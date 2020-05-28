@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="generator" content="Hugo 0.71.1" />
+
+<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+
+
+
+<link rel="shortcut icon" href="/favicons/favicon.ico" >
+<link rel="apple-touch-icon" href="/favicons/apple-touch-icon-180x180.png" sizes="180x180">
+<link rel="icon" type="image/png" href="/favicons/favicon-16x16.png" sizes="16x16">
+<link rel="icon" type="image/png" href="/favicons/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicons/android-36x36.png" sizes="36x36">
+<link rel="icon" type="image/png" href="/favicons/android-48x48.png" sizes="48x48">
+<link rel="icon" type="image/png" href="/favicons/android-72x72.png" sizes="72x72">
+<link rel="icon" type="image/png" href="/favicons/android-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/favicons/android-144x144.png" sizes="144x144">
+<link rel="icon" type="image/png" href="/favicons/android-192x192.png" sizes="192x192">
+
+<title>Associativity | Onshape Developer Documentation</title><meta property="og:title" content="Associativity" />
+<meta property="og:description" content="Onshape Associativity for external applications
+This document describes data structures and APIs that external applications can use to implement associativity.
+Please address questions, comments and suggestions to &ldquo;api-support@onshape.com&rdquo; for the fastest response.
+Introduction Onshape data is stored in replicated databases in the cloud. The data model for accessing Parts and Assemblies through the REST API is described here. The model is influenced by the data model used by Git and similar source code repositories." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/docs/associativity/" />
+<meta property="article:published_time" content="2020-05-18T20:28:26-04:00" />
+<meta property="article:modified_time" content="2020-05-18T20:28:26-04:00" />
+<meta itemprop="name" content="Associativity">
+<meta itemprop="description" content="Onshape Associativity for external applications
+This document describes data structures and APIs that external applications can use to implement associativity.
+Please address questions, comments and suggestions to &ldquo;api-support@onshape.com&rdquo; for the fastest response.
+Introduction Onshape data is stored in replicated databases in the cloud. The data model for accessing Parts and Assemblies through the REST API is described here. The model is influenced by the data model used by Git and similar source code repositories.">
+<meta itemprop="datePublished" content="2020-05-18T20:28:26-04:00" />
+<meta itemprop="dateModified" content="2020-05-18T20:28:26-04:00" />
+<meta itemprop="wordCount" content="1538">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Associativity"/>
+<meta name="twitter:description" content="Onshape Associativity for external applications
+This document describes data structures and APIs that external applications can use to implement associativity.
+Please address questions, comments and suggestions to &ldquo;api-support@onshape.com&rdquo; for the fastest response.
+Introduction Onshape data is stored in replicated databases in the cloud. The data model for accessing Parts and Assemblies through the REST API is described here. The model is influenced by the data model used by Git and similar source code repositories."/>
+
+
+
+
+
+<link rel="preload" href="/scss/main.min.0b2b1932ff6c78c758cec3c3efac1347ba44cbf6a6d94fcb5ab5a0ce8937c6db.css" as="style">
+<link href="/scss/main.min.0b2b1932ff6c78c758cec3c3efac1347ba44cbf6a6d94fcb5ab5a0ce8937c6db.css" rel="stylesheet" integrity="">
+
+
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
+
+  </head>
+  <body class="td-page">
+    <header>
+      
+<nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
+        <a class="navbar-brand" href="/">
+		<span class="navbar-logo"></span><span class="text-uppercase font-weight-bold">Onshape Developer Documentation</span>
+	</a>
+	<div class="td-navbar-nav-scroll ml-md-auto" id="main_navbar">
+		<ul class="navbar-nav mt-2 mt-lg-0">
+			
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				
+				
+				<a class="nav-link active" href="/docs/" ><span class="active">Documentation</span></a>
+			</li>
+			
+			
+			
+		</ul>
+	</div>
+	<div class="navbar-nav d-none d-lg-block">
+</div>
+</nav>
+
+    </header>
+    <div class="container-fluid td-outer">
+      <div class="td-main">
+        <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
+            
+
+
+
+
+<div id="td-sidebar-menu" class="td-sidebar__inner">
+  
+  <form class="td-sidebar__search d-flex align-items-center">
+    
+
+    <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type="button" data-toggle="collapse" data-target="#td-section-nav" aria-controls="td-docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    </button>
+  </form>
+  
+  <nav class="collapse td-sidebar-nav pt-2 pl-4" id="td-section-nav">
+    
+    
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/docs/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Documentation</a>
+  </li>
+  <ul>
+    <li class="collapse show" id="docs">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsapikeys" href="/docs/apikeys/">API Keys</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsapioverview" href="/docs/apioverview/">API Overview</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page  active" id="m-docsassociativity" href="/docs/associativity/">Associativity</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsbilling" href="/docs/billing/">Billing</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsclientmessaging" href="/docs/clientmessaging/">Client Messaging</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsfeatureaccess" href="/docs/featureaccess/">Feature List API</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsoauth" href="/docs/oauth/">OAuth</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsstructuredstorage" href="/docs/structuredstorage/">Structured Storage</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docstessellationperformance" href="/docs/tessellationperformance/">Tessellation Performance</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docstestingguidelines" href="/docs/testingguidelines/">Testing Guidelines</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docstranslation" href="/docs/translation/">Model Translation</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docswebhook" href="/docs/webhook/">Webhook Notifications</a>
+      
+      
+    </li>
+  </ul>
+</ul>
+
+  </nav>
+</div>
+
+
+
+
+          </div>
+          <div class="d-none d-xl-block col-xl-2 td-toc d-print-none">
+            
+
+
+
+
+
+
+
+
+
+
+
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#onshape-data-model">Onshape Data Model</a></li>
+    <li><a href="#git-analogy">Git analogy</a></li>
+    <li><a href="#model-definition-data">Model definition data</a></li>
+    <li><a href="#model-presentation-data">Model presentation data</a></li>
+    <li><a href="#associativity">Associativity</a>
+      <ul>
+        <li><a href="#associativity-example">Associativity Example</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+          </div>
+          <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
+            
+  
+
+            <nav aria-label="breadcrumb" class="d-none d-md-block d-print-none">
+	<ol class="breadcrumb spb-1">
+		
+
+
+
+
+
+
+
+<li class="breadcrumb-item" >
+	<a href="http://example.org/docs/">Documentation</a>
+</li>
+
+
+
+
+<li class="breadcrumb-item active" aria-current="page">
+	<a href="http://example.org/docs/associativity/">Associativity</a>
+</li>
+
+	</ol>
+</nav	>
+
+            
+<div class="td-content">
+	<h1>Associativity</h1>
+    
+	       
+	<p>Onshape Associativity for external applications</p>
+<p>This document describes data structures and APIs that external applications can use to implement associativity.</p>
+<p>Please address questions, comments and suggestions to &ldquo;<a href="mailto:api-support@onshape.com">api-support@onshape.com</a>&rdquo; for the fastest response.</p>
+<h2 id="introduction">Introduction</h2>
+<p>Onshape data is stored in replicated databases in the cloud. The data model for accessing Parts and Assemblies through the REST API is described here. The model is influenced by the data model used by Git and similar source code repositories.</p>
+<h2 id="onshape-data-model">Onshape Data Model</h2>
+<p><em>Documents</em> contain <em>Elements</em>.</p>
+<p><em>Elements</em> are presented as tabs in the user interface. An element can be one of the following types:</p>
+<ul>
+<li>Part Studio</li>
+<li>Assembly</li>
+<li>Blob</li>
+<li>Application</li>
+</ul>
+<p>With some exceptions, all data in a document is stored within an element.</p>
+<p><em>Documents</em> can be branched, creating new <em>Workspaces</em>.</p>
+<p>Note that <em>Workspaces</em> are branches of the entire document. Every change to a document is recorded in the database. The *Document Microversion ID *is an ID that represents the entire state of the document at a point in the history.</p>
+<p><em>Workspaces</em> can be named at a point in time, creating a <em>Version</em>.</p>
+<p><em>Versions</em> are permanent names that identify the state of a workspace at a point in time. Thus, versions are immutable - changes can be made to a workspace, not to a version.</p>
+<p>The following table describes what data stored in each <em>Element</em> type:</p>
+<table>
+  <tr>
+    <td>Part Studio</td>
+    <td>Each Part Studio contains exactly one Feature List. The feature list contains Features such as Sketches, Planes, Extrudes, and so on. Each feature contains one or parameters. Onshape is in the process of publishing APIs to provide read and write access to features.
+<p>Whenever the feature list changes, the parametric history is evaluated, causing the model to be regenerated. This results in zero or more parts and surfaces to be created.</td></p>
+  </tr>
+  <tr>
+    <td>Assembly</td>
+    <td>Each Assembly contains an Assembly Tree, which contains parts and/or other assemblies (sub-assemblies), along with mate information. Onshape provides an API call to retrieve the assembly tree definition.</td>
+  </tr>
+  <tr>
+    <td>Blob</td>
+    <td>Each Blob element contains an uninterpreted binary object that has been uploaded to Onshape, typically from a file. Onshape depends on the browser client to display some blob data (PDF and image data), but does not interpret the data. A blob element can be updated with new data.</td>
+  </tr>
+  <tr>
+    <td>Application</td>
+    <td>Each Application element contains zero or more sub-elements, providing a structured set of transactional data that is defined and managed by an application. A detailed description of the application storage data model is described elsewhere.
+<p>Application data can be displayed in the Onshape tab in an iframe; the application is responsible for rendering the data in the iframe from their server.</td></p>
+  </tr>
+</table>
+<p>Note that Onshape <em>Drawing</em> elements are Application elements tagged as managed by Onshape.</p>
+<p>Documents, Elements, Workspaces, Versions, Microversions, Users and various other data objects are identified by a unique ID. These IDs form the basic building blocks for the Onshape REST API.</p>
+<p>Tessellated data is not stored persistently in Onshape; it is generated on demand for display by the Onshape clients, or in response to application REST API requests. This data may be cached for performance.</p>
+<h2 id="git-analogy">Git analogy</h2>
+<p>The following table identifies Onshape concepts and the corresponding Git concepts. Note that this is not a direct mapping, and the implementation of the concepts is very different.</p>
+<table>
+  <tr>
+    <td>Onshape concept</td>
+    <td>Git concept</td>
+  </tr>
+  <tr>
+    <td>Document</td>
+    <td>Repository</td>
+  </tr>
+  <tr>
+    <td>Element</td>
+    <td>File</td>
+  </tr>
+  <tr>
+    <td>Workspace</td>
+    <td>Branch</td>
+  </tr>
+  <tr>
+    <td>Version</td>
+    <td>Tag</td>
+  </tr>
+  <tr>
+    <td>Microversion</td>
+    <td>Commit</td>
+  </tr>
+  <tr>
+    <td>Document Microversion ID</td>
+    <td>SHA</td>
+  </tr>
+</table>
+<h2 id="model-definition-data">Model definition data</h2>
+<p>Model definition in Onshape is history based, each change of the model represents a unique record in the model&rsquo;s history and the model can be restored to that particular state any time in the future. Each record of the model&rsquo;s history has a unique persistent identifier which is called microversion id in Onshape.</p>
+<p>Model definition can be changed in a context of a Workspace only. Each workspace represents an independent line of history of the model, i.e. a sorted list of model microversions. A reference to a state of the Workspace can be stored as an immutable Version. New Workspaces can be branched from a Version, to continue model history from the moment the Version was created. One Workspace can be merged into another to combine model changes made in both workspaces. Merge conflicts leading to an invalid state of the model are possible.</p>
+<p>Part Studio model is defined by a list of features, some of which (e.g. sketch), may have complex internal structure composed of entities. Model definition features and entities are referenced by unique persistent identifiers. Model definition features and entities can appear, disappear, and reappear depending on the current microversion of the model.</p>
+<p>Assembly model is defined as a list of assembly features and a tree of subassemblies / part instances. Occurrence id is a unique persistent identifier of an occurrence of a part in the assembly structure.</p>
+<h2 id="model-presentation-data">Model presentation data</h2>
+<p>A valid model definition usually corresponds to a real world manufacturable topology. The topology is represented internally as a set of 3-d, 2-d, 1-d, 0-d entities and a set of relations between them. It can be tessellated into a set of geometric primitives which approximate the shape of the model. Tessellated data can be used for visual representation of the model or other processing related to the shape of the model.</p>
+<p>Model topology is represented as a set of Parts, Faces, Edges, and Vertices in the API. Each of these has a unique identifier in every state of the model. The identifier represents an encoded index in the model&rsquo;s history journal and its value depends on the structure of the model&rsquo;s history. The value is not guaranteed to be preserved across model changes, and will almost always change if the model changes in significant ways.</p>
+<p>The following changes in the topological representation can occur between two microversions of the model:</p>
+<ul>
+<li>New topological entities can appear;</li>
+<li>Id of existing topology can change;</li>
+<li>Topological entities can disappear;</li>
+<li>Existing topological entities can be merged into a single entity;</li>
+<li>Existing topological entity can be split into multiple entities.</li>
+</ul>
+<p>A pair of model microversion and Topology ID can be used to identify topological entities across the model changes. Topology ID defined in a specific microversion can be translated into a set of topology ids in the current microversion of the model. (The Topology ID is sometimes referred to as a Deterministic ID within Onshape, and is exposed in specific API calls as Part ID,  Face ID, and so on).</p>
+<p>The following table contains a summary of Topology IDs exposed through Onshape REST APIs. The details of the API calls are documented in the API Explorer.</p>
+<table>
+  <tr>
+    <td>Topology ID</td>
+    <td>REST API</td>
+  </tr>
+  <tr>
+    <td>Part ID</td>
+    <td>/partstudio/d/:did/[wvm]/:wvm/e/:eid/bodydetails
+/partstudio/d/:did/[wvm]/:wvm/e/:eid/tessellatededges
+/partstudio/d/:did/[wvm]/:wvm/e/:eid/tessellatedfaces
+/partstudio/d/:did/[wvm]/:wvm/e/:eid/partid/:partid/shadedviews
+/partstudio/d/:did/[wvm]/:wvm/e/:eid/partid/:partid/boundingboxes
+/partstudios/d/:did/w/:w/e/:eid/metadata
+/parts/d/:did/[wvm]/:wvm/e/:eid/bodydetails
+/parts/d/:did/[wvm]/:wvm/e/:eid/tessellatededges
+/parts/d/:did/[wvm]/:wvm/e/:eid/tessellatedfaces
+/parts/d/:did/[wvm]/:wvm/e/:eid/partid/:partid/shadedviews
+/parts/d/:did/[wvm]/:wvm/e/:eid/partid/:partid/boundingboxes
+/parts/d/:did/w/:w/e/:eid/metadata
+/parts/d/:did/w/:w/e/:eid
+/assemblies/d/:did/w/:wvm/e/:eid
+/parts/d/:did/[wvm]/:wvm/e/:eid/partid/:partid/parasolid
+/parts/d/:did/[wvm]/:wvm/e/:eid/partid/:partid/stl</td>
+  </tr>
+  <tr>
+    <td>Face ID</td>
+    <td>/partstudios/d/:did/[wvm]/:wvm/e/:eid/bodydetails
+/partstudios/d/:did/[wvm]/:wvm/e/:eid/tessellatedfaces
+/partstudios/d/:did/[wvm]/:wvm/e/:eid/tessellatededges
+/part/d/:did/[wvm]/:wvm/e/:eid/bodydetails
+/part/d/:did/[wvm]/:wvm/e/:eid/tessellatedfaces
+/part/d/:did/[wvm]/:wvm/e/:eid/tessellatededges</td>
+  </tr>
+  <tr>
+    <td>Edge ID</td>
+    <td>/partstudios/d/:did/[wvm]/:wvm/e/:eid/bodydetails
+/partstudios/d/:did/[wvm]/:wvm/e/:eid/tessellatededges
+/parts/d/:did/[wvm]/:wvm/e/:eid/bodydetails
+/parts/d/:did/[wvm]/:wvm/e/:eid/tessellatededges</td>
+  </tr>
+  <tr>
+    <td>Vertex ID</td>
+    <td>/partstudios/d/:did/[wvm]/:wvm/e/:eid/bodydetails
+/parts/d/:did/[wvm]/:wvm/e/:eid/bodydetails</td>
+  </tr>
+</table>
+<h2 id="associativity">Associativity</h2>
+<p>The key to understanding associativity in Onshape is to recognize that Onshape does not expose a persistent ID for any of these entities. When the model changes, the ID may change. Therefore, Onshape provides an API that allows you map IDs from a previous microversion to the current microversion. Assuming a simple case of maintaining associativity for a face, an abstract workflow might be:</p>
+<ol>
+<li>Read the tessellated model data.</li>
+<li>Select the face of interest.</li>
+<li>Store the Face ID and Document Microversion ID for the face.</li>
+<li>[ user changes model ]</li>
+<li>Call the REST API to translate from the known Face ID to an ID in the new model.</li>
+<li>Re-apply application-specific data to the face(s) in the new model. Note that a face may become zero, one or multiple faces in the new model, depending on what changes the user made.</li>
+</ol>
+<p>The following example shows the sequence of API calls.</p>
+<h3 id="associativity-example">Associativity Example</h3>
+<ol>
+<li>Create a unit length [cube]:
+<img src="/images/associativityimage03.png" alt="image alt text"></li>
+<li>Get document microversion (<code>https://cad.onshape.com/api/documents/d/&lt;docid&gt;/w/&lt;wid&gt;/microversion</code>).
+Use the appropriate REST API to get the tessellated faces <code>https://cad.onshape.com/api/partstudios/d/&lt;docid&gt;/w/&lt;wid&gt;/e/&lt;eid&gt;/tessellatedfaces</code>
+and edges <code>https://cad.onshape.com/api/partstudios/d/&lt;docid&gt;/w/&lt;wid&gt;/e/&lt;eid&gt;/tessellatededges</code>. Note the ids:</li>
+</ol>
+<ul>
+<li>Part Id : &ldquo;JHD&rdquo;;</li>
+<li>Front face Id : &ldquo;JHO&rdquo;;</li>
+<li>Top edge of the front face Id : &ldquo;JHd&rdquo;;</li>
+<li>Right edge of the top face Id : &ldquo;JHt&rdquo;.</li>
+</ul>
+<ol start="3">
+<li>Split cube with the [&ldquo;Front&rdquo; plane], translate ids:</li>
+</ol>
+<p><img src="/images/associativityimage00.png" alt="image alt text"></p>
+<p><strong>POST</strong> <code>https://cad.onshape.com/api/partstudios/d/&lt;docid&gt;/w/&lt;wid&gt;/e/&lt;eid&gt;/idtranslations</code></p>
+<p><strong>Body</strong>:</p>
+<pre><code class="language-{" data-lang="{">  &quot;sourceDocumentMicroversion&quot; : &quot;47e75ab2ee8b4356a76ebd47&quot;,
+  &quot;ids&quot; : [&quot;JHD&quot;, &quot;JHO&quot;, &quot;JHd&quot;, &quot;JHt&quot;  ]
+}```
+
+**Response**:
+
+```{
+    &quot;documentId&quot;: &quot;748d6e850c9248328189922b&quot;,
+    &quot;elementId&quot;: &quot;042a6fa54e79451e8076463d&quot;,
+    &quot;sourceDocumentMicroversion&quot;: &quot;47e75ab2ee8b4356a76ebd47&quot;,
+    &quot;ids&quot;: [
+        { &quot;source&quot;: &quot;JHD&quot;, &quot;status&quot;: &quot;SPLIT&quot;, &quot;target&quot;: [&quot;JID&quot;, &quot;JIH&quot;] },
+        { &quot;source&quot;: &quot;JHO&quot;, &quot;status&quot;: &quot;OK&quot;, &quot;target&quot;: [&quot;JHO&quot;] },
+        { &quot;source&quot;: &quot;JHd&quot;, &quot;status&quot;: &quot;OK&quot;, &quot;target&quot;: [&quot;JHd&quot;] },
+        { &quot;source&quot;: &quot;JHt&quot;, &quot;status&quot;: &quot;SPLIT&quot;, &quot;target&quot;: [&quot;JI5&quot;, &quot;JI9&quot;] }
+    ],
+    &quot;targetDocumentMicroversion&quot;: &quot;78bc7f3fcf82475085c2f3ab&quot;
+}```
+
+4. Delete one of the [parts], translate ids:
+
+![image alt text](/images/associativityimage01.png)
+
+**POST** `https://cad.onshape.com/api/partstudios/d/&lt;docid&gt;/w/&lt;wid&gt;/e/&lt;eid&gt;/idtranslations`
+
+**Body**:
+
+```{
+  &quot;sourceDocumentMicroversion&quot; : &quot;47e75ab2ee8b4356a76ebd47&quot;,
+  &quot;ids&quot; : [&quot;JHD&quot;, &quot;JHO&quot;, &quot;JHd&quot;, &quot;JHt&quot;]
+}```
+
+**Response**:
+
+```{
+    &quot;documentId&quot;: &quot;748d6e850c9248328189922b&quot;,
+    &quot;elementId&quot;: &quot;042a6fa54e79451e8076463d&quot;,
+    &quot;sourceDocumentMicroversion&quot;: &quot;47e75ab2ee8b4356a76ebd47&quot;,
+    &quot;ids&quot;: [
+        { &quot;source&quot;: &quot;JHD&quot;, &quot;status&quot;: &quot;OK&quot;, &quot;target&quot;: [&quot;JID&quot;] },
+        { &quot;source&quot;: &quot;JHO&quot;, &quot;status&quot;: &quot;FAILED_TO_RESOLVE&quot;, &quot;target&quot;: [] },
+        { &quot;source&quot;: &quot;JHd&quot;, &quot;status&quot;: &quot;FAILED_TO_RESOLVE&quot;, &quot;target&quot;: [] },
+        { &quot;source&quot;: &quot;JHt&quot;, &quot;status&quot;: &quot;OK&quot;, &quot;target&quot;: [&quot;JI5&quot;] }
+    ],
+    &quot;targetDocumentMicroversion&quot;: &quot;52aa74d34b624f3aaef33204&quot;
+}```
+
+5. Rollback delete and [split], translate ids:
+
+![image alt text](/images/associativityimage02.png)
+
+**POST** `https://cad.onshape.com/api/partstudios/d/&lt;docid&gt;/w/&lt;wid&gt;/e/&lt;eid&gt;/idtranslations`
+
+**Body**:
+
+```{
+  &quot;sourceDocumentMicroversion&quot; : &quot;47e75ab2ee8b4356a76ebd47&quot;,
+  &quot;ids&quot; : [&quot;JHD&quot;, &quot;JHO&quot;, &quot;JHd&quot;, &quot;JHt&quot;]
+}```
+
+**Response**:
+
+```{
+    &quot;documentId&quot;: &quot;748d6e850c9248328189922b&quot;,
+    &quot;elementId&quot;: &quot;042a6fa54e79451e8076463d&quot;,
+    &quot;sourceDocumentMicroversion&quot;: &quot;47e75ab2ee8b4356a76ebd47&quot;,
+    &quot;ids&quot;: [
+        { &quot;source&quot;: &quot;JHD&quot;, &quot;status&quot;: &quot;OK&quot;, &quot;target&quot;: [&quot;JID&quot;] },
+        { &quot;source&quot;: &quot;JHO&quot;, &quot;status&quot;: &quot;OK&quot;, &quot;target&quot;: [&quot;JHO&quot;] },
+        { &quot;source&quot;: &quot;JHd&quot;, &quot;status&quot;: &quot;OK&quot;, &quot;target&quot;: [&quot;JHd&quot;] },
+        { &quot;source&quot;: &quot;JHt&quot;, &quot;status&quot;: &quot;OK&quot;, &quot;target&quot;: [&quot;JHt&quot;] }
+    ],
+    &quot;targetDocumentMicroversion&quot;: &quot;52aa74d34b624f3aaef33204&quot;
+}```</code></pre>
+	
+	
+	<div class="text-muted mt-5 pt-3 border-top">Last modified May 18, 2020
+</div>
+</div>
+
+
+          </main>
+        </div>
+      </div>
+      
+<footer class="bg-dark py-5 row d-print-none">
+  <div class="container-fluid mx-sm-5">
+    <div class="row">
+      <div class="col-6 col-sm-4 text-xs-center order-sm-2">
+        
+      </div>
+      <div class="col-6 col-sm-4 text-right text-xs-center order-sm-3">
+        
+      </div>
+      <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
+        
+        
+	
+		
+	
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    </div>
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+<script src="/js/main.min.e2081313840f629d5c183f26a9340d3fb9365d1e35d3a1fa01ad00849ac11949.js" integrity="sha256-4ggTE4QPYp1cGD8mqTQNP7k2XR4106H6Aa0AhJrBGUk=" crossorigin="anonymous"></script>
+
+
+
+  </body>
+</html>

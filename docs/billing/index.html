@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="generator" content="Hugo 0.71.1" />
+
+<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+
+
+
+<link rel="shortcut icon" href="/favicons/favicon.ico" >
+<link rel="apple-touch-icon" href="/favicons/apple-touch-icon-180x180.png" sizes="180x180">
+<link rel="icon" type="image/png" href="/favicons/favicon-16x16.png" sizes="16x16">
+<link rel="icon" type="image/png" href="/favicons/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicons/android-36x36.png" sizes="36x36">
+<link rel="icon" type="image/png" href="/favicons/android-48x48.png" sizes="48x48">
+<link rel="icon" type="image/png" href="/favicons/android-72x72.png" sizes="72x72">
+<link rel="icon" type="image/png" href="/favicons/android-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/favicons/android-144x144.png" sizes="144x144">
+<link rel="icon" type="image/png" href="/favicons/android-192x192.png" sizes="192x192">
+
+<title>Billing | Onshape Developer Documentation</title><meta property="og:title" content="Billing" />
+<meta property="og:description" content="Using Billing within Onshape
+ Last updated 30-October-2015
+ This document describes APIs that will allow partners to interact with the Onshape billing system.
+Please address questions to &ldquo;api-support@onshape.com&rdquo; for the fastest response.
+Overview All billing is done through &ldquo;plans&rdquo; that are created in the Developer Portal. A “plan” has the following attributes:
+  Name (also called SKU) A unique (within your company) plan name   Description A user-visible description of the plan   Amount The cost of the plan (may be one-time or recurring, depending on the type)   Type Monthly, One-time or Consumable   Onshape defines three kinds of plans:" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/docs/billing/" />
+<meta property="article:published_time" content="2020-05-18T20:29:36-04:00" />
+<meta property="article:modified_time" content="2020-05-18T20:29:36-04:00" />
+<meta itemprop="name" content="Billing">
+<meta itemprop="description" content="Using Billing within Onshape
+ Last updated 30-October-2015
+ This document describes APIs that will allow partners to interact with the Onshape billing system.
+Please address questions to &ldquo;api-support@onshape.com&rdquo; for the fastest response.
+Overview All billing is done through &ldquo;plans&rdquo; that are created in the Developer Portal. A “plan” has the following attributes:
+  Name (also called SKU) A unique (within your company) plan name   Description A user-visible description of the plan   Amount The cost of the plan (may be one-time or recurring, depending on the type)   Type Monthly, One-time or Consumable   Onshape defines three kinds of plans:">
+<meta itemprop="datePublished" content="2020-05-18T20:29:36-04:00" />
+<meta itemprop="dateModified" content="2020-05-18T20:29:36-04:00" />
+<meta itemprop="wordCount" content="921">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Billing"/>
+<meta name="twitter:description" content="Using Billing within Onshape
+ Last updated 30-October-2015
+ This document describes APIs that will allow partners to interact with the Onshape billing system.
+Please address questions to &ldquo;api-support@onshape.com&rdquo; for the fastest response.
+Overview All billing is done through &ldquo;plans&rdquo; that are created in the Developer Portal. A “plan” has the following attributes:
+  Name (also called SKU) A unique (within your company) plan name   Description A user-visible description of the plan   Amount The cost of the plan (may be one-time or recurring, depending on the type)   Type Monthly, One-time or Consumable   Onshape defines three kinds of plans:"/>
+
+
+
+
+
+<link rel="preload" href="/scss/main.min.0b2b1932ff6c78c758cec3c3efac1347ba44cbf6a6d94fcb5ab5a0ce8937c6db.css" as="style">
+<link href="/scss/main.min.0b2b1932ff6c78c758cec3c3efac1347ba44cbf6a6d94fcb5ab5a0ce8937c6db.css" rel="stylesheet" integrity="">
+
+
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
+
+  </head>
+  <body class="td-page">
+    <header>
+      
+<nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
+        <a class="navbar-brand" href="/">
+		<span class="navbar-logo"></span><span class="text-uppercase font-weight-bold">Onshape Developer Documentation</span>
+	</a>
+	<div class="td-navbar-nav-scroll ml-md-auto" id="main_navbar">
+		<ul class="navbar-nav mt-2 mt-lg-0">
+			
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				
+				
+				<a class="nav-link active" href="/docs/" ><span class="active">Documentation</span></a>
+			</li>
+			
+			
+			
+		</ul>
+	</div>
+	<div class="navbar-nav d-none d-lg-block">
+</div>
+</nav>
+
+    </header>
+    <div class="container-fluid td-outer">
+      <div class="td-main">
+        <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
+            
+
+
+
+
+<div id="td-sidebar-menu" class="td-sidebar__inner">
+  
+  <form class="td-sidebar__search d-flex align-items-center">
+    
+
+    <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type="button" data-toggle="collapse" data-target="#td-section-nav" aria-controls="td-docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    </button>
+  </form>
+  
+  <nav class="collapse td-sidebar-nav pt-2 pl-4" id="td-section-nav">
+    
+    
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/docs/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Documentation</a>
+  </li>
+  <ul>
+    <li class="collapse show" id="docs">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsapikeys" href="/docs/apikeys/">API Keys</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsapioverview" href="/docs/apioverview/">API Overview</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsassociativity" href="/docs/associativity/">Associativity</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page  active" id="m-docsbilling" href="/docs/billing/">Billing</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsclientmessaging" href="/docs/clientmessaging/">Client Messaging</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsfeatureaccess" href="/docs/featureaccess/">Feature List API</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsoauth" href="/docs/oauth/">OAuth</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsstructuredstorage" href="/docs/structuredstorage/">Structured Storage</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docstessellationperformance" href="/docs/tessellationperformance/">Tessellation Performance</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docstestingguidelines" href="/docs/testingguidelines/">Testing Guidelines</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docstranslation" href="/docs/translation/">Model Translation</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docswebhook" href="/docs/webhook/">Webhook Notifications</a>
+      
+      
+    </li>
+  </ul>
+</ul>
+
+  </nav>
+</div>
+
+
+
+
+          </div>
+          <div class="d-none d-xl-block col-xl-2 td-toc d-print-none">
+            
+
+
+
+
+
+
+
+
+
+
+
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#using-the-onshape-billing-api">Using the Onshape Billing API</a></li>
+    <li><a href="#initiating-a-purchase-from-an-application-in-app-purchases">Initiating a purchase from an application (in-app purchases)</a></li>
+    <li><a href="#consumable-items">Consumable Items</a></li>
+    <li><a href="#other-billing-models">Other billing models</a></li>
+    <li><a href="#samples">Samples</a></li>
+    <li><a href="#testing">Testing</a></li>
+  </ul>
+</nav>
+
+
+
+          </div>
+          <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
+            
+  
+
+            <nav aria-label="breadcrumb" class="d-none d-md-block d-print-none">
+	<ol class="breadcrumb spb-1">
+		
+
+
+
+
+
+
+
+<li class="breadcrumb-item" >
+	<a href="http://example.org/docs/">Documentation</a>
+</li>
+
+
+
+
+<li class="breadcrumb-item active" aria-current="page">
+	<a href="http://example.org/docs/billing/">Billing</a>
+</li>
+
+	</ol>
+</nav	>
+
+            
+<div class="td-content">
+	<h1>Billing</h1>
+    
+	       
+	<p>Using Billing within Onshape</p>
+<hr>
+<p>Last updated 30-October-2015</p>
+<hr>
+<p>This document describes APIs that will allow partners to interact with the Onshape billing system.</p>
+<p>Please address questions to &ldquo;<a href="mailto:api-support@onshape.com">api-support@onshape.com</a>&rdquo; for the fastest response.</p>
+<h2 id="overview">Overview</h2>
+<p>All billing is done through &ldquo;plans&rdquo; that are created in the Developer Portal. A “plan” has the following attributes:</p>
+<table>
+  <tr>
+    <td>Name (also called SKU)</td>
+    <td>A unique (within your company) plan name</td>
+  </tr>
+  <tr>
+    <td>Description</td>
+    <td>A user-visible description of the plan</td>
+  </tr>
+  <tr>
+    <td>Amount</td>
+    <td>The cost of the plan (may be one-time or recurring, depending on the type)</td>
+  </tr>
+  <tr>
+    <td>Type</td>
+    <td>Monthly, One-time or Consumable</td>
+  </tr>
+</table>
+<p>Onshape defines three kinds of plans:</p>
+<table>
+  <tr>
+    <td>Plan type</td>
+    <td>Description</td>
+  </tr>
+  <tr>
+    <td>Recurring
+(Monthly Subscription)</td>
+    <td>A plan that is renewed monthly at a fixed cost. All Apps in the app store must have a Free monthly plan (which is created by default), and may have additional paid plans.</td>
+  </tr>
+  <tr>
+    <td>One-time</td>
+    <td>A plan that is purchased once (not renewed monthly). A user may purchase these multiple times.</td>
+  </tr>
+  <tr>
+    <td>Consumable</td>
+    <td>A plan that represents a consumable unit, such as "hours of rendering" or “simulation runs”. Consumable plans are not fully implemented at this time, but the consumable functionality can be implemented using One-time Purchase plans as described below.</td>
+  </tr>
+</table>
+<p>Users may purchase plans through the App Store interface. In addition, if your application has the OAuth Purchase Scope, your application can initiate &ldquo;in-app&rdquo; purchases by calling Onshape to request a purchase.</p>
+<p>The basic steps for interacting with Onshape Billing:</p>
+<ol>
+<li>Define one or more plans using the Developer Portal interface</li>
+<li>Use the Onshape API to determine the current user’s plan</li>
+<li>Provide features and/or limits based on the current plan</li>
+</ol>
+<h2 id="using-the-onshape-billing-api">Using the Onshape Billing API</h2>
+<p><code>GET /api/accounts/purchases</code></p>
+<p>Returns a list of purchase made by the current user for plans owned by the current application. Use this information to determine what capabilities or features the user is entitled to use.</p>
+<p><code>DELETE /api/accounts/purchases/&lt;purchase id&gt;</code></p>
+<p>Cancel a recurring purchase.</p>
+<p><code>POST /api/accounts/purchases/&lt;purchase id&gt;/consume</code></p>
+<p>Indicate the use of a consumable. (Not fully implemented at this time)</p>
+<p><code>GET /api/billing/plans/client/&lt;client id&gt;</code></p>
+<p>Get a list of the billing plans defined for this client.</p>
+<h2 id="initiating-a-purchase-from-an-application-in-app-purchases">Initiating a purchase from an application (in-app purchases)</h2>
+<p>To initiate a purchase of a subscription or one time item you must set the browser’s location to particular URL within the Onshape stack:</p>
+<p><code>https://cad.onshape.com/billing/purchase?redirectUri=RRRR&amp;clientId=CCCC&amp;sku=SSSS&amp;userId=UUUU</code></p>
+<p>Each of the query parameters should be URL encoded. The clientId is your application’s OAuth Client ID, the sku is the name/sku field for an item (you can find this in the developer portal or it’s retrievable through the /api/billing/plans REST endpoints). The user Id should be the Onshape user Id for the current user and is available through the /api/users/session REST endpoint. The redirectUri is the URI the user will be returned to within your website when the purchase is finished.</p>
+<p>When the browser’s location is changed to this pattern the Onshape stack will serve content to confirm the users identity, confirm the details of what is being purchased (or obtained if the item is free) and then after the user agrees to the purchase will confirm the transaction (with our payment processor if the item is not free) and then redirect the user back to the supplied redirectUri (the browser location will be changed to the redirectUri). Additionally Onshape will add a <code>success=true</code> or <code>success=false</code> query parameter to the redirectURI indicating whether the user completed successfully (payment was taken if required etc.) or failed, either due to cancelling the purchase or an issue with payment.</p>
+<p>When the browser fetches the redirectUri your application must call back through the <code>/api/account/purchases</code> API to get confirmation of the purchase - do NOT assume that a fetch of the redirectUri with a <code>success=true</code> query parameter actually indicates a purchase has occurred. Query the Onshape stack with the <code>/api/account/purchases</code> API to ensure that the required item has actually been bought.</p>
+<h2 id="consumable-items">Consumable Items</h2>
+<p>A detailed description of the interface for managing consumable purchases will be provided shortly. You can use one-time plans to achieve similar results:</p>
+<ol>
+<li>
+<p>Define a one-time purchase plan with a description indicating the nature of the purchase, for example:</p>
+<p>RENDER-10	Ten rendering hours	$100</p>
+</li>
+<li>
+<p>Keep track of the number of hours that the user has consumed. You can store and retrieve this information in Onshape using the following APIs. These APIs allow you to store and retrieve arbitrary information on a per-user basis.</p>
+<p>POST /applications/clients/:cid/settings/users/:uid
+GET  /applications/clients/:cid/settings/users/:uid</p>
+</li>
+<li>
+<p>Check the number of available &ldquo;units&rdquo; by getting the purchases and the record of consumables. Be sure to include UI in your application that the user can use to see their remaining quantity.</p>
+</li>
+<li>
+<p>Alternately, you can store the consumption data in your own system; you do not need to use the Onshape API to manage that data.</p>
+</li>
+</ol>
+<p>Onshape intends to provide a richer set of APIs that help track the purchase and consumption of consumables in the near future.</p>
+<h2 id="other-billing-models">Other billing models</h2>
+<p>You can use these mechanisms to implement other models. For example, a time-limited trial could be implemented by scanning purchases for the first &ldquo;purchase&rdquo; and denying service if it is more than a defined number of days in the past. A “fixed number of uses per month” could be implemented as a monthly subscription, string usage data with the settings API, and denying service after a fixed number of uses.</p>
+<h2 id="samples">Samples</h2>
+<p>Onshape will provide sample code for both desktop and integrated applications demonstrating the use of the billing APIs and workflow. If you are subscribed to the Onshape Github Partner group, you will have access to those samples as soon as they are posted.</p>
+<h2 id="testing">Testing</h2>
+<p>Please contact <a href="mailto:api-support@onshape.com">api-support@onshape.com</a> to discuss details of testing billing &amp; subscriptions.</p>
+
+	
+	
+	<div class="text-muted mt-5 pt-3 border-top">Last modified May 18, 2020
+</div>
+</div>
+
+
+          </main>
+        </div>
+      </div>
+      
+<footer class="bg-dark py-5 row d-print-none">
+  <div class="container-fluid mx-sm-5">
+    <div class="row">
+      <div class="col-6 col-sm-4 text-xs-center order-sm-2">
+        
+      </div>
+      <div class="col-6 col-sm-4 text-right text-xs-center order-sm-3">
+        
+      </div>
+      <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
+        
+        
+	
+		
+	
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    </div>
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+<script src="/js/main.min.e2081313840f629d5c183f26a9340d3fb9365d1e35d3a1fa01ad00849ac11949.js" integrity="sha256-4ggTE4QPYp1cGD8mqTQNP7k2XR4106H6Aa0AhJrBGUk=" crossorigin="anonymous"></script>
+
+
+
+  </body>
+</html>

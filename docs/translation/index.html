@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="generator" content="Hugo 0.71.1" />
+
+<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+
+
+
+<link rel="shortcut icon" href="/favicons/favicon.ico" >
+<link rel="apple-touch-icon" href="/favicons/apple-touch-icon-180x180.png" sizes="180x180">
+<link rel="icon" type="image/png" href="/favicons/favicon-16x16.png" sizes="16x16">
+<link rel="icon" type="image/png" href="/favicons/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicons/android-36x36.png" sizes="36x36">
+<link rel="icon" type="image/png" href="/favicons/android-48x48.png" sizes="48x48">
+<link rel="icon" type="image/png" href="/favicons/android-72x72.png" sizes="72x72">
+<link rel="icon" type="image/png" href="/favicons/android-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/favicons/android-144x144.png" sizes="144x144">
+<link rel="icon" type="image/png" href="/favicons/android-192x192.png" sizes="192x192">
+
+<title>Model Translation | Onshape Developer Documentation</title><meta property="og:title" content="Model Translation" />
+<meta property="og:description" content="Onshape model translation APIs Summary This document describes the APIs provided by Onshape for model translation. This document makes reference to specific APIs using the naming convention Group Name - Api Name, where the identifies an API group and identifies a specific API defined in the group. See the API Explorer for details on the APIs.
+Onshape provides several APIs to support model format translation. These fall into 3 basic categories" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/docs/translation/" />
+<meta property="article:published_time" content="2020-05-18T20:43:20-04:00" />
+<meta property="article:modified_time" content="2020-05-18T20:43:20-04:00" />
+<meta itemprop="name" content="Model Translation">
+<meta itemprop="description" content="Onshape model translation APIs Summary This document describes the APIs provided by Onshape for model translation. This document makes reference to specific APIs using the naming convention Group Name - Api Name, where the identifies an API group and identifies a specific API defined in the group. See the API Explorer for details on the APIs.
+Onshape provides several APIs to support model format translation. These fall into 3 basic categories">
+<meta itemprop="datePublished" content="2020-05-18T20:43:20-04:00" />
+<meta itemprop="dateModified" content="2020-05-18T20:43:20-04:00" />
+<meta itemprop="wordCount" content="1587">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Model Translation"/>
+<meta name="twitter:description" content="Onshape model translation APIs Summary This document describes the APIs provided by Onshape for model translation. This document makes reference to specific APIs using the naming convention Group Name - Api Name, where the identifies an API group and identifies a specific API defined in the group. See the API Explorer for details on the APIs.
+Onshape provides several APIs to support model format translation. These fall into 3 basic categories"/>
+
+
+
+
+
+<link rel="preload" href="/scss/main.min.0b2b1932ff6c78c758cec3c3efac1347ba44cbf6a6d94fcb5ab5a0ce8937c6db.css" as="style">
+<link href="/scss/main.min.0b2b1932ff6c78c758cec3c3efac1347ba44cbf6a6d94fcb5ab5a0ce8937c6db.css" rel="stylesheet" integrity="">
+
+
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
+
+  </head>
+  <body class="td-page">
+    <header>
+      
+<nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
+        <a class="navbar-brand" href="/">
+		<span class="navbar-logo"></span><span class="text-uppercase font-weight-bold">Onshape Developer Documentation</span>
+	</a>
+	<div class="td-navbar-nav-scroll ml-md-auto" id="main_navbar">
+		<ul class="navbar-nav mt-2 mt-lg-0">
+			
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				
+				
+				<a class="nav-link active" href="/docs/" ><span class="active">Documentation</span></a>
+			</li>
+			
+			
+			
+		</ul>
+	</div>
+	<div class="navbar-nav d-none d-lg-block">
+</div>
+</nav>
+
+    </header>
+    <div class="container-fluid td-outer">
+      <div class="td-main">
+        <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
+            
+
+
+
+
+<div id="td-sidebar-menu" class="td-sidebar__inner">
+  
+  <form class="td-sidebar__search d-flex align-items-center">
+    
+
+    <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type="button" data-toggle="collapse" data-target="#td-section-nav" aria-controls="td-docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    </button>
+  </form>
+  
+  <nav class="collapse td-sidebar-nav pt-2 pl-4" id="td-section-nav">
+    
+    
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/docs/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Documentation</a>
+  </li>
+  <ul>
+    <li class="collapse show" id="docs">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsapikeys" href="/docs/apikeys/">API Keys</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsapioverview" href="/docs/apioverview/">API Overview</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsassociativity" href="/docs/associativity/">Associativity</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsbilling" href="/docs/billing/">Billing</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsclientmessaging" href="/docs/clientmessaging/">Client Messaging</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsfeatureaccess" href="/docs/featureaccess/">Feature List API</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsoauth" href="/docs/oauth/">OAuth</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsstructuredstorage" href="/docs/structuredstorage/">Structured Storage</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docstessellationperformance" href="/docs/tessellationperformance/">Tessellation Performance</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docstestingguidelines" href="/docs/testingguidelines/">Testing Guidelines</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page  active" id="m-docstranslation" href="/docs/translation/">Model Translation</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docswebhook" href="/docs/webhook/">Webhook Notifications</a>
+      
+      
+    </li>
+  </ul>
+</ul>
+
+  </nav>
+</div>
+
+
+
+
+          </div>
+          <div class="d-none d-xl-block col-xl-2 td-toc d-print-none">
+            
+
+
+
+
+
+
+
+
+
+
+
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#summary">Summary</a></li>
+    <li><a href="#simple-conversions">Simple conversions</a></li>
+    <li><a href="#general-translations">General translations</a>
+      <ul>
+        <li><a href="#translation-formats">Translation Formats</a></li>
+        <li><a href="#apis">APIs</a></li>
+        <li><a href="#translation-initiation">Translation initiation</a></li>
+        <li><a href="#apis-1">APIs</a></li>
+        <li><a href="#waiting-for-translation-completion">Waiting for translation completion</a></li>
+        <li><a href="#retrieving-results">Retrieving results</a></li>
+      </ul>
+    </li>
+    <li><a href="#import-translation">Import Translation</a></li>
+    <li><a href="#webhook-translation-completion-notification">Webhook Translation Completion notification</a></li>
+  </ul>
+</nav>
+
+
+
+          </div>
+          <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
+            
+  
+
+            <nav aria-label="breadcrumb" class="d-none d-md-block d-print-none">
+	<ol class="breadcrumb spb-1">
+		
+
+
+
+
+
+
+
+<li class="breadcrumb-item" >
+	<a href="http://example.org/docs/">Documentation</a>
+</li>
+
+
+
+
+<li class="breadcrumb-item active" aria-current="page">
+	<a href="http://example.org/docs/translation/">Model Translation</a>
+</li>
+
+	</ol>
+</nav	>
+
+            
+<div class="td-content">
+	<h1>Model Translation</h1>
+    
+	       
+	<h1 id="onshape-model-translation-apis">Onshape model translation APIs</h1>
+<h2 id="summary">Summary</h2>
+<p>This document describes the APIs provided by Onshape for model translation. This document makes reference to specific APIs using the naming convention <em>Group Name - Api Name</em>, where the <group name> identifies an API group and <api name> identifies a specific API defined in the group. See the API Explorer for details on the APIs.</p>
+<p>Onshape provides several APIs to support model format translation. These fall into 3 basic categories</p>
+<ol>
+<li><a href="#simple-conversions">Simple conversions</a> - these support translation of Onshape content into STL and Parasolid format.</li>
+<li><a href="#general-translations">General translation</a> - these support translation from a variety of formats into a variety of other formats.</li>
+<li><a href="#import-translation">Import translation</a> - these translation operations are performed by default when a translatable file is uploaded to a blob element</li>
+</ol>
+<h2 id="simple-conversions">Simple conversions</h2>
+<p>Simple conversions are limited to generating Parasolid and STL output. Most of the interfaces defined here operate by requesting an HTTP redirect to a different URL where the request will be fulfilled. Applications must be sure that they are explicitly handling the redirect and attaching authentication headers to the follow-up request or it will fail.</p>
+<ul>
+<li>
+<p>STL-specific</p>
+<p>Onshape Part Studio tabs and individual parts can be translated to STL format using the dedicated APIs</p>
+<ul>
+<li><em>Part Studios - Export Part Studio to STL</em></li>
+<li><em>Parts - Export Part to STL</em></li>
+</ul>
+<p>These interfaces require a Part Studio element Id and all use redirect behavior.</p>
+</li>
+<li>
+<p>Parasolid-specific</p>
+<p>Onshape Part Studio tabs and individual parts can be translated to Parasolid format using the dedicated APIs</p>
+<ul>
+<li><em>Part Studios - Export Part Studio to STL</em></li>
+<li><em>Parts - Export Part to STL</em></li>
+</ul>
+<p>These interfaces also require a Part Studio element Id and all use redirect behavior.</p>
+</li>
+<li>
+<p>Multi-purpose</p>
+<p>In addition to the format-specific APIs defined for Parts and Part Studios, there are two similar multi-purpose APIs that can convert multiple source types to both STL and Parasolid.</p>
+<ul>
+<li>
+<p><em>Documents - Export Element</em> (POST)</p>
+<p>This form requires the caller to perform an HTTP POST operation followed by an HTTP GET to a URL returned by the POST operation. There is no HTTP redirect performed; the application must explicitly follow the returned link.</p>
+</li>
+<li>
+<p><em>Documents - Export Element</em> (GET)</p>
+<p>This form takes all configuration information in the form of query parameters and uses the redirect mechanism.</p>
+</li>
+</ul>
+<p>These APIs allow conversion of Assemblies as well as Parts and Part Studios into Either STL or Parasolid.
+The primary reason for the existence of the POST form of the API in addition to the GET form of the API is to overcome limits in URL and HTTP header length that can be exceeded when using long lists of part Id values.</p>
+</li>
+</ul>
+<h2 id="general-translations">General translations</h2>
+<p>The simple conversions listed above perform the format conversion synchronously, returning the output immediately after some processing delay. Other format conversions are more complex and time-consuming, and in many cases, cannot be completed quickly enough to prevent connection errors. The solution we use instead is a model where the application performs a 3-step process:</p>
+<ol>
+<li>HTTP POST operation to create a translation request</li>
+<li>Poll for operation completion or wait for webhook notification of completion</li>
+<li>HTTP GET operation to retrieve the translation result.</li>
+</ol>
+<h3 id="translation-formats">Translation Formats</h3>
+<p>The general translation APIs do not support STL, but do support a wide range of industry formats.</p>
+<h4 id="output-formats">Output Formats</h4>
+<p>Supported output formats currently include PARASOLID, STEP, ACIS, IGES, SOLIDWORKS, ONSHAPE.</p>
+<h4 id="source-formats">Source Formats</h4>
+<p>We allow a larger range of input formats that output formats. In addition to the formats listed above for input format,
+you can also convert from Part Studio, Assembly, PROE, NX, CATIA and INVENTOR.</p>
+<h3 id="apis">APIs</h3>
+<p>We provide APIS to allow programatically determining supported formats:</p>
+<ul>
+<li>
+<p><em>Translations - Get Translation Formats</em></p>
+<p>This API presents the full list of supported translation formats</p>
+</li>
+<li>
+<p><em>Part Studios - Get Translation Formats</em></p>
+<p>Returns a list of the formats to which a particular Part Studio tab can be converted. Note that empty Part Studio
+tabs cannot be converted to other formats.</p>
+</li>
+<li>
+<p><em>Assemblies - Get Translation Formats</em></p>
+<p>Returns a list of the formats to which a particular Assembly tab can be converted. Note that empty Assembly
+tabs cannot be converted to other formats.</p>
+</li>
+</ul>
+<p>Note that the source format for a translation is currently always automatically detected by Onshape. Part Studios and Assemblies are known to be ONSHAPE format. File uploads have their type determined by the filename suffix. For example, a file named part7.step is assumed to be in STEP format.</p>
+<h3 id="translation-initiation">Translation initiation</h3>
+<p>Translation is initiated by performing an HTTP POST operation to one of the &ldquo;Create Translation&rdquo; APIs.</p>
+<p>These APIs have some common options:</p>
+<ul>
+<li>
+<p>formatName</p>
+<p>This is the name of the format to which the source will be translated. This formatName must be one of the supported
+names (names are case-sensitive). Note that translation to ONSHAPE format requires storeInDocument=true.</p>
+</li>
+<li>
+<p>storeInDocument</p>
+<p>Allows the caller to decide whether the output should be part of the document (as a Part Studio, Assembly or Blob
+tab) or whether the output should be external to the document.</p>
+</li>
+</ul>
+<p>APIs which use an upload or blob element common options when translating to ONSHAPE:</p>
+<ul>
+<li>
+<p>flattenAssemblies</p>
+<p>If the source file contains an assembly and flattenAssemblies is set to true, the assembly structure is removed and
+a single part studio is created.</p>
+</li>
+<li>
+<p>yAxisIsUp</p>
+<p>Allows the application to tell Onshape translation whether the Y axis or Z Axis is the &ldquo;Up&rdquo; direction.</p>
+</li>
+</ul>
+<h3 id="apis-1">APIs</h3>
+<ul>
+<li>
+<p><em>Translations - Create translation from upload</em></p>
+<p>This API allows an application to provide an input source file that will be converted to another format without
+requiring that the uploaded file be stored as a blob tab in the document. The API requires a document to be provided
+to define ownership context, but the uploaded file is not stored in the document.</p>
+<p>The file is uploaded as multipart form data. Each of the API parameters is a separate field in the multipart upload.
+The two required fields are &ldquo;file&rdquo; and &ldquo;formatName&rdquo;. The file part must contain the upload and should normally have
+a filename attribute set. The filename attribute can be omitted if the form data also has an encodedFilename field
+that contains the filename in URL-encoded form.</p>
+</li>
+<li>
+<p><em>Blob Elements - Create Translation</em></p>
+<p>A blob element containing a translatable file can be translated using this API. The blob element can be the result
+of a previous upload or it can be the output of a previous translation operation.</p>
+</li>
+<li>
+<p><em>Part Studios - Create Translation</em></p>
+<p>Initiate translation for a Part Studio element</p>
+</li>
+<li>
+<p><em>Assemblies - Create Translation</em></p>
+<p>Initiate translation for an Assembly element</p>
+</li>
+</ul>
+<p>The response from these APIs includes the fields:</p>
+<ul>
+<li>
+<p>id</p>
+<p>An identifier for the created translation operation. It can be used for later retrieval of translation results</p>
+</li>
+<li>
+<p>href</p>
+<p>A URL for the <em>Translations - Get Translation Status</em> API for this specific translation</p>
+</li>
+<li>
+<p>requestState
+Identifies the state of the translation request. The request will be done when the state changes from ACTIVE to
+DONE or FAILED. If FAILED, the translation was not successfully completed. If DONE, it completed successfully.</p>
+</li>
+</ul>
+<h3 id="waiting-for-translation-completion">Waiting for translation completion</h3>
+<p>The simplest way to determine when the translation is complete is to poll. You do this in one of two ways (which are really the same thing):</p>
+<ul>
+<li>Call the href returned in the translation response, which returns an updated state object</li>
+<li>Call the <em>Translation - Get Translation Status</em> API, using the id returned in the translation response</li>
+</ul>
+<p>Once the requestState changes to some value other than ACTIVE you will be ready to retrieve results.</p>
+<p>An alternate way to wait for translation completion is to register a webhook and wait for a notification to be delivered. This is discussed <a href="#webhook-translation-completion-notification">later</a>.</p>
+<h3 id="retrieving-results">Retrieving results</h3>
+<p>Once a translation requestState becomes DONE, results are available to be used. How they are accessed depends on the specifics of the translation. A completed request has several additional fields that may be populated. If your original request specified storeInDocument=false then the results are stored as external data, in which case the resultExternalDataIds status field provides identifiers to be used for retrieval (see External Data, below). If the request specified storeInDocument=true then the resultElementIds field will be populated (see Element Data, below).</p>
+<h4 id="external-data">External Data</h4>
+<p>External data is data that is associated with, but external to the document used as translation context. This data is not versioned as is done with in-document data. A translation request to a format other than ONSHAPE currently always produces a single data file (from resultExternalDataIds).</p>
+<p>To retrieve an external data file, use the API
+Documents - Download External Data</p>
+<h4 id="element-data">Element Data</h4>
+<p>When storeInDocument=true is specified, the results are stored as new elements in the document. The new elements are reported in the resultElementIds field in the translation status response. If the selected format is ONSHAPE, these elements will be Assemblies/Part Studios, and there may be multiple created elements. If the selected format is something other than ONSHAPE, there will be a single blob element result.</p>
+<p>A blob element result can be extracted using the <em>Blob Elements - Download File From Blob Element</em> API.</p>
+<h2 id="import-translation">Import Translation</h2>
+<p>When uploading a file to a blob element, either as a new element or an update to an existing element, if the file
+is a recognized format for import, it will, by default, be converted into ONSHAPE format. This behavior can be
+overridden by the application, if desired.</p>
+<h2 id="webhook-translation-completion-notification">Webhook Translation Completion notification</h2>
+<p>If an application runs in a server with a network address that is reachable across the internet, the application may choose to use webhooks to find out about translation completion. For reliable operation, a webhook should be registered for the translation document prior to initiating translation. If registered after translation initiation, the notification might be lost. See the help document on Webhook Notifications for more details.</p>
+
+	
+	
+	<div class="text-muted mt-5 pt-3 border-top">Last modified May 18, 2020
+</div>
+</div>
+
+
+          </main>
+        </div>
+      </div>
+      
+<footer class="bg-dark py-5 row d-print-none">
+  <div class="container-fluid mx-sm-5">
+    <div class="row">
+      <div class="col-6 col-sm-4 text-xs-center order-sm-2">
+        
+      </div>
+      <div class="col-6 col-sm-4 text-right text-xs-center order-sm-3">
+        
+      </div>
+      <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
+        
+        
+	
+		
+	
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    </div>
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+<script src="/js/main.min.e2081313840f629d5c183f26a9340d3fb9365d1e35d3a1fa01ad00849ac11949.js" integrity="sha256-4ggTE4QPYp1cGD8mqTQNP7k2XR4106H6Aa0AhJrBGUk=" crossorigin="anonymous"></script>
+
+
+
+  </body>
+</html>
