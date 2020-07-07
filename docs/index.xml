@@ -1,13 +1,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Onshape Developer Documentation – Welcome to the Developer Portal</title>
-    <link>http://example.org/docs/</link>
+    <link>https://onshape-public.github.io/docs/</link>
     <description>Recent content in Welcome to the Developer Portal on Onshape Developer Documentation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 18 May 2020 20:44:05 -0400</lastBuildDate>
     
-	  <atom:link href="http://example.org/docs/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://onshape-public.github.io/docs/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -17,10 +17,10 @@
     
     <item>
       <title>Docs: API Keys</title>
-      <link>http://example.org/docs/apikeys/</link>
+      <link>https://onshape-public.github.io/docs/apikeys/</link>
       <pubDate>Mon, 18 May 2020 20:20:41 -0400</pubDate>
       
-      <guid>http://example.org/docs/apikeys/</guid>
+      <guid>https://onshape-public.github.io/docs/apikeys/</guid>
       <description>
         
         
@@ -145,10 +145,10 @@
     
     <item>
       <title>Docs: API Overview</title>
-      <link>http://example.org/docs/apioverview/</link>
+      <link>https://onshape-public.github.io/docs/apioverview/</link>
       <pubDate>Mon, 18 May 2020 20:25:28 -0400</pubDate>
       
-      <guid>http://example.org/docs/apioverview/</guid>
+      <guid>https://onshape-public.github.io/docs/apioverview/</guid>
       <description>
         
         
@@ -207,7 +207,7 @@ Desktop or server applications can use REST calls to read information from the O
 Web server applications can create a tightly integrated experience within Onshape by using a combination of REST and client-side APIs to build a seamless interaction by interacting with users inside an Onshape tab.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;The following diagram illustrates basic desktop integration and cloud integration architecture. The REST, WebHook and Client POST messages are documented in this and additional API documents.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://example.org/images/apioverviewimage00.png&#34; alt=&#34;image&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://onshape-public.github.io/images/apioverviewimage00.png&#34; alt=&#34;image&#34;&gt;&lt;/p&gt;
 &lt;p&gt;The Onshape Server Stack consists of a number of cooperating servers that provide the underlying support for the Onshape CAD experience. The Onshape servers are built with a variety of technologies, including Java and C++, database and message services, geometry and constraint management systems, and much more.&lt;/p&gt;
 &lt;p&gt;Partner cloud applications can be written in any web framework. Onshape provides a set of samples in Github. Onshape is also planning to provide a library that simplifies desktop application development.&lt;/p&gt;
 &lt;p&gt;The user interface code that runs in the Onshape browser client is written in Javascript.&lt;/p&gt;
@@ -218,7 +218,7 @@ Web server applications can create a tightly integrated experience within Onshap
 &lt;p&gt;For access to samples and tools, please visit &lt;a href=&#34;https://github.com/onshape-public&#34; target=&#34;_blank&#34;&gt;&lt;a href=&#34;https://github.com/onshape-public&#34;&gt;https://github.com/onshape-public&lt;/a&gt;&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 id=&#34;tools&#34;&gt;Tools&lt;/h2&gt;
 &lt;p&gt;Onshape provides API Explorer - an application written using the Onshape API that offers REST documentation and a &amp;ldquo;try me&amp;rdquo; mode for experimenting with the REST interfaces. To use API Explorer, visit the Appstore, select the API Explorer app and click &amp;ldquo;Try for Free.&amp;rdquo; Then, add a new Application tab using the plus button:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://example.org/images/apioverviewimage01.png&#34; alt=&#34;image&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://onshape-public.github.io/images/apioverviewimage01.png&#34; alt=&#34;image&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Select &amp;ldquo;Add Application&amp;rdquo; to create a tab with the API Explorer.&lt;/p&gt;
 &lt;h2 id=&#34;sample-applications&#34;&gt;Sample Applications&lt;/h2&gt;
 &lt;p&gt;The easiest way to get started with the Onshape API is to look at the sample applications. Each sample application is provided as a Github repository. For access, go to &lt;a href=&#34;https://github.com/onshape-public&#34;&gt;https://github.com/onshape-public&lt;/a&gt;. More samples will be made available over time. The current samples are:&lt;/p&gt;
@@ -374,7 +374,7 @@ applicable.&lt;/p&gt;
 &lt;p&gt;These query parameters provide the context you need to interact with the current document; you will need to authenticate to the Onshape server in order to use the REST APIs. The server parameter is informational, REST requests should always be sent to &lt;a href=&#34;https://cad.onshape.com&#34;&gt;https://cad.onshape.com&lt;/a&gt; for API requests and &lt;a href=&#34;https://oauth.onshape.com&#34;&gt;https://oauth.onshape.com&lt;/a&gt; for OAuth related operations.&lt;/p&gt;
 &lt;h3 id=&#34;end-user-integration&#34;&gt;End user integration&lt;/h3&gt;
 &lt;p&gt;When a user registers an application, there are several possible integration points to expose the application within the Onshape user experience. At this time, applications that provide a UI in an Onshape tab will be added to the menu attached to the plus button on the Onshape tab bar.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://example.org/images/apioverviewimage02.png&#34; alt=&#34;image&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://onshape-public.github.io/images/apioverviewimage02.png&#34; alt=&#34;image&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Use the Developer Portal to create an application and an Appstore entry. We are still considering how to best offer additional integration options, possibly including context menus for appropriate entities, application-specific toolbar buttons and more.&lt;/p&gt;
 &lt;h3 id=&#34;applications-for-mobile-clients&#34;&gt;Applications for Mobile Clients&lt;/h3&gt;
 &lt;p&gt;Onshape expects to enable applications tabs in iOS and Android environments, but details, including touch event handling in mobile environments, have not been finalized.&lt;/p&gt;
@@ -455,87 +455,16 @@ supported version.&lt;/p&gt;
 &lt;li&gt;degree, degrees, deg&lt;/li&gt;
 &lt;li&gt;radian, radians, rad&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;change-history&#34;&gt;Change History&lt;/h2&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Date&lt;/th&gt;
-&lt;th&gt;Description&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;14-Sep-2017&lt;/td&gt;
-&lt;td&gt;Updated sample application descriptions.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;02-Feb-2016&lt;/td&gt;
-&lt;td&gt;Reformat for markdown, clarify app store visibility mechanisms.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;18-Nov-2015&lt;/td&gt;
-&lt;td&gt;Remove deprecated interfaces, add new instructions for accessing API Explorer from the Appstore.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;22-Oct-2015&lt;/td&gt;
-&lt;td&gt;Add instructions for accessing the private API forum&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;9-Oct-2015&lt;/td&gt;
-&lt;td&gt;Document Developer Portal&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;14-Sep-2015&lt;/td&gt;
-&lt;td&gt;Clarify OAuth requirement.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;6-Jul-2015&lt;/td&gt;
-&lt;td&gt;Copy editing.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;26-Jun-2015&lt;/td&gt;
-&lt;td&gt;Add information about registering an application.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;23-Jun-2015&lt;/td&gt;
-&lt;td&gt;Remove caveat about tool installation now that &amp;ldquo;Add Application…&amp;rdquo; works correctly. Refer to deprecated login authentication until OAuth password auth is available.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;13-Jun-2015&lt;/td&gt;
-&lt;td&gt;Significant update to reflect refactoring, new samples, OAuth, new interfaces and more.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;30-Mar-2015&lt;/td&gt;
-&lt;td&gt;Add warning about cut/past hyphen character.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;26-Mar-2015&lt;/td&gt;
-&lt;td&gt;Fix ToC, add support info, add architectural overview description and diagram.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;20-Mar-2015&lt;/td&gt;
-&lt;td&gt;Add XSRF cookie/token handling description. Updated authentication token name information.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;19-Mar-2015&lt;/td&gt;
-&lt;td&gt;Add change history to make it easier to track API changes.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;19-Mar-2015&lt;/td&gt;
-&lt;td&gt;Add maxWidth and facetNormal options to edge and face tessellation APIs.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
 
       </description>
     </item>
     
     <item>
       <title>Docs: Associativity</title>
-      <link>http://example.org/docs/associativity/</link>
+      <link>https://onshape-public.github.io/docs/associativity/</link>
       <pubDate>Mon, 18 May 2020 20:28:26 -0400</pubDate>
       
-      <guid>http://example.org/docs/associativity/</guid>
+      <guid>https://onshape-public.github.io/docs/associativity/</guid>
       <description>
         
         
@@ -692,7 +621,7 @@ supported version.&lt;/p&gt;
 &lt;h3 id=&#34;associativity-example&#34;&gt;Associativity Example&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;Create a unit length [cube]:
-&lt;img src=&#34;http://example.org/images/associativityimage03.png&#34; alt=&#34;image alt text&#34;&gt;&lt;/li&gt;
+&lt;img src=&#34;https://onshape-public.github.io/images/associativityimage03.png&#34; alt=&#34;image alt text&#34;&gt;&lt;/li&gt;
 &lt;li&gt;Get document microversion (&lt;code&gt;https://cad.onshape.com/api/documents/d/&amp;lt;docid&amp;gt;/w/&amp;lt;wid&amp;gt;/microversion&lt;/code&gt;).
 Use the appropriate REST API to get the tessellated faces &lt;code&gt;https://cad.onshape.com/api/partstudios/d/&amp;lt;docid&amp;gt;/w/&amp;lt;wid&amp;gt;/e/&amp;lt;eid&amp;gt;/tessellatedfaces&lt;/code&gt;
 and edges &lt;code&gt;https://cad.onshape.com/api/partstudios/d/&amp;lt;docid&amp;gt;/w/&amp;lt;wid&amp;gt;/e/&amp;lt;eid&amp;gt;/tessellatededges&lt;/code&gt;. Note the ids:&lt;/li&gt;
@@ -706,7 +635,7 @@ and edges &lt;code&gt;https://cad.onshape.com/api/partstudios/d/&amp;lt;docid&am
 &lt;ol start=&#34;3&#34;&gt;
 &lt;li&gt;Split cube with the [&amp;ldquo;Front&amp;rdquo; plane], translate ids:&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;http://example.org/images/associativityimage00.png&#34; alt=&#34;image alt text&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://onshape-public.github.io/images/associativityimage00.png&#34; alt=&#34;image alt text&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;POST&lt;/strong&gt; &lt;code&gt;https://cad.onshape.com/api/partstudios/d/&amp;lt;docid&amp;gt;/w/&amp;lt;wid&amp;gt;/e/&amp;lt;eid&amp;gt;/idtranslations&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Body&lt;/strong&gt;:&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-{&#34; data-lang=&#34;{&#34;&gt;  &amp;quot;sourceDocumentMicroversion&amp;quot; : &amp;quot;47e75ab2ee8b4356a76ebd47&amp;quot;,
@@ -788,18 +717,14 @@ and edges &lt;code&gt;https://cad.onshape.com/api/partstudios/d/&amp;lt;docid&am
     
     <item>
       <title>Docs: Billing</title>
-      <link>http://example.org/docs/billing/</link>
+      <link>https://onshape-public.github.io/docs/billing/</link>
       <pubDate>Mon, 18 May 2020 20:29:36 -0400</pubDate>
       
-      <guid>http://example.org/docs/billing/</guid>
+      <guid>https://onshape-public.github.io/docs/billing/</guid>
       <description>
         
         
-        &lt;p&gt;Using Billing within Onshape&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;Last updated 30-October-2015&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;This document describes APIs that will allow partners to interact with the Onshape billing system.&lt;/p&gt;
+        &lt;p&gt;This document describes APIs that will allow partners to interact with the Onshape billing system.&lt;/p&gt;
 &lt;p&gt;Please address questions to &amp;ldquo;&lt;a href=&#34;mailto:api-support@onshape.com&#34;&gt;api-support@onshape.com&lt;/a&gt;&amp;rdquo; for the fastest response.&lt;/p&gt;
 &lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
 &lt;p&gt;All billing is done through &amp;ldquo;plans&amp;rdquo; that are created in the Developer Portal. A “plan” has the following attributes:&lt;/p&gt;
@@ -895,18 +820,17 @@ GET  /applications/clients/:cid/settings/users/:uid&lt;/p&gt;
     
     <item>
       <title>Docs: Client Messaging</title>
-      <link>http://example.org/docs/clientmessaging/</link>
+      <link>https://onshape-public.github.io/docs/clientmessaging/</link>
       <pubDate>Mon, 18 May 2020 20:30:40 -0400</pubDate>
       
-      <guid>http://example.org/docs/clientmessaging/</guid>
+      <guid>https://onshape-public.github.io/docs/clientmessaging/</guid>
       <description>
         
         
         &lt;h1 id=&#34;javascript-post-message-api&#34;&gt;JavaScript Post Message API&lt;/h1&gt;
-&lt;p&gt;Last updated 29-October-2015&lt;/p&gt;
 &lt;hr&gt;
 &lt;p&gt;Application elements and the Onshape JavaScript web client need to communicate directly, calling across the iframe containing the application element using post message.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://example.org/images/javascriptpostmessageimage00.png&#34; alt=&#34;image alt text&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://onshape-public.github.io/images/javascriptpostmessageimage00.png&#34; alt=&#34;image alt text&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Typical use cases (not all currently implemented) include:&lt;/p&gt;
 &lt;h2 id=&#34;from-the-application-element-to-the-onshape-client&#34;&gt;From the Application Element to the Onshape Client:&lt;/h2&gt;
 &lt;ul&gt;
@@ -1284,15 +1208,14 @@ viewportWidth:       number, width of the viewport
     
     <item>
       <title>Docs: Feature List API</title>
-      <link>http://example.org/docs/featureaccess/</link>
+      <link>https://onshape-public.github.io/docs/featureaccess/</link>
       <pubDate>Mon, 18 May 2020 20:37:28 -0400</pubDate>
       
-      <guid>http://example.org/docs/featureaccess/</guid>
+      <guid>https://onshape-public.github.io/docs/featureaccess/</guid>
       <description>
         
         
         &lt;p&gt;Onshape Part Studio Feature Access API&lt;/p&gt;
-&lt;p&gt;May 1, 2017&lt;/p&gt;
 &lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;
 &lt;p&gt;The Onshape Part Studio tab tracks edits in terms of a feature list.  Creation and modification of geometry is
 performed by manipulating that list.  This document describes capabilities that are intended to allow partners
@@ -2989,10 +2912,10 @@ have a sideLength value of &amp;ldquo;1 in&amp;rdquo; and when the Size input is
     
     <item>
       <title>Docs: OAuth</title>
-      <link>http://example.org/docs/oauth/</link>
+      <link>https://onshape-public.github.io/docs/oauth/</link>
       <pubDate>Mon, 18 May 2020 20:39:14 -0400</pubDate>
       
-      <guid>http://example.org/docs/oauth/</guid>
+      <guid>https://onshape-public.github.io/docs/oauth/</guid>
       <description>
         
         
@@ -3096,10 +3019,10 @@ Possible reasons for specifying more than one redirect URI is if you deploy &amp
     
     <item>
       <title>Docs: Structured Storage</title>
-      <link>http://example.org/docs/structuredstorage/</link>
+      <link>https://onshape-public.github.io/docs/structuredstorage/</link>
       <pubDate>Mon, 18 May 2020 20:40:16 -0400</pubDate>
       
-      <guid>http://example.org/docs/structuredstorage/</guid>
+      <guid>https://onshape-public.github.io/docs/structuredstorage/</guid>
       <description>
         
         
@@ -3521,16 +3444,14 @@ Possible reasons for specifying more than one redirect URI is if you deploy &amp
     
     <item>
       <title>Docs: Tessellation Performance</title>
-      <link>http://example.org/docs/tessellationperformance/</link>
+      <link>https://onshape-public.github.io/docs/tessellationperformance/</link>
       <pubDate>Mon, 18 May 2020 20:42:24 -0400</pubDate>
       
-      <guid>http://example.org/docs/tessellationperformance/</guid>
+      <guid>https://onshape-public.github.io/docs/tessellationperformance/</guid>
       <description>
         
         
-        &lt;h1 id=&#34;tessellation-performance-in-onshape&#34;&gt;Tessellation Performance in Onshape&lt;/h1&gt;
-&lt;p&gt;Last updated 8-October-2015&lt;/p&gt;
-&lt;hr&gt;
+        &lt;hr&gt;
 &lt;p&gt;This note provides guidance in getting good performance from the Onshape tessellation API.&lt;/p&gt;
 &lt;p&gt;We experimented with the &amp;ldquo;render fan&amp;rdquo; model, with the following results.&lt;/p&gt;
 &lt;p&gt;For this model, all of the parts are referenced in a single part studio. This provides a very large opportunity for performance improvements.&lt;/p&gt;
@@ -3599,15 +3520,14 @@ Possible reasons for specifying more than one redirect URI is if you deploy &amp
     
     <item>
       <title>Docs: Testing Guidelines</title>
-      <link>http://example.org/docs/testingguidelines/</link>
+      <link>https://onshape-public.github.io/docs/testingguidelines/</link>
       <pubDate>Mon, 18 May 2020 20:42:57 -0400</pubDate>
       
-      <guid>http://example.org/docs/testingguidelines/</guid>
+      <guid>https://onshape-public.github.io/docs/testingguidelines/</guid>
       <description>
         
         
-        &lt;h1 id=&#34;onshape-appstore-testing-guidelines&#34;&gt;Onshape Appstore Testing Guidelines&lt;/h1&gt;
-&lt;p&gt;The purpose of this document is to help you get your application and App Store entry ready for QA testing.&lt;/p&gt;
+        &lt;p&gt;The purpose of this document is to help you get your application and App Store entry ready for QA testing.&lt;/p&gt;
 &lt;p&gt;Application Release Workflow (ARW)&lt;/p&gt;
 &lt;p&gt;Each application submitted to the Onshape App Store goes through a series of stage-gates.&lt;/p&gt;
 &lt;ul&gt;
@@ -3747,15 +3667,14 @@ Possible reasons for specifying more than one redirect URI is if you deploy &amp
     
     <item>
       <title>Docs: Model Translation</title>
-      <link>http://example.org/docs/translation/</link>
+      <link>https://onshape-public.github.io/docs/translation/</link>
       <pubDate>Mon, 18 May 2020 20:43:20 -0400</pubDate>
       
-      <guid>http://example.org/docs/translation/</guid>
+      <guid>https://onshape-public.github.io/docs/translation/</guid>
       <description>
         
         
-        &lt;h1 id=&#34;onshape-model-translation-apis&#34;&gt;Onshape model translation APIs&lt;/h1&gt;
-&lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;
+        &lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;
 &lt;p&gt;This document describes the APIs provided by Onshape for model translation. This document makes reference to specific APIs using the naming convention &lt;em&gt;Group Name - Api Name&lt;/em&gt;, where the &lt;group name&gt; identifies an API group and &lt;api name&gt; identifies a specific API defined in the group. See the API Explorer for details on the APIs.&lt;/p&gt;
 &lt;p&gt;Onshape provides several APIs to support model format translation. These fall into 3 basic categories&lt;/p&gt;
 &lt;ol&gt;
@@ -3932,10 +3851,10 @@ overridden by the application, if desired.&lt;/p&gt;
     
     <item>
       <title>Docs: Webhook Notifications</title>
-      <link>http://example.org/docs/webhook/</link>
+      <link>https://onshape-public.github.io/docs/webhook/</link>
       <pubDate>Mon, 18 May 2020 20:44:05 -0400</pubDate>
       
-      <guid>http://example.org/docs/webhook/</guid>
+      <guid>https://onshape-public.github.io/docs/webhook/</guid>
       <description>
         
         
