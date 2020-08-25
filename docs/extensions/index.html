@@ -1,0 +1,715 @@
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="generator" content="Hugo 0.74.3" />
+
+<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+
+
+
+<link rel="shortcut icon" href="/favicons/favicon.ico" >
+<link rel="apple-touch-icon" href="/favicons/apple-touch-icon-180x180.png" sizes="180x180">
+<link rel="icon" type="image/png" href="/favicons/favicon-16x16.png" sizes="16x16">
+<link rel="icon" type="image/png" href="/favicons/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicons/android-36x36.png" sizes="36x36">
+<link rel="icon" type="image/png" href="/favicons/android-48x48.png" sizes="48x48">
+<link rel="icon" type="image/png" href="/favicons/android-72x72.png" sizes="72x72">
+<link rel="icon" type="image/png" href="/favicons/android-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/favicons/android-144x144.png" sizes="144x144">
+<link rel="icon" type="image/png" href="/favicons/android-192x192.png" sizes="192x192">
+
+<title>Extensions | Onshape Developer Documentation</title><meta property="og:title" content="Extensions" />
+<meta property="og:description" content="Onshape API and Application Extensions We are enhancing the Onshape API to enable a more integrated user experience and new capabilities.
+The new capabilities called extensions allow the following:
+ Embedding application UIs at multiple locations in the Onshape UI Enabling actions within the Onshape UI that can invoke application code via REST APIs or open custom URLs. Enabling background process integration into release workflows. An OAuth connection from Onshape to the application which enables seamlessly calling application code via REST APIs  Creating extensions Once the application has been created, we can configure it in the Developer Portal." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://onshape-public.github.io/docs/extensions/" />
+<meta property="article:published_time" content="2020-05-18T20:39:14-04:00" />
+<meta property="article:modified_time" content="2020-05-18T20:39:14-04:00" />
+<meta itemprop="name" content="Extensions">
+<meta itemprop="description" content="Onshape API and Application Extensions We are enhancing the Onshape API to enable a more integrated user experience and new capabilities.
+The new capabilities called extensions allow the following:
+ Embedding application UIs at multiple locations in the Onshape UI Enabling actions within the Onshape UI that can invoke application code via REST APIs or open custom URLs. Enabling background process integration into release workflows. An OAuth connection from Onshape to the application which enables seamlessly calling application code via REST APIs  Creating extensions Once the application has been created, we can configure it in the Developer Portal.">
+<meta itemprop="datePublished" content="2020-05-18T20:39:14-04:00" />
+<meta itemprop="dateModified" content="2020-05-18T20:39:14-04:00" />
+<meta itemprop="wordCount" content="3859">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Extensions"/>
+<meta name="twitter:description" content="Onshape API and Application Extensions We are enhancing the Onshape API to enable a more integrated user experience and new capabilities.
+The new capabilities called extensions allow the following:
+ Embedding application UIs at multiple locations in the Onshape UI Enabling actions within the Onshape UI that can invoke application code via REST APIs or open custom URLs. Enabling background process integration into release workflows. An OAuth connection from Onshape to the application which enables seamlessly calling application code via REST APIs  Creating extensions Once the application has been created, we can configure it in the Developer Portal."/>
+
+
+
+
+
+<link rel="preload" href="/scss/main.min.0b2b1932ff6c78c758cec3c3efac1347ba44cbf6a6d94fcb5ab5a0ce8937c6db.css" as="style">
+<link href="/scss/main.min.0b2b1932ff6c78c758cec3c3efac1347ba44cbf6a6d94fcb5ab5a0ce8937c6db.css" rel="stylesheet" integrity="">
+
+
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
+<style>
+  code {
+    white-space : pre-wrap !important;
+    overflow-wrap: break-word;
+  }
+</style>
+
+  </head>
+  <body class="td-page">
+    <header>
+      
+<nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
+        <a class="navbar-brand" href="/">
+		<span class="navbar-logo"></span><span class="text-uppercase font-weight-bold">Onshape Developer Documentation</span>
+	</a>
+	<div class="td-navbar-nav-scroll ml-md-auto" id="main_navbar">
+		<ul class="navbar-nav mt-2 mt-lg-0">
+			
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				
+				
+				<a class="nav-link active" href="/docs/" ><span class="active">Documentation</span></a>
+			</li>
+			
+			
+			
+		</ul>
+	</div>
+	<div class="navbar-nav d-none d-lg-block">
+</div>
+</nav>
+
+    </header>
+    <div class="container-fluid td-outer">
+      <div class="td-main">
+        <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
+            
+
+
+
+
+<div id="td-sidebar-menu" class="td-sidebar__inner">
+  
+  <form class="td-sidebar__search d-flex align-items-center">
+    
+
+    <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type="button" data-toggle="collapse" data-target="#td-section-nav" aria-controls="td-docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    </button>
+  </form>
+  
+  <nav class="collapse td-sidebar-nav pt-2 pl-4" id="td-section-nav">
+    
+    
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/docs/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Documentation</a>
+  </li>
+  <ul>
+    <li class="collapse show" id="docs">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsapikeys" href="/docs/apikeys/">API Keys</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsapioverview" href="/docs/apioverview/">API Overview</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsassociativity" href="/docs/associativity/">Associativity</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsbilling" href="/docs/billing/">Billing</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsclientmessaging" href="/docs/clientmessaging/">Client Messaging</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsfeatureaccess" href="/docs/featureaccess/">Feature List API</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsoauth" href="/docs/oauth/">OAuth</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page  active" id="m-docsextensions" href="/docs/extensions/">Extensions</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsstructuredstorage" href="/docs/structuredstorage/">Structured Storage</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docstessellationperformance" href="/docs/tessellationperformance/">Tessellation Performance</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docstestingguidelines" href="/docs/testingguidelines/">Testing Guidelines</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docstranslation" href="/docs/translation/">Model Translation</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docswebhook" href="/docs/webhook/">Webhook Notifications</a>
+      
+      
+    </li>
+  </ul>
+</ul>
+
+  </nav>
+</div>
+
+
+
+
+          </div>
+          <div class="d-none d-xl-block col-xl-2 td-toc d-print-none">
+            
+
+
+
+
+
+
+
+
+
+
+
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#creating-extensions">Creating extensions</a></li>
+    <li><a href="#3rd-party-oauth">3rd-party OAuth</a></li>
+    <li><a href="#supported-locations-and-contexts">Supported locations and contexts</a>
+      <ul>
+        <li><a href="#location-element-context-menu">Location: Element context menu</a></li>
+        <li><a href="#location-tree-context-menu">Location: Tree context menu</a></li>
+        <li><a href="#location-document-list-context-menu">Location: Document list context menu</a></li>
+        <li><a href="#location-document-list-info-panel">Location: Document list info panel</a></li>
+        <li><a href="#location-element-right-panel">Location: Element right panel</a></li>
+        <li><a href="#location-new-element-tab">Location: New Element tab</a></li>
+        <li><a href="#location-part-number-generator">Location: Part number generator</a></li>
+      </ul>
+    </li>
+    <li><a href="#sample-application">Sample application</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+</nav>
+
+
+
+          </div>
+          <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
+            
+  
+
+            <nav aria-label="breadcrumb" class="d-none d-md-block d-print-none">
+	<ol class="breadcrumb spb-1">
+		
+
+
+
+
+
+
+
+<li class="breadcrumb-item" >
+	<a href="https://onshape-public.github.io/docs/">Documentation</a>
+</li>
+
+
+
+
+<li class="breadcrumb-item active" aria-current="page">
+	<a href="https://onshape-public.github.io/docs/extensions/">Extensions</a>
+</li>
+
+	</ol>
+</nav	>
+
+            
+<div class="td-content">
+	<h1>Extensions</h1>
+    
+	       
+	<h1 id="onshape-api-and-application-extensions">Onshape API and Application Extensions</h1>
+<p>We are enhancing the Onshape API to enable a more integrated user experience and new capabilities.</p>
+<p>The new capabilities called extensions allow the following:</p>
+<ol>
+<li>Embedding application UIs at multiple locations in the Onshape UI</li>
+<li>Enabling actions within the Onshape UI that can invoke application code via REST APIs or open custom URLs.</li>
+<li>Enabling background process integration into release workflows.</li>
+<li>An OAuth connection from Onshape to the application which enables seamlessly calling application code via REST APIs</li>
+</ol>
+<h2 id="creating-extensions">Creating extensions</h2>
+<p>Once the application has been created, we can configure it in the Developer Portal. While viewing or editing the application, we earlier had 4 sections - Details, Settings, Keys, and Secrets and Permissions. We now have 2 new sections - <strong>Extensions</strong> and <strong>External OAuth</strong>.</p>
+<p><img src="/images/extensionsimage01.png" alt="image alt text"></p>
+<p>At a high level, we can classify extensions into 2 types. The first type of extensions embeds a UI from the application into the Onshape UI. The embedded UI is an HTTPS page that is shown in an iFrame in the Onshape UI. The UI is served from the application, and can choose to make API calls to Onshape for additional information. This is exactly like the traditional tab-based applications in Onshape, except that such extensions exist at different UI locations.</p>
+<p>The second type of extension embeds an action that calls a REST API exposed by the application from the Onshape UI. Examples of these are context menu actions and toolbar actions. These types of extensions rely on the External OAuth information to authenticate and make a call where Onshape acts as a client and the application acts as a server.</p>
+<p>Each extension exists at a specific place in the Onshape UI and works with a specific context or selection. The attributes of an extension are:</p>
+<ol>
+<li>
+<p>Name - This should be short and explicit. It will appear in the Onshape UI as a menu item, a toolbar tooltip, a collapsed panel icon tooltip, or a panel icon. It might be truncated in the UI if it is too long.</p>
+</li>
+<li>
+<p>Description - This is where the developer can record a detailed description of the extension. It does not appear in the Onshape UI, but could appear in the grant process.</p>
+</li>
+<li>
+<p>Location - This describes where the extension exists in the Onshape UI. Over time, this will cover various panels in the UI, context menus, toolbars, actions in dialogs, etc. You can see the list of currently supported locations <a href="#supported-locations-and-contexts">here</a>.
+Please note that you can create only one element tab extension per application.</p>
+</li>
+<li>
+<p>Context(selection) - Some locations will work in the context of a selection. Let’s say the application developer wants to show some information from a third-party system, pertinent only to parts (not assemblies or drawings). In this scenario, the developer would choose a location like ‘Document list info panel’, and the context as ‘Selected part’. If the user searches for something in the document list, some documents, Part Studios, parts, and Assemblies would be returned. This extension will show up in the Info panel only if the selected entity is a part. Using context enables application developers to control when the extension is displayed. Check the list of contexts available for different locations <a href="#supported-locations-and-contexts">here</a>.</p>
+</li>
+<li>
+<p>Action URL - Locations that embed a UI use the action URL to define the address of the page to display. The action URL is used to specify the REST endpoint if the location is an action (context menu, toolbar item, action in dialog etc.) and the action type is GET or POST. If the location is an action and the action is ‘Open in new window’, the action URL is the URL to open in the new window.<br>
+The action URL can be parameterized to pass information from Onshape to the application. The action URL replaces attributes in the format {$attribute} with the appropriate value. These attributes can be used to identify the selected entity and/or make calls back to Onshape via the API. The currently supported attributes are:</p>
+</li>
+</ol>
+<ul>
+<li>{$documentId} - The Onshape ID for the current or selected document.</li>
+<li>{$workspaceOrVersion} - This will be either ‘w’ or ‘v’ for workspace or version respectively depending on current opened document state or selection.</li>
+<li>{$workspaceOrVersionId} - The Onshape ID for the current or selected workspace or version.</li>
+<li><em>{$workspaceId}</em> - The Onshape ID for the current or selected workspace. This is being deprecated.</li>
+<li><em>{$versionId}</em> - The Onshape ID for the current or selected version. This is being deprecated.</li>
+<li>{$elementId} -  The Onshape ID for the current or selected element (part studio, assembly, drawing).</li>
+<li>{$partId} - The Onshape ID for the current or selected part.</li>
+<li>{$partNumber} - The Part number property for the current or selected part, assembly or drawing.</li>
+<li>{$revision} - The Revision property for the current or selected part, assembly or drawing.</li>
+<li>{$mimeType} - The mime type if the current or selected element is a blob.</li>
+<li>{$featureId} - In case of feature selected in the Feature list in a Part Studio.</li>
+<li>{$nodeId} - In case of mate or mate feature selected in the Assembly list.</li>
+<li>{$occurrencePath} - In case of part instances, mates, mate connectors and sub assemblies.</li>
+<li>{$configuration} - In case of extensions inside the document, this attribute will be replaced by current element active configuration.</li>
+</ul>
+<p>The attributes can exist as path parameters or query parameters or attributes in the POST body. For example: <a href="https://whispering-sea-42267.herokuapp.com/oauthSignin?documentId=%7B$documentId%7D&amp;workspaceId=%7B$workspaceId%7D&amp;elementId=%7B$elementId%7D&amp;partId=%7B$partId">https://whispering-sea-42267.herokuapp.com/oauthSignin?documentId={$documentId}&amp;workspaceOrVersion={workspaceOrVersion}&amp;workspaceOrVersionId={$workspaceOrVersionId}&amp;elementId={$elementId}&amp;partId={$partId}&amp;server=https://cad.onshape.com&amp;companyId=cad&amp;userId=5f1eba76c14a434817d9c588&amp;locale=en-US</a> OR <a href="https://cad.onshape.com/api/partstudios/d/%7B$documentId%7D/w/%7B$workspaceId%7D/e/%7B$elementId%7D/stl">https://cad.onshape.com/api/partstudios/d/{$documentId}/{$workspaceOrVersion}/{$workspaceOrVersionId}/e/{$elementId}/stl?server=https://cad.onshape.com&amp;companyId=cad&amp;userId=5f1eba76c14a434817d9c588&amp;locale=en-US</a></p>
+<p>The attributes available for replacement differ by location and context selection. You can see the available attributes for each location <a href="#supported-locations-and-contexts">here</a>.</p>
+<p>The <strong>timeout</strong> for action_url of type GET or POST is <strong>180 seconds</strong>.</p>
+<ol start="6">
+<li>Action type: The action type is only applicable for locations that act as actions and not for locations that embed UIs. Check if action type is valid for a location <a href="#supported-locations-and-contexts">here</a>. The supported action types are:</li>
+</ol>
+<ul>
+<li>GET - This makes a GET API call using the action URL. Parameter replacement is done on the action URL.</li>
+<li>POST - This makes a POST API call using the action URL and the action body as the post body. Parameter replacement is done on both the action URL and the action body.</li>
+<li>Open in new window - This opens the action URL in a new browser window. Parameter replacement is done on the action URL.</li>
+</ul>
+<ol start="7">
+<li>
+<p>Action body: This is only applicable if the action type is POST. The action body is passed in a POST API call and must be in a valid json format.</p>
+</li>
+<li>
+<p>Show response: This is only applicable if the action type is GET or POST. If this is checked, the UI will wait for a response and show the response in a dialog in the UI. The response must be in a valid json format.</p>
+</li>
+<li>
+<p>Icon: The icon will be shown where the extension exists. This can be an icon in an Info panel, context menu action, toolbar button, action button in a dialog, or other supported locations.</p>
+</li>
+</ol>
+<p><img src="/images/extensionsimage02.png" alt="image alt text"></p>
+<h2 id="3rd-party-oauth">3rd-party OAuth</h2>
+<p>This section lists the details required by Onshape to connect to the application. Refer to the sample application for details about building OAuth server functionality into your application.</p>
+<p>Please note that this section is compulsory for now. You have to build an OAuth server application at this time. In the future we may make this optional, or even support other authentication models.</p>
+<p>The attributes are:</p>
+<ol>
+<li>Client ID - The Client ID is considered public. It is how your specific application is uniquely identified in OAuth protocol exchanges.</li>
+<li>Client Secret - The client secret is like a password and is saved securely in Onshape storage. It is used to establish a valid OAuth connection to your application.</li>
+<li>Authorization URL - This is the URL where we initiate the OAuth process from Onshape to your application.</li>
+<li>Access Token URL - This is the URL used to access the token for making API calls to your application.</li>
+<li>Scopes - These are the scopes which your application wants to grant. This can be empty.</li>
+</ol>
+<p><img src="/images/extensionsimage03.png" alt="image alt text"></p>
+<h2 id="supported-locations-and-contexts">Supported locations and contexts</h2>
+<p>This is the list of supported locations, their valid contexts, and whether they support action types.</p>
+<h3 id="location-element-context-menu">Location: Element context menu</h3>
+<p>This is the context menu for elements.</p>
+<p><img src="/images/extensionsimage04.png" alt="image alt text"></p>
+<p>Supported contexts:</p>
+<ul>
+<li>Part Studio</li>
+<li>Assembly</li>
+<li>Drawing</li>
+<li>Blob element - These are file elements like pdf, stl, Parasolid file, etc.</li>
+</ul>
+<p>Supported parameters for replacements:</p>
+<ul>
+<li>{$documentId} - The Onshape ID for the current or selected document.</li>
+<li>{$workspaceOrVersion} - This will be either ‘w’ or ‘v’ for workspace or version respectively depending on current opened document state or selection.</li>
+<li>{$workspaceOrVersionId} - The Onshape ID for the current or selected workspace or version.</li>
+<li><em>{$workspaceId}</em> - The Onshape ID for the current or selected workspace. This is being deprecated.</li>
+<li><em>{$versionId}</em> - The Onshape ID for the current or selected version. This is being deprecated.</li>
+<li>{$elementId} -  The Onshape ID for the current or selected element (Part Studio, Assembly, Drawing, blob).</li>
+<li>{$partNumber} - The Part number property for the current or selected part, Assembly or Drawing.</li>
+<li>{$mimeType} - The mime type of the currently selected blob element.</li>
+<li>{$configuration} - The active configuration of the current element.</li>
+</ul>
+<p>Default parameters as query string:</p>
+<ul>
+<li>server - The address of the current Onshape server</li>
+<li>companyId - Default value is ‘cad’. If the document owner is company/enterprise, then the value is company/enterprise ID.</li>
+<li>userId - Current user ID</li>
+<li>locale - Locale of current user (ex. en-US)</li>
+<li>clientId - The OAuth client ID for the application</li>
+</ul>
+<p>This location supports action types.</p>
+<h3 id="location-tree-context-menu">Location: Tree context menu</h3>
+<p>This is the context menu for the part tree, assembly tree and feature tree in part studios.</p>
+<p><img src="/images/extensionsimage05.png" alt="image alt text"></p>
+<p>Supported contexts:</p>
+<ul>
+<li>Part - Part in a Part Studio’s Part list</li>
+<li>Sub assembly - Sub assembly in an Assembly list</li>
+<li>Feature - Feature in a Part Studio’s feature list</li>
+<li>Mate - Mate in an Assembly list</li>
+<li>Mate feature - Mate in an Assembly list</li>
+<li>Instance - Part instance in an Assembly list</li>
+</ul>
+<p>Supported parameters for replacement:</p>
+<ul>
+<li>{$documentId} - The Onshape ID for the current or selected document.</li>
+<li>{$workspaceOrVersion} - This will be either ‘w’ or ‘v’ for workspace or version respectively depending on current opened document state or selection.</li>
+<li>{$workspaceOrVersionId} - The Onshape ID for the current or selected workspace or version.</li>
+<li><em>{$workspaceId}</em> - The Onshape ID for the current or selected workspace. This is being deprecated.</li>
+<li><em>{$versionId}</em> - The Onshape ID for the current or selected version. This is being deprecated.</li>
+<li>{$elementId} -  The Onshape ID for the current or selected element (Part Studio, Assembly, Drawing).</li>
+<li>{$partNumber} - The Part number property for the current or selected part, Assembly or Drawing.</li>
+<li>{$revision} - The Revision property for the current or selected part, Assembly or Drawing.</li>
+<li>{$featureId} - In case of feature selected in the Feature list in a Part Studio</li>
+<li>{$nodeId} - In case of mate or mate feature selected in the Assembly list</li>
+<li>{$occurrencePath} - In case of part instances, mates, mate connectors and sub assemblies.</li>
+<li>{$configuration} - The active configuration of the current element.</li>
+</ul>
+<p>Default parameters as query string:</p>
+<ul>
+<li>server - The address of the current Onshape server</li>
+<li>companyId - Default value is ‘cad’. If the document owner is company/enterprise, then the value is company/enterprise ID.</li>
+<li>userId - Current user ID</li>
+<li>locale - Locale of current user (ex. en-US)</li>
+<li>clientId - The OAuth client ID for the application</li>
+</ul>
+<p>This location supports action types.</p>
+<h3 id="location-document-list-context-menu">Location: Document list context menu</h3>
+<p>This the context menu available on items in the document list. This is normally documents but can be multiple types based on search results.</p>
+<p><img src="/images/extensionsimage06.png" alt="image alt text"></p>
+<p>Supported contexts:</p>
+<ul>
+<li>Part</li>
+<li>Document</li>
+<li>Part Studio</li>
+<li>Assembly</li>
+<li>Drawing</li>
+<li>Blob element - These are file elements like pdf, stl, Parasolid file, etc.</li>
+</ul>
+<p>Supported parameters for replacement:</p>
+<ul>
+<li>{$documentId} - The Onshape ID for the current or selected document.</li>
+<li>{$workspaceOrVersion} - This will be either ‘w’ or ‘v’ for workspace or version respectively depending on current opened document state or selection.</li>
+<li>{$workspaceOrVersionId} - The Onshape ID for the current or selected workspace or version.</li>
+<li><em>{$workspaceId}</em> - The Onshape ID for the current or selected workspace. This is being deprecated.</li>
+<li><em>{$versionId}</em> - The Onshape ID for the current or selected version. This is being deprecated.</li>
+<li>{$elementId} -  The Onshape ID for the current or selected element (Part Studio, Assembly, Drawing).</li>
+<li>{$partNumber} - The Part number property for the current or selected part, Assembly or Drawing.</li>
+<li>{$revision} - The Revision property for the current or selected part, Assembly or Drawing.</li>
+<li>{$configuration} - The active configuration of the current or selected part, Assembly if applicable.</li>
+</ul>
+<p>Default parameters as query string:</p>
+<ul>
+<li>server - The address of the current Onshape server</li>
+<li>companyId - Default value is ‘cad’. If the document owner is company/enterprise, then the value is company/enterprise ID.</li>
+<li>userId - Current user ID</li>
+<li>locale - Locale of current user (ex. en-US)</li>
+<li>clientId - The OAuth client ID for the application</li>
+</ul>
+<p>This location supports action types.</p>
+<h3 id="location-document-list-info-panel">Location: Document list info panel</h3>
+<p>This is the Info panel to the right in the document list. The document list normally contains documents, but can contain other entities as the result of a search.</p>
+<p><img src="/images/extensionsimage07.png" alt="image alt text"></p>
+<p>Supported contexts:</p>
+<ul>
+<li>Part</li>
+<li>Document</li>
+<li>Part Studio</li>
+<li>Assembly</li>
+<li>Drawing</li>
+<li>Blob element - These are file elements like pdf, stl, Parasolid file, etc.</li>
+</ul>
+<p>Supported parameters for replacement:</p>
+<ul>
+<li>{$documentId} - The Onshape ID for the current or selected document.</li>
+<li>{$workspaceOrVersion} - This will be either ‘w’ or ‘v’ for workspace or version respectively depending on current opened document state or selection.</li>
+<li>{$workspaceOrVersionId} - The Onshape ID for the current or selected workspace or version.</li>
+<li><em>{$workspaceId}</em> - The Onshape ID for the current or selected workspace. This is being deprecated.</li>
+<li><em>{$versionId}</em> - The Onshape ID for the current or selected version. This is being deprecated.</li>
+<li>{$elementId} -  The Onshape ID for the current or selected element (Part Studio, Assembly, Drawing).</li>
+<li>{$partId} - The Onshape ID for the current or selected part.</li>
+</ul>
+<p>Default parameters as query string:</p>
+<ul>
+<li>server - The address of the current Onshape server</li>
+<li>companyId - Default value is ‘cad’. If the document owner is company/enterprise, then the value is company/enterprise ID.</li>
+<li>userId - Current user ID</li>
+<li>locale - Locale of current user (ex. en-US)</li>
+<li>clientId - The OAuth client ID for the application</li>
+</ul>
+<p>This location does NOT support action types.</p>
+<h3 id="location-element-right-panel">Location: Element right panel</h3>
+<p>This is the panel inside a document. It currently houses the BOM, configurations, etc. Applications can use this extension location to add items in this panel.</p>
+<p><img src="/images/extensionsimage08.png" alt="image alt text"></p>
+<p>Supported contexts:</p>
+<ul>
+<li>Part - Part selected in the part tree in the Part Studio.</li>
+<li>Document - Shown in the document irrespective of any selections.</li>
+<li>Part studio - Shown in the Part Studio irrespective of other selections.</li>
+<li>Assembly - Shown in the Assembly element irrespective of other selections.</li>
+<li>Sub assembly - Sub assembly selected in the Assembly list.</li>
+<li>Feature - Feature selected in the feature list in the Part Studio.</li>
+<li>Mate - Mate selected in the Assembly list.</li>
+<li>Mate feature - Mate feature selected in the Assembly list.</li>
+</ul>
+<p>Supported parameters for replacement:</p>
+<ul>
+<li>{$documentId} - The Onshape ID for the current document.</li>
+<li>{$workspaceOrVersion} - This will be either ‘w’ or ‘v’ for workspace or version respectively depending on current opened document state or selection.</li>
+<li>{$workspaceOrVersionId} - The Onshape ID for the current or selected workspace or version.</li>
+<li><em>{$workspaceId}</em> - The Onshape ID for the current or selected workspace. This is being deprecated.</li>
+<li><em>{$versionId}</em> - The Onshape ID for the current or selected version. This is being deprecated.</li>
+<li>{$elementId} -  The Onshape ID for the current element (Part Studio, Assembly, Drawing).</li>
+<li>{$partNumber} - The Part number property for the selected part, Assembly or Drawing.</li>
+<li>{$revision} - The Revision property for the selected part, Assembly or Drawing.</li>
+<li>{$featureId} - In case of feature selected in the Feature list in a Part Studio.</li>
+<li>{$nodeId} - In case of mate or mate feature selected in the Assembly list.</li>
+<li>{$occurrencePath} - In case of part instances, mates, mate connectors and sub assemblies.</li>
+<li>{$configuration} - The active configuration of the current element.</li>
+</ul>
+<p>Default parameters as query string:</p>
+<ul>
+<li>server - The address of the current Onshape server.</li>
+<li>companyId - Default value is ‘cad’. If the document owner is company/enterprise, then the value is company/enterprise ID.</li>
+<li>userId - Current user ID</li>
+<li>locale - Locale of current user (ex. en-US)</li>
+<li>clientId - The OAuth client ID for the application</li>
+</ul>
+<p>This location does NOT support action types.</p>
+<h3 id="location-new-element-tab">Location: New Element tab</h3>
+<p>This is the menu option for <code>+ menu -&gt; Add application</code> inside a document . After menu click, a new tab will be created with the action url associated with this extension.</p>
+<p><img src="/images/extensionsimage09.png" alt="image alt text"></p>
+<p>Supported contexts:</p>
+<ul>
+<li>There are no supported contexts.</li>
+</ul>
+<p>Supported parameters for replacement:</p>
+<ul>
+<li>Parameter replacement not supported.</li>
+</ul>
+<p>Default parameters as query string:</p>
+<ul>
+<li>documentId - Current document ID</li>
+<li>workspaceId - Current workspace ID</li>
+<li>versionId - Current version ID</li>
+<li>elementId - Current (application) element ID</li>
+<li>server - The address of the current Onshape server</li>
+<li>companyId - Default value is ‘cad’. If the document owner is company/enterprise, then the value is company/enterprise ID.</li>
+<li>userId - Current user ID</li>
+<li>locale - Locale of current user (ex. en-US)</li>
+<li>clientId - The OAuth client ID for the application</li>
+</ul>
+<p>This location supports action types.</p>
+<h3 id="location-part-number-generator">Location: Part number generator</h3>
+<p>This extension helps partners to embed their own custom part number generation scheme in Onshape. Each application can have only one extension of this type. Once defined, these extensions are listed as one of the part numbering schemes in the release management configuration in Company settings.</p>
+<p><img src="/images/extensionsimage10.png" alt="image alt text"></p>
+<p>In the above screen shot, ‘Part number generation scheme’ is the user-defined name of the extension.</p>
+<p>Supported contexts:</p>
+<ul>
+<li>There are no supported contexts.</li>
+</ul>
+<p>Supported parameters for replacement:</p>
+<ul>
+<li>Parameter replacement is not supported.</li>
+</ul>
+<p>Default parameters as query string:</p>
+<ul>
+<li>No default query parameters</li>
+</ul>
+<p>Action URL defined by the user is assumed to be a POST API. This API should consume a predefined request body as shown below. This definition may have additional attributes in future.</p>
+<pre><code> [
+   {
+           &quot;id&quot; : &lt;internal part number id&gt;,
+           &quot;documentId&quot; : &lt;documentId&gt;,
+           &quot;elementId&quot; : &lt;elementId&gt;,
+           &quot;workspaceId&quot; : &lt;workspaceId&gt;,
+           &quot;elementType&quot; : &lt;elementType&gt;,
+           &quot;partId&quot; : &lt;partId&gt;,
+           &quot;companyId&quot; : &lt;companyId&gt;, // Id of the company that owns the document, else the text “cad”
+           &quot;partNumber&quot; : &lt;current part number&gt;
+   }
+ ]
+</code></pre><p>Expected response sent to Onshape is as follows:</p>
+<pre><code> [   
+   {
+           &quot;id&quot; : &lt;internal part number id&gt;,
+           &quot;documentId&quot; : &lt;documentId&gt;,
+           &quot;elementId&quot; : &lt;elementId&gt;,
+           &quot;workspaceId&quot; : &lt;workspaceId&gt;,
+           &quot;elementType&quot; : &lt;elementType&gt;,
+           &quot;partId&quot; : &lt;partId&gt;,
+           &quot;partNumber&quot; : &lt;next part number generated by third party numbering scheme&gt;
+   }
+ ]
+</code></pre><p>Third-party applications can simply fill up the <code>&quot;partNumber&quot;</code> attribute with part number generated by the custom numbering scheme and send it as a response. However, the response should at least contain <code>&quot;id&quot;</code> and <code>&quot;partNumber&quot;</code> as highlighted above, other attributes are optional.</p>
+<p>Custom numbering schemes for part generation, once set in the Release management page, can be invoked from all the places where we set part numbers, including the Release candidate dialog shown below.</p>
+<p><img src="/images/extensionsimage11.png" alt="image alt text"></p>
+<h2 id="sample-application">Sample application</h2>
+<p>We have provided a sample application which supports the features described in this document.</p>
+<p>The source code for this ‘Inventory management’ application can be found <a href="https://github.com/onshape-public/inventory-oauth2-app">here</a>.</p>
+<p>The instructions to install and try out the application are available in the README.md file in the repository.</p>
+<p>The application is built on the Passport node module. It is based on this <a href="http://scottksmith.com/blog/2014/05/02/building-restful-apis-with-node/">article</a>. Please read the article before proceeding with this section.</p>
+<p>Some structural information about the application:</p>
+<ul>
+<li>The dependencies are defined in package.json</li>
+<li>The routing for inbound calls is defined in server.js. This includes routing for OAuth2 calls as well as calls for the rest APIs we expose that Onshape can call via the extensions.</li>
+<li>The OAuth2 calls are routed to controllers/oauth2.js. These include calls to authenticate as calls to get the bearer token.</li>
+<li>controllers/oauth2.js uses controllers/auth.js to interact with Passport to manage the authentication and storage.</li>
+<li>Other API calls to get part number, etc, route to the appropriate controller in the controllers directory.</li>
+<li>The controllers use the model defined in the model directory.</li>
+</ul>
+<p>The application is defined in the Developer Portal with extensions that use the exposed APIs.</p>
+<p>The following screenshots define the base configuration of the application  and some of the sample extensions.</p>
+<p><img src="/images/extensionsimage12.png" alt="image alt text"></p>
+<p><img src="/images/extensionsimage13.png" alt="image alt text"></p>
+<p><img src="/images/extensionsimage14.png" alt="image alt text"></p>
+<p><img src="/images/extensionsimage15.png" alt="image alt text"></p>
+<p><img src="/images/extensionsimage16.png" alt="image alt text"></p>
+<p><img src="/images/extensionsimage17.png" alt="image alt text"></p>
+<p><img src="/images/extensionsimage18.png" alt="image alt text"></p>
+<p><img src="/images/extensionsimage19.png" alt="image alt text"></p>
+<p><img src="/images/extensionsimage20.png" alt="image alt text"></p>
+<p><img src="/images/extensionsimage21.png" alt="image alt text"></p>
+<h2 id="faq">FAQ</h2>
+<p><em>Q. What is the user experience of granting and revoking OAuth access?</em></p>
+<p>Once users have purchased the application from the App Store, they will start seeing actions and panel icons as described by the extensions. When they try to use these actions and panels, they will be prompted by an error message stating that they need to grant access first.</p>
+<p>They can grant access by navigating to the ‘Applications’ section under ‘My Account’.</p>
+<p><img src="/images/extensionsimage22.png" alt="image alt text"></p>
+<p>Users will have to grant 2 permissions. The first button called ‘Onshape access’ will enable the application to make calls to the Onshape API. This will require the user’s Onshape credentials.</p>
+<p>The second button calls ‘External access’ and enables Onshape to make calls to the application API. This will require the user’s credentials in the application. Both modes of access use OAuth, so credentials are not stored in the other system.</p>
+<p>If the access is revoked at any time, the actions and panels will ask the user to re-authenticate from the ‘Applications’ page. Access may be revoked manually from Onshape or the application, or because a new version is installed that requires a different scope.</p>
+<p><em>Q. Who can get access to my app, and how?</em></p>
+<p>Applications with extensions are only available to people who have been explicitly granted this permission in Onshape. Users who have been given this permission will be able to go to the App Store and purchase the application. There is no change to this process from earlier. They will then be able to grant access to the application as described in the previous question.</p>
+<p>Do not publish your application if it contains extensions in the App Store for all users. Other users (who have not been granted permission) will not be able to see the extensions and will have a bad experience.</p>
+<p><em>Q. How is my application informed about selection changes in the Onshape UI?</em></p>
+<p>Let’s take the case where your application has an extension that is showing some information in the document info panel that is based on document selection. As the selection changes, the action URL passed to the extension will change (based on parameterization). The new action URL will be loaded into the IFrame for the extension, and the application page will reload. We are adding support for post messages to reduce loading overhead in the future.</p>
+<p><em>Q. What is the timeout for the action_url of extensions? Is it configurable?</em></p>
+<p>Timeout set for each GET or POST request set as action_url of an extension is 180 seconds. Timeout is not configurable.</p>
+<p><em>Q. What changed when my legacy application migrated to extensions</em></p>
+<p>If you had created a desktop or connected ckoud app, nothing has changed.<br>
+If you had created an integrated cloud app, the following changes have been made to the app.</p>
+<ul>
+<li>The IFrame URL has been changed to the OAuth URL. This is now invoked from the user&rsquo;s application setting page to grant OAuth access. A redirect URL is passed along with the call as a query parameter named &lsquo;redirectOnshapeUri&rsquo;. You will need to modify your code to redirect to this URL if it is present.</li>
+<li>A new tab extension is automatically created for your applications. The target URL for this extension is the earlier IFrame URL. This should continue to work as earlier.</li>
+<li>The tab icon will also be populated into the extension from the earlier application icon and should work as earlier.</li>
+</ul>
+
+	
+	
+	<div class="text-muted mt-5 pt-3 border-top">Last modified May 18, 2020
+</div>
+</div>
+
+
+          </main>
+        </div>
+      </div>
+      
+<footer class="bg-dark py-5 row d-print-none">
+  <div class="container-fluid mx-sm-5">
+    <div class="row">
+      <div class="col-6 col-sm-4 text-xs-center order-sm-2">
+        
+      </div>
+      <div class="col-6 col-sm-4 text-right text-xs-center order-sm-3">
+        
+      </div>
+      <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
+        
+        
+	
+		
+	
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    </div>
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+<script src="/js/main.min.7ec0cf02e5628a3a2d54549b636ca3cf715405337c49f7d808a336aa4f8ba62b.js" integrity="sha256-fsDPAuViijotVFSbY2yjz3FUBTN8SffYCKM2qk&#43;Lpis=" crossorigin="anonymous"></script>
+
+
+
+  </body>
+</html>

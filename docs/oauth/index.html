@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.71.1" />
+<meta name="generator" content="Hugo 0.74.3" />
 
 <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
 
@@ -32,11 +32,12 @@ When integrating with Onshape, OAuth tokens authorize third-party applications (
 When integrating with Onshape, OAuth tokens authorize third-party applications (such as a desktop application or a web service) for limited access to users&rsquo; Onshape documents. Using OAuth terminology, Onshape acts as both the authorization and resource server, while the desktop or web-based application is the client.">
 <meta itemprop="datePublished" content="2020-05-18T20:39:14-04:00" />
 <meta itemprop="dateModified" content="2020-05-18T20:39:14-04:00" />
-<meta itemprop="wordCount" content="2349">
+<meta itemprop="wordCount" content="2331">
 
 
 
-<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="OAuth"/>
 <meta name="twitter:description" content="Using OAuth 2.0 with Onshape Introduction OAuth 2.0 (&ldquo;OAuth&rdquo;) is an authorization framework allowing a user (also referred to as the resource owner) to approve client application access to the user&rsquo;s resources at an OAuth-enabled server.
 When integrating with Onshape, OAuth tokens authorize third-party applications (such as a desktop application or a web service) for limited access to users&rsquo; Onshape documents. Using OAuth terminology, Onshape acts as both the authorization and resource server, while the desktop or web-based application is the client."/>
@@ -173,6 +174,12 @@ When integrating with Onshape, OAuth tokens authorize third-party applications (
       
       
       
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsextensions" href="/docs/extensions/">Extensions</a>
+      
+      
+      
+      
+      
       <a class="td-sidebar-link td-sidebar-link__page " id="m-docsstructuredstorage" href="/docs/structuredstorage/">Structured Storage</a>
       
       
@@ -297,14 +304,11 @@ When integrating with Onshape, OAuth tokens authorize third-party applications (
 <p>Primary format - this string uniquely identifies your application and is a marker for the data it might store on Onshape servers. It should take the form of a Java style reverse domain name: <code>com.megacorp.stl-preview</code>. This value cannot be changed after the application is registered.</p>
 </li>
 <li>
-<p>Base HREF - this URL is the &lsquo;landing page&rsquo; for your application.  This page should handle OAuth authentication (see &ldquo;Obtaining a code&rdquo;, below), and once your application&rsquo;s server is authenticated on behalf of the user, the user should be redirected to wherever your application&rsquo;s content is.  Applications are placed inside an <code>&lt;iframe&gt;</code> tag within an Onshape application tab, similar to how Onshape part studios and assemblies appear in their own tabs. When the user selects your application tab, the base HREF is fetched. Additional query parameters are appended to the base HREF that allows your application to identify the specific user document and workspace. This URL must use HTTPS; Onshape is served over HTTPS and browsers will refuse to load an <code>&lt;iframe&gt;</code> whose source is not also an HTTPS url. Only one Base HREF value is supported.</p>
-</li>
-<li>
 <p>Redirect URIs - Your application must specify at least one (but multiple values are acceptable) URI used in OAuth protocol exchanges. This URL must also use SSL (a URL that begins with <code>https</code>), with two exceptions applicable for installed desktop applications. These two are exceptions allow redirect URIs of the form <code>http://localhost:&lt;port&gt;</code>, or the URN string <code>urn:ietf:wg:oauth:2.0:oob</code>. The &lsquo;localhost&rsquo; and URN string are meant for installed desktop applications since they do not require a publicly reachable server to be part of the OAuth process.
 Possible reasons for specifying more than one redirect URI is if you deploy &ldquo;test&rdquo; and &ldquo;production&rdquo; versions of your application, and want to use a specific version of your application for different sets of users.</p>
 </li>
 <li>
-<p>Application Scope (Permissions) - the application should also indicate the type of access it requires to the users data. The current list of scopes are:</p>
+<p>Application Scope (Permissions) - the application should also indicate the type of access it requires to the user&rsquo;s data. The current list of scopes are:</p>
 </li>
 </ol>
 <ul>
@@ -315,6 +319,10 @@ Possible reasons for specifying more than one redirect URI is if you deploy &ldq
 <li>Full - Application has full access to your documents</li>
 </ul>
 <p>The list of scopes may be increased or adjusted in the future, in particular access to personal information such as a users email address will be placed under a new scope that will need to be explicitly requested.</p>
+<ol start="6">
+<li>OAuth URL - this URL is the &lsquo;authentication page&rsquo; for your application.  This is the first URL called from onshape applications page. TThe page hosted at this URL should handle OAuth authentication (see &ldquo;Obtaining a code&rdquo;, below). Once your application&rsquo;s server is authenticated on behalf of the user, the user should be redirected to your application&rsquo;s content. If Onshape passes the ‘<code>redirectOnshapeUri</code>’ attribute in the first redirect (as a query parameter) in the OAuth flow, the app should redirect to the Uri passed in this attribute after a successful grant.
+Legacy support: As we migrate to extension based apps, the old Iframe URL is moved to a tab based extension. Change as needed to provide a better user experience.</li>
+</ol>
 <p>After the application has been registered Onshape will send you corresponding OAuth Client ID and OAuth Client Secret strings. While the Client ID is considered public - it is how your specific application is uniquely identified in OAuth protocol exchanges - the Client Secret <em>must</em> be stored securely. For example, it should NOT be checked in to source code control systems. Protect the Client Secret as you would any password data.</p>
 <h2 id="obtaining-an-oauth-access-token">Obtaining an OAuth Access Token</h2>
 <p>An OAuth access token is the credential a client application uses to access user resources at Onshape. Obtaining an OAuth access token is a two-part process: first obtaining a one-time use authorization code, and then exchanging the authorization code for them access token. The access token is used for all subsequent Onshape requests, though it too has a limited lifetime (which may be refreshed, as described below).</p>
