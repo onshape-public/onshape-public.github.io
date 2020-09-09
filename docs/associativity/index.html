@@ -36,7 +36,7 @@ Please address questions, comments and suggestions to &ldquo;api-support@onshape
 Introduction Onshape data is stored in replicated databases in the cloud. The data model for accessing Parts and Assemblies through the REST API is described here. The model is influenced by the data model used by Git and similar source code repositories.">
 <meta itemprop="datePublished" content="2020-05-18T20:28:26-04:00" />
 <meta itemprop="dateModified" content="2020-05-18T20:28:26-04:00" />
-<meta itemprop="wordCount" content="1538">
+<meta itemprop="wordCount" content="1531">
 
 
 
@@ -458,13 +458,12 @@ and edges <code>https://cad.onshape.com/api/partstudios/d/&lt;docid&gt;/w/&lt;wi
 <p><img src="/images/associativityimage00.png" alt="image alt text"></p>
 <p><strong>POST</strong> <code>https://cad.onshape.com/api/partstudios/d/&lt;docid&gt;/w/&lt;wid&gt;/e/&lt;eid&gt;/idtranslations</code></p>
 <p><strong>Body</strong>:</p>
-<pre><code class="language-{" data-lang="{">  &quot;sourceDocumentMicroversion&quot; : &quot;47e75ab2ee8b4356a76ebd47&quot;,
+<pre><code>{
+  &quot;sourceDocumentMicroversion&quot; : &quot;47e75ab2ee8b4356a76ebd47&quot;,
   &quot;ids&quot; : [&quot;JHD&quot;, &quot;JHO&quot;, &quot;JHd&quot;, &quot;JHt&quot;  ]
-}```
-
-**Response**:
-
-```{
+}
+</code></pre><p><strong>Response</strong>:</p>
+<pre><code>{
     &quot;documentId&quot;: &quot;748d6e850c9248328189922b&quot;,
     &quot;elementId&quot;: &quot;042a6fa54e79451e8076463d&quot;,
     &quot;sourceDocumentMicroversion&quot;: &quot;47e75ab2ee8b4356a76ebd47&quot;,
@@ -475,24 +474,19 @@ and edges <code>https://cad.onshape.com/api/partstudios/d/&lt;docid&gt;/w/&lt;wi
         { &quot;source&quot;: &quot;JHt&quot;, &quot;status&quot;: &quot;SPLIT&quot;, &quot;target&quot;: [&quot;JI5&quot;, &quot;JI9&quot;] }
     ],
     &quot;targetDocumentMicroversion&quot;: &quot;78bc7f3fcf82475085c2f3ab&quot;
-}```
-
-4. Delete one of the [parts], translate ids:
-
-![image alt text](/images/associativityimage01.png)
-
-**POST** `https://cad.onshape.com/api/partstudios/d/&lt;docid&gt;/w/&lt;wid&gt;/e/&lt;eid&gt;/idtranslations`
-
-**Body**:
-
-```{
+}
+</code></pre><ol start="4">
+<li>Delete one of the [parts], translate ids:</li>
+</ol>
+<p><img src="/images/associativityimage01.png" alt="image alt text"></p>
+<p><strong>POST</strong> <code>https://cad.onshape.com/api/partstudios/d/&lt;docid&gt;/w/&lt;wid&gt;/e/&lt;eid&gt;/idtranslations</code></p>
+<p><strong>Body</strong>:</p>
+<pre><code>{
   &quot;sourceDocumentMicroversion&quot; : &quot;47e75ab2ee8b4356a76ebd47&quot;,
   &quot;ids&quot; : [&quot;JHD&quot;, &quot;JHO&quot;, &quot;JHd&quot;, &quot;JHt&quot;]
-}```
-
-**Response**:
-
-```{
+}
+</code></pre><p><strong>Response</strong>:</p>
+<pre><code>{
     &quot;documentId&quot;: &quot;748d6e850c9248328189922b&quot;,
     &quot;elementId&quot;: &quot;042a6fa54e79451e8076463d&quot;,
     &quot;sourceDocumentMicroversion&quot;: &quot;47e75ab2ee8b4356a76ebd47&quot;,
@@ -503,24 +497,19 @@ and edges <code>https://cad.onshape.com/api/partstudios/d/&lt;docid&gt;/w/&lt;wi
         { &quot;source&quot;: &quot;JHt&quot;, &quot;status&quot;: &quot;OK&quot;, &quot;target&quot;: [&quot;JI5&quot;] }
     ],
     &quot;targetDocumentMicroversion&quot;: &quot;52aa74d34b624f3aaef33204&quot;
-}```
-
-5. Rollback delete and [split], translate ids:
-
-![image alt text](/images/associativityimage02.png)
-
-**POST** `https://cad.onshape.com/api/partstudios/d/&lt;docid&gt;/w/&lt;wid&gt;/e/&lt;eid&gt;/idtranslations`
-
-**Body**:
-
-```{
+}
+</code></pre><ol start="5">
+<li>Rollback delete and [split], translate ids:</li>
+</ol>
+<p><img src="/images/associativityimage02.png" alt="image alt text"></p>
+<p><strong>POST</strong> <code>https://cad.onshape.com/api/partstudios/d/&lt;docid&gt;/w/&lt;wid&gt;/e/&lt;eid&gt;/idtranslations</code></p>
+<p><strong>Body</strong>:</p>
+<pre><code>{
   &quot;sourceDocumentMicroversion&quot; : &quot;47e75ab2ee8b4356a76ebd47&quot;,
   &quot;ids&quot; : [&quot;JHD&quot;, &quot;JHO&quot;, &quot;JHd&quot;, &quot;JHt&quot;]
-}```
-
-**Response**:
-
-```{
+}
+</code></pre><p><strong>Response</strong>:</p>
+<pre><code>{
     &quot;documentId&quot;: &quot;748d6e850c9248328189922b&quot;,
     &quot;elementId&quot;: &quot;042a6fa54e79451e8076463d&quot;,
     &quot;sourceDocumentMicroversion&quot;: &quot;47e75ab2ee8b4356a76ebd47&quot;,
@@ -531,7 +520,8 @@ and edges <code>https://cad.onshape.com/api/partstudios/d/&lt;docid&gt;/w/&lt;wi
         { &quot;source&quot;: &quot;JHt&quot;, &quot;status&quot;: &quot;OK&quot;, &quot;target&quot;: [&quot;JHt&quot;] }
     ],
     &quot;targetDocumentMicroversion&quot;: &quot;52aa74d34b624f3aaef33204&quot;
-}```</code></pre>
+}
+</code></pre>
 	
 	
 	<div class="text-muted mt-5 pt-3 border-top">Last modified May 18, 2020
