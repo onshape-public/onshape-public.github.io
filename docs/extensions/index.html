@@ -34,7 +34,7 @@ The new capabilities called extensions allow the following:
  Embedding application UIs at multiple locations in the Onshape UI Enabling actions within the Onshape UI that can invoke application code via REST APIs or open custom URLs. Enabling background process integration into release workflows. An OAuth connection from Onshape to the application which enables seamlessly calling application code via REST APIs  Creating extensions Once the application has been created, we can configure it in the Developer Portal.">
 <meta itemprop="datePublished" content="2020-05-18T20:39:14-04:00" />
 <meta itemprop="dateModified" content="2020-05-18T20:39:14-04:00" />
-<meta itemprop="wordCount" content="3859">
+<meta itemprop="wordCount" content="3911">
 
 
 
@@ -596,10 +596,13 @@ The action URL can be parameterized to pass information from Onshape to the appl
            &quot;elementType&quot; : &lt;elementType&gt;,
            &quot;partId&quot; : &lt;partId&gt;,
            &quot;companyId&quot; : &lt;companyId&gt;, // Id of the company that owns the document, else the text “cad”
-           &quot;partNumber&quot; : &lt;current part number&gt;
+           &quot;partNumber&quot; : &lt;current part number&gt;,
+           &quot;configuration&quot; : &lt;configuration string&gt;,
+           &quot;categories&quot; : &lt;array of category ids and names&gt; // [ { &quot;id&quot;: &lt;String&gt;, &quot;name&quot;: &lt;string&gt; } ]
    }
  ]
-</code></pre><p>Expected response sent to Onshape is as follows:</p>
+</code></pre><p>Note - Categories are only passed from the Release dialog and properties dialogs for now. They are empty when part number generation is called from the BOM table or configuration table.</p>
+<p>Expected response sent to Onshape is as follows:</p>
 <pre><code> [   
    {
            &quot;id&quot; : &lt;internal part number id&gt;,

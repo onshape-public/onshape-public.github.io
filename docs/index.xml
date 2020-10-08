@@ -3323,10 +3323,13 @@ The action URL can be parameterized to pass information from Onshape to the appl
            &amp;quot;elementType&amp;quot; : &amp;lt;elementType&amp;gt;,
            &amp;quot;partId&amp;quot; : &amp;lt;partId&amp;gt;,
            &amp;quot;companyId&amp;quot; : &amp;lt;companyId&amp;gt;, // Id of the company that owns the document, else the text “cad”
-           &amp;quot;partNumber&amp;quot; : &amp;lt;current part number&amp;gt;
+           &amp;quot;partNumber&amp;quot; : &amp;lt;current part number&amp;gt;,
+           &amp;quot;configuration&amp;quot; : &amp;lt;configuration string&amp;gt;,
+           &amp;quot;categories&amp;quot; : &amp;lt;array of category ids and names&amp;gt; // [ { &amp;quot;id&amp;quot;: &amp;lt;String&amp;gt;, &amp;quot;name&amp;quot;: &amp;lt;string&amp;gt; } ]
    }
  ]
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Expected response sent to Onshape is as follows:&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Note - Categories are only passed from the Release dialog and properties dialogs for now. They are empty when part number generation is called from the BOM table or configuration table.&lt;/p&gt;
+&lt;p&gt;Expected response sent to Onshape is as follows:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt; [   
    {
            &amp;quot;id&amp;quot; : &amp;lt;internal part number id&amp;gt;,
