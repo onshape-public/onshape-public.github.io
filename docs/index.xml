@@ -1503,7 +1503,7 @@ of features.&lt;/p&gt;
 &lt;p&gt;Some important things to know about the JSON encoding are:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;Default values are omitted in the encoded output. For string fields the default value is &amp;ldquo;&amp;rdquo;, for boolean fields it
+&lt;p&gt;Default values are omitted in the encoded output. For string fields the default value is &amp;ldquo;&amp;quot;, for boolean fields it
 is false, and for numeric fields it is 0.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
