@@ -297,7 +297,7 @@ Web server applications can create a tightly integrated experience within Onshap
 &lt;td&gt;The Element ID identifies an element within the document.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;Part ID&lt;/strong&gt; ** Face ID ** &lt;strong&gt;Edge ID&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Part ID&lt;/strong&gt; &lt;br&gt; &lt;strong&gt;Face ID&lt;/strong&gt; &lt;br&gt; &lt;strong&gt;Edge ID&lt;/strong&gt;&lt;/td&gt;
 &lt;td&gt;The Part ID identifies a part within a part studio. The Part ID should generally not be stored for long-term use, as it is only expected to be valid during the course of a session. Note that a Part ID may reference a part that no longer exists if the model is changed, so it is best to specify a Version or Microversion to pick the context for the Part ID. Note that even with the Version or Microversion, internal changes to the Onshape system may result in the Part ID changing. Therefore, Onshape provides mechanisms for maintaining persistent references. See the &lt;a href=&#34;associativity.html&#34;&gt;associativity APIs&lt;/a&gt; for more information. Face and Edge IDs are used in similar ways, and will be documented in further detail.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
@@ -1503,7 +1503,7 @@ of features.&lt;/p&gt;
 &lt;p&gt;Some important things to know about the JSON encoding are:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;Default values are omitted in the encoded output. For string fields the default value is &amp;ldquo;&amp;quot;, for boolean fields it
+&lt;p&gt;Default values are omitted in the encoded output. For string fields the default value is &amp;ldquo;&amp;rdquo;, for boolean fields it
 is false, and for numeric fields it is 0.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;

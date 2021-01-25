@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.71.0" />
+<meta name="generator" content="Hugo 0.74.3" />
 
 <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
 
@@ -34,11 +34,12 @@ Please address questions to &quot; api-support@onshape.com&rdquo; for the fastes
  NOTE The API is still under development. Many of the previous interfaces have been deprecated in favor of a more consistent API. All previously described interfaces should continue to work, but we reserve the right to remove support for them.">
 <meta itemprop="datePublished" content="2020-05-18T20:25:28-04:00" />
 <meta itemprop="dateModified" content="2020-05-18T20:25:28-04:00" />
-<meta itemprop="wordCount" content="3011">
+<meta itemprop="wordCount" content="3009">
 
 
 
-<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="API Overview"/>
 <meta name="twitter:description" content="Getting Started with the Onshape REST API This document describes APIs that will allow partners to interact with the Onshape system.
 Please address questions to &quot; api-support@onshape.com&rdquo; for the fastest response.
@@ -449,7 +450,7 @@ Web server applications can create a tightly integrated experience within Onshap
 <td>The Element ID identifies an element within the document.</td>
 </tr>
 <tr>
-<td><strong>Part ID</strong> ** Face ID ** <strong>Edge ID</strong></td>
+<td><strong>Part ID</strong> <br> <strong>Face ID</strong> <br> <strong>Edge ID</strong></td>
 <td>The Part ID identifies a part within a part studio. The Part ID should generally not be stored for long-term use, as it is only expected to be valid during the course of a session. Note that a Part ID may reference a part that no longer exists if the model is changed, so it is best to specify a Version or Microversion to pick the context for the Part ID. Note that even with the Version or Microversion, internal changes to the Onshape system may result in the Part ID changing. Therefore, Onshape provides mechanisms for maintaining persistent references. See the <a href="associativity.html">associativity APIs</a> for more information. Face and Edge IDs are used in similar ways, and will be documented in further detail.</td>
 </tr>
 </tbody>
