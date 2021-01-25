@@ -247,7 +247,7 @@ Web server applications can create a tightly integrated experience within Onshap
 &lt;td&gt;A set of examples demonstrating the use of API Keys for Onshape authentication. This includes sample code for both Python and Node applications.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;Windows&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/onshape-public/app-windows-sample&#34;&gt;Windows&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;A Visual C# application demonstrating the use of a wide variety of API calls using OAuth for authentication.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
@@ -1503,7 +1503,7 @@ of features.&lt;/p&gt;
 &lt;p&gt;Some important things to know about the JSON encoding are:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;Default values are omitted in the encoded output. For string fields the default value is &amp;ldquo;&amp;rdquo;, for boolean fields it
+&lt;p&gt;Default values are omitted in the encoded output. For string fields the default value is &amp;ldquo;&amp;quot;, for boolean fields it
 is false, and for numeric fields it is 0.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
