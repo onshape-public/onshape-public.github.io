@@ -21,24 +21,24 @@
 <link rel="icon" type="image/png" href="/favicons/android-192x192.png" sizes="192x192">
 
 <title>Structured Storage | Onshape Developer Documentation</title><meta property="og:title" content="Structured Storage" />
-<meta property="og:description" content="Application Element API Application elements provide element storage that is controlled by applications. These elements allow a set of named sub-elements.
+<meta property="og:description" content="Sub Elements Onshape provides application elements storage that is controlled by applications through the API. These elements allow a set of named sub-elements.
 The application can make changes to sub-elements independently or in arbitrary groupings. Changes may be wholesale replacements, or may be deltas. When performing a delta update, the application may post a full version as well, which allows the api to return a smaller number of deltas for subsequent queries." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://onshape-public.github.io/docs/structuredstorage/" />
 <meta property="article:published_time" content="2020-05-18T20:40:16-04:00" />
 <meta property="article:modified_time" content="2020-05-18T20:40:16-04:00" />
 <meta itemprop="name" content="Structured Storage">
-<meta itemprop="description" content="Application Element API Application elements provide element storage that is controlled by applications. These elements allow a set of named sub-elements.
+<meta itemprop="description" content="Sub Elements Onshape provides application elements storage that is controlled by applications through the API. These elements allow a set of named sub-elements.
 The application can make changes to sub-elements independently or in arbitrary groupings. Changes may be wholesale replacements, or may be deltas. When performing a delta update, the application may post a full version as well, which allows the api to return a smaller number of deltas for subsequent queries.">
 <meta itemprop="datePublished" content="2020-05-18T20:40:16-04:00" />
 <meta itemprop="dateModified" content="2020-05-18T20:40:16-04:00" />
-<meta itemprop="wordCount" content="2647">
+<meta itemprop="wordCount" content="1224">
 
 
 
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Structured Storage"/>
-<meta name="twitter:description" content="Application Element API Application elements provide element storage that is controlled by applications. These elements allow a set of named sub-elements.
+<meta name="twitter:description" content="Sub Elements Onshape provides application elements storage that is controlled by applications through the API. These elements allow a set of named sub-elements.
 The application can make changes to sub-elements independently or in arbitrary groupings. Changes may be wholesale replacements, or may be deltas. When performing a delta update, the application may post a full version as well, which allows the api to return a smaller number of deltas for subsequent queries."/>
 
 
@@ -232,21 +232,13 @@ The application can make changes to sub-elements independently or in arbitrary g
 
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#summary-list-of-apis-described">Summary list of APIs described</a></li>
-    <li><a href="#api-description">API description</a>
+    <li><a href="#sub-elements">Sub Elements</a></li>
+    <li><a href="#json-tree">JSON Tree</a>
       <ul>
-        <li><a href="#operation--create">Operation:  create</a></li>
-        <li><a href="#operation--getids">Operation:  getIds</a></li>
-        <li><a href="#operation-starttransaction">Operation: startTransaction</a></li>
-        <li><a href="#operation-committransaction">Operation: commitTransaction</a></li>
-        <li><a href="#operation-update">Operation: update</a></li>
-        <li><a href="#operation-getcontent">Operation: getContent</a></li>
-        <li><a href="#operation-gethistory">Operation: getHistory</a></li>
-        <li><a href="#operation-deletecontent">Operation: deleteContent</a></li>
+        <li><a href="#json-tree-edit-semantics">JSON Tree Edit Semantics</a></li>
+        <li><a href="#json-tree-examples">JSON Tree Examples</a></li>
       </ul>
     </li>
-    <li><a href="#error-codes">Error Codes</a></li>
-    <li><a href="#onshape-creation-conventions">Onshape creation conventions</a></li>
   </ul>
 </nav>
 
@@ -286,8 +278,8 @@ The application can make changes to sub-elements independently or in arbitrary g
 	<h1>Structured Storage</h1>
     
 	       
-	<h1 id="application-element-api">Application Element API</h1>
-<p>Application elements provide element storage that is controlled by applications.  These elements allow a set of named sub-elements.</p>
+	<h2 id="sub-elements">Sub Elements</h2>
+<p>Onshape provides application elements storage that is controlled by applications through the API.  These elements allow a set of named sub-elements.</p>
 <p>The application can make changes to sub-elements independently or in arbitrary groupings.  Changes may be wholesale replacements, or may be deltas.  When performing a delta update, the application may post a full version as well, which allows the api to return a smaller number of deltas for subsequent queries.</p>
 <p>An application may need to perform multiple versionable actions in the course of performing a user-level action, and we want to allow the individual actions to be collected into a single action from the perspective of document history.  We do this by providing support for creation of a private transaction and support for atomically committing the transaction to the document workspace as a single user-visible action.</p>
 <p>Onshape does not assume any knowledge about the semantics of application deltas.  All merging of deltas into a consolidated form is done by the application.  Applications should typically send checkpoint state for a sub-element if many delta changes have been made since the last checkpoint.</p>
@@ -305,399 +297,121 @@ The application can make changes to sub-elements independently or in arbitrary g
 </li>
 </ul>
 <p><strong>Concurrent access by multiple users</strong></p>
-<p>If the element is being concurrently accessed by multiple sessions, updates may encounter conflicts during update. If the application has a mechanism that ensures that all accesses to the element are mediated by a single process, as is done with our part studio and assemblies,  this can be addressed directly by the application.  However, if the application is not able to mediate access in this way, updates by one session may invalidate state held by another session.  We address this by notifying updaters when an update cannot be directly applied because their state is out of date and allowing them to refresh their state before re-applying the change.  We expect to also provide a webhook api for notifying applications when a concurrent update has invalidated their state.</p>
+<p>If the element is being concurrently accessed by multiple sessions, updates may encounter conflicts during update. If the application has a mechanism that ensures that all accesses to the element are mediated by a single process, as is done with our part studio and assemblies,  this can be addressed directly by the application.  However, if the application is not able to mediate access in this way, updates by one session may invalidate state held by another session.  We address this by notifying updaters when an update cannot be directly applied because their state is out of date and allowing them to refresh their state before re-applying the change.</p>
 <p>This policy of requiring the application have current state when posting updates could be overly conservative in some cases.  Detecting conflict at the sub-element level might provide for better concurrent access performance, but there probably are cases where this fails, so it probably would need some level of application control.</p>
-<h2 id="summary-list-of-apis-described">Summary list of APIs described</h2>
-<p>Creates a new application element:</p>
-<p><code>POST /api/appelements/d/:did/w/:wid</code></p>
-<p>Query for the set of document sub-element ids:</p>
-<p><code>GET /api/appelements/d/:did/[wvm]/:wvmid/content/ids</code></p>
-<p>Create a private transaction for changes to the element:</p>
-<p><code>POST /api/appelements/d/:did/w/:wid/e/:eid/transactions</code></p>
-<p>Commit private transaction changes for the element to the workspace:</p>
-<p><code>POST /api/appelements/d/:did/w/:wid/e/:eid/transactions/:tid</code></p>
-<p>Add or update element content:</p>
-<p><code>POST /api/appelements/d/:did/w/:wid/e/:eid/content</code></p>
-<p>query element content:</p>
-<p><code>GET /api/appelements/d/:did/[wvm]/:wvmid/e/:eid/content</code></p>
-<p>delete element content</p>
-<p><code>DELETE /api/appelements/d/:did/w/:wid/e/:eid/content/subelements/:sid</code></p>
-<p>query element change history</p>
-<p><code>GET /api/appelements/d/:did/[wvm]/:wvmid/e/:eid/content/history</code></p>
-<h2 id="api-description">API description</h2>
-<h3 id="operation--create">Operation:  create</h3>
-<p>Creates a new application element.</p>
-<blockquote>
-<p>NOTE: See <a href="#onshape-creation-conventions">Onshape creation conventions</a> below for information about the initial base content of application elements created by Onshape clients.</p>
-</blockquote>
-<p><code>POST /api/appelements/d/:did/w/:wid</code></p>
-<p>url params:</p>
+<h2 id="json-tree">JSON Tree</h2>
+<p>In contrast with sub elements, JSON tree storage is a more managed data storage mechanism that Onshape itself can merge and diff. At the root of it, the data structure is a single JSON object per Application Element. The user submits incremental changes that are then applied by Onshape to the JSON tree. Onshape stores these &lsquo;diffs&rsquo; in a new microversion created as a result of the update request, or during a subsequent transaction commit request. When the user then performs a merge or restore operation, Onshape can sum and apply the requisite incremental changes. By storing diffs, Onshape provides to the user a storage mechanism that is more robust to race conditions, since multiple simultaneous edits can be optionally merged by Onshape. All of these qualities make JSON tree a preferred way to store application element data in an Onshape-native manner.</p>
+<h3 id="json-tree-edit-semantics">JSON Tree Edit Semantics</h3>
+<h5 id="btjedit-encoding">BTJEdit Encoding</h5>
+<p>A JSON tree edit represents an incremental change to an application element&rsquo;s JSON tree. The edit is a <code>BTJEdit</code> class, which is encoded as one of the following:</p>
 <ul>
-<li>:did - the id of the document in which the new element will be created</li>
-<li>:wid - the workspace in which the new element will be created</li>
+<li>Deletion:</li>
 </ul>
-<p>query params:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{ <span style="color:#1e90ff;font-weight:bold">&#34;btType&#34;</span> : <span style="color:#a50">&#34;BTJEditDelete-1992&#34;</span>, <span style="color:#1e90ff;font-weight:bold">&#34;path&#34;</span> : <span style="color:#a50">&#34;path&#34;</span> }
+</code></pre></div><ul>
+<li>Insertion:</li>
+</ul>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{ <span style="color:#1e90ff;font-weight:bold">&#34;btType&#34;</span> : <span style="color:#a50">&#34;BTJEditInsert-2523&#34;</span>, <span style="color:#1e90ff;font-weight:bold">&#34;path&#34;</span> : <span style="color:#a50">&#34;path&#34;</span>, <span style="color:#1e90ff;font-weight:bold">&#34;value&#34;</span> : <span style="color:#a50">&#34;newValue&#34;</span> }
+</code></pre></div><ul>
+<li>Change:</li>
+</ul>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{ <span style="color:#1e90ff;font-weight:bold">&#34;btType&#34;</span> : <span style="color:#a50">&#34;BTJEditChange-2636&#34;</span>, <span style="color:#1e90ff;font-weight:bold">&#34;path&#34;</span> : <span style="color:#a50">&#34;path&#34;</span>, <span style="color:#1e90ff;font-weight:bold">&#34;value&#34;</span> : <span style="color:#a50">&#34;newValue&#34;</span> }
+</code></pre></div><ul>
+<li>Move:</li>
+</ul>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{ <span style="color:#1e90ff;font-weight:bold">&#34;btType&#34;</span> : <span style="color:#a50">&#34;BTJEditMove-3245&#34;</span>, <span style="color:#1e90ff;font-weight:bold">&#34;sourcePath&#34;</span> : <span style="color:#a50">&#34;path&#34;</span>, <span style="color:#1e90ff;font-weight:bold">&#34;destinationPath&#34;</span> : <span style="color:#a50">&#34;path&#34;</span> }
+</code></pre></div><ul>
+<li>List (where edit1, edit2, etc. are zero or more edits.):</li>
+</ul>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{ <span style="color:#1e90ff;font-weight:bold">&#34;btType&#34;</span> : <span style="color:#a50">&#34;BTJEditList-2707&#34;</span>, <span style="color:#1e90ff;font-weight:bold">&#34;edits&#34;</span> : [ <span style="color:#a50">&#34;edit1&#34;</span>, <span style="color:#a50">&#34;edit2&#34;</span>, <span style="color:#a50">&#34;...&#34;</span>] }
+</code></pre></div><p>Within the above encoding, <code>newValue</code> is a stand in for any valid JSON, and <code>path</code> is a stand in for an object representing a path to the node at which to perform the edit.</p>
+<h5 id="btjpath-encoding">BTJPath Encoding</h5>
+<p>The BTJPath object describes a path through the JSON tree to a particular node, and is encoded as follows:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{ <span style="color:#1e90ff;font-weight:bold">&#34;btType&#34;</span> : <span style="color:#a50">&#34;BTJPath-3073&#34;</span>, <span style="color:#1e90ff;font-weight:bold">&#34;startNode&#34;</span> : <span style="color:#a50">&#34;startNode&#34;</span>, <span style="color:#1e90ff;font-weight:bold">&#34;path&#34;</span> : [ <span style="color:#a50">&#34;pathElement1&#34;</span>, <span style="color:#a50">&#34;pathElement2&#34;</span>, <span style="color:#a50">&#34;...&#34;</span>] }
+</code></pre></div><p>where startNode is a string that is either empty to specify the root node or a nodeId of a node in the tree. The pathElement is one of:</p>
 <ul>
-<li>none</li>
+<li>Key:</li>
 </ul>
-<p>JSON body:</p>
-<pre><code>{
-   &quot;formatId&quot; : &quot;some-format-id&quot;,
-   &quot;subelements&quot; : [ { &quot;subelementId&quot; : &quot;some-id-string&quot;,
-                &quot;baseContent&quot; : &quot;some-base64-string&quot; },
-              ...
-          ],
-   &quot;name&quot; : &quot;some-name&quot;
-   &quot;description&quot; : &quot;some-description&quot;
-}
-</code></pre><p>JSON params:</p>
-<ul>
-<li>formatId - a value which identifies the format of the element data. It is used to allow Onshape to know what application should process the element when it is opened.  The value supplied here normally is assigned to a partner by Onshape, but may be self-assigned for limited-use development testing.  A partner may have more than one assigned formatId if their applications supports more than one type of application element.</li>
-<li>Any formatId assigned by Onshape will consist of alphanumeric characters only.  Partners are welcome to create test elements as long as they contain at least one non-alphanumeric character.  Onshape suggests creating test Ids of the form &ldquo;company-app&rdquo; using the dash character.  Onshape reserves onshape-* for internal use.</li>
-<li>subelements - provides initial content for zero or more sub-elements.
-<ul>
-<li>subelementId - an id string assigned by the application to identify a sub-element</li>
-<li>baseContent - the initial value for the sub-element, expressed as a base64-encoded string</li>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{ <span style="color:#1e90ff;font-weight:bold">&#34;btType&#34;</span> : <span style="color:#a50">&#34;BTJPathKey-3221&#34;</span>, <span style="color:#1e90ff;font-weight:bold">&#34;key&#34;</span> : <span style="color:#a50">&#34;string&#34;</span> }
+</code></pre></div><ul>
+<li>Index:</li>
 </ul>
-</li>
-<li>name - the name to be assigned to the element</li>
-<li>description - a description to be associated with the initial element change state</li>
-</ul>
-<p>returns:</p>
-<pre><code>{
-   &quot;errorCode&quot; : some-integer,
-   &quot;errorDescription&quot; : &quot;some-string&quot;,
-   &quot;elementId&quot; : &quot;some-element-id&quot;,
-   &quot;changeId&quot; : &quot;some-change-id&quot;
-}
-</code></pre><ul>
-<li>errorCode - has the value 0 if successful or an HTTP error status code is reported otherwise</li>
-<li>errorDescription - a short description string  describing the errorCode</li>
-<li>elementId - the id of the created element</li>
-<li>changeId - the initial changeId of the created element</li>
-</ul>
-<h3 id="operation--getids">Operation:  getIds</h3>
-<p>Query for the set of document sub-element ids</p>
-<p><code>GET /api/appelements/d/:did/[wvm]/:wvmid/content/ids</code></p>
-<p>url params:</p>
-<ul>
-<li>:did - the document containing the element</li>
-<li>:wvmid - the workspace/version/microversion for query evaluation, corresponding to the choice of w, v, m</li>
-<li>:eid - the application element</li>
-</ul>
-<p>query params:</p>
-<ul>
-<li>transactionId - an optional transaction of the element in which sub-element ids are retrieved.  If not specified, the workspace is used.</li>
-<li>changeId - the changeId of the element change state from which sub-element ids are retrieved.  If not specified, the current change state of the workspace or selected transaction is used</li>
-</ul>
-<p>returns:</p>
-<pre><code>{
-   &quot;errorCode&quot; : some-integer,
-   &quot;errorDescription&quot; : &quot;some-string&quot;,
-   &quot;subelementIds&quot; : [ &quot;id1&quot;, &quot;id2&quot;, ... &quot;idn&quot; ],
-   &quot;changeId&quot; : &quot;some-change-id&quot;
-}
-</code></pre><ul>
-<li>errorCode - has the value 0 if the operation was successful or an HTTP error status code is reported otherwise</li>
-<li>errorDescription - a short description string  describing the errorCode</li>
-<li>subelementIds - an array of sub-element ids that have been defined</li>
-<li>changeId - the change id of the element where the ids were evaluated.  We return changeId here primarily for the case where a workspace is used.  When a changeId is specified on input, the output will match the input.</li>
-</ul>
-<h3 id="operation-starttransaction">Operation: startTransaction</h3>
-<p>Create a transaction for changes to the element</p>
-<p>A transaction allows multiple edits to be applied and later collapsed onto the workspace as a single edit.</p>
-<p><code>POST /api/appelements/d/:did/w/:wid/e/:eid/transactions</code></p>
-<p>url params:</p>
-<ul>
-<li>:did - the document containing the element</li>
-<li>:wid - the workspace in which the creation takes place</li>
-<li>:eid - the application element</li>
-</ul>
-<p>query params:</p>
-<ul>
-<li>none</li>
-</ul>
-<p>JSON body:</p>
-<pre><code>{
-   &quot;parentChangeId&quot; : &quot;optional-change-id&quot;
-}
-</code></pre><p>JSON params:</p>
-<ul>
-<li>parentChangeId - identifies the change state of the element upon which this changes is based.  If at the time the call is made, this is not the current changeId for the workspace, the caller is informed that they are not using the most recent version of the element.</li>
-</ul>
-<p>returns:</p>
-<pre><code>{
-   &quot;errorCode&quot; : some-integer,
-   &quot;errorDescription&quot; : &quot;some-string&quot;,
-   &quot;changeId&quot; : &quot;some-change-id&quot;,
-   &quot;transactionId&quot; : &quot;some-transaction-id&quot;
-}
-</code></pre><ul>
-<li>errorCode - has the value 0 if successful or an HTTP error status code is reported otherwise</li>
-<li>errorDescription - a short description string  describing the errorCode</li>
-<li>changeId - the changeId off of which the branch was created.</li>
-<li>transactionId - the created transaction id</li>
-</ul>
-<h3 id="operation-committransaction">Operation: commitTransaction</h3>
-<p>Move private transaction changes for the element to the element workspace</p>
-<p><code>POST /api/appelements/d/:did/w/:wid/e/:eid/transactions/:tid</code></p>
-<p>url params:</p>
-<ul>
-<li>:did - the document containing the element</li>
-<li>:eid - the application element</li>
-<li>:wid - the workspace in which the creation takes place</li>
-<li>:tid - the transaction being committed</li>
-</ul>
-<p>query params:</p>
-<ul>
-<li>none</li>
-</ul>
-<p>JSON body:</p>
-<pre><code>{
-    &quot;transactionId&quot; : &quot;some-transaction-id&quot;,
-    &quot;description&quot; : &quot;some-description&quot;
-}
-</code></pre><p>JSON params:</p>
-<ul>
-<li>transactionId - the transaction to merge</li>
-<li>description - a description string to be associated with the merged changes</li>
-</ul>
-<p>returns:</p>
-<pre><code>{
-   &quot;errorCode&quot; : some-integer,
-   &quot;errorDescription&quot; : &quot;some-string&quot;,
-   &quot;changeId&quot; : &quot;some-change-id&quot;
-}
-</code></pre><ul>
-<li>errorCode - has the value 0 if successful or an HTTP error status code is reported otherwise</li>
-<li>errorDescription - a short description string  describing the errorCode</li>
-<li>changeId - the changeId resulting from the merge, if success is true, or the current changeId of the workspace otherwise</li>
-<li>parentChangeId - the changeId that is the parent of the merged changes</li>
-</ul>
-<h3 id="operation-update">Operation: update</h3>
-<p>Add or update element content</p>
-<p><code>POST /api/appelements/d/:did/w/:wid/e/:eid/content</code></p>
-<p>url params:</p>
-<ul>
-<li>:did - the document containing the element</li>
-<li>:wid - the workspace in which the creation takes place</li>
-<li>:eid - the application element</li>
-</ul>
-<p>query params:</p>
-<ul>
-<li>none</li>
-</ul>
-<p>JSON body:</p>
-<pre><code>{
-   &quot;changes&quot; : [ { &quot;subelementId&quot; : &quot;some-id&quot;,
-                   &quot;baseContent&quot; : &quot;some-base64-string&quot; },
-                 { &quot;subelementId&quot; : &quot;some-id&quot;,
-                   &quot;delta&quot; : &quot;some-base64-string&quot; },
-          ],
-   &quot;transactionId&quot; : &quot;optional-transaction-id&quot;,
-   &quot;parentChangeId&quot; : &quot;optional-change-id&quot;,
-   &quot;description&quot; : &quot;some-description&quot;
-}
-</code></pre><p>JSON params:</p>
-<ul>
-<li>changes - contains a list of changes/updates for a set of ids.  For each id, the entry specifies the content and/or changes to the content for the change, with base content and deltas expressed as a base64-encoded string.  If an entry has only baseContent, the entry represents the creation or wholesale replacement of content for the sub-element.  If an entry has only delta, it is a pure delta, and the sub-element must already exist.  If an entry has delta + baseContent, the baseContent is interpreted as a checkpoint for the sub-element content representing the state after application of the delta, as an optimization.</li>
-<li>transactionId - if specified, this is the transaction to be used used for the change rather than the current workspace for the element.</li>
-<li>parentChangeId - identifies the changeId of the element upon which this changes is based.  If at the time the call is made, this is not the current changeId for the selected transaction or workspace, the caller is informed that they are not using the most recent version of the element.</li>
-</ul>
-<p>The operation moves the changes from the transaction to the document workspace.</p>
-<p>returns</p>
-<pre><code>{
-   &quot;errorCode&quot; : some-integer,
-   &quot;errorDescription&quot; : &quot;some-string&quot;,
-   &quot;changeId&quot; : &quot;some-change-id&quot;
-}
-</code></pre><ul>
-<li>errorCode - has the value 0 if successful or an HTTP error status code is reported otherwise</li>
-<li>errorDescription - a short description string  describing the errorCode</li>
-<li>changeId - the new changeId, if success is true, or the current changeId if success is false</li>
-</ul>
-<h3 id="operation-getcontent">Operation: getContent</h3>
-<p>query element content</p>
-<p><code>GET /api/appelements/d/:did/[wvm]/:wvmid/e/:eid/content</code></p>
-<p>url params:</p>
-<ul>
-<li>:did - the document containing the element</li>
-<li>:wvmid - the workspace/version/microversion in which the query takes place, corresponding to the choice of w, v or m</li>
-<li>:eid - the application element</li>
-</ul>
-<p>query params:</p>
-<ul>
-<li>transactionId - (optional) specifies the transaction within the workspace for retrieval.  If not specified, the element’s workspace is used</li>
-<li>changeId - (optional) specifies the changeId for the element state from which the content is to be retrieved.  If not specified, the current changeId of the selected transaction or workspace is used</li>
-<li>baseChangeId - (optional) if specified, indicates that the content to be returned should be limited to the changes relative to the base changeId.  This allows collaborating clients to incrementally synchronize their state with shared state.</li>
-<li>subelementId - (optional) restricts output to be for a single sub-element.  default is all sub-elements</li>
-</ul>
-<p>returns:</p>
-<pre><code>{
-  &quot;errorCode&quot; : some-integer,
-  &quot;errorDescription&quot; : &quot;some-string&quot;,
-  &quot;data&quot; : [ { &quot;subelementId&quot; : &quot;some id&quot;,
-                &quot;baseContent&quot; : &quot;some-base64-string&quot;,
-		    &quot;deltas&quot; : [
-                    { &quot;delta&quot; : &quot;some-base64-string&quot; },
-                    { &quot;delta&quot; : &quot;some-base64-string&quot; } ] } ],
-  &quot;changeId&quot; : &quot;some-change-id&quot;
-}
-</code></pre><ul>
-<li>errorCode - has the value 0 if the operation succeeded or an HTTP error status code is reported otherwise</li>
-<li>errorDescription - a short description string  describing the errorCode</li>
-<li>data - an array of results, one per selected sub-element, containing
-<ul>
-<li>subelementId - the id of the sub-element associated with the entry</li>
-<li>baseContent - the latest complete snapshot of the sub-element, which is not necessarily from the latest change state.  If a baseChangeId is specified, the baseContent field may be absent, indicating that content already in use by the caller should be used as the base for applying any deltas.  The data is returned as a base64-encoded string. If a baseChangeId is specified and there has been an update that includes a basecontent value since the base change occurred, the returned data will include the latest base content and any deltas that occur after the base content.</li>
-<li>deltas - an array of sub-element delta entries, in order of oldest to newest.  If there are no deltas, an empty array is present.  Each entry contains:
-<ul>
-<li>delta - an incremental delta, as provided by the application, expressed as a base64-encoded string.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>changeId - the changeId of the latest change supplied in the output.</li>
-</ul>
-<h3 id="operation-gethistory">Operation: getHistory</h3>
-<p>query element change history</p>
-<p><code>GET /api/appelements/d/:did/[wvm]/:wvmid/e/:eid/content/history</code></p>
-<p>url params:</p>
-<ul>
-<li>:did - the document containing the element</li>
-<li>:wid - the workspace in which the creation takes place</li>
-<li>:eid - the application element</li>
-</ul>
-<p>query params:</p>
-<ul>
-<li>none</li>
-</ul>
-<p>returns:</p>
-<pre><code>{
-  &quot;errorCode&quot; : some-integer,
-  &quot;errorDescription&quot; : &quot;some-string&quot;,
-  &quot;changes&quot; : [ { &quot;changeId&quot; : &quot;some-change-id&quot;,
-                  &quot;createdAt&quot; : &quot;2014-09-08T13:59:37.272+0000&quot;
-                  &quot;description&quot; : &quot;some-string&quot; },
-                …
-                ]
-}
-</code></pre><ul>
-<li>errorCode - has the value 0 if the operation or an HTTP error status code is reported otherwise</li>
-<li>errorDescription - a short description string  describing the errorCode</li>
-<li>changes - an array of changes, in order of application from more recent to less recent. Each one contains:
-<ul>
-<li>changeId - the changeId for the change</li>
-<li>description - the description of the change</li>
-<li>createdAt - the date/time at which the change occurred</li>
-</ul>
-</li>
-</ul>
-<h3 id="operation-deletecontent">Operation: deleteContent</h3>
-<p>delete element content</p>
-<p><code>DELETE /api/appelements/d/:did/w/:wid/e/:eid/content/subelements/:sid</code></p>
-<p>url params:</p>
-<ul>
-<li>:did - the document containing the element</li>
-<li>:wid - the workspace in which the creation takes place</li>
-<li>:eid - the application element</li>
-<li>:sid - the subelement id - be sure to URL encode this value</li>
-</ul>
-<p>query params:</p>
-<ul>
-<li>transactionId - an optional transaction in which sub-elements are deleted.  If not specified, the workspace is used.</li>
-<li>subelementId - the id associated with the sub-element to be deleted</li>
-</ul>
-<p>returns:</p>
-<pre><code>{
-    &quot;errorCode&quot; : some-integer,
-    &quot;errorDescription&quot; : &quot;some-string&quot;,
-    &quot;changeId&quot; : &quot;some-change-id&quot;
-    &quot;parentChangeId&quot; : &quot;some-change-id&quot;
-}
-</code></pre><ul>
-<li>errorCode - has the value 0 if successful or an HTTP error status code is reported otherwise</li>
-<li>errorDescription - a short description string  describing the errorCode</li>
-<li>changeId - the changeId of the entry that results in the entry deletion</li>
-<li>parentChangeId - the changeId of the  prior to the deleteContent operation</li>
-</ul>
-<h2 id="error-codes">Error Codes</h2>
-<p>The errorCode field returned by the API methods returns only a single value, 0, with a description of &ldquo;OK&rdquo;. Errors are signaled using HTTPstatus codes.</p>
-<h2 id="onshape-creation-conventions">Onshape creation conventions</h2>
-<p>When the Onshape client creates an application element, it will create an initial sub-element with subelementId &ldquo;OnshapeCreationContext&rdquo;.  This element contains baseContent that is a base64-encoded UTF-8 stringified representation of the JSON object described below.  This object serves to notify the associated application of the context in which the element was created.  The fields in this object may change over time as needs evolve.</p>
-<p>The context object is intended to provide the application sufficient information to initialize the application element. For applications that are associated with existing data, the &ldquo;data&rdquo; field is used to identify that data.</p>
-<p>As of this writing, the creation context object has the following structure:</p>
-<pre><code>{
-&quot;time&quot; : {some Date() object},
-&quot;userId&quot; : &quot;some-user-id&quot;,
-&quot;documentId&quot; : &quot;creation-document-id&quot;,
-&quot;workspaceId&quot; : &quot;creation-workspace-id&quot;,
-&quot;elementId&quot; : &quot;creation-element-id&quot;,
-&quot;data&quot; : {
-    &quot;documentId&quot; : &quot;context-document-id&quot;,
-    &quot;workspaceId&quot; : &quot;context-workspace-id&quot;,
-    &quot;elementId&quot; : &quot;context-element-id&quot;,
-    &quot;partQuery&quot; : &quot;context-part-query&quot;
-	}
-}
-</code></pre><p>The object may contain the following fields.</p>
-<table>
-  <tr>
-    <td>Field</td>
-    <td>Status</td>
-    <td>Description</td>
-  </tr>
-  <tr>
-    <td>time</td>
-    <td>required</td>
-    <td>The time this element was created</td>
-  </tr>
-  <tr>
-    <td>userId</td>
-    <td>required</td>
-    <td>ID of the user who created this element</td>
-  </tr>
-  <tr>
-    <td>documentId</td>
-    <td>required</td>
-    <td>ID of the document in which this element was created</td>
-  </tr>
-  <tr>
-    <td>workspaceId</td>
-    <td>required</td>
-    <td>ID of the workspace in which this element was created</td>
-  </tr>
-  <tr>
-    <td>elementId</td>
-    <td>required</td>
-    <td>ID of the this element when created</td>
-  </tr>
-  <tr>
-    <td>data</td>
-    <td>optional</td>
-    <td>Identifies the data context.   If not present, no initial data is associated with this element.</td>
-  </tr>
-  <tr>
-    <td>data.documentId</td>
-    <td>required</td>
-    <td>ID of the document that provides the data context.</td>
-  </tr>
-  <tr>
-    <td>data.workspaceId</td>
-    <td>required</td>
-    <td>ID of the workspace that provides the data context.</td>
-  </tr>
-  <tr>
-    <td>data.elementId</td>
-    <td>optional</td>
-    <td>ID of the element that provides the data context.</td>
-  </tr>
-  <tr>
-    <td>data.partQuery</td>
-    <td>optional</td>
-    <td>Identifies a part, currently only meaningful if the data.elementId is present and is a partstudio.</td>
-  </tr>
-</table>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{ <span style="color:#1e90ff;font-weight:bold">&#34;btType&#34;</span> : <span style="color:#a50">&#34;BTJPathIndex-1871&#34;</span>, <span style="color:#1e90ff;font-weight:bold">&#34;index&#34;</span> : <span style="color:#a50">&#34;integer&#34;</span> }
+</code></pre></div><p>In the insertion and move type edits the path elements can describe a path that doesn&rsquo;t currently exist. Onshape will generate the proper keys and values as needed to place the node value in the proper location.</p>
+<h3 id="json-tree-examples">JSON Tree Examples</h3>
+<p>Below are some examples that show the body required to perform the particular edit on a JSON tree.</p>
+<h4 id="deletion-example">Deletion Example</h4>
+<p>If the pre-existing JSON tree looks like:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{<span style="color:#1e90ff;font-weight:bold">&#34;myKey&#34;</span>:  <span style="color:#a50">&#34;myValue&#34;</span>}
+</code></pre></div><p>and a delete edit looks like:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{<span style="color:#1e90ff;font-weight:bold">&#34;btType&#34;</span>: <span style="color:#a50">&#34;BTJEditDelete-1992&#34;</span>,
+     <span style="color:#1e90ff;font-weight:bold">&#34;path&#34;</span>: {<span style="color:#1e90ff;font-weight:bold">&#34;btType&#34;</span>: <span style="color:#a50">&#34;BTJPath-3073&#34;</span>, <span style="color:#1e90ff;font-weight:bold">&#34;startNode&#34;</span>: <span style="color:#a50">&#34;&#34;</span>, <span style="color:#1e90ff;font-weight:bold">&#34;path&#34;</span>: [{<span style="color:#1e90ff;font-weight:bold">&#34;btType&#34;</span>: <span style="color:#a50">&#34;BTJPathKey-3221&#34;</span>, <span style="color:#1e90ff;font-weight:bold">&#34;key&#34;</span>: <span style="color:#a50">&#34;myKey&#34;</span>}]}}
+</code></pre></div><p>then the resulting JSON is the result of deleting the node specified by <code>path</code>:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{}
+</code></pre></div><h4 id="insert-example">Insert Example</h4>
+<p>If the pre-existing JSON tree looks like:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{}
+</code></pre></div><p>and the insertion edit looks like:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{<span style="color:#1e90ff;font-weight:bold">&#34;btType&#34;</span>: <span style="color:#a50">&#34;BTJEditInsert-2523&#34;</span>,
+     <span style="color:#1e90ff;font-weight:bold">&#34;path&#34;</span>: {<span style="color:#1e90ff;font-weight:bold">&#34;btType&#34;</span>: <span style="color:#a50">&#34;BTJPath-3073&#34;</span>, <span style="color:#1e90ff;font-weight:bold">&#34;startNode&#34;</span>: <span style="color:#a50">&#34;&#34;</span>, <span style="color:#1e90ff;font-weight:bold">&#34;path&#34;</span>: [{<span style="color:#1e90ff;font-weight:bold">&#34;btType&#34;</span>: <span style="color:#a50">&#34;BTJPathKey-3221&#34;</span>, <span style="color:#1e90ff;font-weight:bold">&#34;key&#34;</span>: <span style="color:#a50">&#34;insertedKey&#34;</span>}]},
+     <span style="color:#1e90ff;font-weight:bold">&#34;value&#34;</span>: <span style="color:#a50">&#34;myValue&#34;</span>}
+</code></pre></div><p>then the resulting JSON is the result of inserting the node described by <code>value</code> at the node specified by <code>path</code>:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{<span style="color:#1e90ff;font-weight:bold">&#34;insertedKey&#34;</span>: <span style="color:#a50">&#34;myValue&#34;</span>}
+</code></pre></div><h4 id="change-example">Change Example</h4>
+<p>If the pre-existing JSON tree looks like:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{<span style="color:#1e90ff;font-weight:bold">&#34;myKey&#34;</span>:  <span style="color:#a50">&#34;myValue&#34;</span>}
+</code></pre></div><p>and the change edit looks like:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{<span style="color:#1e90ff;font-weight:bold">&#34;btType&#34;</span>: <span style="color:#a50">&#34;BTJEditChange-2636&#34;</span>,
+     <span style="color:#1e90ff;font-weight:bold">&#34;path&#34;</span>: {<span style="color:#1e90ff;font-weight:bold">&#34;btType&#34;</span>: <span style="color:#a50">&#34;BTJPath-3073&#34;</span>, <span style="color:#1e90ff;font-weight:bold">&#34;startNode&#34;</span>: <span style="color:#a50">&#34;&#34;</span>, <span style="color:#1e90ff;font-weight:bold">&#34;path&#34;</span>: [{<span style="color:#1e90ff;font-weight:bold">&#34;btType&#34;</span>: <span style="color:#a50">&#34;BTJPathKey-3221&#34;</span>, <span style="color:#1e90ff;font-weight:bold">&#34;key&#34;</span>: <span style="color:#a50">&#34;myKey&#34;</span>}]},
+     <span style="color:#1e90ff;font-weight:bold">&#34;value&#34;</span>: <span style="color:#a50">&#34;myOtherValue&#34;</span>}
+</code></pre></div><p>then the resulting JSON is the result of changing the node specified by <code>path</code> to the node described by <code>value</code>:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{<span style="color:#1e90ff;font-weight:bold">&#34;myKey&#34;</span>:  <span style="color:#a50">&#34;myOtherValue&#34;</span>}
+</code></pre></div><h4 id="move-example">Move Example</h4>
+<p>If the pre-existing JSON tree looks like:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{<span style="color:#1e90ff;font-weight:bold">&#34;myKey&#34;</span>:  <span style="color:#a50">&#34;myValue&#34;</span>, <span style="color:#1e90ff;font-weight:bold">&#34;myOtherKey&#34;</span>:  <span style="color:#a50">&#34;myOtherValue&#34;</span>}
+</code></pre></div><p>and the move edit looks like:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{<span style="color:#1e90ff;font-weight:bold">&#34;btType&#34;</span>: <span style="color:#a50">&#34;BTJEditMove-3245&#34;</span>, <span style="color:#1e90ff;font-weight:bold">&#34;sourcePath&#34;</span>: {<span style="color:#1e90ff;font-weight:bold">&#34;btType&#34;</span>: <span style="color:#a50">&#34;BTJPath-3073&#34;</span>, <span style="color:#1e90ff;font-weight:bold">&#34;startNode&#34;</span>: <span style="color:#a50">&#34;&#34;</span>,
+                                                  <span style="color:#1e90ff;font-weight:bold">&#34;path&#34;</span>: [{<span style="color:#1e90ff;font-weight:bold">&#34;btType&#34;</span>: <span style="color:#a50">&#34;BTJPathKey-3221&#34;</span>, <span style="color:#1e90ff;font-weight:bold">&#34;key&#34;</span>: <span style="color:#a50">&#34;myKey&#34;</span>}]},
+     <span style="color:#1e90ff;font-weight:bold">&#34;destinationPath&#34;</span>: {<span style="color:#1e90ff;font-weight:bold">&#34;btType&#34;</span>: <span style="color:#a50">&#34;BTJPath-3073&#34;</span>, <span style="color:#1e90ff;font-weight:bold">&#34;startNode&#34;</span>: <span style="color:#a50">&#34;&#34;</span>,
+                         <span style="color:#1e90ff;font-weight:bold">&#34;path&#34;</span>: [{<span style="color:#1e90ff;font-weight:bold">&#34;btType&#34;</span>: <span style="color:#a50">&#34;BTJPathKey-3221&#34;</span>, <span style="color:#1e90ff;font-weight:bold">&#34;key&#34;</span>: <span style="color:#a50">&#34;keyCreatedFromMove&#34;</span>}]}}
+</code></pre></div><p>then the resulting JSON is the result of moving the node from the specified <code>sourcePath</code> to the <code>destinationPath</code>:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{<span style="color:#1e90ff;font-weight:bold">&#34;keyCreatedFromMove&#34;</span>: <span style="color:#a50">&#34;myValue&#34;</span>}
+</code></pre></div><h4 id="list-example">List Example</h4>
+<p>If the pre-existing JSON tree looks like:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{}
+</code></pre></div><p>and the list edit looks like:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{<span style="color:#1e90ff;font-weight:bold">&#34;btType&#34;</span>: <span style="color:#a50">&#34;BTJEditList-2707&#34;</span>, <span style="color:#1e90ff;font-weight:bold">&#34;edits&#34;</span>: [
+        {<span style="color:#1e90ff;font-weight:bold">&#34;btType&#34;</span>: <span style="color:#a50">&#34;BTJEditInsert-2523&#34;</span>, <span style="color:#1e90ff;font-weight:bold">&#34;path&#34;</span>: {<span style="color:#1e90ff;font-weight:bold">&#34;btType&#34;</span>: <span style="color:#a50">&#34;BTJPath-3073&#34;</span>, <span style="color:#1e90ff;font-weight:bold">&#34;startNode&#34;</span>: <span style="color:#a50">&#34;&#34;</span>, <span style="color:#1e90ff;font-weight:bold">&#34;path&#34;</span>: [{<span style="color:#1e90ff;font-weight:bold">&#34;btType&#34;</span>: <span style="color:#a50">&#34;BTJPathKey-3221&#34;</span>, <span style="color:#1e90ff;font-weight:bold">&#34;key&#34;</span>: <span style="color:#a50">&#34;myKey&#34;</span>}]},
+         <span style="color:#1e90ff;font-weight:bold">&#34;value&#34;</span>: <span style="color:#a50">&#34;myValue&#34;</span>},
+        {<span style="color:#1e90ff;font-weight:bold">&#34;btType&#34;</span>: <span style="color:#a50">&#34;BTJEditChange-2636&#34;</span>, <span style="color:#1e90ff;font-weight:bold">&#34;path&#34;</span>: {<span style="color:#1e90ff;font-weight:bold">&#34;btType&#34;</span>: <span style="color:#a50">&#34;BTJPath-3073&#34;</span>, <span style="color:#1e90ff;font-weight:bold">&#34;startNode&#34;</span>: <span style="color:#a50">&#34;&#34;</span>,
+                                                  <span style="color:#1e90ff;font-weight:bold">&#34;path&#34;</span>: [{<span style="color:#1e90ff;font-weight:bold">&#34;btType&#34;</span>: <span style="color:#a50">&#34;BTJPathKey-3221&#34;</span>, <span style="color:#1e90ff;font-weight:bold">&#34;key&#34;</span>: <span style="color:#a50">&#34;myKey&#34;</span>}]},
+         <span style="color:#1e90ff;font-weight:bold">&#34;value&#34;</span>: [<span style="color:#a50">&#34;firstValue&#34;</span>, <span style="color:#a50">&#34;secondValue&#34;</span>]},
+        {<span style="color:#1e90ff;font-weight:bold">&#34;btType&#34;</span>: <span style="color:#a50">&#34;BTJEditInsert-2523&#34;</span>, <span style="color:#1e90ff;font-weight:bold">&#34;path&#34;</span>: {<span style="color:#1e90ff;font-weight:bold">&#34;btType&#34;</span>: <span style="color:#a50">&#34;BTJPath-3073&#34;</span>, <span style="color:#1e90ff;font-weight:bold">&#34;startNode&#34;</span>: <span style="color:#a50">&#34;&#34;</span>,
+                                                  <span style="color:#1e90ff;font-weight:bold">&#34;path&#34;</span>: [{<span style="color:#1e90ff;font-weight:bold">&#34;btType&#34;</span>: <span style="color:#a50">&#34;BTJPathKey-3221&#34;</span>, <span style="color:#1e90ff;font-weight:bold">&#34;key&#34;</span>: <span style="color:#a50">&#34;myKey&#34;</span>},
+                                                           {<span style="color:#1e90ff;font-weight:bold">&#34;btType&#34;</span>: <span style="color:#a50">&#34;BTJPathIndex-1871&#34;</span>, <span style="color:#1e90ff;font-weight:bold">&#34;index&#34;</span>: <span style="color:#099">1</span>}]},
+         <span style="color:#1e90ff;font-weight:bold">&#34;value&#34;</span>: <span style="color:#a50">&#34;myBetterSecondValue&#34;</span>},
+        {<span style="color:#1e90ff;font-weight:bold">&#34;btType&#34;</span>: <span style="color:#a50">&#34;BTJEditDelete-1992&#34;</span>, <span style="color:#1e90ff;font-weight:bold">&#34;path&#34;</span>: {<span style="color:#1e90ff;font-weight:bold">&#34;btType&#34;</span>: <span style="color:#a50">&#34;BTJPath-3073&#34;</span>, <span style="color:#1e90ff;font-weight:bold">&#34;startNode&#34;</span>: <span style="color:#a50">&#34;&#34;</span>,
+                                                  <span style="color:#1e90ff;font-weight:bold">&#34;path&#34;</span>: [{<span style="color:#1e90ff;font-weight:bold">&#34;btType&#34;</span>: <span style="color:#a50">&#34;BTJPathKey-3221&#34;</span>, <span style="color:#1e90ff;font-weight:bold">&#34;key&#34;</span>: <span style="color:#a50">&#34;myKey&#34;</span>},
+                                                           {<span style="color:#1e90ff;font-weight:bold">&#34;btType&#34;</span>: <span style="color:#a50">&#34;BTJPathIndex-1871&#34;</span>, <span style="color:#1e90ff;font-weight:bold">&#34;index&#34;</span>: <span style="color:#099">2</span>}]}}
+    ]}
+</code></pre></div><p>then the resulting JSON is the result of applying all the given edits in order:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{<span style="color:#1e90ff;font-weight:bold">&#34;myKey&#34;</span>: [<span style="color:#a50">&#34;firstValue&#34;</span>, <span style="color:#a50">&#34;myBetterSecondValue&#34;</span>]}
+</code></pre></div><p>The intermediate steps were:</p>
+<ol>
+<li>Insertion:
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">   {<span style="color:#1e90ff;font-weight:bold">&#34;myKey&#34;</span>:  <span style="color:#a50">&#34;myValue&#34;</span>}
+</code></pre></div></li>
+<li>Change:
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">   {<span style="color:#1e90ff;font-weight:bold">&#34;myKey&#34;</span>: [<span style="color:#a50">&#34;firstValue&#34;</span>, <span style="color:#a50">&#34;secondValue&#34;</span>]}
+</code></pre></div></li>
+<li>List insertion:
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">   {<span style="color:#1e90ff;font-weight:bold">&#34;myKey&#34;</span>: [<span style="color:#a50">&#34;firstValue&#34;</span>, <span style="color:#a50">&#34;myBetterSecondValue&#34;</span>, <span style="color:#a50">&#34;secondValue&#34;</span>]}
+</code></pre></div></li>
+<li>List deletion:
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">   {<span style="color:#1e90ff;font-weight:bold">&#34;myKey&#34;</span>: [<span style="color:#a50">&#34;firstValue&#34;</span>, <span style="color:#a50">&#34;myBetterSecondValue&#34;</span>]}
+</code></pre></div></li>
+</ol>
+<p>All the examples above were tested and validated using the Python client <a href="https://github.com/onshape-public/onshape-clients/blob/next/python/test/test_app_element_json_tree.py">here</a>.</p>
 
 	
 	

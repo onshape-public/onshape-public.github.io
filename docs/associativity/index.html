@@ -36,7 +36,7 @@ Please address questions, comments and suggestions to &ldquo;api-support@onshape
 Introduction Onshape data is stored in replicated databases in the cloud. The data model for accessing Parts and Assemblies through the REST API is described here. The model is influenced by the data model used by Git and similar source code repositories.">
 <meta itemprop="datePublished" content="2020-05-18T20:28:26-04:00" />
 <meta itemprop="dateModified" content="2020-05-18T20:28:26-04:00" />
-<meta itemprop="wordCount" content="1531">
+<meta itemprop="wordCount" content="1634">
 
 
 
@@ -241,8 +241,14 @@ Introduction Onshape data is stored in replicated databases in the cloud. The da
     <li><a href="#introduction">Introduction</a></li>
     <li><a href="#onshape-data-model">Onshape Data Model</a></li>
     <li><a href="#git-analogy">Git analogy</a></li>
-    <li><a href="#model-definition-data">Model definition data</a></li>
-    <li><a href="#model-presentation-data">Model presentation data</a></li>
+    <li><a href="#document-data">Document Data</a>
+      <ul>
+        <li><a href="#part-studio-data">Part Studio Data</a></li>
+        <li><a href="#assembly-data">Assembly Data</a></li>
+        <li><a href="#external-application-data">External Application Data</a></li>
+      </ul>
+    </li>
+    <li><a href="#model-presentation-data">Model Presentation Data</a></li>
     <li><a href="#associativity">Associativity</a>
       <ul>
         <li><a href="#associativity-example">Associativity Example</a></li>
@@ -362,12 +368,16 @@ Introduction Onshape data is stored in replicated databases in the cloud. The da
     <td>SHA</td>
   </tr>
 </table>
-<h2 id="model-definition-data">Model definition data</h2>
-<p>Model definition in Onshape is history based, each change of the model represents a unique record in the model&rsquo;s history and the model can be restored to that particular state any time in the future. Each record of the model&rsquo;s history has a unique persistent identifier which is called microversion id in Onshape.</p>
-<p>Model definition can be changed in a context of a Workspace only. Each workspace represents an independent line of history of the model, i.e. a sorted list of model microversions. A reference to a state of the Workspace can be stored as an immutable Version. New Workspaces can be branched from a Version, to continue model history from the moment the Version was created. One Workspace can be merged into another to combine model changes made in both workspaces. Merge conflicts leading to an invalid state of the model are possible.</p>
-<p>Part Studio model is defined by a list of features, some of which (e.g. sketch), may have complex internal structure composed of entities. Model definition features and entities are referenced by unique persistent identifiers. Model definition features and entities can appear, disappear, and reappear depending on the current microversion of the model.</p>
-<p>Assembly model is defined as a list of assembly features and a tree of subassemblies / part instances. Occurrence id is a unique persistent identifier of an occurrence of a part in the assembly structure.</p>
-<h2 id="model-presentation-data">Model presentation data</h2>
+<h2 id="document-data">Document Data</h2>
+<p>All elements, be them Assemblies, Part Studios, Drawings, or even apps, are history based. Each change to an element or set of elements represents a unique record in the document&rsquo;s history. The document can be restored to that particular state any time in the future. Each record of the document&rsquo;s history has a unique persistent identifier which is called a <strong>Microversion</strong> id in Onshape.</p>
+<p>Document data (excluding document metadata) can be changed in the context of only a <strong>Workspace</strong>. Each workspace represents an independent line of history of the document, i.e. a sorted list of document microversions. A reference to a state of the Workspace can be stored as an immutable <strong>Version</strong>. New Workspaces can be branched from a Version, to continue document history from the moment the Version was created. One Workspace can be merged into another to combine document changes made in both workspaces. If an app expects the data in the app element to have certain properties, a merge may fail to preserve these properties, leading to an invalid state of that app element.</p>
+<h3 id="part-studio-data">Part Studio Data</h3>
+<p>The Part Studio element is defined by a list of features, some of which (e.g. sketch), may have complex internal structure composed of entities. Part Studio features and entities are referenced by unique persistent identifiers. Part Studio features and entities can appear, disappear, and reappear depending on the current microversion of the model.</p>
+<h3 id="assembly-data">Assembly Data</h3>
+<p>The Assembly element is defined as a list of assembly features and a tree of subassemblies / part instances. Occurrence id is a unique persistent identifier of an occurrence of a part in the assembly structure.</p>
+<h3 id="external-application-data">External Application Data</h3>
+<p>An external application has complete control over how it manages/stores documents, however, to take advantage of the Onshape data model, there is a set of endpoints they should use to store state. These are collectively known as the &lsquo;Application Element API&rsquo;. To learn how to use these elements, read the Application Element API section.</p>
+<h2 id="model-presentation-data">Model Presentation Data</h2>
 <p>A valid model definition usually corresponds to a real world manufacturable topology. The topology is represented internally as a set of 3-d, 2-d, 1-d, 0-d entities and a set of relations between them. It can be tessellated into a set of geometric primitives which approximate the shape of the model. Tessellated data can be used for visual representation of the model or other processing related to the shape of the model.</p>
 <p>Model topology is represented as a set of Parts, Faces, Edges, and Vertices in the API. Each of these has a unique identifier in every state of the model. The identifier represents an encoded index in the model&rsquo;s history journal and its value depends on the structure of the model&rsquo;s history. The value is not guaranteed to be preserved across model changes, and will almost always change if the model changes in significant ways.</p>
 <p>The following changes in the topological representation can occur between two microversions of the model:</p>
@@ -473,54 +483,63 @@ and edges <code>https://cad.onshape.com/api/partstudios/d/&lt;docid&gt;/w/&lt;wi
         { &quot;source&quot;: &quot;JHt&quot;, &quot;status&quot;: &quot;SPLIT&quot;, &quot;target&quot;: [&quot;JI5&quot;, &quot;JI9&quot;] }
     ],
     &quot;targetDocumentMicroversion&quot;: &quot;78bc7f3fcf82475085c2f3ab&quot;
-}
-</code></pre><ol start="4">
-<li>Delete one of the [parts], translate ids:</li>
-</ol>
-<p><img src="/images/associativityimage01.png" alt="image alt text"></p>
-<p><strong>POST</strong> <code>https://cad.onshape.com/api/partstudios/d/&lt;docid&gt;/w/&lt;wid&gt;/e/&lt;eid&gt;/idtranslations</code></p>
-<p><strong>Body</strong>:</p>
-<pre><code>{
-  &quot;sourceDocumentMicroversion&quot; : &quot;47e75ab2ee8b4356a76ebd47&quot;,
-  &quot;ids&quot; : [&quot;JHD&quot;, &quot;JHO&quot;, &quot;JHd&quot;, &quot;JHt&quot;]
-}
-</code></pre><p><strong>Response</strong>:</p>
-<pre><code>{
-    &quot;documentId&quot;: &quot;748d6e850c9248328189922b&quot;,
-    &quot;elementId&quot;: &quot;042a6fa54e79451e8076463d&quot;,
-    &quot;sourceDocumentMicroversion&quot;: &quot;47e75ab2ee8b4356a76ebd47&quot;,
-    &quot;ids&quot;: [
-        { &quot;source&quot;: &quot;JHD&quot;, &quot;status&quot;: &quot;OK&quot;, &quot;target&quot;: [&quot;JID&quot;] },
-        { &quot;source&quot;: &quot;JHO&quot;, &quot;status&quot;: &quot;FAILED_TO_RESOLVE&quot;, &quot;target&quot;: [] },
-        { &quot;source&quot;: &quot;JHd&quot;, &quot;status&quot;: &quot;FAILED_TO_RESOLVE&quot;, &quot;target&quot;: [] },
-        { &quot;source&quot;: &quot;JHt&quot;, &quot;status&quot;: &quot;OK&quot;, &quot;target&quot;: [&quot;JI5&quot;] }
-    ],
-    &quot;targetDocumentMicroversion&quot;: &quot;52aa74d34b624f3aaef33204&quot;
-}
-</code></pre><ol start="5">
-<li>Rollback delete and [split], translate ids:</li>
-</ol>
-<p><img src="/images/associativityimage02.png" alt="image alt text"></p>
-<p><strong>POST</strong> <code>https://cad.onshape.com/api/partstudios/d/&lt;docid&gt;/w/&lt;wid&gt;/e/&lt;eid&gt;/idtranslations</code></p>
-<p><strong>Body</strong>:</p>
-<pre><code>{
-  &quot;sourceDocumentMicroversion&quot; : &quot;47e75ab2ee8b4356a76ebd47&quot;,
-  &quot;ids&quot; : [&quot;JHD&quot;, &quot;JHO&quot;, &quot;JHd&quot;, &quot;JHt&quot;]
-}
-</code></pre><p><strong>Response</strong>:</p>
-<pre><code>{
-    &quot;documentId&quot;: &quot;748d6e850c9248328189922b&quot;,
-    &quot;elementId&quot;: &quot;042a6fa54e79451e8076463d&quot;,
-    &quot;sourceDocumentMicroversion&quot;: &quot;47e75ab2ee8b4356a76ebd47&quot;,
-    &quot;ids&quot;: [
-        { &quot;source&quot;: &quot;JHD&quot;, &quot;status&quot;: &quot;OK&quot;, &quot;target&quot;: [&quot;JID&quot;] },
-        { &quot;source&quot;: &quot;JHO&quot;, &quot;status&quot;: &quot;OK&quot;, &quot;target&quot;: [&quot;JHO&quot;] },
-        { &quot;source&quot;: &quot;JHd&quot;, &quot;status&quot;: &quot;OK&quot;, &quot;target&quot;: [&quot;JHd&quot;] },
-        { &quot;source&quot;: &quot;JHt&quot;, &quot;status&quot;: &quot;OK&quot;, &quot;target&quot;: [&quot;JHt&quot;] }
-    ],
-    &quot;targetDocumentMicroversion&quot;: &quot;52aa74d34b624f3aaef33204&quot;
-}
-</code></pre>
+
+4. Delete one of the [parts], translate ids:
+
+![image alt text](/images/associativityimage01.png)
+
+**POST** `https://cad.onshape.com/api/partstudios/d/&lt;docid&gt;/w/&lt;wid&gt;/e/&lt;eid&gt;/idtranslations`
+
+**Body**:
+
+</code></pre><p>{
+&ldquo;sourceDocumentMicroversion&rdquo; : &ldquo;47e75ab2ee8b4356a76ebd47&rdquo;,
+&ldquo;ids&rdquo; : [&ldquo;JHD&rdquo;, &ldquo;JHO&rdquo;, &ldquo;JHd&rdquo;, &ldquo;JHt&rdquo;]
+}</p>
+<pre><code>
+**Response**:
+
+</code></pre><p>{
+&ldquo;documentId&rdquo;: &ldquo;748d6e850c9248328189922b&rdquo;,
+&ldquo;elementId&rdquo;: &ldquo;042a6fa54e79451e8076463d&rdquo;,
+&ldquo;sourceDocumentMicroversion&rdquo;: &ldquo;47e75ab2ee8b4356a76ebd47&rdquo;,
+&ldquo;ids&rdquo;: [
+{ &ldquo;source&rdquo;: &ldquo;JHD&rdquo;, &ldquo;status&rdquo;: &ldquo;OK&rdquo;, &ldquo;target&rdquo;: [&ldquo;JID&rdquo;] },
+{ &ldquo;source&rdquo;: &ldquo;JHO&rdquo;, &ldquo;status&rdquo;: &ldquo;FAILED_TO_RESOLVE&rdquo;, &ldquo;target&rdquo;: [] },
+{ &ldquo;source&rdquo;: &ldquo;JHd&rdquo;, &ldquo;status&rdquo;: &ldquo;FAILED_TO_RESOLVE&rdquo;, &ldquo;target&rdquo;: [] },
+{ &ldquo;source&rdquo;: &ldquo;JHt&rdquo;, &ldquo;status&rdquo;: &ldquo;OK&rdquo;, &ldquo;target&rdquo;: [&ldquo;JI5&rdquo;] }
+],
+&ldquo;targetDocumentMicroversion&rdquo;: &ldquo;52aa74d34b624f3aaef33204&rdquo;
+}</p>
+<pre><code>
+5. Rollback delete and [split], translate ids:
+
+![image alt text](/images/associativityimage02.png)
+
+**POST** `https://cad.onshape.com/api/partstudios/d/&lt;docid&gt;/w/&lt;wid&gt;/e/&lt;eid&gt;/idtranslations`
+
+**Body**:
+
+</code></pre><p>{
+&ldquo;sourceDocumentMicroversion&rdquo; : &ldquo;47e75ab2ee8b4356a76ebd47&rdquo;,
+&ldquo;ids&rdquo; : [&ldquo;JHD&rdquo;, &ldquo;JHO&rdquo;, &ldquo;JHd&rdquo;, &ldquo;JHt&rdquo;]
+}</p>
+<pre><code>
+**Response**:
+
+</code></pre><p>{
+&ldquo;documentId&rdquo;: &ldquo;748d6e850c9248328189922b&rdquo;,
+&ldquo;elementId&rdquo;: &ldquo;042a6fa54e79451e8076463d&rdquo;,
+&ldquo;sourceDocumentMicroversion&rdquo;: &ldquo;47e75ab2ee8b4356a76ebd47&rdquo;,
+&ldquo;ids&rdquo;: [
+{ &ldquo;source&rdquo;: &ldquo;JHD&rdquo;, &ldquo;status&rdquo;: &ldquo;OK&rdquo;, &ldquo;target&rdquo;: [&ldquo;JID&rdquo;] },
+{ &ldquo;source&rdquo;: &ldquo;JHO&rdquo;, &ldquo;status&rdquo;: &ldquo;OK&rdquo;, &ldquo;target&rdquo;: [&ldquo;JHO&rdquo;] },
+{ &ldquo;source&rdquo;: &ldquo;JHd&rdquo;, &ldquo;status&rdquo;: &ldquo;OK&rdquo;, &ldquo;target&rdquo;: [&ldquo;JHd&rdquo;] },
+{ &ldquo;source&rdquo;: &ldquo;JHt&rdquo;, &ldquo;status&rdquo;: &ldquo;OK&rdquo;, &ldquo;target&rdquo;: [&ldquo;JHt&rdquo;] }
+],
+&ldquo;targetDocumentMicroversion&rdquo;: &ldquo;52aa74d34b624f3aaef33204&rdquo;
+}</p>
+<pre><code></code></pre>
 	
 	
 	<div class="text-muted mt-5 pt-3 border-top">Last modified May 18, 2020

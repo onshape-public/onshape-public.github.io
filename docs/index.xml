@@ -543,12 +543,16 @@ supported version.&lt;/p&gt;
     &lt;td&gt;SHA&lt;/td&gt;
   &lt;/tr&gt;
 &lt;/table&gt;
-&lt;h2 id=&#34;model-definition-data&#34;&gt;Model definition data&lt;/h2&gt;
-&lt;p&gt;Model definition in Onshape is history based, each change of the model represents a unique record in the model&amp;rsquo;s history and the model can be restored to that particular state any time in the future. Each record of the model&amp;rsquo;s history has a unique persistent identifier which is called microversion id in Onshape.&lt;/p&gt;
-&lt;p&gt;Model definition can be changed in a context of a Workspace only. Each workspace represents an independent line of history of the model, i.e. a sorted list of model microversions. A reference to a state of the Workspace can be stored as an immutable Version. New Workspaces can be branched from a Version, to continue model history from the moment the Version was created. One Workspace can be merged into another to combine model changes made in both workspaces. Merge conflicts leading to an invalid state of the model are possible.&lt;/p&gt;
-&lt;p&gt;Part Studio model is defined by a list of features, some of which (e.g. sketch), may have complex internal structure composed of entities. Model definition features and entities are referenced by unique persistent identifiers. Model definition features and entities can appear, disappear, and reappear depending on the current microversion of the model.&lt;/p&gt;
-&lt;p&gt;Assembly model is defined as a list of assembly features and a tree of subassemblies / part instances. Occurrence id is a unique persistent identifier of an occurrence of a part in the assembly structure.&lt;/p&gt;
-&lt;h2 id=&#34;model-presentation-data&#34;&gt;Model presentation data&lt;/h2&gt;
+&lt;h2 id=&#34;document-data&#34;&gt;Document Data&lt;/h2&gt;
+&lt;p&gt;All elements, be them Assemblies, Part Studios, Drawings, or even apps, are history based. Each change to an element or set of elements represents a unique record in the document&amp;rsquo;s history. The document can be restored to that particular state any time in the future. Each record of the document&amp;rsquo;s history has a unique persistent identifier which is called a &lt;strong&gt;Microversion&lt;/strong&gt; id in Onshape.&lt;/p&gt;
+&lt;p&gt;Document data (excluding document metadata) can be changed in the context of only a &lt;strong&gt;Workspace&lt;/strong&gt;. Each workspace represents an independent line of history of the document, i.e. a sorted list of document microversions. A reference to a state of the Workspace can be stored as an immutable &lt;strong&gt;Version&lt;/strong&gt;. New Workspaces can be branched from a Version, to continue document history from the moment the Version was created. One Workspace can be merged into another to combine document changes made in both workspaces. If an app expects the data in the app element to have certain properties, a merge may fail to preserve these properties, leading to an invalid state of that app element.&lt;/p&gt;
+&lt;h3 id=&#34;part-studio-data&#34;&gt;Part Studio Data&lt;/h3&gt;
+&lt;p&gt;The Part Studio element is defined by a list of features, some of which (e.g. sketch), may have complex internal structure composed of entities. Part Studio features and entities are referenced by unique persistent identifiers. Part Studio features and entities can appear, disappear, and reappear depending on the current microversion of the model.&lt;/p&gt;
+&lt;h3 id=&#34;assembly-data&#34;&gt;Assembly Data&lt;/h3&gt;
+&lt;p&gt;The Assembly element is defined as a list of assembly features and a tree of subassemblies / part instances. Occurrence id is a unique persistent identifier of an occurrence of a part in the assembly structure.&lt;/p&gt;
+&lt;h3 id=&#34;external-application-data&#34;&gt;External Application Data&lt;/h3&gt;
+&lt;p&gt;An external application has complete control over how it manages/stores documents, however, to take advantage of the Onshape data model, there is a set of endpoints they should use to store state. These are collectively known as the &amp;lsquo;Application Element API&amp;rsquo;. To learn how to use these elements, read the Application Element API section.&lt;/p&gt;
+&lt;h2 id=&#34;model-presentation-data&#34;&gt;Model Presentation Data&lt;/h2&gt;
 &lt;p&gt;A valid model definition usually corresponds to a real world manufacturable topology. The topology is represented internally as a set of 3-d, 2-d, 1-d, 0-d entities and a set of relations between them. It can be tessellated into a set of geometric primitives which approximate the shape of the model. Tessellated data can be used for visual representation of the model or other processing related to the shape of the model.&lt;/p&gt;
 &lt;p&gt;Model topology is represented as a set of Parts, Faces, Edges, and Vertices in the API. Each of these has a unique identifier in every state of the model. The identifier represents an encoded index in the model&amp;rsquo;s history journal and its value depends on the structure of the model&amp;rsquo;s history. The value is not guaranteed to be preserved across model changes, and will almost always change if the model changes in significant ways.&lt;/p&gt;
 &lt;p&gt;The following changes in the topological representation can occur between two microversions of the model:&lt;/p&gt;
@@ -654,54 +658,63 @@ and edges &lt;code&gt;https://cad.onshape.com/api/partstudios/d/&amp;lt;docid&am
         { &amp;quot;source&amp;quot;: &amp;quot;JHt&amp;quot;, &amp;quot;status&amp;quot;: &amp;quot;SPLIT&amp;quot;, &amp;quot;target&amp;quot;: [&amp;quot;JI5&amp;quot;, &amp;quot;JI9&amp;quot;] }
     ],
     &amp;quot;targetDocumentMicroversion&amp;quot;: &amp;quot;78bc7f3fcf82475085c2f3ab&amp;quot;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;4&#34;&gt;
-&lt;li&gt;Delete one of the [parts], translate ids:&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;https://onshape-public.github.io/images/associativityimage01.png&#34; alt=&#34;image alt text&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;POST&lt;/strong&gt; &lt;code&gt;https://cad.onshape.com/api/partstudios/d/&amp;lt;docid&amp;gt;/w/&amp;lt;wid&amp;gt;/e/&amp;lt;eid&amp;gt;/idtranslations&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Body&lt;/strong&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;{
-  &amp;quot;sourceDocumentMicroversion&amp;quot; : &amp;quot;47e75ab2ee8b4356a76ebd47&amp;quot;,
-  &amp;quot;ids&amp;quot; : [&amp;quot;JHD&amp;quot;, &amp;quot;JHO&amp;quot;, &amp;quot;JHd&amp;quot;, &amp;quot;JHt&amp;quot;]
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Response&lt;/strong&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;{
-    &amp;quot;documentId&amp;quot;: &amp;quot;748d6e850c9248328189922b&amp;quot;,
-    &amp;quot;elementId&amp;quot;: &amp;quot;042a6fa54e79451e8076463d&amp;quot;,
-    &amp;quot;sourceDocumentMicroversion&amp;quot;: &amp;quot;47e75ab2ee8b4356a76ebd47&amp;quot;,
-    &amp;quot;ids&amp;quot;: [
-        { &amp;quot;source&amp;quot;: &amp;quot;JHD&amp;quot;, &amp;quot;status&amp;quot;: &amp;quot;OK&amp;quot;, &amp;quot;target&amp;quot;: [&amp;quot;JID&amp;quot;] },
-        { &amp;quot;source&amp;quot;: &amp;quot;JHO&amp;quot;, &amp;quot;status&amp;quot;: &amp;quot;FAILED_TO_RESOLVE&amp;quot;, &amp;quot;target&amp;quot;: [] },
-        { &amp;quot;source&amp;quot;: &amp;quot;JHd&amp;quot;, &amp;quot;status&amp;quot;: &amp;quot;FAILED_TO_RESOLVE&amp;quot;, &amp;quot;target&amp;quot;: [] },
-        { &amp;quot;source&amp;quot;: &amp;quot;JHt&amp;quot;, &amp;quot;status&amp;quot;: &amp;quot;OK&amp;quot;, &amp;quot;target&amp;quot;: [&amp;quot;JI5&amp;quot;] }
-    ],
-    &amp;quot;targetDocumentMicroversion&amp;quot;: &amp;quot;52aa74d34b624f3aaef33204&amp;quot;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;5&#34;&gt;
-&lt;li&gt;Rollback delete and [split], translate ids:&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;https://onshape-public.github.io/images/associativityimage02.png&#34; alt=&#34;image alt text&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;POST&lt;/strong&gt; &lt;code&gt;https://cad.onshape.com/api/partstudios/d/&amp;lt;docid&amp;gt;/w/&amp;lt;wid&amp;gt;/e/&amp;lt;eid&amp;gt;/idtranslations&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Body&lt;/strong&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;{
-  &amp;quot;sourceDocumentMicroversion&amp;quot; : &amp;quot;47e75ab2ee8b4356a76ebd47&amp;quot;,
-  &amp;quot;ids&amp;quot; : [&amp;quot;JHD&amp;quot;, &amp;quot;JHO&amp;quot;, &amp;quot;JHd&amp;quot;, &amp;quot;JHt&amp;quot;]
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Response&lt;/strong&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;{
-    &amp;quot;documentId&amp;quot;: &amp;quot;748d6e850c9248328189922b&amp;quot;,
-    &amp;quot;elementId&amp;quot;: &amp;quot;042a6fa54e79451e8076463d&amp;quot;,
-    &amp;quot;sourceDocumentMicroversion&amp;quot;: &amp;quot;47e75ab2ee8b4356a76ebd47&amp;quot;,
-    &amp;quot;ids&amp;quot;: [
-        { &amp;quot;source&amp;quot;: &amp;quot;JHD&amp;quot;, &amp;quot;status&amp;quot;: &amp;quot;OK&amp;quot;, &amp;quot;target&amp;quot;: [&amp;quot;JID&amp;quot;] },
-        { &amp;quot;source&amp;quot;: &amp;quot;JHO&amp;quot;, &amp;quot;status&amp;quot;: &amp;quot;OK&amp;quot;, &amp;quot;target&amp;quot;: [&amp;quot;JHO&amp;quot;] },
-        { &amp;quot;source&amp;quot;: &amp;quot;JHd&amp;quot;, &amp;quot;status&amp;quot;: &amp;quot;OK&amp;quot;, &amp;quot;target&amp;quot;: [&amp;quot;JHd&amp;quot;] },
-        { &amp;quot;source&amp;quot;: &amp;quot;JHt&amp;quot;, &amp;quot;status&amp;quot;: &amp;quot;OK&amp;quot;, &amp;quot;target&amp;quot;: [&amp;quot;JHt&amp;quot;] }
-    ],
-    &amp;quot;targetDocumentMicroversion&amp;quot;: &amp;quot;52aa74d34b624f3aaef33204&amp;quot;
-}
-&lt;/code&gt;&lt;/pre&gt;
+
+4. Delete one of the [parts], translate ids:
+
+![image alt text](/images/associativityimage01.png)
+
+**POST** `https://cad.onshape.com/api/partstudios/d/&amp;lt;docid&amp;gt;/w/&amp;lt;wid&amp;gt;/e/&amp;lt;eid&amp;gt;/idtranslations`
+
+**Body**:
+
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;{
+&amp;ldquo;sourceDocumentMicroversion&amp;rdquo; : &amp;ldquo;47e75ab2ee8b4356a76ebd47&amp;rdquo;,
+&amp;ldquo;ids&amp;rdquo; : [&amp;ldquo;JHD&amp;rdquo;, &amp;ldquo;JHO&amp;rdquo;, &amp;ldquo;JHd&amp;rdquo;, &amp;ldquo;JHt&amp;rdquo;]
+}&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
+**Response**:
+
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;{
+&amp;ldquo;documentId&amp;rdquo;: &amp;ldquo;748d6e850c9248328189922b&amp;rdquo;,
+&amp;ldquo;elementId&amp;rdquo;: &amp;ldquo;042a6fa54e79451e8076463d&amp;rdquo;,
+&amp;ldquo;sourceDocumentMicroversion&amp;rdquo;: &amp;ldquo;47e75ab2ee8b4356a76ebd47&amp;rdquo;,
+&amp;ldquo;ids&amp;rdquo;: [
+{ &amp;ldquo;source&amp;rdquo;: &amp;ldquo;JHD&amp;rdquo;, &amp;ldquo;status&amp;rdquo;: &amp;ldquo;OK&amp;rdquo;, &amp;ldquo;target&amp;rdquo;: [&amp;ldquo;JID&amp;rdquo;] },
+{ &amp;ldquo;source&amp;rdquo;: &amp;ldquo;JHO&amp;rdquo;, &amp;ldquo;status&amp;rdquo;: &amp;ldquo;FAILED_TO_RESOLVE&amp;rdquo;, &amp;ldquo;target&amp;rdquo;: [] },
+{ &amp;ldquo;source&amp;rdquo;: &amp;ldquo;JHd&amp;rdquo;, &amp;ldquo;status&amp;rdquo;: &amp;ldquo;FAILED_TO_RESOLVE&amp;rdquo;, &amp;ldquo;target&amp;rdquo;: [] },
+{ &amp;ldquo;source&amp;rdquo;: &amp;ldquo;JHt&amp;rdquo;, &amp;ldquo;status&amp;rdquo;: &amp;ldquo;OK&amp;rdquo;, &amp;ldquo;target&amp;rdquo;: [&amp;ldquo;JI5&amp;rdquo;] }
+],
+&amp;ldquo;targetDocumentMicroversion&amp;rdquo;: &amp;ldquo;52aa74d34b624f3aaef33204&amp;rdquo;
+}&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
+5. Rollback delete and [split], translate ids:
+
+![image alt text](/images/associativityimage02.png)
+
+**POST** `https://cad.onshape.com/api/partstudios/d/&amp;lt;docid&amp;gt;/w/&amp;lt;wid&amp;gt;/e/&amp;lt;eid&amp;gt;/idtranslations`
+
+**Body**:
+
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;{
+&amp;ldquo;sourceDocumentMicroversion&amp;rdquo; : &amp;ldquo;47e75ab2ee8b4356a76ebd47&amp;rdquo;,
+&amp;ldquo;ids&amp;rdquo; : [&amp;ldquo;JHD&amp;rdquo;, &amp;ldquo;JHO&amp;rdquo;, &amp;ldquo;JHd&amp;rdquo;, &amp;ldquo;JHt&amp;rdquo;]
+}&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
+**Response**:
+
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;{
+&amp;ldquo;documentId&amp;rdquo;: &amp;ldquo;748d6e850c9248328189922b&amp;rdquo;,
+&amp;ldquo;elementId&amp;rdquo;: &amp;ldquo;042a6fa54e79451e8076463d&amp;rdquo;,
+&amp;ldquo;sourceDocumentMicroversion&amp;rdquo;: &amp;ldquo;47e75ab2ee8b4356a76ebd47&amp;rdquo;,
+&amp;ldquo;ids&amp;rdquo;: [
+{ &amp;ldquo;source&amp;rdquo;: &amp;ldquo;JHD&amp;rdquo;, &amp;ldquo;status&amp;rdquo;: &amp;ldquo;OK&amp;rdquo;, &amp;ldquo;target&amp;rdquo;: [&amp;ldquo;JID&amp;rdquo;] },
+{ &amp;ldquo;source&amp;rdquo;: &amp;ldquo;JHO&amp;rdquo;, &amp;ldquo;status&amp;rdquo;: &amp;ldquo;OK&amp;rdquo;, &amp;ldquo;target&amp;rdquo;: [&amp;ldquo;JHO&amp;rdquo;] },
+{ &amp;ldquo;source&amp;rdquo;: &amp;ldquo;JHd&amp;rdquo;, &amp;ldquo;status&amp;rdquo;: &amp;ldquo;OK&amp;rdquo;, &amp;ldquo;target&amp;rdquo;: [&amp;ldquo;JHd&amp;rdquo;] },
+{ &amp;ldquo;source&amp;rdquo;: &amp;ldquo;JHt&amp;rdquo;, &amp;ldquo;status&amp;rdquo;: &amp;ldquo;OK&amp;rdquo;, &amp;ldquo;target&amp;rdquo;: [&amp;ldquo;JHt&amp;rdquo;] }
+],
+&amp;ldquo;targetDocumentMicroversion&amp;rdquo;: &amp;ldquo;52aa74d34b624f3aaef33204&amp;rdquo;
+}&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&lt;/code&gt;&lt;/pre&gt;
       </description>
     </item>
     
@@ -3406,8 +3419,8 @@ If you had created an integrated cloud app, the following changes have been made
       <description>
         
         
-        &lt;h1 id=&#34;application-element-api&#34;&gt;Application Element API&lt;/h1&gt;
-&lt;p&gt;Application elements provide element storage that is controlled by applications.  These elements allow a set of named sub-elements.&lt;/p&gt;
+        &lt;h2 id=&#34;sub-elements&#34;&gt;Sub Elements&lt;/h2&gt;
+&lt;p&gt;Onshape provides application elements storage that is controlled by applications through the API.  These elements allow a set of named sub-elements.&lt;/p&gt;
 &lt;p&gt;The application can make changes to sub-elements independently or in arbitrary groupings.  Changes may be wholesale replacements, or may be deltas.  When performing a delta update, the application may post a full version as well, which allows the api to return a smaller number of deltas for subsequent queries.&lt;/p&gt;
 &lt;p&gt;An application may need to perform multiple versionable actions in the course of performing a user-level action, and we want to allow the individual actions to be collected into a single action from the perspective of document history.  We do this by providing support for creation of a private transaction and support for atomically committing the transaction to the document workspace as a single user-visible action.&lt;/p&gt;
 &lt;p&gt;Onshape does not assume any knowledge about the semantics of application deltas.  All merging of deltas into a consolidated form is done by the application.  Applications should typically send checkpoint state for a sub-element if many delta changes have been made since the last checkpoint.&lt;/p&gt;
@@ -3425,399 +3438,121 @@ If you had created an integrated cloud app, the following changes have been made
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;Concurrent access by multiple users&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;If the element is being concurrently accessed by multiple sessions, updates may encounter conflicts during update. If the application has a mechanism that ensures that all accesses to the element are mediated by a single process, as is done with our part studio and assemblies,  this can be addressed directly by the application.  However, if the application is not able to mediate access in this way, updates by one session may invalidate state held by another session.  We address this by notifying updaters when an update cannot be directly applied because their state is out of date and allowing them to refresh their state before re-applying the change.  We expect to also provide a webhook api for notifying applications when a concurrent update has invalidated their state.&lt;/p&gt;
+&lt;p&gt;If the element is being concurrently accessed by multiple sessions, updates may encounter conflicts during update. If the application has a mechanism that ensures that all accesses to the element are mediated by a single process, as is done with our part studio and assemblies,  this can be addressed directly by the application.  However, if the application is not able to mediate access in this way, updates by one session may invalidate state held by another session.  We address this by notifying updaters when an update cannot be directly applied because their state is out of date and allowing them to refresh their state before re-applying the change.&lt;/p&gt;
 &lt;p&gt;This policy of requiring the application have current state when posting updates could be overly conservative in some cases.  Detecting conflict at the sub-element level might provide for better concurrent access performance, but there probably are cases where this fails, so it probably would need some level of application control.&lt;/p&gt;
-&lt;h2 id=&#34;summary-list-of-apis-described&#34;&gt;Summary list of APIs described&lt;/h2&gt;
-&lt;p&gt;Creates a new application element:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;POST /api/appelements/d/:did/w/:wid&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;Query for the set of document sub-element ids:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;GET /api/appelements/d/:did/[wvm]/:wvmid/content/ids&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;Create a private transaction for changes to the element:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;POST /api/appelements/d/:did/w/:wid/e/:eid/transactions&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;Commit private transaction changes for the element to the workspace:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;POST /api/appelements/d/:did/w/:wid/e/:eid/transactions/:tid&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;Add or update element content:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;POST /api/appelements/d/:did/w/:wid/e/:eid/content&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;query element content:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;GET /api/appelements/d/:did/[wvm]/:wvmid/e/:eid/content&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;delete element content&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;DELETE /api/appelements/d/:did/w/:wid/e/:eid/content/subelements/:sid&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;query element change history&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;GET /api/appelements/d/:did/[wvm]/:wvmid/e/:eid/content/history&lt;/code&gt;&lt;/p&gt;
-&lt;h2 id=&#34;api-description&#34;&gt;API description&lt;/h2&gt;
-&lt;h3 id=&#34;operation--create&#34;&gt;Operation:  create&lt;/h3&gt;
-&lt;p&gt;Creates a new application element.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;NOTE: See &lt;a href=&#34;#onshape-creation-conventions&#34;&gt;Onshape creation conventions&lt;/a&gt; below for information about the initial base content of application elements created by Onshape clients.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;code&gt;POST /api/appelements/d/:did/w/:wid&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;url params:&lt;/p&gt;
+&lt;h2 id=&#34;json-tree&#34;&gt;JSON Tree&lt;/h2&gt;
+&lt;p&gt;In contrast with sub elements, JSON tree storage is a more managed data storage mechanism that Onshape itself can merge and diff. At the root of it, the data structure is a single JSON object per Application Element. The user submits incremental changes that are then applied by Onshape to the JSON tree. Onshape stores these &amp;lsquo;diffs&amp;rsquo; in a new microversion created as a result of the update request, or during a subsequent transaction commit request. When the user then performs a merge or restore operation, Onshape can sum and apply the requisite incremental changes. By storing diffs, Onshape provides to the user a storage mechanism that is more robust to race conditions, since multiple simultaneous edits can be optionally merged by Onshape. All of these qualities make JSON tree a preferred way to store application element data in an Onshape-native manner.&lt;/p&gt;
+&lt;h3 id=&#34;json-tree-edit-semantics&#34;&gt;JSON Tree Edit Semantics&lt;/h3&gt;
+&lt;h5 id=&#34;btjedit-encoding&#34;&gt;BTJEdit Encoding&lt;/h5&gt;
+&lt;p&gt;A JSON tree edit represents an incremental change to an application element&amp;rsquo;s JSON tree. The edit is a &lt;code&gt;BTJEdit&lt;/code&gt; class, which is encoded as one of the following:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;:did - the id of the document in which the new element will be created&lt;/li&gt;
-&lt;li&gt;:wid - the workspace in which the new element will be created&lt;/li&gt;
+&lt;li&gt;Deletion:&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;query params:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;{ &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;btType&amp;#34;&lt;/span&gt; : &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;BTJEditDelete-1992&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;path&amp;#34;&lt;/span&gt; : &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;path&amp;#34;&lt;/span&gt; }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;Insertion:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;{ &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;btType&amp;#34;&lt;/span&gt; : &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;BTJEditInsert-2523&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;path&amp;#34;&lt;/span&gt; : &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;path&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;value&amp;#34;&lt;/span&gt; : &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;newValue&amp;#34;&lt;/span&gt; }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;Change:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;{ &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;btType&amp;#34;&lt;/span&gt; : &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;BTJEditChange-2636&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;path&amp;#34;&lt;/span&gt; : &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;path&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;value&amp;#34;&lt;/span&gt; : &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;newValue&amp;#34;&lt;/span&gt; }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;Move:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;{ &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;btType&amp;#34;&lt;/span&gt; : &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;BTJEditMove-3245&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;sourcePath&amp;#34;&lt;/span&gt; : &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;path&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;destinationPath&amp;#34;&lt;/span&gt; : &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;path&amp;#34;&lt;/span&gt; }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;List (where edit1, edit2, etc. are zero or more edits.):&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;{ &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;btType&amp;#34;&lt;/span&gt; : &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;BTJEditList-2707&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;edits&amp;#34;&lt;/span&gt; : [ &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;edit1&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;edit2&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;...&amp;#34;&lt;/span&gt;] }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Within the above encoding, &lt;code&gt;newValue&lt;/code&gt; is a stand in for any valid JSON, and &lt;code&gt;path&lt;/code&gt; is a stand in for an object representing a path to the node at which to perform the edit.&lt;/p&gt;
+&lt;h5 id=&#34;btjpath-encoding&#34;&gt;BTJPath Encoding&lt;/h5&gt;
+&lt;p&gt;The BTJPath object describes a path through the JSON tree to a particular node, and is encoded as follows:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;{ &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;btType&amp;#34;&lt;/span&gt; : &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;BTJPath-3073&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;startNode&amp;#34;&lt;/span&gt; : &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;startNode&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;path&amp;#34;&lt;/span&gt; : [ &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;pathElement1&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;pathElement2&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;...&amp;#34;&lt;/span&gt;] }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;where startNode is a string that is either empty to specify the root node or a nodeId of a node in the tree. The pathElement is one of:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;none&lt;/li&gt;
+&lt;li&gt;Key:&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;JSON body:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;{
-   &amp;quot;formatId&amp;quot; : &amp;quot;some-format-id&amp;quot;,
-   &amp;quot;subelements&amp;quot; : [ { &amp;quot;subelementId&amp;quot; : &amp;quot;some-id-string&amp;quot;,
-                &amp;quot;baseContent&amp;quot; : &amp;quot;some-base64-string&amp;quot; },
-              ...
-          ],
-   &amp;quot;name&amp;quot; : &amp;quot;some-name&amp;quot;
-   &amp;quot;description&amp;quot; : &amp;quot;some-description&amp;quot;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;JSON params:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;formatId - a value which identifies the format of the element data. It is used to allow Onshape to know what application should process the element when it is opened.  The value supplied here normally is assigned to a partner by Onshape, but may be self-assigned for limited-use development testing.  A partner may have more than one assigned formatId if their applications supports more than one type of application element.&lt;/li&gt;
-&lt;li&gt;Any formatId assigned by Onshape will consist of alphanumeric characters only.  Partners are welcome to create test elements as long as they contain at least one non-alphanumeric character.  Onshape suggests creating test Ids of the form &amp;ldquo;company-app&amp;rdquo; using the dash character.  Onshape reserves onshape-* for internal use.&lt;/li&gt;
-&lt;li&gt;subelements - provides initial content for zero or more sub-elements.
-&lt;ul&gt;
-&lt;li&gt;subelementId - an id string assigned by the application to identify a sub-element&lt;/li&gt;
-&lt;li&gt;baseContent - the initial value for the sub-element, expressed as a base64-encoded string&lt;/li&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;{ &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;btType&amp;#34;&lt;/span&gt; : &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;BTJPathKey-3221&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;key&amp;#34;&lt;/span&gt; : &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;string&amp;#34;&lt;/span&gt; }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;Index:&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;name - the name to be assigned to the element&lt;/li&gt;
-&lt;li&gt;description - a description to be associated with the initial element change state&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;returns:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;{
-   &amp;quot;errorCode&amp;quot; : some-integer,
-   &amp;quot;errorDescription&amp;quot; : &amp;quot;some-string&amp;quot;,
-   &amp;quot;elementId&amp;quot; : &amp;quot;some-element-id&amp;quot;,
-   &amp;quot;changeId&amp;quot; : &amp;quot;some-change-id&amp;quot;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
-&lt;li&gt;errorCode - has the value 0 if successful or an HTTP error status code is reported otherwise&lt;/li&gt;
-&lt;li&gt;errorDescription - a short description string  describing the errorCode&lt;/li&gt;
-&lt;li&gt;elementId - the id of the created element&lt;/li&gt;
-&lt;li&gt;changeId - the initial changeId of the created element&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;operation--getids&#34;&gt;Operation:  getIds&lt;/h3&gt;
-&lt;p&gt;Query for the set of document sub-element ids&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;GET /api/appelements/d/:did/[wvm]/:wvmid/content/ids&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;url params:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;:did - the document containing the element&lt;/li&gt;
-&lt;li&gt;:wvmid - the workspace/version/microversion for query evaluation, corresponding to the choice of w, v, m&lt;/li&gt;
-&lt;li&gt;:eid - the application element&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;query params:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;transactionId - an optional transaction of the element in which sub-element ids are retrieved.  If not specified, the workspace is used.&lt;/li&gt;
-&lt;li&gt;changeId - the changeId of the element change state from which sub-element ids are retrieved.  If not specified, the current change state of the workspace or selected transaction is used&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;returns:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;{
-   &amp;quot;errorCode&amp;quot; : some-integer,
-   &amp;quot;errorDescription&amp;quot; : &amp;quot;some-string&amp;quot;,
-   &amp;quot;subelementIds&amp;quot; : [ &amp;quot;id1&amp;quot;, &amp;quot;id2&amp;quot;, ... &amp;quot;idn&amp;quot; ],
-   &amp;quot;changeId&amp;quot; : &amp;quot;some-change-id&amp;quot;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
-&lt;li&gt;errorCode - has the value 0 if the operation was successful or an HTTP error status code is reported otherwise&lt;/li&gt;
-&lt;li&gt;errorDescription - a short description string  describing the errorCode&lt;/li&gt;
-&lt;li&gt;subelementIds - an array of sub-element ids that have been defined&lt;/li&gt;
-&lt;li&gt;changeId - the change id of the element where the ids were evaluated.  We return changeId here primarily for the case where a workspace is used.  When a changeId is specified on input, the output will match the input.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;operation-starttransaction&#34;&gt;Operation: startTransaction&lt;/h3&gt;
-&lt;p&gt;Create a transaction for changes to the element&lt;/p&gt;
-&lt;p&gt;A transaction allows multiple edits to be applied and later collapsed onto the workspace as a single edit.&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;POST /api/appelements/d/:did/w/:wid/e/:eid/transactions&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;url params:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;:did - the document containing the element&lt;/li&gt;
-&lt;li&gt;:wid - the workspace in which the creation takes place&lt;/li&gt;
-&lt;li&gt;:eid - the application element&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;query params:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;none&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;JSON body:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;{
-   &amp;quot;parentChangeId&amp;quot; : &amp;quot;optional-change-id&amp;quot;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;JSON params:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;parentChangeId - identifies the change state of the element upon which this changes is based.  If at the time the call is made, this is not the current changeId for the workspace, the caller is informed that they are not using the most recent version of the element.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;returns:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;{
-   &amp;quot;errorCode&amp;quot; : some-integer,
-   &amp;quot;errorDescription&amp;quot; : &amp;quot;some-string&amp;quot;,
-   &amp;quot;changeId&amp;quot; : &amp;quot;some-change-id&amp;quot;,
-   &amp;quot;transactionId&amp;quot; : &amp;quot;some-transaction-id&amp;quot;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
-&lt;li&gt;errorCode - has the value 0 if successful or an HTTP error status code is reported otherwise&lt;/li&gt;
-&lt;li&gt;errorDescription - a short description string  describing the errorCode&lt;/li&gt;
-&lt;li&gt;changeId - the changeId off of which the branch was created.&lt;/li&gt;
-&lt;li&gt;transactionId - the created transaction id&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;operation-committransaction&#34;&gt;Operation: commitTransaction&lt;/h3&gt;
-&lt;p&gt;Move private transaction changes for the element to the element workspace&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;POST /api/appelements/d/:did/w/:wid/e/:eid/transactions/:tid&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;url params:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;:did - the document containing the element&lt;/li&gt;
-&lt;li&gt;:eid - the application element&lt;/li&gt;
-&lt;li&gt;:wid - the workspace in which the creation takes place&lt;/li&gt;
-&lt;li&gt;:tid - the transaction being committed&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;query params:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;none&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;JSON body:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;{
-    &amp;quot;transactionId&amp;quot; : &amp;quot;some-transaction-id&amp;quot;,
-    &amp;quot;description&amp;quot; : &amp;quot;some-description&amp;quot;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;JSON params:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;transactionId - the transaction to merge&lt;/li&gt;
-&lt;li&gt;description - a description string to be associated with the merged changes&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;returns:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;{
-   &amp;quot;errorCode&amp;quot; : some-integer,
-   &amp;quot;errorDescription&amp;quot; : &amp;quot;some-string&amp;quot;,
-   &amp;quot;changeId&amp;quot; : &amp;quot;some-change-id&amp;quot;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
-&lt;li&gt;errorCode - has the value 0 if successful or an HTTP error status code is reported otherwise&lt;/li&gt;
-&lt;li&gt;errorDescription - a short description string  describing the errorCode&lt;/li&gt;
-&lt;li&gt;changeId - the changeId resulting from the merge, if success is true, or the current changeId of the workspace otherwise&lt;/li&gt;
-&lt;li&gt;parentChangeId - the changeId that is the parent of the merged changes&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;operation-update&#34;&gt;Operation: update&lt;/h3&gt;
-&lt;p&gt;Add or update element content&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;POST /api/appelements/d/:did/w/:wid/e/:eid/content&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;url params:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;:did - the document containing the element&lt;/li&gt;
-&lt;li&gt;:wid - the workspace in which the creation takes place&lt;/li&gt;
-&lt;li&gt;:eid - the application element&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;query params:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;none&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;JSON body:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;{
-   &amp;quot;changes&amp;quot; : [ { &amp;quot;subelementId&amp;quot; : &amp;quot;some-id&amp;quot;,
-                   &amp;quot;baseContent&amp;quot; : &amp;quot;some-base64-string&amp;quot; },
-                 { &amp;quot;subelementId&amp;quot; : &amp;quot;some-id&amp;quot;,
-                   &amp;quot;delta&amp;quot; : &amp;quot;some-base64-string&amp;quot; },
-          ],
-   &amp;quot;transactionId&amp;quot; : &amp;quot;optional-transaction-id&amp;quot;,
-   &amp;quot;parentChangeId&amp;quot; : &amp;quot;optional-change-id&amp;quot;,
-   &amp;quot;description&amp;quot; : &amp;quot;some-description&amp;quot;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;JSON params:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;changes - contains a list of changes/updates for a set of ids.  For each id, the entry specifies the content and/or changes to the content for the change, with base content and deltas expressed as a base64-encoded string.  If an entry has only baseContent, the entry represents the creation or wholesale replacement of content for the sub-element.  If an entry has only delta, it is a pure delta, and the sub-element must already exist.  If an entry has delta + baseContent, the baseContent is interpreted as a checkpoint for the sub-element content representing the state after application of the delta, as an optimization.&lt;/li&gt;
-&lt;li&gt;transactionId - if specified, this is the transaction to be used used for the change rather than the current workspace for the element.&lt;/li&gt;
-&lt;li&gt;parentChangeId - identifies the changeId of the element upon which this changes is based.  If at the time the call is made, this is not the current changeId for the selected transaction or workspace, the caller is informed that they are not using the most recent version of the element.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The operation moves the changes from the transaction to the document workspace.&lt;/p&gt;
-&lt;p&gt;returns&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;{
-   &amp;quot;errorCode&amp;quot; : some-integer,
-   &amp;quot;errorDescription&amp;quot; : &amp;quot;some-string&amp;quot;,
-   &amp;quot;changeId&amp;quot; : &amp;quot;some-change-id&amp;quot;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
-&lt;li&gt;errorCode - has the value 0 if successful or an HTTP error status code is reported otherwise&lt;/li&gt;
-&lt;li&gt;errorDescription - a short description string  describing the errorCode&lt;/li&gt;
-&lt;li&gt;changeId - the new changeId, if success is true, or the current changeId if success is false&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;operation-getcontent&#34;&gt;Operation: getContent&lt;/h3&gt;
-&lt;p&gt;query element content&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;GET /api/appelements/d/:did/[wvm]/:wvmid/e/:eid/content&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;url params:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;:did - the document containing the element&lt;/li&gt;
-&lt;li&gt;:wvmid - the workspace/version/microversion in which the query takes place, corresponding to the choice of w, v or m&lt;/li&gt;
-&lt;li&gt;:eid - the application element&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;query params:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;transactionId - (optional) specifies the transaction within the workspace for retrieval.  If not specified, the element’s workspace is used&lt;/li&gt;
-&lt;li&gt;changeId - (optional) specifies the changeId for the element state from which the content is to be retrieved.  If not specified, the current changeId of the selected transaction or workspace is used&lt;/li&gt;
-&lt;li&gt;baseChangeId - (optional) if specified, indicates that the content to be returned should be limited to the changes relative to the base changeId.  This allows collaborating clients to incrementally synchronize their state with shared state.&lt;/li&gt;
-&lt;li&gt;subelementId - (optional) restricts output to be for a single sub-element.  default is all sub-elements&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;returns:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;{
-  &amp;quot;errorCode&amp;quot; : some-integer,
-  &amp;quot;errorDescription&amp;quot; : &amp;quot;some-string&amp;quot;,
-  &amp;quot;data&amp;quot; : [ { &amp;quot;subelementId&amp;quot; : &amp;quot;some id&amp;quot;,
-                &amp;quot;baseContent&amp;quot; : &amp;quot;some-base64-string&amp;quot;,
-		    &amp;quot;deltas&amp;quot; : [
-                    { &amp;quot;delta&amp;quot; : &amp;quot;some-base64-string&amp;quot; },
-                    { &amp;quot;delta&amp;quot; : &amp;quot;some-base64-string&amp;quot; } ] } ],
-  &amp;quot;changeId&amp;quot; : &amp;quot;some-change-id&amp;quot;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
-&lt;li&gt;errorCode - has the value 0 if the operation succeeded or an HTTP error status code is reported otherwise&lt;/li&gt;
-&lt;li&gt;errorDescription - a short description string  describing the errorCode&lt;/li&gt;
-&lt;li&gt;data - an array of results, one per selected sub-element, containing
-&lt;ul&gt;
-&lt;li&gt;subelementId - the id of the sub-element associated with the entry&lt;/li&gt;
-&lt;li&gt;baseContent - the latest complete snapshot of the sub-element, which is not necessarily from the latest change state.  If a baseChangeId is specified, the baseContent field may be absent, indicating that content already in use by the caller should be used as the base for applying any deltas.  The data is returned as a base64-encoded string. If a baseChangeId is specified and there has been an update that includes a basecontent value since the base change occurred, the returned data will include the latest base content and any deltas that occur after the base content.&lt;/li&gt;
-&lt;li&gt;deltas - an array of sub-element delta entries, in order of oldest to newest.  If there are no deltas, an empty array is present.  Each entry contains:
-&lt;ul&gt;
-&lt;li&gt;delta - an incremental delta, as provided by the application, expressed as a base64-encoded string.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;changeId - the changeId of the latest change supplied in the output.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;operation-gethistory&#34;&gt;Operation: getHistory&lt;/h3&gt;
-&lt;p&gt;query element change history&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;GET /api/appelements/d/:did/[wvm]/:wvmid/e/:eid/content/history&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;url params:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;:did - the document containing the element&lt;/li&gt;
-&lt;li&gt;:wid - the workspace in which the creation takes place&lt;/li&gt;
-&lt;li&gt;:eid - the application element&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;query params:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;none&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;returns:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;{
-  &amp;quot;errorCode&amp;quot; : some-integer,
-  &amp;quot;errorDescription&amp;quot; : &amp;quot;some-string&amp;quot;,
-  &amp;quot;changes&amp;quot; : [ { &amp;quot;changeId&amp;quot; : &amp;quot;some-change-id&amp;quot;,
-                  &amp;quot;createdAt&amp;quot; : &amp;quot;2014-09-08T13:59:37.272+0000&amp;quot;
-                  &amp;quot;description&amp;quot; : &amp;quot;some-string&amp;quot; },
-                …
-                ]
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
-&lt;li&gt;errorCode - has the value 0 if the operation or an HTTP error status code is reported otherwise&lt;/li&gt;
-&lt;li&gt;errorDescription - a short description string  describing the errorCode&lt;/li&gt;
-&lt;li&gt;changes - an array of changes, in order of application from more recent to less recent. Each one contains:
-&lt;ul&gt;
-&lt;li&gt;changeId - the changeId for the change&lt;/li&gt;
-&lt;li&gt;description - the description of the change&lt;/li&gt;
-&lt;li&gt;createdAt - the date/time at which the change occurred&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;operation-deletecontent&#34;&gt;Operation: deleteContent&lt;/h3&gt;
-&lt;p&gt;delete element content&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;DELETE /api/appelements/d/:did/w/:wid/e/:eid/content/subelements/:sid&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;url params:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;:did - the document containing the element&lt;/li&gt;
-&lt;li&gt;:wid - the workspace in which the creation takes place&lt;/li&gt;
-&lt;li&gt;:eid - the application element&lt;/li&gt;
-&lt;li&gt;:sid - the subelement id - be sure to URL encode this value&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;query params:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;transactionId - an optional transaction in which sub-elements are deleted.  If not specified, the workspace is used.&lt;/li&gt;
-&lt;li&gt;subelementId - the id associated with the sub-element to be deleted&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;returns:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;{
-    &amp;quot;errorCode&amp;quot; : some-integer,
-    &amp;quot;errorDescription&amp;quot; : &amp;quot;some-string&amp;quot;,
-    &amp;quot;changeId&amp;quot; : &amp;quot;some-change-id&amp;quot;
-    &amp;quot;parentChangeId&amp;quot; : &amp;quot;some-change-id&amp;quot;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
-&lt;li&gt;errorCode - has the value 0 if successful or an HTTP error status code is reported otherwise&lt;/li&gt;
-&lt;li&gt;errorDescription - a short description string  describing the errorCode&lt;/li&gt;
-&lt;li&gt;changeId - the changeId of the entry that results in the entry deletion&lt;/li&gt;
-&lt;li&gt;parentChangeId - the changeId of the  prior to the deleteContent operation&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;error-codes&#34;&gt;Error Codes&lt;/h2&gt;
-&lt;p&gt;The errorCode field returned by the API methods returns only a single value, 0, with a description of &amp;ldquo;OK&amp;rdquo;. Errors are signaled using HTTPstatus codes.&lt;/p&gt;
-&lt;h2 id=&#34;onshape-creation-conventions&#34;&gt;Onshape creation conventions&lt;/h2&gt;
-&lt;p&gt;When the Onshape client creates an application element, it will create an initial sub-element with subelementId &amp;ldquo;OnshapeCreationContext&amp;rdquo;.  This element contains baseContent that is a base64-encoded UTF-8 stringified representation of the JSON object described below.  This object serves to notify the associated application of the context in which the element was created.  The fields in this object may change over time as needs evolve.&lt;/p&gt;
-&lt;p&gt;The context object is intended to provide the application sufficient information to initialize the application element. For applications that are associated with existing data, the &amp;ldquo;data&amp;rdquo; field is used to identify that data.&lt;/p&gt;
-&lt;p&gt;As of this writing, the creation context object has the following structure:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;{
-&amp;quot;time&amp;quot; : {some Date() object},
-&amp;quot;userId&amp;quot; : &amp;quot;some-user-id&amp;quot;,
-&amp;quot;documentId&amp;quot; : &amp;quot;creation-document-id&amp;quot;,
-&amp;quot;workspaceId&amp;quot; : &amp;quot;creation-workspace-id&amp;quot;,
-&amp;quot;elementId&amp;quot; : &amp;quot;creation-element-id&amp;quot;,
-&amp;quot;data&amp;quot; : {
-    &amp;quot;documentId&amp;quot; : &amp;quot;context-document-id&amp;quot;,
-    &amp;quot;workspaceId&amp;quot; : &amp;quot;context-workspace-id&amp;quot;,
-    &amp;quot;elementId&amp;quot; : &amp;quot;context-element-id&amp;quot;,
-    &amp;quot;partQuery&amp;quot; : &amp;quot;context-part-query&amp;quot;
-	}
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The object may contain the following fields.&lt;/p&gt;
-&lt;table&gt;
-  &lt;tr&gt;
-    &lt;td&gt;Field&lt;/td&gt;
-    &lt;td&gt;Status&lt;/td&gt;
-    &lt;td&gt;Description&lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td&gt;time&lt;/td&gt;
-    &lt;td&gt;required&lt;/td&gt;
-    &lt;td&gt;The time this element was created&lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td&gt;userId&lt;/td&gt;
-    &lt;td&gt;required&lt;/td&gt;
-    &lt;td&gt;ID of the user who created this element&lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td&gt;documentId&lt;/td&gt;
-    &lt;td&gt;required&lt;/td&gt;
-    &lt;td&gt;ID of the document in which this element was created&lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td&gt;workspaceId&lt;/td&gt;
-    &lt;td&gt;required&lt;/td&gt;
-    &lt;td&gt;ID of the workspace in which this element was created&lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td&gt;elementId&lt;/td&gt;
-    &lt;td&gt;required&lt;/td&gt;
-    &lt;td&gt;ID of the this element when created&lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td&gt;data&lt;/td&gt;
-    &lt;td&gt;optional&lt;/td&gt;
-    &lt;td&gt;Identifies the data context.   If not present, no initial data is associated with this element.&lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td&gt;data.documentId&lt;/td&gt;
-    &lt;td&gt;required&lt;/td&gt;
-    &lt;td&gt;ID of the document that provides the data context.&lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td&gt;data.workspaceId&lt;/td&gt;
-    &lt;td&gt;required&lt;/td&gt;
-    &lt;td&gt;ID of the workspace that provides the data context.&lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td&gt;data.elementId&lt;/td&gt;
-    &lt;td&gt;optional&lt;/td&gt;
-    &lt;td&gt;ID of the element that provides the data context.&lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td&gt;data.partQuery&lt;/td&gt;
-    &lt;td&gt;optional&lt;/td&gt;
-    &lt;td&gt;Identifies a part, currently only meaningful if the data.elementId is present and is a partstudio.&lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/table&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;{ &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;btType&amp;#34;&lt;/span&gt; : &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;BTJPathIndex-1871&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;index&amp;#34;&lt;/span&gt; : &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;integer&amp;#34;&lt;/span&gt; }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;In the insertion and move type edits the path elements can describe a path that doesn&amp;rsquo;t currently exist. Onshape will generate the proper keys and values as needed to place the node value in the proper location.&lt;/p&gt;
+&lt;h3 id=&#34;json-tree-examples&#34;&gt;JSON Tree Examples&lt;/h3&gt;
+&lt;p&gt;Below are some examples that show the body required to perform the particular edit on a JSON tree.&lt;/p&gt;
+&lt;h4 id=&#34;deletion-example&#34;&gt;Deletion Example&lt;/h4&gt;
+&lt;p&gt;If the pre-existing JSON tree looks like:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;{&lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;myKey&amp;#34;&lt;/span&gt;:  &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;myValue&amp;#34;&lt;/span&gt;}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;and a delete edit looks like:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;{&lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;btType&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;BTJEditDelete-1992&amp;#34;&lt;/span&gt;,
+     &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;path&amp;#34;&lt;/span&gt;: {&lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;btType&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;BTJPath-3073&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;startNode&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;path&amp;#34;&lt;/span&gt;: [{&lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;btType&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;BTJPathKey-3221&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;key&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;myKey&amp;#34;&lt;/span&gt;}]}}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;then the resulting JSON is the result of deleting the node specified by &lt;code&gt;path&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;{}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;insert-example&#34;&gt;Insert Example&lt;/h4&gt;
+&lt;p&gt;If the pre-existing JSON tree looks like:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;{}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;and the insertion edit looks like:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;{&lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;btType&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;BTJEditInsert-2523&amp;#34;&lt;/span&gt;,
+     &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;path&amp;#34;&lt;/span&gt;: {&lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;btType&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;BTJPath-3073&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;startNode&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;path&amp;#34;&lt;/span&gt;: [{&lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;btType&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;BTJPathKey-3221&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;key&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;insertedKey&amp;#34;&lt;/span&gt;}]},
+     &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;value&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;myValue&amp;#34;&lt;/span&gt;}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;then the resulting JSON is the result of inserting the node described by &lt;code&gt;value&lt;/code&gt; at the node specified by &lt;code&gt;path&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;{&lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;insertedKey&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;myValue&amp;#34;&lt;/span&gt;}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;change-example&#34;&gt;Change Example&lt;/h4&gt;
+&lt;p&gt;If the pre-existing JSON tree looks like:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;{&lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;myKey&amp;#34;&lt;/span&gt;:  &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;myValue&amp;#34;&lt;/span&gt;}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;and the change edit looks like:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;{&lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;btType&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;BTJEditChange-2636&amp;#34;&lt;/span&gt;,
+     &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;path&amp;#34;&lt;/span&gt;: {&lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;btType&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;BTJPath-3073&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;startNode&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;path&amp;#34;&lt;/span&gt;: [{&lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;btType&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;BTJPathKey-3221&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;key&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;myKey&amp;#34;&lt;/span&gt;}]},
+     &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;value&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;myOtherValue&amp;#34;&lt;/span&gt;}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;then the resulting JSON is the result of changing the node specified by &lt;code&gt;path&lt;/code&gt; to the node described by &lt;code&gt;value&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;{&lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;myKey&amp;#34;&lt;/span&gt;:  &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;myOtherValue&amp;#34;&lt;/span&gt;}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;move-example&#34;&gt;Move Example&lt;/h4&gt;
+&lt;p&gt;If the pre-existing JSON tree looks like:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;{&lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;myKey&amp;#34;&lt;/span&gt;:  &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;myValue&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;myOtherKey&amp;#34;&lt;/span&gt;:  &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;myOtherValue&amp;#34;&lt;/span&gt;}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;and the move edit looks like:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;{&lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;btType&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;BTJEditMove-3245&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;sourcePath&amp;#34;&lt;/span&gt;: {&lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;btType&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;BTJPath-3073&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;startNode&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;,
+                                                  &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;path&amp;#34;&lt;/span&gt;: [{&lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;btType&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;BTJPathKey-3221&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;key&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;myKey&amp;#34;&lt;/span&gt;}]},
+     &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;destinationPath&amp;#34;&lt;/span&gt;: {&lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;btType&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;BTJPath-3073&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;startNode&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;,
+                         &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;path&amp;#34;&lt;/span&gt;: [{&lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;btType&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;BTJPathKey-3221&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;key&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;keyCreatedFromMove&amp;#34;&lt;/span&gt;}]}}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;then the resulting JSON is the result of moving the node from the specified &lt;code&gt;sourcePath&lt;/code&gt; to the &lt;code&gt;destinationPath&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;{&lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;keyCreatedFromMove&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;myValue&amp;#34;&lt;/span&gt;}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;list-example&#34;&gt;List Example&lt;/h4&gt;
+&lt;p&gt;If the pre-existing JSON tree looks like:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;{}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;and the list edit looks like:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;{&lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;btType&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;BTJEditList-2707&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;edits&amp;#34;&lt;/span&gt;: [
+        {&lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;btType&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;BTJEditInsert-2523&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;path&amp;#34;&lt;/span&gt;: {&lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;btType&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;BTJPath-3073&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;startNode&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;path&amp;#34;&lt;/span&gt;: [{&lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;btType&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;BTJPathKey-3221&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;key&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;myKey&amp;#34;&lt;/span&gt;}]},
+         &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;value&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;myValue&amp;#34;&lt;/span&gt;},
+        {&lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;btType&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;BTJEditChange-2636&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;path&amp;#34;&lt;/span&gt;: {&lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;btType&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;BTJPath-3073&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;startNode&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;,
+                                                  &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;path&amp;#34;&lt;/span&gt;: [{&lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;btType&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;BTJPathKey-3221&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;key&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;myKey&amp;#34;&lt;/span&gt;}]},
+         &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;value&amp;#34;&lt;/span&gt;: [&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;firstValue&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;secondValue&amp;#34;&lt;/span&gt;]},
+        {&lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;btType&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;BTJEditInsert-2523&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;path&amp;#34;&lt;/span&gt;: {&lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;btType&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;BTJPath-3073&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;startNode&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;,
+                                                  &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;path&amp;#34;&lt;/span&gt;: [{&lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;btType&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;BTJPathKey-3221&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;key&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;myKey&amp;#34;&lt;/span&gt;},
+                                                           {&lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;btType&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;BTJPathIndex-1871&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;index&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt;}]},
+         &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;value&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;myBetterSecondValue&amp;#34;&lt;/span&gt;},
+        {&lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;btType&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;BTJEditDelete-1992&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;path&amp;#34;&lt;/span&gt;: {&lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;btType&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;BTJPath-3073&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;startNode&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;,
+                                                  &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;path&amp;#34;&lt;/span&gt;: [{&lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;btType&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;BTJPathKey-3221&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;key&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;myKey&amp;#34;&lt;/span&gt;},
+                                                           {&lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;btType&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;BTJPathIndex-1871&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;index&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#099&#34;&gt;2&lt;/span&gt;}]}}
+    ]}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;then the resulting JSON is the result of applying all the given edits in order:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;{&lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;myKey&amp;#34;&lt;/span&gt;: [&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;firstValue&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;myBetterSecondValue&amp;#34;&lt;/span&gt;]}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The intermediate steps were:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Insertion:
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;   {&lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;myKey&amp;#34;&lt;/span&gt;:  &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;myValue&amp;#34;&lt;/span&gt;}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;Change:
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;   {&lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;myKey&amp;#34;&lt;/span&gt;: [&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;firstValue&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;secondValue&amp;#34;&lt;/span&gt;]}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;List insertion:
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;   {&lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;myKey&amp;#34;&lt;/span&gt;: [&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;firstValue&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;myBetterSecondValue&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;secondValue&amp;#34;&lt;/span&gt;]}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;List deletion:
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;   {&lt;span style=&#34;color:#1e90ff;font-weight:bold&#34;&gt;&amp;#34;myKey&amp;#34;&lt;/span&gt;: [&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;firstValue&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;myBetterSecondValue&amp;#34;&lt;/span&gt;]}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;All the examples above were tested and validated using the Python client &lt;a href=&#34;https://github.com/onshape-public/onshape-clients/blob/next/python/test/test_app_element_json_tree.py&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 
       </description>
     </item>
