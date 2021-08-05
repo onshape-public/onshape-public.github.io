@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.71.1" />
+<meta name="generator" content="Hugo 0.71.0" />
 
 <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
 
@@ -32,7 +32,7 @@ Example Code  Python  Events Each type of event that an application may receive 
 Example Code  Python  Events Each type of event that an application may receive notifications for has a unique identifier known as the event type. Event types are grouped into Event Groups. Each group shares specification requirements, as described below.">
 <meta itemprop="datePublished" content="2020-05-18T20:44:05-04:00" />
 <meta itemprop="dateModified" content="2020-05-18T20:44:05-04:00" />
-<meta itemprop="wordCount" content="1011">
+<meta itemprop="wordCount" content="1064">
 
 
 
@@ -328,6 +328,9 @@ the event will be registered for all present and future documents owned by the c
 <li><code>onshape.model.lifecycle.changed.externalreferences</code> - occurs when an external reference changes</li>
 <li><code>onshape.document.lifecycle.created</code> - occurs when a document is created</li>
 <li><code>onshape.revision.created</code> - occurs when a revision is created</li>
+<li><code>onshape.comment.create</code> - occurs when a comment is created in a document</li>
+<li><code>onshape.comment.update</code> - occurs when a comment is updated in a document</li>
+<li><code>onshape.comment.delete</code> - occurs when a deleted is deleted in a document</li>
 </ul>
 <h4 id="workflow-group">Workflow Group</h4>
 <p>Monitor release management actions.</p>
@@ -452,6 +455,17 @@ delivery to fail.</p>
   &quot;documentId&quot;: &quot;0f9c4392e5934f30b48ab645&quot;,
   &quot;userId&quot;: &quot;567953d60a1a5fbb95940333&quot;,
   &quot;translationRequestId&quot;: &quot;4f5de10f9c4392e5934f30b4&quot;
+}
+</code></pre><p>comment create</p>
+<pre><code>{
+  &quot;timestamp&quot;: &quot;2014-12-16T23:46:29.284-0500&quot;,
+  &quot;event&quot;: &quot;onshape.comment.create&quot;,
+  &quot;workspaceId&quot;: &quot;f925722bee1c43fc80fb5bb2&quot;,
+  &quot;elementId&quot;: &quot;0f931a1ceba842299192823f&quot;,
+  &quot;webhookId&quot;: &quot;544e91f7fb88ed44f5de1508&quot;,
+  &quot;messageId&quot;: &quot;60f54ac1cbc04179a6642d9a&quot;,
+  &quot;documentId&quot;: &quot;0f9c4392e5934f30b48ab645&quot;,
+  &quot;commentId&quot;: &quot;567953d60a1a5fbb95940333&quot;
 }
 </code></pre>
 	

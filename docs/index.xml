@@ -4019,6 +4019,9 @@ the event will be registered for all present and future documents owned by the c
 &lt;li&gt;&lt;code&gt;onshape.model.lifecycle.changed.externalreferences&lt;/code&gt; - occurs when an external reference changes&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;onshape.document.lifecycle.created&lt;/code&gt; - occurs when a document is created&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;onshape.revision.created&lt;/code&gt; - occurs when a revision is created&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;onshape.comment.create&lt;/code&gt; - occurs when a comment is created in a document&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;onshape.comment.update&lt;/code&gt; - occurs when a comment is updated in a document&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;onshape.comment.delete&lt;/code&gt; - occurs when a deleted is deleted in a document&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;workflow-group&#34;&gt;Workflow Group&lt;/h4&gt;
 &lt;p&gt;Monitor release management actions.&lt;/p&gt;
@@ -4143,6 +4146,17 @@ delivery to fail.&lt;/p&gt;
   &amp;quot;documentId&amp;quot;: &amp;quot;0f9c4392e5934f30b48ab645&amp;quot;,
   &amp;quot;userId&amp;quot;: &amp;quot;567953d60a1a5fbb95940333&amp;quot;,
   &amp;quot;translationRequestId&amp;quot;: &amp;quot;4f5de10f9c4392e5934f30b4&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;comment create&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;{
+  &amp;quot;timestamp&amp;quot;: &amp;quot;2014-12-16T23:46:29.284-0500&amp;quot;,
+  &amp;quot;event&amp;quot;: &amp;quot;onshape.comment.create&amp;quot;,
+  &amp;quot;workspaceId&amp;quot;: &amp;quot;f925722bee1c43fc80fb5bb2&amp;quot;,
+  &amp;quot;elementId&amp;quot;: &amp;quot;0f931a1ceba842299192823f&amp;quot;,
+  &amp;quot;webhookId&amp;quot;: &amp;quot;544e91f7fb88ed44f5de1508&amp;quot;,
+  &amp;quot;messageId&amp;quot;: &amp;quot;60f54ac1cbc04179a6642d9a&amp;quot;,
+  &amp;quot;documentId&amp;quot;: &amp;quot;0f9c4392e5934f30b48ab645&amp;quot;,
+  &amp;quot;commentId&amp;quot;: &amp;quot;567953d60a1a5fbb95940333&amp;quot;
 }
 &lt;/code&gt;&lt;/pre&gt;
       </description>
