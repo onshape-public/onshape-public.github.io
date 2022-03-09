@@ -3,10 +3,8 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.71.0" />
-
-<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
-
+<meta name="generator" content="Hugo 0.71.1" />
+<meta name="robots" content="noindex, nofollow">
 
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -20,7 +18,11 @@
 <link rel="icon" type="image/png" href="/favicons/android-144x144.png" sizes="144x144">
 <link rel="icon" type="image/png" href="/favicons/android-192x192.png" sizes="192x192">
 
-<title>Feature List API | Onshape Developer Documentation</title><meta property="og:title" content="Feature List API" />
+<title>Feature List API | Onshape Developer Documentation</title>
+<meta name="description" content="Onshape Part Studio Feature Access API
+Summary
+The Onshape Part Studio tab tracks edits in terms of a feature list.  Creation and modification of …">
+<meta property="og:title" content="Feature List API" />
 <meta property="og:description" content="Onshape Part Studio Feature Access API
 Summary The Onshape Part Studio tab tracks edits in terms of a feature list. Creation and modification of geometry is performed by manipulating that list. This document describes capabilities that are intended to allow partners and customers to manipulate the feature list from software.
 The feature API comprises the following API methods:
@@ -54,15 +56,12 @@ The feature API comprises the following API methods:
 
 
 
-<link rel="preload" href="/scss/main.min.0b2b1932ff6c78c758cec3c3efac1347ba44cbf6a6d94fcb5ab5a0ce8937c6db.css" as="style">
-<link href="/scss/main.min.0b2b1932ff6c78c758cec3c3efac1347ba44cbf6a6d94fcb5ab5a0ce8937c6db.css" rel="stylesheet" integrity="">
-
+<link href="/scss/main.css" rel="stylesheet">
 
 <script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK"
   crossorigin="anonymous"></script>
-
 <style>
   code {
     white-space : pre-wrap !important;
@@ -76,13 +75,15 @@ The feature API comprises the following API methods:
       
 <nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
         <a class="navbar-brand" href="/">
-		<span class="navbar-logo"></span><span class="text-uppercase font-weight-bold">Onshape Developer Documentation</span>
+		<span class="navbar-logo"></span><span class="font-weight-bold">Onshape Developer Documentation</span>
 	</a>
 	<div class="td-navbar-nav-scroll ml-md-auto" id="main_navbar">
 		<ul class="navbar-nav mt-2 mt-lg-0">
 			
 			
 			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
 				
 				
 				
@@ -96,150 +97,70 @@ The feature API comprises the following API methods:
 			
 		</ul>
 	</div>
-	<div class="navbar-nav d-none d-lg-block">
-</div>
+	<div class="navbar-nav d-none d-lg-block"></div>
 </nav>
 
     </header>
     <div class="container-fluid td-outer">
       <div class="td-main">
         <div class="row flex-xl-nowrap">
-          <div class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
+          <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
             
-
-
-
-
 <div id="td-sidebar-menu" class="td-sidebar__inner">
-  
   <form class="td-sidebar__search d-flex align-items-center">
     
-
     <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type="button" data-toggle="collapse" data-target="#td-section-nav" aria-controls="td-docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
     </button>
   </form>
-  
-  <nav class="collapse td-sidebar-nav pt-2 pl-4" id="td-section-nav">
-    
-    
-
-
-
-
-
-
-<ul class="td-sidebar-nav__section pr-md-3">
-  <li class="td-sidebar-nav__section-title">
-    <a  href="/docs/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Documentation</a>
-  </li>
-  <ul>
-    <li class="collapse show" id="docs">
-      
-      
-      
-      
-      
-      
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsapikeys" href="/docs/apikeys/">API Keys</a>
-      
-      
-      
-      
-      
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsapioverview" href="/docs/apioverview/">API Overview</a>
-      
-      
-      
-      
-      
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsassociativity" href="/docs/associativity/">Associativity</a>
-      
-      
-      
-      
-      
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsbilling" href="/docs/billing/">Billing</a>
-      
-      
-      
-      
-      
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsclientmessaging" href="/docs/clientmessaging/">Client Messaging</a>
-      
-      
-      
-      
-      
-      <a class="td-sidebar-link td-sidebar-link__page  active" id="m-docsfeatureaccess" href="/docs/featureaccess/">Feature List API</a>
-      
-      
-      
-      
-      
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsoauth" href="/docs/oauth/">OAuth</a>
-      
-      
-      
-      
-      
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsextensions" href="/docs/extensions/">Extensions</a>
-      
-      
-      
-      
-      
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsstructuredstorage" href="/docs/structuredstorage/">Structured Storage</a>
-      
-      
-      
-      
-      
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docstessellationperformance" href="/docs/tessellationperformance/">Tessellation Performance</a>
-      
-      
-      
-      
-      
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docstestingguidelines" href="/docs/testingguidelines/">Testing Guidelines</a>
-      
-      
-      
-      
-      
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docstranslation" href="/docs/translation/">Model Translation</a>
-      
-      
-      
-      
-      
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docswebhook" href="/docs/webhook/">Webhook Notifications</a>
-      
-      
-    </li>
+  <nav class="collapse td-sidebar-nav" id="td-section-nav">
+    <ul class="td-sidebar-nav__section pr-md-3 ul-0">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-docs-li">
+  <a href="/docs/" title="Welcome to the Developer Portal" class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id="m-docs"><span class="">Documentation</span></a>
+  <ul class="ul-1">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsapikeys-li">
+  <a href="/docs/apikeys/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsapikeys"><span class="">API Keys</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsapioverview-li">
+  <a href="/docs/apioverview/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsapioverview"><span class="">API Overview</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsassociativity-li">
+  <a href="/docs/associativity/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsassociativity"><span class="">Associativity</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsbilling-li">
+  <a href="/docs/billing/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsbilling"><span class="">Billing</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsclientmessaging-li">
+  <a href="/docs/clientmessaging/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsclientmessaging"><span class="">Client Messaging</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id="m-docsfeatureaccess-li">
+  <a href="/docs/featureaccess/" class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id="m-docsfeatureaccess"><span class="td-sidebar-nav-active-item">Feature List API</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsoauth-li">
+  <a href="/docs/oauth/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsoauth"><span class="">OAuth</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsextensions-li">
+  <a href="/docs/extensions/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsextensions"><span class="">Extensions</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsstructuredstorage-li">
+  <a href="/docs/structuredstorage/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsstructuredstorage"><span class="">Structured Storage</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docstessellationperformance-li">
+  <a href="/docs/tessellationperformance/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docstessellationperformance"><span class="">Tessellation Performance</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docstestingguidelines-li">
+  <a href="/docs/testingguidelines/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docstestingguidelines"><span class="">Testing Guidelines</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docstranslation-li">
+  <a href="/docs/translation/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docstranslation"><span class="">Model Translation</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docswebhook-li">
+  <a href="/docs/webhook/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docswebhook"><span class="">Webhook Notifications</span></a>
+</li>
   </ul>
-</ul>
-
+</li>
+    </ul>
   </nav>
 </div>
 
+          </aside>
+          <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
+            
+<div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
 
+</div>
 
-
-          </div>
-          <div class="d-none d-xl-block col-xl-2 td-toc d-print-none">
             
 
 
-
-
-
-
-
-
-
-
-
-<nav id="TableOfContents">
+<div class="td-toc"><nav id="TableOfContents">
   <ul>
     <li><a href="#summary">Summary</a></li>
     <li><a href="#api-methods">API Methods</a>
@@ -278,44 +199,64 @@ The feature API comprises the following API methods:
       </ul>
     </li>
   </ul>
-</nav>
+</nav></div>
 
 
 
-          </div>
-          <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
             
-  
 
-            <nav aria-label="breadcrumb" class="d-none d-md-block d-print-none">
-	<ol class="breadcrumb spb-1">
+	
 		
 
 
 
+  
+  
+
+	
+		
 
 
 
+  
+  
 
-<li class="breadcrumb-item" >
-	<a href="https://onshape-public.github.io/docs/">Documentation</a>
-</li>
+	
 
+          </aside>
+          <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
+            
+  
 
-
-
-<li class="breadcrumb-item active" aria-current="page">
-	<a href="https://onshape-public.github.io/docs/featureaccess/">Feature List API</a>
-</li>
-
-	</ol>
-</nav	>
-
+            <nav aria-label="breadcrumb" class="td-breadcrumbs">
+  <ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a href="https://onshape-public.github.io/docs/">Documentation</a>
+  </li>
+  <li class="breadcrumb-item active" aria-current="page">
+    <a href="https://onshape-public.github.io/docs/featureaccess/">Feature List API</a>
+  </li>
+  </ol>
+</nav>
             
 <div class="td-content">
 	<h1>Feature List API</h1>
+	
+	<header class="article-meta">
+		
+
+  
     
-	       
+
+
+  
+    
+
+
+  
+
+		
+	</header>    
 	<p>Onshape Part Studio Feature Access API</p>
 <h2 id="summary">Summary</h2>
 <p>The Onshape Part Studio tab tracks edits in terms of a feature list.  Creation and modification of geometry is
@@ -2010,8 +1951,7 @@ have a sideLength value of &ldquo;1 in&rdquo; and when the Size input is set to 
 
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified May 18, 2020
-</div>
+	
 </div>
 
 
@@ -2041,9 +1981,18 @@ have a sideLength value of &ldquo;1 in&rdquo; and when the Size input is set to 
 
 
     </div>
-    
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
+    integrity="sha512-UR25UO94eTnCVwjbXozyeVd6ZqpaAE9naiEUBK/A+QDbfSTQFhPGj5lOR6d8tsgbBk84Ggb5A3EkjsOgPRPcKA=="
+    crossorigin="anonymous"></script>
+
+
+
+
+
+<script src='/js/tabpane-persist.js'></script>
 
 
 
@@ -2051,7 +2000,18 @@ have a sideLength value of &ldquo;1 in&rdquo; and when the Size input is set to 
 
 
 
-<script src="/js/main.min.7ec0cf02e5628a3a2d54549b636ca3cf715405337c49f7d808a336aa4f8ba62b.js" integrity="sha256-fsDPAuViijotVFSbY2yjz3FUBTN8SffYCKM2qk&#43;Lpis=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js"></script>
+
 
 
 
