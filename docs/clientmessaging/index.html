@@ -1,273 +1,12 @@
-<!doctype html>
-<html lang="en" class="no-js">
-  <head>
-    <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.95.0" />
-<meta name="robots" content="noindex, nofollow">
+<!doctype html><html lang=en class=no-js><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=generator content="Hugo 0.100.1"><meta name=robots content="index, follow"><link rel="shortcut icon" href=/favicons/favicon.ico><link rel=apple-touch-icon href=/favicons/apple-touch-icon-180x180.png sizes=180x180><link rel=icon type=image/png href=/favicons/favicon-16x16.png sizes=16x16><link rel=icon type=image/png href=/favicons/favicon-32x32.png sizes=32x32><link rel=icon type=image/png href=/favicons/android-36x36.png sizes=36x36><link rel=icon type=image/png href=/favicons/android-48x48.png sizes=48x48><link rel=icon type=image/png href=/favicons/android-72x72.png sizes=72x72><link rel=icon type=image/png href=/favicons/android-96x96.png sizes=96x96><link rel=icon type=image/png href=/favicons/android-144x144.png sizes=144x144><link rel=icon type=image/png href=/favicons/android-192x192.png sizes=192x192><title>Client Messaging | Onshape Developer Documentation</title><meta name=description content="JavaScript Post Message API
 
-
-<link rel="shortcut icon" href="/favicons/favicon.ico" >
-<link rel="apple-touch-icon" href="/favicons/apple-touch-icon-180x180.png" sizes="180x180">
-<link rel="icon" type="image/png" href="/favicons/favicon-16x16.png" sizes="16x16">
-<link rel="icon" type="image/png" href="/favicons/favicon-32x32.png" sizes="32x32">
-<link rel="icon" type="image/png" href="/favicons/android-36x36.png" sizes="36x36">
-<link rel="icon" type="image/png" href="/favicons/android-48x48.png" sizes="48x48">
-<link rel="icon" type="image/png" href="/favicons/android-72x72.png" sizes="72x72">
-<link rel="icon" type="image/png" href="/favicons/android-96x96.png" sizes="96x96">
-<link rel="icon" type="image/png" href="/favicons/android-144x144.png" sizes="144x144">
-<link rel="icon" type="image/png" href="/favicons/android-192x192.png" sizes="192x192">
-
-<title>Client Messaging | Onshape Developer Documentation</title>
-<meta name="description" content="JavaScript Post Message API
-
-Application elements and the Onshape JavaScript web client need to communicate directly, calling across the iframe …">
-<meta property="og:title" content="Client Messaging" />
-<meta property="og:description" content="JavaScript Post Message API  Application elements and the Onshape JavaScript web client need to communicate directly, calling across the iframe containing the application element using post message.
+Application elements and the Onshape JavaScript web client need to communicate directly, calling across the iframe …"><meta property="og:title" content="Client Messaging"><meta property="og:description" content="JavaScript Post Message API Application elements and the Onshape JavaScript web client need to communicate directly, calling across the iframe containing the application element using post message.
 Typical use cases (not all currently implemented) include:
-From the Application Element to the Onshape Client:   Click/Close Flyouts Events - Notify the Onshape client that the user has clicked in the application element, which should cause Onshape flyouts (versions, history, uploads, etc." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://onshape-public.github.io/docs/clientmessaging/" /><meta property="article:section" content="docs" />
-<meta property="article:published_time" content="2020-05-18T20:30:40-04:00" />
-<meta property="article:modified_time" content="2020-05-18T20:30:40-04:00" />
-
-<meta itemprop="name" content="Client Messaging">
-<meta itemprop="description" content="JavaScript Post Message API  Application elements and the Onshape JavaScript web client need to communicate directly, calling across the iframe containing the application element using post message.
+From the Application Element to the Onshape Client: Click/Close Flyouts Events - Notify the Onshape client that the user has clicked in the application element, which should cause Onshape flyouts (versions, history, uploads, etc.) and dropdown menus (profile dropdown menu, document menu) to close."><meta property="og:type" content="article"><meta property="og:url" content="https://onshape-public.github.io/docs/clientmessaging/"><meta property="article:section" content="docs"><meta property="article:published_time" content="2020-05-18T20:30:40-04:00"><meta property="article:modified_time" content="2020-05-18T20:30:40-04:00"><meta itemprop=name content="Client Messaging"><meta itemprop=description content="JavaScript Post Message API Application elements and the Onshape JavaScript web client need to communicate directly, calling across the iframe containing the application element using post message.
 Typical use cases (not all currently implemented) include:
-From the Application Element to the Onshape Client:   Click/Close Flyouts Events - Notify the Onshape client that the user has clicked in the application element, which should cause Onshape flyouts (versions, history, uploads, etc."><meta itemprop="datePublished" content="2020-05-18T20:30:40-04:00" />
-<meta itemprop="dateModified" content="2020-05-18T20:30:40-04:00" />
-<meta itemprop="wordCount" content="2753">
-<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Client Messaging"/>
-<meta name="twitter:description" content="JavaScript Post Message API  Application elements and the Onshape JavaScript web client need to communicate directly, calling across the iframe containing the application element using post message.
+From the Application Element to the Onshape Client: Click/Close Flyouts Events - Notify the Onshape client that the user has clicked in the application element, which should cause Onshape flyouts (versions, history, uploads, etc.) and dropdown menus (profile dropdown menu, document menu) to close."><meta itemprop=datePublished content="2020-05-18T20:30:40-04:00"><meta itemprop=dateModified content="2020-05-18T20:30:40-04:00"><meta itemprop=wordCount content="2754"><meta itemprop=keywords content><meta name=twitter:card content="summary"><meta name=twitter:title content="Client Messaging"><meta name=twitter:description content="JavaScript Post Message API Application elements and the Onshape JavaScript web client need to communicate directly, calling across the iframe containing the application element using post message.
 Typical use cases (not all currently implemented) include:
-From the Application Element to the Onshape Client:   Click/Close Flyouts Events - Notify the Onshape client that the user has clicked in the application element, which should cause Onshape flyouts (versions, history, uploads, etc."/>
-
-
-
-
-
-<link href="/scss/main.css" rel="stylesheet">
-
-<script
-  src="https://code.jquery.com/jquery-3.6.0.min.js"
-  integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK"
-  crossorigin="anonymous"></script>
-<style>
-  code {
-    white-space : pre-wrap !important;
-    overflow-wrap: break-word;
-  }
-</style>
-
-  </head>
-  <body class="td-page">
-    <header>
-      
-<nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
-        <a class="navbar-brand" href="/">
-		<span class="navbar-logo"></span><span class="font-weight-bold">Onshape Developer Documentation</span>
-	</a>
-	<div class="td-navbar-nav-scroll ml-md-auto" id="main_navbar">
-		<ul class="navbar-nav mt-2 mt-lg-0">
-			
-			
-			<li class="nav-item mr-4 mb-2 mb-lg-0">
-				
-				
-				
-				
-				
-				
-				
-				
-				<a class="nav-link active" href="/docs/" ><span class="active">Documentation</span></a>
-			</li>
-			
-			
-			
-		</ul>
-	</div>
-	<div class="navbar-nav d-none d-lg-block"></div>
-</nav>
-
-    </header>
-    <div class="container-fluid td-outer">
-      <div class="td-main">
-        <div class="row flex-xl-nowrap">
-          <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
-            
-<div id="td-sidebar-menu" class="td-sidebar__inner">
-  <form class="td-sidebar__search d-flex align-items-center">
-    
-    <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type="button" data-toggle="collapse" data-target="#td-section-nav" aria-controls="td-docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
-    </button>
-  </form>
-  <nav class="collapse td-sidebar-nav" id="td-section-nav">
-    <ul class="td-sidebar-nav__section pr-md-3 ul-0">
-      <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-docs-li">
-  <a href="/docs/" title="Welcome to the Developer Portal" class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id="m-docs"><span class="">Documentation</span></a>
-  <ul class="ul-1">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsapikeys-li">
-  <a href="/docs/apikeys/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsapikeys"><span class="">API Keys</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsapioverview-li">
-  <a href="/docs/apioverview/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsapioverview"><span class="">API Overview</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsassociativity-li">
-  <a href="/docs/associativity/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsassociativity"><span class="">Associativity</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsbilling-li">
-  <a href="/docs/billing/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsbilling"><span class="">Billing</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id="m-docsclientmessaging-li">
-  <a href="/docs/clientmessaging/" class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id="m-docsclientmessaging"><span class="td-sidebar-nav-active-item">Client Messaging</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsfeatureaccess-li">
-  <a href="/docs/featureaccess/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsfeatureaccess"><span class="">Feature List API</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsoauth-li">
-  <a href="/docs/oauth/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsoauth"><span class="">OAuth</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsextensions-li">
-  <a href="/docs/extensions/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsextensions"><span class="">Extensions</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsstructuredstorage-li">
-  <a href="/docs/structuredstorage/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsstructuredstorage"><span class="">Structured Storage</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docstessellationperformance-li">
-  <a href="/docs/tessellationperformance/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docstessellationperformance"><span class="">Tessellation Performance</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docstestingguidelines-li">
-  <a href="/docs/testingguidelines/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docstestingguidelines"><span class="">Testing Guidelines</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docstranslation-li">
-  <a href="/docs/translation/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docstranslation"><span class="">Model Translation</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docswebhook-li">
-  <a href="/docs/webhook/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docswebhook"><span class="">Webhook Notifications</span></a>
-</li>
-  </ul>
-</li>
-    </ul>
-  </nav>
-</div>
-
-          </aside>
-          <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
-            
-<div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
-
-</div>
-
-            
-
-
-<div class="td-toc"><nav id="TableOfContents">
-  <ul>
-    <li><a href="#from-the-application-element-to-the-onshape-client">From the Application Element to the Onshape Client:</a></li>
-    <li><a href="#from-the-onshape-client-to-the-application-element">From the Onshape Client to the Application Element:</a></li>
-    <li><a href="#posting-a-message-from-the-application-element-to-the-onshape-client">Posting a message from the Application Element to the Onshape Client</a></li>
-  </ul>
-</nav></div>
-
-
-
-            
-
-	
-		
-
-
-
-  
-  
-
-	
-		
-
-
-
-  
-  
-
-	
-
-          </aside>
-          <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
-            
-  
-
-            <nav aria-label="breadcrumb" class="td-breadcrumbs">
-  <ol class="breadcrumb">
-  <li class="breadcrumb-item">
-    <a href="https://onshape-public.github.io/docs/">Documentation</a>
-  </li>
-  <li class="breadcrumb-item active" aria-current="page">
-    <a href="https://onshape-public.github.io/docs/clientmessaging/">Client Messaging</a>
-  </li>
-  </ol>
-</nav>
-            
-<div class="td-content">
-	<h1>Client Messaging</h1>
-	
-	<header class="article-meta">
-		
-
-  
-    
-
-
-  
-    
-
-
-  
-
-		
-	</header>    
-	<h1 id="javascript-post-message-api">JavaScript Post Message API</h1>
-<hr>
-<p>Application elements and the Onshape JavaScript web client need to communicate directly, calling across the iframe containing the application element using post message.</p>
-<p><img src="/images/javascriptpostmessageimage00.png" alt="image alt text"></p>
-<p>Typical use cases (not all currently implemented) include:</p>
-<h2 id="from-the-application-element-to-the-onshape-client">From the Application Element to the Onshape Client:</h2>
-<ul>
-<li>
-<p><strong>Click/Close Flyouts Events</strong> - Notify the Onshape client that the user has clicked in the application element, which should cause Onshape flyouts (versions, history, uploads, etc.) and dropdown menus (profile dropdown menu, document menu) to close.  Without this, the flyouts and menus remain open, over the application element.</p>
-</li>
-<li>
-<p><strong>Shortcut Keyboard Events</strong> - Shortcut keys such as &ldquo;?&rdquo; that should open the Onshape help dialog could be handled by the application element posting a message to the Onshape client to open the help dialog.</p>
-</li>
-<li>
-<p><strong>Keep Alive</strong> - Notify the Onshape client that the user is actively working in the application element, which will cause the Onshape client to send a message to the server to keep the browser session alive.  Without this, the Onshape browser session will timeout after some amount of time, asking the user to login again.</p>
-</li>
-<li>
-<p><strong>Standard Onshape Dialogs</strong> - Request from the application element to the Onshape client to open one of the Onshape standard dialogs and send the user’s choices back to the application element.  For example, if the application element needs the user to choose a part or assembly to be operated on, the application element can post a message to the Onshape client requesting that dialog be opened and the selected part or assembly information sent back to the application element.</p>
-</li>
-<li>
-<p><strong>UI Customization</strong> - Request from the application element to the Onshape client to customize the Onshape UI - to add commands to menus, add buttons to the toolbars, etc.  When such commands or toolbar buttons are clicked, the Onshape client would post a message to the application element with the available context.  **Note - **this is limited to cases where the application element is made active by the user, as application elements are not automatically loaded when a document is opened.  Most UI customizations should be done when you register the application with Onshape, as those would change the Onshape client automatically without needing to load the application element first.</p>
-</li>
-<li>
-<p><strong>Content/Material Insertion</strong> - Request from the application element to insert content into the Onshape document.  Possible examples: to insert a part into a new or existing partstudio, to apply a material to a part, or to add a material to a material library.</p>
-</li>
-</ul>
-<h2 id="from-the-onshape-client-to-the-application-element">From the Onshape Client to the Application Element:</h2>
-<ul>
-<li>
-<p>**User Action Notification **- The Onshape client could notify an application element when various user actions happen.  For example, the Onshape client might notify when the user has made the application element active or inactive (when the user clicks on document tabs), as there is no way to know this currently otherwise except when initially loading an application element.  When an application element is made inactive, it is moved off the edges of the browser, so it cannot be seen but is still active, preserving its state.</p>
-</li>
-<li>
-<p><strong>Printing</strong> - The Onshape client could notify an application element when the user has chosen the Print command from the main Onshape document menu, enabling the application element to do a print operation.</p>
-</li>
-</ul>
-<h2 id="posting-a-message-from-the-application-element-to-the-onshape-client">Posting a message from the Application Element to the Onshape Client</h2>
-<p>To ensure security, an application element must:</p>
-<ol>
-<li>
-<p><strong>document, workspace and element ids</strong> - Parse for the document id, workspace id and element id that were passed as query parameters within the application element’s iframe src URL.  You will need to post these back in each post message.</p>
-</li>
-<li>
-<p><strong>server</strong> - Parse for the server that was passed as a query parameter within the application element’s iframe src URL.  You will need to use this to validate messages received, as shown later in this document.</p>
-</li>
-<li>
-<p><strong>do not redirect to another base URL</strong> - The browser will tell the Onshape client the origin base URL from which a post message is received.  The Onshape client will ignore messages posted from an origin URL that doesn’t match the original iframe src URL.  Hence application elements should not redirect to another base URL after the iframe has been opened, as that will result in the Onshape ignoring its messages.</p>
-</li>
-<li>
-<p><strong>post a message on startup</strong> - After an application element has started up and finished loading, it should post a message to the Onshape client.  This tells the Onshape client that the application element is able to handle post messages.  The Onshape client will not post a message to an application element until it has first received a message from the application element.  This ensures the Onshape client won’t send messages to an application element that isn’t listening for them and won’t send messages until the application element is fully loaded.  Any type of valid message sent to the Onshape client will trigger postings from the Onshape client (e.g. keepAlive).</p>
-</li>
-</ol>
-<p>This JavaScript code parses the iframe src query parameters uses them to post a message:</p>
-<pre tabindex="0"><code>  var documentId;
+From the Application Element to the Onshape Client: Click/Close Flyouts Events - Notify the Onshape client that the user has clicked in the application element, which should cause Onshape flyouts (versions, history, uploads, etc.) and dropdown menus (profile dropdown menu, document menu) to close."><link rel=preload href=/scss/main.min.b62e58da7255459c03616973d5e57025c9e05acf735fe51d880fde377e61cf51.css as=style><link href=/scss/main.min.b62e58da7255459c03616973d5e57025c9e05acf735fe51d880fde377e61cf51.css rel=stylesheet integrity><script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script><style>code{white-space:pre-wrap!important;overflow-wrap:break-word}</style></head><body class=td-page><header><nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar"><a class=navbar-brand href=/><span class=navbar-logo></span><span class=font-weight-bold>Onshape Developer Documentation</span></a><div class="td-navbar-nav-scroll ml-md-auto" id=main_navbar><ul class="navbar-nav mt-2 mt-lg-0"><li class="nav-item mr-4 mb-2 mb-lg-0"><a class="nav-link active" href=/docs/><span class=active>Documentation</span></a></li></ul></div><div class="navbar-nav d-none d-lg-block"></div></nav></header><div class="container-fluid td-outer"><div class=td-main><div class="row flex-xl-nowrap"><aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none"><div id=td-sidebar-menu class=td-sidebar__inner><form class="td-sidebar__search d-flex align-items-center"><button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation"></button></form><nav class="collapse td-sidebar-nav" id=td-section-nav><ul class="td-sidebar-nav__section pr-md-3 ul-0"><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docs-li><a href=/docs/ title="Welcome to the Developer Portal" class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id=m-docs><span>Documentation</span></a><ul class=ul-1><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsapikeys-li><a href=/docs/apikeys/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsapikeys><span>API Keys</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsapioverview-li><a href=/docs/apioverview/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsapioverview><span>API Overview</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsassociativity-li><a href=/docs/associativity/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsassociativity><span>Associativity</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsbilling-li><a href=/docs/billing/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsbilling><span>Billing</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsclientmessaging-li><a href=/docs/clientmessaging/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-docsclientmessaging><span class=td-sidebar-nav-active-item>Client Messaging</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsfeatureaccess-li><a href=/docs/featureaccess/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsfeatureaccess><span>Feature List API</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsoauth-li><a href=/docs/oauth/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsoauth><span>OAuth</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsextensions-li><a href=/docs/extensions/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsextensions><span>Extensions</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsstructuredstorage-li><a href=/docs/structuredstorage/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsstructuredstorage><span>Structured Storage</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docstessellationperformance-li><a href=/docs/tessellationperformance/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docstessellationperformance><span>Tessellation Performance</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docstestingguidelines-li><a href=/docs/testingguidelines/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docstestingguidelines><span>Testing Guidelines</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docstranslation-li><a href=/docs/translation/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docstranslation><span>Model Translation</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docswebhook-li><a href=/docs/webhook/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docswebhook><span>Webhook Notifications</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsintegrationguide-li><a href=/docs/integrationguide/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsintegrationguide><span></span></a></li></ul></li></ul></nav></div></aside><aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none"><div class="td-page-meta ml-2 pb-1 pt-2 mb-0"></div><div class=td-toc><nav id=TableOfContents><ul><li><a href=#from-the-application-element-to-the-onshape-client>From the Application Element to the Onshape Client:</a></li><li><a href=#from-the-onshape-client-to-the-application-element>From the Onshape Client to the Application Element:</a></li><li><a href=#posting-a-message-from-the-application-element-to-the-onshape-client>Posting a message from the Application Element to the Onshape Client</a></li></ul></nav></div></aside><main class="col-12 col-md-9 col-xl-8 pl-md-5" role=main><nav aria-label=breadcrumb class=td-breadcrumbs><ol class=breadcrumb><li class=breadcrumb-item><a href=https://onshape-public.github.io/docs/>Documentation</a></li><li class="breadcrumb-item active" aria-current=page><a href=https://onshape-public.github.io/docs/clientmessaging/>Client Messaging</a></li></ol></nav><div class=td-content><h1>Client Messaging</h1><header class=article-meta></header><h1 id=javascript-post-message-api>JavaScript Post Message API</h1><hr><p>Application elements and the Onshape JavaScript web client need to communicate directly, calling across the iframe containing the application element using post message.</p><p><img src=/images/javascriptpostmessageimage00.png alt="image alt text"></p><p>Typical use cases (not all currently implemented) include:</p><h2 id=from-the-application-element-to-the-onshape-client>From the Application Element to the Onshape Client:</h2><ul><li><p><strong>Click/Close Flyouts Events</strong> - Notify the Onshape client that the user has clicked in the application element, which should cause Onshape flyouts (versions, history, uploads, etc.) and dropdown menus (profile dropdown menu, document menu) to close. Without this, the flyouts and menus remain open, over the application element.</p></li><li><p><strong>Shortcut Keyboard Events</strong> - Shortcut keys such as &ldquo;?&rdquo; that should open the Onshape help dialog could be handled by the application element posting a message to the Onshape client to open the help dialog.</p></li><li><p><strong>Keep Alive</strong> - Notify the Onshape client that the user is actively working in the application element, which will cause the Onshape client to send a message to the server to keep the browser session alive. Without this, the Onshape browser session will timeout after some amount of time, asking the user to login again.</p></li><li><p><strong>Standard Onshape Dialogs</strong> - Request from the application element to the Onshape client to open one of the Onshape standard dialogs and send the user’s choices back to the application element. For example, if the application element needs the user to choose a part or assembly to be operated on, the application element can post a message to the Onshape client requesting that dialog be opened and the selected part or assembly information sent back to the application element.</p></li><li><p><strong>UI Customization</strong> - Request from the application element to the Onshape client to customize the Onshape UI - to add commands to menus, add buttons to the toolbars, etc. When such commands or toolbar buttons are clicked, the Onshape client would post a message to the application element with the available context. **Note - **this is limited to cases where the application element is made active by the user, as application elements are not automatically loaded when a document is opened. Most UI customizations should be done when you register the application with Onshape, as those would change the Onshape client automatically without needing to load the application element first.</p></li><li><p><strong>Content/Material Insertion</strong> - Request from the application element to insert content into the Onshape document. Possible examples: to insert a part into a new or existing partstudio, to apply a material to a part, or to add a material to a material library.</p></li></ul><h2 id=from-the-onshape-client-to-the-application-element>From the Onshape Client to the Application Element:</h2><ul><li><p>**User Action Notification **- The Onshape client could notify an application element when various user actions happen. For example, the Onshape client might notify when the user has made the application element active or inactive (when the user clicks on document tabs), as there is no way to know this currently otherwise except when initially loading an application element. When an application element is made inactive, it is moved off the edges of the browser, so it cannot be seen but is still active, preserving its state.</p></li><li><p><strong>Printing</strong> - The Onshape client could notify an application element when the user has chosen the Print command from the main Onshape document menu, enabling the application element to do a print operation.</p></li></ul><h2 id=posting-a-message-from-the-application-element-to-the-onshape-client>Posting a message from the Application Element to the Onshape Client</h2><p>To ensure security, an application element must:</p><ol><li><p><strong>document, workspace and element ids</strong> - Parse for the document id, workspace id and element id that were passed as query parameters within the application element’s iframe src URL. You will need to post these back in each post message.</p></li><li><p><strong>server</strong> - Parse for the server that was passed as a query parameter within the application element’s iframe src URL. You will need to use this to validate messages received, as shown later in this document.</p></li><li><p><strong>do not redirect to another base URL</strong> - The browser will tell the Onshape client the origin base URL from which a post message is received. The Onshape client will ignore messages posted from an origin URL that doesn’t match the original iframe src URL. Hence application elements should not redirect to another base URL after the iframe has been opened, as that will result in the Onshape ignoring its messages.</p></li><li><p><strong>post a message on startup</strong> - After an application element has started up and finished loading, it should post a message to the Onshape client. This tells the Onshape client that the application element is able to handle post messages. The Onshape client will not post a message to an application element until it has first received a message from the application element. This ensures the Onshape client won’t send messages to an application element that isn’t listening for them and won’t send messages until the application element is fully loaded. Any type of valid message sent to the Onshape client will trigger postings from the Onshape client (e.g. keepAlive).</p></li></ol><p>This JavaScript code parses the iframe src query parameters uses them to post a message:</p><pre tabindex=0><code>  var documentId;
   var workspaceId;
   var elementId;
   var server;
@@ -304,105 +43,16 @@ From the Application Element to the Onshape Client:   Click/Close Flyouts Events
                      messageName: &#39;closeFlyoutsAndMenus&#39;};
       window.parent.postMessage(message, &#39;*&#39;);
     }, true);
-</code></pre><p>The server query parameter is used when receiving post messages from Onshape.  See later in this document.</p>
-<p>If the application element uses a JavaScript library or framework such as BackboneJS or AngularJS, it can parse the query parameters and maintain state in other ways.</p>
-<p>The message object posted to the Onshape client is of the form:</p>
-<pre tabindex="0"><code>{
+</code></pre><p>The server query parameter is used when receiving post messages from Onshape. See later in this document.</p><p>If the application element uses a JavaScript library or framework such as BackboneJS or AngularJS, it can parse the query parameters and maintain state in other ways.</p><p>The message object posted to the Onshape client is of the form:</p><pre tabindex=0><code>{
     documentId: documentId,
      workspaceId: workspaceId,
      elementId: elementId,
      messageName: &#39;&lt;message name&gt;&#39;,
      … other properties as needed for other message types …};
 }
-</code></pre><p>The messages supported currently are:</p>
-<table>
-  <tr>
-    <td>messageName
-(case sensitive)</td>
-    <td>other message properties?</td>
-    <td>comment</td>
-  </tr>
-  <tr>
-    <td>applicationInit</td>
-    <td>yes
-<p>notifyWhenSaveRequired: whether Onshape should send a notification to save pending changes during certain operations
-(default is false)</p>
-</td>
-    <td>Send once on application startup.</td>
-  </tr>
-  <tr>
-    <td>closeFlyoutsAndMenus</td>
-    <td>no</td>
-    <td>Send when a mouse click or other event happens in the application element.  Closes Onshape flyouts and dropdown menus.</td>
-  </tr>
-  <tr>
-    <td>closeSelectItemDialog</td>
-    <td>no</td>
-    <td>Closes the select item dialog.</td>
-  </tr>
-  <tr>
-    <td>connectionLost</td>
-    <td>no</td>
-    <td>Displays the standard Onshape connection lost message in a message bubble, forcing the user to either reload the document or return to the documents page.</td>
-  </tr>
-  <tr>
-    <td>errorReload</td>
-    <td>yes
-<p>message: your message</td>
-<td>Similar to the connectionLost message, but enables an application to specify the first part of the message, which will be used instead of &ldquo;Onshape is not connected.&rdquo;  The user must reload the document or return to the documents page.</td></p>
-  </tr>
-  <tr>
-    <td>finishedSaving</td>
-    <td>yes
-<p>messageId: the id sent in the corresponding &lsquo;saveChanges&rsquo; message</td>
-<td>Response to a &lsquo;saveChanges&rsquo; message sent from Onshape. Should be sent after application has cleaned up any pending edits.</td></p>
-  </tr>
-  <tr>
-    <td>keepAlive</td>
-    <td>no</td>
-    <td>Send periodically while while the user is actively working to avoid the session from timing out.</td>
-  </tr>
-  <tr>
-    <td>saveAVersion</td>
-    <td>no</td>
-    <td>Send when the user types “Shift-S” in the application element, the keyboard shortcut for save a version.</td>
-  </tr>
-  <tr>
-    <td>showKeyboardShortcutsHelp</td>
-    <td>no</td>
-    <td>Send when the user types “?” (Shift-? on most keyboards) in the application element, the keyboard shortcut for the keyboard shortcuts help dialog.</td>
-  </tr>
-  <tr>
-    <td>showMessageBubble</td>
-    <td>yes
-<p>message: your message</td>
-<td>Send when you want to show a string in the blue message bubble at the top of the Onshape app.</td></p>
-  </tr>
-  <tr>
-    <td>startLoadingSpinner</td>
-    <td>yes
-<p>message: your message</td>
-<td>Send to start a large spinner in the middle of the browser window with your message underneath it.</td></p>
-  </tr>
-  <tr>
-    <td>stopLoadingSpinner</td>
-    <td>no</td>
-    <td>Send to stop the large spinner.</td>
-  </tr>
-  <tr>
-    <td>startWorkingSpinner</td>
-    <td>no</td>
-    <td>Send to start a small spinner in the middle bottom of the browser window.</td>
-  </tr>
-  <tr>
-    <td>stopWorkingSpinner</td>
-    <td>no</td>
-    <td>Send to stop the small spinner.</td>
-  </tr>
-  <tr>
-    <td>openSelectItemDialog</td>
-    <td>yes
-<p>dialogTitle: your dialog title
+</code></pre><p>The messages supported currently are:</p><table><tr><td>messageName
+(case sensitive)</td><td>other message properties?</td><td>comment</td></tr><tr><td>applicationInit</td><td>yes<p>notifyWhenSaveRequired: whether Onshape should send a notification to save pending changes during certain operations
+(default is false)</p></td><td>Send once on application startup.</td></tr><tr><td>closeFlyoutsAndMenus</td><td>no</td><td>Send when a mouse click or other event happens in the application element. Closes Onshape flyouts and dropdown menus.</td></tr><tr><td>closeSelectItemDialog</td><td>no</td><td>Closes the select item dialog.</td></tr><tr><td>connectionLost</td><td>no</td><td>Displays the standard Onshape connection lost message in a message bubble, forcing the user to either reload the document or return to the documents page.</td></tr><tr><td>errorReload</td><td>yes<p>message: your message</td><td>Similar to the connectionLost message, but enables an application to specify the first part of the message, which will be used instead of &ldquo;Onshape is not connected.&rdquo; The user must reload the document or return to the documents page.</td></p></tr><tr><td>finishedSaving</td><td>yes<p>messageId: the id sent in the corresponding &lsquo;saveChanges&rsquo; message</td><td>Response to a &lsquo;saveChanges&rsquo; message sent from Onshape. Should be sent after application has cleaned up any pending edits.</td></p></tr><tr><td>keepAlive</td><td>no</td><td>Send periodically while while the user is actively working to avoid the session from timing out.</td></tr><tr><td>saveAVersion</td><td>no</td><td>Send when the user types “Shift-S” in the application element, the keyboard shortcut for save a version.</td></tr><tr><td>showKeyboardShortcutsHelp</td><td>no</td><td>Send when the user types “?” (Shift-? on most keyboards) in the application element, the keyboard shortcut for the keyboard shortcuts help dialog.</td></tr><tr><td>showMessageBubble</td><td>yes<p>message: your message</td><td>Send when you want to show a string in the blue message bubble at the top of the Onshape app.</td></p></tr><tr><td>startLoadingSpinner</td><td>yes<p>message: your message</td><td>Send to start a large spinner in the middle of the browser window with your message underneath it.</td></p></tr><tr><td>stopLoadingSpinner</td><td>no</td><td>Send to stop the large spinner.</td></tr><tr><td>startWorkingSpinner</td><td>no</td><td>Send to start a small spinner in the middle bottom of the browser window.</td></tr><tr><td>stopWorkingSpinner</td><td>no</td><td>Send to stop the small spinner.</td></tr><tr><td>openSelectItemDialog</td><td>yes<p>dialogTitle: your dialog title
 (default is no title),
 selectBlobs: true or false
 (default is false),
@@ -419,54 +69,12 @@ selectBlobMimeTypes: ‘comma-delimited string of blob mime types to show in dia
 showBrowseDocuments: true or false - controls whether ‘Other documents’ choice should be available
 (default is true)
 showStandardContent: true or false - controls whether ‘Standard content’ choice should be available
-(default is false)</p>
-</td>
-    <td>Send when your application wants to open a dialog in which the user will select one or multiple items - blobs, parts, part studios or assemblies.
-</td>
-  </tr>
-  <tr>
-    <td>requestCameraProperties</td>
-    <td>yes
-<p>graphicsElementId: string , Element ID of the part studio or assembly </td>
-<td>
-Send to request camera properties of a specific part studio or assembly element. Note: The element should have been opened at least once in the current session. The messageName of the response is cameraProperties
-</td></p>
-  </tr>
-</table>
-<p>As said before, a message will be ignored if any of the following are true:</p>
-<ul>
-<li>If the document id, workspace id or element id are missing or not valid.</li>
-<li>If the message name is missing or not recognized.</li>
-<li>If the origin of the post message does not match the original iframe src URL.</li>
-</ul>
-<p><strong>Receiving a message from the Onshape Client</strong></p>
-<p>As said earlier in this document, the Onshape client will not post messages to an application element until the application element has loaded and sent at least one message to the Onshape client.  Typically an application element would send a keepAlive message after it is fully loaded to initiate messaging.</p>
-<p>The message data object posted to the application element is of the form:</p>
-<pre tabindex="0"><code>{
+(default is false)</p></td><td>Send when your application wants to open a dialog in which the user will select one or multiple items - blobs, parts, part studios or assemblies.</td></tr><tr><td>requestCameraProperties</td><td>yes<p>graphicsElementId: string , Element ID of the part studio or assembly</td><td>Send to request camera properties of a specific part studio or assembly element. Note: The element should have been opened at least once in the current session. The messageName of the response is cameraProperties</td></p></tr></table><p>As said before, a message will be ignored if any of the following are true:</p><ul><li>If the document id, workspace id or element id are missing or not valid.</li><li>If the message name is missing or not recognized.</li><li>If the origin of the post message does not match the original iframe src URL.</li></ul><p><strong>Receiving a message from the Onshape Client</strong></p><p>As said earlier in this document, the Onshape client will not post messages to an application element until the application element has loaded and sent at least one message to the Onshape client. Typically an application element would send a keepAlive message after it is fully loaded to initiate messaging.</p><p>The message data object posted to the application element is of the form:</p><pre tabindex=0><code>{
     messageName: &#39;&lt;message name&gt;&#39;,
      … other properties as needed for other message types …
 }
-</code></pre><p>The messages supported currently are:</p>
-<table>
-  <tr>
-    <td>messageName
-(case sensitive)</td>
-    <td>other message properties?</td>
-    <td>comment</td>
-  </tr>
-  <tr>
-    <td>show</td>
-    <td>no</td>
-    <td>Sent when an application element is shown (made active) within the Onshape client.   This message is NOT sent when the application element is created.</td>
-  </tr>
-  <tr>
-    <td>hide</td>
-    <td>no</td>
-    <td>Sent when an application element is made inactive within the Onshape client.  This message is NOT sent when an application element is deleted.</td>
-  </tr>
-  <tr>
-    <td>itemSelectedInSelectItemDialog</td>
-    <td>yes
+</code></pre><p>The messages supported currently are:</p><table><tr><td>messageName
+(case sensitive)</td><td>other message properties?</td><td>comment</td></tr><tr><td>show</td><td>no</td><td>Sent when an application element is shown (made active) within the Onshape client. This message is NOT sent when the application element is created.</td></tr><tr><td>hide</td><td>no</td><td>Sent when an application element is made inactive within the Onshape client. This message is NOT sent when an application element is deleted.</td></tr><tr><td>itemSelectedInSelectItemDialog</td><td>yes
 ```
 documentId: id of selected item’s document,
 workspaceId: id of selected item’s workspace, empty if versionId not empty,
@@ -478,24 +86,8 @@ elementMicroversionId: microversion id of the element,
 itemType: type of item selected: ‘part’,‘partStudio’ or ‘assembly’,
 partName: name of part selected, empty if itemType is not ‘part’,
 idTag: id of part, empty if no part selected
-```
-    </td>
-    <td>Sent when the user selects an item (blob, part, part studio or assembly) in the select item dialog that was opened due to an openSelectItemDialog message sent earlier.
-When a part is not selected, the partXxx message properties will be empty strings.</td>
-  </tr>
-  <tr>
-    <td>print</td>
-    <td>no</td>
-    <td>Sent when the user chooses the Print command while the application is the active element.  The application can choose to handle this as either a print or an export to a PDF or other format.</td>
-  </tr>
-  <tr>
-    <td>selectItemDialogClosed</td>
-    <td>no</td>
-    <td>Sent when the select item dialog closes, either because the user selected an item and selectMultiple is false, or the user changed the active element or the user closed the dialog with the "X" button.</td>
-  </tr>
-  <tr>
-    <td>startFirstViewCommand</td>
-    <td>                  yes
+```</td><td>Sent when the user selects an item (blob, part, part studio or assembly) in the select item dialog that was opened due to an openSelectItemDialog message sent earlier.
+When a part is not selected, the partXxx message properties will be empty strings.</td></tr><tr><td>print</td><td>no</td><td>Sent when the user chooses the Print command while the application is the active element. The application can choose to handle this as either a print or an export to a PDF or other format.</td></tr><tr><td>selectItemDialogClosed</td><td>no</td><td>Sent when the select item dialog closes, either because the user selected an item and selectMultiple is false, or the user changed the active element or the user closed the dialog with the "X" button.</td></tr><tr><td>startFirstViewCommand</td><td>yes
 ```
 documentId: id of selected item’s document,
 workspaceId: id of selected item’s workspace, empty if versionId not empty,
@@ -507,24 +99,10 @@ elementMicroversionId: microversion id of the element,
 itemType: type of item selected: ‘part’,‘partstudio’ or ‘assembly’,
 partName: name of part selected, empty if itemType is not ‘part’,
 idTag: id of part
-```
-</td>
-    <td>Sent to a drawings application element when the drawing is created with zero views.
-<p>If other types of applications need a message posted to them with creation context, contact Onshape and we can discuss using this sort of message for your application also.</td></p>
-  </tr>
-  <tr>
-    <td>export</td>
-    <td>yes
+```</td><td>Sent to a drawings application element when the drawing is created with zero views.<p>If other types of applications need a message posted to them with creation context, contact Onshape and we can discuss using this sort of message for your application also.</td></p></tr><tr><td>export</td><td>yes
 ```
 fileExtension: the file extension of the export type the user chose - “.dwg”, “.dxf” are the types currently supported.
-baseFileName: the base portion of the expected output file.  This is currently set to “<document name> - <element name>”</td>
-```
-    <td>Sent when the user chooses a command to export the contents of the application to a file.</td>
-  </tr>
-  <tr>
-    <td>cameraProperties</td>
-    <td>yes
-<pre><code>graphicsElementId: string , Element ID of the part studio or assembly
+baseFileName: the base portion of the expected output file. This is currently set to “<document name> - <element name>”</td>```<td>Sent when the user chooses a command to export the contents of the application to a file.</td></tr><tr><td>cameraProperties</td><td>yes<pre><code>graphicsElementId: string , Element ID of the part studio or assembly
 isValid: boolean, Indicates if the properties are valid or not. false if element ID is invalid or element has not been open in the current session
 projectionType: string, Denotes the projection method. Values are ‘orthographic’, ‘perspective’ . Empty string ‘’ if isValid is false
 viewMatrix: 16 element numeric matrix with elements at index 13, 14, 15 corresponding to position of the camera
@@ -532,25 +110,7 @@ projectionMatrix: 16 element numeric matrix
 verticalFieldOfView: number, 0 in case of orthographic projection
 viewportHeight:      number, eight of the viewport
 viewportWidth:       number, width of the viewport
-</code></pre>
-</td>
-    <td>Sent when application posts a requestCameraProperties message</td>
-  </tr>
-  <tr>
-    <td>takeFocus</td>
-    <td>no</td>
-    <td>Sent when the Onshape client sets focus on the content window of the application element.</td>
-  </tr>
-  <tr>
-    <td>saveChanges</td>
-    <td>yes
-<p>messageId: a unique identifier for this message. Should be passed back in the &lsquo;finishedSaving&rsquo; message.</td>
-<td>Sent if the application specified &rsquo;notifyWhenSaveRequired&rsquo; in the &lsquo;applicationInit&rsquo; message. Indicates that the application should cleanup any pending edits before an Onshape process continues (i.e. version save).</td></p>
-  </tr>
-</table>
-<p>The message will always have a ‘messageName’ property.</p>
-<p>Here’s some JavaScript code showing how to listen for messages from the Onshape client:</p>
-<pre tabindex="0"><code>  // server is one of the iframe src query parameters - see above
+</code></pre></td><td>Sent when application posts a requestCameraProperties message</td></tr><tr><td>takeFocus</td><td>no</td><td>Sent when the Onshape client sets focus on the content window of the application element.</td></tr><tr><td>saveChanges</td><td>yes<p>messageId: a unique identifier for this message. Should be passed back in the &lsquo;finishedSaving&rsquo; message.</td><td>Sent if the application specified &rsquo;notifyWhenSaveRequired&rsquo; in the &lsquo;applicationInit&rsquo; message. Indicates that the application should cleanup any pending edits before an Onshape process continues (i.e. version save).</td></p></tr></table><p>The message will always have a ‘messageName’ property.</p><p>Here’s some JavaScript code showing how to listen for messages from the Onshape client:</p><pre tabindex=0><code>  // server is one of the iframe src query parameters - see above
 
   var handlePostMessage = function(e) {
     console.log(&#34;Post message received in application element.&#34;);
@@ -573,89 +133,8 @@ viewportWidth:       number, width of the viewport
   };
 
   window.addEventListener(&#39;message&#39;, handlePostMessage, false);
-</code></pre><blockquote>
-<p>It is <em>extremely important</em> to the security of your application that you verify that the origin of all messages you receive is the same as the original server query parameter in the iframe src, as shown above:</p>
-</blockquote>
-<pre tabindex="0"><code>       if (server === e.origin) {
-</code></pre><blockquote>
-<p>In production operation especially, the message IS NOT SAFE if the message origin does not match the iframe src server query parameter.</p>
-</blockquote>
-<p><strong>Application Must Post First Message</strong></p>
-<p>Onshape will not post messages to an application until that application has previously posted a valid message to Onshape.  This is to avoid posting messages to an application that isn’t ready to handle them, isn’t fully loaded, etc.</p>
-<p>So after your application is fully loaded and ready to receive messages, post a message to Onshape.  A keepAlive message is a great first message to send to Onshape.  Once Onshape receives a valid message, Onshape will start posting messages to the application.</p>
-<p>If the application later sends an invalid message to Onshape, again Onshape will stop sending messages until a valid message is posted to Onshape.</p>
-<p><strong>Keyboard Focus / Shortcut Keys</strong></p>
-<p>Keyboard focus will not be transferred to an application until the user clicks in the application or the application programmatically takes focus.  The simplest thing is an application should programmatically take focus when it is first loaded and then also take focus when it receives a &ldquo;show&rdquo; message from Onshape.  If an application does this, then shortcut keys will work immediately when the application is shown.</p>
-<p><strong>Future Notes</strong></p>
-<p>New message types will be added as needed.  If your application element needs a message not listed in this document, please notify Onshape and we’ll work with you on it.</p>
-<p>Mobile client support is unclear at this time.</p>
-<p>Onshape is considering using promises to wrap post messages.  This would make the application element’s JavaScript simpler and enables chaining posts with other operations.  But promises would make some sorts of interactions where there are multiple responses difficult, such as when you open a dialog like the select item dialog and want to receive multiple post messages back due to the user clicking on multiple items in the dialog.</p>
-
-	
-	
-	
-</div>
-
-
-          </main>
-        </div>
-      </div>
-      
-<footer class="bg-dark py-5 row d-print-none">
-  <div class="container-fluid mx-sm-5">
-    <div class="row">
-      <div class="col-6 col-sm-4 text-xs-center order-sm-2">
-        
-      </div>
-      <div class="col-6 col-sm-4 text-right text-xs-center order-sm-3">
-        
-      </div>
-      <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
-        
-        
-	
-		
-	
-      </div>
-    </div>
-  </div>
-</footer>
-
-
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-    crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
-    integrity="sha512-UR25UO94eTnCVwjbXozyeVd6ZqpaAE9naiEUBK/A+QDbfSTQFhPGj5lOR6d8tsgbBk84Ggb5A3EkjsOgPRPcKA=="
-    crossorigin="anonymous"></script>
-
-
-
-
-
-<script src='/js/tabpane-persist.js'></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script src="/js/main.js"></script>
-
-
-
-
-  </body>
-</html>
+</code></pre><blockquote><p>It is <em>extremely important</em> to the security of your application that you verify that the origin of all messages you receive is the same as the original server query parameter in the iframe src, as shown above:</p></blockquote><pre tabindex=0><code>       if (server === e.origin) {
+</code></pre><blockquote><p>In production operation especially, the message IS NOT SAFE if the message origin does not match the iframe src server query parameter.</p></blockquote><p><strong>Application Must Post First Message</strong></p><p>Onshape will not post messages to an application until that application has previously posted a valid message to Onshape. This is to avoid posting messages to an application that isn’t ready to handle them, isn’t fully loaded, etc.</p><p>So after your application is fully loaded and ready to receive messages, post a message to Onshape. A keepAlive message is a great first message to send to Onshape. Once Onshape receives a valid message, Onshape will start posting messages to the application.</p><p>If the application later sends an invalid message to Onshape, again Onshape will stop sending messages until a valid message is posted to Onshape.</p><p><strong>Keyboard Focus / Shortcut Keys</strong></p><p>Keyboard focus will not be transferred to an application until the user clicks in the application or the application programmatically takes focus. The simplest thing is an application should programmatically take focus when it is first loaded and then also take focus when it receives a &ldquo;show&rdquo; message from Onshape. If an application does this, then shortcut keys will work immediately when the application is shown.</p><p><strong>Future Notes</strong></p><p>New message types will be added as needed. If your application element needs a message not listed in this document, please notify Onshape and we’ll work with you on it.</p><p>Mobile client support is unclear at this time.</p><p>Onshape is considering using promises to wrap post messages. This would make the application element’s JavaScript simpler and enables chaining posts with other operations. But promises would make some sorts of interactions where there are multiple responses difficult, such as when you open a dialog like the select item dialog and want to receive multiple post messages back due to the user clicking on multiple items in the dialog.</p></div></main></div></div><footer class="bg-dark py-5 row d-print-none"><div class="container-fluid mx-sm-5"><div class=row><div class="col-6 col-sm-4 text-xs-center order-sm-2"></div><div class="col-6 col-sm-4 text-right text-xs-center order-sm-3"></div><div class="col-12 col-sm-4 text-center py-2 order-sm-2"></div></div></div></footer></div><script src=https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js integrity=sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js integrity="sha512-UR25UO94eTnCVwjbXozyeVd6ZqpaAE9naiEUBK/A+QDbfSTQFhPGj5lOR6d8tsgbBk84Ggb5A3EkjsOgPRPcKA==" crossorigin=anonymous></script>
+<script src=/js/tabpane-persist.js></script>
+<script src=/js/main.min.5b464b2cab6a6b8d0f969a781d2b1091bca4ed9d1b5ee1032666142dbb30cf70.js integrity="sha256-W0ZLLKtqa40Plpp4HSsQkbyk7Z0bXuEDJmYULbswz3A=" crossorigin=anonymous></script></body></html>

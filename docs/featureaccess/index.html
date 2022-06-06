@@ -1,567 +1,79 @@
-<!doctype html>
-<html lang="en" class="no-js">
-  <head>
-    <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.95.0" />
-<meta name="robots" content="noindex, nofollow">
-
-
-<link rel="shortcut icon" href="/favicons/favicon.ico" >
-<link rel="apple-touch-icon" href="/favicons/apple-touch-icon-180x180.png" sizes="180x180">
-<link rel="icon" type="image/png" href="/favicons/favicon-16x16.png" sizes="16x16">
-<link rel="icon" type="image/png" href="/favicons/favicon-32x32.png" sizes="32x32">
-<link rel="icon" type="image/png" href="/favicons/android-36x36.png" sizes="36x36">
-<link rel="icon" type="image/png" href="/favicons/android-48x48.png" sizes="48x48">
-<link rel="icon" type="image/png" href="/favicons/android-72x72.png" sizes="72x72">
-<link rel="icon" type="image/png" href="/favicons/android-96x96.png" sizes="96x96">
-<link rel="icon" type="image/png" href="/favicons/android-144x144.png" sizes="144x144">
-<link rel="icon" type="image/png" href="/favicons/android-192x192.png" sizes="192x192">
-
-<title>Feature List API | Onshape Developer Documentation</title>
-<meta name="description" content="Onshape Part Studio Feature Access API
+<!doctype html><html lang=en class=no-js><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=generator content="Hugo 0.100.1"><meta name=robots content="index, follow"><link rel="shortcut icon" href=/favicons/favicon.ico><link rel=apple-touch-icon href=/favicons/apple-touch-icon-180x180.png sizes=180x180><link rel=icon type=image/png href=/favicons/favicon-16x16.png sizes=16x16><link rel=icon type=image/png href=/favicons/favicon-32x32.png sizes=32x32><link rel=icon type=image/png href=/favicons/android-36x36.png sizes=36x36><link rel=icon type=image/png href=/favicons/android-48x48.png sizes=48x48><link rel=icon type=image/png href=/favicons/android-72x72.png sizes=72x72><link rel=icon type=image/png href=/favicons/android-96x96.png sizes=96x96><link rel=icon type=image/png href=/favicons/android-144x144.png sizes=144x144><link rel=icon type=image/png href=/favicons/android-192x192.png sizes=192x192><title>Feature List API | Onshape Developer Documentation</title><meta name=description content="Onshape Part Studio Feature Access API
 Summary
-The Onshape Part Studio tab tracks edits in terms of a feature list.  Creation and modification of …">
-<meta property="og:title" content="Feature List API" />
-<meta property="og:description" content="Onshape Part Studio Feature Access API
+The Onshape Part Studio tab tracks edits in terms of a feature list.  Creation and modification of …"><meta property="og:title" content="Feature List API"><meta property="og:description" content="Onshape Part Studio Feature Access API
 Summary The Onshape Part Studio tab tracks edits in terms of a feature list. Creation and modification of geometry is performed by manipulating that list. This document describes capabilities that are intended to allow partners and customers to manipulate the feature list from software.
 The feature API comprises the following API methods:
-  GET /api/partstudios/DWMVE/features - get feature list
-  GET /api/partstudios/DWMVE/featurespecs - get feature specs" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://onshape-public.github.io/docs/featureaccess/" /><meta property="article:section" content="docs" />
-<meta property="article:published_time" content="2020-05-18T20:37:28-04:00" />
-<meta property="article:modified_time" content="2020-05-18T20:37:28-04:00" />
-
-<meta itemprop="name" content="Feature List API">
-<meta itemprop="description" content="Onshape Part Studio Feature Access API
+GET /api/partstudios/DWMVE/features - get feature list
+GET /api/partstudios/DWMVE/featurespecs - get feature specs"><meta property="og:type" content="article"><meta property="og:url" content="https://onshape-public.github.io/docs/featureaccess/"><meta property="article:section" content="docs"><meta property="article:published_time" content="2020-05-18T20:37:28-04:00"><meta property="article:modified_time" content="2020-05-18T20:37:28-04:00"><meta itemprop=name content="Feature List API"><meta itemprop=description content="Onshape Part Studio Feature Access API
 Summary The Onshape Part Studio tab tracks edits in terms of a feature list. Creation and modification of geometry is performed by manipulating that list. This document describes capabilities that are intended to allow partners and customers to manipulate the feature list from software.
 The feature API comprises the following API methods:
-  GET /api/partstudios/DWMVE/features - get feature list
-  GET /api/partstudios/DWMVE/featurespecs - get feature specs"><meta itemprop="datePublished" content="2020-05-18T20:37:28-04:00" />
-<meta itemprop="dateModified" content="2020-05-18T20:37:28-04:00" />
-<meta itemprop="wordCount" content="6502">
-<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Feature List API"/>
-<meta name="twitter:description" content="Onshape Part Studio Feature Access API
+GET /api/partstudios/DWMVE/features - get feature list
+GET /api/partstudios/DWMVE/featurespecs - get feature specs"><meta itemprop=datePublished content="2020-05-18T20:37:28-04:00"><meta itemprop=dateModified content="2020-05-18T20:37:28-04:00"><meta itemprop=wordCount content="6502"><meta itemprop=keywords content><meta name=twitter:card content="summary"><meta name=twitter:title content="Feature List API"><meta name=twitter:description content="Onshape Part Studio Feature Access API
 Summary The Onshape Part Studio tab tracks edits in terms of a feature list. Creation and modification of geometry is performed by manipulating that list. This document describes capabilities that are intended to allow partners and customers to manipulate the feature list from software.
 The feature API comprises the following API methods:
-  GET /api/partstudios/DWMVE/features - get feature list
-  GET /api/partstudios/DWMVE/featurespecs - get feature specs"/>
-
-
-
-
-
-<link href="/scss/main.css" rel="stylesheet">
-
-<script
-  src="https://code.jquery.com/jquery-3.6.0.min.js"
-  integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK"
-  crossorigin="anonymous"></script>
-<style>
-  code {
-    white-space : pre-wrap !important;
-    overflow-wrap: break-word;
-  }
-</style>
-
-  </head>
-  <body class="td-page">
-    <header>
-      
-<nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
-        <a class="navbar-brand" href="/">
-		<span class="navbar-logo"></span><span class="font-weight-bold">Onshape Developer Documentation</span>
-	</a>
-	<div class="td-navbar-nav-scroll ml-md-auto" id="main_navbar">
-		<ul class="navbar-nav mt-2 mt-lg-0">
-			
-			
-			<li class="nav-item mr-4 mb-2 mb-lg-0">
-				
-				
-				
-				
-				
-				
-				
-				
-				<a class="nav-link active" href="/docs/" ><span class="active">Documentation</span></a>
-			</li>
-			
-			
-			
-		</ul>
-	</div>
-	<div class="navbar-nav d-none d-lg-block"></div>
-</nav>
-
-    </header>
-    <div class="container-fluid td-outer">
-      <div class="td-main">
-        <div class="row flex-xl-nowrap">
-          <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
-            
-<div id="td-sidebar-menu" class="td-sidebar__inner">
-  <form class="td-sidebar__search d-flex align-items-center">
-    
-    <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type="button" data-toggle="collapse" data-target="#td-section-nav" aria-controls="td-docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
-    </button>
-  </form>
-  <nav class="collapse td-sidebar-nav" id="td-section-nav">
-    <ul class="td-sidebar-nav__section pr-md-3 ul-0">
-      <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-docs-li">
-  <a href="/docs/" title="Welcome to the Developer Portal" class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id="m-docs"><span class="">Documentation</span></a>
-  <ul class="ul-1">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsapikeys-li">
-  <a href="/docs/apikeys/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsapikeys"><span class="">API Keys</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsapioverview-li">
-  <a href="/docs/apioverview/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsapioverview"><span class="">API Overview</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsassociativity-li">
-  <a href="/docs/associativity/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsassociativity"><span class="">Associativity</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsbilling-li">
-  <a href="/docs/billing/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsbilling"><span class="">Billing</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsclientmessaging-li">
-  <a href="/docs/clientmessaging/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsclientmessaging"><span class="">Client Messaging</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id="m-docsfeatureaccess-li">
-  <a href="/docs/featureaccess/" class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id="m-docsfeatureaccess"><span class="td-sidebar-nav-active-item">Feature List API</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsoauth-li">
-  <a href="/docs/oauth/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsoauth"><span class="">OAuth</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsextensions-li">
-  <a href="/docs/extensions/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsextensions"><span class="">Extensions</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsstructuredstorage-li">
-  <a href="/docs/structuredstorage/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsstructuredstorage"><span class="">Structured Storage</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docstessellationperformance-li">
-  <a href="/docs/tessellationperformance/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docstessellationperformance"><span class="">Tessellation Performance</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docstestingguidelines-li">
-  <a href="/docs/testingguidelines/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docstestingguidelines"><span class="">Testing Guidelines</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docstranslation-li">
-  <a href="/docs/translation/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docstranslation"><span class="">Model Translation</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docswebhook-li">
-  <a href="/docs/webhook/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docswebhook"><span class="">Webhook Notifications</span></a>
-</li>
-  </ul>
-</li>
-    </ul>
-  </nav>
-</div>
-
-          </aside>
-          <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
-            
-<div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
-
-</div>
-
-            
-
-
-<div class="td-toc"><nav id="TableOfContents">
-  <ul>
-    <li><a href="#summary">Summary</a></li>
-    <li><a href="#api-methods">API Methods</a>
-      <ul>
-        <li><a href="#get-feature-list">Get Feature List</a></li>
-        <li><a href="#get-feature-specs">Get Feature Specs</a></li>
-        <li><a href="#add-feature">Add Feature</a></li>
-        <li><a href="#update-feature">Update Feature</a></li>
-        <li><a href="#update-features">Update Features</a></li>
-        <li><a href="#delete-feature">Delete Feature</a></li>
-        <li><a href="#move-rollback-bar">Move Rollback Bar</a></li>
-        <li><a href="#evaluate-featurescript">Evaluate FeatureScript</a></li>
-      </ul>
-    </li>
-    <li><a href="#configuration-api-methods">Configuration API Methods</a>
-      <ul>
-        <li><a href="#get-configuration">Get Configuration</a></li>
-        <li><a href="#update-configuration">Update Configuration</a></li>
-      </ul>
-    </li>
-    <li><a href="#api-usage-details">API Usage Details</a>
-      <ul>
-        <li><a href="#general-features">General Features</a></li>
-        <li><a href="#sketches">Sketches</a></li>
-      </ul>
-    </li>
-    <li><a href="#feature-specs">Feature Specs</a></li>
-    <li><a href="#feature-script-evaluation">Feature Script Evaluation</a></li>
-    <li><a href="#custom-features">Custom Features</a></li>
-    <li><a href="#examples">Examples</a>
-      <ul>
-        <li><a href="#example-1">Example 1</a></li>
-        <li><a href="#example-2">Example 2</a></li>
-        <li><a href="#example-3">Example 3</a></li>
-        <li><a href="#example-4">Example 4</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav></div>
-
-
-
-            
-
-	
-		
-
-
-
-  
-  
-
-	
-		
-
-
-
-  
-  
-
-	
-
-          </aside>
-          <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
-            
-  
-
-            <nav aria-label="breadcrumb" class="td-breadcrumbs">
-  <ol class="breadcrumb">
-  <li class="breadcrumb-item">
-    <a href="https://onshape-public.github.io/docs/">Documentation</a>
-  </li>
-  <li class="breadcrumb-item active" aria-current="page">
-    <a href="https://onshape-public.github.io/docs/featureaccess/">Feature List API</a>
-  </li>
-  </ol>
-</nav>
-            
-<div class="td-content">
-	<h1>Feature List API</h1>
-	
-	<header class="article-meta">
-		
-
-  
-    
-
-
-  
-    
-
-
-  
-
-		
-	</header>    
-	<p>Onshape Part Studio Feature Access API</p>
-<h2 id="summary">Summary</h2>
-<p>The Onshape Part Studio tab tracks edits in terms of a feature list.  Creation and modification of geometry is
-performed by manipulating that list.  This document describes capabilities that are intended to allow partners
-and customers to manipulate the feature list from software.</p>
-<p>The feature API comprises the following API methods:</p>
-<ul>
-<li>
-<p>GET /api/partstudios/DWMVE/features - get feature list</p>
-</li>
-<li>
-<p>GET /api/partstudios/DWMVE/featurespecs - get feature specs</p>
-</li>
-<li>
-<p>POST /api/partstudios/DWE/features - add feature to feature list</p>
-</li>
-<li>
-<p>POST /api/partstudios/DWE/features/featureid/:fid - update an existing feature in feature list</p>
-</li>
-<li>
-<p>DELETE /api/partstudios/DWE/features/featureid/:fid - delete an existing feature from feature list</p>
-</li>
-<li>
-<p>POST /api/partstudios/DWE/features/features/updates - selectively update features in feature list</p>
-</li>
-<li>
-<p>POST /api/partstudios/DWE/features/rollback - move the rollback bar</p>
-</li>
-<li>
-<p>POST /api/partstudios/DWMVE/featurescript - evaluate featurescript</p>
-</li>
-</ul>
-<p>As well as related configuration API methods:</p>
-<ul>
-<li>
-<p>GET /api/partstudios/DWMVE/configuration - get part studio configuration</p>
-</li>
-<li>
-<p>POST /api/partstudios/DWE/configuration - update part studio configuration</p>
-</li>
-</ul>
-<p>Note that the use of &ldquo;DWE&rdquo; occurrences within this document are a shorthand notation for “d/:did/w/:wid/e/:eid”
+GET /api/partstudios/DWMVE/features - get feature list
+GET /api/partstudios/DWMVE/featurespecs - get feature specs"><link rel=preload href=/scss/main.min.b62e58da7255459c03616973d5e57025c9e05acf735fe51d880fde377e61cf51.css as=style><link href=/scss/main.min.b62e58da7255459c03616973d5e57025c9e05acf735fe51d880fde377e61cf51.css rel=stylesheet integrity><script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script><style>code{white-space:pre-wrap!important;overflow-wrap:break-word}</style></head><body class=td-page><header><nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar"><a class=navbar-brand href=/><span class=navbar-logo></span><span class=font-weight-bold>Onshape Developer Documentation</span></a><div class="td-navbar-nav-scroll ml-md-auto" id=main_navbar><ul class="navbar-nav mt-2 mt-lg-0"><li class="nav-item mr-4 mb-2 mb-lg-0"><a class="nav-link active" href=/docs/><span class=active>Documentation</span></a></li></ul></div><div class="navbar-nav d-none d-lg-block"></div></nav></header><div class="container-fluid td-outer"><div class=td-main><div class="row flex-xl-nowrap"><aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none"><div id=td-sidebar-menu class=td-sidebar__inner><form class="td-sidebar__search d-flex align-items-center"><button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation"></button></form><nav class="collapse td-sidebar-nav" id=td-section-nav><ul class="td-sidebar-nav__section pr-md-3 ul-0"><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docs-li><a href=/docs/ title="Welcome to the Developer Portal" class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id=m-docs><span>Documentation</span></a><ul class=ul-1><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsapikeys-li><a href=/docs/apikeys/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsapikeys><span>API Keys</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsapioverview-li><a href=/docs/apioverview/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsapioverview><span>API Overview</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsassociativity-li><a href=/docs/associativity/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsassociativity><span>Associativity</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsbilling-li><a href=/docs/billing/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsbilling><span>Billing</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsclientmessaging-li><a href=/docs/clientmessaging/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsclientmessaging><span>Client Messaging</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsfeatureaccess-li><a href=/docs/featureaccess/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-docsfeatureaccess><span class=td-sidebar-nav-active-item>Feature List API</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsoauth-li><a href=/docs/oauth/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsoauth><span>OAuth</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsextensions-li><a href=/docs/extensions/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsextensions><span>Extensions</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsstructuredstorage-li><a href=/docs/structuredstorage/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsstructuredstorage><span>Structured Storage</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docstessellationperformance-li><a href=/docs/tessellationperformance/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docstessellationperformance><span>Tessellation Performance</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docstestingguidelines-li><a href=/docs/testingguidelines/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docstestingguidelines><span>Testing Guidelines</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docstranslation-li><a href=/docs/translation/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docstranslation><span>Model Translation</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docswebhook-li><a href=/docs/webhook/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docswebhook><span>Webhook Notifications</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsintegrationguide-li><a href=/docs/integrationguide/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsintegrationguide><span></span></a></li></ul></li></ul></nav></div></aside><aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none"><div class="td-page-meta ml-2 pb-1 pt-2 mb-0"></div><div class=td-toc><nav id=TableOfContents><ul><li><a href=#summary>Summary</a></li><li><a href=#api-methods>API Methods</a><ul><li><a href=#get-feature-list>Get Feature List</a></li><li><a href=#get-feature-specs>Get Feature Specs</a></li><li><a href=#add-feature>Add Feature</a></li><li><a href=#update-feature>Update Feature</a></li><li><a href=#update-features>Update Features</a></li><li><a href=#delete-feature>Delete Feature</a></li><li><a href=#move-rollback-bar>Move Rollback Bar</a></li><li><a href=#evaluate-featurescript>Evaluate FeatureScript</a></li></ul></li><li><a href=#configuration-api-methods>Configuration API Methods</a><ul><li><a href=#get-configuration>Get Configuration</a></li><li><a href=#update-configuration>Update Configuration</a></li></ul></li><li><a href=#api-usage-details>API Usage Details</a><ul><li><a href=#general-features>General Features</a></li><li><a href=#sketches>Sketches</a></li></ul></li><li><a href=#feature-specs>Feature Specs</a></li><li><a href=#feature-script-evaluation>Feature Script Evaluation</a></li><li><a href=#custom-features>Custom Features</a></li><li><a href=#examples>Examples</a><ul><li><a href=#example-1>Example 1</a></li><li><a href=#example-2>Example 2</a></li><li><a href=#example-3>Example 3</a></li><li><a href=#example-4>Example 4</a></li></ul></li></ul></nav></div></aside><main class="col-12 col-md-9 col-xl-8 pl-md-5" role=main><nav aria-label=breadcrumb class=td-breadcrumbs><ol class=breadcrumb><li class=breadcrumb-item><a href=https://onshape-public.github.io/docs/>Documentation</a></li><li class="breadcrumb-item active" aria-current=page><a href=https://onshape-public.github.io/docs/featureaccess/>Feature List API</a></li></ol></nav><div class=td-content><h1>Feature List API</h1><header class=article-meta></header><p>Onshape Part Studio Feature Access API</p><h2 id=summary>Summary</h2><p>The Onshape Part Studio tab tracks edits in terms of a feature list. Creation and modification of geometry is
+performed by manipulating that list. This document describes capabilities that are intended to allow partners
+and customers to manipulate the feature list from software.</p><p>The feature API comprises the following API methods:</p><ul><li><p>GET /api/partstudios/DWMVE/features - get feature list</p></li><li><p>GET /api/partstudios/DWMVE/featurespecs - get feature specs</p></li><li><p>POST /api/partstudios/DWE/features - add feature to feature list</p></li><li><p>POST /api/partstudios/DWE/features/featureid/:fid - update an existing feature in feature list</p></li><li><p>DELETE /api/partstudios/DWE/features/featureid/:fid - delete an existing feature from feature list</p></li><li><p>POST /api/partstudios/DWE/features/features/updates - selectively update features in feature list</p></li><li><p>POST /api/partstudios/DWE/features/rollback - move the rollback bar</p></li><li><p>POST /api/partstudios/DWMVE/featurescript - evaluate featurescript</p></li></ul><p>As well as related configuration API methods:</p><ul><li><p>GET /api/partstudios/DWMVE/configuration - get part studio configuration</p></li><li><p>POST /api/partstudios/DWE/configuration - update part studio configuration</p></li></ul><p>Note that the use of &ldquo;DWE&rdquo; occurrences within this document are a shorthand notation for “d/:did/w/:wid/e/:eid”
 and DWMVE occurrences within this document are a shorthand notation for any of “d/:did/w/:wid/e/:eid”,
-“d/:did/v/:vid/e/:eid”, “d/:did/m/:mid/e/:eid”.  It is assumed that the reader is familiar with these URL path patterns
-from the API Explorer documentation.</p>
-<h2 id="api-methods">API Methods</h2>
-<p>The methods described here are also documented at an overview level in the API Explorer within the Part Studios group.</p>
-<h3 id="get-feature-list">Get Feature List</h3>
-<pre><code>GET /api/partstudios/DWMVE/features - get feature list
-</code></pre>
-<p>If you have a part studio ekement, you can call the get feature list api to find the features that are instantiated within the part studio.
-The return structure contains the following fields:</p>
-<ul>
-<li>
-<p>features - A list of user-define features in the part studio.</p>
-</li>
-<li>
-<p>defaultFeatures - A list of the default feature (pre-defined) in the part studio</p>
-</li>
-<li>
-<p>imports - A list of capabilities that may be referenced by the features. We currently only support a specific
-predefined set of geometry capabilities.</p>
-</li>
-<li>
-<p>featureStates - A list of feature states, one per feature, which describe whether the feature is valid. If a feature
-has been added to the feature list with an incorrect definition it remains in the feature list.</p>
-</li>
-<li>
-<p>isComplete - A boolean indicating whether the features represents the entire part studio (true) or is only a subset
-(false).  The result is a subset if the call to the api specifies a filter on the feature ids</p>
-</li>
-<li>
-<p>rollbackIndex - The ordinal position of the rollback bar w.r.t. the list of features.  Onshape only executes features
-that are prior to the rollback bar.</p>
-</li>
-<li>
-<p>serializationVersion - A string identifying the version of the structure serialization rules used to encode the
+“d/:did/v/:vid/e/:eid”, “d/:did/m/:mid/e/:eid”. It is assumed that the reader is familiar with these URL path patterns
+from the API Explorer documentation.</p><h2 id=api-methods>API Methods</h2><p>The methods described here are also documented at an overview level in the API Explorer within the Part Studios group.</p><h3 id=get-feature-list>Get Feature List</h3><pre><code>GET /api/partstudios/DWMVE/features - get feature list
+</code></pre><p>If you have a part studio ekement, you can call the get feature list api to find the features that are instantiated within the part studio.
+The return structure contains the following fields:</p><ul><li><p>features - A list of user-define features in the part studio.</p></li><li><p>defaultFeatures - A list of the default feature (pre-defined) in the part studio</p></li><li><p>imports - A list of capabilities that may be referenced by the features. We currently only support a specific
+predefined set of geometry capabilities.</p></li><li><p>featureStates - A list of feature states, one per feature, which describe whether the feature is valid. If a feature
+has been added to the feature list with an incorrect definition it remains in the feature list.</p></li><li><p>isComplete - A boolean indicating whether the features represents the entire part studio (true) or is only a subset
+(false). The result is a subset if the call to the api specifies a filter on the feature ids</p></li><li><p>rollbackIndex - The ordinal position of the rollback bar w.r.t. the list of features. Onshape only executes features
+that are prior to the rollback bar.</p></li><li><p>serializationVersion - A string identifying the version of the structure serialization rules used to encode the
 output. This is included so that if the output is fed back in and the software has changed incompatibilities can be
-detected</p>
-</li>
-<li>
-<p>sourceMicroversion - The microversion identifier for the document that describes the state from which the result was
+detected</p></li><li><p>sourceMicroversion - The microversion identifier for the document that describes the state from which the result was
 extracted. This is critical when attempting to use geometry ids that are included in the output, since the
-interpretation of a geometry id is dependent on the document microversion.</p>
-</li>
-<li>
-<p>libraryVersion - An integer indicating the version number for FeatureScript in the Part Studio</p>
-</li>
-</ul>
-<h3 id="get-feature-specs">Get Feature Specs</h3>
-<pre><code>GET /api/partstudios/DWMVE/featurespecs - get feature specs
-</code></pre>
-<p>Returns a list of feature specs that are available within the part studio. A feature spec provides a data description
+interpretation of a geometry id is dependent on the document microversion.</p></li><li><p>libraryVersion - An integer indicating the version number for FeatureScript in the Part Studio</p></li></ul><h3 id=get-feature-specs>Get Feature Specs</h3><pre><code>GET /api/partstudios/DWMVE/featurespecs - get feature specs
+</code></pre><p>Returns a list of feature specs that are available within the part studio. A feature spec provides a data description
 of the interface to a feature. This can, in theory, allow an application to use introspection to allow dynamically
 generated features. In practice, we expect that the application developer understands the features ahead of time and
 might utilize the feature spec to understand the options available and the required format for feature
-addition/modification.</p>
-<h3 id="add-feature">Add Feature</h3>
-<pre><code>POST /api/partstudios/DWE/features
-</code></pre>
-<p>A feature can be added to the feature list by calling the add feature API. The API accepts as input a JSON structure
-containing the fields:</p>
-<ul>
-<li>
-<p>feature - A single feature definition, in the same format that is output by the get feature list API, except that
-there is no need to provide feature ids, node ids, or typeNames.</p>
-</li>
-<li>
-<p>sourceMicroversion - The microversion of the document that is assumed. Any geometry ids included in the feature are
-interpreted in the context of this microversion.</p>
-</li>
-<li>
-<p>rejectMicroversionSkew (optional) - If set to true, the call will refuse to make the addition if the current
+addition/modification.</p><h3 id=add-feature>Add Feature</h3><pre><code>POST /api/partstudios/DWE/features
+</code></pre><p>A feature can be added to the feature list by calling the add feature API. The API accepts as input a JSON structure
+containing the fields:</p><ul><li><p>feature - A single feature definition, in the same format that is output by the get feature list API, except that
+there is no need to provide feature ids, node ids, or typeNames.</p></li><li><p>sourceMicroversion - The microversion of the document that is assumed. Any geometry ids included in the feature are
+interpreted in the context of this microversion.</p></li><li><p>rejectMicroversionSkew (optional) - If set to true, the call will refuse to make the addition if the current
 microversion for the document does not match the source Microversion. Otherwise, a best-effort attempt is made to
-re-interpret the feature addition in the context of a newer document microversion.</p>
-</li>
-</ul>
-<p>The call returns a structure with the following fields:</p>
-<ul>
-<li>
-<p>feature - The input feature, echoed back with id value assignments in place</p>
-</li>
-<li>
-<p>featureState - The state of the feature</p>
-</li>
-<li>
-<p>serializationVersion - As described previously</p>
-</li>
-<li>
-<p>sourceMicroversion - The microversion of the document in which the returned feature is defined</p>
-</li>
-<li>
-<p>microversionSkew - If rejectMicroversionSkew was not set to true on input and the document microversion had changed
-since the input sourceMicroversion, this is set to true to indicate that a re-interpretation was made.</p>
-</li>
-<li>
-<p>libraryVersion - An integer indicating the version number for FeatureScript in the Part Studio</p>
-</li>
-</ul>
-<p>The feature is added immediately before the rollback bar. Any geometry ids specified in the feature must be valid at
+re-interpret the feature addition in the context of a newer document microversion.</p></li></ul><p>The call returns a structure with the following fields:</p><ul><li><p>feature - The input feature, echoed back with id value assignments in place</p></li><li><p>featureState - The state of the feature</p></li><li><p>serializationVersion - As described previously</p></li><li><p>sourceMicroversion - The microversion of the document in which the returned feature is defined</p></li><li><p>microversionSkew - If rejectMicroversionSkew was not set to true on input and the document microversion had changed
+since the input sourceMicroversion, this is set to true to indicate that a re-interpretation was made.</p></li><li><p>libraryVersion - An integer indicating the version number for FeatureScript in the Part Studio</p></li></ul><p>The feature is added immediately before the rollback bar. Any geometry ids specified in the feature must be valid at
 that point in the feature tree. For example, if applying a fillet to an edge, that edge must exist in the feature tree.
 Filleting the edge will normally make it invalid at future states of the feature tree, since the fillet feature
-removes the edge.</p>
-<h3 id="update-feature">Update Feature</h3>
-<pre><code>POST /api/partstudios/DWE/features/featureid/:fid
-</code></pre>
-<p>An existing feature can be modified by calling the update feature API. This API accepts the same input body format and
+removes the edge.</p><h3 id=update-feature>Update Feature</h3><pre><code>POST /api/partstudios/DWE/features/featureid/:fid
+</code></pre><p>An existing feature can be modified by calling the update feature API. This API accepts the same input body format and
 returns the same output format as the Add Feature API. However, instead of adding a new feature prior to the rollback
-bar location, it replaces an existing feature in the location of the existing feature.</p>
-<h3 id="update-features">Update Features</h3>
-<pre><code>POST /api/partstudios/DWE/features/updates
-</code></pre>
-<p>Multiple existing features can be modified by calling the update features API. This API accepts a list of features and to update, which must already exist in the part studio. This call does not fully re-define the features but instead, updates only the parameters supplied in the top-level feature structure, and optionally will update feature suppression attributes.</p>
-<p>Applications that need to update parameters for multiple features can typically achieve faster model rebuild time by updating multiple features in a single call. It also has the benefit that it allows features to be suppressed or unsuppressed without specifying parameters. This is particularly useful in the unsuppress case because parameters containing query values are not populated when reading from the feature list.</p>
-<h3 id="delete-feature">Delete Feature</h3>
-<pre><code>DELETE /api/partstudios/DWE/features/featureid/:fid
-</code></pre>
-<p>An existing feature can be removed from the feature list by calling the delete feature API. The API accepts only URL
-path parameters and return only the following fields:</p>
-<ul>
-<li>
-<p>serializationVersion - As described earlier</p>
-</li>
-<li>
-<p>sourceMicroversion - As described earlier</p>
-</li>
-</ul>
-<h3 id="move-rollback-bar">Move Rollback Bar</h3>
-<pre><code>POST /api/partstudios/DWE/features/rollback
-</code></pre>
-<p>The rollback bar can be moved using this API. This is useful if a feature needs to be added at a location other than
-the current rollback bar location. As input, it accepts the following fields:</p>
-<ul>
-<li>
-<p>rollbackIndex - The index at which the rollback index should be placed. Features with entry index (0-based) higher
+bar location, it replaces an existing feature in the location of the existing feature.</p><h3 id=update-features>Update Features</h3><pre><code>POST /api/partstudios/DWE/features/updates
+</code></pre><p>Multiple existing features can be modified by calling the update features API. This API accepts a list of features and to update, which must already exist in the part studio. This call does not fully re-define the features but instead, updates only the parameters supplied in the top-level feature structure, and optionally will update feature suppression attributes.</p><p>Applications that need to update parameters for multiple features can typically achieve faster model rebuild time by updating multiple features in a single call. It also has the benefit that it allows features to be suppressed or unsuppressed without specifying parameters. This is particularly useful in the unsuppress case because parameters containing query values are not populated when reading from the feature list.</p><h3 id=delete-feature>Delete Feature</h3><pre><code>DELETE /api/partstudios/DWE/features/featureid/:fid
+</code></pre><p>An existing feature can be removed from the feature list by calling the delete feature API. The API accepts only URL
+path parameters and return only the following fields:</p><ul><li><p>serializationVersion - As described earlier</p></li><li><p>sourceMicroversion - As described earlier</p></li></ul><h3 id=move-rollback-bar>Move Rollback Bar</h3><pre><code>POST /api/partstudios/DWE/features/rollback
+</code></pre><p>The rollback bar can be moved using this API. This is useful if a feature needs to be added at a location other than
+the current rollback bar location. As input, it accepts the following fields:</p><ul><li><p>rollbackIndex - The index at which the rollback index should be placed. Features with entry index (0-based) higher
 than or equal to this value are rolled back. The value must be in the range 0 to the number of entries in the feature
-list</p>
-</li>
-<li>
-<p>serializationVersion</p>
-</li>
-<li>
-<p>sourceMicroversion</p>
-<p>The result returned by the API includes the fields</p>
-</li>
-<li>
-<p>rollbackIndex - The rollback index in the updated state</p>
-</li>
-<li>
-<p>serializationVersion - As described previously</p>
-</li>
-<li>
-<p>sourceMicroversion - As described previously</p>
-</li>
-<li>
-<p>microversionSkew - As described previously</p>
-</li>
-</ul>
-<h3 id="evaluate-featurescript">Evaluate FeatureScript</h3>
-<pre><code>POST api/partstudios/DWMVE/featurescript
-</code></pre>
-<p>This API allows the caller to execute a FeatureScript function to query information about the existing feature tree
-that is not exposed through the other methods described here. As input, it accepts the following fields:</p>
-<ul>
-<li>
-<p>script - The definition of a FeatureScript function that takes a Context argument and a map argument</p>
-</li>
-<li>
-<p>queries - A list of key, value pairs, where the key is a FeatureScript identifier that will appear as a key in the
+list</p></li><li><p>serializationVersion</p></li><li><p>sourceMicroversion</p><p>The result returned by the API includes the fields</p></li><li><p>rollbackIndex - The rollback index in the updated state</p></li><li><p>serializationVersion - As described previously</p></li><li><p>sourceMicroversion - As described previously</p></li><li><p>microversionSkew - As described previously</p></li></ul><h3 id=evaluate-featurescript>Evaluate FeatureScript</h3><pre><code>POST api/partstudios/DWMVE/featurescript
+</code></pre><p>This API allows the caller to execute a FeatureScript function to query information about the existing feature tree
+that is not exposed through the other methods described here. As input, it accepts the following fields:</p><ul><li><p>script - The definition of a FeatureScript function that takes a Context argument and a map argument</p></li><li><p>queries - A list of key, value pairs, where the key is a FeatureScript identifier that will appear as a key in the
 map supplied to the script function and the valid is a list of geometry Id strings, where the list is converted to
-&ldquo;query&rdquo; form form use within the script function.</p>
-</li>
-</ul>
-<p>See the example below to better understand this usage.</p>
-<h2 id="configuration-api-methods">Configuration API Methods</h2>
-<p>Part Studios may be unconfigured or configured. A configured part studio has a list of configuration parameters that
+&ldquo;query&rdquo; form form use within the script function.</p></li></ul><p>See the example below to better understand this usage.</p><h2 id=configuration-api-methods>Configuration API Methods</h2><p>Part Studios may be unconfigured or configured. A configured part studio has a list of configuration parameters that
 define the knobs that allow adjustment of the part studio part content. Configuration parameters are referred to as
 &ldquo;inputs&rdquo; in the UI and may be one of Enum (or List), Boolean, Quantity or String. Each parameter includes a default
-value setting that is used if the parameter is not otherwise set.</p>
-<p>Configured part studios also have a &ldquo;current&rdquo; configuration. This is a list of configuration parameter settings for
+value setting that is used if the parameter is not otherwise set.</p><p>Configured part studios also have a &ldquo;current&rdquo; configuration. This is a list of configuration parameter settings for
 the current representation of the part studio. Alternate configurations of the part studio may be used concurrently,
-but the current configuration defines the parts seen by the user within in the part studio.</p>
-<h3 id="get-configuration">Get Configuration</h3>
-<pre><code>GET /api/partstudios/DWMVE/configuration - get part studio configuration
-</code></pre>
-<p>This method reads the current configuration information for a Part Studio.
-The return structure contains the following fields:</p>
-<ul>
-<li>
-<p>configurationParameters - A list of the parameters that allow configuration of the part studio.</p>
-</li>
-<li>
-<p>currentConfiguration - A list of configuration parameter settings for the current representation of the part studio.</p>
-</li>
-<li>
-<p>serializationVersion - As described previously</p>
-</li>
-<li>
-<p>sourceMicroversion - As described previously</p>
-</li>
-<li>
-<p>microversionSkew - As described previously</p>
-</li>
-<li>
-<p>libraryVersion - As described previously</p>
-</li>
-</ul>
-<h3 id="update-configuration">Update Configuration</h3>
-<pre><code>POST /api/partstudios/DWE/configuration - update part studio configuration
-</code></pre>
-<p>This method modifies the current configuration information for a Part Studio. When changing configuration parameters
+but the current configuration defines the parts seen by the user within in the part studio.</p><h3 id=get-configuration>Get Configuration</h3><pre><code>GET /api/partstudios/DWMVE/configuration - get part studio configuration
+</code></pre><p>This method reads the current configuration information for a Part Studio.
+The return structure contains the following fields:</p><ul><li><p>configurationParameters - A list of the parameters that allow configuration of the part studio.</p></li><li><p>currentConfiguration - A list of configuration parameter settings for the current representation of the part studio.</p></li><li><p>serializationVersion - As described previously</p></li><li><p>sourceMicroversion - As described previously</p></li><li><p>microversionSkew - As described previously</p></li><li><p>libraryVersion - As described previously</p></li></ul><h3 id=update-configuration>Update Configuration</h3><pre><code>POST /api/partstudios/DWE/configuration - update part studio configuration
+</code></pre><p>This method modifies the current configuration information for a Part Studio. When changing configuration parameters
 it is important that parameterId values be maintained consistently across changes so that features that reference the
 parameter do not get broken.
-The API accepts as input a JSON structure containing the fields:</p>
-<ul>
-<li>
-<p>configurationParameters - A list of the parameters that allow configuration of the part studio.</p>
-</li>
-<li>
-<p>currentConfiguration - A list of configuration parameter settings for the current representation of the part studio.</p>
-</li>
-<li>
-<p>sourceMicroversion (optional) - The microversion of the document that is assumed.</p>
-</li>
-<li>
-<p>rejectMicroversionSkew (optional) - If set to true, the call will refuse to make the addition if the current
-microversion for the document does not match the source Microversion.</p>
-</li>
-</ul>
-<p>The call returns a structure with the following fields:</p>
-<ul>
-<li>
-<p>configurationParameters - A list of the parameters that allow configuration of the part studio.</p>
-</li>
-<li>
-<p>currentConfiguration - A list of configuration parameter settings for the current representation of the part studio.</p>
-</li>
-<li>
-<p>serializationVersion - As described previously</p>
-</li>
-<li>
-<p>sourceMicroversion - As described previously</p>
-</li>
-<li>
-<p>microversionSkew - As described previously</p>
-</li>
-<li>
-<p>libraryVersion - As described previously</p>
-</li>
-</ul>
-<h2 id="api-usage-details">API Usage Details</h2>
-<p>The feature access and modification API in Onshape presents the internal form of feature definitions rather than
+The API accepts as input a JSON structure containing the fields:</p><ul><li><p>configurationParameters - A list of the parameters that allow configuration of the part studio.</p></li><li><p>currentConfiguration - A list of configuration parameter settings for the current representation of the part studio.</p></li><li><p>sourceMicroversion (optional) - The microversion of the document that is assumed.</p></li><li><p>rejectMicroversionSkew (optional) - If set to true, the call will refuse to make the addition if the current
+microversion for the document does not match the source Microversion.</p></li></ul><p>The call returns a structure with the following fields:</p><ul><li><p>configurationParameters - A list of the parameters that allow configuration of the part studio.</p></li><li><p>currentConfiguration - A list of configuration parameter settings for the current representation of the part studio.</p></li><li><p>serializationVersion - As described previously</p></li><li><p>sourceMicroversion - As described previously</p></li><li><p>microversionSkew - As described previously</p></li><li><p>libraryVersion - As described previously</p></li></ul><h2 id=api-usage-details>API Usage Details</h2><p>The feature access and modification API in Onshape presents the internal form of feature definitions rather than
 providing a translation layer between external form and internal form. We suggest that you familiarize yourself with
 the formats involved by calling the Get Feature List API on existing part studios in order to understand the encoding
-of features.</p>
-<p>Some important things to know about the JSON encoding are:</p>
-<ul>
-<li>
-<p>Default values are omitted in the encoded output. For string fields the default value is &ldquo;&rdquo;, for boolean fields it
-is false, and for numeric fields it is 0.</p>
-</li>
-<li>
-<p>It uses a special tagging system in order to manage polymorphic data structures. Specifically, objects generally
-are encoded by enclosing them within another object that declares the type information for the enclosed object.</p>
-</li>
-</ul>
-<p>As an example of the type tagging mechanism, the GET features api might return a structure that looks like this:</p>
-<pre><code>{
+of features.</p><p>Some important things to know about the JSON encoding are:</p><ul><li><p>Default values are omitted in the encoded output. For string fields the default value is &ldquo;&rdquo;, for boolean fields it
+is false, and for numeric fields it is 0.</p></li><li><p>It uses a special tagging system in order to manage polymorphic data structures. Specifically, objects generally
+are encoded by enclosing them within another object that declares the type information for the enclosed object.</p></li></ul><p>As an example of the type tagging mechanism, the GET features api might return a structure that looks like this:</p><pre><code>{
   &quot;features&quot;: [
     {
       &quot;type&quot;: 134,
@@ -613,152 +125,39 @@ are encoded by enclosing them within another object that declares the type infor
   &quot;serializationVersion&quot;: &quot;1.1.6&quot;,
   &quot;sourceMicroversion&quot;: &quot;b5b4834bd0674b4489b2b2b7&quot;
 }
-</code></pre>
-<p>We see that in this case, the features array contains a single feature. The &ldquo;type&rdquo; and &ldquo;typeName&rdquo; fields describe the
+</code></pre><p>We see that in this case, the features array contains a single feature. The &ldquo;type&rdquo; and &ldquo;typeName&rdquo; fields describe the
 type that is encoded within the &ldquo;message&rdquo; field. The &ldquo;type&rdquo; field provides definitive type information and is the type
 number assigned to the structure. This type number is a permanent assignment. The &ldquo;typeName&rdquo; field is a convenience
 field that is generated on output and ignored on input. It is intended to allow developers to associate meaningful
-names with the type numbers.</p>
-<h3 id="general-features">General Features</h3>
-<p>In the example above, we see that the single feature is of type 134, which is the general feature type. A general
+names with the type numbers.</p><h3 id=general-features>General Features</h3><p>In the example above, we see that the single feature is of type 134, which is the general feature type. A general
 feature is an instantiation of the feature template that is describe by its corresponding feature spec. The BTMFeature
-structure includes the following fields:</p>
-<ul>
-<li>
-<p>featureType - Specifies the name of the feature spec that this instantiates</p>
-</li>
-<li>
-<p>featureId - The internal identifier of the feature instance within this part studio. It is internally generated when
-a feature is added.</p>
-</li>
-<li>
-<p>nodeId - An internal identifier for the feature node. This is also internally generated when the feature is added.</p>
-</li>
-<li>
-<p>name - The user visible name of the feature.</p>
-</li>
-<li>
-<p>namespace - An indicator of where the feature definition can be found. Features in the FeatureScript standard library
-have a namespace value of &quot;&quot; whereas custom features identify the featurestudio that contains the definition. See
-the Custom Features section below for more information.</p>
-</li>
-<li>
-<p>parameters - A list of parameter values for instantiation of the feature spec. Parameters are present for all
-defined parameters, even if not used in a specific instantiation.</p>
-</li>
-</ul>
-<p>All parameters have the following fields in common:</p>
-<ul>
-<li>
-<p>parameterId - The name of the parameter spec that this applies to</p>
-</li>
-<li>
-<p>nodeId - An internal identifier for the parameter node</p>
-</li>
-</ul>
-<p>Parameters are typically one of the following types:</p>
-<ul>
-<li>
-<p>BTMParameterQuantity (type 147) - specifies the value for a parameter defined in the feature spec as a
-BTParameterSpecQuantity. It has the field:</p>
-<ul>
-<li>expression - An expression defining the value for the parameter.</li>
-</ul>
-<p>An example of its usage is in the depth parameter in the extrude feature.</p>
-</li>
-<li>
-<p>BTMParameterQueryList (type 148) - specifies the value for a parameter defined in the feature spec as a
-BTParameterSpecQuery. It has the field:</p>
-<ul>
-<li>
-<p>queries - a list of query objects. The query objects could be either</p>
-<ul>
-<li>
-<p>SBTMIndividualQuery objects (type 138) with the field:</p>
-<ul>
-<li>geometryIds - A list of geometry id values indentifying geometry that the feature applies to.</li>
-</ul>
-</li>
-<li>
-<p>SBTMIndividualSketchRegionQuery objects (type 140) with the field:</p>
-<ul>
-<li>featureId - The featureId of a sketch, with the query identifying all regions of the sketch</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>An example of its usage is in the entities parameter in the extrude feature.</p>
-</li>
-<li>
-<p>BTMParameterBoolean (type 144) - specifies the value for a parameter defined in the feature spec as a
-BTParameterSpecBoolean. It has the field:</p>
-<ul>
-<li>value - The boolean value</li>
-</ul>
-<p>An example of its usage is in the oppositeDirection parameter in the extrude feature.</p>
-</li>
-<li>
-<p>BTMParameterEnum (type 145) - specifies the value for a parameter defined in the feature spec as a
-BTParameterSpecEnum. It has the fields:</p>
-<ul>
-<li>
-<p>enumName - The name of the enum type that value is a member of</p>
-</li>
-<li>
-<p>value - The name of the enum member</p>
-</li>
-</ul>
-<p>An example of its usage is in the bodyType parameter in the extrude feature.</p>
-</li>
-</ul>
-<p>Other parameter types exist for special cases and are not described here.</p>
-<h3 id="sketches">Sketches</h3>
-<p>Although most features are of type BTMFeature, there is also a BTMSketch type, which defines a sketch. The structure
+structure includes the following fields:</p><ul><li><p>featureType - Specifies the name of the feature spec that this instantiates</p></li><li><p>featureId - The internal identifier of the feature instance within this part studio. It is internally generated when
+a feature is added.</p></li><li><p>nodeId - An internal identifier for the feature node. This is also internally generated when the feature is added.</p></li><li><p>name - The user visible name of the feature.</p></li><li><p>namespace - An indicator of where the feature definition can be found. Features in the FeatureScript standard library
+have a namespace value of "" whereas custom features identify the featurestudio that contains the definition. See
+the Custom Features section below for more information.</p></li><li><p>parameters - A list of parameter values for instantiation of the feature spec. Parameters are present for all
+defined parameters, even if not used in a specific instantiation.</p></li></ul><p>All parameters have the following fields in common:</p><ul><li><p>parameterId - The name of the parameter spec that this applies to</p></li><li><p>nodeId - An internal identifier for the parameter node</p></li></ul><p>Parameters are typically one of the following types:</p><ul><li><p>BTMParameterQuantity (type 147) - specifies the value for a parameter defined in the feature spec as a
+BTParameterSpecQuantity. It has the field:</p><ul><li>expression - An expression defining the value for the parameter.</li></ul><p>An example of its usage is in the depth parameter in the extrude feature.</p></li><li><p>BTMParameterQueryList (type 148) - specifies the value for a parameter defined in the feature spec as a
+BTParameterSpecQuery. It has the field:</p><ul><li><p>queries - a list of query objects. The query objects could be either</p><ul><li><p>SBTMIndividualQuery objects (type 138) with the field:</p><ul><li>geometryIds - A list of geometry id values indentifying geometry that the feature applies to.</li></ul></li><li><p>SBTMIndividualSketchRegionQuery objects (type 140) with the field:</p><ul><li>featureId - The featureId of a sketch, with the query identifying all regions of the sketch</li></ul></li></ul></li></ul><p>An example of its usage is in the entities parameter in the extrude feature.</p></li><li><p>BTMParameterBoolean (type 144) - specifies the value for a parameter defined in the feature spec as a
+BTParameterSpecBoolean. It has the field:</p><ul><li>value - The boolean value</li></ul><p>An example of its usage is in the oppositeDirection parameter in the extrude feature.</p></li><li><p>BTMParameterEnum (type 145) - specifies the value for a parameter defined in the feature spec as a
+BTParameterSpecEnum. It has the fields:</p><ul><li><p>enumName - The name of the enum type that value is a member of</p></li><li><p>value - The name of the enum member</p></li></ul><p>An example of its usage is in the bodyType parameter in the extrude feature.</p></li></ul><p>Other parameter types exist for special cases and are not described here.</p><h3 id=sketches>Sketches</h3><p>Although most features are of type BTMFeature, there is also a BTMSketch type, which defines a sketch. The structure
 of a sketch feature extends the BTMFeature and is relatively complex. It is suggested that the developer use a manually
 edited sketch as a template for any sketches that they want to create programmatically. However, we will give a
-high-level overview of the content for the sketch.</p>
-<p>Sketches have top-level fields:</p>
-<ul>
-<li>
-<p>entities - the sketch geometry</p>
-</li>
-<li>
-<p>constraints - the geometric relationship constraints and dimensions for the sketch</p>
-</li>
-<li>
-<p>parameters - the sketch parameters. The only parameter is the parameter that identifies the sketch plane</p>
-</li>
-<li>
-<p>featureType - set to &ldquo;newSketch&rdquo;</p>
-</li>
-<li>
-<p>featureId - the feature id</p>
-</li>
-<li>
-<p>name - the sketch name</p>
-</li>
-</ul>
-<p>The entities describe curves in terms of unbounded curves plus parameterized ranges. The geometry is always specified
+high-level overview of the content for the sketch.</p><p>Sketches have top-level fields:</p><ul><li><p>entities - the sketch geometry</p></li><li><p>constraints - the geometric relationship constraints and dimensions for the sketch</p></li><li><p>parameters - the sketch parameters. The only parameter is the parameter that identifies the sketch plane</p></li><li><p>featureType - set to &ldquo;newSketch&rdquo;</p></li><li><p>featureId - the feature id</p></li><li><p>name - the sketch name</p></li></ul><p>The entities describe curves in terms of unbounded curves plus parameterized ranges. The geometry is always specified
 in meters, regardless of the user’s choice of units. This geometry provides an initial guess for the sketch. The actual
-solve state may differ, depending on whether the input constraints are satisfied.</p>
-<p>The constraints describe the requirements for sketch solution. These typically include constraints such as COINCIDENT,
+solve state may differ, depending on whether the input constraints are satisfied.</p><p>The constraints describe the requirements for sketch solution. These typically include constraints such as COINCIDENT,
 HORIZONTAL, VERTICAL, PARALLEL, PERPENDICULAR, TANGENT that control geometric positioning and constraints such as
 DISTANCE, RADIUS, DIAMETER, ANGLE that provide dimensional constraints. The constraints typically have one or two
 objects that are constrained. These are referenced as localFirst for the first constrained entity, which is within
 the sketch, and either localSecond or externalSection, depending on whether the second constrained entity is local
 to the sketch. When entities are local to the sketch they are identitified by entity ids (long unique names) and when
-external they are identified by a BTMIndiviualQuery.</p>
-<h2 id="feature-specs">Feature Specs</h2>
-<p>The feature spec for a feature provides a description of the inputs that it accepts. As an example, the feature spec
+external they are identified by a BTMIndiviualQuery.</p><h2 id=feature-specs>Feature Specs</h2><p>The feature spec for a feature provides a description of the inputs that it accepts. As an example, the feature spec
 for a cube is shown below. It defines a single parameter named &ldquo;sideLength&rdquo;. The parameter spec includes a list of
 ranges that specify valid ranges for the parameter value. Each range is specific to a particular unit and has a
 defaultValue for that unit. Some parameters described by the feature spec may be optional. These normally have a
 visibilityCondition that describes a logical test as to whether the parameter should be exposed for editing, based on
 other parameter values. This provides a fairly reliable way to determine whether the parameter is required for a
 particular feature instance, but it is safe to include default values for a feature even if it has a
-visibilityCondition that indicates it is not visible.</p>
-<pre><code>{
+visibilityCondition that indicates it is not visible.</p><pre><code>{
   &quot;type&quot;: 129,
   &quot;typeName&quot;: &quot;BTFeatureSpec&quot;,
   &quot;message&quot;: {
@@ -909,140 +308,33 @@ visibilityCondition that indicates it is not visible.</p>
     ]
   }
 }
-</code></pre>
-<p>Visibility conditions come in 3 variants:</p>
-<ul>
-<li>
-<p>BTParameterVisibilityAlwaysHidden - Special-case parameters that are not directly shown to the user</p>
-</li>
-<li>
-<p>BTParameterVisibilityLogical - Allows a logical condition to express when a parameter is visible. Allows nested
-AND/OR/NOT expressions. The leaves of the expression tree are BTParameterVisibilityOnEqual</p>
-</li>
-<li>
-<p>BTParameterVisibilityOnEqual - A simple test that a parameter has been assigned a specific value.</p>
-</li>
-</ul>
-<p>A ParameterSpec can be one of numerous types. The most commonly used types are:</p>
-<ul>
-<li>
-<p>BTParameterSpecQuery - indicates that a query parameter should be supplied. The parameter spec has an allowable
+</code></pre><p>Visibility conditions come in 3 variants:</p><ul><li><p>BTParameterVisibilityAlwaysHidden - Special-case parameters that are not directly shown to the user</p></li><li><p>BTParameterVisibilityLogical - Allows a logical condition to express when a parameter is visible. Allows nested
+AND/OR/NOT expressions. The leaves of the expression tree are BTParameterVisibilityOnEqual</p></li><li><p>BTParameterVisibilityOnEqual - A simple test that a parameter has been assigned a specific value.</p></li></ul><p>A ParameterSpec can be one of numerous types. The most commonly used types are:</p><ul><li><p>BTParameterSpecQuery - indicates that a query parameter should be supplied. The parameter spec has an allowable
 number of selections and query filter that describes the allowable types that can be selected. See below for
 additional information about query filters. An example usage is identifying the entities to chamfer in a &ldquo;Chamfer&rdquo;
-feature.</p>
-</li>
-<li>
-<p>BTParameterSpecString - indicates that a string value should be supplied. For example, this is used for the name of
-a variable in a &ldquo;Variable&rdquo; feature.</p>
-</li>
-<li>
-<p>BTParameterSpecQuantity - indicates that a number value should be supplied. In allows a quantityType, which describes
+feature.</p></li><li><p>BTParameterSpecString - indicates that a string value should be supplied. For example, this is used for the name of
+a variable in a &ldquo;Variable&rdquo; feature.</p></li><li><p>BTParameterSpecQuantity - indicates that a number value should be supplied. In allows a quantityType, which describes
 the type of number (length, angle, mass, count, etc.) and range limits on the value. An example usage is the depth
-parameter in an &ldquo;Extrude&rdquo; feature.</p>
-</li>
-<li>
-<p>BTParameterSpecEnum - indicates that an enumerated value should should be provided. An example usage is the
-operationType parameter in an &ldquo;Extrude&rdquo; feature.</p>
-</li>
-<li>
-<p>BTParameterSpecBoolean - indicates that a boolean true/false value should be specified. An example usage is the
-offset parameter in the &ldquo;Boolean&rdquo; feature</p>
-</li>
-</ul>
-<p>Some less commonly used parameter spec types are:</p>
-<ul>
-<li>
-<p>BTParameterSpecDerived - indicates that an import of a part from another Part Studio should be specified.</p>
-</li>
-<li>
-<p>BTParameterSpecLookupTablePath - provides a list of string values that can be chosen.</p>
-</li>
-<li>
-<p>BTParameterSpecForeignId - indicates that a &ldquo;foreign id&rdquo; value should be supplied. Foreign ids are currently not
-generally accessible through the API, but identify a file that is made available throughout the system.</p>
-</li>
-</ul>
-<p>Parameter Spec query filters:</p>
-<p>Query Filters are even more numerous than parameter spec types.</p>
-<p>Basic selections:</p>
-<ul>
-<li>
-<p>BTBodyTypeFilter - a specific body type (solid, sheet, wire, acorn, mate_connector)</p>
-</li>
-<li>
-<p>BTClosedCurveFilter - a curve that is either closed or not closed, depending on the isClosed value. (NO)</p>
-</li>
-<li>
-<p>BTConstructionObjectFilter - an object that either is or is not identified as &ldquo;construction&rdquo;, depending on the
-isConstruction value.</p>
-</li>
-<li>
-<p>BTEdgeTopologyFilter - an edge that either is or is not an internal edge, depending on the isInternalEdge value.</p>
-</li>
-<li>
-<p>BTEntityTypeFilter - selects a specific type of entity based on the entityType value (vertex, edge, face, body,
-degenerate_edge).</p>
-</li>
-<li>
-<p>BTFeatureTypeFilter - selects a specific type of feature base on the featureType value. (NO)</p>
-</li>
-<li>
-<p>BTGeometryFilter - select specific geometry types based on the geometryType value (line, circle, arg, plane,
-cylinder,cone sphere torus, spline, ellipse).</p>
-</li>
-<li>
-<p>BTImageFilter - an entity that either is or is not an image, based on the isImage value. (no)</p>
-</li>
-<li>
-<p>BTMateConnectorFilter - a mate connector (NO)</p>
-</li>
-<li>
-<p>BTMateFilter - a mate object</p>
-</li>
-<li>
-<p>BTPlaneOrientationFilter - excludes planes that are aligned with another plane, based on the normal value.</p>
-</li>
-<li>
-<p>BTSketchObjectFilter - an object that either is or is not a sketch object, or is a sketch object created by the
-user, depending on the objectType value (not_sketch_object, any_sketch_object, user_entity).</p>
-</li>
-<li>
-<p>BTTextObjectFilter - an object that either is or is not a text object, depending on the isText value.</p>
-</li>
-<li>
-<p>BTTextStrokeFilter - an object that either is or is not a text stroke, depending on the isStroke value.</p>
-</li>
-</ul>
-<p>Logical operations:</p>
-<ul>
-<li>
-<p>SBTAndFilter - combines query filters with &ldquo;AND&rdquo;</p>
-</li>
-<li>
-<p>SBTOrFilter - combines query filters with &ldquo;OR&rdquo;</p>
-</li>
-<li>
-<p>SBTNotFilter - negates query filters</p>
-</li>
-</ul>
-<h2 id="feature-script-evaluation">Feature Script Evaluation</h2>
-<p>For certain tasks when creating and updating features, there may be information needed that is embedded within the
+parameter in an &ldquo;Extrude&rdquo; feature.</p></li><li><p>BTParameterSpecEnum - indicates that an enumerated value should should be provided. An example usage is the
+operationType parameter in an &ldquo;Extrude&rdquo; feature.</p></li><li><p>BTParameterSpecBoolean - indicates that a boolean true/false value should be specified. An example usage is the
+offset parameter in the &ldquo;Boolean&rdquo; feature</p></li></ul><p>Some less commonly used parameter spec types are:</p><ul><li><p>BTParameterSpecDerived - indicates that an import of a part from another Part Studio should be specified.</p></li><li><p>BTParameterSpecLookupTablePath - provides a list of string values that can be chosen.</p></li><li><p>BTParameterSpecForeignId - indicates that a &ldquo;foreign id&rdquo; value should be supplied. Foreign ids are currently not
+generally accessible through the API, but identify a file that is made available throughout the system.</p></li></ul><p>Parameter Spec query filters:</p><p>Query Filters are even more numerous than parameter spec types.</p><p>Basic selections:</p><ul><li><p>BTBodyTypeFilter - a specific body type (solid, sheet, wire, acorn, mate_connector)</p></li><li><p>BTClosedCurveFilter - a curve that is either closed or not closed, depending on the isClosed value. (NO)</p></li><li><p>BTConstructionObjectFilter - an object that either is or is not identified as &ldquo;construction&rdquo;, depending on the
+isConstruction value.</p></li><li><p>BTEdgeTopologyFilter - an edge that either is or is not an internal edge, depending on the isInternalEdge value.</p></li><li><p>BTEntityTypeFilter - selects a specific type of entity based on the entityType value (vertex, edge, face, body,
+degenerate_edge).</p></li><li><p>BTFeatureTypeFilter - selects a specific type of feature base on the featureType value. (NO)</p></li><li><p>BTGeometryFilter - select specific geometry types based on the geometryType value (line, circle, arg, plane,
+cylinder,cone sphere torus, spline, ellipse).</p></li><li><p>BTImageFilter - an entity that either is or is not an image, based on the isImage value. (no)</p></li><li><p>BTMateConnectorFilter - a mate connector (NO)</p></li><li><p>BTMateFilter - a mate object</p></li><li><p>BTPlaneOrientationFilter - excludes planes that are aligned with another plane, based on the normal value.</p></li><li><p>BTSketchObjectFilter - an object that either is or is not a sketch object, or is a sketch object created by the
+user, depending on the objectType value (not_sketch_object, any_sketch_object, user_entity).</p></li><li><p>BTTextObjectFilter - an object that either is or is not a text object, depending on the isText value.</p></li><li><p>BTTextStrokeFilter - an object that either is or is not a text stroke, depending on the isStroke value.</p></li></ul><p>Logical operations:</p><ul><li><p>SBTAndFilter - combines query filters with &ldquo;AND&rdquo;</p></li><li><p>SBTOrFilter - combines query filters with &ldquo;OR&rdquo;</p></li><li><p>SBTNotFilter - negates query filters</p></li></ul><h2 id=feature-script-evaluation>Feature Script Evaluation</h2><p>For certain tasks when creating and updating features, there may be information needed that is embedded within the
 existing model. You can often access it by running a Feature Script function. Feature Script is a language that is
-used to define the behavior of features.</p>
-<p>As an example of its usage, consider the case of using a face of an existing part to define new geometry. A plane is
+used to define the behavior of features.</p><p>As an example of its usage, consider the case of using a face of an existing part to define new geometry. A plane is
 defined in FeatureScript as an origin, x-direction vector and normal vector. These can be queried from FeatureScript
 by using the evPlane function, but it wants a &ldquo;query&rdquo; that identifies the face. Here is an example of how you might do
 this with a call to the Evaluate FeatureScript API call. Suppose you know that “JCC” is the geometry Id of a particular
-face. The following body can be passed to the evaluate function.</p>
-<pre><code>{
+face. The following body can be passed to the evaluate function.</p><pre><code>{
   &quot;script&quot; : &quot;function (context is Context, queries is map) {
               return evPlane(context, {face:queries.id});
               }&quot;,
   &quot;queries&quot; : [ { &quot;key&quot; : &quot;id&quot;, &quot;value&quot; : [ &quot;JCC&quot; ] } ]
 }
-</code></pre>
-<p>Assuming that we have done everything right, the output of this might look something like this:</p>
-<pre><code>{
+</code></pre><p>Assuming that we have done everything right, the output of this might look something like this:</p><pre><code>{
   &quot;result&quot;: {
     &quot;type&quot;: 2062,
     &quot;typeName&quot;: &quot;BTFSValueMap&quot;,
@@ -1197,14 +489,11 @@ face. The following body can be passed to the evaluate function.</p>
   &quot;sourceMicroversion&quot;: &quot;27db48fb62bf6ac3b3ddaeaa&quot;,
   &quot;libraryVersion&quot;: 296
 }
-</code></pre>
-<p>You can see from the output that the FeatureScript object representation uses the same typing rules that is used for
+</code></pre><p>You can see from the output that the FeatureScript object representation uses the same typing rules that is used for
 other output. In addition, FeatureScript objects may have a typeTag field associated with them, which indicates that
 type-specific behavior should be applied. For instance, we see cases where a BTFSValueArray has a typeTag of &ldquo;Vector&rdquo;,
-which allows the array to be accepted where a Vector is declared to be required.</p>
-<p>In order to help describe the interpretation of the structure above, here is a possible JSON representation of the
-result from the output shown above, but with weaker typing:</p>
-<pre><code>{
+which allows the array to be accepted where a Vector is declared to be required.</p><p>In order to help describe the interpretation of the structure above, here is a possible JSON representation of the
+result from the output shown above, but with weaker typing:</p><pre><code>{
   &quot;normal&quot; : [ -1, 0, 0 ],
   &quot;origin&quot; : { &quot;value&quot; : [ 0,
                            0.012700000000000001,
@@ -1212,46 +501,29 @@ result from the output shown above, but with weaker typing:</p>
                &quot;units&quot; : &quot;meter&quot; },
   &quot;x&quot; : [ 0, -1, 0 ]
 }
-</code></pre>
-<h2 id="custom-features">Custom Features</h2>
-<p>Custom features can be used in the feature apis with a little additional work. The key to using custom features is
+</code></pre><h2 id=custom-features>Custom Features</h2><p>Custom features can be used in the feature apis with a little additional work. The key to using custom features is
 that you must set a namespace field in the feature to tell Onshape where to look for the feature defintion.
 The namespace field identifies a specific version of a feature studio. There are two standard forms for the namespace
-field to consider:</p>
-<ul>
-<li>
-<p>Intra-workspace - In this case, the namespace field has the form
-&ldquo;e<elementId>::m<microversionId>&rdquo;
+field to consider:</p><ul><li><p>Intra-workspace - In this case, the namespace field has the form
+&ldquo;e<elementid>::m<microversionid>&rdquo;
 where elementId is the elementId of the FeatureStudio that defines the feature and microversionId is the element
 microversionId of the FeatureStudio. It is important to note that the element microversionId is different from the
-document microversionId that is more typically encountered in API usage.</p>
-</li>
-<li>
-<p>External - When the definition to be used lives in a different document or in a specific version of the current
+document microversionId that is more typically encountered in API usage.</p></li><li><p>External - When the definition to be used lives in a different document or in a specific version of the current
 document it is referenced using the form
-&ldquo;d<documentId>::v<versionId>::e<elementId>::m<microversionId>&rdquo;
+&ldquo;d<documentid>::v<versionid>::e<elementid>::m<microversionid>&rdquo;
 This is the same form as for the intra-workspace case but with a documentId and versionId additionally specified.
 The documentId is the id of the document containing the FeatureStudio and the versionId is the version of the
-document to be used.</p>
-</li>
-</ul>
-<p>In both of the forms listed, it is necessary to determine the FeatureStudio element microversionId. One way to do this
+document to be used.</p></li></ul><p>In both of the forms listed, it is necessary to determine the FeatureStudio element microversionId. One way to do this
 is to call the GET /api/documents/DWMV/elements API, which reports the element microversion for each of the elements.
 There is also a GET /api/featurestudios/DWMV/featurespecs API that provides a featurespec for each of the features
 defined in the FeatureStudio. These featurespecs also have a namespace field that reports the namespace of the
-FeatureStudio in the intra-workspace form.</p>
-<h2 id="examples">Examples</h2>
-<p>Below are several examples of how the API can be used in order to help you get started. The examples are quite trivial,
+FeatureStudio in the intra-workspace form.</p><h2 id=examples>Examples</h2><p>Below are several examples of how the API can be used in order to help you get started. The examples are quite trivial,
 but should provide a basic demonstration of how to use these API methods. You should be able to execute the calls
 against a part studio of yours and see results immediately. The calls could be executed using your preferred software
-environment but interactive use in a REST-aware tool is likely the easiest way to try the examples.</p>
-<h3 id="example-1">Example 1</h3>
-<p>In our first example we will create a cube using the cube feature. The feature accepts only a single parameter, which
+environment but interactive use in a REST-aware tool is likely the easiest way to try the examples.</p><h3 id=example-1>Example 1</h3><p>In our first example we will create a cube using the cube feature. The feature accepts only a single parameter, which
 is the length of a side, and creates a cube with a corner at the origin and aligned with the three default planes. In
 running the example, be sure to replace DWE with the the d/:did/w/:wid/e/:eid that is appropriate for the part studio
-that you are operating against.</p>
-<p>POST /api/partstudios/DWE/features</p>
-<pre><code>{
+that you are operating against.</p><p>POST /api/partstudios/DWE/features</p><pre><code>{
   &quot;feature&quot; : {
     &quot;type&quot;: 134,
     &quot;typeName&quot;: &quot;BTMFeature&quot;,
@@ -1271,9 +543,7 @@ that you are operating against.</p>
       }
     }
 }
-</code></pre>
-<p>This returns output similar to the following:</p>
-<pre><code>{
+</code></pre><p>This returns output similar to the following:</p><pre><code>{
     &quot;feature&quot;: {
         &quot;type&quot;: 134,
         &quot;typeName&quot;: &quot;BTMFeature&quot;,
@@ -1305,26 +575,19 @@ that you are operating against.</p>
     &quot;serializationVersion&quot;: &quot;1.1.6&quot;,
     &quot;sourceMicroversion&quot;: &quot;2d31ccc170551a83995b89c8&quot;
 }
-</code></pre>
-<p>The output returns us the feature definition that we provided as input with nodeIds and a featureId, plus information
+</code></pre><p>The output returns us the feature definition that we provided as input with nodeIds and a featureId, plus information
 telling us that that the feature executed correctly and information about the serialization version and microversion of
-the document that resulted from our feature addition.</p>
-<h3 id="example-2">Example 2</h3>
-<p>In our second example we will create a cube where the sideLength parameter is defined by a variable and will then
-update the variable to have a new value.</p>
-<p>Step 1) Create a variable - we create a feature of type assignVariable, which defines a variable and assigns it a
+the document that resulted from our feature addition.</p><h3 id=example-2>Example 2</h3><p>In our second example we will create a cube where the sideLength parameter is defined by a variable and will then
+update the variable to have a new value.</p><p>Step 1) Create a variable - we create a feature of type assignVariable, which defines a variable and assigns it a
 value. Here, the variables name is &ldquo;size&rdquo; and is displayed in the feature list as &ldquo;Cube size&rdquo;, and it is assigned to
 have the value &ldquo;1*in&rdquo; with a variableType of ANY. Once again, be sure to replace DWE with the the d/:did/w/:wid/e/:eid
-that is appropriate for the part studio that you are operating against.</p>
-<p>A variable can be created with variableType set to &ldquo;ANY&rdquo;, &ldquo;LENGTH&rdquo;, &ldquo;ANGLE&rdquo;, or &ldquo;NUMBER&rdquo;. This supplies a constraint
+that is appropriate for the part studio that you are operating against.</p><p>A variable can be created with variableType set to &ldquo;ANY&rdquo;, &ldquo;LENGTH&rdquo;, &ldquo;ANGLE&rdquo;, or &ldquo;NUMBER&rdquo;. This supplies a constraint
 on the supplied value and each type requires setting the appropriate corresponding parameter, which would be anyValue,
 lengthValue, angleValue or numberValue, respectively in addition to setting the value parameter. For the intended
 purpose of using it as a length value it might be more appropriate to use &ldquo;LENGTH&rdquo; as the type, which would require
 setting the lengthValue and value parameters to a length value. We have chosen to demonstrate the use of the &ldquo;ANY&rdquo;
 type here because it can be used in a wider range of applications than a &ldquo;LENGTH&rdquo; variable, but does not provide the
-value type checking that is provided by &ldquo;LENGTH&rdquo;, &ldquo;ANGLE&rdquo; or &ldquo;NUMBER&rdquo; types.</p>
-<p>POST /api/partstudios/DWE/features</p>
-<pre><code>{
+value type checking that is provided by &ldquo;LENGTH&rdquo;, &ldquo;ANGLE&rdquo; or &ldquo;NUMBER&rdquo; types.</p><p>POST /api/partstudios/DWE/features</p><pre><code>{
   &quot;feature&quot; : {
     &quot;type&quot;: 134,
     &quot;typeName&quot;: &quot;BTMFeature&quot;,
@@ -1361,14 +624,8 @@ value type checking that is provided by &ldquo;LENGTH&rdquo;, &ldquo;ANGLE&rdquo
     }
   }
 }
-</code></pre>
-<p>The returned structure will include a featureId value for the variable. Make note of this value and we will use it
-in step 3 below.</p>
-<ol start="2">
-<li>Create the cube feature, referencing the variable created</li>
-</ol>
-<p>POST /api/partstudios/DWE/features</p>
-<pre><code>{
+</code></pre><p>The returned structure will include a featureId value for the variable. Make note of this value and we will use it
+in step 3 below.</p><ol start=2><li>Create the cube feature, referencing the variable created</li></ol><p>POST /api/partstudios/DWE/features</p><pre><code>{
   &quot;feature&quot; : {
     &quot;type&quot;: 134,
     &quot;typeName&quot;: &quot;BTMFeature&quot;,
@@ -1388,13 +645,8 @@ in step 3 below.</p>
       }
     }
 }
-</code></pre>
-<ol start="3">
-<li>Update the variable to have a new value. We assume here that the featureId value returned in step 1 is
-&ldquo;FuJu9c8PvO5oyTgaV&rdquo; and we will change the cube size from 1 inch to 10 centimeters.</li>
-</ol>
-<p>POST /api/partstudios/DWE/features/featureid/FuJu9c8PvO5oyTgaV</p>
-<pre><code>{
+</code></pre><ol start=3><li>Update the variable to have a new value. We assume here that the featureId value returned in step 1 is
+&ldquo;FuJu9c8PvO5oyTgaV&rdquo; and we will change the cube size from 1 inch to 10 centimeters.</li></ol><p>POST /api/partstudios/DWE/features/featureid/FuJu9c8PvO5oyTgaV</p><pre><code>{
   &quot;feature&quot; : {
     &quot;type&quot;: 134,
     &quot;typeName&quot;: &quot;BTMFeature&quot;,
@@ -1431,18 +683,10 @@ in step 3 below.</p>
     }
   }
 }
-</code></pre>
-<p>Take a look at the part studio and you will see the cube at its new size. You can edit the Cube size variable and
-change the value again.</p>
-<h3 id="example-3">Example 3</h3>
-<p>In this example, we create a Sketch and extrude it. This demonstrates relationships betweeen features. First, the
+</code></pre><p>Take a look at the part studio and you will see the cube at its new size. You can edit the Cube size variable and
+change the value again.</p><h3 id=example-3>Example 3</h3><p>In this example, we create a Sketch and extrude it. This demonstrates relationships betweeen features. First, the
 sketch must be created on a plane, and for convenience, we will use the pre-defined front plane. Then, the extrude
-needs to describe what is to be extruded, and for convenience, we use the BTMIndividualSketchRegionQuery.</p>
-<ol>
-<li>Determine the geometryId for the front plane.</li>
-</ol>
-<p>POST /api/features/DWE/featurescript</p>
-<pre><code>{
+needs to describe what is to be extruded, and for convenience, we use the BTMIndividualSketchRegionQuery.</p><ol><li>Determine the geometryId for the front plane.</li></ol><p>POST /api/features/DWE/featurescript</p><pre><code>{
   &quot;script&quot; :
     &quot;function(context is Context, queries)
       {
@@ -1450,9 +694,7 @@ needs to describe what is to be extruded, and for convenience, we use the BTMInd
       }&quot;,
   &quot;queries&quot; : []
 }
-</code></pre>
-<p>This will likely return something like this:</p>
-<pre><code>{
+</code></pre><p>This will likely return something like this:</p><pre><code>{
   &quot;result&quot;: {
     &quot;type&quot;: 1499,
     &quot;typeName&quot;: &quot;BTFSValueArray&quot;,
@@ -1472,13 +714,7 @@ needs to describe what is to be extruded, and for convenience, we use the BTMInd
   &quot;sourceMicroversion&quot;: &quot;a53cabe7d36e30ee100b1d2a&quot;,
   &quot;libraryVersion&quot;: 298
 }
-</code></pre>
-<p>This tells us that the geometryId for the face created by the &ldquo;Front&rdquo; feature is &ldquo;JCC&rdquo;.</p>
-<ol start="2">
-<li>Determine the geometryId for the Origin</li>
-</ol>
-<p>POST /api/features/DWE/featurescript</p>
-<pre><code>{
+</code></pre><p>This tells us that the geometryId for the face created by the &ldquo;Front&rdquo; feature is &ldquo;JCC&rdquo;.</p><ol start=2><li>Determine the geometryId for the Origin</li></ol><p>POST /api/features/DWE/featurescript</p><pre><code>{
   &quot;script&quot; :
     &quot;function(context is Context, queries)
       {
@@ -1486,14 +722,8 @@ needs to describe what is to be extruded, and for convenience, we use the BTMInd
       }&quot;,
   &quot;queries&quot; : []
 }
-</code></pre>
-<p>This will report the geometryId for the origin (probably with the value &ldquo;IB&rdquo;) which we will use in the sketch.</p>
-<ol start="3">
-<li>Create the sketch. This will be just a circle on the front plane with its center at the origin and diameter of
-1 inch.</li>
-</ol>
-<p>POST /api/partstudios/DWE/features</p>
-<pre><code>{
+</code></pre><p>This will report the geometryId for the origin (probably with the value &ldquo;IB&rdquo;) which we will use in the sketch.</p><ol start=3><li>Create the sketch. This will be just a circle on the front plane with its center at the origin and diameter of
+1 inch.</li></ol><p>POST /api/partstudios/DWE/features</p><pre><code>{
   &quot;feature&quot; : {
     &quot;type&quot;: 151,
     &quot;typeName&quot;: &quot;BTMSketch&quot;,
@@ -1622,14 +852,9 @@ needs to describe what is to be extruded, and for convenience, we use the BTMInd
     }
   }
 }
-</code></pre>
-<ol start="4">
-<li>Create the extrude. Here we assume that the previous call returned the sketch with a feature id of
+</code></pre><ol start=4><li>Create the extrude. Here we assume that the previous call returned the sketch with a feature id of
 &ldquo;Fj1THqyY7u36ktGSr&rdquo;. The extrude uses the BTMIndividualSketchRegionQuery, identifying the sketch feature in order to
-indicate what is to be extruded. The depth of extrude is 1 inch.</li>
-</ol>
-<p>POST /api/partstudios/DWE/features</p>
-<pre><code>{
+indicate what is to be extruded. The depth of extrude is 1 inch.</li></ol><p>POST /api/partstudios/DWE/features</p><pre><code>{
   &quot;feature&quot; : {
     &quot;type&quot;: 134,
     &quot;typeName&quot;: &quot;BTMFeature&quot;,
@@ -1824,20 +1049,12 @@ indicate what is to be extruded. The depth of extrude is 1 inch.</li>
     }
   }
 }
-</code></pre>
-<p>We see here that there are a lot of parameters that have no values set in them. This is the way features are created
+</code></pre><p>We see here that there are a lot of parameters that have no values set in them. This is the way features are created
 by the Onshape web client, buty the unneeded ones could be left out. All of the parameters after &ldquo;depth&rdquo; could be
 omitted without changing the result. However, leaving out a required parameter will normally result in the result
-reporting a featureStatus of &ldquo;ERROR&rdquo;.</p>
-<h3 id="example-4">Example 4</h3>
-<p>This example shows an example of configuring a Part Studio with a single Enum (List) input, and a cube feature
-is created that has its size vary based on the configuration of the Part studio.</p>
-<ol>
-<li>Create a configuration for the part studio. This example assumes that you are starting with an unconfigured Part
-Studio. The Enum input is named &ldquo;Size&rdquo;, which 2 options available, &ldquo;Small&rdquo; and &ldquo;Large&rdquo;.</li>
-</ol>
-<p>POST /api/partstudios/DWE/configuration</p>
-<pre><code>{
+reporting a featureStatus of &ldquo;ERROR&rdquo;.</p><h3 id=example-4>Example 4</h3><p>This example shows an example of configuring a Part Studio with a single Enum (List) input, and a cube feature
+is created that has its size vary based on the configuration of the Part studio.</p><ol><li>Create a configuration for the part studio. This example assumes that you are starting with an unconfigured Part
+Studio. The Enum input is named &ldquo;Size&rdquo;, which 2 options available, &ldquo;Small&rdquo; and &ldquo;Large&rdquo;.</li></ol><p>POST /api/partstudios/DWE/configuration</p><pre><code>{
     &quot;configurationParameters&quot;: [
         {
             &quot;type&quot;: 105,
@@ -1884,13 +1101,8 @@ Studio. The Enum input is named &ldquo;Size&rdquo;, which 2 options available, &
         }
     ]
 }
-</code></pre>
-<ol start="2">
-<li>Create a cube feature in the Part Studio. When the Size configuration input is set to &ldquo;Small&rdquo;, the cube will
-have a sideLength value of &ldquo;1 in&rdquo; and when the Size input is set to &ldquo;Large&rdquo; it will have a sideLength value of &ldquo;2 in&rdquo;.</li>
-</ol>
-<p>POST /api/partstudios/DWE/features</p>
-<pre><code>{
+</code></pre><ol start=2><li>Create a cube feature in the Part Studio. When the Size configuration input is set to &ldquo;Small&rdquo;, the cube will
+have a sideLength value of &ldquo;1 in&rdquo; and when the Size input is set to &ldquo;Large&rdquo; it will have a sideLength value of &ldquo;2 in&rdquo;.</li></ol><p>POST /api/partstudios/DWE/features</p><pre><code>{
     &quot;feature&quot;: {
         &quot;type&quot;: 134,
         &quot;typeName&quot;: &quot;BTMFeature&quot;,
@@ -1944,73 +1156,7 @@ have a sideLength value of &ldquo;1 in&rdquo; and when the Size input is set to 
         }
     }
 }
-</code></pre>
-
-	
-	
-	
-</div>
-
-
-          </main>
-        </div>
-      </div>
-      
-<footer class="bg-dark py-5 row d-print-none">
-  <div class="container-fluid mx-sm-5">
-    <div class="row">
-      <div class="col-6 col-sm-4 text-xs-center order-sm-2">
-        
-      </div>
-      <div class="col-6 col-sm-4 text-right text-xs-center order-sm-3">
-        
-      </div>
-      <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
-        
-        
-	
-		
-	
-      </div>
-    </div>
-  </div>
-</footer>
-
-
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-    crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
-    integrity="sha512-UR25UO94eTnCVwjbXozyeVd6ZqpaAE9naiEUBK/A+QDbfSTQFhPGj5lOR6d8tsgbBk84Ggb5A3EkjsOgPRPcKA=="
-    crossorigin="anonymous"></script>
-
-
-
-
-
-<script src='/js/tabpane-persist.js'></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script src="/js/main.js"></script>
-
-
-
-
-  </body>
-</html>
+</code></pre></div></main></div></div><footer class="bg-dark py-5 row d-print-none"><div class="container-fluid mx-sm-5"><div class=row><div class="col-6 col-sm-4 text-xs-center order-sm-2"></div><div class="col-6 col-sm-4 text-right text-xs-center order-sm-3"></div><div class="col-12 col-sm-4 text-center py-2 order-sm-2"></div></div></div></footer></div><script src=https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js integrity=sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js integrity="sha512-UR25UO94eTnCVwjbXozyeVd6ZqpaAE9naiEUBK/A+QDbfSTQFhPGj5lOR6d8tsgbBk84Ggb5A3EkjsOgPRPcKA==" crossorigin=anonymous></script>
+<script src=/js/tabpane-persist.js></script>
+<script src=/js/main.min.5b464b2cab6a6b8d0f969a781d2b1091bca4ed9d1b5ee1032666142dbb30cf70.js integrity="sha256-W0ZLLKtqa40Plpp4HSsQkbyk7Z0bXuEDJmYULbswz3A=" crossorigin=anonymous></script></body></html>
