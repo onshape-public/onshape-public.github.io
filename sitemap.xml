@@ -1,88 +1,54 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
     <loc>https://onshape-public.github.io/docs/apikeys/</loc>
     <lastmod>2020-05-18T20:20:41-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://onshape-public.github.io/docs/apioverview/</loc>
     <lastmod>2020-05-18T20:25:28-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://onshape-public.github.io/docs/associativity/</loc>
     <lastmod>2020-05-18T20:28:26-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://onshape-public.github.io/docs/billing/</loc>
     <lastmod>2020-05-18T20:29:36-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://onshape-public.github.io/docs/clientmessaging/</loc>
     <lastmod>2020-05-18T20:30:40-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://onshape-public.github.io/docs/featureaccess/</loc>
     <lastmod>2020-05-18T20:37:28-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://onshape-public.github.io/docs/oauth/</loc>
     <lastmod>2020-05-18T20:39:14-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://onshape-public.github.io/docs/extensions/</loc>
     <lastmod>2020-05-18T20:39:14-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://onshape-public.github.io/docs/structuredstorage/</loc>
     <lastmod>2020-05-18T20:40:16-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://onshape-public.github.io/docs/tessellationperformance/</loc>
     <lastmod>2020-05-18T20:42:24-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://onshape-public.github.io/docs/testingguidelines/</loc>
     <lastmod>2020-05-18T20:42:57-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://onshape-public.github.io/docs/translation/</loc>
     <lastmod>2020-05-18T20:43:20-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://onshape-public.github.io/docs/webhook/</loc>
     <lastmod>2020-05-18T20:44:05-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://onshape-public.github.io/</loc>
     <lastmod>2020-05-18T20:44:05-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://onshape-public.github.io/docs/</loc>
     <lastmod>2020-05-18T20:44:05-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://onshape-public.github.io/categories/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://onshape-public.github.io/tags/</loc>
   </url>
-  
 </urlset>

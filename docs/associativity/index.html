@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.71.1" />
+<meta name="generator" content="Hugo 0.95.0" />
 <meta name="robots" content="noindex, nofollow">
 
 
@@ -27,20 +27,17 @@ This document describes data structures and APIs that external applications can 
 Please address questions, comments and suggestions to &ldquo;api-support@onshape.com&rdquo; for the fastest response.
 Introduction Onshape data is stored in replicated databases in the cloud. The data model for accessing Parts and Assemblies through the REST API is described here. The model is influenced by the data model used by Git and similar source code repositories." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://onshape-public.github.io/docs/associativity/" />
+<meta property="og:url" content="https://onshape-public.github.io/docs/associativity/" /><meta property="article:section" content="docs" />
 <meta property="article:published_time" content="2020-05-18T20:28:26-04:00" />
 <meta property="article:modified_time" content="2020-05-18T20:28:26-04:00" />
+
 <meta itemprop="name" content="Associativity">
 <meta itemprop="description" content="Onshape Associativity for external applications
 This document describes data structures and APIs that external applications can use to implement associativity.
 Please address questions, comments and suggestions to &ldquo;api-support@onshape.com&rdquo; for the fastest response.
-Introduction Onshape data is stored in replicated databases in the cloud. The data model for accessing Parts and Assemblies through the REST API is described here. The model is influenced by the data model used by Git and similar source code repositories.">
-<meta itemprop="datePublished" content="2020-05-18T20:28:26-04:00" />
+Introduction Onshape data is stored in replicated databases in the cloud. The data model for accessing Parts and Assemblies through the REST API is described here. The model is influenced by the data model used by Git and similar source code repositories."><meta itemprop="datePublished" content="2020-05-18T20:28:26-04:00" />
 <meta itemprop="dateModified" content="2020-05-18T20:28:26-04:00" />
 <meta itemprop="wordCount" content="1634">
-
-
-
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Associativity"/>
 <meta name="twitter:description" content="Onshape Associativity for external applications
@@ -407,22 +404,22 @@ and edges <code>https://cad.onshape.com/api/partstudios/d/&lt;docid&gt;/w/&lt;wi
 <p><img src="/images/associativityimage00.png" alt="image alt text"></p>
 <p><strong>POST</strong> <code>https://cad.onshape.com/api/partstudios/d/&lt;docid&gt;/w/&lt;wid&gt;/e/&lt;eid&gt;/idtranslations</code></p>
 <p><strong>Body</strong>:</p>
-<pre><code>{
-  &quot;sourceDocumentMicroversion&quot; : &quot;47e75ab2ee8b4356a76ebd47&quot;,
-  &quot;ids&quot; : [&quot;JHD&quot;, &quot;JHO&quot;, &quot;JHd&quot;, &quot;JHt&quot;  ]
+<pre tabindex="0"><code>{
+  &#34;sourceDocumentMicroversion&#34; : &#34;47e75ab2ee8b4356a76ebd47&#34;,
+  &#34;ids&#34; : [&#34;JHD&#34;, &#34;JHO&#34;, &#34;JHd&#34;, &#34;JHt&#34;  ]
 }
 </code></pre><p><strong>Response</strong>:</p>
-<pre><code>{
-    &quot;documentId&quot;: &quot;748d6e850c9248328189922b&quot;,
-    &quot;elementId&quot;: &quot;042a6fa54e79451e8076463d&quot;,
-    &quot;sourceDocumentMicroversion&quot;: &quot;47e75ab2ee8b4356a76ebd47&quot;,
-    &quot;ids&quot;: [
-        { &quot;source&quot;: &quot;JHD&quot;, &quot;status&quot;: &quot;SPLIT&quot;, &quot;target&quot;: [&quot;JID&quot;, &quot;JIH&quot;] },
-        { &quot;source&quot;: &quot;JHO&quot;, &quot;status&quot;: &quot;OK&quot;, &quot;target&quot;: [&quot;JHO&quot;] },
-        { &quot;source&quot;: &quot;JHd&quot;, &quot;status&quot;: &quot;OK&quot;, &quot;target&quot;: [&quot;JHd&quot;] },
-        { &quot;source&quot;: &quot;JHt&quot;, &quot;status&quot;: &quot;SPLIT&quot;, &quot;target&quot;: [&quot;JI5&quot;, &quot;JI9&quot;] }
+<pre tabindex="0"><code>{
+    &#34;documentId&#34;: &#34;748d6e850c9248328189922b&#34;,
+    &#34;elementId&#34;: &#34;042a6fa54e79451e8076463d&#34;,
+    &#34;sourceDocumentMicroversion&#34;: &#34;47e75ab2ee8b4356a76ebd47&#34;,
+    &#34;ids&#34;: [
+        { &#34;source&#34;: &#34;JHD&#34;, &#34;status&#34;: &#34;SPLIT&#34;, &#34;target&#34;: [&#34;JID&#34;, &#34;JIH&#34;] },
+        { &#34;source&#34;: &#34;JHO&#34;, &#34;status&#34;: &#34;OK&#34;, &#34;target&#34;: [&#34;JHO&#34;] },
+        { &#34;source&#34;: &#34;JHd&#34;, &#34;status&#34;: &#34;OK&#34;, &#34;target&#34;: [&#34;JHd&#34;] },
+        { &#34;source&#34;: &#34;JHt&#34;, &#34;status&#34;: &#34;SPLIT&#34;, &#34;target&#34;: [&#34;JI5&#34;, &#34;JI9&#34;] }
     ],
-    &quot;targetDocumentMicroversion&quot;: &quot;78bc7f3fcf82475085c2f3ab&quot;
+    &#34;targetDocumentMicroversion&#34;: &#34;78bc7f3fcf82475085c2f3ab&#34;
 
 4. Delete one of the [parts], translate ids:
 
@@ -431,14 +428,12 @@ and edges <code>https://cad.onshape.com/api/partstudios/d/&lt;docid&gt;/w/&lt;wi
 **POST** `https://cad.onshape.com/api/partstudios/d/&lt;docid&gt;/w/&lt;wid&gt;/e/&lt;eid&gt;/idtranslations`
 
 **Body**:
-
 </code></pre><p>{
 &ldquo;sourceDocumentMicroversion&rdquo; : &ldquo;47e75ab2ee8b4356a76ebd47&rdquo;,
 &ldquo;ids&rdquo; : [&ldquo;JHD&rdquo;, &ldquo;JHO&rdquo;, &ldquo;JHd&rdquo;, &ldquo;JHt&rdquo;]
 }</p>
-<pre><code>
+<pre tabindex="0"><code>
 **Response**:
-
 </code></pre><p>{
 &ldquo;documentId&rdquo;: &ldquo;748d6e850c9248328189922b&rdquo;,
 &ldquo;elementId&rdquo;: &ldquo;042a6fa54e79451e8076463d&rdquo;,
@@ -451,7 +446,7 @@ and edges <code>https://cad.onshape.com/api/partstudios/d/&lt;docid&gt;/w/&lt;wi
 ],
 &ldquo;targetDocumentMicroversion&rdquo;: &ldquo;52aa74d34b624f3aaef33204&rdquo;
 }</p>
-<pre><code>
+<pre tabindex="0"><code>
 5. Rollback delete and [split], translate ids:
 
 ![image alt text](/images/associativityimage02.png)
@@ -459,14 +454,12 @@ and edges <code>https://cad.onshape.com/api/partstudios/d/&lt;docid&gt;/w/&lt;wi
 **POST** `https://cad.onshape.com/api/partstudios/d/&lt;docid&gt;/w/&lt;wid&gt;/e/&lt;eid&gt;/idtranslations`
 
 **Body**:
-
 </code></pre><p>{
 &ldquo;sourceDocumentMicroversion&rdquo; : &ldquo;47e75ab2ee8b4356a76ebd47&rdquo;,
 &ldquo;ids&rdquo; : [&ldquo;JHD&rdquo;, &ldquo;JHO&rdquo;, &ldquo;JHd&rdquo;, &ldquo;JHt&rdquo;]
 }</p>
-<pre><code>
+<pre tabindex="0"><code>
 **Response**:
-
 </code></pre><p>{
 &ldquo;documentId&rdquo;: &ldquo;748d6e850c9248328189922b&rdquo;,
 &ldquo;elementId&rdquo;: &ldquo;042a6fa54e79451e8076463d&rdquo;,
@@ -479,7 +472,7 @@ and edges <code>https://cad.onshape.com/api/partstudios/d/&lt;docid&gt;/w/&lt;wi
 ],
 &ldquo;targetDocumentMicroversion&rdquo;: &ldquo;52aa74d34b624f3aaef33204&rdquo;
 }</p>
-<pre><code></code></pre>
+<pre tabindex="0"><code></code></pre>
 	
 	
 	

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.71.1" />
+<meta name="generator" content="Hugo 0.95.0" />
 <meta name="robots" content="noindex, nofollow">
 
 
@@ -27,19 +27,16 @@ Application elements and the Onshape JavaScript web client need to communicate d
 Typical use cases (not all currently implemented) include:
 From the Application Element to the Onshape Client:   Click/Close Flyouts Events - Notify the Onshape client that the user has clicked in the application element, which should cause Onshape flyouts (versions, history, uploads, etc." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://onshape-public.github.io/docs/clientmessaging/" />
+<meta property="og:url" content="https://onshape-public.github.io/docs/clientmessaging/" /><meta property="article:section" content="docs" />
 <meta property="article:published_time" content="2020-05-18T20:30:40-04:00" />
 <meta property="article:modified_time" content="2020-05-18T20:30:40-04:00" />
+
 <meta itemprop="name" content="Client Messaging">
 <meta itemprop="description" content="JavaScript Post Message API  Application elements and the Onshape JavaScript web client need to communicate directly, calling across the iframe containing the application element using post message.
 Typical use cases (not all currently implemented) include:
-From the Application Element to the Onshape Client:   Click/Close Flyouts Events - Notify the Onshape client that the user has clicked in the application element, which should cause Onshape flyouts (versions, history, uploads, etc.">
-<meta itemprop="datePublished" content="2020-05-18T20:30:40-04:00" />
+From the Application Element to the Onshape Client:   Click/Close Flyouts Events - Notify the Onshape client that the user has clicked in the application element, which should cause Onshape flyouts (versions, history, uploads, etc."><meta itemprop="datePublished" content="2020-05-18T20:30:40-04:00" />
 <meta itemprop="dateModified" content="2020-05-18T20:30:40-04:00" />
 <meta itemprop="wordCount" content="2753">
-
-
-
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Client Messaging"/>
 <meta name="twitter:description" content="JavaScript Post Message API  Application elements and the Onshape JavaScript web client need to communicate directly, calling across the iframe containing the application element using post message.
@@ -270,28 +267,28 @@ From the Application Element to the Onshape Client:   Click/Close Flyouts Events
 </li>
 </ol>
 <p>This JavaScript code parses the iframe src query parameters uses them to post a message:</p>
-<pre><code>  var documentId;
+<pre tabindex="0"><code>  var documentId;
   var workspaceId;
   var elementId;
   var server;
 
   // Parse query parameters
   var queryParameters = decodeURIComponent(window.location.search.substr(1));
-  var queryParametersArray = queryParameters.split('&amp;');
+  var queryParametersArray = queryParameters.split(&#39;&amp;&#39;);
   for (var i = 0; i &lt; queryParametersArray.length; i++) {
-    var parameterArray = queryParametersArray[i].split('=');
+    var parameterArray = queryParametersArray[i].split(&#39;=&#39;);
     if (parameterArray.length === 2) {
       switch (parameterArray[0]) {
-        case 'documentId':
+        case &#39;documentId&#39;:
           documentId = parameterArray[1];
           break;
-        case 'workspaceId':
+        case &#39;workspaceId&#39;:
           workspaceId = parameterArray[1];
           break;
-        case 'elementId':
+        case &#39;elementId&#39;:
           elementId = parameterArray[1];
           break;
-        case 'server':
+        case &#39;server&#39;:
           server = parameterArray[1];
           break;
       }
@@ -299,22 +296,22 @@ From the Application Element to the Onshape Client:   Click/Close Flyouts Events
   }
 
   // Listen for clicks and post a message to the Onshape client
-  document.getElementById('&lt;id of your topmost element&gt;').
-    addEventListener('click', function() {
+  document.getElementById(&#39;&lt;id of your topmost element&gt;&#39;).
+    addEventListener(&#39;click&#39;, function() {
       var message = {documentId: documentId,
                      workspaceId: workspaceId,
                      elementId: elementId,
-                     messageName: 'closeFlyoutsAndMenus'};
-      window.parent.postMessage(message, '*');
+                     messageName: &#39;closeFlyoutsAndMenus&#39;};
+      window.parent.postMessage(message, &#39;*&#39;);
     }, true);
 </code></pre><p>The server query parameter is used when receiving post messages from Onshape.  See later in this document.</p>
 <p>If the application element uses a JavaScript library or framework such as BackboneJS or AngularJS, it can parse the query parameters and maintain state in other ways.</p>
 <p>The message object posted to the Onshape client is of the form:</p>
-<pre><code>{
+<pre tabindex="0"><code>{
     documentId: documentId,
      workspaceId: workspaceId,
      elementId: elementId,
-     messageName: '&lt;message name&gt;',
+     messageName: &#39;&lt;message name&gt;&#39;,
      … other properties as needed for other message types …};
 }
 </code></pre><p>The messages supported currently are:</p>
@@ -445,8 +442,8 @@ Send to request camera properties of a specific part studio or assembly element.
 <p><strong>Receiving a message from the Onshape Client</strong></p>
 <p>As said earlier in this document, the Onshape client will not post messages to an application element until the application element has loaded and sent at least one message to the Onshape client.  Typically an application element would send a keepAlive message after it is fully loaded to initiate messaging.</p>
 <p>The message data object posted to the application element is of the form:</p>
-<pre><code>{
-    messageName: '&lt;message name&gt;',
+<pre tabindex="0"><code>{
+    messageName: &#39;&lt;message name&gt;&#39;,
      … other properties as needed for other message types …
 }
 </code></pre><p>The messages supported currently are:</p>
@@ -548,38 +545,38 @@ viewportWidth:       number, width of the viewport
     <td>saveChanges</td>
     <td>yes
 <p>messageId: a unique identifier for this message. Should be passed back in the &lsquo;finishedSaving&rsquo; message.</td>
-<td>Sent if the application specified &lsquo;notifyWhenSaveRequired&rsquo; in the &lsquo;applicationInit&rsquo; message. Indicates that the application should cleanup any pending edits before an Onshape process continues (i.e. version save).</td></p>
+<td>Sent if the application specified &rsquo;notifyWhenSaveRequired&rsquo; in the &lsquo;applicationInit&rsquo; message. Indicates that the application should cleanup any pending edits before an Onshape process continues (i.e. version save).</td></p>
   </tr>
 </table>
 <p>The message will always have a ‘messageName’ property.</p>
 <p>Here’s some JavaScript code showing how to listen for messages from the Onshape client:</p>
-<pre><code>  // server is one of the iframe src query parameters - see above
+<pre tabindex="0"><code>  // server is one of the iframe src query parameters - see above
 
   var handlePostMessage = function(e) {
-    console.log(&quot;Post message received in application element.&quot;);
-    console.log(&quot;e.origin = &quot; + e.origin);
+    console.log(&#34;Post message received in application element.&#34;);
+    console.log(&#34;e.origin = &#34; + e.origin);
 
     // Verify the origin matches the server iframe src query parameter
     if (server === e.origin) {
-      console.log(&quot;Message safe and can be handled as it is from origin '&quot;
+      console.log(&#34;Message safe and can be handled as it is from origin &#39;&#34;
                   + e.origin +
-                  &quot;', which matches server query parameter '&quot;
-                  + server + &quot;'.&quot;);
+                  &#34;&#39;, which matches server query parameter &#39;&#34;
+                  + server + &#34;&#39;.&#34;);
       if (e.data &amp;&amp; e.data.messageName) {
-        console.log(&quot;Message name = '&quot; + e.data.messageName + &quot;'&quot;);
+        console.log(&#34;Message name = &#39;&#34; + e.data.messageName + &#34;&#39;&#34;);
       } else {
-        console.log(&quot;Message name not found. Ignoring message.&quot;);
+        console.log(&#34;Message name not found. Ignoring message.&#34;);
       }
     } else {
-      console.log(&quot;Message NOT safe and should be ignored.&quot;);
+      console.log(&#34;Message NOT safe and should be ignored.&#34;);
     }
   };
 
-  window.addEventListener('message', handlePostMessage, false);
+  window.addEventListener(&#39;message&#39;, handlePostMessage, false);
 </code></pre><blockquote>
 <p>It is <em>extremely important</em> to the security of your application that you verify that the origin of all messages you receive is the same as the original server query parameter in the iframe src, as shown above:</p>
 </blockquote>
-<pre><code>       if (server === e.origin) {
+<pre tabindex="0"><code>       if (server === e.origin) {
 </code></pre><blockquote>
 <p>In production operation especially, the message IS NOT SAFE if the message origin does not match the iframe src server query parameter.</p>
 </blockquote>

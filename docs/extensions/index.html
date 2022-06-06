@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.71.1" />
+<meta name="generator" content="Hugo 0.95.0" />
 <meta name="robots" content="noindex, nofollow">
 
 
@@ -27,19 +27,16 @@ The new …">
 The new capabilities called extensions allow the following:
  Embedding application UIs at multiple locations in the Onshape UI Enabling actions within the Onshape UI that can invoke application code via REST APIs or open custom URLs. Enabling background process integration into release workflows. An OAuth connection from Onshape to the application which enables seamlessly calling application code via REST APIs  Creating extensions Once the application has been created, we can configure it in the Developer Portal." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://onshape-public.github.io/docs/extensions/" />
+<meta property="og:url" content="https://onshape-public.github.io/docs/extensions/" /><meta property="article:section" content="docs" />
 <meta property="article:published_time" content="2020-05-18T20:39:14-04:00" />
 <meta property="article:modified_time" content="2020-05-18T20:39:14-04:00" />
+
 <meta itemprop="name" content="Extensions">
 <meta itemprop="description" content="Onshape API and Application Extensions We are enhancing the Onshape API to enable a more integrated user experience and new capabilities.
 The new capabilities called extensions allow the following:
- Embedding application UIs at multiple locations in the Onshape UI Enabling actions within the Onshape UI that can invoke application code via REST APIs or open custom URLs. Enabling background process integration into release workflows. An OAuth connection from Onshape to the application which enables seamlessly calling application code via REST APIs  Creating extensions Once the application has been created, we can configure it in the Developer Portal.">
-<meta itemprop="datePublished" content="2020-05-18T20:39:14-04:00" />
+ Embedding application UIs at multiple locations in the Onshape UI Enabling actions within the Onshape UI that can invoke application code via REST APIs or open custom URLs. Enabling background process integration into release workflows. An OAuth connection from Onshape to the application which enables seamlessly calling application code via REST APIs  Creating extensions Once the application has been created, we can configure it in the Developer Portal."><meta itemprop="datePublished" content="2020-05-18T20:39:14-04:00" />
 <meta itemprop="dateModified" content="2020-05-18T20:39:14-04:00" />
 <meta itemprop="wordCount" content="3911">
-
-
-
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Extensions"/>
 <meta name="twitter:description" content="Onshape API and Application Extensions We are enhancing the Onshape API to enable a more integrated user experience and new capabilities.
@@ -527,31 +524,31 @@ The action URL can be parameterized to pass information from Onshape to the appl
 <li>No default query parameters</li>
 </ul>
 <p>Action URL defined by the user is assumed to be a POST API. This API should consume a predefined request body as shown below. This definition may have additional attributes in future.</p>
-<pre><code> [
+<pre tabindex="0"><code> [
    {
-           &quot;id&quot; : &lt;internal part number id&gt;,
-           &quot;documentId&quot; : &lt;documentId&gt;,
-           &quot;elementId&quot; : &lt;elementId&gt;,
-           &quot;workspaceId&quot; : &lt;workspaceId&gt;,
-           &quot;elementType&quot; : &lt;elementType&gt;,
-           &quot;partId&quot; : &lt;partId&gt;,
-           &quot;companyId&quot; : &lt;companyId&gt;, // Id of the company that owns the document, else the text “cad”
-           &quot;partNumber&quot; : &lt;current part number&gt;,
-           &quot;configuration&quot; : &lt;configuration string&gt;,
-           &quot;categories&quot; : &lt;array of category ids and names&gt; // [ { &quot;id&quot;: &lt;String&gt;, &quot;name&quot;: &lt;string&gt; } ]
+           &#34;id&#34; : &lt;internal part number id&gt;,
+           &#34;documentId&#34; : &lt;documentId&gt;,
+           &#34;elementId&#34; : &lt;elementId&gt;,
+           &#34;workspaceId&#34; : &lt;workspaceId&gt;,
+           &#34;elementType&#34; : &lt;elementType&gt;,
+           &#34;partId&#34; : &lt;partId&gt;,
+           &#34;companyId&#34; : &lt;companyId&gt;, // Id of the company that owns the document, else the text “cad”
+           &#34;partNumber&#34; : &lt;current part number&gt;,
+           &#34;configuration&#34; : &lt;configuration string&gt;,
+           &#34;categories&#34; : &lt;array of category ids and names&gt; // [ { &#34;id&#34;: &lt;String&gt;, &#34;name&#34;: &lt;string&gt; } ]
    }
  ]
 </code></pre><p>Note - Categories are only passed from the Release dialog and properties dialogs for now. They are empty when part number generation is called from the BOM table or configuration table.</p>
 <p>Expected response sent to Onshape is as follows:</p>
-<pre><code> [   
+<pre tabindex="0"><code> [   
    {
-           &quot;id&quot; : &lt;internal part number id&gt;,
-           &quot;documentId&quot; : &lt;documentId&gt;,
-           &quot;elementId&quot; : &lt;elementId&gt;,
-           &quot;workspaceId&quot; : &lt;workspaceId&gt;,
-           &quot;elementType&quot; : &lt;elementType&gt;,
-           &quot;partId&quot; : &lt;partId&gt;,
-           &quot;partNumber&quot; : &lt;next part number generated by third party numbering scheme&gt;
+           &#34;id&#34; : &lt;internal part number id&gt;,
+           &#34;documentId&#34; : &lt;documentId&gt;,
+           &#34;elementId&#34; : &lt;elementId&gt;,
+           &#34;workspaceId&#34; : &lt;workspaceId&gt;,
+           &#34;elementType&#34; : &lt;elementType&gt;,
+           &#34;partId&#34; : &lt;partId&gt;,
+           &#34;partNumber&#34; : &lt;next part number generated by third party numbering scheme&gt;
    }
  ]
 </code></pre><p>Third-party applications can simply fill up the <code>&quot;partNumber&quot;</code> attribute with part number generated by the custom numbering scheme and send it as a response. However, the response should at least contain <code>&quot;id&quot;</code> and <code>&quot;partNumber&quot;</code> as highlighted above, other attributes are optional.</p>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.71.1" />
+<meta name="generator" content="Hugo 0.95.0" />
 <meta name="robots" content="noindex, nofollow">
 
 
@@ -29,21 +29,18 @@ The feature API comprises the following API methods:
   GET /api/partstudios/DWMVE/features - get feature list
   GET /api/partstudios/DWMVE/featurespecs - get feature specs" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://onshape-public.github.io/docs/featureaccess/" />
+<meta property="og:url" content="https://onshape-public.github.io/docs/featureaccess/" /><meta property="article:section" content="docs" />
 <meta property="article:published_time" content="2020-05-18T20:37:28-04:00" />
 <meta property="article:modified_time" content="2020-05-18T20:37:28-04:00" />
+
 <meta itemprop="name" content="Feature List API">
 <meta itemprop="description" content="Onshape Part Studio Feature Access API
 Summary The Onshape Part Studio tab tracks edits in terms of a feature list. Creation and modification of geometry is performed by manipulating that list. This document describes capabilities that are intended to allow partners and customers to manipulate the feature list from software.
 The feature API comprises the following API methods:
   GET /api/partstudios/DWMVE/features - get feature list
-  GET /api/partstudios/DWMVE/featurespecs - get feature specs">
-<meta itemprop="datePublished" content="2020-05-18T20:37:28-04:00" />
+  GET /api/partstudios/DWMVE/featurespecs - get feature specs"><meta itemprop="datePublished" content="2020-05-18T20:37:28-04:00" />
 <meta itemprop="dateModified" content="2020-05-18T20:37:28-04:00" />
 <meta itemprop="wordCount" content="6502">
-
-
-
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Feature List API"/>
 <meta name="twitter:description" content="Onshape Part Studio Feature Access API
@@ -555,7 +552,7 @@ of features.</p>
 <p>Some important things to know about the JSON encoding are:</p>
 <ul>
 <li>
-<p>Default values are omitted in the encoded output. For string fields the default value is &ldquo;&quot;, for boolean fields it
+<p>Default values are omitted in the encoded output. For string fields the default value is &ldquo;&rdquo;, for boolean fields it
 is false, and for numeric fields it is 0.</p>
 </li>
 <li>
@@ -642,7 +639,7 @@ a feature is added.</p>
 </li>
 <li>
 <p>namespace - An indicator of where the feature definition can be found. Features in the FeatureScript standard library
-have a namespace value of &quot;&rdquo; whereas custom features identify the featurestudio that contains the definition. See
+have a namespace value of &quot;&quot; whereas custom features identify the featurestudio that contains the definition. See
 the Custom Features section below for more information.</p>
 </li>
 <li>

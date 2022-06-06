@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.71.1" />
+<meta name="generator" content="Hugo 0.95.0" />
 <meta name="robots" content="noindex, nofollow">
 
 
@@ -26,18 +26,15 @@ OAuth 2.0 (&ldquo;OAuth&rdquo;) is an authorization framework allowing a user (a
 <meta property="og:description" content="Using OAuth 2.0 with Onshape Introduction OAuth 2.0 (&ldquo;OAuth&rdquo;) is an authorization framework allowing a user (also referred to as the resource owner) to approve client application access to the user&rsquo;s resources at an OAuth-enabled server.
 When integrating with Onshape, OAuth tokens authorize third-party applications (such as a desktop application or a web service) for limited access to users&rsquo; Onshape documents. Using OAuth terminology, Onshape acts as both the authorization and resource server, while the desktop or web-based application is the client." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://onshape-public.github.io/docs/oauth/" />
+<meta property="og:url" content="https://onshape-public.github.io/docs/oauth/" /><meta property="article:section" content="docs" />
 <meta property="article:published_time" content="2020-05-18T20:39:14-04:00" />
 <meta property="article:modified_time" content="2020-05-18T20:39:14-04:00" />
+
 <meta itemprop="name" content="OAuth">
 <meta itemprop="description" content="Using OAuth 2.0 with Onshape Introduction OAuth 2.0 (&ldquo;OAuth&rdquo;) is an authorization framework allowing a user (also referred to as the resource owner) to approve client application access to the user&rsquo;s resources at an OAuth-enabled server.
-When integrating with Onshape, OAuth tokens authorize third-party applications (such as a desktop application or a web service) for limited access to users&rsquo; Onshape documents. Using OAuth terminology, Onshape acts as both the authorization and resource server, while the desktop or web-based application is the client.">
-<meta itemprop="datePublished" content="2020-05-18T20:39:14-04:00" />
+When integrating with Onshape, OAuth tokens authorize third-party applications (such as a desktop application or a web service) for limited access to users&rsquo; Onshape documents. Using OAuth terminology, Onshape acts as both the authorization and resource server, while the desktop or web-based application is the client."><meta itemprop="datePublished" content="2020-05-18T20:39:14-04:00" />
 <meta itemprop="dateModified" content="2020-05-18T20:39:14-04:00" />
 <meta itemprop="wordCount" content="2332">
-
-
-
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="OAuth"/>
 <meta name="twitter:description" content="Using OAuth 2.0 with Onshape Introduction OAuth 2.0 (&ldquo;OAuth&rdquo;) is an authorization framework allowing a user (also referred to as the resource owner) to approve client application access to the user&rsquo;s resources at an OAuth-enabled server.
@@ -244,7 +241,7 @@ When integrating with Onshape, OAuth tokens authorize third-party applications (
 <p>Primary format - this string uniquely identifies your application and is a marker for the data it might store on Onshape servers. It should take the form of a Java style reverse domain name: <code>com.megacorp.stl-preview</code>. This value cannot be changed after the application is registered.</p>
 </li>
 <li>
-<p>Redirect URIs - Your application must specify at least one (but multiple values are acceptable) URI used in OAuth protocol exchanges. This URL must also use SSL (a URL that begins with <code>https</code>), with two exceptions applicable for installed desktop applications. These two are exceptions allow redirect URIs of the form <code>http://localhost:&lt;port&gt;</code>, or the URN string <code>urn:ietf:wg:oauth:2.0:oob</code>. The &lsquo;localhost&rsquo; and URN string are meant for installed desktop applications since they do not require a publicly reachable server to be part of the OAuth process.
+<p>Redirect URIs - Your application must specify at least one (but multiple values are acceptable) URI used in OAuth protocol exchanges. This URL must also use SSL (a URL that begins with <code>https</code>), with two exceptions applicable for installed desktop applications. These two are exceptions allow redirect URIs of the form <code>http://localhost:&lt;port&gt;</code>, or the URN string <code>urn:ietf:wg:oauth:2.0:oob</code>. The &rsquo;localhost&rsquo; and URN string are meant for installed desktop applications since they do not require a publicly reachable server to be part of the OAuth process.
 Possible reasons for specifying more than one redirect URI is if you deploy &ldquo;test&rdquo; and &ldquo;production&rdquo; versions of your application, and want to use a specific version of your application for different sets of users.</p>
 </li>
 <li>
@@ -266,7 +263,7 @@ Legacy support: As we migrate to extension based apps, the old Iframe URL is mov
 <p>After the application has been registered Onshape will send you corresponding OAuth Client ID and OAuth Client Secret strings. While the Client ID is considered public - it is how your specific application is uniquely identified in OAuth protocol exchanges - the Client Secret <strong>must</strong> be stored securely. For example, it should <strong>not</strong> be checked in to source code control systems. Protect the Client Secret as you would any password data.</p>
 <h2 id="obtaining-an-oauth-access-token">Obtaining an OAuth Access Token</h2>
 <p>An OAuth access token is the credential a client application uses to access user resources at Onshape. Obtaining an OAuth access token is a two-part process: first obtaining a one-time use authorization code, and then exchanging the authorization code for them access token. The access token is used for all subsequent Onshape requests, though it too has a limited lifetime (which may be refreshed, as described below).</p>
-<p>In the example URLs used below to describe the OAuth exchanges, values enclosed in angle brackets (&lsquo;&lt;&gt;&rsquo;) are descriptive names used to indicate that application-specific values should be substituted in actual exchanges. All other URLs and URL fragments are literal strings.</p>
+<p>In the example URLs used below to describe the OAuth exchanges, values enclosed in angle brackets (&rsquo;&lt;&gt;&rsquo;) are descriptive names used to indicate that application-specific values should be substituted in actual exchanges. All other URLs and URL fragments are literal strings.</p>
 <h3 id="obtaining-a-code">Obtaining a code</h3>
 <p>Your application must first must direct the user to <code>https://oauth.onshape.com/oauth/authorize?response_type=code&amp;client_id=&lt;your client id&gt;</code>. You may optionally add the <code>redirect_uri</code>, <code>scope</code>, <code>state</code> and <code>company_id</code> query parameters.</p>
 <p>If your application was registered with more than one redirect URI, then the specific URI to use is indicated by the <code>redirect_uri</code> query string. You can only use a <code>redirect_uri</code> value that has been previously registered for this application. URIs must be a exactly match registered values, including the port number (if not using the default HTTPS port). Typically this action is performed by using a HTTP 302 response code with a <code>Location</code> HTTP response header when the user arrives at the starting page of your application, for example in response to a GET of the Base HREF specified in the application registration. The Location HTTP response header should contain the URL with the correct query parameters as outlined above.</p>
@@ -283,11 +280,11 @@ Legacy support: As we migrate to extension based apps, the old Iframe URL is mov
 <p>Additionally if a redirect URI was supplied as an additional parameter in the initial GET of <code>/oauth/authorize</code> it must also be supplied here.</p>
 <p><em>Note</em> Each parameter must be URL encoded - as before the client ID and client secret both have trailing <code>=</code> which must be replaced with <code>%3D</code>. Do <em>not</em> encode the entire body of the POST request - the <code>=</code> separating parameter name and value must be left intact. This is a POST operation with the body of the POST message containing the data to complete the OAuth request for an access token. It is <em>not</em> a GET operation with the additional data supplied as query parameters.</p>
 <p>In response to a valid POST request the server returns a JSON encoded structure:</p>
-<pre><code>{
-  &quot;access_token&quot;:&quot;&lt;access token&gt;&quot;,
-  &quot;token_type&quot;:&quot;Bearer&quot;,
-  &quot;expires_in&quot;:3600,
-  &quot;refresh_token&quot;:&quot;&lt;refresh token&gt;&quot;,
+<pre tabindex="0"><code>{
+  &#34;access_token&#34;:&#34;&lt;access token&gt;&#34;,
+  &#34;token_type&#34;:&#34;Bearer&#34;,
+  &#34;expires_in&#34;:3600,
+  &#34;refresh_token&#34;:&#34;&lt;refresh token&gt;&#34;,
 }
 </code></pre><p>This token structure can be stored by your server as data unique to the user who initiated the request or you can make it part of the server side session storage for this users session with your server.</p>
 <h3 id="using-the-access-token">Using the access token</h3>

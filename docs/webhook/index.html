@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.71.1" />
+<meta name="generator" content="Hugo 0.95.0" />
 <meta name="robots" content="noindex, nofollow">
 
 
@@ -26,18 +26,15 @@ Onshape environment. …">
 <meta property="og:description" content="Summary Webhook notifications allow an application to register to receive notifications of certain events that occur within the Onshape environment. To receive a notification, an application must expose an endpoint that Onshape can call.
 Example Code  Python  Events Each type of event that an application may receive notifications for has a unique identifier known as the event type. Event types are grouped into Event Groups. Each group shares specification requirements, as described below." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://onshape-public.github.io/docs/webhook/" />
+<meta property="og:url" content="https://onshape-public.github.io/docs/webhook/" /><meta property="article:section" content="docs" />
 <meta property="article:published_time" content="2020-05-18T20:44:05-04:00" />
 <meta property="article:modified_time" content="2020-05-18T20:44:05-04:00" />
+
 <meta itemprop="name" content="Webhook Notifications">
 <meta itemprop="description" content="Summary Webhook notifications allow an application to register to receive notifications of certain events that occur within the Onshape environment. To receive a notification, an application must expose an endpoint that Onshape can call.
-Example Code  Python  Events Each type of event that an application may receive notifications for has a unique identifier known as the event type. Event types are grouped into Event Groups. Each group shares specification requirements, as described below.">
-<meta itemprop="datePublished" content="2020-05-18T20:44:05-04:00" />
+Example Code  Python  Events Each type of event that an application may receive notifications for has a unique identifier known as the event type. Event types are grouped into Event Groups. Each group shares specification requirements, as described below."><meta itemprop="datePublished" content="2020-05-18T20:44:05-04:00" />
 <meta itemprop="dateModified" content="2020-05-18T20:44:05-04:00" />
 <meta itemprop="wordCount" content="1064">
-
-
-
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Webhook Notifications"/>
 <meta name="twitter:description" content="Summary Webhook notifications allow an application to register to receive notifications of certain events that occur within the Onshape environment. To receive a notification, an application must expose an endpoint that Onshape can call.
@@ -318,53 +315,53 @@ delivery to fail.</p>
 <p>When an application no longer needs to be notified of changes specified by a particular notification registration, it should normally de-register the notification request.  De-registration is performed by making an HTTP that specifies the hook to deregister.  Onshape will attempt to call the deregistered hook with an event type of webhook.unregister as validation for the application that the de-registration is complete.  If the application does not de-register the webhook, Onshape will continue delivering notifications until either the the application returns an error in response to a notification for the webhook, or fails to respond at all for an extended period of time.</p>
 <h2 id="notification-api-example-messages">Notification API example messages</h2>
 <p>registration</p>
-<pre><code>{
-  &quot;timestamp&quot;: &quot;2014-12-16T23:45:10.611-0500&quot;,
-  &quot;event&quot;: &quot;webhook.register&quot;,
-  &quot;workspaceId&quot;: &quot;000000000000000000000000&quot;,
-  &quot;elementId&quot;: &quot;000000000000000000000000&quot;,
-  &quot;webhookId&quot;: &quot;544e91f7fb88ed44f5de1508&quot;,
-  &quot;messageId&quot;: &quot;34795d2e5f5f44eeb61fb7b1&quot;,
-  &quot;data&quot;: &quot;Some data&quot;,
-  &quot;documentId&quot;: &quot;000000000000000000000000&quot;,
-  &quot;versionId&quot;:  &quot;000000000000000000000000&quot;
+<pre tabindex="0"><code>{
+  &#34;timestamp&#34;: &#34;2014-12-16T23:45:10.611-0500&#34;,
+  &#34;event&#34;: &#34;webhook.register&#34;,
+  &#34;workspaceId&#34;: &#34;000000000000000000000000&#34;,
+  &#34;elementId&#34;: &#34;000000000000000000000000&#34;,
+  &#34;webhookId&#34;: &#34;544e91f7fb88ed44f5de1508&#34;,
+  &#34;messageId&#34;: &#34;34795d2e5f5f44eeb61fb7b1&#34;,
+  &#34;data&#34;: &#34;Some data&#34;,
+  &#34;documentId&#34;: &#34;000000000000000000000000&#34;,
+  &#34;versionId&#34;:  &#34;000000000000000000000000&#34;
 }
 </code></pre><p>ping</p>
-<pre><code>{
-  &quot;timestamp&quot;: &quot;2014-12-16T23:46:24.368-0500&quot;,
-  &quot;event&quot;: &quot;webhook.ping&quot;,
-  &quot;workspaceId&quot;: &quot;000000000000000000000000&quot;,
-  &quot;elementId&quot;: &quot;000000000000000000000000&quot;,
-  &quot;webhookId&quot;: &quot;544e91f7fb88ed44f5de1508&quot;,
-  &quot;messageId&quot;: &quot;6808d9a622644330b6cd95f5&quot;,
-  &quot;data&quot;: &quot;Some data&quot;,
-  &quot;documentId&quot;: &quot;000000000000000000000000&quot;,
-  &quot;versionId&quot;:  &quot;000000000000000000000000&quot;
+<pre tabindex="0"><code>{
+  &#34;timestamp&#34;: &#34;2014-12-16T23:46:24.368-0500&#34;,
+  &#34;event&#34;: &#34;webhook.ping&#34;,
+  &#34;workspaceId&#34;: &#34;000000000000000000000000&#34;,
+  &#34;elementId&#34;: &#34;000000000000000000000000&#34;,
+  &#34;webhookId&#34;: &#34;544e91f7fb88ed44f5de1508&#34;,
+  &#34;messageId&#34;: &#34;6808d9a622644330b6cd95f5&#34;,
+  &#34;data&#34;: &#34;Some data&#34;,
+  &#34;documentId&#34;: &#34;000000000000000000000000&#34;,
+  &#34;versionId&#34;:  &#34;000000000000000000000000&#34;
 }
 </code></pre><p>model change</p>
-<pre><code>{
-  &quot;timestamp&quot;: &quot;2014-12-16T23:46:29.284-0500&quot;,
-  &quot;event&quot;: &quot;onshape.model.lifecycle.changed&quot;,
-  &quot;workspaceId&quot;: &quot;f925722bee1c43fc80fb5bb2&quot;,
-  &quot;elementId&quot;: &quot;0f931a1ceba842299192823f&quot;,
-  &quot;webhookId&quot;: &quot;544e91f7fb88ed44f5de1508&quot;,
-  &quot;messageId&quot;: &quot;60f54ac1cbc04179a6642d9a&quot;,
-  &quot;data&quot;: &quot;Some data&quot;,
-  &quot;documentId&quot;: &quot;0f9c4392e5934f30b48ab645&quot;,
-  &quot;versionId&quot;:  &quot;000000000000000000000000&quot;
+<pre tabindex="0"><code>{
+  &#34;timestamp&#34;: &#34;2014-12-16T23:46:29.284-0500&#34;,
+  &#34;event&#34;: &#34;onshape.model.lifecycle.changed&#34;,
+  &#34;workspaceId&#34;: &#34;f925722bee1c43fc80fb5bb2&#34;,
+  &#34;elementId&#34;: &#34;0f931a1ceba842299192823f&#34;,
+  &#34;webhookId&#34;: &#34;544e91f7fb88ed44f5de1508&#34;,
+  &#34;messageId&#34;: &#34;60f54ac1cbc04179a6642d9a&#34;,
+  &#34;data&#34;: &#34;Some data&#34;,
+  &#34;documentId&#34;: &#34;0f9c4392e5934f30b48ab645&#34;,
+  &#34;versionId&#34;:  &#34;000000000000000000000000&#34;
 }
 </code></pre><p>document state change</p>
-<pre><code>{
-  &quot;timestamp&quot;: &quot;2014-12-16T23:46:29.284-0500&quot;,
-  &quot;event&quot;: &quot;onshape.document.lifecycle.statechange&quot;,
-  &quot;workspaceId&quot;: &quot;000000000000000000000000&quot;,
-  &quot;elementId&quot;: &quot;000000000000000000000000&quot;,
-  &quot;webhookId&quot;: &quot;544e91f7fb88ed44f5de1508&quot;,
-  &quot;messageId&quot;: &quot;60f54ac1cbc04179a6642d9a&quot;,
-  &quot;data&quot;: &quot;Some data&quot;,
-  &quot;documentId&quot;: &quot;0f9c4392e5934f30b48ab645&quot;,
-  &quot;versionId&quot;:  &quot;000000000000000000000000&quot;,
-  &quot;documentState&quot;: &quot;TRASH&quot;
+<pre tabindex="0"><code>{
+  &#34;timestamp&#34;: &#34;2014-12-16T23:46:29.284-0500&#34;,
+  &#34;event&#34;: &#34;onshape.document.lifecycle.statechange&#34;,
+  &#34;workspaceId&#34;: &#34;000000000000000000000000&#34;,
+  &#34;elementId&#34;: &#34;000000000000000000000000&#34;,
+  &#34;webhookId&#34;: &#34;544e91f7fb88ed44f5de1508&#34;,
+  &#34;messageId&#34;: &#34;60f54ac1cbc04179a6642d9a&#34;,
+  &#34;data&#34;: &#34;Some data&#34;,
+  &#34;documentId&#34;: &#34;0f9c4392e5934f30b48ab645&#34;,
+  &#34;versionId&#34;:  &#34;000000000000000000000000&#34;,
+  &#34;documentState&#34;: &#34;TRASH&#34;
 }
 </code></pre><p>Possible values of documentState are:</p>
 <ul>
@@ -373,40 +370,40 @@ delivery to fail.</p>
 <li>&ldquo;DELETED&rdquo; - document has been deleted</li>
 </ul>
 <p>user application settings change</p>
-<pre><code>{
-  &quot;timestamp&quot;: &quot;2014-12-16T23:46:29.284-0500&quot;,
-  &quot;event&quot;: &quot;onshape.user.lifecycle.updateappsettings&quot;,
-  &quot;workspaceId&quot;: &quot;f925722bee1c43fc80fb5bb2&quot;,
-  &quot;elementId&quot;: &quot;0f931a1ceba842299192823f&quot;,
-  &quot;webhookId&quot;: &quot;544e91f7fb88ed44f5de1508&quot;,
-  &quot;messageId&quot;: &quot;60f54ac1cbc04179a6642d9a&quot;,
-  &quot;data&quot;: &quot;Some data&quot;,
-  &quot;userId&quot;: &quot;567953d60a1a5fbb95940333&quot;,
-  &quot;clientId&quot;:&quot;ABCDEFGHIJKLMNOPQRSTUVWXZY234567ABCDEFG=&quot;
+<pre tabindex="0"><code>{
+  &#34;timestamp&#34;: &#34;2014-12-16T23:46:29.284-0500&#34;,
+  &#34;event&#34;: &#34;onshape.user.lifecycle.updateappsettings&#34;,
+  &#34;workspaceId&#34;: &#34;f925722bee1c43fc80fb5bb2&#34;,
+  &#34;elementId&#34;: &#34;0f931a1ceba842299192823f&#34;,
+  &#34;webhookId&#34;: &#34;544e91f7fb88ed44f5de1508&#34;,
+  &#34;messageId&#34;: &#34;60f54ac1cbc04179a6642d9a&#34;,
+  &#34;data&#34;: &#34;Some data&#34;,
+  &#34;userId&#34;: &#34;567953d60a1a5fbb95940333&#34;,
+  &#34;clientId&#34;:&#34;ABCDEFGHIJKLMNOPQRSTUVWXZY234567ABCDEFG=&#34;
 }
 </code></pre><p>translation completion</p>
-<pre><code>{
-  &quot;timestamp&quot;: &quot;2014-12-16T23:46:29.284-0500&quot;,
-  &quot;event&quot;: &quot;onshape.model.translation.complete&quot;,
-  &quot;workspaceId&quot;: &quot;f925722bee1c43fc80fb5bb2&quot;,
-  &quot;elementId&quot;: &quot;0f931a1ceba842299192823f&quot;,
-  &quot;webhookId&quot;: &quot;544e91f7fb88ed44f5de1508&quot;,
-  &quot;messageId&quot;: &quot;60f54ac1cbc04179a6642d9a&quot;,
-  &quot;data&quot;: &quot;Some data&quot;,
-  &quot;documentId&quot;: &quot;0f9c4392e5934f30b48ab645&quot;,
-  &quot;userId&quot;: &quot;567953d60a1a5fbb95940333&quot;,
-  &quot;translationRequestId&quot;: &quot;4f5de10f9c4392e5934f30b4&quot;
+<pre tabindex="0"><code>{
+  &#34;timestamp&#34;: &#34;2014-12-16T23:46:29.284-0500&#34;,
+  &#34;event&#34;: &#34;onshape.model.translation.complete&#34;,
+  &#34;workspaceId&#34;: &#34;f925722bee1c43fc80fb5bb2&#34;,
+  &#34;elementId&#34;: &#34;0f931a1ceba842299192823f&#34;,
+  &#34;webhookId&#34;: &#34;544e91f7fb88ed44f5de1508&#34;,
+  &#34;messageId&#34;: &#34;60f54ac1cbc04179a6642d9a&#34;,
+  &#34;data&#34;: &#34;Some data&#34;,
+  &#34;documentId&#34;: &#34;0f9c4392e5934f30b48ab645&#34;,
+  &#34;userId&#34;: &#34;567953d60a1a5fbb95940333&#34;,
+  &#34;translationRequestId&#34;: &#34;4f5de10f9c4392e5934f30b4&#34;
 }
 </code></pre><p>comment create</p>
-<pre><code>{
-  &quot;timestamp&quot;: &quot;2014-12-16T23:46:29.284-0500&quot;,
-  &quot;event&quot;: &quot;onshape.comment.create&quot;,
-  &quot;workspaceId&quot;: &quot;f925722bee1c43fc80fb5bb2&quot;,
-  &quot;elementId&quot;: &quot;0f931a1ceba842299192823f&quot;,
-  &quot;webhookId&quot;: &quot;544e91f7fb88ed44f5de1508&quot;,
-  &quot;messageId&quot;: &quot;60f54ac1cbc04179a6642d9a&quot;,
-  &quot;documentId&quot;: &quot;0f9c4392e5934f30b48ab645&quot;,
-  &quot;commentId&quot;: &quot;567953d60a1a5fbb95940333&quot;
+<pre tabindex="0"><code>{
+  &#34;timestamp&#34;: &#34;2014-12-16T23:46:29.284-0500&#34;,
+  &#34;event&#34;: &#34;onshape.comment.create&#34;,
+  &#34;workspaceId&#34;: &#34;f925722bee1c43fc80fb5bb2&#34;,
+  &#34;elementId&#34;: &#34;0f931a1ceba842299192823f&#34;,
+  &#34;webhookId&#34;: &#34;544e91f7fb88ed44f5de1508&#34;,
+  &#34;messageId&#34;: &#34;60f54ac1cbc04179a6642d9a&#34;,
+  &#34;documentId&#34;: &#34;0f9c4392e5934f30b48ab645&#34;,
+  &#34;commentId&#34;: &#34;567953d60a1a5fbb95940333&#34;
 }
 </code></pre>
 	
