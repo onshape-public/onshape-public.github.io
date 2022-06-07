@@ -3966,146 +3966,146 @@ delivery to fail.&lt;/p>
 &lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage3.png"
 style="width:4.29167in;height:0.95498in" />&lt;/p>
 &lt;h1 id="table-of-contents">Table of Contents&lt;/h1>
-&lt;p>[Introduction &lt;a href="#introduction">4&lt;/a>](#introduction)&lt;/p>
-&lt;p>[About this book &lt;a href="#about-this-book">6&lt;/a>](#about-this-book)&lt;/p>
-&lt;p>[Who is this book for?
-&lt;a href="#who-is-this-book-for">6&lt;/a>](#who-is-this-book-for)&lt;/p>
-&lt;p>[How this book is organized
-&lt;a href="#how-this-book-is-organized">6&lt;/a>](#how-this-book-is-organized)&lt;/p>
-&lt;p>[Conventions Used throughout this book
-&lt;a href="#conventions-used-throughout-this-book">7&lt;/a>](#conventions-used-throughout-this-book)&lt;/p>
-&lt;p>[Onshape – a new architecture
-&lt;a href="#onshape-a-new-architecture">8&lt;/a>](#onshape-a-new-architecture)&lt;/p>
-&lt;p>[Traditional Three-Tier Architecture
-&lt;a href="#traditional-three-tier-architecture">8&lt;/a>](#traditional-three-tier-architecture)&lt;/p>
-&lt;p>[Single vs Multiple Tenant Architectures
-&lt;a href="#single-vs-multiple-tenant-architectures">9&lt;/a>](#single-vs-multiple-tenant-architectures)&lt;/p>
-&lt;p>[What is a REST API? &lt;a href="#what-is-a-rest-api">11&lt;/a>](#what-is-a-rest-api)&lt;/p>
-&lt;p>[What is JSON? &lt;a href="#what-is-json">13&lt;/a>](#what-is-json)&lt;/p>
-&lt;p>[The Onshape difference
-&lt;a href="#the-onshape-difference">15&lt;/a>](#the-onshape-difference)&lt;/p>
-&lt;p>[The Key Onshape differentiators
-&lt;a href="#the-key-onshape-differentiators">15&lt;/a>](#the-key-onshape-differentiators)&lt;/p>
-&lt;p>[Data Driven – No files
-&lt;a href="#data-driven-no-files">15&lt;/a>](#data-driven-no-files)&lt;/p>
-&lt;p>[PDM is built-in &lt;a href="#pdm-is-built-in">17&lt;/a>](#pdm-is-built-in)&lt;/p>
-&lt;p>[Multi-Part Part Studios
-&lt;a href="#multi-part-part-studios">19&lt;/a>](#multi-part-part-studios)&lt;/p>
-&lt;p>[Versions and Releases
-&lt;a href="#versions-and-releases">21&lt;/a>](#versions-and-releases)&lt;/p>
-&lt;p>[Workflows &lt;a href="#workflows">22&lt;/a>](#workflows)&lt;/p>
-&lt;p>[The Document Structure
-&lt;a href="#the-document-structure">24&lt;/a>](#the-document-structure)&lt;/p>
-&lt;p>[The Onshape URL &lt;a href="#the-onshape-url">26&lt;/a>](#the-onshape-url)&lt;/p>
-&lt;p>[Integration Considerations
-&lt;a href="#integration-considerations">27&lt;/a>](#integration-considerations)&lt;/p>
-&lt;p>[Integrating 3&lt;sup>rd&lt;/sup> Party Applications with Onshape
-&lt;a href="#integrating-3rd-party-applications-with-onshape">29&lt;/a>](#integrating-3rd-party-applications-with-onshape)&lt;/p>
-&lt;p>[Authentication Overview
-&lt;a href="#authentication-overview">29&lt;/a>](#authentication-overview)&lt;/p>
-&lt;p>[What is OAuth2? &lt;a href="#what-is-oauth2">29&lt;/a>](#what-is-oauth2)&lt;/p>
-&lt;p>[How Does OAuth Work? &lt;a href="#how-does-oauth-work">30&lt;/a>](#how-does-oauth-work)&lt;/p>
-&lt;p>[Enabling a 3&lt;sup>rd&lt;/sup> Party Application in Onshape
-&lt;a href="#enabling-a-3rd-party-application-in-onshape">33&lt;/a>](#enabling-a-3rd-party-application-in-onshape)&lt;/p>
-&lt;p>[Implementing OAuth2 in your Code
-&lt;a href="#implementing-oauth2-in-your-code">37&lt;/a>](#implementing-oauth2-in-your-code)&lt;/p>
-&lt;p>[Step 1: get the user authorization code
-&lt;a href="#step-1-get-the-user-authorization-code">37&lt;/a>](#step-1-get-the-user-authorization-code)&lt;/p>
-&lt;p>[step2: Exchange the code for an access token
-&lt;a href="#step2-exchange-the-code-for-an-access-token">43&lt;/a>](#step2-exchange-the-code-for-an-access-token)&lt;/p>
-&lt;p>[step 3: Using the access token
-&lt;a href="#step-3-using-the-access-token">45&lt;/a>](#step-3-using-the-access-token)&lt;/p>
-&lt;p>[Step 4: Refreshing the token
-&lt;a href="#step-4-refreshing-the-token">48&lt;/a>](#step-4-refreshing-the-token)&lt;/p>
-&lt;p>[User Grant of Authorization
-&lt;a href="#user-grant-of-authorization">51&lt;/a>](#user-grant-of-authorization)&lt;/p>
-&lt;p>[OAuth2 Summary &lt;a href="#oauth2-summary">53&lt;/a>](#oauth2-summary)&lt;/p>
-&lt;p>[The methodology of specific Business Cases
-&lt;a href="#the-methodology-of-specific-business-cases">54&lt;/a>](#the-methodology-of-specific-business-cases)&lt;/p>
-&lt;p>[Methodology Introduction
-&lt;a href="#methodology-introduction">54&lt;/a>](#methodology-introduction)&lt;/p>
-&lt;p>[Business Case 1: Sync Objects and Metadata
-&lt;a href="#business-case-1-sync-objects-and-metadata">55&lt;/a>](#business-case-1-sync-objects-and-metadata)&lt;/p>
-&lt;p>[Business case 1 Overview
-&lt;a href="#business-case-1-overview">55&lt;/a>](#business-case-1-overview)&lt;/p>
-&lt;p>[Step 1 Define Properties in Onshape:
-&lt;a href="#step-1-define-properties-in-onshape">56&lt;/a>](#step-1-define-properties-in-onshape)&lt;/p>
-&lt;p>[Step 2 Create Corresponding Object:
-&lt;a href="#step-2-create-corresponding-object">57&lt;/a>](#step-2-create-corresponding-object)&lt;/p>
-&lt;p>[Step 3 Get Onshape Metadata:
-&lt;a href="#step-3-get-onshape-metadata">58&lt;/a>](#step-3-get-onshape-metadata)&lt;/p>
-&lt;p>[Step 4 Modify Properties in Onshape:
-&lt;a href="#step-4-modify-properties-in-onshape">59&lt;/a>](#step-4-modify-properties-in-onshape)&lt;/p>
-&lt;p>[Step 5: Request Part Number
-&lt;a href="#step-5-request-part-number">60&lt;/a>](#step-5-request-part-number)&lt;/p>
-&lt;p>[Step 6: Push Updates from Third-Party application
-&lt;a href="#step-6-push-updates-from-third-party-application">61&lt;/a>](#step-6-push-updates-from-third-party-application)&lt;/p>
-&lt;p>[Business case 1 implementation
-&lt;a href="#business-case-1-implementation">62&lt;/a>](#business-case-1-implementation)&lt;/p>
-&lt;p>[REST API Tips and Tricks
-&lt;a href="#rest-api-tips-and-tricks">62&lt;/a>](#rest-api-tips-and-tricks)&lt;/p>
-&lt;p>[Glassworks &lt;a href="#glassworks">62&lt;/a>](#glassworks)&lt;/p>
-&lt;p>[Debug Using Browser Developer Tools
-&lt;a href="#debug-using-browser-developer-tools">64&lt;/a>](#debug-using-browser-developer-tools)&lt;/p>
-&lt;p>[Define an Application Extension
-&lt;a href="#define-an-application-extension">68&lt;/a>](#define-an-application-extension)&lt;/p>
-&lt;p>[Grant Onshape Access to 3&lt;sup>rd&lt;/sup> Party Data
-&lt;a href="#grant-onshape-access-to-3rd-party-data">71&lt;/a>](#grant-onshape-access-to-3rd-party-data)&lt;/p>
-&lt;p>[Defining Webhooks &lt;a href="#defining-webhooks">73&lt;/a>](#defining-webhooks)&lt;/p>
-&lt;p>[Receiving Webhook notifications
-&lt;a href="#receiving-webhook-notifications">77&lt;/a>](#receiving-webhook-notifications)&lt;/p>
-&lt;p>[Getting Onshape Properties
-&lt;a href="#getting-onshape-properties">78&lt;/a>](#getting-onshape-properties)&lt;/p>
-&lt;p>[Updating Onshape &lt;a href="#updating-onshape">80&lt;/a>](#updating-onshape)&lt;/p>
-&lt;p>[Implementing Custom Part Numbers
-&lt;a href="#implementing-custom-part-numbers">81&lt;/a>](#implementing-custom-part-numbers)&lt;/p>
-&lt;p>[Implementing Part Number Code
-&lt;a href="#implementing-part-number-code">83&lt;/a>](#implementing-part-number-code)&lt;/p>
-&lt;p>[Business Case 2: Sync Revisions and releases
-&lt;a href="#business-case-2-sync-revisions-and-releases">87&lt;/a>](#business-case-2-sync-revisions-and-releases)&lt;/p>
-&lt;p>[Business case 2 Overview
-&lt;a href="#business-case-2-overview">87&lt;/a>](#business-case-2-overview)&lt;/p>
-&lt;p>[Step 1: Initiate Release
-&lt;a href="#step-1-initiate-release">89&lt;/a>](#step-1-initiate-release)&lt;/p>
-&lt;p>[Step 2: Initiating Release Process in 3&lt;sup>rd&lt;/sup> Party app
-&lt;a href="#step-2-initiating-release-process-in-3rd-party-app">91&lt;/a>](#step-2-initiating-release-process-in-3rd-party-app)&lt;/p>
-&lt;p>[Step 3: Complete Release Process
-&lt;a href="#step-3-complete-release-process">92&lt;/a>](#step-3-complete-release-process)&lt;/p>
-&lt;p>[Business case 2 implementation
-&lt;a href="#business-case-2-implementation">94&lt;/a>](#business-case-2-implementation)&lt;/p>
-&lt;p>[Setup Webhook &lt;a href="#setup-webhook">94&lt;/a>](#setup-webhook)&lt;/p>
-&lt;p>[Receiving Web Hook Notifications
-&lt;a href="#receiving-web-hook-notifications">95&lt;/a>](#receiving-web-hook-notifications)&lt;/p>
-&lt;p>[Getting Release Package Data
-&lt;a href="#getting-release-package-data">97&lt;/a>](#getting-release-package-data)&lt;/p>
-&lt;p>[Saving Release Package Data
-&lt;a href="#saving-release-package-data">97&lt;/a>](#saving-release-package-data)&lt;/p>
-&lt;p>[Completing the Release
-&lt;a href="#completing-the-release">99&lt;/a>](#completing-the-release)&lt;/p>
-&lt;p>[Business Case 3: Generate Derivative Files
-&lt;a href="#business-case-3-generate-derivative-files">103&lt;/a>](#business-case-3-generate-derivative-files)&lt;/p>
-&lt;p>[Business case 3 Overview
-&lt;a href="#business-case-3-overview">104&lt;/a>](#business-case-3-overview)&lt;/p>
-&lt;p>[Business case 3 implementation
-&lt;a href="#business-case-3-implementation">106&lt;/a>](#business-case-3-implementation)&lt;/p>
-&lt;p>[Initiating the Translation
-&lt;a href="#initiating-the-translation">107&lt;/a>](#initiating-the-translation)&lt;/p>
-&lt;p>[Ping Onshape for Translation
-&lt;a href="#ping-onshape-for-translation">108&lt;/a>](#ping-onshape-for-translation)&lt;/p>
-&lt;p>[Retrieve Translated File
-&lt;a href="#retrieve-translated-file">110&lt;/a>](#retrieve-translated-file)&lt;/p>
-&lt;p>[Translation Webhooks
-&lt;a href="#translation-webhooks">112&lt;/a>](#translation-webhooks)&lt;/p>
-&lt;p>[Integrating into the Onshape Interface
-&lt;a href="#integrating-into-the-onshape-interface">114&lt;/a>](#integrating-into-the-onshape-interface)&lt;/p>
-&lt;p>[Setting up the Integration
-&lt;a href="#setting-up-the-integration">115&lt;/a>](#setting-up-the-integration)&lt;/p>
-&lt;p>[Calling a Page in the Extension
-&lt;a href="#calling-a-page-in-the-extension">118&lt;/a>](#calling-a-page-in-the-extension)&lt;/p>
-&lt;p>[Using our application extension
-&lt;a href="#using-our-application-extension">119&lt;/a>](#using-our-application-extension)&lt;/p>
-&lt;p>[Methodology Summary &lt;a href="#methodology-summary">121&lt;/a>](#methodology-summary)&lt;/p>
-&lt;p>[Table to Figures &lt;a href="#table-to-figures">122&lt;/a>](#table-to-figures)&lt;/p>
+&lt;p>&lt;a href="#introduction">Introduction 4&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#about-this-book">About this book 6&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#who-is-this-book-for">Who is this book for?
+6&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#how-this-book-is-organized">How this book is organized
+6&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#conventions-used-throughout-this-book">Conventions Used throughout this book
+7&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#onshape-a-new-architecture">Onshape – a new architecture
+8&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#traditional-three-tier-architecture">Traditional Three-Tier Architecture
+8&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#single-vs-multiple-tenant-architectures">Single vs Multiple Tenant Architectures
+9&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#what-is-a-rest-api">What is a REST API? 11&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#what-is-json">What is JSON? 13&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#the-onshape-difference">The Onshape difference
+15&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#the-key-onshape-differentiators">The Key Onshape differentiators
+15&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#data-driven-no-files">Data Driven – No files
+15&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#pdm-is-built-in">PDM is built-in 17&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#multi-part-part-studios">Multi-Part Part Studios
+19&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#versions-and-releases">Versions and Releases
+21&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#workflows">Workflows 22&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#the-document-structure">The Document Structure
+24&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#the-onshape-url">The Onshape URL 26&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#integration-considerations">Integration Considerations
+27&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#integrating-3rd-party-applications-with-onshape">Integrating 3&lt;sup>rd&lt;/sup> Party Applications with Onshape
+29&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#authentication-overview">Authentication Overview
+29&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#what-is-oauth2">What is OAuth2? 29&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#how-does-oauth-work">How Does OAuth Work? 30&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#enabling-a-3rd-party-application-in-onshape">Enabling a 3&lt;sup>rd&lt;/sup> Party Application in Onshape
+33&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#implementing-oauth2-in-your-code">Implementing OAuth2 in your Code
+37&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#step-1-get-the-user-authorization-code">Step 1: get the user authorization code
+37&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#step2-exchange-the-code-for-an-access-token">Step2: Exchange the code for an access token
+43&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#step-3-using-the-access-token">Step 3: Using the access token
+45&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#step-4-refreshing-the-token">Step 4: Refreshing the token
+48&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#user-grant-of-authorization">User Grant of Authorization
+51&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#oauth2-summary">OAuth2 Summary 53&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#the-methodology-of-specific-business-cases">The methodology of specific Business Cases
+54&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#methodology-introduction">Methodology Introduction
+54&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#business-case-1-sync-objects-and-metadata">Business Case 1: Sync Objects and Metadata
+55&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#business-case-1-overview">Business case 1 Overview
+55&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#step-1-define-properties-in-onshape">Step 1 Define Properties in Onshape:
+56&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#step-2-create-corresponding-object">Step 2 Create Corresponding Object:
+57&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#step-3-get-onshape-metadata">Step 3 Get Onshape Metadata:
+58&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#step-4-modify-properties-in-onshape">Step 4 Modify Properties in Onshape:
+59&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#step-5-request-part-number">Step 5: Request Part Number
+60&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#step-6-push-updates-from-third-party-application">Step 6: Push Updates from Third-Party application
+61&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#business-case-1-implementation">Business case 1 implementation
+62&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#rest-api-tips-and-tricks">REST API Tips and Tricks
+62&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#glassworks">Glassworks 62&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#debug-using-browser-developer-tools">Debug Using Browser Developer Tools
+4&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#define-an-application-extension">Define an Application Extension
+68&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#grant-onshape-access-to-3rd-party-data">Grant Onshape Access to 3&lt;sup>rd&lt;/sup> Party Data
+71&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#defining-webhooks">Defining Webhooks 73&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#receiving-webhook-notifications">Receiving Webhook notifications
+77&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#getting-onshape-properties">Getting Onshape Properties
+78&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#updating-onshape">Updating Onshape 80&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#implementing-custom-part-numbers">Implementing Custom Part Numbers
+81&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#implementing-part-number-code">Implementing Part Number Code
+83&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#business-case-2-sync-revisions-and-releases">Business Case 2: Sync Revisions and releases
+87&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#business-case-2-overview">Business case 2 Overview
+87&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#step-1-initiate-release">Step 1: Initiate Release
+89&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#step-2-initiating-release-process-in-3rd-party-app">Step 2: Initiating Release Process in 3&lt;sup>rd&lt;/sup> Party app
+91&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#step-3-complete-release-process">Step 3: Complete Release Process
+92&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#business-case-2-implementation">Business case 2 implementation
+94&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#setup-webhook">Setup Webhook 94&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#receiving-web-hook-notifications">Receiving Web Hook Notifications
+95&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#getting-release-package-data">Getting Release Package Data
+97&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#saving-release-package-data">Saving Release Package Data
+97&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#completing-the-release">Completing the Release
+99&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#business-case-3-generate-derivative-files">Business Case 3: Generate Derivative Files
+103&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#business-case-3-overview">Business case 3 Overview
+104&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#business-case-3-implementation">Business case 3 implementation
+106&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#initiating-the-translation">Initiating the Translation
+107&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#ping-onshape-for-translation">Ping Onshape for Translation
+108&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#retrieve-translated-file">Retrieve Translated File
+110&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#translation-webhooks">Translation Webhooks
+112&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#integrating-into-the-onshape-interface">Integrating into the Onshape Interface
+114&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#setting-up-the-integration">Setting up the Integration
+115&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#calling-a-page-in-the-extension">Calling a Page in the Extension
+118&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#using-our-application-extension">Using our application extension
+119&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#methodology-summary">Methodology Summary 121&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#table-to-figures">Table to Figures 122&lt;/a>&lt;/p>
 &lt;h1 id="introduction">Introduction&lt;/h1>
 &lt;p>As long as there have been applications managing organizational data
 into a database, there has been a need to share that data between
@@ -4161,8 +4161,8 @@ an Out-Of-The-Box solution or through some custom coding.&lt;/p>
 &lt;p>Early on, Onshape understood that as an engineering system, it cannot
 exist in a vacuum – it must be able to communicate with other systems.
 For this reason, the REST API was developed.&lt;/p>
-&lt;p>An&lt;img src="https://onshape-public.github.io/images/integrationguideimage4.png"
-style="width:0.43056in;height:0.43056in" /> API, or &lt;em>application
+&lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage4.png"
+style="width:0.43056in;height:0.43056in" /> An API, or &lt;em>application
 programming interface&lt;/em>, is a set of rules that define how applications
 or devices can connect to and communicate with each other. A REST API is
 an API that conforms to the design principles of the REST,
@@ -4358,33 +4358,31 @@ languages support them in one form or another. It makes sense that a
 data format that is interchangeable with programming languages also be
 based on these structures.&lt;/p>
 &lt;p>The following is the basic format of JSON:&lt;/p>
-&lt;p>Object: {&lt;/p>
-&lt;p>“attribute”: “value”,&lt;/p>
-&lt;p>“attribute”: “value”&lt;/p>
-&lt;p>}&lt;/p>
-&lt;p>A simple example of a JSON object could be the following:&lt;/p>
-&lt;p>“Person”:{&lt;/p>
-&lt;p>“firstname”: “Joe”,&lt;/p>
-&lt;p>“lastname: “Smith”,&lt;/p>
-&lt;p>“Age”: 31&lt;/p>
-&lt;p>}&lt;/p>
-&lt;p>This is an object that describes a person named Joe Smith who is 31
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f00;background-color:#faa">Object:&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f00;background-color:#faa">“attribute”:&lt;/span> &lt;span style="color:#f00;background-color:#faa">“value”,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f00;background-color:#faa">“attribute”:&lt;/span> &lt;span style="color:#f00;background-color:#faa">“value”&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>A simple example of a JSON object could be the following:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f00;background-color:#faa">“Person”:&lt;/span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f00;background-color:#faa">“firstname”:&lt;/span> &lt;span style="color:#f00;background-color:#faa">“Joe”,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f00;background-color:#faa">“lastname:&lt;/span> &lt;span style="color:#f00;background-color:#faa">“Smith”,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f00;background-color:#faa">“Age”:&lt;/span> &lt;span style="color:#f00;background-color:#faa">31&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This is an object that describes a person named Joe Smith who is 31
 years old.&lt;/p>
 &lt;p>To this object we can add an array of children as follows:&lt;/p>
-&lt;p>{&lt;/p>
-&lt;p>&amp;ldquo;Person&amp;rdquo;: {&lt;/p>
-&lt;p>“firstname”: “Joe”,&lt;/p>
-&lt;p>“lastname&amp;quot;: “Smith”,&lt;/p>
-&lt;p>“Age”: 31,&lt;/p>
-&lt;p>&amp;ldquo;children&amp;rdquo;: [&lt;/p>
-&lt;blockquote>
-&lt;p>{&amp;ldquo;name&amp;rdquo;: &amp;ldquo;Bill”, &amp;ldquo;age&amp;rdquo;: 5},&lt;/p>
-&lt;/blockquote>
-&lt;p>{&amp;ldquo;name&amp;rdquo;: &amp;ldquo;Sarah&amp;rdquo;, &amp;ldquo;age&amp;rdquo;: 2}&lt;/p>
-&lt;p>]&lt;/p>
-&lt;p>}&lt;/p>
-&lt;p>}&lt;/p>
-&lt;p>As we can see here, we added an array of 2 children to our “Person”
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;Person&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f00;background-color:#faa">“firstname”:&lt;/span> &lt;span style="color:#f00;background-color:#faa">“Joe”,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f00;background-color:#faa">“lastname&lt;/span>&lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;: “Smith”,
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#1e90ff;font-weight:bold"> “Age”: 31,
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#1e90ff;font-weight:bold"> &amp;#34;&lt;/span>&lt;span style="color:#f00;background-color:#faa">children&lt;/span>&lt;span style="color:#a50">&amp;#34;: [
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a50"> {&amp;#34;&lt;/span>&lt;span style="color:#f00;background-color:#faa">name&lt;/span>&lt;span style="color:#a50">&amp;#34;: &amp;#34;&lt;/span>&lt;span style="color:#f00;background-color:#faa">Bill”&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;age&amp;#34;&lt;/span>: &lt;span style="color:#099">5&lt;/span>},
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f00;background-color:#faa">{&lt;/span>&lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;Sarah&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;age&amp;#34;&lt;/span>: &lt;span style="color:#099">2&lt;/span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f00;background-color:#faa">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f00;background-color:#faa">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f00;background-color:#faa">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>As we can see here, we added an array of 2 children to our “Person”
 object by using the square brackets [] – which denotes an array.&lt;/p>
 &lt;p>There’s not much more to the JSON format that we need to know other than
 this basic structure of objects with key pair values.&lt;/p>
@@ -5052,28 +5050,30 @@ passport will provide hooks for controlling what occurs when
 authentication succeeds or fails. For more information on Passport
 please reference &lt;a href="https://www.npmjs.com/package/passport">https://www.npmjs.com/package/passport&lt;/a>&lt;/p>
 &lt;p>To install Passport&lt;/p>
-&lt;p>$ npm install passport&lt;/p>
-&lt;p>To install passport-onshape plugin for Passport&lt;/p>
-&lt;p>$ npm install passport-onshape&lt;/p>
-&lt;p>Define your app.js (Server file).&lt;/p>
-&lt;p>const express = require(&amp;rsquo;express&amp;rsquo;);&lt;/p>
-&lt;p>const session = require(&amp;rsquo;express-session&amp;rsquo;);&lt;/p>
-&lt;p>const passport = require(&amp;lsquo;passport&amp;rsquo;);&lt;/p>
-&lt;p>const OnshapeStrategy = require(&amp;lsquo;passport-onshape&amp;rsquo;);&lt;/p>
-&lt;p>Tell Express to use Passport and initialize passport&lt;/p>
-&lt;p>var app = express();&lt;/p>
-&lt;p>app.use(session({&lt;/p>
-&lt;p>secret: session_secret,&lt;/p>
-&lt;p>resave: false,&lt;/p>
-&lt;p>saveUninitialized: true&lt;/p>
-&lt;p>}));&lt;/p>
-&lt;p>app.use(passport.initialize());&lt;/p>
-&lt;p>app.use(passport.session());&lt;/p>
-&lt;p>Store Onshape user information so it can be retrieved from req.user in
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>$ npm install passport
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>To install passport-onshape plugin for Passport&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>$ npm install passport-onshape
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Define your app.js (Server file).&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a">const&lt;/span> express = require(&lt;span style="color:#a50">&amp;#39;express&amp;#39;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a">const&lt;/span> session = require(&lt;span style="color:#a50">&amp;#39;express-session&amp;#39;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a">const&lt;/span> passport = require(&lt;span style="color:#a50">&amp;#39;passport&amp;#39;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a">const&lt;/span> OnshapeStrategy = require(&lt;span style="color:#a50">&amp;#39;passport-onshape&amp;#39;&lt;/span>);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Tell Express to use Passport and initialize passport&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a">var&lt;/span> app = express();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>app.use(session({
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> secret: session_secret,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> resave: &lt;span style="color:#00a">false&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> saveUninitialized: &lt;span style="color:#00a">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}));
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>app.use(passport.initialize());
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>app.use(passport.session());
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Store Onshape user information so it can be retrieved from req.user in
 each call.&lt;/p>
-&lt;p>passport.serializeUser((user, done) =&amp;gt; done(null, user));&lt;/p>
-&lt;p>passport.deserializeUser((obj, done) =&amp;gt; done(null, obj));&lt;/p>
-&lt;p>Notes on serializeUser and deserializeUser:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>passport.serializeUser((user, done) =&amp;gt; done(&lt;span style="color:#00a">null&lt;/span>, user));
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>passport.deserializeUser((obj, done) =&amp;gt; done(&lt;span style="color:#00a">null&lt;/span>, obj));
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Notes on serializeUser and deserializeUser:&lt;/p>
 &lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage6.png"
 style="width:0.47222in;height:0.47222in" />Passport uses the
 serializeUser function to persist user data (after successful
@@ -5081,36 +5081,33 @@ authentication) into the session. The function deserializeUser is used
 to retrieve user data from session.&lt;/p>
 &lt;p>Passport needs the following setup to save user data after
 authentication in the session:&lt;/p>
-&lt;p>app.use(session({ secret: session_secret }));&lt;/p>
-&lt;p>app.use(passport.initialize());&lt;/p>
-&lt;p>app.use(passport.session());&lt;/p>
-&lt;p>The following diagram explains what happens with the serialize and
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>app.use(session({ secret: session_secret }));
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>app.use(passport.initialize());
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>app.use(passport.session());
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The following diagram explains what happens with the serialize and
 deserialize functions.&lt;/p>
 &lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage6.png"
 style="width:0.47222in;height:0.47222in" />To learn more about Passport
 please reference &lt;a href="https://www.npmjs.com/package/passport">https://www.npmjs.com/package/passport&lt;/a>&lt;/p>
 &lt;p>Initialize Passport with the Onshape Strategy&lt;/p>
-&lt;p>passport.use(new OnshapeStrategy({&lt;/p>
-&lt;p>clientID: oauth_clientid, //the client ID string that you got when
-registering the app with Onshape&lt;/p>
-&lt;p>clientSecret: oauth_clent_secret, //The secret string&lt;/p>
-&lt;p>callbackURL: oauth_callback, //The Oauth Callback URL ex: /oauthRedirect&lt;/p>
-&lt;p>authorizationURL: oauthurl, //https://oauth.onshape.com/oauth/authorize&lt;/p>
-&lt;p>tokenURL: oauthtokenurl, //https://oauth.onshape.com/oauth/token&lt;/p>
-&lt;p>userProfileURL: userprofileurl
-//https://cad.onshape.com/api/users/sessioninfo&lt;/p>
-&lt;p>},&lt;/p>
-&lt;p>(accessToken, refreshToken, profile, done) =&amp;gt; {&lt;/p>
-&lt;p>profile.accessToken = accessToken;&lt;/p>
-&lt;p>profile.refreshToken = refreshToken;&lt;/p>
-&lt;p>//Here you can store the user profile, accessToken, RrefreshToken in
-your database&lt;/p>
-&lt;p>userController.updateUser(accessToken, refreshToken, user
-).then((data)=&amp;gt;{});&lt;/p>
-&lt;p>return done(null, data);&lt;/p>
-&lt;p>}&lt;/p>
-&lt;p>));&lt;/p>
-&lt;p>The OnshapeStrategy takes six values, all which should be stored in your
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>passport.use(&lt;span style="color:#00a">new&lt;/span> OnshapeStrategy({
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> clientID: oauth_clientid, &lt;span style="color:#aaa;font-style:italic">//the client ID string that you got when registering the app with Onshape
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span> clientSecret: oauth_clent_secret, &lt;span style="color:#aaa;font-style:italic">//The secret string
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span> callbackURL: oauth_callback, &lt;span style="color:#aaa;font-style:italic">//The Oauth Callback URL ex: /oauthRedirect
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span> authorizationURL: oauthurl, &lt;span style="color:#aaa;font-style:italic">//https://oauth.onshape.com/oauth/authorize
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span> tokenURL: oauthtokenurl, &lt;span style="color:#aaa;font-style:italic">//https://oauth.onshape.com/oauth/token
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span> userProfileURL: userprofileurl &lt;span style="color:#aaa;font-style:italic">//https://cad.onshape.com/api/users/sessioninfo
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span>},
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>(accessToken, refreshToken, profile, done) =&amp;gt; {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> profile.accessToken = accessToken;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> profile.refreshToken = refreshToken;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">//Here you can store the user profile, accessToken, RrefreshToken in your database
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span> userController.updateUser(accessToken, refreshToken, user).then((data)=&amp;gt;{});
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a">return&lt;/span> done(&lt;span style="color:#00a">null&lt;/span>, data);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}));
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The OnshapeStrategy takes six values, all which should be stored in your
 .env (or configuration) file. There are several values that don’t change
 and should use the following definitions:&lt;/p>
 &lt;ol>
@@ -5138,10 +5135,10 @@ case ‘/oauthSignin’. This is the endpoint that we previously defined in
 the Onshape application setup. This will redirect to an Onshape page in
 order for the user to confirm (or deny) the applications access to the
 Onshape resources.&lt;/p>
-&lt;p>app.use(&amp;rsquo;/oauthSignin&amp;rsquo;, (req, res) =&amp;gt; {&lt;/p>
-&lt;p>return passport.authenticate(&amp;lsquo;onshape&amp;rsquo;, { state: uuid.v4() })(req, res);&lt;/p>
-&lt;p>}, (req, res) =&amp;gt; { /* redirected to Onshape for authentication */ });&lt;/p>
-&lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage6.png"
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>app.use(&lt;span style="color:#a50">&amp;#39;/oauthSignin&amp;#39;&lt;/span>, (req, res) =&lt;span style="color:#f00;background-color:#faa">\&lt;/span>&amp;gt; {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a">return&lt;/span> passport.authenticate(&lt;span style="color:#a50">&amp;#39;onshape&amp;#39;&lt;/span>, { state: uuid.v4() })(req, res);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}, (req, res) =&lt;span style="color:#f00;background-color:#faa">\&lt;/span>&amp;gt; { &lt;span style="color:#099">/\* redirected to Onshape for authentication \*/&lt;/span> });
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage6.png"
 style="width:0.43056in;height:0.46528in" />The state fields can be used
 to store relevant information such as documentId, ElementId,
 WorkspaceId, etc – in the event that this information is sent from
@@ -5163,25 +5160,29 @@ The return URL will contain the one-time authorization token and the
 passport will extract that and exchange it for an access Token and a
 refresh token. These will be available in the Passport callback function
 shown previously.&lt;/p>
-&lt;p>//OAuth2 redirect code will be replaced for a token&lt;/p>
-&lt;p>app.use(&amp;rsquo;/oauthRedirect&amp;rsquo;, passport.authenticate(&amp;lsquo;onshape&amp;rsquo;, {
-failureRedirect: &amp;lsquo;/grantDenied&amp;rsquo; }), (req, res) =&amp;gt; {&lt;/p>
-&lt;p>// additional optional redirect parameters to be added to the redirect
-URL&lt;/p>
-&lt;p>res.redirect(`/?authsuccess=true`);&lt;/p>
-&lt;p>});&lt;/p>
-&lt;p>In the above code there are a few interesting points.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">//OAuth2 redirect code will be replaced for a token
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>app.use(&lt;span style="color:#a50">&amp;#39;/oauthRedirect&amp;#39;&lt;/span>, passport.authenticate(&lt;span style="color:#a50">&amp;#39;onshape&amp;#39;&lt;/span>, {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>failureRedirect: &lt;span style="color:#a50">&amp;#39;/grantDenied&amp;#39;&lt;/span> }), (req, res, next) =&amp;gt; {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">// additional optional redirect parameters to be added to the redirect
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span>URL
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>res.redirect(&lt;span style="color:#a50">`/?authsuccess=true`&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>next();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>});
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>In the above code there are a few interesting points.&lt;/p>
 &lt;p>Firstly, if the user clicked on the “Deny” button, the user is navigated
 to a page that notifies that access to the application was denied. We
 can see that in the “failureRedirect” argument. The route for calling
 the “grantDenied.html“ page is defined below:&lt;/p>
-&lt;p>app.get(&amp;rsquo;/grantDenied&amp;rsquo;, (req, res) =&amp;gt; {&lt;/p>
-&lt;p>res.sendFile(path.join(__dirname, &amp;lsquo;public&amp;rsquo;, &amp;lsquo;html&amp;rsquo;,
-&amp;lsquo;grantDenied.html&amp;rsquo;));&lt;/p>
-&lt;p>})&lt;/p>
-&lt;p>Another interesting point to mention is the following line:&lt;/p>
-&lt;p>res.redirect(`/?authsuccess=true`);&lt;/p>
-&lt;p>Here, we can add additional parameters to the URL that gets called once
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>app.get(&lt;span style="color:#a50">&amp;#39;/grantDenied&amp;#39;&lt;/span>, (req, res, next) =&amp;gt; {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>res.sendFile(path.join(__dirname, &lt;span style="color:#a50">&amp;#39;public&amp;#39;&lt;/span>, &lt;span style="color:#a50">&amp;#39;html&amp;#39;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a50">&amp;#39;grantDenied.html&amp;#39;&lt;/span>));
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>})
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Another interesting point to mention is the following line:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>res.redirect(&lt;span style="color:#a50">`/?authsuccess=true`&lt;/span>);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Here, we can add additional parameters to the URL that gets called once
 the OAuth process completes successfully. In this case I’m adding a
 simple argument that lets my index page know that authorization
 completed successfully. The index page then produces a notification that
@@ -5217,12 +5218,13 @@ installing it:&lt;/p>
 &lt;p>More details regarding the axios library can be found here:
 &lt;a href="https://www.npmjs.com/package/axios">https://www.npmjs.com/package/axios&lt;/a>&lt;/p>
 &lt;p>In the code above note the catch clause:&lt;/p>
-&lt;p>}).catch(function (data) {&lt;/p>
-&lt;p>if (data.statusCode === 401) {&lt;/p>
-&lt;p>authentication.refreshOAuthToken(req, res).then(function () {&lt;/p>
-&lt;p>getMetadata(docid, wsid, eleid, pid, req, res);&lt;/p>
-&lt;p>})&lt;/p>
-&lt;p>If the call to the Onshape API fails for any reason it is caught by this
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>}).&lt;span style="color:#00a">catch&lt;/span>(&lt;span style="color:#00a">function&lt;/span> (data) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">if&lt;/span> (data.response.status === &lt;span style="color:#099">401&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> authentication.refreshOAuthToken(req, res).then(&lt;span style="color:#00a">function&lt;/span> () {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> getMetadata(docid, wsid, eleid, pid, req, res);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>If the call to the Onshape API fails for any reason it is caught by this
 catch clause. The first reason for failure would probably be because the
 accessToken has expired, this would return an HTTP 401 error – not
 authorized.&lt;/p>
@@ -5558,8 +5560,6 @@ Number field&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage6.png"
-style="width:0.47222in;height:0.47222in" />&lt;/p>
-&lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage6.png"
 style="width:0.47222in;height:0.47222in" />Note that in order to pull a
 part number from a third-party application we will need to implement
 OAuth2 in our application and grant Onshape access to the resources of
@@ -5878,18 +5878,28 @@ accessToken in the header in order to establish a secure call to
 Onshape’s resources.&lt;/p>
 &lt;p>The information coming back from the registration call will be similar
 to the following:&lt;/p>
-&lt;p>{&lt;/p>
-&lt;p>&amp;ldquo;timestamp&amp;rdquo;: &amp;ldquo;2014-12-16T23:45:10.611-0500&amp;rdquo;,&lt;/p>
-&lt;p>&amp;ldquo;event&amp;rdquo;: &amp;ldquo;webhook.register&amp;rdquo;,&lt;/p>
-&lt;p>&amp;ldquo;workspaceId&amp;rdquo;: &amp;ldquo;000000000000000000000000&amp;rdquo;,&lt;/p>
-&lt;p>&amp;ldquo;elementId&amp;rdquo;: &amp;ldquo;000000000000000000000000&amp;rdquo;,&lt;/p>
-&lt;p>&amp;ldquo;webhookId&amp;rdquo;: &amp;ldquo;544e91f7fb88ed44f5de1508&amp;rdquo;,&lt;/p>
-&lt;p>&amp;ldquo;messageId&amp;rdquo;: &amp;ldquo;34795d2e5f5f44eeb61fb7b1&amp;rdquo;,&lt;/p>
-&lt;p>&amp;ldquo;data&amp;rdquo;: &amp;ldquo;Some data&amp;rdquo;,&lt;/p>
-&lt;p>&amp;ldquo;documentId&amp;rdquo;: &amp;ldquo;000000000000000000000000&amp;rdquo;,&lt;/p>
-&lt;p>&amp;ldquo;versionId&amp;rdquo;: &amp;ldquo;000000000000000000000000&amp;rdquo;&lt;/p>
-&lt;p>}&lt;/p>
-&lt;p>In our example we are saving the event
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;timestamp&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;2014-12-16T23:45:10.611-0500&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;event&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;webhook.register&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;workspaceId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;elementId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;webhookId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;544e91f7fb88ed44f5de1508&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;messageId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;34795d2e5f5f44eeb61fb7b1&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;data&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;Some data&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;documentId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;versionId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>In our example we are saving the event
 (onshape.model.lifecycle.metadata) and the returned webhookId to a
 database in order that we can later ping it to make sure that it is
 live.&lt;/p>
@@ -5942,19 +5952,30 @@ from each call.&lt;/p>
 &lt;p>Once your webhook is registered and confirmed to be working you should
 be getting a notification from the webhook to your notify URL. The
 notification should be similar to the following:&lt;/p>
-&lt;p>{&lt;/p>
-&lt;p>&amp;ldquo;timestamp&amp;rdquo;: &amp;ldquo;2014-12-16T23:46:29.284-0500&amp;rdquo;,&lt;/p>
-&lt;p>&amp;ldquo;event&amp;rdquo;: &amp;ldquo;onshape.document.lifecycle.metadata&amp;rdquo;,&lt;/p>
-&lt;p>&amp;ldquo;workspaceId&amp;rdquo;: &amp;ldquo;000000000000000000000000&amp;rdquo;,&lt;/p>
-&lt;p>&amp;ldquo;elementId&amp;rdquo;: &amp;ldquo;000000000000000000000000&amp;rdquo;,&lt;/p>
-&lt;p>&amp;ldquo;webhookId&amp;rdquo;: &amp;ldquo;544e91f7fb88ed44f5de1508&amp;rdquo;,&lt;/p>
-&lt;p>&amp;ldquo;messageId&amp;rdquo;: &amp;ldquo;60f54ac1cbc04179a6642d9a&amp;rdquo;,&lt;/p>
-&lt;p>&amp;ldquo;data&amp;rdquo;: &amp;ldquo;Some data&amp;rdquo;,&lt;/p>
-&lt;p>&amp;ldquo;documentId&amp;rdquo;: &amp;ldquo;0f9c4392e5934f30b48ab645&amp;rdquo;,&lt;/p>
-&lt;p>&amp;ldquo;versionId&amp;rdquo;: &amp;ldquo;000000000000000000000000&amp;rdquo;,&lt;/p>
-&lt;p>&amp;ldquo;documentState&amp;rdquo;: &amp;ldquo;IN PROGRESS&amp;rdquo;&lt;/p>
-&lt;p>}&lt;/p>
-&lt;p>In your case the workspaceId, elementID, documentID, and PartId should
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;timestamp&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;2014-12-16T23:46:29.284-0500&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;event&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;onshape.document.lifecycle.metadata&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;workspaceId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;elementId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;webhookId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;544e91f7fb88ed44f5de1508&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;messageId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;60f54ac1cbc04179a6642d9a&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;data&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;Some data&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;documentId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;0f9c4392e5934f30b48ab645&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;versionId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;documentState&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;IN PROGRESS&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>In your case the workspaceId, elementID, documentID, and PartId should
 be populated with the values from the Onshape document that was open
 when the properties were updated.&lt;/p>
 &lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage4.png"
@@ -6032,7 +6053,8 @@ important to build a data model that can store the properties with the
 unique ID provided by Onshape.&lt;/p>
 &lt;h4 id="implementing-custom-part-numbers">Implementing Custom Part Numbers&lt;/h4>
 &lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage56.png"
-style="width:2.95556in;height:2.94924in" />The final step in this
+style="width:2.95556in;height:2.94924in" />&lt;/p>
+&lt;p>The final step in this
 business case is to pull the part numbers form our third-party
 application. The part numbers can be calculated based on metadata values
 that were previously synced from Onshape or they might be numbers being
@@ -6123,7 +6145,8 @@ a PLM system to control the release of data instead of Onshape having
 that control – this is in fact a common use case.&lt;/p>
 &lt;h3 id="business-case-2-overview">Business case 2 Overview&lt;/h3>
 &lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage64.png"
-style="width:3.21077in;height:2.56522in" />We have mentioned before that
+style="width:3.21077in;height:2.56522in" />&lt;/p>
+&lt;p>We have mentioned before that
 Onshape has the ability to release data – it is totally integrated to
 Onshape since there is no division between CAD capabilities and PDM
 capabilities in Onshape – they are all part of the same solution. See
@@ -6194,7 +6217,8 @@ approved by an external source.&lt;/p>
 &lt;p>Finally, when everything is defined, submit the release. The window
 will close. Since the release is pending approval, the parts
 involved in the release will enter the state of “Pending” as shown
-here: &lt;img src="https://onshape-public.github.io/images/integrationguideimage67.png"
+here:&lt;/p>
+&lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage67.png"
 style="width:4.40131in;height:2.9375in"
 alt="Graphical user interface, text, application Description automatically generated" />&lt;/p>
 &lt;/li>
@@ -6203,7 +6227,8 @@ alt="Graphical user interface, text, application Description automatically gener
 Release&lt;/p>
 &lt;p>They will remain in this state until the release has been completed.&lt;/p>
 &lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage68.png"
-style="width:2.71208in;height:1.52174in" />It is important to note that
+style="width:2.71208in;height:1.52174in" />&lt;/p>
+&lt;p>It is important to note that
 unlike traditional PDM systems where the files are locked for change
 until the release is completed or rejected, Onshape does not lock the
 files. As mentioned previously, Onshape views the releases as a point in
@@ -6388,7 +6413,8 @@ third-party application. In this case I’m storing other properties that
 came from the release candidate such as release name and description.&lt;/p>
 &lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage75.emf" alt="">&lt;/p>
 &lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage76.png"
-style="width:3.01875in;height:4.38889in" />Most of this code deals with
+style="width:3.01875in;height:4.38889in" />&lt;/p>
+&lt;p>Most of this code deals with
 retrieving values from the release package and storing them as a new
 release object in the database. Additional values are associated with
 the part in the PLM system. In a typical production scenario this code
@@ -6719,7 +6745,7 @@ load in the right element panel. The parameters can be added as
 arguments. These are variable that get replaced with real values when
 the page is loaded from Onshape.&lt;/p>
 &lt;p>In our case our URL might look something like the following:&lt;/p>
-&lt;p>&lt;a href="https://ourserver.com/bom?documentId=$%7bdocumentid%7d&amp;amp;elementId=$%7belementid%7d&amp;amp;partId=%7b$partId%7d&amp;amp;partNumber=%7b$partNumber%7d">https://ourserver.com/bom?documentId=${documentid}&amp;amp;elementId=${elementid}&amp;amp;partId={$partId}&amp;amp;partNumber={$partNumber}&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://ourserver.com/bom?documentId=$%7Bdocumentid%7D&amp;amp;elementId=$%7Belementid%7D&amp;amp;partId=%7B$partId%7D&amp;amp;partNumber=%7B$partNumber%7D">https://ourserver.com/bom?documentId=${documentid}&amp;amp;elementId=${elementid}&amp;amp;partId={$partId}&amp;amp;partNumber={$partNumber}&lt;/a>&lt;/p>
 &lt;p>In the case of the selected Part context for the Element Right Panel,
 the possible parameters are as follows:&lt;/p>
 &lt;ul>
@@ -6863,101 +6889,101 @@ that Onshape provides by placing integration constraints on that user.
 This has been the purpose of this guide, to show you how to correctly
 integrate with a true 21&lt;sup>st&lt;/sup> century SaaS product.&lt;/p>
 &lt;h1 id="table-to-figures">Table to Figures&lt;/h1>
-&lt;p>[Figure 1 - Typical three-tier architecture
-&lt;a href="#_Toc102977872">8&lt;/a>](#_Toc102977872)&lt;/p>
-&lt;p>[Figure 2 - Single Tenant Architecture
-&lt;a href="#_Toc102977873">9&lt;/a>](#_Toc102977873)&lt;/p>
-&lt;p>[Figure 3 - Multi-Tenant Architecture
-&lt;a href="#_Toc102977874">10&lt;/a>](#_Toc102977874)&lt;/p>
-&lt;p>[Figure 4 - REST API Architecture &lt;a href="#_Toc102977875">12&lt;/a>](#_Toc102977875)&lt;/p>
-&lt;p>[Figure 5 - Onshape’s revision and part number schema definition
-interface &lt;a href="#_Toc102977876">17&lt;/a>](#_Toc102977876)&lt;/p>
-&lt;p>[Figure 6 - An example of a multi-part Part Studio in Onshape
-&lt;a href="#_Toc102977877">20&lt;/a>](#_Toc102977877)&lt;/p>
-&lt;p>[Figure 7 - Onshape History and Versions
-&lt;a href="#_Toc102977878">21&lt;/a>](&lt;a href="https://ptccloud-my.sharepoint.com/personal/gpaull_ptc_com/Documents/Integrations/Onshape%20Integration%20Methodology%20Guide.docx#_Toc102977878">https://ptccloud-my.sharepoint.com/personal/gpaull_ptc_com/Documents/Integrations/Onshape%20Integration%20Methodology%20Guide.docx#_Toc102977878&lt;/a>)&lt;/p>
-&lt;p>[Figure 8 - A custom Release process in Onshape
-&lt;a href="#_Toc102977879">23&lt;/a>](#_Toc102977879)&lt;/p>
-&lt;p>[Figure 9 - The Onshape Document
-&lt;a href="#_Toc102977880">24&lt;/a>](&lt;a href="https://ptccloud-my.sharepoint.com/personal/gpaull_ptc_com/Documents/Integrations/Onshape%20Integration%20Methodology%20Guide.docx#_Toc102977880">https://ptccloud-my.sharepoint.com/personal/gpaull_ptc_com/Documents/Integrations/Onshape%20Integration%20Methodology%20Guide.docx#_Toc102977880&lt;/a>)&lt;/p>
-&lt;p>[Figure 10 - OAuth2 Authorization Flow
-&lt;a href="#_Toc102977881">30&lt;/a>](#_Toc102977881)&lt;/p>
-&lt;p>[Figure 11: Create new OAuth Application interface
-&lt;a href="#_Toc102977882">33&lt;/a>](#_Toc102977882)&lt;/p>
-&lt;p>[Figure 12 - OAuth application definitions
-&lt;a href="#_Toc102977883">36&lt;/a>](#_Toc102977883)&lt;/p>
-&lt;p>[Figure 13- passport serialize visual flow
-&lt;a href="#_Toc102977884">40&lt;/a>](&lt;a href="https://ptccloud-my.sharepoint.com/personal/gpaull_ptc_com/Documents/Integrations/Onshape%20Integration%20Methodology%20Guide.docx#_Toc102977884">https://ptccloud-my.sharepoint.com/personal/gpaull_ptc_com/Documents/Integrations/Onshape%20Integration%20Methodology%20Guide.docx#_Toc102977884&lt;/a>)&lt;/p>
-&lt;p>[Figure 14 - Onshape Authorize Application Interface
-&lt;a href="#_Toc102977885">43&lt;/a>](#_Toc102977885)&lt;/p>
-&lt;p>[Figure 15 - Notifying the user of successful authentication
-&lt;a href="#_Toc102977886">44&lt;/a>](#_Toc102977886)&lt;/p>
-&lt;p>[Figure 16 - Step 1 Initiating properties sync
-&lt;a href="#_Toc102977887">56&lt;/a>](&lt;a href="https://ptccloud-my.sharepoint.com/personal/gpaull_ptc_com/Documents/Integrations/Onshape%20Integration%20Methodology%20Guide.docx#_Toc102977887">https://ptccloud-my.sharepoint.com/personal/gpaull_ptc_com/Documents/Integrations/Onshape%20Integration%20Methodology%20Guide.docx#_Toc102977887&lt;/a>)&lt;/p>
-&lt;p>[Figure 17 Step 2, Create Object in 3rd Party System
-&lt;a href="#_Toc102977888">57&lt;/a>](&lt;a href="https://ptccloud-my.sharepoint.com/personal/gpaull_ptc_com/Documents/Integrations/Onshape%20Integration%20Methodology%20Guide.docx#_Toc102977888">https://ptccloud-my.sharepoint.com/personal/gpaull_ptc_com/Documents/Integrations/Onshape%20Integration%20Methodology%20Guide.docx#_Toc102977888&lt;/a>)&lt;/p>
-&lt;p>[Figure 18 - Step 3, Sync Metadata
-&lt;a href="#_Toc102977889">58&lt;/a>](&lt;a href="https://ptccloud-my.sharepoint.com/personal/gpaull_ptc_com/Documents/Integrations/Onshape%20Integration%20Methodology%20Guide.docx#_Toc102977889">https://ptccloud-my.sharepoint.com/personal/gpaull_ptc_com/Documents/Integrations/Onshape%20Integration%20Methodology%20Guide.docx#_Toc102977889&lt;/a>)&lt;/p>
-&lt;p>[Figure 19 - Step 4, Update 3rd Part Object
-&lt;a href="#_Toc102977890">59&lt;/a>](&lt;a href="https://ptccloud-my.sharepoint.com/personal/gpaull_ptc_com/Documents/Integrations/Onshape%20Integration%20Methodology%20Guide.docx#_Toc102977890">https://ptccloud-my.sharepoint.com/personal/gpaull_ptc_com/Documents/Integrations/Onshape%20Integration%20Methodology%20Guide.docx#_Toc102977890&lt;/a>)&lt;/p>
-&lt;p>[Figure 20 - Request Custom Part Number in Onshape
-&lt;a href="#_Toc102977891">60&lt;/a>](&lt;a href="https://ptccloud-my.sharepoint.com/personal/gpaull_ptc_com/Documents/Integrations/Onshape%20Integration%20Methodology%20Guide.docx#_Toc102977891">https://ptccloud-my.sharepoint.com/personal/gpaull_ptc_com/Documents/Integrations/Onshape%20Integration%20Methodology%20Guide.docx#_Toc102977891&lt;/a>)&lt;/p>
-&lt;p>[Figure 21 - Bi-directional Update of Properties
-&lt;a href="#_Toc102977892">61&lt;/a>](&lt;a href="https://ptccloud-my.sharepoint.com/personal/gpaull_ptc_com/Documents/Integrations/Onshape%20Integration%20Methodology%20Guide.docx#_Toc102977892">https://ptccloud-my.sharepoint.com/personal/gpaull_ptc_com/Documents/Integrations/Onshape%20Integration%20Methodology%20Guide.docx#_Toc102977892&lt;/a>)&lt;/p>
-&lt;p>[Figure 22 - Glassworks Authentication Options
-&lt;a href="#_Toc102977893">63&lt;/a>](#_Toc102977893)&lt;/p>
-&lt;p>[Figure 23 Glassworks &amp;ldquo;Try It Out&amp;rdquo; feature
-&lt;a href="#_Toc102977894">64&lt;/a>](#_Toc102977894)&lt;/p>
-&lt;p>[Figure 24 Accessing Chrome&amp;rsquo;s Developer Tools
-&lt;a href="#_Toc102977895">65&lt;/a>](#_Toc102977895)&lt;/p>
-&lt;p>[Figure 25 Developer Tools Network Tab
-&lt;a href="#_Toc102977896">66&lt;/a>](#_Toc102977896)&lt;/p>
-&lt;p>[Figure 26 Network Request Sample &lt;a href="#_Toc102977897">66&lt;/a>](#_Toc102977897)&lt;/p>
-&lt;p>[Figure 27 HTTP POST Request for Saving Properties
-&lt;a href="#_Toc102977898">67&lt;/a>](#_Toc102977898)&lt;/p>
-&lt;p>[Figure 28 HTTP POST Body &lt;a href="#_Toc102977899">67&lt;/a>](#_Toc102977899)&lt;/p>
-&lt;p>[Figure 29 - Oauth Applications - Extensions
-&lt;a href="#_Toc102977900">69&lt;/a>](#_Toc102977900)&lt;/p>
-&lt;p>[Figure 30 - Define Application Extension
-&lt;a href="#_Toc102977901">70&lt;/a>](#_Toc102977901)&lt;/p>
-&lt;p>[Figure 31 - Define External OAuth &lt;a href="#_Toc102977902">71&lt;/a>](#_Toc102977902)&lt;/p>
-&lt;p>[Figure 32 - Grant External Access &lt;a href="#_Toc102977903">72&lt;/a>](#_Toc102977903)&lt;/p>
-&lt;p>[Figure 33 - Enabling Onshape to access a 3rd parties data
-&lt;a href="#_Toc102977904">73&lt;/a>](#_Toc102977904)&lt;/p>
-&lt;p>[Figure 34 - Finding Your Enterprise ID
-&lt;a href="#_Toc102977905">74&lt;/a>](#_Toc102977905)&lt;/p>
-&lt;p>[Figure 35 - Application Extension Definition for Part Numbers
-&lt;a href="#_Toc102977906">81&lt;/a>](&lt;a href="https://ptccloud-my.sharepoint.com/personal/gpaull_ptc_com/Documents/Integrations/Onshape%20Integration%20Methodology%20Guide.docx#_Toc102977906">https://ptccloud-my.sharepoint.com/personal/gpaull_ptc_com/Documents/Integrations/Onshape%20Integration%20Methodology%20Guide.docx#_Toc102977906&lt;/a>)&lt;/p>
-&lt;p>[Figure 36 - Revisions and Part Number Settings
-&lt;a href="#_Toc102977907">82&lt;/a>](#_Toc102977907)&lt;/p>
-&lt;p>[Figure 37 - Selecting Custom Part Number Generator
-&lt;a href="#_Toc102977908">83&lt;/a>](#_Toc102977908)&lt;/p>
-&lt;p>[Figure 38 - Release Candidate Part Number generation
-&lt;a href="#_Toc102977909">86&lt;/a>](#_Toc102977909)&lt;/p>
-&lt;p>[Figure 39 - release visual cues
-&lt;a href="#_Toc102977910">87&lt;/a>](&lt;a href="https://ptccloud-my.sharepoint.com/personal/gpaull_ptc_com/Documents/Integrations/Onshape%20Integration%20Methodology%20Guide.docx#_Toc102977910">https://ptccloud-my.sharepoint.com/personal/gpaull_ptc_com/Documents/Integrations/Onshape%20Integration%20Methodology%20Guide.docx#_Toc102977910&lt;/a>)&lt;/p>
-&lt;p>[Figure 40 - Initiating a release candidate
-&lt;a href="#_Toc102977911">89&lt;/a>](#_Toc102977911)&lt;/p>
-&lt;p>[Figure 41 - Pending Release &lt;a href="#_Toc102977912">90&lt;/a>](#_Toc102977912)&lt;/p>
-&lt;p>[Figure 42 - Release and changes
-&lt;a href="#_Toc102977913">90&lt;/a>](&lt;a href="https://ptccloud-my.sharepoint.com/personal/gpaull_ptc_com/Documents/Integrations/Onshape%20Integration%20Methodology%20Guide.docx#_Toc102977913">https://ptccloud-my.sharepoint.com/personal/gpaull_ptc_com/Documents/Integrations/Onshape%20Integration%20Methodology%20Guide.docx#_Toc102977913&lt;/a>)&lt;/p>
-&lt;p>[Figure 43 - release candidate rejected
-&lt;a href="#_Toc102977914">93&lt;/a>](#_Toc102977914)&lt;/p>
-&lt;p>[Figure 44 - Displaying Onshape Release data
-&lt;a href="#_Toc102977915">98&lt;/a>](&lt;a href="https://ptccloud-my.sharepoint.com/personal/gpaull_ptc_com/Documents/Integrations/Onshape%20Integration%20Methodology%20Guide.docx#_Toc102977915">https://ptccloud-my.sharepoint.com/personal/gpaull_ptc_com/Documents/Integrations/Onshape%20Integration%20Methodology%20Guide.docx#_Toc102977915&lt;/a>)&lt;/p>
-&lt;p>[Figure 45 - Release completed automatically in Onshape
-&lt;a href="#_Toc102977916">101&lt;/a>](#_Toc102977916)&lt;/p>
-&lt;p>[Figure 46 - Release comments Updated from third-party system
-&lt;a href="#_Toc102977917">102&lt;/a>](#_Toc102977917)&lt;/p>
-&lt;p>[Figure 47 - Integrating into the document right panel
-&lt;a href="#_Toc102977918">114&lt;/a>](#_Toc102977918)&lt;/p>
-&lt;p>[Figure 48 - Oauth Application Extensions
-&lt;a href="#_Toc102977919">115&lt;/a>](#_Toc102977919)&lt;/p>
-&lt;p>[Figure 49 - Defining Application Extension
-&lt;a href="#_Toc102977920">116&lt;/a>](#_Toc102977920)&lt;/p>
-&lt;p>[Figure 50 - Application Extension with Part Selected
-&lt;a href="#_Toc102977921">119&lt;/a>](#_Toc102977921)&lt;/p>
-&lt;p>[Figure 51 - Application extension with synced part
-&lt;a href="#_Toc102977922">120&lt;/a>](#_Toc102977922)&lt;/p>
-&lt;p>[Figure 52 - Application extension with no selected Part
-&lt;a href="#_Toc102977923">120&lt;/a>](#_Toc102977923)&lt;/p></description></item></channel></rss>
+&lt;p>&lt;a href="#_Toc102977872">Figure 1 - Typical three-tier architecture
+8&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977873">Figure 2 - Single Tenant Architecture
+9&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977874">Figure 3 - Multi-Tenant Architecture
+10&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977875">Figure 4 - REST API Architecture 12&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977876">Figure 5 - Onshape’s revision and part number schema definition
+interface 17&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977877">Figure 6 - An example of a multi-part Part Studio in Onshape
+20&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977878">Figure 7 - Onshape History and Versions
+21&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977879">Figure 8 - A custom Release process in Onshape
+23&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977880">Figure 9 - The Onshape Document
+24&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977881">Figure 10 - OAuth2 Authorization Flow
+30&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977882">Figure 11: Create new OAuth Application interface
+33&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977883">Figure 12 - OAuth application definitions
+36&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977884">Figure 13- passport serialize visual flow
+40&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977885">Figure 14 - Onshape Authorize Application Interface
+43&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977886">Figure 15 - Notifying the user of successful authentication
+44&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977887">Figure 16 - Step 1 Initiating properties sync
+56&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977888">Figure 17 Step 2, Create Object in 3rd Party System
+57&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977889">Figure 18 - Step 3, Sync Metadata
+58&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977890">Figure 19 - Step 4, Update 3rd Part Object
+59&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977891">Figure 20 - Request Custom Part Number in Onshape
+60&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977892">Figure 21 - Bi-directional Update of Properties
+61&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977893">Figure 22 - Glassworks Authentication Options
+63&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977894">Figure 23 Glassworks &amp;ldquo;Try It Out&amp;rdquo; feature
+64&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977895">Figure 24 Accessing Chrome&amp;rsquo;s Developer Tools
+65&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977896">Figure 25 Developer Tools Network Tab
+66&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977897">Figure 26 Network Request Sample 66&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977898">Figure 27 HTTP POST Request for Saving Properties
+67&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977899">Figure 28 HTTP POST Body 67&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977900">Figure 29 - Oauth Applications - Extensions
+69&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977901">Figure 30 - Define Application Extension
+70&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977902">Figure 31 - Define External OAuth 71&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977903">Figure 32 - Grant External Access 72&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977904">Figure 33 - Enabling Onshape to access a 3rd parties data
+73&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977905">Figure 34 - Finding Your Enterprise ID
+74&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977906">Figure 35 - Application Extension Definition for Part Numbers
+81&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977907">Figure 36 - Revisions and Part Number Settings
+82&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977908">Figure 37 - Selecting Custom Part Number Generator
+83&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977909">Figure 38 - Release Candidate Part Number generation
+86&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977910">Figure 39 - release visual cues
+87&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977911">Figure 40 - Initiating a release candidate
+89&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977912">Figure 41 - Pending Release 90&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977913">Figure 42 - Release and changes
+90&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977914">Figure 43 - release candidate rejected
+93&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977915">Figure 44 - Displaying Onshape Release data
+98&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977916">Figure 45 - Release completed automatically in Onshape
+101&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977917">Figure 46 - Release comments Updated from third-party system
+102&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977918">Figure 47 - Integrating into the document right panel
+114&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977919">Figure 48 - Oauth Application Extensions
+115&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977920">Figure 49 - Defining Application Extension
+116&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977921">Figure 50 - Application Extension with Part Selected
+119&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977922">Figure 51 - Application extension with synced part
+120&lt;/a>&lt;/p>
+&lt;p>&lt;a href="#_Toc102977923">Figure 52 - Application extension with no selected Part
+120&lt;/a>&lt;/p></description></item></channel></rss>
