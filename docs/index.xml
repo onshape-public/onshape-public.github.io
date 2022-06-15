@@ -745,53 +745,53 @@ GET /applications/clients/:cid/settings/users/:uid&lt;/p>
 &lt;p>Please contact &lt;a href="mailto:api-support@onshape.com">api-support@onshape.com&lt;/a> to discuss details of testing billing &amp;amp; subscriptions.&lt;/p></description></item><item><title>Docs: Client Messaging</title><link>https://onshape-public.github.io/docs/clientmessaging/</link><pubDate>Mon, 18 May 2020 20:30:40 -0400</pubDate><guid>https://onshape-public.github.io/docs/clientmessaging/</guid><description>
 &lt;h1 id="javascript-post-message-api">JavaScript Post Message API&lt;/h1>
 &lt;hr>
-&lt;p>Application elements and the Onshape JavaScript web client need to communicate directly, calling across the iframe containing the application element using post message.&lt;/p>
+&lt;p>Application extensions and the Onshape JavaScript web client need to communicate directly, calling across the iframe containing the application extension using post message.&lt;/p>
 &lt;p>&lt;img src="https://onshape-public.github.io/images/javascriptpostmessageimage00.png" alt="image alt text">&lt;/p>
 &lt;p>Typical use cases (not all currently implemented) include:&lt;/p>
-&lt;h2 id="from-the-application-element-to-the-onshape-client">From the Application Element to the Onshape Client:&lt;/h2>
+&lt;h2 id="from-the-application-extension-to-the-onshape-client">From the Application Extension to the Onshape Client:&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;strong>Click/Close Flyouts Events&lt;/strong> - Notify the Onshape client that the user has clicked in the application element, which should cause Onshape flyouts (versions, history, uploads, etc.) and dropdown menus (profile dropdown menu, document menu) to close. Without this, the flyouts and menus remain open, over the application element.&lt;/p>
+&lt;p>&lt;strong>Click/Close Flyouts Events&lt;/strong> - Notify the Onshape client that the user has clicked in the application extension, which should cause Onshape flyouts (versions, history, uploads, etc.) and dropdown menus (profile dropdown menu, document menu) to close. Without this, there may be cases the flyouts and menus remain open, over the application extension.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;strong>Shortcut Keyboard Events&lt;/strong> - Shortcut keys such as &amp;ldquo;?&amp;rdquo; that should open the Onshape help dialog could be handled by the application element posting a message to the Onshape client to open the help dialog.&lt;/p>
+&lt;p>&lt;strong>Shortcut Keyboard Events&lt;/strong> - Shortcut keys such as &amp;ldquo;?&amp;rdquo; that should open the Onshape help dialog could be handled by the application extension posting a message to the Onshape client to open the help dialog.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;strong>Keep Alive&lt;/strong> - Notify the Onshape client that the user is actively working in the application element, which will cause the Onshape client to send a message to the server to keep the browser session alive. Without this, the Onshape browser session will timeout after some amount of time, asking the user to login again.&lt;/p>
+&lt;p>&lt;strong>Keep Alive&lt;/strong> - Notify the Onshape client that the user is actively working in the application extension, which will cause the Onshape client to send a message to the server to keep the browser session alive. Without this, the Onshape browser session will timeout after some amount of time, asking the user to login again.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;strong>Standard Onshape Dialogs&lt;/strong> - Request from the application element to the Onshape client to open one of the Onshape standard dialogs and send the user’s choices back to the application element. For example, if the application element needs the user to choose a part or assembly to be operated on, the application element can post a message to the Onshape client requesting that dialog be opened and the selected part or assembly information sent back to the application element.&lt;/p>
+&lt;p>&lt;strong>Standard Onshape Dialogs&lt;/strong> - Request from the application extension to the Onshape client to open one of the Onshape standard dialogs and send the user’s choices back to the application extension. For example, if the application extension needs the user to choose a part or assembly to be operated on, the application extension can post a message to the Onshape client requesting that dialog be opened and the selected part or assembly information sent back to the application extension.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;strong>UI Customization&lt;/strong> - Request from the application element to the Onshape client to customize the Onshape UI - to add commands to menus, add buttons to the toolbars, etc. When such commands or toolbar buttons are clicked, the Onshape client would post a message to the application element with the available context. **Note - **this is limited to cases where the application element is made active by the user, as application elements are not automatically loaded when a document is opened. Most UI customizations should be done when you register the application with Onshape, as those would change the Onshape client automatically without needing to load the application element first.&lt;/p>
+&lt;p>&lt;strong>UI Customization&lt;/strong> - Request from the application extension to the Onshape client to customize the Onshape UI - to add commands to menus, add buttons to the toolbars, etc. When such commands or toolbar buttons are clicked, the Onshape client would post a message to the application extension with the available context. **Note - **this is limited to cases where the application extension is made active by the user, as application extensions are not automatically loaded when a document is opened. Most UI customizations should be done when you register the application with Onshape, as those would change the Onshape client automatically without needing to load the application extension first.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;strong>Content/Material Insertion&lt;/strong> - Request from the application element to insert content into the Onshape document. Possible examples: to insert a part into a new or existing partstudio, to apply a material to a part, or to add a material to a material library.&lt;/p>
+&lt;p>&lt;strong>Content/Material Insertion&lt;/strong> - Request from the application extension to insert content into the Onshape document. Possible examples: to insert a part into a new or existing partstudio, to apply a material to a part, or to add a material to a material library.&lt;/p>
 &lt;/li>
 &lt;/ul>
-&lt;h2 id="from-the-onshape-client-to-the-application-element">From the Onshape Client to the Application Element:&lt;/h2>
+&lt;h2 id="from-the-onshape-client-to-the-application-extension">From the Onshape Client to the Application Extension:&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>**User Action Notification **- The Onshape client could notify an application element when various user actions happen. For example, the Onshape client might notify when the user has made the application element active or inactive (when the user clicks on document tabs), as there is no way to know this currently otherwise except when initially loading an application element. When an application element is made inactive, it is moved off the edges of the browser, so it cannot be seen but is still active, preserving its state.&lt;/p>
+&lt;p>&lt;strong>User Action Notification&lt;/strong> - The Onshape client could notify an application extension when various user actions happen. For example, the Onshape client might notify when the user has made the application extension active or inactive (when the user clicks on document tabs), as there is no way to know this currently otherwise except when initially loading an application extension. When an application extension is made inactive, it is moved off the edges of the browser, so it cannot be seen but is still active, preserving its state.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;strong>Printing&lt;/strong> - The Onshape client could notify an application element when the user has chosen the Print command from the main Onshape document menu, enabling the application element to do a print operation.&lt;/p>
+&lt;p>&lt;strong>Printing&lt;/strong> - The Onshape client could notify an application extension when the user has chosen the Print command from the main Onshape document menu, enabling the application extension to do a print operation.&lt;/p>
 &lt;/li>
 &lt;/ul>
-&lt;h2 id="posting-a-message-from-the-application-element-to-the-onshape-client">Posting a message from the Application Element to the Onshape Client&lt;/h2>
-&lt;p>To ensure security, an application element must:&lt;/p>
+&lt;h2 id="posting-a-message-from-the-application-extension-to-the-onshape-client">Posting a message from the Application Extension to the Onshape Client&lt;/h2>
+&lt;p>To ensure security, an application extension must:&lt;/p>
 &lt;ol>
 &lt;li>
-&lt;p>&lt;strong>document, workspace and element ids&lt;/strong> - Parse for the document id, workspace id and element id that were passed as query parameters within the application element’s iframe src URL. You will need to post these back in each post message.&lt;/p>
+&lt;p>&lt;strong>document, workspace and element ids&lt;/strong> - Parse for the document id, workspace id and element id that were passed as query parameters within the application extension’s iframe src URL. You will need to post these back in each post message.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;strong>server&lt;/strong> - Parse for the server that was passed as a query parameter within the application element’s iframe src URL. You will need to use this to validate messages received, as shown later in this document.&lt;/p>
+&lt;p>&lt;strong>server&lt;/strong> - Parse for the server that was passed as a query parameter within the application extension’s iframe src URL. You will need to use this to validate messages received, as shown later in this document.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;strong>do not redirect to another base URL&lt;/strong> - The browser will tell the Onshape client the origin base URL from which a post message is received. The Onshape client will ignore messages posted from an origin URL that doesn’t match the original iframe src URL. Hence application elements should not redirect to another base URL after the iframe has been opened, as that will result in the Onshape ignoring its messages.&lt;/p>
+&lt;p>&lt;strong>do not redirect to another base URL&lt;/strong> - The browser will tell the Onshape client the origin base URL from which a post message is received. The Onshape client will ignore messages posted from an origin URL that doesn’t match the original iframe src URL. Hence application extensions should not redirect to another base URL after the iframe has been opened, as that will result in the Onshape ignoring its messages.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;strong>post a message on startup&lt;/strong> - After an application element has started up and finished loading, it should post a message to the Onshape client. This tells the Onshape client that the application element is able to handle post messages. The Onshape client will not post a message to an application element until it has first received a message from the application element. This ensures the Onshape client won’t send messages to an application element that isn’t listening for them and won’t send messages until the application element is fully loaded. Any type of valid message sent to the Onshape client will trigger postings from the Onshape client (e.g. keepAlive).&lt;/p>
+&lt;p>&lt;strong>post a message on startup&lt;/strong> - After an application extension has started up and finished loading, it should post a message to the Onshape client. This tells the Onshape client that the application extension is able to handle post messages. The Onshape client will not post a message to an application extension until it has first received a message from the application extension. This ensures the Onshape client won’t send messages to an application extension that isn’t listening for them and won’t send messages until the application extension is fully loaded. Any type of valid message sent to the Onshape client will trigger postings from the Onshape client (e.g. keepAlive).&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;p>This JavaScript code parses the iframe src query parameters uses them to post a message:&lt;/p>
@@ -830,9 +830,7 @@ elementId: elementId,
 messageName: &amp;#39;closeFlyoutsAndMenus&amp;#39;};
 window.parent.postMessage(message, &amp;#39;*&amp;#39;);
 }, true);
-&lt;/code>&lt;/pre>&lt;p>The server query parameter is used when receiving post messages from Onshape. See later in this document.&lt;/p>
-&lt;p>If the application element uses a JavaScript library or framework such as BackboneJS or AngularJS, it can parse the query parameters and maintain state in other ways.&lt;/p>
-&lt;p>The message object posted to the Onshape client is of the form:&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>The message object posted to the Onshape client is of the form:&lt;/p>
 &lt;pre tabindex="0">&lt;code>{
 documentId: documentId,
 workspaceId: workspaceId,
@@ -840,7 +838,62 @@ elementId: elementId,
 messageName: &amp;#39;&amp;lt;message name&amp;gt;&amp;#39;,
 … other properties as needed for other message types …};
 }
-&lt;/code>&lt;/pre>&lt;p>The messages supported currently are:&lt;/p>
+&lt;/code>&lt;/pre>&lt;blockquote>
+&lt;p>&lt;em>&lt;strong>Notes:&lt;/strong>&lt;/em>&lt;/p>
+&lt;ul>
+&lt;li>The server query parameter is used when receiving post messages from Onshape. See later in this document.&lt;/li>
+&lt;li>If the application extension uses a JavaScript library or framework such as BackboneJS or AngularJS, it can parse the query parameters and maintain state in other ways.&lt;/li>
+&lt;li>Post messages submitted by application extensions to Onshape will be ignored if any of the following is true:
+&lt;ul>
+&lt;li>the document id, workspace id or element id are missing or not valid.&lt;/li>
+&lt;li>the message name is missing or not recognized.&lt;/li>
+&lt;li>the origin of the post message does not match the original iframe src URL.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/blockquote>
+&lt;h2 id="handling-messages-posted-from-the-onshape-client-to-the-application-extension">Handling Messages Posted from the Onshape Client to the Application Extension&lt;/h2>
+&lt;p>The message data object posted to the application extension is of the form:&lt;/p>
+&lt;pre tabindex="0">&lt;code>{
+messageName: &amp;#39;&amp;lt;message name&amp;gt;&amp;#39;,
+… other properties as needed for other message types …
+}
+&lt;/code>&lt;/pre>&lt;p>The message will always have a &lt;code>messageName&lt;/code> property.&lt;/p>
+&lt;p>Here’s some JavaScript code showing how to listen for messages from the Onshape client:&lt;/p>
+&lt;pre tabindex="0">&lt;code> // server is one of the iframe src query parameters - see above
+var handlePostMessage = function(e) {
+console.log(&amp;#34;Post message received in application extension.&amp;#34;);
+console.log(&amp;#34;e.origin = &amp;#34; + e.origin);
+// Verify the origin matches the server iframe src query parameter
+if (server === e.origin) {
+console.log(&amp;#34;Message safe and can be handled as it is from origin &amp;#39;&amp;#34;
++ e.origin +
+&amp;#34;&amp;#39;, which matches server query parameter &amp;#39;&amp;#34;
++ server + &amp;#34;&amp;#39;.&amp;#34;);
+if (e.data &amp;amp;&amp;amp; e.data.messageName) {
+console.log(&amp;#34;Message name = &amp;#39;&amp;#34; + e.data.messageName + &amp;#34;&amp;#39;&amp;#34;);
+} else {
+console.log(&amp;#34;Message name not found. Ignoring message.&amp;#34;);
+}
+} else {
+console.log(&amp;#34;Message NOT safe and should be ignored.&amp;#34;);
+}
+};
+window.addEventListener(&amp;#39;message&amp;#39;, handlePostMessage, false);
+&lt;/code>&lt;/pre>&lt;blockquote>
+&lt;p>It is &lt;em>extremely important&lt;/em> to the security of your application that you verify that the origin of all messages you receive is the same as the original server query parameter in the iframe src, as shown above:&lt;/p>
+&lt;/blockquote>
+&lt;pre tabindex="0">&lt;code> if (server === e.origin) {
+&lt;/code>&lt;/pre>&lt;blockquote>
+&lt;p>In production operation especially, the message IS NOT SAFE if the message origin does not match the iframe src server query parameter.&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;strong>Application Extensions Must Post First Message&lt;/strong>&lt;/p>
+&lt;p>Onshape will not post messages until a newly started application extension has first posted a valid message to Onshape. This constraint is in effect anytime an application extension is (re)started and exists to avoid posting messages to application extensions that are not ready to handle them, are not fully loaded, etc.&lt;/p>
+&lt;p>So after your application extension is fully loaded and ready to receive messages, post a message to Onshape. A keepAlive message is a great first message to send to Onshape. Once Onshape receives a valid message, Onshape will start posting messages to the application extension.&lt;/p>
+&lt;p>If the application extension later sends an invalid message Onshape will stop sending messages until a valid message is posted to Onshape.&lt;/p>
+&lt;h2 id="element-tab-application-extension-messages">&lt;strong>Element Tab&lt;/strong> Application Extension Messages:&lt;/h2>
+&lt;p>Messages may be sent and recieved by element tab application extensions. The following table describes messages that may be sent; find those that may be recieved &lt;a href="#messages-that-may-be-received-by-element-tab-application-extensions">here&lt;/a>:&lt;/p>
+&lt;h3 id="mesages-that-may-be-_sent_-by-element-tab-application-extensions">Mesages that may be &lt;em>Sent&lt;/em> by Element Tab Application Extensions&lt;/h3>
 &lt;table>
 &lt;tr>
 &lt;td>messageName
@@ -859,7 +912,7 @@ messageName: &amp;#39;&amp;lt;message name&amp;gt;&amp;#39;,
 &lt;tr>
 &lt;td>closeFlyoutsAndMenus&lt;/td>
 &lt;td>no&lt;/td>
-&lt;td>Send when a mouse click or other event happens in the application element. Closes Onshape flyouts and dropdown menus.&lt;/td>
+&lt;td>Send when a mouse click or other event happens in the application extension. Closes Onshape flyouts and dropdown menus.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>closeSelectItemDialog&lt;/td>
@@ -891,12 +944,12 @@ messageName: &amp;#39;&amp;lt;message name&amp;gt;&amp;#39;,
 &lt;tr>
 &lt;td>saveAVersion&lt;/td>
 &lt;td>no&lt;/td>
-&lt;td>Send when the user types “Shift-S” in the application element, the keyboard shortcut for save a version.&lt;/td>
+&lt;td>Send when the user types “Shift-S” in the application extension, the keyboard shortcut for save a version.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>showKeyboardShortcutsHelp&lt;/td>
 &lt;td>no&lt;/td>
-&lt;td>Send when the user types “?” (Shift-? on most keyboards) in the application element, the keyboard shortcut for the keyboard shortcuts help dialog.&lt;/td>
+&lt;td>Send when the user types “?” (Shift-? on most keyboards) in the application extension, the keyboard shortcut for the keyboard shortcuts help dialog.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>showMessageBubble&lt;/td>
@@ -959,20 +1012,7 @@ Send to request camera properties of a specific part studio or assembly element.
 &lt;/td>&lt;/p>
 &lt;/tr>
 &lt;/table>
-&lt;p>As said before, a message will be ignored if any of the following are true:&lt;/p>
-&lt;ul>
-&lt;li>If the document id, workspace id or element id are missing or not valid.&lt;/li>
-&lt;li>If the message name is missing or not recognized.&lt;/li>
-&lt;li>If the origin of the post message does not match the original iframe src URL.&lt;/li>
-&lt;/ul>
-&lt;p>&lt;strong>Receiving a message from the Onshape Client&lt;/strong>&lt;/p>
-&lt;p>As said earlier in this document, the Onshape client will not post messages to an application element until the application element has loaded and sent at least one message to the Onshape client. Typically an application element would send a keepAlive message after it is fully loaded to initiate messaging.&lt;/p>
-&lt;p>The message data object posted to the application element is of the form:&lt;/p>
-&lt;pre tabindex="0">&lt;code>{
-messageName: &amp;#39;&amp;lt;message name&amp;gt;&amp;#39;,
-… other properties as needed for other message types …
-}
-&lt;/code>&lt;/pre>&lt;p>The messages supported currently are:&lt;/p>
+&lt;h3 id="messages-that-may-be-_received_-by-element-tab-application-extensions">Messages that may be &lt;em>Received&lt;/em> by Element Tab Application Extensions&lt;/h3>
 &lt;table>
 &lt;tr>
 &lt;td>messageName
@@ -983,18 +1023,17 @@ messageName: &amp;#39;&amp;lt;message name&amp;gt;&amp;#39;,
 &lt;tr>
 &lt;td>show&lt;/td>
 &lt;td>no&lt;/td>
-&lt;td>Sent when an application element is shown (made active) within the Onshape client. This message is NOT sent when the application element is created.&lt;/td>
+&lt;td>Sent when an element tab application extension is shown (made active) within the Onshape client. This message is NOT sent when the element tab application extension is created.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>hide&lt;/td>
 &lt;td>no&lt;/td>
-&lt;td>Sent when an application element is made inactive within the Onshape client. This message is NOT sent when an application element is deleted.&lt;/td>
+&lt;td>Sent when an element tab application extension is made inactive within the Onshape client. This message is NOT sent when an element tab application extension is deleted.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>itemSelectedInSelectItemDialog&lt;/td>
 &lt;td>yes
-```
-documentId: id of selected item’s document,
+&lt;p>documentId: id of selected item’s document,
 workspaceId: id of selected item’s workspace, empty if versionId not empty,
 versionId: id of selected item’s version, empty if workspaceId not empty,
 elementId: id of element selected or containing the selected part,
@@ -1004,10 +1043,9 @@ elementMicroversionId: microversion id of the element,
 itemType: type of item selected: ‘part’,‘partStudio’ or ‘assembly’,
 partName: name of part selected, empty if itemType is not ‘part’,
 idTag: id of part, empty if no part selected
-```
 &lt;/td>
 &lt;td>Sent when the user selects an item (blob, part, part studio or assembly) in the select item dialog that was opened due to an openSelectItemDialog message sent earlier.
-When a part is not selected, the partXxx message properties will be empty strings.&lt;/td>
+When a part is not selected, the partXxx message properties will be empty strings.&lt;/td>&lt;/p>
 &lt;/tr>
 &lt;tr>
 &lt;td>print&lt;/td>
@@ -1021,8 +1059,7 @@ When a part is not selected, the partXxx message properties will be empty string
 &lt;/tr>
 &lt;tr>
 &lt;td>startFirstViewCommand&lt;/td>
-&lt;td> yes
-```
+&lt;td>yes
 documentId: id of selected item’s document,
 workspaceId: id of selected item’s workspace, empty if versionId not empty,
 versionId: id of selected item’s version, empty if workspaceId not empty,
@@ -1033,19 +1070,18 @@ elementMicroversionId: microversion id of the element,
 itemType: type of item selected: ‘part’,‘partstudio’ or ‘assembly’,
 partName: name of part selected, empty if itemType is not ‘part’,
 idTag: id of part
-```
 &lt;/td>
-&lt;td>Sent to a drawings application element when the drawing is created with zero views.
+&lt;td>Sent to a drawings application extension when the drawing is created with zero views.
 &lt;p>If other types of applications need a message posted to them with creation context, contact Onshape and we can discuss using this sort of message for your application also.&lt;/td>&lt;/p>
 &lt;/tr>
 &lt;tr>
 &lt;td>export&lt;/td>
 &lt;td>yes
-```
 fileExtension: the file extension of the export type the user chose - “.dwg”, “.dxf” are the types currently supported.
-baseFileName: the base portion of the expected output file. This is currently set to “&lt;document name> - &lt;element name>”&lt;/td>
-```
-&lt;td>Sent when the user chooses a command to export the contents of the application to a file.&lt;/td>
+baseFileName: the base portion of the expected output file. This is currently set to “&lt;document name> - &lt;element name>”
+&lt;/td>
+&lt;pre>&lt;code>&amp;lt;td&amp;gt;Sent when the user chooses a command to export the contents of the application to a file.&amp;lt;/td&amp;gt;
+&lt;/code>&lt;/pre>
 &lt;/tr>
 &lt;tr>
 &lt;td>cameraProperties&lt;/td>
@@ -1065,7 +1101,7 @@ viewportWidth: number, width of the viewport
 &lt;tr>
 &lt;td>takeFocus&lt;/td>
 &lt;td>no&lt;/td>
-&lt;td>Sent when the Onshape client sets focus on the content window of the application element.&lt;/td>
+&lt;td>Sent when the Onshape client sets focus on the content window of the element tab application extension.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>saveChanges&lt;/td>
@@ -1074,45 +1110,13 @@ viewportWidth: number, width of the viewport
 &lt;td>Sent if the application specified &amp;rsquo;notifyWhenSaveRequired&amp;rsquo; in the &amp;lsquo;applicationInit&amp;rsquo; message. Indicates that the application should cleanup any pending edits before an Onshape process continues (i.e. version save).&lt;/td>&lt;/p>
 &lt;/tr>
 &lt;/table>
-&lt;p>The message will always have a ‘messageName’ property.&lt;/p>
-&lt;p>Here’s some JavaScript code showing how to listen for messages from the Onshape client:&lt;/p>
-&lt;pre tabindex="0">&lt;code> // server is one of the iframe src query parameters - see above
-var handlePostMessage = function(e) {
-console.log(&amp;#34;Post message received in application element.&amp;#34;);
-console.log(&amp;#34;e.origin = &amp;#34; + e.origin);
-// Verify the origin matches the server iframe src query parameter
-if (server === e.origin) {
-console.log(&amp;#34;Message safe and can be handled as it is from origin &amp;#39;&amp;#34;
-+ e.origin +
-&amp;#34;&amp;#39;, which matches server query parameter &amp;#39;&amp;#34;
-+ server + &amp;#34;&amp;#39;.&amp;#34;);
-if (e.data &amp;amp;&amp;amp; e.data.messageName) {
-console.log(&amp;#34;Message name = &amp;#39;&amp;#34; + e.data.messageName + &amp;#34;&amp;#39;&amp;#34;);
-} else {
-console.log(&amp;#34;Message name not found. Ignoring message.&amp;#34;);
-}
-} else {
-console.log(&amp;#34;Message NOT safe and should be ignored.&amp;#34;);
-}
-};
-window.addEventListener(&amp;#39;message&amp;#39;, handlePostMessage, false);
-&lt;/code>&lt;/pre>&lt;blockquote>
-&lt;p>It is &lt;em>extremely important&lt;/em> to the security of your application that you verify that the origin of all messages you receive is the same as the original server query parameter in the iframe src, as shown above:&lt;/p>
-&lt;/blockquote>
-&lt;pre tabindex="0">&lt;code> if (server === e.origin) {
-&lt;/code>&lt;/pre>&lt;blockquote>
-&lt;p>In production operation especially, the message IS NOT SAFE if the message origin does not match the iframe src server query parameter.&lt;/p>
-&lt;/blockquote>
-&lt;p>&lt;strong>Application Must Post First Message&lt;/strong>&lt;/p>
-&lt;p>Onshape will not post messages to an application until that application has previously posted a valid message to Onshape. This is to avoid posting messages to an application that isn’t ready to handle them, isn’t fully loaded, etc.&lt;/p>
-&lt;p>So after your application is fully loaded and ready to receive messages, post a message to Onshape. A keepAlive message is a great first message to send to Onshape. Once Onshape receives a valid message, Onshape will start posting messages to the application.&lt;/p>
-&lt;p>If the application later sends an invalid message to Onshape, again Onshape will stop sending messages until a valid message is posted to Onshape.&lt;/p>
+&lt;h2 id="general">General&lt;/h2>
 &lt;p>&lt;strong>Keyboard Focus / Shortcut Keys&lt;/strong>&lt;/p>
 &lt;p>Keyboard focus will not be transferred to an application until the user clicks in the application or the application programmatically takes focus. The simplest thing is an application should programmatically take focus when it is first loaded and then also take focus when it receives a &amp;ldquo;show&amp;rdquo; message from Onshape. If an application does this, then shortcut keys will work immediately when the application is shown.&lt;/p>
 &lt;p>&lt;strong>Future Notes&lt;/strong>&lt;/p>
-&lt;p>New message types will be added as needed. If your application element needs a message not listed in this document, please notify Onshape and we’ll work with you on it.&lt;/p>
+&lt;p>New message types will be added as needed. If your application extension needs a message not listed in this document, please notify Onshape and we’ll work with you on it.&lt;/p>
 &lt;p>Mobile client support is unclear at this time.&lt;/p>
-&lt;p>Onshape is considering using promises to wrap post messages. This would make the application element’s JavaScript simpler and enables chaining posts with other operations. But promises would make some sorts of interactions where there are multiple responses difficult, such as when you open a dialog like the select item dialog and want to receive multiple post messages back due to the user clicking on multiple items in the dialog.&lt;/p></description></item><item><title>Docs: Feature List API</title><link>https://onshape-public.github.io/docs/featureaccess/</link><pubDate>Mon, 18 May 2020 20:37:28 -0400</pubDate><guid>https://onshape-public.github.io/docs/featureaccess/</guid><description>
+&lt;p>Onshape is considering using promises to wrap post messages. This would make the application extension&amp;rsquo;s JavaScript simpler and enables chaining posts with other operations. But promises would make some sorts of interactions where there are multiple responses difficult, such as when you open a dialog like the select item dialog and want to receive multiple post messages back due to the user clicking on multiple items in the dialog.&lt;/p></description></item><item><title>Docs: Feature List API</title><link>https://onshape-public.github.io/docs/featureaccess/</link><pubDate>Mon, 18 May 2020 20:37:28 -0400</pubDate><guid>https://onshape-public.github.io/docs/featureaccess/</guid><description>
 &lt;p>Onshape Part Studio Feature Access API&lt;/p>
 &lt;h2 id="summary">Summary&lt;/h2>
 &lt;p>The Onshape Part Studio tab tracks edits in terms of a feature list. Creation and modification of geometry is
