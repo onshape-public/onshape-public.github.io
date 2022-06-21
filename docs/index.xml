@@ -747,8 +747,9 @@ GET /applications/clients/:cid/settings/users/:uid&lt;/p>
 &lt;hr>
 &lt;p>Application extensions and the Onshape JavaScript web client need to communicate directly, calling across the iframe containing the application extension using post message.&lt;/p>
 &lt;p>&lt;img src="https://onshape-public.github.io/images/javascriptpostmessageimage00.png" alt="image alt text">&lt;/p>
-&lt;p>Typical use cases (not all currently implemented) include:&lt;/p>
-&lt;h2 id="from-the-application-extension-to-the-onshape-client">From the Application Extension to the Onshape Client:&lt;/h2>
+&lt;h2 id="typical-use-cases">Typical Use Cases&lt;/h2>
+&lt;p>Some example use cases that might include using Onshape Client Messaging can be split into those that are initiated from the Application Extension, and those that are initiated from the Onshape Client. While many examples are provided, not all of them can be implemented given the currently supported messages.&lt;/p>
+&lt;h3 id="from-the-application-extension-to-the-onshape-client">From the Application Extension to the Onshape Client:&lt;/h3>
 &lt;ul>
 &lt;li>
 &lt;p>&lt;strong>Click/Close Flyouts Events&lt;/strong> - Notify the Onshape client that the user has clicked in the application extension, which should cause Onshape flyouts (versions, history, uploads, etc.) and dropdown menus (profile dropdown menu, document menu) to close. Without this, there may be cases the flyouts and menus remain open, over the application extension.&lt;/p>
@@ -769,7 +770,7 @@ GET /applications/clients/:cid/settings/users/:uid&lt;/p>
 &lt;p>&lt;strong>Content/Material Insertion&lt;/strong> - Request from the application extension to insert content into the Onshape document. Possible examples: to insert a part into a new or existing partstudio, to apply a material to a part, or to add a material to a material library.&lt;/p>
 &lt;/li>
 &lt;/ul>
-&lt;h2 id="from-the-onshape-client-to-the-application-extension">From the Onshape Client to the Application Extension:&lt;/h2>
+&lt;h3 id="from-the-onshape-client-to-the-application-extension">From the Onshape Client to the Application Extension:&lt;/h3>
 &lt;ul>
 &lt;li>
 &lt;p>&lt;strong>User Action Notification&lt;/strong> - The Onshape client could notify an application extension when various user actions happen. For example, the Onshape client might notify when the user has made the application extension active or inactive (when the user clicks on document tabs), as there is no way to know this currently otherwise except when initially loading an application extension. When an application extension is made inactive, it is moved off the edges of the browser, so it cannot be seen but is still active, preserving its state.&lt;/p>
@@ -904,8 +905,9 @@ window.addEventListener(&amp;#39;message&amp;#39;, handlePostMessage, false);
 &lt;tr>
 &lt;td>applicationInit&lt;/td>
 &lt;td>yes
-&lt;p>notifyWhenSaveRequired: whether Onshape should send a notification to save pending changes during certain operations
-(default is false)&lt;/p>
+&lt;pre>&lt;code>notifyWhenSaveRequired: whether Onshape should send a notification to save pending changes during certain operations
+(default is false)
+&lt;/code>&lt;/pre>
 &lt;/td>
 &lt;td>Send once on application startup.&lt;/td>
 &lt;/tr>
@@ -927,14 +929,18 @@ window.addEventListener(&amp;#39;message&amp;#39;, handlePostMessage, false);
 &lt;tr>
 &lt;td>errorReload&lt;/td>
 &lt;td>yes
-&lt;p>message: your message&lt;/td>
-&lt;td>Similar to the connectionLost message, but enables an application to specify the first part of the message, which will be used instead of &amp;ldquo;Onshape is not connected.&amp;rdquo; The user must reload the document or return to the documents page.&lt;/td>&lt;/p>
+&lt;pre>&lt;code>message: your message
+&lt;/code>&lt;/pre>
+&lt;/td>
+&lt;td>Similar to the connectionLost message, but enables an application to specify the first part of the message, which will be used instead of "Onshape is not connected." The user must reload the document or return to the documents page.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>finishedSaving&lt;/td>
 &lt;td>yes
-&lt;p>messageId: the id sent in the corresponding &amp;lsquo;saveChanges&amp;rsquo; message&lt;/td>
-&lt;td>Response to a &amp;lsquo;saveChanges&amp;rsquo; message sent from Onshape. Should be sent after application has cleaned up any pending edits.&lt;/td>&lt;/p>
+&lt;pre>&lt;code>messageId: the id sent in the corresponding 'saveChanges' message
+&lt;/code>&lt;/pre>
+&lt;/td>
+&lt;td>Response to a 'saveChanges' message sent from Onshape. Should be sent after application has cleaned up any pending edits.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>keepAlive&lt;/td>
@@ -954,14 +960,18 @@ window.addEventListener(&amp;#39;message&amp;#39;, handlePostMessage, false);
 &lt;tr>
 &lt;td>showMessageBubble&lt;/td>
 &lt;td>yes
-&lt;p>message: your message&lt;/td>
-&lt;td>Send when you want to show a string in the blue message bubble at the top of the Onshape app.&lt;/td>&lt;/p>
+&lt;pre>&lt;code>message: your message
+&lt;/code>&lt;/pre>
+&lt;/td>
+&lt;td>Send when you want to show a string in the blue message bubble at the top of the Onshape app.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>startLoadingSpinner&lt;/td>
 &lt;td>yes
-&lt;p>message: your message&lt;/td>
-&lt;td>Send to start a large spinner in the middle of the browser window with your message underneath it.&lt;/td>&lt;/p>
+&lt;pre>&lt;code>message: your message
+&lt;/code>&lt;/pre>
+&lt;/td>
+&lt;td>Send to start a large spinner in the middle of the browser window with your message underneath it.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>stopLoadingSpinner&lt;/td>
@@ -981,7 +991,7 @@ window.addEventListener(&amp;#39;message&amp;#39;, handlePostMessage, false);
 &lt;tr>
 &lt;td>openSelectItemDialog&lt;/td>
 &lt;td>yes
-&lt;p>dialogTitle: your dialog title
+&lt;pre>&lt;code>dialogTitle: your dialog title
 (default is no title),
 selectBlobs: true or false
 (default is false),
@@ -998,7 +1008,8 @@ selectBlobMimeTypes: ‘comma-delimited string of blob mime types to show in dia
 showBrowseDocuments: true or false - controls whether ‘Other documents’ choice should be available
 (default is true)
 showStandardContent: true or false - controls whether ‘Standard content’ choice should be available
-(default is false)&lt;/p>
+(default is false)
+&lt;/code>&lt;/pre>
 &lt;/td>
 &lt;td>Send when your application wants to open a dialog in which the user will select one or multiple items - blobs, parts, part studios or assemblies.
 &lt;/td>
@@ -1006,10 +1017,12 @@ showStandardContent: true or false - controls whether ‘Standard content’ cho
 &lt;tr>
 &lt;td>requestCameraProperties&lt;/td>
 &lt;td>yes
-&lt;p>graphicsElementId: string , Element ID of the part studio or assembly &lt;/td>
+&lt;pre>&lt;code>graphicsElementId: string , Element ID of the part studio or assembly
+&lt;/code>&lt;/pre>
+&lt;/td>
 &lt;td>
 Send to request camera properties of a specific part studio or assembly element. Note: The element should have been opened at least once in the current session. The messageName of the response is cameraProperties
-&lt;/td>&lt;/p>
+&lt;/td>
 &lt;/tr>
 &lt;/table>
 &lt;h3 id="messages-that-may-be-_received_-by-element-tab-application-extensions">Messages that may be &lt;em>Received&lt;/em> by Element Tab Application Extensions&lt;/h3>
@@ -1033,7 +1046,7 @@ Send to request camera properties of a specific part studio or assembly element.
 &lt;tr>
 &lt;td>itemSelectedInSelectItemDialog&lt;/td>
 &lt;td>yes
-&lt;p>documentId: id of selected item’s document,
+&lt;pre>&lt;code>documentId: id of selected item’s document,
 workspaceId: id of selected item’s workspace, empty if versionId not empty,
 versionId: id of selected item’s version, empty if workspaceId not empty,
 elementId: id of element selected or containing the selected part,
@@ -1043,9 +1056,10 @@ elementMicroversionId: microversion id of the element,
 itemType: type of item selected: ‘part’,‘partStudio’ or ‘assembly’,
 partName: name of part selected, empty if itemType is not ‘part’,
 idTag: id of part, empty if no part selected
+&lt;/code>&lt;/pre>
 &lt;/td>
 &lt;td>Sent when the user selects an item (blob, part, part studio or assembly) in the select item dialog that was opened due to an openSelectItemDialog message sent earlier.
-When a part is not selected, the partXxx message properties will be empty strings.&lt;/td>&lt;/p>
+When a part is not selected, the partXxx message properties will be empty strings.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>print&lt;/td>
@@ -1060,7 +1074,7 @@ When a part is not selected, the partXxx message properties will be empty string
 &lt;tr>
 &lt;td>startFirstViewCommand&lt;/td>
 &lt;td>yes
-documentId: id of selected item’s document,
+&lt;pre>&lt;code>documentId: id of selected item’s document,
 workspaceId: id of selected item’s workspace, empty if versionId not empty,
 versionId: id of selected item’s version, empty if workspaceId not empty,
 elementId: id of element selected or containing the selected part,
@@ -1070,6 +1084,7 @@ elementMicroversionId: microversion id of the element,
 itemType: type of item selected: ‘part’,‘partstudio’ or ‘assembly’,
 partName: name of part selected, empty if itemType is not ‘part’,
 idTag: id of part
+&lt;/code>&lt;/pre>
 &lt;/td>
 &lt;td>Sent to a drawings application extension when the drawing is created with zero views.
 &lt;p>If other types of applications need a message posted to them with creation context, contact Onshape and we can discuss using this sort of message for your application also.&lt;/td>&lt;/p>
@@ -1077,11 +1092,11 @@ idTag: id of part
 &lt;tr>
 &lt;td>export&lt;/td>
 &lt;td>yes
-fileExtension: the file extension of the export type the user chose - “.dwg”, “.dxf” are the types currently supported.
-baseFileName: the base portion of the expected output file. This is currently set to “&lt;document name> - &lt;element name>”
-&lt;/td>
-&lt;pre>&lt;code>&amp;lt;td&amp;gt;Sent when the user chooses a command to export the contents of the application to a file.&amp;lt;/td&amp;gt;
+&lt;pre>&lt;code>fileExtension: the file extension of the export type the user chose - “.dwg”, “.dxf” are the types currently supported.
+baseFileName: the base portion of the expected output file. This is currently set to “&amp;lt;document name&amp;gt; - &amp;lt;element name&amp;gt;”
 &lt;/code>&lt;/pre>
+&lt;/td>
+&lt;td>Sent when the user chooses a command to export the contents of the application to a file.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>cameraProperties&lt;/td>
@@ -1106,11 +1121,133 @@ viewportWidth: number, width of the viewport
 &lt;tr>
 &lt;td>saveChanges&lt;/td>
 &lt;td>yes
-&lt;p>messageId: a unique identifier for this message. Should be passed back in the &amp;lsquo;finishedSaving&amp;rsquo; message.&lt;/td>
-&lt;td>Sent if the application specified &amp;rsquo;notifyWhenSaveRequired&amp;rsquo; in the &amp;lsquo;applicationInit&amp;rsquo; message. Indicates that the application should cleanup any pending edits before an Onshape process continues (i.e. version save).&lt;/td>&lt;/p>
+&lt;pre>&lt;code>messageId: a unique identifier for this message. Should be passed back in the 'finishedSaving' message.
+&lt;/code>&lt;/pre>
+&lt;/td>
+&lt;td>Sent if the application specified 'notifyWhenSaveRequired' in the 'applicationInit' message. Indicates that the application should cleanup any pending edits before an Onshape process continues (i.e. version save).&lt;/td>
 &lt;/tr>
 &lt;/table>
-&lt;h2 id="general">General&lt;/h2>
+&lt;h2 id="element-right-panel-application-extension-messages">&lt;strong>Element Right Panel&lt;/strong> Application Extension Messages&lt;/h2>
+&lt;p>Most client messaging functionality had been limited to that occurring between the Onshape client and application elements (the &lt;strong>element tab&lt;/strong> location). Included now is &lt;em>some&lt;/em> functionality for client messaging to work with application extensions in the &lt;strong>element right panel&lt;/strong> location as well.&lt;/p>
+&lt;h3 id="all-onshape-selections-to-element-right-panel-application-extensions">All Onshape Selections to Element Right Panel Application Extensions&lt;/h3>
+&lt;p>Enabled messaging to element right panel extensions includes the communication of selections that the user makes for the following application extension contexts:&lt;/p>
+&lt;ul>
+&lt;li>Part Studio&lt;/li>
+&lt;li>Assembly&lt;/li>
+&lt;li>Document&lt;/li>
+&lt;/ul>
+&lt;h4 id="capturing-selection-messages-from-the-onshape-client">Capturing &lt;code>SELECTION&lt;/code> Messages from the Onshape Client:&lt;/h4>
+&lt;p>First, all &lt;a href="#posting-a-message-from-the-application-extension-to-the-onshape-client">security related requirements&lt;/a> that apply to posting a message from an element tab location to the Onshape client apply for the element right panel location as well. In staying consistent with the functionality described in that section, an initial message from the application extension to the Onshape client, in the form of an &lt;code>applicationInit&lt;/code> message (or one of any other messages supported by the element right panel extensions), is required to ensure the Onshape client does not send messages to the extension until it is ready.&lt;/p>
+&lt;p>Once a valid &lt;code>applicationInit&lt;/code> message is received by the Onshape client, it will start sending messages with the &lt;code>messageName&lt;/code> value of &lt;code>SELECTION&lt;/code> upon user selection interactions.&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;em>&lt;strong>NOTE:&lt;/strong> Prior to accepting &lt;em>any&lt;/em> message from the Onshape client as secure, the &lt;code>origin&lt;/code> attribute value included in incoming messages must be validated as equal to the original &lt;code>server&lt;/code> query parameter value used to load the application extension.&lt;/em>&lt;/p>
+&lt;/blockquote>
+&lt;p>Sequence diagram illustrating interaction between element right panel application extension and Onshape client:&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-mermaid" data-lang="mermaid">%%{
+init: {
+&amp;#34;theme&amp;#34;: &amp;#34;default&amp;#34;,
+&amp;#34;sequence&amp;#34;: {
+&amp;#34;mirrorActors&amp;#34;: false,
+&amp;#34;showSequenceNumbers&amp;#34;: false,
+&amp;#34;width&amp;#34;: 75,
+&amp;#34;height&amp;#34;: 60,
+&amp;#34;actorMargin&amp;#34;: 25,
+&amp;#34;messageFontSize&amp;#34;: 13,
+&amp;#34;messageFontFamily&amp;#34;: &amp;#34;monospace&amp;#34;,
+&amp;#34;messageFontWeight&amp;#34;: 2
+}
+}
+}%%
+sequenceDiagram
+actor user
+participant OSC AS Onshape Client
+participant AE AS Application Extension
+user-&amp;gt;&amp;gt;+OSC: start element right panel extension
+Note right of user: via configured button
+OSC-&amp;gt;&amp;gt;+AE: invoke action url (with query params)
+AE-&amp;gt;&amp;gt;OSC: postMessage(messageName: &amp;#39;applicationInit&amp;#39;)
+loop selection interactions
+user-&amp;gt;&amp;gt;OSC: select
+OSC-&amp;gt;&amp;gt;AE: postMessage(messageName: &amp;#39;SELECTION&amp;#39;)
+end
+user-&amp;gt;&amp;gt;OSC: stop element right panel extension
+Note right of user: via configured button
+deactivate AE
+OSC-XAE: destroy
+deactivate OSC
+&lt;/code>&lt;/pre>&lt;p>The following messages are exchanged for application extensions located in the element right panel and configured for Part Studio, Assembly, or Document contexts:&lt;/p>
+&lt;p>The first message with &lt;code>messageName&lt;/code> attribute set to &lt;code>applicationInit&lt;/code> is sent to the Onshape client by an application extension once it is loaded and ready to receive and process incoming messages:&lt;/p>
+&lt;pre tabindex="0">&lt;code> {
+documentId: &amp;#39;&amp;lt;document id&amp;gt;&amp;#39;,
+workspaceId: &amp;#39;&amp;lt;workspace id&amp;gt;&amp;#39;,
+elementId: &amp;#39;&amp;lt;element id&amp;gt;&amp;#39;,
+messageName: &amp;#39;applicationInit&amp;#39;
+}
+&lt;/code>&lt;/pre>&lt;p>where the values &amp;lt;document id&amp;gt;, &amp;lt;workspace id&amp;gt;, &amp;lt;element id&amp;gt;, and &amp;lt;server id&amp;gt;:&lt;/p>
+&lt;ul>
+&lt;li>are originally included as query parameters in the action URL used to request the content of the application extension&lt;/li>
+&lt;li>must be included in messages sent to the Onshape client&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>&lt;em>&lt;strong>Note:&lt;/strong>&lt;/em> while initialization is the specific intent of the &lt;code>applicationInit&lt;/code> message, other supported &lt;code>messageName&lt;/code> attributes have the same initialization effect upon their first receipt by the Onshape client.&lt;/p>
+&lt;/blockquote>
+&lt;p>Next, as the user interacts with Onshape by selecting various parts of the model, messages with the &lt;code>messageName&lt;/code> attribute set to &lt;code>SELECTION&lt;/code> are sent to the application extension. The following is an example of one such message:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> messageName: &lt;span style="color:#a50">&amp;#39;SELECTION&amp;#39;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> selections: [
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> selectionType: &lt;span style="color:#a50">&amp;#39;ENTITY&amp;#39;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> selectionId: &lt;span style="color:#a50">&amp;#39;KRiB&amp;#39;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> entityType: &lt;span style="color:#a50">&amp;#39;FACE&amp;#39;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> occurrencePath: [
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a50">&amp;#39;MfOieM8xKIDGHe37c&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> workspaceMicroversionId: &lt;span style="color:#a50">&amp;#39;a781c53fbd1095e3462d2b70&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> selectionType: &lt;span style="color:#a50">&amp;#39;ENTITY&amp;#39;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> selectionId: &lt;span style="color:#a50">&amp;#39;KRdC&amp;#39;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> entityType: &lt;span style="color:#a50">&amp;#39;EDGE&amp;#39;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> occurrencePath: [
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a50">&amp;#39;MfOieM8xKIDGHe37c&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> workspaceMicroversionId: &lt;span style="color:#a50">&amp;#39;a781c53fbd1095e3462d2b70&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="example-code-snippet">Example Code Snippet&lt;/h4>
+&lt;p>The following is an example of how one might send an initialization message to, and handle post messages from the Onshape client.&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;em>&lt;strong>Note:&lt;/strong>&lt;/em> Proper clean-up of event listeners is not included in the snippet&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a">function&lt;/span> handlePostMessage(event) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#aaa;font-style:italic">// ensure that the event data is from a legit source:
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span> &lt;span style="color:#00a">if&lt;/span>(theServerStringFromActionUrl !== event.origin) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> console.error(&lt;span style="color:#a50">&amp;#39;origin of message is not legitimate&amp;#39;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">return&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#aaa;font-style:italic">// branch based on messageName attribute
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span> &lt;span style="color:#00a">switch&lt;/span>(event.data.messageName) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">case&lt;/span> &lt;span style="color:#a50">&amp;#39;SELECTION&amp;#39;&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> console.debug(&lt;span style="color:#a50">&amp;#39;SELECTION event data: %o&amp;#39;&lt;/span>, event.data);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">break&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">default&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> console.debug(&lt;span style="color:#a50">`&lt;/span>&lt;span style="color:#a50">${&lt;/span>event.data.messageName&lt;span style="color:#a50">}&lt;/span>&lt;span style="color:#a50"> not handled`&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0aa">window&lt;/span>.addEventListener(&lt;span style="color:#a50">&amp;#39;message&amp;#39;&lt;/span>, handlePostMessage);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a">const&lt;/span> initMessage = {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> documentId: theDocumentId, &lt;span style="color:#aaa;font-style:italic">// required - parsed from action url
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span> workspaceId: theWorkspaceId, &lt;span style="color:#aaa;font-style:italic">// required - parsed from action url
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span> elementId: theElementId, &lt;span style="color:#aaa;font-style:italic">// required - parsed from action url
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span> messageName: &lt;span style="color:#a50">&amp;#39;applicationInit&amp;#39;&lt;/span> &lt;span style="color:#aaa;font-style:italic">// required
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span>};
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0aa">window&lt;/span>.parent.postMessage(initMessage, &lt;span style="color:#a50">&amp;#39;*&amp;#39;&lt;/span>);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="general">General&lt;/h2>
 &lt;p>&lt;strong>Keyboard Focus / Shortcut Keys&lt;/strong>&lt;/p>
 &lt;p>Keyboard focus will not be transferred to an application until the user clicks in the application or the application programmatically takes focus. The simplest thing is an application should programmatically take focus when it is first loaded and then also take focus when it receives a &amp;ldquo;show&amp;rdquo; message from Onshape. If an application does this, then shortcut keys will work immediately when the application is shown.&lt;/p>
 &lt;p>&lt;strong>Future Notes&lt;/strong>&lt;/p>
