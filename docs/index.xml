@@ -118,11 +118,11 @@
 &lt;p>This document describes APIs that will allow partners to interact with the Onshape system.&lt;/p>
 &lt;p>Please address questions to &amp;quot; &lt;a href="mailto:api-support@onshape.com">api-support@onshape.com&lt;/a>&amp;quot; for the fastest response.&lt;/p>
 &lt;blockquote>
-&lt;p>NOTE The API is still under development. Many of the previous interfaces have been deprecated in favor of a more consistent API. All previously described interfaces should continue to work, but we reserve the right to remove support for them. Please update to use the new forms as described in the API Explorer.&lt;/p>
+&lt;p>NOTE The API is still under development. Many of the previous interfaces have been deprecated in favor of a more consistent API. All previously described interfaces should continue to work, but we reserve the right to remove support for them. Please update to use the new forms as described in the Glassworks API Explorer.&lt;/p>
 &lt;/blockquote>
 &lt;h2 id="quick-start">Quick Start&lt;/h2>
 &lt;ol>
-&lt;li>Use the API Explorer to see detailed documentation of the Onshape API. To use the API Explorer, subscribe in the Appstore at &lt;a href="https://appstore.onshape.com" target="_blank">&lt;a href="https://appstore.onshape.com">https://appstore.onshape.com&lt;/a>&lt;/a>, then add the Explorer to a document using the plus menu.&lt;/li>
+&lt;li>Use the Glassworks API Explorer to see detailed documentation of the Onshape API. To use the API Explorer, subscribe in the Appstore at &lt;a href="https://appstore.onshape.com" target="_blank">&lt;a href="https://appstore.onshape.com">https://appstore.onshape.com&lt;/a>&lt;/a>, then add the Explorer to a document using the plus menu.&lt;/li>
 &lt;li>Sample applications are available at &lt;a href="https://github.com/onshape-public" target="_blank">&lt;a href="https://github.com/onshape-public">https://github.com/onshape-public&lt;/a>&lt;a>.&lt;/li>
 &lt;li>Request access to the private forum for API and App Store development. Send an email to Lou Gallo (&lt;a href="mailto:lgallo@onshape.com">lgallo@onshape.com&lt;/a>) requesting access to the partner forum. Include the email address you use for signing in to the Onshape production server (cad.onshape.com).&lt;/li>
 &lt;/ol>
@@ -179,9 +179,9 @@ Web server applications can create a tightly integrated experience within Onshap
 &lt;p>The components of the sample applications written by Onshape are provided under the MIT License; applications may include other open source components as well.&lt;/p>
 &lt;p>For access to samples and tools, please visit &lt;a href="https://github.com/onshape-public" target="_blank">&lt;a href="https://github.com/onshape-public">https://github.com/onshape-public&lt;/a>&lt;/a>.&lt;/p>
 &lt;h2 id="tools">Tools&lt;/h2>
-&lt;p>Onshape provides API Explorer - an application written using the Onshape API that offers REST documentation and a &amp;ldquo;try me&amp;rdquo; mode for experimenting with the REST interfaces. To use API Explorer, visit the Appstore, select the API Explorer app and click &amp;ldquo;Try for Free.&amp;rdquo; Then, add a new Application tab using the plus button:&lt;/p>
+&lt;p>Onshape provides Glassworks API Explorer - an application written using the Onshape API that offers REST documentation and a &amp;ldquo;try me&amp;rdquo; mode for experimenting with the REST interfaces. To use API Explorer, visit the Appstore, select the API Explorer app and click &amp;ldquo;Try for Free.&amp;rdquo; Then, add a new Application tab using the plus button:&lt;/p>
 &lt;p>&lt;img src="https://onshape-public.github.io/images/apioverviewimage01.png" alt="image">&lt;/p>
-&lt;p>Select &amp;ldquo;Add Application&amp;rdquo; to create a tab with the API Explorer.&lt;/p>
+&lt;p>Select &amp;ldquo;Add Application&amp;rdquo; to create a tab with the Glassworks API Explorer.&lt;/p>
 &lt;h2 id="sample-applications">Sample Applications&lt;/h2>
 &lt;p>The easiest way to get started with the Onshape API is to look at the sample applications. Each sample application is provided as a Github repository. For access, go to &lt;a href="https://github.com/onshape-public">https://github.com/onshape-public&lt;/a>. More samples will be made available over time. The current samples are:&lt;/p>
 &lt;table>
@@ -341,9 +341,9 @@ applicable.&lt;/p>
 &lt;h3 id="applications-for-mobile-clients">Applications for Mobile Clients&lt;/h3>
 &lt;p>Onshape expects to enable applications tabs in iOS and Android environments, but details, including touch event handling in mobile environments, have not been finalized.&lt;/p>
 &lt;h2 id="rest-api-documentation">REST API Documentation&lt;/h2>
-&lt;p>The available REST API endpoints are documented in the API Explorer. Documentation of deprecated forms of the API are provided for reference below.&lt;/p>
+&lt;p>The available REST API endpoints are documented in the Glassworks API Explorer. Documentation of deprecated forms of the API are provided for reference below.&lt;/p>
 &lt;blockquote>
-&lt;p>&lt;strong>IMPORTANT NOTE&lt;/strong> The documentation in the API Explorer reflects the supported interface. Some API calls may, for historical reasons, return additional undocumented fields. Unless the return fields are documented in the API Explorer, you should NOT use them, as they may be removed without warning. Your application should always ignore unexpected or undocumented return data. Onshape reserves the right to add, remove or change any undocumented fields.&lt;/p>
+&lt;p>&lt;strong>IMPORTANT NOTE&lt;/strong> The documentation in the Glassworks API Explorer reflects the supported interface. Some API calls may, for historical reasons, return additional undocumented fields. Unless the return fields are documented in the API Explorer, you should NOT use them, as they may be removed without warning. Your application should always ignore unexpected or undocumented return data. Onshape reserves the right to add, remove or change any undocumented fields.&lt;/p>
 &lt;/blockquote>
 &lt;h2 id="api-conventions">API conventions&lt;/h2>
 &lt;p>The Onshape API generally follows the following conventions:&lt;/p>
@@ -399,8 +399,8 @@ a meaningful way, we will either introduce a new API or define a new version of 
 callers should take note of the documented Accept header for an API call and specify that in their
 application. When no version header is specified the behavior will behave according to the oldest
 supported version.&lt;/p>
-&lt;p>Please refer to the API Explorer for detailed information. The API Explorer describes the officially supported interfaces and documents all supported options and return values. You should only use documented fields. Internal data may be changed or removed without notice.&lt;/p>
-&lt;p>To obtain a complete list of API endpoints, open the API Explorer and click on the &amp;ldquo;Toggle All Endpoints&amp;rdquo; button to expand all available REST APIs. You can search this list using your browser&amp;rsquo;s search capability to locate specific interfaces.&lt;/p>
+&lt;p>Please refer to the Glassworks API Explorer for detailed information. The API Explorer describes the officially supported interfaces and documents all supported options and return values. You should only use documented fields. Internal data may be changed or removed without notice.&lt;/p>
+&lt;p>To obtain a complete list of API endpoints, open the Glassworks API Explorer and click on the &amp;ldquo;Toggle All Endpoints&amp;quot;button to expand all available REST APIs. You can search this list using your browser&amp;rsquo;s search capability to locate specific interfaces.&lt;/p>
 &lt;h2 id="units-parameters">Units parameters&lt;/h2>
 &lt;p>The following strings are valid unit designators:&lt;/p>
 &lt;p>For length measures:&lt;/p>
@@ -513,7 +513,7 @@ supported version.&lt;/p>
 &lt;li>Existing topological entity can be split into multiple entities.&lt;/li>
 &lt;/ul>
 &lt;p>A pair of model microversion and Topology ID can be used to identify topological entities across the model changes. Topology ID defined in a specific microversion can be translated into a set of topology ids in the current microversion of the model. (The Topology ID is sometimes referred to as a Deterministic ID within Onshape, and is exposed in specific API calls as Part ID, Face ID, and so on).&lt;/p>
-&lt;p>The following table contains a summary of Topology IDs exposed through Onshape REST APIs. The details of the API calls are documented in the API Explorer.&lt;/p>
+&lt;p>The following table contains a summary of Topology IDs exposed through Onshape REST APIs. The details of the API calls are documented in the Glassworks API Explorer.&lt;/p>
 &lt;table>
 &lt;tr>
 &lt;td>Topology ID&lt;/td>
@@ -1298,9 +1298,9 @@ and customers to manipulate the feature list from software.&lt;/p>
 &lt;p>Note that the use of &amp;ldquo;DWE&amp;rdquo; occurrences within this document are a shorthand notation for “d/:did/w/:wid/e/:eid”
 and DWMVE occurrences within this document are a shorthand notation for any of “d/:did/w/:wid/e/:eid”,
 “d/:did/v/:vid/e/:eid”, “d/:did/m/:mid/e/:eid”. It is assumed that the reader is familiar with these URL path patterns
-from the API Explorer documentation.&lt;/p>
+from the Glassworks API Explorer documentation.&lt;/p>
 &lt;h2 id="api-methods">API Methods&lt;/h2>
-&lt;p>The methods described here are also documented at an overview level in the API Explorer within the Part Studios group.&lt;/p>
+&lt;p>The methods described here are also documented at an overview level in the Glassworks API Explorer within the Part Studios group.&lt;/p>
 &lt;h3 id="get-feature-list">Get Feature List&lt;/h3>
 &lt;pre>&lt;code>GET /api/partstudios/DWMVE/features - get feature list
 &lt;/code>&lt;/pre>
@@ -6772,7 +6772,7 @@ If you had created an integrated cloud app, the following changes have been made
 &lt;li>(1)The EULA link should point to an English Language EULA&lt;/li>
 &lt;/ul></description></item><item><title>Docs: Model Translation</title><link>https://onshape-public.github.io/docs/translation/</link><pubDate>Mon, 18 May 2020 20:43:20 -0400</pubDate><guid>https://onshape-public.github.io/docs/translation/</guid><description>
 &lt;h2 id="summary">Summary&lt;/h2>
-&lt;p>This document describes the APIs provided by Onshape for model translation. This document makes reference to specific APIs using the naming convention &lt;em>Group Name - Api Name&lt;/em>, where the &lt;group name> identifies an API group and &lt;api name> identifies a specific API defined in the group. See the API Explorer for details on the APIs.&lt;/p>
+&lt;p>This document describes the APIs provided by Onshape for model translation. This document makes reference to specific APIs using the naming convention &lt;em>Group Name - Api Name&lt;/em>, where the &lt;group name> identifies an API group and &lt;api name> identifies a specific API defined in the group. See the Glassworks API Explorer for details on the APIs.&lt;/p>
 &lt;p>Onshape provides several APIs to support model format translation. These fall into 3 basic categories&lt;/p>
 &lt;ol>
 &lt;li>&lt;a href="#simple-conversions">Simple conversions&lt;/a> - these support translation of Onshape content into STL and Parasolid format.&lt;/li>
