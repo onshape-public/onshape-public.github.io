@@ -15,10 +15,8 @@
 &lt;h5 id="instructions">Instructions&lt;/h5>
 &lt;ol>
 &lt;li>
-&lt;p>Get the Developer role for your Onshape account by contacting us at &lt;a href="mailto:api-support@onshape.com">api-support@onshape.com&lt;/a>. You should already have this since you&amp;rsquo;re in the Developer Portal already.&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>Create and manage your API key pairs from the Developer Portal; note that the secret will only be displayed once! Keep it somewhere safe.&lt;/p>
+&lt;p>Create and manage your API key pairs from the Developer Portal; note that the secret will only be displayed once!
+Keep it somewhere safe.&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Now that you have a key pair, see &lt;a href="#generating-a-request-signature">below&lt;/a> for information on signing your requests to use our API.&lt;/p>
