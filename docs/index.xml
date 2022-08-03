@@ -1,117 +1,223 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Onshape Developer Documentation – Welcome to the Developer Portal</title><link>https://onshape-public.github.io/docs/</link><description>Recent content in Welcome to the Developer Portal on Onshape Developer Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 07 Jun 2022 08:24:05 -0400</lastBuildDate><atom:link href="https://onshape-public.github.io/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: API Keys</title><link>https://onshape-public.github.io/docs/apikeys/</link><pubDate>Mon, 18 May 2020 20:20:41 -0400</pubDate><guid>https://onshape-public.github.io/docs/apikeys/</guid><description>
-&lt;h1 id="using-api-keys-with-onshape">Using API Keys with Onshape&lt;/h1>
-&lt;h3 id="why-api-keys">Why API Keys?&lt;/h3>
-&lt;p>API keys are useful for small applications meant for personal use, allowing developers to avoid the overhead of the OAuth workflow. Creating an app is very easy with API keys: create an API key with the Developer Portal, set up a function to build your API key header as in the samples, and make your API calls! There&amp;rsquo;s no need to deal with OAuth redirects or things like that.&lt;/p>
-&lt;p>We&amp;rsquo;ve moved over to using API keys for authenticating requests instead of using cookies for several reasons.&lt;/p>
-&lt;ol>
-&lt;li>Security: Each request is signed with unique headers so that we can be sure it&amp;rsquo;s coming from the right place.&lt;/li>
-&lt;li>OAuth: The API key system we&amp;rsquo;re now using for HTTP requests is the same process developers follow when building full-blown OAuth applications; there&amp;rsquo;s no longer a disconnect between the two.&lt;/li>
-&lt;/ol>
-&lt;p>Once you create an API key, it will only be valid in the stack on which it was created. An API key created on the partner stack, for example, will not function on the production stack.&lt;/p>
-&lt;h3 id="questions-and-concerns">Questions and Concerns&lt;/h3>
-&lt;p>If you need information or have a question unanswered in this documentation, feel free to chat with us by sending an email to &lt;a href="mailto:api-support@onshape.com">api-support@onshape.com&lt;/a> or by checking out the &lt;a href="https://forum.onshape.com" target="_blank">forums&lt;/a>. If you are a member of the DevPartners group (see the Development help page for information) more detailed instructions and code examples are in the apikey sample repo.&lt;/p>
-&lt;h3 id="working-with-api-keys">Working with API Keys&lt;/h3>
-&lt;p>Read the following and you&amp;rsquo;ll be up and running with using API keys in your application:&lt;/p>
-&lt;h5 id="instructions">Instructions&lt;/h5>
-&lt;ol>
-&lt;li>
-&lt;p>Create and manage your API key pairs from the Developer Portal; note that the secret will only be displayed once!
-Keep it somewhere safe.&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>Now that you have a key pair, see &lt;a href="#generating-a-request-signature">below&lt;/a> for information on signing your requests to use our API.&lt;/p>
-&lt;/li>
-&lt;/ol>
-&lt;p>Once you have your access key and secret, you will want to avoid giving others access to them since they&amp;rsquo;re tied directly to your personal Onshape account. Think of your API key as a username and password pair. Therefore, you should avoid placing them directly in the code for your application, especially if others might see it. The samples use a separate configuration file that you yourself will need to create that will contain this information, but there are other ways to keep the access key and secret safe, like setting them as environment variables.&lt;/p>
-&lt;h5 id="scopes">Scopes&lt;/h5>
-&lt;p>There are several scopes available for API keys (equivalent to OAuth scopes):&lt;/p>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Onshape Developer Documentation – Welcome to the Developer Portal</title><link>https://onshape-public.github.io/docs/</link><description>Recent content in Welcome to the Developer Portal on Onshape Developer Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 07 Jun 2022 08:24:05 -0400</lastBuildDate><atom:link href="https://onshape-public.github.io/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Quick Start</title><link>https://onshape-public.github.io/docs/quickstart/</link><pubDate>Mon, 18 May 2020 20:39:14 -0400</pubDate><guid>https://onshape-public.github.io/docs/quickstart/</guid><description>
+&lt;h2 id="overview">Overview&lt;/h2>
+&lt;p>Onshape was built from the ground up as a true multi-tenant Software as a Service (SaaS) based system, and it uses REST APIs to communicate with its clients and third-party systems. In short, you call a REST API as you would do on a web page. It has a specific web address and often some additional parameters that are required either in the URL itself or a form of data that can be attached to the web call. The web call will return information instead of returning a web page, and the response from the API call is formatted in JSON (JavaScript Object Notation).&lt;/p>
+&lt;h3 id="the-rest-api">The REST API&lt;/h3>
+&lt;p>The REST API stands for the &lt;b>RE&lt;/b>presentational &lt;b>S&lt;/b>tate &lt;b>T&lt;/b>ransfer &lt;b>A&lt;/b>pplication &lt;b>P&lt;/b>rogramming &lt;b>I&lt;/b>nterface. In Onshape, you can use the REST API to access Onshape engine and data in real-time. There are currently three types of REST API requests that are supported in Onshape (following the HTTP standards):&lt;/p>
 &lt;ul>
-&lt;li>&amp;ldquo;OAuth2Read&amp;rdquo; - Read non-personal information (documents, parts, etc.)&lt;/li>
-&lt;li>&amp;ldquo;OAuth2ReadPII&amp;rdquo; - Read personal information (name, email, etc.)&lt;/li>
-&lt;li>&amp;ldquo;OAuth2Write&amp;rdquo; - Create and edit documents / etc.&lt;/li>
-&lt;li>&amp;ldquo;OAuth2Delete&amp;rdquo; - Delete documents / etc.&lt;/li>
-&lt;li>&amp;ldquo;OAuth2Purchase&amp;rdquo; - Authorize purchases from account&lt;/li>
+&lt;li>&lt;code>GET&lt;/code>: Retrieve (read) information from the server (i.e., your Onshape documents). Any arguments included in the URL are sent to the server.&lt;/li>
+&lt;li>&lt;code>POST&lt;/code>: Update (write) the server with new information. Data required is included in the body of the request – the same as how a web form submits data to a server.&lt;/li>
+&lt;li>&lt;code>DELETE&lt;/code>: Delete information from the server.&lt;/li>
 &lt;/ul>
-&lt;h5 id="generating-a-request-signature">Generating A Request Signature&lt;/h5>
-&lt;p>To ensure that a request is coming from you, we have a process for signing requests that you must follow for API calls to work. Everything is done via HTTP headers that you&amp;rsquo;ll need to set:&lt;/p>
-&lt;ol>
-&lt;li>&lt;em>Date&lt;/em>: A standard date header giving the time of the request; must be accurate within &lt;strong>5 minutes&lt;/strong> of request. Example: &lt;code>Mon, 11 Apr 2016 20:08:56 GMT&lt;/code>&lt;/li>
-&lt;li>&lt;em>On-Nonce&lt;/em>: A string that satisfies the following requirements (see the code for one possible way to generate it):
+&lt;img src="https://onshape-public.github.io/images/integrationguideimage13.jpeg" alt="PHP RESTful Web Service API" style="width:80%"/>
+&lt;h3 id="the-onshape-architecture">The Onshape Architecture&lt;/h3>
+&lt;p>When you start a design in Onshape, you typically create a &lt;b>document&lt;/b>. The document is the container that includes all the content related to a specific design. All data in an Onshape document is stored in &lt;b>Elements&lt;/b> (represented as tabs in the user interface). Typically, Part Studios and Assemblies are two of the most common element types that a design requires. Throughout the design process, you may also find creating &lt;b>versions&lt;/b> to be useful for product development management while working on the &amp;ldquo;Main&amp;rdquo; &lt;b>workspace&lt;/b>. More details can be found in the &lt;a href="../associativity">Associativity page&lt;/a> of the documentation.&lt;/p>
+&lt;p>Since Onshape is a web-based solution, it uses a URL to define what gets loaded in the browser. We can access different documents and different parts/versions of a document by simply altering the URL following a similar structure.&lt;/p>
+&lt;p>As an example, here is a typical Onshape URL:&lt;/p>
+&lt;pre>&lt;code>https://cad.onshape.com/documents/58d051743d98a90f86e9e2ab/w/17e0ba65df28e4e72f7f4961/e/4a289bd094a999329a3900af
+&lt;/code>&lt;/pre>
 &lt;ul>
-&lt;li>At least 16 characters&lt;/li>
-&lt;li>Alphanumeric&lt;/li>
-&lt;li>Unique for each request&lt;/li>
+&lt;li>&lt;code>https://cad.onshape.com&lt;/code> is the &lt;i>base URL&lt;/i> of the document. It defines the Onshape Enterprise that the document belongs to. While the default for standard accounts is &lt;code>cad.onshape.com&lt;/code>, every Enterprise account has a different base URL (e.g., &lt;code>companyName.onshape.com&lt;/code>).&lt;/li>
+&lt;li>&lt;code>documents/&lt;/code> or simply &lt;code>d/&lt;/code> is followed by a 24-character &lt;i>document ID&lt;/i>. The document ID uniquely identifies an Onshape document.&lt;/li>
+&lt;li>&lt;code>w/&lt;/code> is followed by a 24-character &lt;i>workspace ID&lt;/i>. The workspace ID uniquely identifies a workspace within the document. By default, a document is started with the &lt;code>Main&lt;/code> workspace.
+&lt;ul>
+&lt;li>But you can also create &lt;i>versions&lt;/i> along the design process, which can be linked to by replacing &lt;code>w/&lt;/code> with &lt;code>v/&lt;/code>, followed by a 24-character &lt;i>version ID&lt;/i>.&lt;/li>
+&lt;li>With every edit made in the document, a microversion is automatically created internally. You can also access a specific microversion by replacing &lt;code>w/&lt;/code> with &lt;code>m/&lt;/code>, followed by a 24-character &lt;i>microversion ID&lt;/i>.&lt;/li>
+&lt;li>&lt;b>Note:&lt;/b> &lt;code>POST&lt;/code> requests will always be made to a workspace, as versions and microversions are immutable.&lt;/li>
 &lt;/ul>
 &lt;/li>
-&lt;li>&lt;em>Authorization&lt;/em>: This is where the API keys come into play. You&amp;rsquo;ll sign the request by implementing this algorithm:
-&lt;ul>
-&lt;li>&lt;strong>Input&lt;/strong>: Method, URL, On-Nonce, Date, Content-Type, AccessKey, SecretKey&lt;/li>
-&lt;li>&lt;strong>Output&lt;/strong>: String of the form: &lt;code>On &amp;lt;AccessKey&amp;gt;:HmacSHA256:&amp;lt;Signature&amp;gt;&lt;/code>&lt;/li>
-&lt;li>&lt;strong>Steps to generate the signature portion&lt;/strong>:
-&lt;ol>
-&lt;li>Parse the URL and get the following:
-&lt;ol>
-&lt;li>The path, e.g. &lt;code>/api/documents&lt;/code> (no query params!)&lt;/li>
-&lt;li>The query string, e.g. &lt;code>a=1&amp;amp;b=2&lt;/code>
-&lt;ul>
-&lt;li>NOTE: If no query paramaters are present, use an empty string&lt;/li>
+&lt;li>&lt;code>e/&lt;/code> is followed by a 24-character &lt;i>element ID&lt;/i>. The element ID uniquely identifies an element (i.e., a tab that we see and access through the user interface).&lt;/li>
 &lt;/ul>
-&lt;/li>
-&lt;/ol>
-&lt;/li>
-&lt;li>Create a string by appending the following information in order. Each field should be separated by a newline (&lt;code>\n&lt;/code>) character, and the string must be converted to lowercase:
-&lt;ol>
-&lt;li>HTTP method&lt;/li>
-&lt;li>On-Nonce header value&lt;/li>
-&lt;li>Date header value&lt;/li>
-&lt;li>Content-Type header value&lt;/li>
-&lt;li>URL pathname&lt;/li>
-&lt;li>URL query string&lt;/li>
-&lt;/ol>
-&lt;/li>
-&lt;li>Using SHA-256, generate an &lt;a href="https://en.wikipedia.org/wiki/Hash-based_message_authentication_code" target="_blank">HMAC digest&lt;/a>, using the API secret key first and then the above string, then encode it in Base64.&lt;/li>
-&lt;li>Create the &lt;code>On &amp;lt;AccessKey&amp;gt;:HmacSHA256:&amp;lt;Signature&amp;gt;&lt;/code> string and use that in the Authorization header in your request.&lt;/li>
-&lt;/ol>
-&lt;/li>
+&lt;img src="https://onshape-public.github.io/images/quickstart1.png" alt="Associativity Demonstration" style="width:80%"/>
+&lt;h2 id="glassworks-onshape-api-explorer">Glassworks Onshape API Explorer&lt;/h2>
+&lt;p>Onshape documents all available REST API endpoints on the Glassworks API Explorer, which can be reached through &lt;a href="https://cad.onshape.com/glassworks/explorer/">https://cad.onshape.com/glassworks/explorer/&lt;/a>. It also provides the ability to run the API requests within its interface with the &amp;ldquo;Try it out&amp;rdquo; button and provides the output from the API call.&lt;/p>
+&lt;p>For a quick start, you can try out the API calls on Glassworks by running Onshape in a browser tab. Glassworks can use the logged-in Onshape session Cookie to authenticate the API calls. However, if you are making API calls to an Enterprise account, change the base URL of the Glassworks API explorer to the base URL of your Enterprise (e.g., &lt;a href="https://companyName.onshape.com/glassworks/explorer/)">https://companyName.onshape.com/glassworks/explorer/)&lt;/a>.&lt;/p>
+&lt;img src="https://onshape-public.github.io/images/quickstart2.gif" alt="Glassworks Demonstration" style="width:80%"/>
+&lt;h2 id="making-an-onshape-rest-api-call">Making an Onshape REST API call&lt;/h2>
+&lt;p>While making API calls on Glassworks is a great platform for testing out individual endpoints, there is a much greater potential on what the REST API can achieve by establishing computation workflows and developing web applications with APIs.&lt;/p>
+&lt;h3 id="authenticate-access">Authenticate access&lt;/h3>
+&lt;p>To use the Onshape REST APIs outside of Glassworks, there are two possible workflows to authenticate the access to your Onshape account:&lt;/p>
+&lt;ul>
+&lt;li>API Keys: allow a &lt;i>user&lt;/i> (specifically, a developer) to make API requests&lt;/li>
+&lt;li>OAuth: allows an &lt;i>application&lt;/i> to make API requests on behalf of the user&lt;/li>
 &lt;/ul>
-&lt;/li>
+&lt;p>For a quick starting example, you can go through the following steps to create a set of API keys. More information about setting up the OAuth for app development can be found in the &lt;a href="../oauth">OAuth page&lt;/a>.&lt;/p>
+&lt;ol>
+&lt;li>Go to the Onshape developer portal at &lt;a href="https://dev-portal.onshape.com">https://dev-portal.onshape.com&lt;/a> and log in with your Onshape account.&lt;/li>
+&lt;li>Under &amp;ldquo;API keys&amp;rdquo; of the left panel, click &amp;ldquo;Create new API key&amp;rdquo; in the top right corner of the page.&lt;/li>
+&lt;li>Choose the company and permissions that you would like this key to have access to (recommend enabling read-only permission for now, then be careful with the rest before you gain sufficient experience).&lt;/li>
+&lt;li>Once the API key is created, a pop-up box should show an access key and a secret key. Note that the secret key will only show up once, or you will have to generate a new set of API keys if you lose access.&lt;/li>
 &lt;/ol>
-&lt;p>Below is an example function to generate the authorization header, using Node.js&amp;rsquo;s standard &lt;code>crypto&lt;/code> and &lt;code>url&lt;/code> libraries:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-js" data-lang="js">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">// ...at top of file
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span>&lt;span style="color:#00a">var&lt;/span> u = require(&lt;span style="color:#a50">&amp;#39;url&amp;#39;&lt;/span>);
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a">var&lt;/span> crypto = require(&lt;span style="color:#a50">&amp;#39;crypto&amp;#39;&lt;/span>);
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">/**
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">* Generates the &amp;#34;Authorization&amp;#34; HTTP header for using the Onshape API
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">*
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">* @param {string} method - Request method; GET, POST, etc.
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">* @param {string} url - The full request URL
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">* @param {string} nonce - 25-character nonce (generated by you)
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">* @param {string} authDate - UTC-formatted date string (generated by you)
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">* @param {string} contentType - Value of the &amp;#34;Content-Type&amp;#34; header; generally &amp;#34;application/json&amp;#34;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">* @param {string} accessKey - API access key
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">* @param {string} secretKey - API secret key
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">*
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">* @return {string} Value for the &amp;#34;Authorization&amp;#34; header
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">*/&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a">function&lt;/span> createSignature(method, url, nonce, authDate, contentType, accessKey, secretKey) {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">var&lt;/span> urlObj = u.parse(url);
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">var&lt;/span> urlPath = urlObj.pathname;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">var&lt;/span> urlQuery = urlObj.query ? urlObj.query : &lt;span style="color:#a50">&amp;#39;&amp;#39;&lt;/span>; &lt;span style="color:#aaa;font-style:italic">// if no query, use empty string
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">var&lt;/span> str = (method + &lt;span style="color:#a50">&amp;#39;\n&amp;#39;&lt;/span> + nonce + &lt;span style="color:#a50">&amp;#39;\n&amp;#39;&lt;/span> + authDate + &lt;span style="color:#a50">&amp;#39;\n&amp;#39;&lt;/span> + contentType + &lt;span style="color:#a50">&amp;#39;\n&amp;#39;&lt;/span> +
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> urlPath + &lt;span style="color:#a50">&amp;#39;\n&amp;#39;&lt;/span> + urlQuery + &lt;span style="color:#a50">&amp;#39;\n&amp;#39;&lt;/span>).toLowerCase();
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">var&lt;/span> hmac = crypto.createHmac(&lt;span style="color:#a50">&amp;#39;sha256&amp;#39;&lt;/span>, secretKey)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .update(str)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .digest(&lt;span style="color:#a50">&amp;#39;base64&amp;#39;&lt;/span>);
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">var&lt;/span> signature = &lt;span style="color:#a50">&amp;#39;On &amp;#39;&lt;/span> + accessKey + &lt;span style="color:#a50">&amp;#39;:HmacSHA256:&amp;#39;&lt;/span> + hmac;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">return&lt;/span> signature;
+&lt;p>&lt;strong>CAUTION&lt;/strong>: you should NOT share your API keys with others, nor upload and/or share the keys publicly. Gaining access to your API keys is equivalent to gaining access to your Onshape account with the permissions you specified in step 3 above. It is also good practice to periodically delete your API keys and generate a new set, such that you can deactivate any API keys that were leaked accidentally.&lt;/p>
+&lt;h3 id="introduction-to-a-typical-api-call">Introduction to a typical API call&lt;/h3>
+&lt;p>For a typical REST API call in Onshape, there are five major components:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>method&lt;/code>: This should be one of &lt;code>GET&lt;/code>, &lt;code>POST&lt;/code>, and &lt;code>DELETE&lt;/code>. Every API endpoint on Glassworks is labelled with its corresponding method type.&lt;/li>
+&lt;li>&lt;code>url&lt;/code>: The URL specifies the API endpoint that is being called and the part of the document that the API is calling. The &lt;code>url&lt;/code> should be in the following format: &lt;code>{base_url}/api/{fixed_url}&lt;/code>. The &lt;code>{base_url}&lt;/code> should be the same base URL that is introduced &lt;a href="#the-onshape-architecture">above&lt;/a> (e.g., &lt;a href="https://cad.onshape.com">https://cad.onshape.com&lt;/a> for non-Enterprise accounts). Then, the &lt;code>{fixed_url}&lt;/code> is the URL that the API endpoint is titled with on Glassworks. However, you should replace all the information in &lt;code>{...}&lt;/code> with the actual IDs.&lt;/li>
+&lt;li>&lt;code>query parameters&lt;/code>: Besides the required parameters for the &lt;code>url&lt;/code>, there are sometimes a few more optional paramters for the API call. In the drop-down content of every API endpoint on Glassworks, you can find a list of all optional query parameters with description.&lt;/li>
+&lt;li>&lt;code>headers&lt;/code>: The header of an API request defines the associated meta-data, which is used by the server to process the request. Usually, this contains the &lt;code>&amp;quot;Content-Type&amp;quot;&lt;/code> and &lt;code>&amp;quot;Accept&amp;quot;&lt;/code>. While the content type is generally set to be &lt;code>&amp;quot;application/json&amp;quot;&lt;/code>, the accept type can be found under &amp;ldquo;Media type&amp;rdquo; of the response section of every API endpoint on Glassworks.&lt;/li>
+&lt;li>&lt;code>payload body&lt;/code>: A request body is only applicable for &lt;code>POST&lt;/code> requests, and it&amp;rsquo;s a required component for some &lt;code>POST&lt;/code> requests and optional for others. Again, a template of the payload body can be found under the drop-down content of the API endpoint on Glassworks. In most cases, the payload body should not be manually filled, but it should be obtained and modified from the response of a related &lt;code>GET&lt;/code> request.&lt;/li>
+&lt;/ul>
+&lt;h3 id="example-of-making-an-api-call">Example of making an API call&lt;/h3>
+&lt;p>A REST API call for Onshape can be made the same way as you make an API call for most other platforms/servers. Samples codes in a few different popular programming languages can be found on the &lt;a href="../samplecode">Sample Code page&lt;/a>.&lt;/p>
+&lt;h3 id="rest-api-response">REST API Response&lt;/h3>
+&lt;p>The REST API in Onshape communicates data in JSON format, a template of the returned response can also be found under the drop-down content of each API endpoint on Glassworks.&lt;/p>
+&lt;p>As an example, below is the response from calling the &lt;code>getPartStudioMassProperties&lt;/code> endpoint &lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/getPartStudioMassProperties">here&lt;/a> to this public &lt;a href="https://cad.onshape.com/documents/58d051743d98a90f86e9e2ab/w/17e0ba65df28e4e72f7f4961/e/4a289bd094a999329a3900af">document&lt;/a> (note: some of the numbers here were replaced with &lt;code>...&lt;/code> to simplify the demonstration). Taking the first value in the list of &lt;code>response[&amp;quot;bodies&amp;quot;][&amp;quot;-all-&amp;quot;][&amp;quot;mass&amp;quot;]&lt;/code> gives the mass of the part in the Part Studio; the list contains the best estimate and the lower and upper peripherial tolerance.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;bodies&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;-all-&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;principalInertia&amp;#34;&lt;/span>: [
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#099">0.08004372143652973&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#099">0.08004372143652973&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#099">0.13924990725024763&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;principalAxes&amp;#34;&lt;/span>: [
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;x&amp;#34;&lt;/span>: &lt;span style="color:#099">1&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;y&amp;#34;&lt;/span>: &lt;span style="color:#099">0&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;z&amp;#34;&lt;/span>: &lt;span style="color:#099">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;x&amp;#34;&lt;/span>: &lt;span style="color:#099">0&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;y&amp;#34;&lt;/span>: &lt;span style="color:#099">0&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;z&amp;#34;&lt;/span>: &lt;span style="color:#099">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;x&amp;#34;&lt;/span>: &lt;span style="color:#099">0&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;y&amp;#34;&lt;/span>: &lt;span style="color:#099">1&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;z&amp;#34;&lt;/span>: &lt;span style="color:#099">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;mass&amp;#34;&lt;/span>: [
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#099">19.61161892375398&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#099">19.61161890561838&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#099">19.61161894188958&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;hasMass&amp;#34;&lt;/span>: &lt;span style="color:#00a">true&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;volume&amp;#34;&lt;/span>: [
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#099">0.0024422937638547922&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#099">0.002442275628254571&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#099">0.0024423118994550135&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;periphery&amp;#34;&lt;/span>: [
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#099">0.22529146317055807&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#099">0.2252913285020754&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#099">0.22529159783904074&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;centroid&amp;#34;&lt;/span>: [
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#099">3.268293381618339e-34&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#099">1.699411226844061e-17&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#099">-1.5130909293744692e-18&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f00;background-color:#faa">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;inertia&amp;#34;&lt;/span>: [
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#099">0.08004372143652974&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#099">0&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#099">0&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f00;background-color:#faa">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;massMissingCount&amp;#34;&lt;/span>: &lt;span style="color:#099">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;microversionId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;c6396b20bd1ffd204e146ddf&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Some API endpoints return 307 redirects. You must generate an Authorization header for the redirect as well, but please note that the server portion of the URL might be different, the redirect URL may contain query parameters that must be encoded in the Authorization header, etc. Please see the samples for examples.&lt;/p>
-&lt;h3 id="api-keys-and-oauth">API keys and OAuth&lt;/h3>
-&lt;p>Our API key workflow differs from our OAuth workflow in one important characteristic: an API key allows a &lt;em>user&lt;/em> (specifically, a developer) to make requests, while OAuth allows an &lt;em>application&lt;/em> to make requests on behalf of the user. We require the OAuth workflow for apps in the Onshape App Store, so if you develop an app using API keys and want to distribute it through the App Store, you will need to change to OAuth. Please see our OAuth sample apps for examples of how to make OAuth work (onshape/app-bom is a great place to start). The good news is that we&amp;rsquo;ve structured API keys to work very similarly to OAuth in the operation of your app. While you will need to build your Authorization header differently (and set up redirects and signins as in the onshape/app-bom sample), the API calls themselves will work the same in both versions, provided that the API key and the OAuth app have the same scopes. An API key with the OAuth2Read and OAuth2Write scopes will have the same access to the same API endpoints as an OAuth application with the OAuth2Read and OAuth2Write scopes, for example. (The only differences are when calling API endpoints relating to the OAuth application itself, since an API key request obviously does not come from an OAuth application.)&lt;/p></description></item><item><title>Docs: API Overview</title><link>https://onshape-public.github.io/docs/apioverview/</link><pubDate>Mon, 18 May 2020 20:25:28 -0400</pubDate><guid>https://onshape-public.github.io/docs/apioverview/</guid><description>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="next-steps">Next Steps&lt;/h2>
+&lt;p>After testing out a few REST API calls in Onshape, you should now have a good understanding of the basics. To further explore the potential of using the REST API in Onshape, please check out other sections of this documentation as well.&lt;/p>
+&lt;ul>
+&lt;li>Other pages in the &lt;a href="">Introduction section&lt;/a> go through more details about Onshape&amp;rsquo;s architecture, which will be beneficial to more advanced use of the REST API, especially on using some of the optional query parameters.&lt;/li>
+&lt;li>The &lt;a href="../apioverview">API Overview section&lt;/a> goes through more details about using the REST API with API keys as a user.&lt;/li>
+&lt;li>The &lt;a href="../oauth">OAuth Integration section&lt;/a> goes through the process of developing an application and integrating it to Onshape.&lt;/li>
+&lt;/ul>
+&lt;p>There are also many more other sample projects documented in the &lt;a href="https://github.com/onshape-public">Onshape Public&lt;/a> and the &lt;a href="https://github.com/PTC-Education">PTC Education&lt;/a> GitHub organizations.&lt;/p></description></item><item><title>Docs: Sample Code</title><link>https://onshape-public.github.io/docs/samplecode/</link><pubDate>Mon, 18 May 2020 20:39:14 -0400</pubDate><guid>https://onshape-public.github.io/docs/samplecode/</guid><description>
+&lt;p>This page provides some sample codes in a few different popular programming languages for you to get started with using the Onshape REST API. Please note that samples shown on this page are only designed to be used as a quick start guide.&lt;/p>
+&lt;p>All codes written on this page, with different programming languages, are all trying to make a &lt;code>GET&lt;/code> request to the &lt;code>getPartStudioMassProperties&lt;/code> API endpoint to retrive the mass property of the part in &lt;a href="https://cad.onshape.com/documents/58d051743d98a90f86e9e2ab/w/17e0ba65df28e4e72f7f4961/e/4a289bd094a999329a3900af">this public Onshape document&lt;/a>. For more details about this API endpoint, please visit &lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/getPartStudioMassProperties">this endpoint&lt;/a> on the Glassworks API explorer.&lt;/p>
+&lt;p>Languages demonstrated on this page:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="#python">Python&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#javascript">JavaScript&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#cc">C/C++&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="python">Python&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-py" data-lang="py">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a">import&lt;/span> &lt;span style="color:#0aa;text-decoration:underline">requests&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a">import&lt;/span> &lt;span style="color:#0aa;text-decoration:underline">json&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic"># Use the API keys generated from the Onshape developer portal &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic"># Note: replace with your own keys &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>api_keys = (ACCESS_KEY, SECRET_KEY)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic"># Assemble the URL for the API call &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>api_url = &lt;span style="color:#a50">&amp;#34;https://cad.onshape.com/api/partstudios/d/58d051743d98a90f86e9e2ab/w/17e0ba65df28e4e72f7f4961/e/4a289bd094a999329a3900af/massproperties&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic"># Optional query parameters can be assigned &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>params = {}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic"># Define the header for the request &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>headers = {&lt;span style="color:#a50">&amp;#39;Accept&amp;#39;&lt;/span>: &lt;span style="color:#a50">&amp;#39;application/json;charset=UTF-8;qs=0.09&amp;#39;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a50">&amp;#39;Content-Type&amp;#39;&lt;/span>: &lt;span style="color:#a50">&amp;#39;application/json&amp;#39;&lt;/span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic"># Putting everything together to make the API request &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>response = requests.get(api_url,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> params=params,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> auth=api_keys,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> headers=headers)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic"># Print (formatted) response &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0aa">print&lt;/span>(json.dumps(response.json(), indent=&lt;span style="color:#099">4&lt;/span>))
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="javascript">JavaScript&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-js" data-lang="js">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a">import&lt;/span> fetch from &lt;span style="color:#a50">&amp;#39;node-fetch&amp;#39;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">// Define an async function for the API request
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span>&lt;span style="color:#00a">async&lt;/span> &lt;span style="color:#00a">function&lt;/span> getMass(url=&lt;span style="color:#a50">&amp;#39;&amp;#39;&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">const&lt;/span> response = &lt;span style="color:#00a">await&lt;/span> fetch(url, {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> method: &lt;span style="color:#a50">&amp;#39;GET&amp;#39;&lt;/span>, &lt;span style="color:#aaa;font-style:italic">// May change to GET, POST, or DELETE
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span> headers: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a50">&amp;#39;Content-Type&amp;#39;&lt;/span>: &lt;span style="color:#a50">&amp;#39;application/json&amp;#39;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Accept: &lt;span style="color:#a50">&amp;#39;application/json;charset=UTF-8;qs=0.09&amp;#39;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#aaa;font-style:italic">// Replace with API keys generated from the Onshape developer portal
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span> Authorization: &lt;span style="color:#a50">`Basic &lt;/span>&lt;span style="color:#a50">${&lt;/span>btoa(&lt;span style="color:#a50">&amp;#39;ACCESS_KEY:SECRET_KEY&amp;#39;&lt;/span>)&lt;span style="color:#a50">}&lt;/span>&lt;span style="color:#a50">`&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#aaa;font-style:italic">// May add body here for POST requests
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span> });
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">return&lt;/span> response.json(); &lt;span style="color:#aaa;font-style:italic">// Return the JSON response
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">// Make the API request with the assembled URL
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">// May add optional query parameters to the end of the URL in the form
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">// &amp;#34;?PARAM_NAME=PARAM&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span>getMass( &lt;span style="color:#a50">&amp;#39;https://cad.onshape.com/api/partstudios/d/58d051743d98a90f86e9e2ab/w/17e0ba65df28e4e72f7f4961/e/4a289bd094a999329a3900af/massproperties&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>).then((data) =&amp;gt; {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> console.log(data); &lt;span style="color:#aaa;font-style:italic">// Display the JSON response
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span>});
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="cc">C/C++&lt;/h2>
+&lt;p>Before running the following script, you can first run the following command line in terminal to create a credential using your API keys generated from the Onshape developer portal.&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ echo -n ACCESS_KEY:SECRET_KEY | base64
+&lt;/code>&lt;/pre>&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4c8317">#include&lt;/span> &lt;span style="color:#4c8317">&amp;lt;iostream&amp;gt;&lt;/span>&lt;span style="color:#4c8317">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4c8317">#include&lt;/span> &lt;span style="color:#4c8317">&amp;lt;string&amp;gt;&lt;/span>&lt;span style="color:#4c8317">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4c8317">#include&lt;/span> &lt;span style="color:#4c8317">&amp;lt;stdio.h&amp;gt;&lt;/span>&lt;span style="color:#4c8317">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4c8317">&lt;/span>&lt;span style="color:#00a">using&lt;/span> &lt;span style="color:#00a">namespace&lt;/span> std;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0aa">int&lt;/span> &lt;span style="color:#0a0">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> string url = &lt;span style="color:#a50">&amp;#34;curl &amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#aaa;font-style:italic">// Use &amp;#34;-X&amp;#34; to specify API type
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span> url += &lt;span style="color:#a50">&amp;#34;-X &amp;#39;GET&amp;#39; &amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#aaa;font-style:italic">// Assemble the URL of the API
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span> &lt;span style="color:#aaa;font-style:italic">// May add optional query parameters to the end of the URL in the form
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span> &lt;span style="color:#aaa;font-style:italic">// &amp;#34;?PARAM_NAME=PARAM&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span> url += &lt;span style="color:#a50">&amp;#34;&amp;#39;https://cad.onshape.com/api/partstudios/d/58d051743d98a90f86e9e2ab/w/17e0ba65df28e4e72f7f4961/e/4a289bd094a999329a3900af/massproperties&amp;#39; &amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#aaa;font-style:italic">// Use &amp;#34;-H&amp;#34; to send headers
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span> url += &lt;span style="color:#a50">&amp;#34;-H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39; &amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#aaa;font-style:italic">// Replace CREDENTIAL with the Base64 credential generated from the command line above
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span> url += &lt;span style="color:#a50">&amp;#34;-H &amp;#39;Authorization: Basic CREDENTIAL&amp;#39;&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#aaa;font-style:italic">// Use &amp;#34;-d&amp;#34; to send body (data) for POST requests
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#aaa;font-style:italic">//Executing the cURL script
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span> system(url.c_str());
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">return&lt;/span> &lt;span style="color:#099">0&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: API Overview</title><link>https://onshape-public.github.io/docs/apioverview/</link><pubDate>Mon, 18 May 2020 20:25:28 -0400</pubDate><guid>https://onshape-public.github.io/docs/apioverview/</guid><description>
 &lt;h2 id="getting-started-with-the-onshape-rest-api">Getting Started with the Onshape REST API&lt;/h2>
 &lt;p>This document describes APIs that will allow partners to interact with the Onshape system.&lt;/p>
 &lt;p>Please address questions to &amp;quot; &lt;a href="mailto:api-support@onshape.com">api-support@onshape.com&lt;/a>&amp;quot; for the fastest response.&lt;/p>
@@ -414,7 +520,120 @@ supported version.&lt;/p>
 &lt;ul>
 &lt;li>degree, degrees, deg&lt;/li>
 &lt;li>radian, radians, rad&lt;/li>
-&lt;/ul></description></item><item><title>Docs: Associativity</title><link>https://onshape-public.github.io/docs/associativity/</link><pubDate>Mon, 18 May 2020 20:28:26 -0400</pubDate><guid>https://onshape-public.github.io/docs/associativity/</guid><description>
+&lt;/ul></description></item><item><title>Docs: API Keys</title><link>https://onshape-public.github.io/docs/apikeys/</link><pubDate>Mon, 18 May 2020 20:20:41 -0400</pubDate><guid>https://onshape-public.github.io/docs/apikeys/</guid><description>
+&lt;h1 id="using-api-keys-with-onshape">Using API Keys with Onshape&lt;/h1>
+&lt;h3 id="why-api-keys">Why API Keys?&lt;/h3>
+&lt;p>API keys are useful for small applications meant for personal use, allowing developers to avoid the overhead of the OAuth workflow. Creating an app is very easy with API keys: create an API key with the Developer Portal, set up a function to build your API key header as in the samples, and make your API calls! There&amp;rsquo;s no need to deal with OAuth redirects or things like that.&lt;/p>
+&lt;p>We&amp;rsquo;ve moved over to using API keys for authenticating requests instead of using cookies for several reasons.&lt;/p>
+&lt;ol>
+&lt;li>Security: Each request is signed with unique headers so that we can be sure it&amp;rsquo;s coming from the right place.&lt;/li>
+&lt;li>OAuth: The API key system we&amp;rsquo;re now using for HTTP requests is the same process developers follow when building full-blown OAuth applications; there&amp;rsquo;s no longer a disconnect between the two.&lt;/li>
+&lt;/ol>
+&lt;p>Once you create an API key, it will only be valid in the stack on which it was created. An API key created on the partner stack, for example, will not function on the production stack.&lt;/p>
+&lt;h3 id="questions-and-concerns">Questions and Concerns&lt;/h3>
+&lt;p>If you need information or have a question unanswered in this documentation, feel free to chat with us by sending an email to &lt;a href="mailto:api-support@onshape.com">api-support@onshape.com&lt;/a> or by checking out the &lt;a href="https://forum.onshape.com" target="_blank">forums&lt;/a>. If you are a member of the DevPartners group (see the Development help page for information) more detailed instructions and code examples are in the apikey sample repo.&lt;/p>
+&lt;h3 id="working-with-api-keys">Working with API Keys&lt;/h3>
+&lt;p>Read the following and you&amp;rsquo;ll be up and running with using API keys in your application:&lt;/p>
+&lt;h5 id="instructions">Instructions&lt;/h5>
+&lt;ol>
+&lt;li>
+&lt;p>Create and manage your API key pairs from the Developer Portal; note that the secret will only be displayed once!
+Keep it somewhere safe.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Now that you have a key pair, see &lt;a href="#generating-a-request-signature">below&lt;/a> for information on signing your requests to use our API.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>Once you have your access key and secret, you will want to avoid giving others access to them since they&amp;rsquo;re tied directly to your personal Onshape account. Think of your API key as a username and password pair. Therefore, you should avoid placing them directly in the code for your application, especially if others might see it. The samples use a separate configuration file that you yourself will need to create that will contain this information, but there are other ways to keep the access key and secret safe, like setting them as environment variables.&lt;/p>
+&lt;h5 id="scopes">Scopes&lt;/h5>
+&lt;p>There are several scopes available for API keys (equivalent to OAuth scopes):&lt;/p>
+&lt;ul>
+&lt;li>&amp;ldquo;OAuth2Read&amp;rdquo; - Read non-personal information (documents, parts, etc.)&lt;/li>
+&lt;li>&amp;ldquo;OAuth2ReadPII&amp;rdquo; - Read personal information (name, email, etc.)&lt;/li>
+&lt;li>&amp;ldquo;OAuth2Write&amp;rdquo; - Create and edit documents / etc.&lt;/li>
+&lt;li>&amp;ldquo;OAuth2Delete&amp;rdquo; - Delete documents / etc.&lt;/li>
+&lt;li>&amp;ldquo;OAuth2Purchase&amp;rdquo; - Authorize purchases from account&lt;/li>
+&lt;/ul>
+&lt;h5 id="generating-a-request-signature">Generating A Request Signature&lt;/h5>
+&lt;p>To ensure that a request is coming from you, we have a process for signing requests that you must follow for API calls to work. Everything is done via HTTP headers that you&amp;rsquo;ll need to set:&lt;/p>
+&lt;ol>
+&lt;li>&lt;em>Date&lt;/em>: A standard date header giving the time of the request; must be accurate within &lt;strong>5 minutes&lt;/strong> of request. Example: &lt;code>Mon, 11 Apr 2016 20:08:56 GMT&lt;/code>&lt;/li>
+&lt;li>&lt;em>On-Nonce&lt;/em>: A string that satisfies the following requirements (see the code for one possible way to generate it):
+&lt;ul>
+&lt;li>At least 16 characters&lt;/li>
+&lt;li>Alphanumeric&lt;/li>
+&lt;li>Unique for each request&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;em>Authorization&lt;/em>: This is where the API keys come into play. You&amp;rsquo;ll sign the request by implementing this algorithm:
+&lt;ul>
+&lt;li>&lt;strong>Input&lt;/strong>: Method, URL, On-Nonce, Date, Content-Type, AccessKey, SecretKey&lt;/li>
+&lt;li>&lt;strong>Output&lt;/strong>: String of the form: &lt;code>On &amp;lt;AccessKey&amp;gt;:HmacSHA256:&amp;lt;Signature&amp;gt;&lt;/code>&lt;/li>
+&lt;li>&lt;strong>Steps to generate the signature portion&lt;/strong>:
+&lt;ol>
+&lt;li>Parse the URL and get the following:
+&lt;ol>
+&lt;li>The path, e.g. &lt;code>/api/documents&lt;/code> (no query params!)&lt;/li>
+&lt;li>The query string, e.g. &lt;code>a=1&amp;amp;b=2&lt;/code>
+&lt;ul>
+&lt;li>NOTE: If no query paramaters are present, use an empty string&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>Create a string by appending the following information in order. Each field should be separated by a newline (&lt;code>\n&lt;/code>) character, and the string must be converted to lowercase:
+&lt;ol>
+&lt;li>HTTP method&lt;/li>
+&lt;li>On-Nonce header value&lt;/li>
+&lt;li>Date header value&lt;/li>
+&lt;li>Content-Type header value&lt;/li>
+&lt;li>URL pathname&lt;/li>
+&lt;li>URL query string&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>Using SHA-256, generate an &lt;a href="https://en.wikipedia.org/wiki/Hash-based_message_authentication_code" target="_blank">HMAC digest&lt;/a>, using the API secret key first and then the above string, then encode it in Base64.&lt;/li>
+&lt;li>Create the &lt;code>On &amp;lt;AccessKey&amp;gt;:HmacSHA256:&amp;lt;Signature&amp;gt;&lt;/code> string and use that in the Authorization header in your request.&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;p>Below is an example function to generate the authorization header, using Node.js&amp;rsquo;s standard &lt;code>crypto&lt;/code> and &lt;code>url&lt;/code> libraries:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-js" data-lang="js">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">// ...at top of file
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span>&lt;span style="color:#00a">var&lt;/span> u = require(&lt;span style="color:#a50">&amp;#39;url&amp;#39;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a">var&lt;/span> crypto = require(&lt;span style="color:#a50">&amp;#39;crypto&amp;#39;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">* Generates the &amp;#34;Authorization&amp;#34; HTTP header for using the Onshape API
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">*
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">* @param {string} method - Request method; GET, POST, etc.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">* @param {string} url - The full request URL
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">* @param {string} nonce - 25-character nonce (generated by you)
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">* @param {string} authDate - UTC-formatted date string (generated by you)
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">* @param {string} contentType - Value of the &amp;#34;Content-Type&amp;#34; header; generally &amp;#34;application/json&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">* @param {string} accessKey - API access key
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">* @param {string} secretKey - API secret key
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">*
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">* @return {string} Value for the &amp;#34;Authorization&amp;#34; header
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">*/&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a">function&lt;/span> createSignature(method, url, nonce, authDate, contentType, accessKey, secretKey) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">var&lt;/span> urlObj = u.parse(url);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">var&lt;/span> urlPath = urlObj.pathname;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">var&lt;/span> urlQuery = urlObj.query ? urlObj.query : &lt;span style="color:#a50">&amp;#39;&amp;#39;&lt;/span>; &lt;span style="color:#aaa;font-style:italic">// if no query, use empty string
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">var&lt;/span> str = (method + &lt;span style="color:#a50">&amp;#39;\n&amp;#39;&lt;/span> + nonce + &lt;span style="color:#a50">&amp;#39;\n&amp;#39;&lt;/span> + authDate + &lt;span style="color:#a50">&amp;#39;\n&amp;#39;&lt;/span> + contentType + &lt;span style="color:#a50">&amp;#39;\n&amp;#39;&lt;/span> +
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> urlPath + &lt;span style="color:#a50">&amp;#39;\n&amp;#39;&lt;/span> + urlQuery + &lt;span style="color:#a50">&amp;#39;\n&amp;#39;&lt;/span>).toLowerCase();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">var&lt;/span> hmac = crypto.createHmac(&lt;span style="color:#a50">&amp;#39;sha256&amp;#39;&lt;/span>, secretKey)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .update(str)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .digest(&lt;span style="color:#a50">&amp;#39;base64&amp;#39;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">var&lt;/span> signature = &lt;span style="color:#a50">&amp;#39;On &amp;#39;&lt;/span> + accessKey + &lt;span style="color:#a50">&amp;#39;:HmacSHA256:&amp;#39;&lt;/span> + hmac;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">return&lt;/span> signature;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Some API endpoints return 307 redirects. You must generate an Authorization header for the redirect as well, but please note that the server portion of the URL might be different, the redirect URL may contain query parameters that must be encoded in the Authorization header, etc. Please see the samples for examples.&lt;/p>
+&lt;h3 id="api-keys-and-oauth">API keys and OAuth&lt;/h3>
+&lt;p>Our API key workflow differs from our OAuth workflow in one important characteristic: an API key allows a &lt;em>user&lt;/em> (specifically, a developer) to make requests, while OAuth allows an &lt;em>application&lt;/em> to make requests on behalf of the user. We require the OAuth workflow for apps in the Onshape App Store, so if you develop an app using API keys and want to distribute it through the App Store, you will need to change to OAuth. Please see our OAuth sample apps for examples of how to make OAuth work (onshape/app-bom is a great place to start). The good news is that we&amp;rsquo;ve structured API keys to work very similarly to OAuth in the operation of your app. While you will need to build your Authorization header differently (and set up redirects and signins as in the onshape/app-bom sample), the API calls themselves will work the same in both versions, provided that the API key and the OAuth app have the same scopes. An API key with the OAuth2Read and OAuth2Write scopes will have the same access to the same API endpoints as an OAuth application with the OAuth2Read and OAuth2Write scopes, for example. (The only differences are when calling API endpoints relating to the OAuth application itself, since an API key request obviously does not come from an OAuth application.)&lt;/p></description></item><item><title>Docs: Associativity</title><link>https://onshape-public.github.io/docs/associativity/</link><pubDate>Mon, 18 May 2020 20:28:26 -0400</pubDate><guid>https://onshape-public.github.io/docs/associativity/</guid><description>
 &lt;p>Onshape Associativity for external applications&lt;/p>
 &lt;p>This document describes data structures and APIs that external applications can use to implement associativity.&lt;/p>
 &lt;p>Please address questions, comments and suggestions to &amp;ldquo;&lt;a href="mailto:api-support@onshape.com">api-support@onshape.com&lt;/a>&amp;rdquo; for the fastest response.&lt;/p>
