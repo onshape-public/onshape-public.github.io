@@ -3652,30 +3652,34 @@ languages support them in one form or another. It makes sense that a
 data format that is interchangeable with programming languages also be
 based on these structures.&lt;/p>
 &lt;p>The following is the basic format of JSON:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f00;background-color:#faa">Object:&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f00;background-color:#faa">“attribute”:&lt;/span> &lt;span style="color:#f00;background-color:#faa">“value”,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f00;background-color:#faa">“attribute”:&lt;/span> &lt;span style="color:#f00;background-color:#faa">“value”&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;Object&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;attribute&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;value&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;attribute&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;value&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>A simple example of a JSON object could be the following:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f00;background-color:#faa">“Person”:&lt;/span>{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f00;background-color:#faa">“firstname”:&lt;/span> &lt;span style="color:#f00;background-color:#faa">“Joe”,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f00;background-color:#faa">“lastname:&lt;/span> &lt;span style="color:#f00;background-color:#faa">“Smith”,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f00;background-color:#faa">“Age”:&lt;/span> &lt;span style="color:#f00;background-color:#faa">31&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;Person&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;firstname&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;Joe&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;lastname&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;Smith&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;age&amp;#34;&lt;/span>: &lt;span style="color:#099">31&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This is an object that describes a person named Joe Smith who is 31
 years old.&lt;/p>
 &lt;p>To this object we can add an array of children as follows:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;Person&amp;#34;&lt;/span>: {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f00;background-color:#faa">“firstname”:&lt;/span> &lt;span style="color:#f00;background-color:#faa">“Joe”,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f00;background-color:#faa">“lastname&lt;/span>&lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;: “Smith”,
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#1e90ff;font-weight:bold"> “Age”: 31,
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#1e90ff;font-weight:bold"> &amp;#34;&lt;/span>&lt;span style="color:#f00;background-color:#faa">children&lt;/span>&lt;span style="color:#a50">&amp;#34;: [
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a50"> {&amp;#34;&lt;/span>&lt;span style="color:#f00;background-color:#faa">name&lt;/span>&lt;span style="color:#a50">&amp;#34;: &amp;#34;&lt;/span>&lt;span style="color:#f00;background-color:#faa">Bill”&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;age&amp;#34;&lt;/span>: &lt;span style="color:#099">5&lt;/span>},
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f00;background-color:#faa">{&lt;/span>&lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;Sarah&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;age&amp;#34;&lt;/span>: &lt;span style="color:#099">2&lt;/span>}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f00;background-color:#faa">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f00;background-color:#faa">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f00;background-color:#faa">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;firstname&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;Joe&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;lastname&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;Smith&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;age&amp;#34;&lt;/span>: &lt;span style="color:#099">31&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;children&amp;#34;&lt;/span>: [
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;Bill&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;age&amp;#34;&lt;/span>: &lt;span style="color:#099">5&lt;/span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;Sarah&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;age&amp;#34;&lt;/span>: &lt;span style="color:#099">2&lt;/span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>As we can see here, we added an array of 2 children to our “Person”
 object by using the square brackets [] – which denotes an array.&lt;/p>
 &lt;p>There’s not much more to the JSON format that we need to know other than
@@ -4429,9 +4433,9 @@ case ‘/oauthSignin’. This is the endpoint that we previously defined in
 the Onshape application setup. This will redirect to an Onshape page in
 order for the user to confirm (or deny) the applications access to the
 Onshape resources.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>app.use(&lt;span style="color:#a50">&amp;#39;/oauthSignin&amp;#39;&lt;/span>, (req, res) =&lt;span style="color:#f00;background-color:#faa">\&lt;/span>&amp;gt; {
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>app.use(&lt;span style="color:#a50">&amp;#39;/oauthSignin&amp;#39;&lt;/span>, (req, res) =&amp;gt; {
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a">return&lt;/span> passport.authenticate(&lt;span style="color:#a50">&amp;#39;onshape&amp;#39;&lt;/span>, { state: uuid.v4() })(req, res);
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}, (req, res) =&lt;span style="color:#f00;background-color:#faa">\&lt;/span>&amp;gt; { &lt;span style="color:#099">/\* redirected to Onshape for authentication \*/&lt;/span> });
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}, (req, res) =&amp;gt; { &lt;span style="color:#aaa;font-style:italic">/* redirected to Onshape for authentication */&lt;/span> });
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage6.png"
 style="width:0.43056in;height:0.46528in" />The state fields can be used
 to store relevant information such as documentId, ElementId,
