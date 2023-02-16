@@ -1,4 +1,4 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Onshape Developer Documentation – Welcome to the Developer Portal</title><link>https://onshape-public.github.io/docs/</link><description>Recent content in Welcome to the Developer Portal on Onshape Developer Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 07 Jun 2022 08:24:05 -0400</lastBuildDate><atom:link href="https://onshape-public.github.io/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Quick Start</title><link>https://onshape-public.github.io/docs/quickstart/</link><pubDate>Mon, 18 May 2020 20:39:14 -0400</pubDate><guid>https://onshape-public.github.io/docs/quickstart/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Onshape Developer Documentation – Welcome to the Developer Portal</title><link>https://onshape-public.github.io/docs/</link><description>Recent content in Welcome to the Developer Portal on Onshape Developer Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 15 Feb 2023 20:44:05 -0400</lastBuildDate><atom:link href="https://onshape-public.github.io/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Quick Start</title><link>https://onshape-public.github.io/docs/quickstart/</link><pubDate>Mon, 18 May 2020 20:39:14 -0400</pubDate><guid>https://onshape-public.github.io/docs/quickstart/</guid><description>
 &lt;h2 id="overview">Overview&lt;/h2>
 &lt;p>Onshape was built from the ground up as a true multi-tenant Software as a Service (SaaS) based system, and it uses REST APIs to communicate with its clients and third-party systems. In short, you call a REST API as you would do on a web page. It has a specific web address and often some additional parameters that are required either in the URL itself or a form of data that can be attached to the web call. The web call will return information instead of returning a web page, and the response from the API call is formatted in JSON (JavaScript Object Notation).&lt;/p>
 &lt;h3 id="the-rest-api">The REST API&lt;/h3>
@@ -7348,4 +7348,133 @@ delivery to fail.&lt;/p>
 &amp;#34;documentId&amp;#34;: &amp;#34;0f9c4392e5934f30b48ab645&amp;#34;,
 &amp;#34;commentId&amp;#34;: &amp;#34;567953d60a1a5fbb95940333&amp;#34;
 }
-&lt;/code>&lt;/pre></description></item></channel></rss>
+&lt;/code>&lt;/pre></description></item><item><title>Docs: Changelog</title><link>https://onshape-public.github.io/docs/changelog/</link><pubDate>Wed, 15 Feb 2023 20:44:05 -0400</pubDate><guid>https://onshape-public.github.io/docs/changelog/</guid><description>
+&lt;h3 id="rel-1158---released-2023-01-11">&lt;code>rel-1.158&lt;/code> - released 2023-01-11&lt;/h3>
+&lt;ul>
+&lt;li>New example values in Glassworks API documentation&lt;/li>
+&lt;/ul>
+&lt;h3 id="rel-1155---released-2022-11-01">&lt;code>rel-1.155&lt;/code> - released 2022-11-01&lt;/h3>
+&lt;ul>
+&lt;li>Support Parasolid binary (x_b) exports&lt;/li>
+&lt;/ul>
+&lt;h3 id="rel-1154---released-2022-10-10">&lt;code>rel-1.154&lt;/code> - released 2022-10-10&lt;/h3>
+&lt;ul>
+&lt;li>Add face color, hidden state and type of composite to body details endpoint&lt;/li>
+&lt;/ul>
+&lt;h3 id="rel-1152---released-2022-08-30">&lt;code>rel-1.152&lt;/code> - released 2022-08-30&lt;/h3>
+&lt;ul>
+&lt;li>Support more parameters to filter the partstudio endpoint&lt;/li>
+&lt;/ul>
+&lt;h3 id="rel-1147---released-2022-05-16">&lt;code>rel-1.147&lt;/code> - released 2022-05-16&lt;/h3>
+&lt;ul>
+&lt;li>Support global tree node endpoint for impacting recently opened filter&lt;/li>
+&lt;/ul>
+&lt;h3 id="rel-1146---released-2022-04-25">&lt;code>rel-1.146&lt;/code> - released 2022-04-25&lt;/h3>
+&lt;ul>
+&lt;li>Support API versioning&lt;/li>
+&lt;li>Return ‘nodeId’ when adding or updating an AppElement&lt;/li>
+&lt;/ul>
+&lt;h3 id="rel-1145---released-2022-04-05">&lt;code>rel-1.145&lt;/code> - released 2022-04-05&lt;/h3>
+&lt;ul>
+&lt;li>Fixed issue where assembly feature errors were missing&lt;/li>
+&lt;/ul>
+&lt;h3 id="rel-1140---released-2021-12-15">&lt;code>rel-1.140&lt;/code> - released 2021-12-15&lt;/h3>
+&lt;ul>
+&lt;li>Add mass properties for assemblies&lt;/li>
+&lt;/ul>
+&lt;h3 id="rel-1139---released-2021-11-15">&lt;code>rel-1.139&lt;/code> - released 2021-11-15&lt;/h3>
+&lt;ul>
+&lt;li>Relax casing search in Glassworks (Swagger client)&lt;/li>
+&lt;li>BOM and Metadata API endpoint responses now matched&lt;/li>
+&lt;/ul>
+&lt;h3 id="rel-1138---released-2021-10-25">&lt;code>rel-1.138&lt;/code> - released 2021-10-25&lt;/h3>
+&lt;ul>
+&lt;li>Updated webhook documentation&lt;/li>
+&lt;/ul>
+&lt;h3 id="rel-1135---released-2021-8-20">&lt;code>rel-1.135&lt;/code> - released 2021-8-20&lt;/h3>
+&lt;ul>
+&lt;li>Webhook events for Enterprise SSO configuration changes&lt;/li>
+&lt;/ul>
+&lt;h3 id="rel-1134---released-2021-07-30">&lt;code>rel-1.134&lt;/code> - released 2021-07-30&lt;/h3>
+&lt;ul>
+&lt;li>Support comment events (add, update, delete) for the web-hook endpoint&lt;/li>
+&lt;/ul>
+&lt;h3 id="rel-1131---released-2021-06-01">&lt;code>rel-1.131&lt;/code> - released 2021-06-01&lt;/h3>
+&lt;ul>
+&lt;li>Add synchronous glTF/gLB endpoint for assemblies&lt;/li>
+&lt;/ul>
+&lt;h3 id="rel-1128---released-2021-03-29">&lt;code>rel-1.128&lt;/code> - released 2021-03-29&lt;/h3>
+&lt;ul>
+&lt;li>Support face color for export of glTF/gLB&lt;/li>
+&lt;li>Add document API endpoint for comments&lt;/li>
+&lt;/ul>
+&lt;h3 id="rel-1127---released-2021-03-08">&lt;code>rel-1.127&lt;/code> - released 2021-03-08&lt;/h3>
+&lt;ul>
+&lt;li>Add translation option dtkPeriodicFacesPolicy=3 for CATIA parts&lt;/li>
+&lt;/ul>
+&lt;h3 id="rel-1126---released-2021-02-12">&lt;code>rel-1.126&lt;/code> - released 2021-02-12&lt;/h3>
+&lt;ul>
+&lt;li>Add GLTF and GLB accepts option to the tessellation APIs&lt;/li>
+&lt;/ul>
+&lt;h3 id="rel-1125---released-2021-01-25">&lt;code>rel-1.125&lt;/code> - released 2021-01-25&lt;/h3>
+&lt;ul>
+&lt;li>Add ‘good/better/best’ quality query parameters to tessellation endpoint&lt;/li>
+&lt;/ul>
+&lt;h3 id="rel-1122---released-2020-11-18">&lt;code>rel-1.122&lt;/code> - released 2020-11-18&lt;/h3>
+&lt;ul>
+&lt;li>Enforce OAuth endpoint rate limiting&lt;/li>
+&lt;li>Add release package action/transition based webhooks&lt;/li>
+&lt;/ul>
+&lt;h3 id="rel-1119---released-2020-09-15">&lt;code>rel-1.119&lt;/code> - released 2020-09-15&lt;/h3>
+&lt;ul>
+&lt;li>Add rollback bar to EvalFeatureScript endpoint&lt;/li>
+&lt;/ul>
+&lt;h3 id="rel-1118---released-2020-08-25">&lt;code>rel-1.118&lt;/code> - released 2020-08-25&lt;/h3>
+&lt;ul>
+&lt;li>PartStudio GET support for sketch constraints in features endpoint&lt;/li>
+&lt;/ul>
+&lt;h3 id="rel-1116---released-2020-07-15">&lt;code>rel-1.116&lt;/code> - released 2020-07-15&lt;/h3>
+&lt;ul>
+&lt;li>Specify starting elements to create document endpoint&lt;/li>
+&lt;/ul>
+&lt;h3 id="rel-1114---released-2020-06-03">&lt;code>rel-1.114&lt;/code> - released 2020-06-03&lt;/h3>
+&lt;ul>
+&lt;li>Project endpoints&lt;/li>
+&lt;/ul>
+&lt;h3 id="rel-1113---released-2020-05-11">&lt;code>rel-1.113&lt;/code> - released 2020-05-11&lt;/h3>
+&lt;ul>
+&lt;li>Output GLTF files for an element (tab)&lt;/li>
+&lt;/ul>
+&lt;h3 id="rel-1111---released-2020-03-31">&lt;code>rel-1.111&lt;/code> - released 2020-03-31&lt;/h3>
+&lt;ul>
+&lt;li>Support ownership transfer for teams&lt;/li>
+&lt;/ul>
+&lt;h3 id="rel-1110---released-2020-03-09">&lt;code>rel-1.110&lt;/code> - released 2020-03-09&lt;/h3>
+&lt;ul>
+&lt;li>Add support for exploded views&lt;/li>
+&lt;/ul>
+&lt;h3 id="rel-1108---released-2020-01-29">&lt;code>rel-1.108&lt;/code> - released 2020-01-29&lt;/h3>
+&lt;ul>
+&lt;li>Drawings endpoints for create 4 view, get view geometry and view definition&lt;/li>
+&lt;/ul>
+&lt;h3 id="rel-1102---released-2019-09-11">&lt;code>rel-1.102&lt;/code> - released 2019-09-11&lt;/h3>
+&lt;ul>
+&lt;li>Added webhook events for release management&lt;/li>
+&lt;li>Added webhook event for document version creation&lt;/li>
+&lt;/ul>
+&lt;h3 id="rel-199---released-2019-07-08">&lt;code>rel-1.99&lt;/code> - released 2019-07-08&lt;/h3>
+&lt;ul>
+&lt;li>Assembly BOM API support for items&lt;/li>
+&lt;/ul>
+&lt;h3 id="rel-196---released-2019-05-03">&lt;code>rel-1.96&lt;/code> - released 2019-05-03&lt;/h3>
+&lt;ul>
+&lt;li>Part Studio compare endpoint&lt;/li>
+&lt;/ul>
+&lt;h3 id="rel-193---released-2019-03-01">&lt;code>rel-1.93&lt;/code> - released 2019-03-01&lt;/h3>
+&lt;ul>
+&lt;li>Webhook subscriptions for a company&lt;/li>
+&lt;/ul>
+&lt;h3 id="rel-186---released-2018-09-28">&lt;code>rel-1.86&lt;/code> - released 2018-09-28&lt;/h3>
+&lt;ul>
+&lt;li>Export Drawings to DXF, DWG and PDF&lt;/li>
+&lt;/ul></description></item></channel></rss>
