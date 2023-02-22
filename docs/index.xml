@@ -231,6 +231,8 @@
 &lt;li>Request access to the private forum for API and App Store development. Send an email to Lou Gallo (&lt;a href="mailto:lgallo@onshape.com">lgallo@onshape.com&lt;/a>) requesting access to the partner forum. Include the email address you use for signing in to the Onshape production server (cad.onshape.com).&lt;/li>
 &lt;/ol>
 &lt;p>Create your own application and let us know how it goes. We look forward to your questions, comments, and a demo of what you build!&lt;/p>
+&lt;h2 id="rate-limiting">Rate Limiting&lt;/h2>
+&lt;p>Any call can receive an HTTP &lt;code>429 Too Many Requests&lt;/code> response, caused by sending too many requests to a particular Onshape endpoint in a given time window. Depending on the endpoint, the number of requests and time window vary and are subject to change. Onshape does not publish this information. If your client receives HTTP 429 responses, reduce its request rate.&lt;/p>
 &lt;h2 id="onshape-appstore">Onshape Appstore&lt;/h2>
 &lt;p>Onshape will make applications available through the Onshape Appstore. The Appstore will be actively promoted to users, making it easy for users to find, purchase and use third party applications. Click &lt;a href="https://appstore.onshape.com" target="_blank">&lt;a href="https://appstore.onshape.com">https://appstore.onshape.com&lt;/a>&lt;/a> to view the Onshape Appstore.&lt;/p>
 &lt;h2 id="the-lifecycle-of-an-application">The Lifecycle of an Application&lt;/h2>
