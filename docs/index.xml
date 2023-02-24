@@ -7355,7 +7355,7 @@ delivery to fail.&lt;/p>
 &lt;ul>
 &lt;li>Remove deprecated &lt;code>GET&lt;/code> : &lt;code>/api/elements/:emid&lt;/code>&lt;/li>
 &lt;li>Remove deprecated &lt;code>GET&lt;/code> and &lt;code>POST&lt;/code> : &lt;code>/api/elements/d/:did/[wvm]/:wvmid/e/:eid/metadata&lt;/code>&lt;/li>
-&lt;li>Remove deprecated &lt;code>GET&lt;/code> and &lt;code>POST&lt;/code> : &lt;code>/api/parts/standardcontent/d/:did/v/:vid/e/:eid/[cu]/:cuid/partid/:pid/metadata&lt;/code>&lt;/li>
+&lt;li>Deprecated &lt;code>GET&lt;/code> and &lt;code>POST&lt;/code> : &lt;code>/api/parts/standardcontent/d/:did/v/:vid/e/:eid/[cu]/:cuid/partid/:pid/metadata&lt;/code>&lt;/li>
 &lt;li>Deprecated &lt;code>GET&lt;/code> and &lt;code>POST&lt;/code> : &lt;code>/api/parts/d/:did/[wvm]/:wmvid/e/:eid/partid/:pid/metadata&lt;/code>&lt;/li>
 &lt;/ul>
 &lt;h4 id="rel-1158---released-2023-01-11">&lt;code>rel-1.158&lt;/code> - released 2023-01-11&lt;/h4>
