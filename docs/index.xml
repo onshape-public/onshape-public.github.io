@@ -7353,6 +7353,7 @@ delivery to fail.&lt;/p>
 &lt;/code>&lt;/pre></description></item><item><title>Docs: Changelog</title><link>https://onshape-public.github.io/docs/changelog/</link><pubDate>Fri, 24 Feb 2023 12:30:00 -0400</pubDate><guid>https://onshape-public.github.io/docs/changelog/</guid><description>
 &lt;h4 id="rel-1160---released-2023-02-24">&lt;code>rel-1.160&lt;/code> - released 2023-02-24&lt;/h4>
 &lt;ul>
+&lt;li>Support configuratons for &lt;code>GET&lt;/code> : &lt;code>/api/partstudios/d/{did}/{wvm}/{wvmid}/e/{eid}/features&lt;/code>&lt;/li>
 &lt;li>Remove deprecated &lt;code>GET&lt;/code> : &lt;code>/api/elements/:emid&lt;/code>&lt;/li>
 &lt;li>Remove deprecated &lt;code>GET&lt;/code> and &lt;code>POST&lt;/code> : &lt;code>/api/elements/d/:did/[wvm]/:wvmid/e/:eid/metadata&lt;/code>&lt;/li>
 &lt;li>Deprecated &lt;code>GET&lt;/code> and &lt;code>POST&lt;/code> : &lt;code>/api/parts/standardcontent/d/:did/v/:vid/e/:eid/[cu]/:cuid/partid/:pid/metadata&lt;/code>&lt;/li>
