@@ -251,7 +251,7 @@ will include authentication credentials that verify if your application
 is in fact authorized to run this API.</p><p><img src=/images/integrationguideimage13.jpeg style=width:5.48611in;height:4.1181in alt="PHP RESTful Web Service API – Part 1 – Introduction with Step-by-step Example - Phppot"></p><p><span id=_Toc102977875 class=anchor></span>Figure 4 - REST API
 Architecture</p><p>An example of an Onshape REST API call would be the following. This GET
 API is used to retrieve information about a specific document in
-Onshape:</p><p><a href=https://cad.onshpae.com/api/documents/72de34014b590a923c87>https://cad.onshpae.com/api/documents/72de34014b590a923c87</a></p><p>The response from this API is too long to show here however it will be
+Onshape:</p><p><a href=https://cad.onshape.com/api/documents/72de34014b590a923c87>https://cad.onshape.com/api/documents/72de34014b590a923c87</a></p><p>The response from this API is too long to show here however it will be
 in JSON format and contain information regarding the document’s
 workspace, the owner of the document, permissions and a lot of other
 relevant information.</p><p><img src=/images/integrationguideimage6.png style=width:.375in;height:.47222in>For tips and tricks, regarding
@@ -309,7 +309,7 @@ JSON parser tool that enables you to browse the data in a tree view that
 can be expanded.</p><p>One of the one’s I use is <a href=http://jsonviewer.stack.hu/>http://jsonviewer.stack.hu/</a>. This
 application allows you to paste your JSON data directly into a text
 editor and then view it in a viewer tab where you can easily view the
-structure and find specific attributes and values.</p><h2 id=the-onshape-difference>The Onshape difference</h2><p>If your familiar with how other CAD systems function, or you’ve worked
+structure and find specific attributes and values.</p><h2 id=the-onshape-difference>The Onshape difference</h2><p>If you're familiar with how other CAD systems function, or you’ve worked
 on integrations to other CAD systems, then please read this section.
 Onshape does not work like other legacy CAD systems. As mentioned
 previously, Onshape was built from scratch for the cloud and as a modern
@@ -332,7 +332,7 @@ Onshape does not work this way – it is a data driven system.</p><p>Being data-
 already tell you that an integration into Onshape is going to look
 different from any integration to a CAD system that you might have done
 previously.</p><p>In traditional CAD a single file represents a snapshot of what the
-design looked like at a specific moment in time – for all intense and
+design looked like at a specific moment in time – for all intents and
 purposes, unless it’s changed it will remain in that state forever. PDM
 systems manage these files and once the designer decides to make a
 revision or a release, the file is locked and a new file can be created
@@ -663,7 +663,7 @@ created by this user can be accessed with read privileges only</p></li><li><p><s
 Onshape documents can be modified by this application</p></li><li><p><strong>Application can delete documents and workspaces</strong> – Your
 application will be able to delete a workspace within a document
 or the complete Onshape document.</p></li><li><p><strong>Application can request Purchases on Your behalf</strong> – The
-application will have access to make purchases if required.</p></li><li><p>Application can Share and unshare documents on your behalf –
+application will have access to make purchases if required.</p></li><li><p><strong>Application can Share and unshare documents on your behalf</strong> –
 Onshape’s document sharing capabilities are very powerful and
 enable other parties to access your shared documents with
 predefined rights. If this option is checked, the application
@@ -885,8 +885,8 @@ profile in Onshape would have been granted successfully.</p><h3 id=oauth2-summar
 requires specific data to be delivered at specific times in a specific
 format. Using a library such as Passport does make our lives a lot
 easier when implementing such a solution.</p><p>We’ve covered a lot of ground in this section. First, defining a
-third-part application in Onshape, understanding what OAuth2 is and how
-it works through concreate examples of how to implement it and
+third-party application in Onshape, understanding what OAuth2 is and how
+it works through concrete examples of how to implement it and
 communicate with Onshape.</p><p>In the end, simplifying the explanation, OAuth2 is a three-step process
 that secures your applications and guarantees that an application isn’t
 impersonating a user when it access the resources, but is a validated
@@ -916,7 +916,7 @@ data is released initially in Onshape or in the third-party application,
 we need to keep those releases in sync. The examples that we will use
 here build off each other yet can also be provided as standalone
 solutions. In our second business case we use data pushed to the
-third-part application in the first scenario to release data and push
+third-party application in the first scenario to release data and push
 notifications back to Onshape.</p><p>The third and final business case deals with the creation of derivative
 files, such as PDF, STEP, etc. once the release has been successfully
 completed.</p><h2 id=business-case-1-sync-objects-and-metadata>Business Case 1: Sync Objects and Metadata</h2><h3 id=business-case-1-overview>Business case 1 Overview</h3><p>The first business case is probably the most common, “How do I sync data
@@ -1669,7 +1669,7 @@ interface.</p><h2 id=calling-a-page-in-the-extension>Calling a Page in the Exten
 in the application extension definition window. This will load a regular
 web page within the Onshape interface. For instance, you could load your
 favorite news web site in the Onshape interface, there is no requirement
-to pass any parameters to the web site. However, a more practicle
+to pass any parameters to the web site. However, a more practical
 implementation would require passing parameters and using those
 paramters to retrieve data from our third-party application and load
 that data in the resulting web page.</p><p>The following code snippet shows how we use our previous definition to
