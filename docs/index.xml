@@ -1,4 +1,4 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Onshape Developer Documentation – Welcome to the Developer Portal</title><link>https://onshape-public.github.io/docs/</link><description>Recent content in Welcome to the Developer Portal on Onshape Developer Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 12 Apr 2023 10:30:00 -0400</lastBuildDate><atom:link href="https://onshape-public.github.io/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Quick Start</title><link>https://onshape-public.github.io/docs/quickstart/</link><pubDate>Mon, 18 May 2020 20:39:14 -0400</pubDate><guid>https://onshape-public.github.io/docs/quickstart/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Onshape Developer Documentation – Welcome to the Developer Portal</title><link>https://onshape-public.github.io/docs/</link><description>Recent content in Welcome to the Developer Portal on Onshape Developer Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 28 Apr 2023 10:30:00 -0400</lastBuildDate><atom:link href="https://onshape-public.github.io/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Quick Start</title><link>https://onshape-public.github.io/docs/quickstart/</link><pubDate>Mon, 18 May 2020 20:39:14 -0400</pubDate><guid>https://onshape-public.github.io/docs/quickstart/</guid><description>
 &lt;h2 id="overview">Overview&lt;/h2>
 &lt;p>Onshape was built from the ground up as a true multi-tenant Software as a Service (SaaS) based system, and it uses REST APIs to communicate with its clients and third-party systems. In short, you call a REST API as you would do on a web page. It has a specific web address and often some additional parameters that are required either in the URL itself or a form of data that can be attached to the web call. The web call will return information instead of returning a web page, and the response from the API call is formatted in JSON (JavaScript Object Notation).&lt;/p>
 &lt;h3 id="the-rest-api">The REST API&lt;/h3>
@@ -7350,7 +7350,12 @@ delivery to fail.&lt;/p>
 &amp;#34;documentId&amp;#34;: &amp;#34;0f9c4392e5934f30b48ab645&amp;#34;,
 &amp;#34;commentId&amp;#34;: &amp;#34;567953d60a1a5fbb95940333&amp;#34;
 }
-&lt;/code>&lt;/pre></description></item><item><title>Docs: Changelog</title><link>https://onshape-public.github.io/docs/changelog/</link><pubDate>Wed, 12 Apr 2023 10:30:00 -0400</pubDate><guid>https://onshape-public.github.io/docs/changelog/</guid><description>
+&lt;/code>&lt;/pre></description></item><item><title>Docs: Changelog</title><link>https://onshape-public.github.io/docs/changelog/</link><pubDate>Fri, 28 Apr 2023 10:30:00 -0400</pubDate><guid>https://onshape-public.github.io/docs/changelog/</guid><description>
+&lt;h4 id="rel-1163---released-2023-04-28">&lt;code>rel-1.163&lt;/code> - released 2023-04-28&lt;/h4>
+&lt;ul>
+&lt;li>Update documentation for the Documents endpoint (&lt;code>/api/documents&lt;/code>)&lt;/li>
+&lt;li>Update Releasepackage endpoint &lt;code>GET&lt;/code> : &lt;code>/api/releasepackage&lt;/code> to include &lt;code>type&lt;/code> to understand action (ie. Approve vs Reject)&lt;/li>
+&lt;/ul>
 &lt;h4 id="rel-1162---released-2023-04-12">&lt;code>rel-1.162&lt;/code> - released 2023-04-12&lt;/h4>
 &lt;ul>
 &lt;li>New Assembly modify endpoint &lt;code>POST&lt;/code> : &lt;code>/api/assemblies/d/{did}/w/{wid}/e/{eid}/modify&lt;/code> for bulk deletion and suppression of instances and features&lt;/li>
