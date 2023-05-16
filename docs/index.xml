@@ -7355,6 +7355,7 @@ delivery to fail.&lt;/p>
 &lt;ul>
 &lt;li>Update documentation for the Documents endpoint (&lt;code>/api/documents&lt;/code>)&lt;/li>
 &lt;li>Update Releasepackage endpoint &lt;code>GET&lt;/code> : &lt;code>/api/releasepackage&lt;/code> to include &lt;code>type&lt;/code> to understand action (ie. Approve vs Reject)&lt;/li>
+&lt;li>Update API to V6 - Fix a bug in how updating the JSON tree of an app element in a transaction returns the diff&lt;/li>
 &lt;/ul>
 &lt;h4 id="rel-1162---released-2023-04-12">&lt;code>rel-1.162&lt;/code> - released 2023-04-12&lt;/h4>
 &lt;ul>
