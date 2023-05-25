@@ -1,4 +1,4 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Onshape Developer Documentation – Welcome to the Developer Portal</title><link>https://onshape-public.github.io/docs/</link><description>Recent content in Welcome to the Developer Portal on Onshape Developer Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 19 May 2023 10:30:00 -0400</lastBuildDate><atom:link href="https://onshape-public.github.io/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Quick Start</title><link>https://onshape-public.github.io/docs/quickstart/</link><pubDate>Mon, 18 May 2020 20:39:14 -0400</pubDate><guid>https://onshape-public.github.io/docs/quickstart/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Onshape Developer Documentation – Welcome to the Developer Portal</title><link>https://onshape-public.github.io/docs/</link><description>Recent content in Welcome to the Developer Portal on Onshape Developer Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 19 May 2023 10:30:00 -0400</lastBuildDate><atom:link href="https://onshape-public.github.io/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Introduction</title><link>https://onshape-public.github.io/docs/introduction/</link><pubDate>Mon, 18 May 2020 20:39:14 -0400</pubDate><guid>https://onshape-public.github.io/docs/introduction/</guid><description>
 &lt;h2 id="overview">Overview&lt;/h2>
 &lt;p>Onshape was built from the ground up as a true multi-tenant Software as a Service (SaaS) based system, and it uses REST APIs to communicate with its clients and third-party systems. In short, you call a REST API as you would do on a web page. It has a specific web address and often some additional parameters that are required either in the URL itself or a form of data that can be attached to the web call. The web call will return information instead of returning a web page, and the response from the API call is formatted in JSON (JavaScript Object Notation).&lt;/p>
 &lt;h3 id="the-rest-api">The REST API&lt;/h3>
@@ -127,28 +127,129 @@
 &lt;li>The &lt;a href="../apioverview">API Overview section&lt;/a> goes through more details about using the REST API with API keys as a user.&lt;/li>
 &lt;li>The &lt;a href="../oauth">OAuth Integration section&lt;/a> goes through the process of developing an application and integrating it to Onshape.&lt;/li>
 &lt;/ul>
-&lt;p>There are also many more other sample projects documented in the &lt;a href="https://github.com/onshape-public">Onshape Public&lt;/a> and the &lt;a href="https://github.com/PTC-Education">PTC Education&lt;/a> GitHub organizations.&lt;/p></description></item><item><title>Docs: Sample Code</title><link>https://onshape-public.github.io/docs/samplecode/</link><pubDate>Mon, 18 May 2020 20:39:14 -0400</pubDate><guid>https://onshape-public.github.io/docs/samplecode/</guid><description>
-&lt;p>This page provides some sample codes in a few different popular programming languages for you to get started with using the Onshape REST API. Please note that samples shown on this page are only designed to be used as a quick start guide.&lt;/p>
-&lt;p>All codes written on this page, with different programming languages, are all trying to make a &lt;code>GET&lt;/code> request to the &lt;code>getPartStudioMassProperties&lt;/code> API endpoint to retrive the mass property of the part in &lt;a href="https://cad.onshape.com/documents/58d051743d98a90f86e9e2ab/w/17e0ba65df28e4e72f7f4961/e/4a289bd094a999329a3900af">this public Onshape document&lt;/a>. For more details about this API endpoint, please visit &lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/getPartStudioMassProperties">this endpoint&lt;/a> on the Glassworks API explorer.&lt;/p>
-&lt;p>Languages demonstrated on this page:&lt;/p>
+&lt;p>There are also many more other sample projects documented in the &lt;a href="https://github.com/onshape-public">Onshape Public&lt;/a> and the &lt;a href="https://github.com/PTC-Education">PTC Education&lt;/a> GitHub organizations.&lt;/p></description></item><item><title>Docs: Quick Start</title><link>https://onshape-public.github.io/docs/quickstart/</link><pubDate>Mon, 18 May 2020 20:39:14 -0400</pubDate><guid>https://onshape-public.github.io/docs/quickstart/</guid><description>
+&lt;p>In this example, we will call an Onshape REST API endpoint to send a document name to our console. Please note that the sample shown on this page is only designed to be used as a quick start guide and does not represent a full Onshape application.&lt;/p>
+&lt;h2 id="system-requirements">System Requirements&lt;/h2>
 &lt;ul>
-&lt;li>&lt;a href="#python">Python&lt;/a>&lt;/li>
-&lt;li>&lt;a href="#javascript">JavaScript&lt;/a>&lt;/li>
-&lt;li>&lt;a href="#cc">C/C++&lt;/a>&lt;/li>
+&lt;li>Before you can begin this tutorial, you must obtain a login for the Onshape dev portal. Send an email to &lt;code>api-support@onshape.com&lt;/code> and request a login.&lt;/li>
+&lt;li>This example is coded in Python. The equivalent code is provided in other languages at the end of the example. To follow along with this tutorial, you can download and install Python here: &lt;a href="https://www.python.org/downloads/">https://www.python.org/downloads/&lt;/a>.&lt;/li>
 &lt;/ul>
-&lt;h2 id="python">Python&lt;/h2>
+&lt;h2 id="review-the-api-endpoint">Review the API Endpoint&lt;/h2>
+&lt;ol>
+&lt;li>Go to &lt;a href="https://cad.onshape.com/glassworks/explorer">Glassworks&lt;/a> and scroll to &lt;code>Document&lt;/code>.&lt;/li>
+&lt;li>Expand the &lt;code>GET /documents/{did}&lt;/code> endpoint. Note that in the URL, the name of this API is &lt;code>getDocument&lt;/code>.&lt;/li>
+&lt;li>Make a note of the URL structure and the parameters required to make this request. This will become the fixed URL part of our API call. &lt;/br>
+&lt;img src="https://onshape-public.github.io/images/Glassworks_getDocument.png" alt="image"> &lt;/br>
+For this endpoint, we only need to get the document ID from the document URL.&lt;/li>
+&lt;li>Scroll down and make a note of the &lt;code>Media Type&lt;/code> that we’ll need to include in our header. &lt;/br>
+&lt;img src="https://onshape-public.github.io/images/Glassworks_MediaType.png" alt="image">&lt;/li>
+&lt;/ol>
+&lt;h2 id="review-the-document">Review the Document&lt;/h2>
+&lt;ol>
+&lt;li>Navigate to &lt;a href="https://cad.onshape.com/documents/58d051743d98a90f86e9e2ab/w/17e0ba65df28e4e72f7f4961/e/4a289bd094a999329a3900af">this public document&lt;/a>, and make a note of the document ID in the URL (&lt;code>58d051743d98a90f86e9e2ab&lt;/code>). &lt;/br>
+&lt;img src="https://onshape-public.github.io/images/PublicDocURL.png" alt="image">&lt;/li>
+&lt;/ol>
+&lt;h2 id="create-your-api-keys">Create your API Keys&lt;/h2>
+&lt;ol>
+&lt;li>Go to &lt;a href="https://dev-portal.onshape.com">https://dev-portal.onshape.com&lt;/a>.&lt;/li>
+&lt;li>In the left pane, click &lt;code>API keys&lt;/code>.&lt;/li>
+&lt;li>Click the &lt;code>Create new API key&lt;/code> button.&lt;/li>
+&lt;li>Select the following permissions for your app:
+&lt;ul>
+&lt;li>&lt;code>Application can read your documents.&lt;/code>&lt;/li>
+&lt;li>&lt;code>Application can write to your documents.&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Click the &lt;code>Create API key&lt;/code> button. &lt;/br>
+&lt;img src="https://onshape-public.github.io/images/CreateNewAPIKey.png" alt="image">&lt;/li>
+&lt;li>Copy both the &lt;strong>access key&lt;/strong> and &lt;strong>secret key&lt;/strong> from the pop-up window, save them somewhere, then click the &lt;code>Close&lt;/code> button.
+&lt;/br>&lt;strong>IMPORTANT NOTE: You will not be able to find the secret key again, so save it somewhere safe!&lt;/strong>&lt;/br>
+&lt;img src="https://onshape-public.github.io/images/APIKeySecretKey.png" alt="image">&lt;/li>
+&lt;li>The details for your application appear. &lt;/br>
+&lt;img src="https://onshape-public.github.io/images/DevPortalKeys.png" alt="image">&lt;/li>
+&lt;/ol>
+&lt;h2 id="write-your-code">Write Your Code&lt;/h2>
+&lt;ol>
+&lt;li>Create a new file called &lt;code>hello.py&lt;/code>.&lt;/li>
+&lt;li>Start your file by importing the necessary libraries.&lt;/br>&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a">import&lt;/span> &lt;span style="color:#0aa;text-decoration:underline">requests&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a">import&lt;/span> &lt;span style="color:#0aa;text-decoration:underline">json&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
+&lt;li>Next, define the URL for the API call:&lt;/br>&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic"># Assemble the URL for the API call &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>api_url = &lt;span style="color:#a50">&amp;#34;ASSEMBLED_URL&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
+&lt;li>Replace &lt;code>ASSEMBLED_URL&lt;/code> with the fully formed API. This is where we’ll put together everything we’ve learned so far:
+&lt;ol>
+&lt;li>The base URL:
+&lt;ul>
+&lt;li>&lt;code>https://cad.onshape.com/api&lt;/code>&lt;/li>
+&lt;li>&lt;code>https://companyName.onshape.com/api&lt;/code> for Enterprise accounts&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>The fixed URL is specified in the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Document/getDocument">&lt;code>getDocument&lt;/code>&lt;/a> API in Glassworks: &lt;code>/documents/{did}&lt;/code>&lt;/li>
+&lt;li>The document ID parameter from the public document URL to include in the fixed URL: &lt;code>{did}: 58d051743d98a90f86e9e2ab&lt;/code>&lt;/li>
+&lt;li>Together, this makes the URL for our API request:
+&lt;code>https://cad.onshape.com/api/documents/58d051743d98a90f86e9e2ab&lt;/code> &lt;/br>&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ol>
+&lt;!--**NOTE**: If you’re struggling to understand how we created this URL, please review:
+* The [Onshape API Request](/docs/1-introduction/restapi) page (to learn what’s in the Onshape URL)
+* The [Review the API Endpoint](/docs/2-quick-start/#review-the-api-endpoint) section above (to learn what the API call requires)
+* The [Create a New Document](/docs/2-quick-start/#create-a-new-document) section above (to learn where to get the info for the call) -->
+&lt;ol start="5">
+&lt;li>We don&amp;rsquo;t need to send any optional parameters with our request, so we can define them as an empty object:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic"># Optional query parameters can be assigned &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>params = {}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="6">
+&lt;li>Now, define your API keys: &lt;/br>&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic"># Use the API keys generated from the Onshape developer portal &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic"># Note: replace with your own keys &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>api_keys = (ACCESS_KEY, SECRET_KEY)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="7">
+&lt;li>Replace &lt;code>ACCESS_KEY&lt;/code> with your access key from the Onshape dev portal, and replace &lt;code>SECRET_KEY&lt;/code> with your secret key.&lt;/li>
+&lt;li>Next, define your headers:&lt;/br>&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic"># Define the header for the request &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>headers = {&lt;span style="color:#a50">&amp;#39;Accept&amp;#39;&lt;/span>: &lt;span style="color:#a50">&amp;#39;MEDIA_TYPE&amp;#39;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a50">&amp;#39;Content-Type&amp;#39;&lt;/span>: &lt;span style="color:#a50">&amp;#39;application/json&amp;#39;&lt;/span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="9">
+&lt;li>Replace &lt;code>MEDIA_TYPE&lt;/code> with the Media type we obtained from Glassworks during the Review the API section above:&lt;/br>&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>application/json;charset=UTF-&lt;span style="color:#099">8&lt;/span>;qs=&lt;span style="color:#099">0.09&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="10">
+&lt;li>Put all the variables you just defined together into the request:&lt;/br>&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic"># Put everything together to make the API request &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>response = requests.get(api_url,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> params=params,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> auth=api_keys,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> headers=headers)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="11">
+&lt;li>And finally, print the name value from the response:&lt;/br>&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic"># Convert the response to formatted JSON and print the `name` property&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0aa">print&lt;/span>(json.dumps(response.json()[&lt;span style="color:#a50">&amp;#34;name&amp;#34;&lt;/span>], indent=&lt;span style="color:#099">4&lt;/span>))
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="12">
+&lt;li>Make sure your file matches the full example below:&lt;/br>&lt;/li>
+&lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-py" data-lang="py">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a">import&lt;/span> &lt;span style="color:#0aa;text-decoration:underline">requests&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a">import&lt;/span> &lt;span style="color:#0aa;text-decoration:underline">json&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic"># Assemble the URL for the API call &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>api_url = &lt;span style="color:#a50">&amp;#34;https://cad.onshape.com/api/documents/58d051743d98a90f86e9e2ab&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic"># Optional query parameters can be assigned &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>params = {}
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic"># Use the API keys generated from the Onshape developer portal &lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic"># Note: replace with your own keys &lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>api_keys = (ACCESS_KEY, SECRET_KEY)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic"># Assemble the URL for the API call &lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>api_url = &lt;span style="color:#a50">&amp;#34;https://cad.onshape.com/api/partstudios/d/58d051743d98a90f86e9e2ab/w/17e0ba65df28e4e72f7f4961/e/4a289bd094a999329a3900af/massproperties&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic"># Optional query parameters can be assigned &lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>params = {}
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic"># Define the header for the request &lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>headers = {&lt;span style="color:#a50">&amp;#39;Accept&amp;#39;&lt;/span>: &lt;span style="color:#a50">&amp;#39;application/json;charset=UTF-8;qs=0.09&amp;#39;&lt;/span>,
@@ -160,13 +261,25 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> auth=api_keys,
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> headers=headers)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic"># Print (formatted) response &lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0aa">print&lt;/span>(json.dumps(response.json(), indent=&lt;span style="color:#099">4&lt;/span>))
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="javascript">JavaScript&lt;/h2>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic"># Convert the response to formatted JSON and print the `name` property&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0aa">print&lt;/span>(json.dumps(response.json()[&lt;span style="color:#a50">&amp;#34;name&amp;#34;&lt;/span>], indent=&lt;span style="color:#099">4&lt;/span>))
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="run-your-code">Run Your Code&lt;/h2>
+&lt;ol>
+&lt;li>Open your terminal and navigate into the folder where you saved your &lt;code>hello.py&lt;/code> file: &lt;code>cd ~/&amp;lt;your-file-path&amp;gt;&lt;/code>&lt;/li>
+&lt;li>Install the necessary modules:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>python -m pip install requests
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>python -m pip install json
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
+&lt;li>Run your code:&lt;/br>&lt;code>python hello.py&lt;/code>&lt;/li>
+&lt;li>Confirm that your console displays:&lt;/br>&lt;code>&amp;quot;Exercise: Basic Drawing&amp;quot;&lt;/code>&lt;/li>
+&lt;/ol>
+&lt;h2 id="other-language-examples">Other Language Examples&lt;/h2>
+&lt;h3 id="javascript">JavaScript&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-js" data-lang="js">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a">import&lt;/span> fetch from &lt;span style="color:#a50">&amp;#39;node-fetch&amp;#39;&lt;/span>;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">// Define an async function for the API request
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span>&lt;span style="color:#00a">async&lt;/span> &lt;span style="color:#00a">function&lt;/span> getMass(url=&lt;span style="color:#a50">&amp;#39;&amp;#39;&lt;/span>) {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span>&lt;span style="color:#00a">async&lt;/span> &lt;span style="color:#00a">function&lt;/span> getDocument(url=&lt;span style="color:#a50">&amp;#39;&amp;#39;&lt;/span>) {
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">const&lt;/span> response = &lt;span style="color:#00a">await&lt;/span> fetch(url, {
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> method: &lt;span style="color:#a50">&amp;#39;GET&amp;#39;&lt;/span>, &lt;span style="color:#aaa;font-style:italic">// May change to GET, POST, or DELETE
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span> headers: {
@@ -183,41 +296,43 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">// Make the API request with the assembled URL
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">// May add optional query parameters to the end of the URL in the form
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">// &amp;#34;?PARAM_NAME=PARAM&amp;#34;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span>getMass( &lt;span style="color:#a50">&amp;#39;https://cad.onshape.com/api/partstudios/d/58d051743d98a90f86e9e2ab/w/17e0ba65df28e4e72f7f4961/e/4a289bd094a999329a3900af/massproperties&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span>getMass(&lt;span style="color:#a50">&amp;#39;https://cad.onshape.com/api/documents/58d051743d98a90f86e9e2ab&amp;#39;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>).then((data) =&amp;gt; {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> console.log(data); &lt;span style="color:#aaa;font-style:italic">// Display the JSON response
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> console.log(data.name); &lt;span style="color:#aaa;font-style:italic">// Display the JSON response
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span>});
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="cc">C/C++&lt;/h2>
-&lt;p>Before running the following script, you can first run the following command line in terminal to create a credential using your API keys generated from the Onshape developer portal.&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ echo -n ACCESS_KEY:SECRET_KEY | base64
-&lt;/code>&lt;/pre>&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4c8317">#include&lt;/span> &lt;span style="color:#4c8317">&amp;lt;iostream&amp;gt;&lt;/span>&lt;span style="color:#4c8317">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4c8317">#include&lt;/span> &lt;span style="color:#4c8317">&amp;lt;string&amp;gt;&lt;/span>&lt;span style="color:#4c8317">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4c8317">#include&lt;/span> &lt;span style="color:#4c8317">&amp;lt;stdio.h&amp;gt;&lt;/span>&lt;span style="color:#4c8317">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4c8317">&lt;/span>&lt;span style="color:#00a">using&lt;/span> &lt;span style="color:#00a">namespace&lt;/span> std;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0aa">int&lt;/span> &lt;span style="color:#0a0">main&lt;/span>() {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> string url = &lt;span style="color:#a50">&amp;#34;curl &amp;#34;&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#aaa;font-style:italic">// Use &amp;#34;-X&amp;#34; to specify API type
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span> url += &lt;span style="color:#a50">&amp;#34;-X &amp;#39;GET&amp;#39; &amp;#34;&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#aaa;font-style:italic">// Assemble the URL of the API
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span> &lt;span style="color:#aaa;font-style:italic">// May add optional query parameters to the end of the URL in the form
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span> &lt;span style="color:#aaa;font-style:italic">// &amp;#34;?PARAM_NAME=PARAM&amp;#34;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span> url += &lt;span style="color:#a50">&amp;#34;&amp;#39;https://cad.onshape.com/api/partstudios/d/58d051743d98a90f86e9e2ab/w/17e0ba65df28e4e72f7f4961/e/4a289bd094a999329a3900af/massproperties&amp;#39; &amp;#34;&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#aaa;font-style:italic">// Use &amp;#34;-H&amp;#34; to send headers
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span> url += &lt;span style="color:#a50">&amp;#34;-H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39; &amp;#34;&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#aaa;font-style:italic">// Replace CREDENTIAL with the Base64 credential generated from the command line above
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span> url += &lt;span style="color:#a50">&amp;#34;-H &amp;#39;Authorization: Basic CREDENTIAL&amp;#39;&amp;#34;&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#aaa;font-style:italic">// Use &amp;#34;-d&amp;#34; to send body (data) for POST requests
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#aaa;font-style:italic">//Executing the cURL script
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span> system(url.c_str());
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">return&lt;/span> &lt;span style="color:#099">0&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: API Overview</title><link>https://onshape-public.github.io/docs/apioverview/</link><pubDate>Mon, 18 May 2020 20:25:28 -0400</pubDate><guid>https://onshape-public.github.io/docs/apioverview/</guid><description>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="c">C#&lt;/h3>
+&lt;p>Coming soon!&lt;/p>
+&lt;h3 id="cc">C/C++&lt;/h3>
+&lt;p>Coming soon!&lt;/p>
+&lt;!--
+Before running the following script, you can first run the following command line in terminal to create a credential using your API keys generated from the Onshape developer portal.
+```bash
+$ echo -n ACCESS_KEY:SECRET_KEY | base64
+```
+```cpp
+#include &lt;iostream>
+#include &lt;string>
+#include &lt;stdio.h>
+using namespace std;
+int main() {
+string url = "curl ";
+// Use "-X" to specify API type
+url += "-X 'GET' ";
+// Assemble the URL of the API
+// May add optional query parameters to the end of the URL in the form
+// "?PARAM_NAME=PARAM"
+url += "'https://cad.onshape.com/api/document/d/58d051743d98a90f86e9e2ab'";
+// Use "-H" to send headers
+url += "-H 'accept: application/json;charset=UTF-8; qs=0.09' ";
+// Replace CREDENTIAL with the Base64 credential generated from the command line above
+url += "-H 'Authorization: Basic CREDENTIAL'";
+// Use "-d" to send body (data) for POST requests
+//Executing the cURL script
+system(url.c_str());
+return 0;
+}
+```
+--></description></item><item><title>Docs: API Overview</title><link>https://onshape-public.github.io/docs/apioverview/</link><pubDate>Mon, 18 May 2020 20:25:28 -0400</pubDate><guid>https://onshape-public.github.io/docs/apioverview/</guid><description>
 &lt;h2 id="getting-started-with-the-onshape-rest-api">Getting Started with the Onshape REST API&lt;/h2>
 &lt;p>This document describes APIs that will allow partners to interact with the Onshape system.&lt;/p>
 &lt;p>Please address questions to &amp;quot; &lt;a href="mailto:api-support@onshape.com">api-support@onshape.com&lt;/a>&amp;quot; for the fastest response.&lt;/p>
