@@ -1,0 +1,209 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Onshape Developer Documentation – API Development</title><link>https://onshape-public.github.io/docs/3-api-development/</link><description>Recent content in API Development on Onshape Developer Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 18 May 2020 20:25:28 -0400</lastBuildDate><atom:link href="https://onshape-public.github.io/docs/3-api-development/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: API Keys</title><link>https://onshape-public.github.io/docs/3-api-development/apikeys/</link><pubDate>Mon, 18 May 2020 20:20:41 -0400</pubDate><guid>https://onshape-public.github.io/docs/3-api-development/apikeys/</guid><description>
+&lt;h1 id="using-api-keys-with-onshape">Using API Keys with Onshape&lt;/h1>
+&lt;h3 id="why-api-keys">Why API Keys?&lt;/h3>
+&lt;p>API keys are useful for small applications meant for personal use, allowing developers to avoid the overhead of the OAuth workflow. Creating an app is very easy with API keys: create an API key with the Developer Portal, set up a function to build your API key header as in the samples, and make your API calls! There&amp;rsquo;s no need to deal with OAuth redirects or things like that.&lt;/p>
+&lt;p>We&amp;rsquo;ve moved over to using API keys for authenticating requests instead of using cookies for several reasons.&lt;/p>
+&lt;ol>
+&lt;li>Security: Each request is signed with unique headers so that we can be sure it&amp;rsquo;s coming from the right place.&lt;/li>
+&lt;li>OAuth: The API key system we&amp;rsquo;re now using for HTTP requests is the same process developers follow when building full-blown OAuth applications; there&amp;rsquo;s no longer a disconnect between the two.&lt;/li>
+&lt;/ol>
+&lt;p>Once you create an API key, it will only be valid in the stack on which it was created. An API key created on the partner stack, for example, will not function on the production stack.&lt;/p>
+&lt;h3 id="questions-and-concerns">Questions and Concerns&lt;/h3>
+&lt;p>If you need information or have a question unanswered in this documentation, feel free to chat with us by sending an email to &lt;a href="mailto:api-support@onshape.com">api-support@onshape.com&lt;/a> or by checking out the &lt;a href="https://forum.onshape.com" target="_blank">forums&lt;/a>. If you are a member of the DevPartners group (see the Development help page for information) more detailed instructions and code examples are in the apikey sample repo.&lt;/p>
+&lt;h3 id="working-with-api-keys">Working with API Keys&lt;/h3>
+&lt;p>Read the following and you&amp;rsquo;ll be up and running with using API keys in your application:&lt;/p>
+&lt;h5 id="instructions">Instructions&lt;/h5>
+&lt;ol>
+&lt;li>
+&lt;p>Create and manage your API key pairs from the Developer Portal; note that the secret will only be displayed once!
+Keep it somewhere safe.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Now that you have a key pair, see &lt;a href="#generating-a-request-signature">below&lt;/a> for information on signing your requests to use our API.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>Once you have your access key and secret, you will want to avoid giving others access to them since they&amp;rsquo;re tied directly to your personal Onshape account. Think of your API key as a username and password pair. Therefore, you should avoid placing them directly in the code for your application, especially if others might see it. The samples use a separate configuration file that you yourself will need to create that will contain this information, but there are other ways to keep the access key and secret safe, like setting them as environment variables.&lt;/p>
+&lt;h5 id="scopes">Scopes&lt;/h5>
+&lt;p>There are several scopes available for API keys (equivalent to OAuth scopes):&lt;/p>
+&lt;ul>
+&lt;li>&amp;ldquo;OAuth2Read&amp;rdquo; - Read non-personal information (documents, parts, etc.)&lt;/li>
+&lt;li>&amp;ldquo;OAuth2ReadPII&amp;rdquo; - Read personal information (name, email, etc.)&lt;/li>
+&lt;li>&amp;ldquo;OAuth2Write&amp;rdquo; - Create and edit documents / etc.&lt;/li>
+&lt;li>&amp;ldquo;OAuth2Delete&amp;rdquo; - Delete documents / etc.&lt;/li>
+&lt;li>&amp;ldquo;OAuth2Purchase&amp;rdquo; - Authorize purchases from account&lt;/li>
+&lt;/ul>
+&lt;h5 id="generating-a-request-signature">Generating A Request Signature&lt;/h5>
+&lt;p>To ensure that a request is coming from you, we have a process for signing requests that you must follow for API calls to work. Everything is done via HTTP headers that you&amp;rsquo;ll need to set:&lt;/p>
+&lt;ol>
+&lt;li>&lt;em>Date&lt;/em>: A standard date header giving the time of the request; must be accurate within &lt;strong>5 minutes&lt;/strong> of request. Example: &lt;code>Mon, 11 Apr 2016 20:08:56 GMT&lt;/code>&lt;/li>
+&lt;li>&lt;em>On-Nonce&lt;/em>: A string that satisfies the following requirements (see the code for one possible way to generate it):
+&lt;ul>
+&lt;li>At least 16 characters&lt;/li>
+&lt;li>Alphanumeric&lt;/li>
+&lt;li>Unique for each request&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;em>Authorization&lt;/em>: This is where the API keys come into play. You&amp;rsquo;ll sign the request by implementing this algorithm:
+&lt;ul>
+&lt;li>&lt;strong>Input&lt;/strong>: Method, URL, On-Nonce, Date, Content-Type, AccessKey, SecretKey&lt;/li>
+&lt;li>&lt;strong>Output&lt;/strong>: String of the form: &lt;code>On &amp;lt;AccessKey&amp;gt;:HmacSHA256:&amp;lt;Signature&amp;gt;&lt;/code>&lt;/li>
+&lt;li>&lt;strong>Steps to generate the signature portion&lt;/strong>:
+&lt;ol>
+&lt;li>Parse the URL and get the following:
+&lt;ol>
+&lt;li>The path, e.g. &lt;code>/api/documents&lt;/code> (no query params!)&lt;/li>
+&lt;li>The query string, e.g. &lt;code>a=1&amp;amp;b=2&lt;/code>
+&lt;ul>
+&lt;li>NOTE: If no query paramaters are present, use an empty string&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>Create a string by appending the following information in order. Each field should be separated by a newline (&lt;code>\n&lt;/code>) character, and the string must be converted to lowercase:
+&lt;ol>
+&lt;li>HTTP method&lt;/li>
+&lt;li>On-Nonce header value&lt;/li>
+&lt;li>Date header value&lt;/li>
+&lt;li>Content-Type header value&lt;/li>
+&lt;li>URL pathname&lt;/li>
+&lt;li>URL query string&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>Using SHA-256, generate an &lt;a href="https://en.wikipedia.org/wiki/Hash-based_message_authentication_code" target="_blank">HMAC digest&lt;/a>, using the API secret key first and then the above string, then encode it in Base64.&lt;/li>
+&lt;li>Create the &lt;code>On &amp;lt;AccessKey&amp;gt;:HmacSHA256:&amp;lt;Signature&amp;gt;&lt;/code> string and use that in the Authorization header in your request.&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;p>Below is an example function to generate the authorization header, using Node.js&amp;rsquo;s standard &lt;code>crypto&lt;/code> and &lt;code>url&lt;/code> libraries:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-js" data-lang="js">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">// ...at top of file
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span>&lt;span style="color:#00a">var&lt;/span> u = require(&lt;span style="color:#a50">&amp;#39;url&amp;#39;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a">var&lt;/span> crypto = require(&lt;span style="color:#a50">&amp;#39;crypto&amp;#39;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">* Generates the &amp;#34;Authorization&amp;#34; HTTP header for using the Onshape API
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">*
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">* @param {string} method - Request method; GET, POST, etc.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">* @param {string} url - The full request URL
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">* @param {string} nonce - 25-character nonce (generated by you)
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">* @param {string} authDate - UTC-formatted date string (generated by you)
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">* @param {string} contentType - Value of the &amp;#34;Content-Type&amp;#34; header; generally &amp;#34;application/json&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">* @param {string} accessKey - API access key
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">* @param {string} secretKey - API secret key
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">*
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">* @return {string} Value for the &amp;#34;Authorization&amp;#34; header
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">*/&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a">function&lt;/span> createSignature(method, url, nonce, authDate, contentType, accessKey, secretKey) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">var&lt;/span> urlObj = u.parse(url);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">var&lt;/span> urlPath = urlObj.pathname;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">var&lt;/span> urlQuery = urlObj.query ? urlObj.query : &lt;span style="color:#a50">&amp;#39;&amp;#39;&lt;/span>; &lt;span style="color:#aaa;font-style:italic">// if no query, use empty string
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">var&lt;/span> str = (method + &lt;span style="color:#a50">&amp;#39;\n&amp;#39;&lt;/span> + nonce + &lt;span style="color:#a50">&amp;#39;\n&amp;#39;&lt;/span> + authDate + &lt;span style="color:#a50">&amp;#39;\n&amp;#39;&lt;/span> + contentType + &lt;span style="color:#a50">&amp;#39;\n&amp;#39;&lt;/span> +
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> urlPath + &lt;span style="color:#a50">&amp;#39;\n&amp;#39;&lt;/span> + urlQuery + &lt;span style="color:#a50">&amp;#39;\n&amp;#39;&lt;/span>).toLowerCase();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">var&lt;/span> hmac = crypto.createHmac(&lt;span style="color:#a50">&amp;#39;sha256&amp;#39;&lt;/span>, secretKey)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .update(str)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .digest(&lt;span style="color:#a50">&amp;#39;base64&amp;#39;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">var&lt;/span> signature = &lt;span style="color:#a50">&amp;#39;On &amp;#39;&lt;/span> + accessKey + &lt;span style="color:#a50">&amp;#39;:HmacSHA256:&amp;#39;&lt;/span> + hmac;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">return&lt;/span> signature;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Some API endpoints return 307 redirects. You must generate an Authorization header for the redirect as well, but please note that the server portion of the URL might be different, the redirect URL may contain query parameters that must be encoded in the Authorization header, etc. Please see the samples for examples.&lt;/p>
+&lt;h3 id="api-keys-and-oauth">API keys and OAuth&lt;/h3>
+&lt;p>Our API key workflow differs from our OAuth workflow in one important characteristic: an API key allows a &lt;em>user&lt;/em> (specifically, a developer) to make requests, while OAuth allows an &lt;em>application&lt;/em> to make requests on behalf of the user. We require the OAuth workflow for apps in the Onshape App Store, so if you develop an app using API keys and want to distribute it through the App Store, you will need to change to OAuth. Please see our OAuth sample apps for examples of how to make OAuth work (onshape/app-bom is a great place to start). The good news is that we&amp;rsquo;ve structured API keys to work very similarly to OAuth in the operation of your app. While you will need to build your Authorization header differently (and set up redirects and signins as in the onshape/app-bom sample), the API calls themselves will work the same in both versions, provided that the API key and the OAuth app have the same scopes. An API key with the OAuth2Read and OAuth2Write scopes will have the same access to the same API endpoints as an OAuth application with the OAuth2Read and OAuth2Write scopes, for example. (The only differences are when calling API endpoints relating to the OAuth application itself, since an API key request obviously does not come from an OAuth application.)&lt;/p></description></item><item><title>Docs: OAuth</title><link>https://onshape-public.github.io/docs/3-api-development/oauth/</link><pubDate>Mon, 18 May 2020 20:39:14 -0400</pubDate><guid>https://onshape-public.github.io/docs/3-api-development/oauth/</guid><description>
+&lt;h1 id="using-oauth-20-with-onshape">Using OAuth 2.0 with Onshape&lt;/h1>
+&lt;h2 id="introduction">Introduction&lt;/h2>
+&lt;p>OAuth 2.0 (&amp;ldquo;OAuth&amp;rdquo;) is an authorization framework allowing a user (also referred to as the resource owner) to approve client application access to the user&amp;rsquo;s resources at an OAuth-enabled server.&lt;/p>
+&lt;p>When integrating with Onshape, OAuth tokens authorize third-party applications (such as a desktop application or a web service) for limited access to users&amp;rsquo; Onshape documents. Using OAuth terminology, Onshape acts as both the authorization and resource server, while the desktop or web-based application is the client. Resource owners have the option of granting or denying access to applications.&lt;/p>
+&lt;p>RFC 6749 (&lt;a href="http://tools.ietf.org/html/rfc6749" target="_blank">&lt;a href="http://tools.ietf.org/html/rfc6749">http://tools.ietf.org/html/rfc6749&lt;/a>&lt;/a>) is the reference for the OAuth framework as a whole. Most of this document describes how to implement the OAuth exchanges described by the reference within the context of Onshape and client applications. RFC 6750 (&lt;a href="http://tools.ietf.org/html/rfc6750" target="_blank">&lt;a href="http://tools.ietf.org/html/rfc6750">http://tools.ietf.org/html/rfc6750&lt;/a>&lt;/a>) describes the exchange of OAuth access tokens between clients and OAuth servers.&lt;/p>
+&lt;p>Once obtained an OAuth token will work for third-party APIs under &lt;code>/api&lt;/code>. It&amp;rsquo;s not appropriate to attempt to use an OAuth token to fetch the URLs typically displayed in a web browsers location bar.&lt;/p>
+&lt;h2 id="application-registration">Application Registration&lt;/h2>
+&lt;p>OAuth relies on an orchestrated set of interactions between the web browser, Onshape&amp;rsquo;s web services and third-party client applications (which may be desktop or web server-based). The orchestration takes the form of a sequence of requests and subsequent browser redirections between pre-configured URL endpoints. In order to take part in the OAuth process an application must first be registered with Onshape.&lt;/p>
+&lt;p>Currently partners register applications by contacting &lt;a href="mailto:api-support@onshape.com">api-support@onshape.com&lt;/a> to register OAuth application. The following items are necessary:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Application name - acceptable names must include some identification of the partner. &amp;lsquo;Megacorp STL Previewer and Editor&amp;rsquo; is appropriate, but &amp;lsquo;STL Preview and Editor&amp;rsquo; is not. This value cannot be changed after the application is registered.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Application description - a short string displayed to the user when they&amp;rsquo;re asked to grant your application permission to access their data.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Primary format - this string uniquely identifies your application and is a marker for the data it might store on Onshape servers. It should take the form of a Java style reverse domain name: &lt;code>com.megacorp.stl-preview&lt;/code>. This value cannot be changed after the application is registered.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Redirect URIs - Your application must specify at least one (but multiple values are acceptable) URI used in OAuth protocol exchanges. This URL must also use SSL (a URL that begins with &lt;code>https&lt;/code>), with two exceptions applicable for installed desktop applications. These two are exceptions allow redirect URIs of the form &lt;code>http://localhost:&amp;lt;port&amp;gt;&lt;/code>, or the URN string &lt;code>urn:ietf:wg:oauth:2.0:oob&lt;/code>. The &amp;rsquo;localhost&amp;rsquo; and URN string are meant for installed desktop applications since they do not require a publicly reachable server to be part of the OAuth process.
+Possible reasons for specifying more than one redirect URI is if you deploy &amp;ldquo;test&amp;rdquo; and &amp;ldquo;production&amp;rdquo; versions of your application, and want to use a specific version of your application for different sets of users.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Application Scope (Permissions) - the application should also indicate the type of access it requires to the user&amp;rsquo;s data. The current list of scopes are:&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>Read - Application has read access to your documents&lt;/li>
+&lt;li>Comment - Application has read and comment access to your documents&lt;/li>
+&lt;li>Write - Application has modify and comment access to your documents&lt;/li>
+&lt;li>Reshare - Application has modify and share access to your documents&lt;/li>
+&lt;li>Full - Application has full access to your documents&lt;/li>
+&lt;/ul>
+&lt;p>The list of scopes may be increased or adjusted in the future, in particular access to personal information such as a users email address will be placed under a new scope that will need to be explicitly requested.&lt;/p>
+&lt;ol start="6">
+&lt;li>OAuth URL - this URL is the &amp;lsquo;authentication page&amp;rsquo; for your application. This is the first URL called from an Onshape application&amp;rsquo;s page. The page hosted at this URL should handle OAuth authentication (see &amp;ldquo;Obtaining a code&amp;rdquo;, below). Once your application&amp;rsquo;s server is authenticated on behalf of the user, the user should be redirected to your application&amp;rsquo;s content. If Onshape passes the &lt;code>redirectOnshapeUri&lt;/code> attribute in the first redirect (as a query parameter) in the OAuth flow, the app should redirect to the URI passed in this attribute after a successful grant.
+Legacy support: As we migrate to extension based apps, the old Iframe URL is moved to a tab based extension. Change as needed to provide a better user experience.&lt;/li>
+&lt;/ol>
+&lt;p>After the application has been registered Onshape will send you corresponding OAuth Client ID and OAuth Client Secret strings. While the Client ID is considered public - it is how your specific application is uniquely identified in OAuth protocol exchanges - the Client Secret &lt;strong>must&lt;/strong> be stored securely. For example, it should &lt;strong>not&lt;/strong> be checked in to source code control systems. Protect the Client Secret as you would any password data.&lt;/p>
+&lt;h2 id="obtaining-an-oauth-access-token">Obtaining an OAuth Access Token&lt;/h2>
+&lt;p>An OAuth access token is the credential a client application uses to access user resources at Onshape. Obtaining an OAuth access token is a two-part process: first obtaining a one-time use authorization code, and then exchanging the authorization code for them access token. The access token is used for all subsequent Onshape requests, though it too has a limited lifetime (which may be refreshed, as described below).&lt;/p>
+&lt;p>In the example URLs used below to describe the OAuth exchanges, values enclosed in angle brackets (&amp;rsquo;&amp;lt;&amp;gt;&amp;rsquo;) are descriptive names used to indicate that application-specific values should be substituted in actual exchanges. All other URLs and URL fragments are literal strings.&lt;/p>
+&lt;h3 id="obtaining-a-code">Obtaining a code&lt;/h3>
+&lt;p>Your application must first must direct the user to &lt;code>https://oauth.onshape.com/oauth/authorize?response_type=code&amp;amp;client_id=&amp;lt;your client id&amp;gt;&lt;/code>. You may optionally add the &lt;code>redirect_uri&lt;/code>, &lt;code>scope&lt;/code>, &lt;code>state&lt;/code> and &lt;code>company_id&lt;/code> query parameters.&lt;/p>
+&lt;p>If your application was registered with more than one redirect URI, then the specific URI to use is indicated by the &lt;code>redirect_uri&lt;/code> query string. You can only use a &lt;code>redirect_uri&lt;/code> value that has been previously registered for this application. URIs must be a exactly match registered values, including the port number (if not using the default HTTPS port). Typically this action is performed by using a HTTP 302 response code with a &lt;code>Location&lt;/code> HTTP response header when the user arrives at the starting page of your application, for example in response to a GET of the Base HREF specified in the application registration. The Location HTTP response header should contain the URL with the correct query parameters as outlined above.&lt;/p>
+&lt;p>If the &lt;code>scope&lt;/code> parameter is omitted the token retrieved at the end of this process will be valid for all scopes your application has registered. You can restrict the token to a subset of the registered scopes by using the &lt;code>scope&lt;/code> parameter. Refer to section of RFC 6749 for the exact syntax to specify scopes within a query string. Again, this is optional; by default the OAuth exchange will use the scopes registered for your application.&lt;/p>
+&lt;p>The &lt;code>state&lt;/code> parameter is a string value supplied by the partner server and returned back to the partner server later when the browser is redirected to the supplied redirect URI. It can be useful to encode such information as the document and workspace ID from the URL that initiates the OAuth process into the state parameter.&lt;/p>
+&lt;p>The &lt;code>company_id&lt;/code> parameter identifies the specific Onshape company of the user requesting the token. OAuth tokens are unique to the combination of user and company. If the user is a member of more than one company and the &lt;code>company_id&lt;/code> parameter is not supplied the user will automatically be prompted to select from a list of eligible companies. Integrated applications are supplied with a company identifier alongside other initial startup parameters for the document the app is installed against when they&amp;rsquo;re first loaded.&lt;/p>
+&lt;p>&lt;em>Note&lt;/em> this should be a GET operation and should supply all the values as URL encoded query parameters. In particular the OAuth client id typically has at least one trailing &lt;code>=&lt;/code> which must be URL encoded (replaced with &lt;code>%3D&lt;/code> in the query parameter) in order to be handled correctly.&lt;/p>
+&lt;p>When the browser fetches the redirected &lt;code>https://oauth.onshape.com/oauth/authorize&lt;/code> URL the user may be prompted to login (if the used is not currently logged in to Onshape) and is presented with a page describing your application and the scopes that it is requesting. The user can choose to Grant or Deny the request - after this choice is made the browser is redirected to the location specified by the &lt;code>redirect_uri&lt;/code> if present in the request, or the default location entered during application registration.&lt;/p>
+&lt;p>The redirection will cause the browser to GET &lt;code>https://&amp;lt;redirect_uri&amp;gt;?code=&amp;lt;code&amp;gt;&amp;amp;state=&amp;lt;state&amp;gt;&lt;/code> (if no state value was supplied initially it will be omitted in this GET). If an error occurs the browser is redirected to &lt;code>https://&amp;lt;redirect_uri&amp;gt;?error=&amp;lt;error_code&amp;gt;&amp;amp;state=&amp;lt;state&amp;gt;&lt;/code> A list of possible error codes is given at section 4.1.2.1 of RFC 6749. If the user denies your application access then the &lt;code>error_code&lt;/code> will be &lt;code>access_denied&lt;/code> though other values may also be encountered.&lt;/p>
+&lt;p>At this point your web server application should extract the &lt;code>code&lt;/code> query string parameter value and use it in the subsequent phase to obtain an access token. This authorization code is a one-time use token, and is valid for only a short duration. If the code is not exchanged for an access token within 60 seconds after it is issued, it expires.&lt;/p>
+&lt;h3 id="exchanging-the-code-for-a-token">Exchanging the code for a token&lt;/h3>
+&lt;p>Using the authorization code from the above exchange, your application can now obtain the OAuth access token. The application makes a POST HTTP request to &lt;code>https://oauth.onshape.com/oauth/token&lt;/code>, with the following data provided as a URL-encoded form body with Content-Type &lt;code>application/x-www-form-urlencoded&lt;/code>:&lt;/p>
+&lt;p>&lt;code>grant_type=authorization_code&amp;amp;code=&amp;lt;code&amp;gt;&amp;amp;client_id=&amp;lt;client id&amp;gt;&amp;amp;client_secret=&amp;lt;client_secret&amp;gt;&lt;/code>&lt;/p>
+&lt;p>Additionally if a redirect URI was supplied as an additional parameter in the initial GET of &lt;code>/oauth/authorize&lt;/code> it must also be supplied here.&lt;/p>
+&lt;p>&lt;em>Note&lt;/em> Each parameter must be URL encoded - as before the client ID and client secret both have trailing &lt;code>=&lt;/code> which must be replaced with &lt;code>%3D&lt;/code>. Do &lt;em>not&lt;/em> encode the entire body of the POST request - the &lt;code>=&lt;/code> separating parameter name and value must be left intact. This is a POST operation with the body of the POST message containing the data to complete the OAuth request for an access token. It is &lt;em>not&lt;/em> a GET operation with the additional data supplied as query parameters.&lt;/p>
+&lt;p>In response to a valid POST request the server returns a JSON encoded structure:&lt;/p>
+&lt;pre tabindex="0">&lt;code>{
+&amp;#34;access_token&amp;#34;:&amp;#34;&amp;lt;access token&amp;gt;&amp;#34;,
+&amp;#34;token_type&amp;#34;:&amp;#34;Bearer&amp;#34;,
+&amp;#34;expires_in&amp;#34;:3600,
+&amp;#34;refresh_token&amp;#34;:&amp;#34;&amp;lt;refresh token&amp;gt;&amp;#34;,
+}
+&lt;/code>&lt;/pre>&lt;p>This token structure can be stored by your server as data unique to the user who initiated the request or you can make it part of the server side session storage for this users session with your server.&lt;/p>
+&lt;h3 id="using-the-access-token">Using the access token&lt;/h3>
+&lt;p>The &amp;lsquo;access_token&amp;rsquo; must be supplied on all subsequent Onshape API requests as a header value: &lt;code>Authorization: Bearer &amp;lt;access_token&amp;gt;&lt;/code> The access token uniquely identifies the combination of your application, the Onshape user and the set of permissions granted for the access token.&lt;/p>
+&lt;p>The access token has a limited lifetime of 60 minutes, after which it will no longer work and attempts to use it will result in an error response for an Onshape API request. The application must use the refresh token returned by the original authorization code exchange to generate new access tokens&lt;/p>
+&lt;h3 id="refreshing-the-access-token">Refreshing the access token&lt;/h3>
+&lt;p>When the access token expires it must be refreshed by making another POST request to &lt;code>https://oauth.onshape.com/oauth/token&lt;/code> with the following URL encoded form body (again, with Content-Type &lt;code>application/x-www-form-urlencoded&lt;/code>):&lt;/p>
+&lt;p>&lt;code>grant_type=refresh_token&amp;amp;refresh_token=&amp;lt;refresh_token&amp;gt;&amp;amp;client_id=&amp;lt;client_id&amp;gt;&amp;amp;client_secret=&amp;lt;client_secret&amp;gt;&lt;/code>.&lt;/p>
+&lt;p>As with the authorization code data, the parameters in the form body must be URL encoded. The response to this POST request will be a JSON encoded structure as before with a new &lt;code>access_token&lt;/code> value that can be used for the next 60 minutes.&lt;/p>
+&lt;p>Refresh tokens are valid for the lifetime of the user&amp;rsquo;s grant. If a user who has previously granted access to your application decides to revoke the grant, the refresh token is invalidated. If the user decides to re-grant application access, a new refresh token is generated and returned along with the access token.&lt;/p>
+&lt;h2 id="notes-for-developers-of-installed-desktop-applications">Notes for developers of installed desktop applications&lt;/h2>
+&lt;p>OAuth is designed for interactions between two servers utilizing a browser. However it can also be used by an installed desktop (or mobile) application. The application must perform a similar role to that of a third party server - it must exchange the code for an access token structure.&lt;/p>
+&lt;p>In order to enable this to be as automatic as possible Onshape allows two special forms of redirect URI to be registered: &lt;code>http://localhost:&amp;lt;port&amp;gt;&lt;/code> and &lt;code>urn:ietf:wg:oauth:2.0:oob&lt;/code>&lt;/p>
+&lt;p>The first causes the browser to attempt to load a page from the host upon which it is running. The code parameter etc will be supplied exactly the same as outlined above. If the application can listen on the registered port and behave as a simple web server for the redirect URI it can retrieve the code in the same way as a deployed web server would.&lt;/p>
+&lt;p>The second will cause the browser to display a simple page containing the code after a request has been granted instead of going to a new URI. The page contains simple instructions to copy and paste the code into an application field. The browser will also update the title of the window to contain the code. An application could also look for browsers with window titles containing the string &lt;code>Success code=&amp;lt;code&amp;gt;&lt;/code> and automatically grab the code from the browser window title. If an error occurs (the grant is denied for example) then the browser window title will contain &lt;code>Error description=&amp;lt;error string&amp;gt;&lt;/code>&lt;/p>
+&lt;h2 id="notes-for-debugging">Notes for debugging&lt;/h2>
+&lt;p>Debugging OAuth can be a little tricky. Here are some things to bear in mind:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Make sure you are correctly URL encoding the values supplied to the oauth/authorize and oauth/token endpoints.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Use a &lt;code>GET /oauth/authorize&lt;/code> but a &lt;code>POST /oauth/token&lt;/code> and make sure that the GET uses query parameters but that the POST uses a URL encoded form body.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>If you supply a &lt;code>redirect_uri&lt;/code> to &lt;code>/oauth/authorize&lt;/code> you must also supply it as an additional parameter in the POST to /oauth/token&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Use a tool such as Burp (&lt;a href="https://portswigger.net/burp" target="_blank">&lt;a href="https://portswigger.net/burp">https://portswigger.net/burp&lt;/a>&lt;/a>) or Charles (&lt;a href="http://charlesproxy.com" target="_blank">&lt;a href="http://charlesproxy.com">http://charlesproxy.com&lt;/a>&lt;/a>) to deliberately &amp;lsquo;man-in-the-middle&amp;rsquo; the connection requests between your server and Onshape, and verify that you are performing the correct REST operations (GET vs. POST) and correctly URL encoding the parameter values.&lt;/p>
+&lt;/li>
+&lt;/ol></description></item></channel></rss>

@@ -1,0 +1,291 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Onshape Developer Documentation – Reference</title><link>https://onshape-public.github.io/docs/7-reference/</link><description>Recent content in Reference on Onshape Developer Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 19 May 2023 10:30:00 -0400</lastBuildDate><atom:link href="https://onshape-public.github.io/docs/7-reference/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Changelog</title><link>https://onshape-public.github.io/docs/7-reference/changelog/</link><pubDate>Fri, 19 May 2023 10:30:00 -0400</pubDate><guid>https://onshape-public.github.io/docs/7-reference/changelog/</guid><description>
+&lt;h4 id="rel-1164---released-2023-05-19">&lt;code>rel-1.164&lt;/code> - released 2023-05-19&lt;/h4>
+&lt;ul>
+&lt;li>Support &lt;code>partId&lt;/code> array string for &lt;code>GET&lt;/code> : &lt;code>/api/partstudios/bodydetails&lt;/code> endpoint for the option of getting a subset of parts from a partstudio (empty = all parts)&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1163---released-2023-04-28">&lt;code>rel-1.163&lt;/code> - released 2023-04-28&lt;/h4>
+&lt;ul>
+&lt;li>Update documentation for the Documents endpoint (&lt;code>/api/documents&lt;/code>)&lt;/li>
+&lt;li>Update Releasepackage endpoint &lt;code>GET&lt;/code> : &lt;code>/api/releasepackage&lt;/code> to include &lt;code>type&lt;/code> to understand action (ie. Approve vs Reject)&lt;/li>
+&lt;li>Update API to V6 - Fix a bug in how updating the JSON tree of an app element in a transaction returns the diff&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1162---released-2023-04-12">&lt;code>rel-1.162&lt;/code> - released 2023-04-12&lt;/h4>
+&lt;ul>
+&lt;li>New Assembly modify endpoint &lt;code>POST&lt;/code> : &lt;code>/api/assemblies/d/{did}/w/{wid}/e/{eid}/modify&lt;/code> for bulk deletion and suppression of instances and features&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1161---released-2023-03-20">&lt;code>rel-1.161&lt;/code> - released 2023-03-20&lt;/h4>
+&lt;ul>
+&lt;li>New BOM templates endpoint (&lt;code>/api/tabletemplates&lt;/code>)&lt;/li>
+&lt;li>Support POST &lt;code>/api/webhooks&lt;/code> parameter &lt;code>isTransient = true&lt;/code> to specify auto cleanup after a set number of days&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1160---released-2023-02-24">&lt;code>rel-1.160&lt;/code> - released 2023-02-24&lt;/h4>
+&lt;ul>
+&lt;li>Support configuratons for &lt;code>GET&lt;/code> : &lt;code>/api/partstudios/d/{did}/{wvm}/{wvmid}/e/{eid}/features&lt;/code>&lt;/li>
+&lt;li>Remove deprecated &lt;code>GET&lt;/code> : &lt;code>/api/elements/:emid&lt;/code>&lt;/li>
+&lt;li>Remove deprecated &lt;code>GET&lt;/code> and &lt;code>POST&lt;/code> : &lt;code>/api/elements/d/:did/[wvm]/:wvmid/e/:eid/metadata&lt;/code>&lt;/li>
+&lt;li>Deprecated &lt;code>GET&lt;/code> and &lt;code>POST&lt;/code> : &lt;code>/api/parts/standardcontent/d/:did/v/:vid/e/:eid/[cu]/:cuid/partid/:pid/metadata&lt;/code>&lt;/li>
+&lt;li>Deprecated &lt;code>GET&lt;/code> and &lt;code>POST&lt;/code> : &lt;code>/api/parts/d/:did/[wvm]/:wmvid/e/:eid/partid/:pid/metadata&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1158---released-2023-01-11">&lt;code>rel-1.158&lt;/code> - released 2023-01-11&lt;/h4>
+&lt;ul>
+&lt;li>New example values in Glassworks API documentation&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1155---released-2022-11-01">&lt;code>rel-1.155&lt;/code> - released 2022-11-01&lt;/h4>
+&lt;ul>
+&lt;li>Support Parasolid binary (x_b) exports&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1154---released-2022-10-10">&lt;code>rel-1.154&lt;/code> - released 2022-10-10&lt;/h4>
+&lt;ul>
+&lt;li>Add face color, hidden state and type of composite to body details endpoint&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1152---released-2022-08-30">&lt;code>rel-1.152&lt;/code> - released 2022-08-30&lt;/h4>
+&lt;ul>
+&lt;li>Support more parameters to filter the partstudio endpoint&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1147---released-2022-05-16">&lt;code>rel-1.147&lt;/code> - released 2022-05-16&lt;/h4>
+&lt;ul>
+&lt;li>Support global tree node endpoint for impacting recently opened filter&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1146---released-2022-04-25">&lt;code>rel-1.146&lt;/code> - released 2022-04-25&lt;/h4>
+&lt;ul>
+&lt;li>Support API versioning&lt;/li>
+&lt;li>Return ‘nodeId’ when adding or updating an AppElement&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1145---released-2022-04-05">&lt;code>rel-1.145&lt;/code> - released 2022-04-05&lt;/h4>
+&lt;ul>
+&lt;li>Fixed issue where assembly feature errors were missing&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1140---released-2021-12-15">&lt;code>rel-1.140&lt;/code> - released 2021-12-15&lt;/h4>
+&lt;ul>
+&lt;li>Add mass properties for assemblies&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1139---released-2021-11-15">&lt;code>rel-1.139&lt;/code> - released 2021-11-15&lt;/h4>
+&lt;ul>
+&lt;li>Relax casing search in Glassworks (Swagger client)&lt;/li>
+&lt;li>BOM and Metadata API endpoint responses now matched&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1138---released-2021-10-25">&lt;code>rel-1.138&lt;/code> - released 2021-10-25&lt;/h4>
+&lt;ul>
+&lt;li>Updated webhook documentation&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1135---released-2021-8-20">&lt;code>rel-1.135&lt;/code> - released 2021-8-20&lt;/h4>
+&lt;ul>
+&lt;li>Webhook events for Enterprise SSO configuration changes&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1134---released-2021-07-30">&lt;code>rel-1.134&lt;/code> - released 2021-07-30&lt;/h4>
+&lt;ul>
+&lt;li>Support comment events (add, update, delete) for the web-hook endpoint&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1131---released-2021-06-01">&lt;code>rel-1.131&lt;/code> - released 2021-06-01&lt;/h4>
+&lt;ul>
+&lt;li>Add synchronous glTF/gLB endpoint for assemblies&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1128---released-2021-03-29">&lt;code>rel-1.128&lt;/code> - released 2021-03-29&lt;/h4>
+&lt;ul>
+&lt;li>Support face color for export of glTF/gLB&lt;/li>
+&lt;li>Add document API endpoint for comments&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1127---released-2021-03-08">&lt;code>rel-1.127&lt;/code> - released 2021-03-08&lt;/h4>
+&lt;ul>
+&lt;li>Add translation option dtkPeriodicFacesPolicy=3 for CATIA parts&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1126---released-2021-02-12">&lt;code>rel-1.126&lt;/code> - released 2021-02-12&lt;/h4>
+&lt;ul>
+&lt;li>Add GLTF and GLB accepts option to the tessellation APIs&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1125---released-2021-01-25">&lt;code>rel-1.125&lt;/code> - released 2021-01-25&lt;/h4>
+&lt;ul>
+&lt;li>Add ‘good/better/best’ quality query parameters to tessellation endpoint&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1122---released-2020-11-18">&lt;code>rel-1.122&lt;/code> - released 2020-11-18&lt;/h4>
+&lt;ul>
+&lt;li>Enforce OAuth endpoint rate limiting&lt;/li>
+&lt;li>Add release package action/transition based webhooks&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1119---released-2020-09-15">&lt;code>rel-1.119&lt;/code> - released 2020-09-15&lt;/h4>
+&lt;ul>
+&lt;li>Add rollback bar to EvalFeatureScript endpoint&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1118---released-2020-08-25">&lt;code>rel-1.118&lt;/code> - released 2020-08-25&lt;/h4>
+&lt;ul>
+&lt;li>PartStudio GET support for sketch constraints in features endpoint&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1116---released-2020-07-15">&lt;code>rel-1.116&lt;/code> - released 2020-07-15&lt;/h4>
+&lt;ul>
+&lt;li>Specify starting elements to create document endpoint&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1114---released-2020-06-03">&lt;code>rel-1.114&lt;/code> - released 2020-06-03&lt;/h4>
+&lt;ul>
+&lt;li>Project endpoints&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1113---released-2020-05-11">&lt;code>rel-1.113&lt;/code> - released 2020-05-11&lt;/h4>
+&lt;ul>
+&lt;li>Output GLTF files for an element (tab)&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1111---released-2020-03-31">&lt;code>rel-1.111&lt;/code> - released 2020-03-31&lt;/h4>
+&lt;ul>
+&lt;li>Support ownership transfer for teams&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1110---released-2020-03-09">&lt;code>rel-1.110&lt;/code> - released 2020-03-09&lt;/h4>
+&lt;ul>
+&lt;li>Add support for exploded views&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1108---released-2020-01-29">&lt;code>rel-1.108&lt;/code> - released 2020-01-29&lt;/h4>
+&lt;ul>
+&lt;li>Drawings endpoints for create 4 view, get view geometry and view definition&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1102---released-2019-09-11">&lt;code>rel-1.102&lt;/code> - released 2019-09-11&lt;/h4>
+&lt;ul>
+&lt;li>Added webhook events for release management&lt;/li>
+&lt;li>Added webhook event for document version creation&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-199---released-2019-07-08">&lt;code>rel-1.99&lt;/code> - released 2019-07-08&lt;/h4>
+&lt;ul>
+&lt;li>Assembly BOM API support for items&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-196---released-2019-05-03">&lt;code>rel-1.96&lt;/code> - released 2019-05-03&lt;/h4>
+&lt;ul>
+&lt;li>Part Studio compare endpoint&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-193---released-2019-03-01">&lt;code>rel-1.93&lt;/code> - released 2019-03-01&lt;/h4>
+&lt;ul>
+&lt;li>Webhook subscriptions for a company&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-186---released-2018-09-28">&lt;code>rel-1.86&lt;/code> - released 2018-09-28&lt;/h4>
+&lt;ul>
+&lt;li>Export Drawings to DXF, DWG and PDF&lt;/li>
+&lt;/ul></description></item><item><title>Docs: Testing Guidelines</title><link>https://onshape-public.github.io/docs/7-reference/testingguidelines/</link><pubDate>Mon, 18 May 2020 20:42:57 -0400</pubDate><guid>https://onshape-public.github.io/docs/7-reference/testingguidelines/</guid><description>
+&lt;p>The purpose of this document is to help you get your application and App Store entry ready for QA testing.&lt;/p>
+&lt;p>Application Release Workflow (ARW)&lt;/p>
+&lt;p>Each application submitted to the Onshape App Store goes through a series of stage-gates.&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Ok to deploy to Production (Beta testing) (limited visibility)&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Ok to make Public&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Application is Public&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>The starting state is ‘Ok to deploy to limited visibility on Production’’. The end goal is ‘Application is Public on Production’. To advance to the next stage, your application must pass testing and your app store entry must pass review.&lt;/p>
+&lt;p>Testing may be requested at any time.&lt;/p>
+&lt;p>Testing is done on a first-come basis.&lt;/p>
+&lt;p>When testing is complete (pass or fail), you go to the back of the queue.&lt;/p>
+&lt;p>Testing protocol&lt;/p>
+&lt;p>Testing of Partner Applications will be performed against the checklist in addendum A.&lt;/p>
+&lt;p>Testing of Production App Store entries will be performed against the checklist in addendum B.&lt;/p>
+&lt;p>The result of each test will be one of;&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Pass - no action needed and no notification will be issued&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>An enhancement - these are suggestions that should you chose to implement them, we believe would make the application better.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>A bug (low priority) - these are slight deviations from the criteria but have low end user impact and will not prevent the application being turned on for public access and there is no stipulated time-frame for their resolution&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>A bug (medium priority) - these are material deviations from the criteria that are noticeable to the end-user and represent a minor problem requiring a work-around. A medium priority bug will not prevent the application from being turned on for public access, but should be fixed within 30 days.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>A bug (high priority) - this is a significant deviation from the criteria and will prevent the application from being turned on for public access but will not prevent the application from being promoted from the partner stack.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>A bug (MUST FIX) - this category usually represents a significant deviation from protocol or security violation. A MUST FIX will prevent an application on Production being turned on for public access and MAY, if the application is already public, cause it to be temporarily suspended from the app store.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>Any test may be annotated with a ‘*’.&lt;/p>
+&lt;p>This indicates that the test is a must-pass in order for the application or app store entry to be promoted. A failure of this test will generate a bug (MUST FIX).&lt;/p>
+&lt;h2 id="actions-that-you-can-initiate-from-jira">Actions that you can initiate from JIRA&lt;/h2>
+&lt;ul>
+&lt;li>
+&lt;p>Request application testing - This puts your application in the testing queue. We will note when testing has started (‘in progress’) and when concluded, the ticket will be closed. The outcome will include notes and links to any issues generated (‘tickets’). This phase may include as many iterations as needed to get your application ready. If necessary, the Application Release Workflow (ARW) will be updated.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Request public (general) authorization. We will note when testing has started (‘in progress’) and this request will trigger a review of your app store entry and any outstanding bugs. Note there is no implied testing of your application, simply a review of outstanding issues (tickets) and of the app store entry. Success at this stage will advance the Application Release Workflow (ARW) and you will now be able to request public (general) release.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Request public (general) release. This request states that you have coordinated with the Partner Application Manager (Joe Dunne) and the Onshape marketing department and general agreement has been reached that now is the time - Congratulations!&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="addendum-a---application-testing-criteria">Addendum A - Application Testing Criteria&lt;/h2>
+&lt;ol>
+&lt;li>Applied to all Applications&lt;/li>
+&lt;li>Applies to Integrated Cloud Applications&lt;/li>
+&lt;li>Applies to Connected Cloud Applications&lt;/li>
+&lt;li>Applies to Connected Desktop Applications&lt;/li>
+&lt;/ol>
+&lt;p>x Denotes that this is a ‘must-pass’. A failure of this test results in a must-fix&lt;/p>
+&lt;ul>
+&lt;li>(1)x The application must use the Onshape OAUTH mechanism&lt;/li>
+&lt;li>(1)x The OAUTH must be against the correct stack&lt;/li>
+&lt;li>(2)(3)x To be promoted to the Production stack, and hosted service must be on a monitored production server with worldwide 24/7 availability.&lt;/li>
+&lt;li>(2)(3) The application should not generate any avoidable console (browser) errors&lt;/li>
+&lt;li>(1) The application should should provide one or more of the following options;
+&lt;ul>
+&lt;li>Login using the Onshape ID (account created silently on first use)&lt;/li>
+&lt;li>Login with partner product account credentials&lt;/li>
+&lt;li>Create a new partner account&lt;/li>
+&lt;li>The user should not have to leave the registration workflow to complete a pre-requisite&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>(1) The application must be capable of managing/displaying documents in excess of 20 - suggested strategies include;
+&lt;ul>
+&lt;li>Use of a ‘Next’ button to load the next 20&lt;/li>
+&lt;li>Infinite scroll (loading the next 20 if/when the scrollbar reaches the bottom of the dialog&lt;/li>
+&lt;li>The application must display ‘reasonable’ performance when reading documents, workspaces, elements and parts. Consider at-scale than an account may have thousands of documents, many with multiple workspaces and each with multiple elements. Strategies may include any combination of;&lt;/li>
+&lt;li>Displaying the most-recently-opened first&lt;/li>
+&lt;li>Displaying a counter of documents/workspaces/elements read&lt;/li>
+&lt;li>Progressive loading&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>(1) The application should correctly list valid documents when ‘per document app access’ is turned on.&lt;/li>
+&lt;li>(1) The application should correctly handle selection of versions&lt;/li>
+&lt;li>(1) The application should correctly handle selection of workspaces (branches)&lt;/li>
+&lt;li>(1) The application should correctly handle/display elements that;
+&lt;ul>
+&lt;li>Are part studios that contain nothing&lt;/li>
+&lt;li>Are assemblies that contain nothing&lt;/li>
+&lt;li>Are part studios that contain only surfaces&lt;/li>
+&lt;li>Are part studios that contain only ‘wire’ data (eg helices)&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>(1) The application should appropriately handle revocation of a grant&lt;/li>
+&lt;/ul>
+&lt;h2 id="addendum-b---app-store-testing-criteria">Addendum B - App Store Testing Criteria&lt;/h2>
+&lt;ol>
+&lt;li>Applied to all Applications&lt;/li>
+&lt;li>Applies to Integrated Cloud Applications&lt;/li>
+&lt;li>Applies to Connected Cloud Applications&lt;/li>
+&lt;li>Applies to Connected Desktop Applications&lt;/li>
+&lt;li>Required for deployment to production&lt;/li>
+&lt;li>Only where the application is using Onshape billing&lt;/li>
+&lt;/ol>
+&lt;p>x Denotes that this is a ‘must-pass’. A failure of this test results in a must-fix&lt;/p>
+&lt;ul>
+&lt;li>(1) The application should have a descriptive name&lt;/li>
+&lt;li>(1) The application summary should be accurate&lt;/li>
+&lt;li>(1)x The redirect URLS should be valid&lt;/li>
+&lt;li>(2)x The iframe URL should be valid&lt;/li>
+&lt;li>(1) The Grant (permissions) request should be no more than is needed&lt;/li>
+&lt;li>(1) The Application Type should be correctly set&lt;/li>
+&lt;li>(1) Team Visibility should be set&lt;/li>
+&lt;li>(1) The Category should be appropriate&lt;/li>
+&lt;li>(1) The application description should be accurate&lt;/li>
+&lt;li>(1) The Sign-In URL should be valid&lt;/li>
+&lt;li>(1) The pricing summary should be accurate. For instance, it cannot say ‘Free’ if this is a trial - it should say ‘Free for 30 days and then $30/month&lt;/li>
+&lt;li>(1) Any pay-plans should have an accurate description&lt;/li>
+&lt;li>(1) The support URL should point to a resource for help - this can be;
+&lt;ul>
+&lt;li>A support ticketing system (eg Zendesk)&lt;/li>
+&lt;li>A page giving a telephone number&lt;/li>
+&lt;li>A page giving an email address&lt;/li>
+&lt;li>A forum&lt;/li>
+&lt;li>It cannot be to an FAQ page (unless that page also contains one of the other options)&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>(1)The EULA link should point to an English Language EULA&lt;/li>
+&lt;/ul></description></item></channel></rss>
