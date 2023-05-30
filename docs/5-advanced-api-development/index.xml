@@ -1,149 +1,5 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Onshape Developer Documentation – Advanced API Development</title><link>https://onshape-public.github.io/docs/5-advanced-api-development/</link><description>Recent content in Advanced API Development on Onshape Developer Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 18 May 2020 20:43:20 -0400</lastBuildDate><atom:link href="https://onshape-public.github.io/docs/5-advanced-api-development/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Associativity</title><link>https://onshape-public.github.io/docs/5-advanced-api-development/associativity/</link><pubDate>Mon, 18 May 2020 20:28:26 -0400</pubDate><guid>https://onshape-public.github.io/docs/5-advanced-api-development/associativity/</guid><description>
-&lt;p>Onshape Associativity for external applications&lt;/p>
-&lt;p>This document describes data structures and APIs that external applications can use to implement associativity.&lt;/p>
-&lt;p>Please address questions, comments and suggestions to &amp;ldquo;&lt;a href="mailto:api-support@onshape.com">api-support@onshape.com&lt;/a>&amp;rdquo; for the fastest response.&lt;/p>
-&lt;h2 id="introduction">Introduction&lt;/h2>
-&lt;p>Onshape data is stored in replicated databases in the cloud. The data model for accessing Parts and Assemblies through the REST API is described here. The model is influenced by the data model used by Git and similar source code repositories.&lt;/p>
-&lt;h2 id="onshape-data-model">Onshape Data Model&lt;/h2>
-&lt;p>&lt;em>Documents&lt;/em> contain &lt;em>Elements&lt;/em>.&lt;/p>
-&lt;p>&lt;em>Elements&lt;/em> are presented as tabs in the user interface. An element can be one of the following types:&lt;/p>
-&lt;ul>
-&lt;li>Part Studio&lt;/li>
-&lt;li>Assembly&lt;/li>
-&lt;li>Blob&lt;/li>
-&lt;li>Application&lt;/li>
-&lt;/ul>
-&lt;p>With some exceptions, all data in a document is stored within an element.&lt;/p>
-&lt;p>&lt;em>Documents&lt;/em> can be branched, creating new &lt;em>Workspaces&lt;/em>.&lt;/p>
-&lt;p>Note that &lt;em>Workspaces&lt;/em> are branches of the entire document. Every change to a document is recorded in the database. The *Document Microversion ID *is an ID that represents the entire state of the document at a point in the history.&lt;/p>
-&lt;p>&lt;em>Workspaces&lt;/em> can be named at a point in time, creating a &lt;em>Version&lt;/em>.&lt;/p>
-&lt;p>&lt;em>Versions&lt;/em> are permanent names that identify the state of a workspace at a point in time. Thus, versions are immutable - changes can be made to a workspace, not to a version.&lt;/p>
-&lt;p>The following table describes what data stored in each &lt;em>Element&lt;/em> type:&lt;/p>
-&lt;table>
-&lt;tr>
-&lt;td>Part Studio&lt;/td>
-&lt;td>Each Part Studio contains exactly one Feature List. The feature list contains Features such as Sketches, Planes, Extrudes, and so on. Each feature contains one or parameters. Onshape is in the process of publishing APIs to provide read and write access to features.
-&lt;p>Whenever the feature list changes, the parametric history is evaluated, causing the model to be regenerated. This results in zero or more parts and surfaces to be created.&lt;/td>&lt;/p>
-&lt;/tr>
-&lt;tr>
-&lt;td>Assembly&lt;/td>
-&lt;td>Each Assembly contains an Assembly Tree, which contains parts and/or other assemblies (sub-assemblies), along with mate information. Onshape provides an API call to retrieve the assembly tree definition.&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Blob&lt;/td>
-&lt;td>Each Blob element contains an uninterpreted binary object that has been uploaded to Onshape, typically from a file. Onshape depends on the browser client to display some blob data (PDF and image data), but does not interpret the data. A blob element can be updated with new data.&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Application&lt;/td>
-&lt;td>Each Application element contains zero or more sub-elements, providing a structured set of transactional data that is defined and managed by an application. A detailed description of the application storage data model is described elsewhere.
-&lt;p>Application data can be displayed in the Onshape tab in an iframe; the application is responsible for rendering the data in the iframe from their server.&lt;/td>&lt;/p>
-&lt;/tr>
-&lt;/table>
-&lt;p>Note that Onshape &lt;em>Drawing&lt;/em> elements are Application elements tagged as managed by Onshape.&lt;/p>
-&lt;p>Documents, Elements, Workspaces, Versions, Microversions, Users and various other data objects are identified by a unique ID. These IDs form the basic building blocks for the Onshape REST API.&lt;/p>
-&lt;p>Tessellated data is not stored persistently in Onshape; it is generated on demand for display by the Onshape clients, or in response to application REST API requests. This data may be cached for performance.&lt;/p>
-&lt;h2 id="git-analogy">Git analogy&lt;/h2>
-&lt;p>The following table identifies Onshape concepts and the corresponding Git concepts. Note that this is not a direct mapping, and the implementation of the concepts is very different.&lt;/p>
-&lt;table>
-&lt;tr>
-&lt;td>Onshape concept&lt;/td>
-&lt;td>Git concept&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Document&lt;/td>
-&lt;td>Repository&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Element&lt;/td>
-&lt;td>File&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Workspace&lt;/td>
-&lt;td>Branch&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Version&lt;/td>
-&lt;td>Tag&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Microversion&lt;/td>
-&lt;td>Commit&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Document Microversion ID&lt;/td>
-&lt;td>SHA&lt;/td>
-&lt;/tr>
-&lt;/table>
-&lt;h2 id="document-data">Document Data&lt;/h2>
-&lt;p>All elements, be them Assemblies, Part Studios, Drawings, or even apps, are history based. Each change to an element or set of elements represents a unique record in the document&amp;rsquo;s history. The document can be restored to that particular state any time in the future. Each record of the document&amp;rsquo;s history has a unique persistent identifier which is called a &lt;strong>Microversion&lt;/strong> id in Onshape.&lt;/p>
-&lt;p>Document data (excluding document metadata) can be changed in the context of only a &lt;strong>Workspace&lt;/strong>. Each workspace represents an independent line of history of the document, i.e. a sorted list of document microversions. A reference to a state of the Workspace can be stored as an immutable &lt;strong>Version&lt;/strong>. New Workspaces can be branched from a Version, to continue document history from the moment the Version was created. One Workspace can be merged into another to combine document changes made in both workspaces. If an app expects the data in the app element to have certain properties, a merge may fail to preserve these properties, leading to an invalid state of that app element.&lt;/p>
-&lt;h3 id="part-studio-data">Part Studio Data&lt;/h3>
-&lt;p>The Part Studio element is defined by a list of features, some of which (e.g. sketch), may have complex internal structure composed of entities. Part Studio features and entities are referenced by unique persistent identifiers. Part Studio features and entities can appear, disappear, and reappear depending on the current microversion of the model.&lt;/p>
-&lt;h3 id="assembly-data">Assembly Data&lt;/h3>
-&lt;p>The Assembly element is defined as a list of assembly features and a tree of subassemblies / part instances. Occurrence id is a unique persistent identifier of an occurrence of a part in the assembly structure.&lt;/p>
-&lt;h3 id="external-application-data">External Application Data&lt;/h3>
-&lt;p>An external application has complete control over how it manages/stores documents, however, to take advantage of the Onshape data model, there is a set of endpoints they should use to store state. These are collectively known as the &amp;lsquo;Application Element API&amp;rsquo;. To learn how to use these elements, read the Application Element API section.&lt;/p>
-&lt;h2 id="model-presentation-data">Model Presentation Data&lt;/h2>
-&lt;p>A valid model definition usually corresponds to a real world manufacturable topology. The topology is represented internally as a set of 3-d, 2-d, 1-d, 0-d entities and a set of relations between them. It can be tessellated into a set of geometric primitives which approximate the shape of the model. Tessellated data can be used for visual representation of the model or other processing related to the shape of the model.&lt;/p>
-&lt;p>Model topology is represented as a set of Parts, Faces, Edges, and Vertices in the API. Each of these has a unique identifier in every state of the model. The identifier represents an encoded index in the model&amp;rsquo;s history journal and its value depends on the structure of the model&amp;rsquo;s history. The value is not guaranteed to be preserved across model changes, and will almost always change if the model changes in significant ways.&lt;/p>
-&lt;p>The following changes in the topological representation can occur between two microversions of the model:&lt;/p>
-&lt;ul>
-&lt;li>New topological entities can appear;&lt;/li>
-&lt;li>Id of existing topology can change;&lt;/li>
-&lt;li>Topological entities can disappear;&lt;/li>
-&lt;li>Existing topological entities can be merged into a single entity;&lt;/li>
-&lt;li>Existing topological entity can be split into multiple entities.&lt;/li>
-&lt;/ul>
-&lt;p>A pair of model microversion and Topology ID can be used to identify topological entities across the model changes. Topology ID defined in a specific microversion can be translated into a set of topology ids in the current microversion of the model. (The Topology ID is sometimes referred to as a Deterministic ID within Onshape, and is exposed in specific API calls as Part ID, Face ID, and so on).&lt;/p>
-&lt;p>The following table contains a summary of Topology IDs exposed through Onshape REST APIs. The details of the API calls are documented in the Glassworks API Explorer.&lt;/p>
-&lt;table>
-&lt;tr>
-&lt;td>Topology ID&lt;/td>
-&lt;td>REST API&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Part ID&lt;/td>
-&lt;td>/partstudio/d/:did/[wvm]/:wvm/e/:eid/bodydetails
-/partstudio/d/:did/[wvm]/:wvm/e/:eid/tessellatededges
-/partstudio/d/:did/[wvm]/:wvm/e/:eid/tessellatedfaces
-/partstudio/d/:did/[wvm]/:wvm/e/:eid/partid/:partid/shadedviews
-/partstudio/d/:did/[wvm]/:wvm/e/:eid/partid/:partid/boundingboxes
-/partstudios/d/:did/w/:w/e/:eid/metadata
-/parts/d/:did/[wvm]/:wvm/e/:eid/bodydetails
-/parts/d/:did/[wvm]/:wvm/e/:eid/tessellatededges
-/parts/d/:did/[wvm]/:wvm/e/:eid/tessellatedfaces
-/parts/d/:did/[wvm]/:wvm/e/:eid/partid/:partid/shadedviews
-/parts/d/:did/[wvm]/:wvm/e/:eid/partid/:partid/boundingboxes
-/parts/d/:did/w/:w/e/:eid/metadata
-/parts/d/:did/w/:w/e/:eid
-/assemblies/d/:did/w/:wvm/e/:eid
-/parts/d/:did/[wvm]/:wvm/e/:eid/partid/:partid/parasolid
-/parts/d/:did/[wvm]/:wvm/e/:eid/partid/:partid/stl&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Face ID&lt;/td>
-&lt;td>/partstudios/d/:did/[wvm]/:wvm/e/:eid/bodydetails
-/partstudios/d/:did/[wvm]/:wvm/e/:eid/tessellatedfaces
-/partstudios/d/:did/[wvm]/:wvm/e/:eid/tessellatededges
-/part/d/:did/[wvm]/:wvm/e/:eid/bodydetails
-/part/d/:did/[wvm]/:wvm/e/:eid/tessellatedfaces
-/part/d/:did/[wvm]/:wvm/e/:eid/tessellatededges&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Edge ID&lt;/td>
-&lt;td>/partstudios/d/:did/[wvm]/:wvm/e/:eid/bodydetails
-/partstudios/d/:did/[wvm]/:wvm/e/:eid/tessellatededges
-/parts/d/:did/[wvm]/:wvm/e/:eid/bodydetails
-/parts/d/:did/[wvm]/:wvm/e/:eid/tessellatededges&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Vertex ID&lt;/td>
-&lt;td>/partstudios/d/:did/[wvm]/:wvm/e/:eid/bodydetails
-/parts/d/:did/[wvm]/:wvm/e/:eid/bodydetails&lt;/td>
-&lt;/tr>
-&lt;/table>
-&lt;h2 id="associativity">Associativity&lt;/h2>
-&lt;p>The key to understanding associativity in Onshape is to recognize that Onshape does not expose a persistent ID for any of these entities. When the model changes, the ID may change. Therefore, Onshape provides an API that allows you map IDs from a previous microversion to the current microversion. Assuming a simple case of maintaining associativity for a face, an abstract workflow might be:&lt;/p>
+&lt;p>Onshape does not expose a persistent ID for any of these entities. When the model changes, the ID may change. Therefore, Onshape provides an API to enable mapping IDs from a previous microversion to the current microversion. Assuming a simple case of maintaining associativity for a face, an abstract workflow might be:&lt;/p>
 &lt;ol>
 &lt;li>Read the tessellated model data.&lt;/li>
 &lt;li>Select the face of interest.&lt;/li>
@@ -152,89 +8,92 @@
 &lt;li>Call the REST API to translate from the known Face ID to an ID in the new model.&lt;/li>
 &lt;li>Re-apply application-specific data to the face(s) in the new model. Note that a face may become zero, one or multiple faces in the new model, depending on what changes the user made.&lt;/li>
 &lt;/ol>
-&lt;p>The following example shows the sequence of API calls.&lt;/p>
-&lt;h3 id="associativity-example">Associativity Example&lt;/h3>
+&lt;h2 id="associativity-example">Associativity Example&lt;/h2>
 &lt;ol>
-&lt;li>Create a unit length [cube]:
+&lt;li>Create a cube in Onshape:&lt;/br>
 &lt;img src="https://onshape-public.github.io/images/associativityimage03.png" alt="image alt text">&lt;/li>
-&lt;li>Get document microversion (&lt;code>https://cad.onshape.com/api/documents/d/&amp;lt;docid&amp;gt;/w/&amp;lt;wid&amp;gt;/microversion&lt;/code>).
-Use the appropriate REST API to get the tessellated faces &lt;code>https://cad.onshape.com/api/partstudios/d/&amp;lt;docid&amp;gt;/w/&amp;lt;wid&amp;gt;/e/&amp;lt;eid&amp;gt;/tessellatedfaces&lt;/code>
-and edges &lt;code>https://cad.onshape.com/api/partstudios/d/&amp;lt;docid&amp;gt;/w/&amp;lt;wid&amp;gt;/e/&amp;lt;eid&amp;gt;/tessellatededges&lt;/code>. Note the ids:&lt;/li>
-&lt;/ol>
+&lt;li>Get the document microversion ID from the URL: &lt;code>https://cad.onshape.com/api/documents/d/&amp;lt;docid&amp;gt;/w/&amp;lt;wid&amp;gt;/microversionId&lt;/code>.&lt;/li>
+&lt;li>Use the appropriate REST API to get the tessellated faces (&lt;code>getPartStudioFaces&lt;/code>)
+and edges (&lt;code>getPartStudioEdges&lt;/code>}. Note the ids:
 &lt;ul>
-&lt;li>Part Id : &amp;ldquo;JHD&amp;rdquo;;&lt;/li>
-&lt;li>Front face Id : &amp;ldquo;JHO&amp;rdquo;;&lt;/li>
-&lt;li>Top edge of the front face Id : &amp;ldquo;JHd&amp;rdquo;;&lt;/li>
-&lt;li>Right edge of the top face Id : &amp;ldquo;JHt&amp;rdquo;.&lt;/li>
+&lt;li>Part ID: &lt;code>JHD&lt;/code>&lt;/li>
+&lt;li>Front face ID: &lt;code>JHO&lt;/code>&lt;/li>
+&lt;li>Top edge of the front face ID: &lt;code>JHd&lt;/code>&lt;/li>
+&lt;li>Right edge of the top face ID: &lt;code>JHt&lt;/code>&lt;/li>
 &lt;/ul>
-&lt;ol start="3">
-&lt;li>Split cube with the [&amp;ldquo;Front&amp;rdquo; plane], translate ids:&lt;/li>
+&lt;/li>
+&lt;li>Split cube with the Front plane and translate the IDs:&lt;/li>
 &lt;/ol>
 &lt;p>&lt;img src="https://onshape-public.github.io/images/associativityimage00.png" alt="image alt text">&lt;/p>
-&lt;p>&lt;strong>POST&lt;/strong> &lt;code>https://cad.onshape.com/api/partstudios/d/&amp;lt;docid&amp;gt;/w/&amp;lt;wid&amp;gt;/e/&amp;lt;eid&amp;gt;/idtranslations&lt;/code>&lt;/p>
-&lt;p>&lt;strong>Body&lt;/strong>:&lt;/p>
-&lt;pre tabindex="0">&lt;code>{
-&amp;#34;sourceDocumentMicroversion&amp;#34; : &amp;#34;47e75ab2ee8b4356a76ebd47&amp;#34;,
-&amp;#34;ids&amp;#34; : [&amp;#34;JHD&amp;#34;, &amp;#34;JHO&amp;#34;, &amp;#34;JHd&amp;#34;, &amp;#34;JHt&amp;#34; ]
-}
-&lt;/code>&lt;/pre>&lt;p>&lt;strong>Response&lt;/strong>:&lt;/p>
-&lt;pre tabindex="0">&lt;code>{
-&amp;#34;documentId&amp;#34;: &amp;#34;748d6e850c9248328189922b&amp;#34;,
-&amp;#34;elementId&amp;#34;: &amp;#34;042a6fa54e79451e8076463d&amp;#34;,
-&amp;#34;sourceDocumentMicroversion&amp;#34;: &amp;#34;47e75ab2ee8b4356a76ebd47&amp;#34;,
-&amp;#34;ids&amp;#34;: [
-{ &amp;#34;source&amp;#34;: &amp;#34;JHD&amp;#34;, &amp;#34;status&amp;#34;: &amp;#34;SPLIT&amp;#34;, &amp;#34;target&amp;#34;: [&amp;#34;JID&amp;#34;, &amp;#34;JIH&amp;#34;] },
-{ &amp;#34;source&amp;#34;: &amp;#34;JHO&amp;#34;, &amp;#34;status&amp;#34;: &amp;#34;OK&amp;#34;, &amp;#34;target&amp;#34;: [&amp;#34;JHO&amp;#34;] },
-{ &amp;#34;source&amp;#34;: &amp;#34;JHd&amp;#34;, &amp;#34;status&amp;#34;: &amp;#34;OK&amp;#34;, &amp;#34;target&amp;#34;: [&amp;#34;JHd&amp;#34;] },
-{ &amp;#34;source&amp;#34;: &amp;#34;JHt&amp;#34;, &amp;#34;status&amp;#34;: &amp;#34;SPLIT&amp;#34;, &amp;#34;target&amp;#34;: [&amp;#34;JI5&amp;#34;, &amp;#34;JI9&amp;#34;] }
-],
-&amp;#34;targetDocumentMicroversion&amp;#34;: &amp;#34;78bc7f3fcf82475085c2f3ab&amp;#34;
-4. Delete one of the [parts], translate ids:
-![image alt text](/images/associativityimage01.png)
-**POST** `https://cad.onshape.com/api/partstudios/d/&amp;lt;docid&amp;gt;/w/&amp;lt;wid&amp;gt;/e/&amp;lt;eid&amp;gt;/idtranslations`
-**Body**:
-&lt;/code>&lt;/pre>&lt;p>{
-&amp;ldquo;sourceDocumentMicroversion&amp;rdquo; : &amp;ldquo;47e75ab2ee8b4356a76ebd47&amp;rdquo;,
-&amp;ldquo;ids&amp;rdquo; : [&amp;ldquo;JHD&amp;rdquo;, &amp;ldquo;JHO&amp;rdquo;, &amp;ldquo;JHd&amp;rdquo;, &amp;ldquo;JHt&amp;rdquo;]
-}&lt;/p>
-&lt;pre tabindex="0">&lt;code>
-**Response**:
-&lt;/code>&lt;/pre>&lt;p>{
-&amp;ldquo;documentId&amp;rdquo;: &amp;ldquo;748d6e850c9248328189922b&amp;rdquo;,
-&amp;ldquo;elementId&amp;rdquo;: &amp;ldquo;042a6fa54e79451e8076463d&amp;rdquo;,
-&amp;ldquo;sourceDocumentMicroversion&amp;rdquo;: &amp;ldquo;47e75ab2ee8b4356a76ebd47&amp;rdquo;,
-&amp;ldquo;ids&amp;rdquo;: [
-{ &amp;ldquo;source&amp;rdquo;: &amp;ldquo;JHD&amp;rdquo;, &amp;ldquo;status&amp;rdquo;: &amp;ldquo;OK&amp;rdquo;, &amp;ldquo;target&amp;rdquo;: [&amp;ldquo;JID&amp;rdquo;] },
-{ &amp;ldquo;source&amp;rdquo;: &amp;ldquo;JHO&amp;rdquo;, &amp;ldquo;status&amp;rdquo;: &amp;ldquo;FAILED_TO_RESOLVE&amp;rdquo;, &amp;ldquo;target&amp;rdquo;: [] },
-{ &amp;ldquo;source&amp;rdquo;: &amp;ldquo;JHd&amp;rdquo;, &amp;ldquo;status&amp;rdquo;: &amp;ldquo;FAILED_TO_RESOLVE&amp;rdquo;, &amp;ldquo;target&amp;rdquo;: [] },
-{ &amp;ldquo;source&amp;rdquo;: &amp;ldquo;JHt&amp;rdquo;, &amp;ldquo;status&amp;rdquo;: &amp;ldquo;OK&amp;rdquo;, &amp;ldquo;target&amp;rdquo;: [&amp;ldquo;JI5&amp;rdquo;] }
-],
-&amp;ldquo;targetDocumentMicroversion&amp;rdquo;: &amp;ldquo;52aa74d34b624f3aaef33204&amp;rdquo;
-}&lt;/p>
-&lt;pre tabindex="0">&lt;code>
-5. Rollback delete and [split], translate ids:
-![image alt text](/images/associativityimage02.png)
-**POST** `https://cad.onshape.com/api/partstudios/d/&amp;lt;docid&amp;gt;/w/&amp;lt;wid&amp;gt;/e/&amp;lt;eid&amp;gt;/idtranslations`
-**Body**:
-&lt;/code>&lt;/pre>&lt;p>{
-&amp;ldquo;sourceDocumentMicroversion&amp;rdquo; : &amp;ldquo;47e75ab2ee8b4356a76ebd47&amp;rdquo;,
-&amp;ldquo;ids&amp;rdquo; : [&amp;ldquo;JHD&amp;rdquo;, &amp;ldquo;JHO&amp;rdquo;, &amp;ldquo;JHd&amp;rdquo;, &amp;ldquo;JHt&amp;rdquo;]
-}&lt;/p>
-&lt;pre tabindex="0">&lt;code>
-**Response**:
-&lt;/code>&lt;/pre>&lt;p>{
-&amp;ldquo;documentId&amp;rdquo;: &amp;ldquo;748d6e850c9248328189922b&amp;rdquo;,
-&amp;ldquo;elementId&amp;rdquo;: &amp;ldquo;042a6fa54e79451e8076463d&amp;rdquo;,
-&amp;ldquo;sourceDocumentMicroversion&amp;rdquo;: &amp;ldquo;47e75ab2ee8b4356a76ebd47&amp;rdquo;,
-&amp;ldquo;ids&amp;rdquo;: [
-{ &amp;ldquo;source&amp;rdquo;: &amp;ldquo;JHD&amp;rdquo;, &amp;ldquo;status&amp;rdquo;: &amp;ldquo;OK&amp;rdquo;, &amp;ldquo;target&amp;rdquo;: [&amp;ldquo;JID&amp;rdquo;] },
-{ &amp;ldquo;source&amp;rdquo;: &amp;ldquo;JHO&amp;rdquo;, &amp;ldquo;status&amp;rdquo;: &amp;ldquo;OK&amp;rdquo;, &amp;ldquo;target&amp;rdquo;: [&amp;ldquo;JHO&amp;rdquo;] },
-{ &amp;ldquo;source&amp;rdquo;: &amp;ldquo;JHd&amp;rdquo;, &amp;ldquo;status&amp;rdquo;: &amp;ldquo;OK&amp;rdquo;, &amp;ldquo;target&amp;rdquo;: [&amp;ldquo;JHd&amp;rdquo;] },
-{ &amp;ldquo;source&amp;rdquo;: &amp;ldquo;JHt&amp;rdquo;, &amp;ldquo;status&amp;rdquo;: &amp;ldquo;OK&amp;rdquo;, &amp;ldquo;target&amp;rdquo;: [&amp;ldquo;JHt&amp;rdquo;] }
-],
-&amp;ldquo;targetDocumentMicroversion&amp;rdquo;: &amp;ldquo;52aa74d34b624f3aaef33204&amp;rdquo;
-}&lt;/p>
-&lt;pre tabindex="0">&lt;code>&lt;/code>&lt;/pre></description></item><item><title>Docs: Billing</title><link>https://onshape-public.github.io/docs/5-advanced-api-development/billing/</link><pubDate>Mon, 18 May 2020 20:29:36 -0400</pubDate><guid>https://onshape-public.github.io/docs/5-advanced-api-development/billing/</guid><description>
+&lt;p>&lt;strong>POST&lt;/strong>&lt;/p>
+&lt;pre tabindex="0">&lt;code>https://cad.onshape.com/api/partstudios/d/&amp;lt;docid&amp;gt;/w/&amp;lt;wid&amp;gt;/e/&amp;lt;eid&amp;gt;/idtranslations
+&lt;/code>&lt;/pre>&lt;p>&lt;strong>Body&lt;/strong>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;sourceDocumentMicroversion&amp;#34;&lt;/span> : &lt;span style="color:#a50">&amp;#34;47e75ab2ee8b4356a76ebd47&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;ids&amp;#34;&lt;/span> : [&lt;span style="color:#a50">&amp;#34;JHD&amp;#34;&lt;/span>, &lt;span style="color:#a50">&amp;#34;JHO&amp;#34;&lt;/span>, &lt;span style="color:#a50">&amp;#34;JHd&amp;#34;&lt;/span>, &lt;span style="color:#a50">&amp;#34;JHt&amp;#34;&lt;/span> ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Response&lt;/strong>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;documentId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;748d6e850c9248328189922b&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;elementId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;042a6fa54e79451e8076463d&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;sourceDocumentMicroversion&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;47e75ab2ee8b4356a76ebd47&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;ids&amp;#34;&lt;/span>: [
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;source&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;JHD&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;status&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;SPLIT&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;target&amp;#34;&lt;/span>: [&lt;span style="color:#a50">&amp;#34;JID&amp;#34;&lt;/span>, &lt;span style="color:#a50">&amp;#34;JIH&amp;#34;&lt;/span>] },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;source&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;JHO&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;status&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;OK&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;target&amp;#34;&lt;/span>: [&lt;span style="color:#a50">&amp;#34;JHO&amp;#34;&lt;/span>] },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;source&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;JHd&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;status&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;OK&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;target&amp;#34;&lt;/span>: [&lt;span style="color:#a50">&amp;#34;JHd&amp;#34;&lt;/span>] },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;source&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;JHt&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;status&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;SPLIT&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;target&amp;#34;&lt;/span>: [&lt;span style="color:#a50">&amp;#34;JI5&amp;#34;&lt;/span>, &lt;span style="color:#a50">&amp;#34;JI9&amp;#34;&lt;/span>] }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;targetDocumentMicroversion&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;78bc7f3fcf82475085c2f3ab&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
+&lt;li>Delete one of the parts, and translate the IDs:&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://onshape-public.github.io/images/associativityimage01.png" alt="image alt text">&lt;/p>
+&lt;p>&lt;strong>POST&lt;/strong>&lt;/p>
+&lt;pre tabindex="0">&lt;code>https://cad.onshape.com/api/partstudios/d/&amp;lt;docid&amp;gt;/w/&amp;lt;wid&amp;gt;/e/&amp;lt;eid&amp;gt;/idtranslations
+&lt;/code>&lt;/pre>&lt;p>&lt;strong>Body&lt;/strong>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;sourceDocumentMicroversion&amp;#34;&lt;/span> : &lt;span style="color:#a50">&amp;#34;47e75ab2ee8b4356a76ebd47&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;ids&amp;#34;&lt;/span> : [&lt;span style="color:#a50">&amp;#34;JHD&amp;#34;&lt;/span>, &lt;span style="color:#a50">&amp;#34;JHO&amp;#34;&lt;/span>, &lt;span style="color:#a50">&amp;#34;JHd&amp;#34;&lt;/span>, &lt;span style="color:#a50">&amp;#34;JHt&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Response&lt;/strong>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;documentId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;748d6e850c9248328189922b&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;elementId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;042a6fa54e79451e8076463d&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;sourceDocumentMicroversion&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;47e75ab2ee8b4356a76ebd47&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;ids&amp;#34;&lt;/span>: [
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;source&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;JHD&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;status&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;OK&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;target&amp;#34;&lt;/span>: [&lt;span style="color:#a50">&amp;#34;JID&amp;#34;&lt;/span>] },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;source&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;JHO&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;status&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;FAILED_TO_RESOLVE&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;target&amp;#34;&lt;/span>: [] },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;source&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;JHd&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;status&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;FAILED_TO_RESOLVE&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;target&amp;#34;&lt;/span>: [] },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;source&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;JHt&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;status&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;OK&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;target&amp;#34;&lt;/span>: [&lt;span style="color:#a50">&amp;#34;JI5&amp;#34;&lt;/span>] }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;targetDocumentMicroversion&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;52aa74d34b624f3aaef33204&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="5">
+&lt;li>Roll back the delete and the split, and translate the IDs:&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://onshape-public.github.io/images/associativityimage02.png" alt="image alt text">&lt;/p>
+&lt;p>&lt;strong>POST&lt;/strong>&lt;/p>
+&lt;pre tabindex="0">&lt;code>https://cad.onshape.com/api/partstudios/d/&amp;lt;docid&amp;gt;/w/&amp;lt;wid&amp;gt;/e/&amp;lt;eid&amp;gt;/idtranslations
+&lt;/code>&lt;/pre>&lt;p>&lt;strong>Body&lt;/strong>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;sourceDocumentMicroversion&amp;#34;&lt;/span> : &lt;span style="color:#a50">&amp;#34;47e75ab2ee8b4356a76ebd47&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;ids&amp;#34;&lt;/span> : [&lt;span style="color:#a50">&amp;#34;JHD&amp;#34;&lt;/span>, &lt;span style="color:#a50">&amp;#34;JHO&amp;#34;&lt;/span>, &lt;span style="color:#a50">&amp;#34;JHd&amp;#34;&lt;/span>, &lt;span style="color:#a50">&amp;#34;JHt&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Response&lt;/strong>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;documentId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;748d6e850c9248328189922b&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;elementId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;042a6fa54e79451e8076463d&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;sourceDocumentMicroversion&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;47e75ab2ee8b4356a76ebd47&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;ids&amp;#34;&lt;/span>: [
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;source&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;JHD&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;status&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;OK&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;target&amp;#34;&lt;/span>: [&lt;span style="color:#a50">&amp;#34;JID&amp;#34;&lt;/span>] },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;source&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;JHO&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;status&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;OK&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;target&amp;#34;&lt;/span>: [&lt;span style="color:#a50">&amp;#34;JHO&amp;#34;&lt;/span>] },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;source&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;JHd&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;status&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;OK&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;target&amp;#34;&lt;/span>: [&lt;span style="color:#a50">&amp;#34;JHd&amp;#34;&lt;/span>] },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;source&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;JHt&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;status&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;OK&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;target&amp;#34;&lt;/span>: [&lt;span style="color:#a50">&amp;#34;JHt&amp;#34;&lt;/span>] }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;targetDocumentMicroversion&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;52aa74d34b624f3aaef33204&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Billing</title><link>https://onshape-public.github.io/docs/5-advanced-api-development/billing/</link><pubDate>Mon, 18 May 2020 20:29:36 -0400</pubDate><guid>https://onshape-public.github.io/docs/5-advanced-api-development/billing/</guid><description>
 &lt;p>This document describes APIs that will allow partners to interact with the Onshape billing system.&lt;/p>
 &lt;p>Please address questions to &amp;ldquo;&lt;a href="mailto:api-support@onshape.com">api-support@onshape.com&lt;/a>&amp;rdquo; for the fastest response.&lt;/p>
 &lt;h2 id="overview">Overview&lt;/h2>

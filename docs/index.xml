@@ -1,133 +1,170 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Onshape Developer Documentation – Welcome to the Onshape Developer Documentation</title><link>https://onshape-public.github.io/docs/</link><description>Recent content in Welcome to the Onshape Developer Documentation on Onshape Developer Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 19 May 2023 10:30:00 -0400</lastBuildDate><atom:link href="https://onshape-public.github.io/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Introduction to the Onshape REST API</title><link>https://onshape-public.github.io/docs/introduction/</link><pubDate>Mon, 18 May 2020 20:39:14 -0400</pubDate><guid>https://onshape-public.github.io/docs/introduction/</guid><description>
-&lt;h2 id="overview">Overview&lt;/h2>
-&lt;p>Onshape was built from the ground up as a true multi-tenant Software as a Service (SaaS) based system, and it uses REST APIs to communicate with its clients and third-party systems. In short, you call a REST API as you would do on a web page. It has a specific web address and often some additional parameters that are required either in the URL itself or a form of data that can be attached to the web call. The web call will return information instead of returning a web page, and the response from the API call is formatted in JSON (JavaScript Object Notation).&lt;/p>
-&lt;h3 id="the-rest-api">The REST API&lt;/h3>
-&lt;p>The REST API stands for the &lt;b>RE&lt;/b>presentational &lt;b>S&lt;/b>tate &lt;b>T&lt;/b>ransfer &lt;b>A&lt;/b>pplication &lt;b>P&lt;/b>rogramming &lt;b>I&lt;/b>nterface. In Onshape, you can use the REST API to access Onshape engine and data in real-time. There are currently three types of REST API requests that are supported in Onshape (following the HTTP standards):&lt;/p>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Onshape Developer Documentation – Welcome to the Onshape Developer Documentation</title><link>https://onshape-public.github.io/docs/</link><description>Recent content in Welcome to the Onshape Developer Documentation on Onshape Developer Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 19 May 2023 10:30:00 -0400</lastBuildDate><atom:link href="https://onshape-public.github.io/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Introduction</title><link>https://onshape-public.github.io/docs/introduction/</link><pubDate>Mon, 18 May 2020 20:39:14 -0400</pubDate><guid>https://onshape-public.github.io/docs/introduction/</guid><description>
+&lt;p>This page will explain the basics of using the Onshape REST API. If you are brand new to using APIs, we suggest you spend some time learning the basics from these free resources:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://docs.github.com/en/rest/guides/getting-started-with-the-rest-api">https://docs.github.com/en/rest/guides/getting-started-with-the-rest-api&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.freecodecamp.org/news/apis-for-beginners/">https://www.freecodecamp.org/news/apis-for-beginners/&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>Onshape uses REST APIs to communicate with clients and third-party systems. Onshape lives in your browser, which means you call REST APIs like you would any other web page. The API call returns information instead of a web page, and the response is formatted in JSON (JavaScript Object Notation).&lt;/p>
+&lt;p>You can use our REST APIs to access the Onshape engine and data in real time. We currently support three REST API requests (following the HTTP standards):&lt;/p>
 &lt;ul>
 &lt;li>&lt;code>GET&lt;/code>: Retrieve (read) information from the server (i.e., your Onshape documents). Any arguments included in the URL are sent to the server.&lt;/li>
-&lt;li>&lt;code>POST&lt;/code>: Update (write) the server with new information. Data required is included in the body of the request – the same as how a web form submits data to a server.&lt;/li>
+&lt;li>&lt;code>POST&lt;/code>: Update (write) the server with new information. Required data is included in the request body.&lt;/li>
 &lt;li>&lt;code>DELETE&lt;/code>: Delete information from the server.&lt;/li>
 &lt;/ul>
-&lt;img src="https://onshape-public.github.io/images/integrationguideimage13.jpeg" alt="PHP RESTful Web Service API" style="width:80%"/>
-&lt;h3 id="the-onshape-architecture">The Onshape Architecture&lt;/h3>
-&lt;p>When you start a design in Onshape, you typically create a &lt;b>document&lt;/b>. The document is the container that includes all the content related to a specific design. All data in an Onshape document is stored in &lt;b>Elements&lt;/b> (represented as tabs in the user interface). Typically, Part Studios and Assemblies are two of the most common element types that a design requires. Throughout the design process, you may also find creating &lt;b>versions&lt;/b> to be useful for product development management while working on the &amp;ldquo;Main&amp;rdquo; &lt;b>workspace&lt;/b>. More details can be found in the &lt;a href="../associativity">Associativity page&lt;/a> of the documentation.&lt;/p>
-&lt;p>Since Onshape is a web-based solution, it uses a URL to define what gets loaded in the browser. We can access different documents and different parts/versions of a document by simply altering the URL following a similar structure.&lt;/p>
-&lt;p>As an example, here is a typical Onshape URL:&lt;/p>
-&lt;pre>&lt;code>https://cad.onshape.com/documents/58d051743d98a90f86e9e2ab/w/17e0ba65df28e4e72f7f4961/e/4a289bd094a999329a3900af
-&lt;/code>&lt;/pre>
+&lt;p>A typical REST API call in Onshape includes five major components:&lt;/p>
 &lt;ul>
-&lt;li>&lt;code>https://cad.onshape.com&lt;/code> is the &lt;i>base URL&lt;/i> of the document. It defines the Onshape Enterprise that the document belongs to. While the default for standard accounts is &lt;code>cad.onshape.com&lt;/code>, every Enterprise account has a different base URL (e.g., &lt;code>companyName.onshape.com&lt;/code>).&lt;/li>
-&lt;li>&lt;code>documents/&lt;/code> or simply &lt;code>d/&lt;/code> is followed by a 24-character &lt;i>document ID&lt;/i>. The document ID uniquely identifies an Onshape document.&lt;/li>
-&lt;li>&lt;code>w/&lt;/code> is followed by a 24-character &lt;i>workspace ID&lt;/i>. The workspace ID uniquely identifies a workspace within the document. By default, a document is started with the &lt;code>Main&lt;/code> workspace.
+&lt;li>Method:
 &lt;ul>
-&lt;li>But you can also create &lt;i>versions&lt;/i> along the design process, which can be linked to by replacing &lt;code>w/&lt;/code> with &lt;code>v/&lt;/code>, followed by a 24-character &lt;i>version ID&lt;/i>.&lt;/li>
-&lt;li>With every edit made in the document, a microversion is automatically created internally. You can also access a specific microversion by replacing &lt;code>w/&lt;/code> with &lt;code>m/&lt;/code>, followed by a 24-character &lt;i>microversion ID&lt;/i>.&lt;/li>
-&lt;li>&lt;b>Note:&lt;/b> &lt;code>POST&lt;/code> requests will always be made to a workspace, as versions and microversions are immutable.&lt;/li>
+&lt;li>&lt;code>GET&lt;/code>, &lt;code>POST&lt;/code>, or &lt;code>DELETE&lt;/code>&lt;/li>
+&lt;li>Every Onshape API endpoint is labeled with its method type.&lt;/li>
 &lt;/ul>
 &lt;/li>
-&lt;li>&lt;code>e/&lt;/code> is followed by a 24-character &lt;i>element ID&lt;/i>. The element ID uniquely identifies an element (i.e., a tab that we see and access through the user interface).&lt;/li>
-&lt;/ul>
-&lt;img src="https://onshape-public.github.io/images/quickstart1.png" alt="Associativity Demonstration" style="width:80%"/>
-&lt;h2 id="glassworks-onshape-api-explorer">Glassworks Onshape API Explorer&lt;/h2>
-&lt;p>Onshape documents all available REST API endpoints on the Glassworks API Explorer, which can be reached through &lt;a href="https://cad.onshape.com/glassworks/explorer/">https://cad.onshape.com/glassworks/explorer/&lt;/a>. It also provides the ability to run the API requests within its interface with the &amp;ldquo;Try it out&amp;rdquo; button and provides the output from the API call.&lt;/p>
-&lt;p>For a quick start, you can try out the API calls on Glassworks by running Onshape in a browser tab. Glassworks can use the logged-in Onshape session Cookie to authenticate the API calls. However, if you are making API calls to an Enterprise account, change the base URL of the Glassworks API explorer to the base URL of your Enterprise (e.g., &lt;a href="https://companyName.onshape.com/glassworks/explorer/)">https://companyName.onshape.com/glassworks/explorer/)&lt;/a>.&lt;/p>
-&lt;img src="https://onshape-public.github.io/images/quickstart2.gif" alt="Glassworks Demonstration" style="width:80%"/>
-&lt;h2 id="making-an-onshape-rest-api-call">Making an Onshape REST API call&lt;/h2>
-&lt;p>While making API calls on Glassworks is a great platform for testing out individual endpoints, there is a much greater potential on what the REST API can achieve by establishing computation workflows and developing web applications with APIs.&lt;/p>
-&lt;h3 id="authenticate-access">Authenticate access&lt;/h3>
-&lt;p>To use the Onshape REST APIs outside of Glassworks, there are two possible workflows to authenticate the access to your Onshape account:&lt;/p>
+&lt;li>URL:
 &lt;ul>
-&lt;li>API Keys: allow a &lt;i>user&lt;/i> (specifically, a developer) to make API requests&lt;/li>
-&lt;li>OAuth: allows an &lt;i>application&lt;/i> to make API requests on behalf of the user&lt;/li>
-&lt;/ul>
-&lt;p>For a quick starting example, you can go through the following steps to create a set of API keys. More information about setting up the OAuth for app development can be found in the &lt;a href="../oauth">OAuth page&lt;/a>.&lt;/p>
-&lt;ol>
-&lt;li>Go to the Onshape developer portal at &lt;a href="https://dev-portal.onshape.com">https://dev-portal.onshape.com&lt;/a> and log in with your Onshape account.&lt;/li>
-&lt;li>Under &amp;ldquo;API keys&amp;rdquo; of the left panel, click &amp;ldquo;Create new API key&amp;rdquo; in the top right corner of the page.&lt;/li>
-&lt;li>Choose the company and permissions that you would like this key to have access to (recommend enabling read-only permission for now, then be careful with the rest before you gain sufficient experience).&lt;/li>
-&lt;li>Once the API key is created, a pop-up box should show an access key and a secret key. Note that the secret key will only show up once, or you will have to generate a new set of API keys if you lose access.&lt;/li>
-&lt;/ol>
-&lt;p>&lt;strong>CAUTION&lt;/strong>: you should NOT share your API keys with others, nor upload and/or share the keys publicly. Gaining access to your API keys is equivalent to gaining access to your Onshape account with the permissions you specified in step 3 above. It is also good practice to periodically delete your API keys and generate a new set, such that you can deactivate any API keys that were leaked accidentally.&lt;/p>
-&lt;h3 id="introduction-to-a-typical-api-call">Introduction to a typical API call&lt;/h3>
-&lt;p>For a typical REST API call in Onshape, there are five major components:&lt;/p>
+&lt;li>Specifies the API endpoint and part of the document that the API is calling&lt;/li>
+&lt;li>Uses the following format: &lt;code>{base_url}/{fixed_url}&lt;/code>.
 &lt;ul>
-&lt;li>&lt;code>method&lt;/code>: This should be one of &lt;code>GET&lt;/code>, &lt;code>POST&lt;/code>, and &lt;code>DELETE&lt;/code>. Every API endpoint on Glassworks is labelled with its corresponding method type.&lt;/li>
-&lt;li>&lt;code>url&lt;/code>: The URL specifies the API endpoint that is being called and the part of the document that the API is calling. The &lt;code>url&lt;/code> should be in the following format: &lt;code>{base_url}/api/{fixed_url}&lt;/code>. The &lt;code>{base_url}&lt;/code> should be the same base URL that is introduced &lt;a href="#the-onshape-architecture">above&lt;/a> (e.g., &lt;a href="https://cad.onshape.com">https://cad.onshape.com&lt;/a> for non-Enterprise accounts). Then, the &lt;code>{fixed_url}&lt;/code> is the URL that the API endpoint is titled with on Glassworks. However, you should replace all the information in &lt;code>{...}&lt;/code> with the actual IDs.&lt;/li>
-&lt;li>&lt;code>query parameters&lt;/code>: Besides the required parameters for the &lt;code>url&lt;/code>, there are sometimes a few more optional paramters for the API call. In the drop-down content of every API endpoint on Glassworks, you can find a list of all optional query parameters with description.&lt;/li>
-&lt;li>&lt;code>headers&lt;/code>: The header of an API request defines the associated meta-data, which is used by the server to process the request. Usually, this contains the &lt;code>&amp;quot;Content-Type&amp;quot;&lt;/code> and &lt;code>&amp;quot;Accept&amp;quot;&lt;/code>. While the content type is generally set to be &lt;code>&amp;quot;application/json&amp;quot;&lt;/code>, the accept type can be found under &amp;ldquo;Media type&amp;rdquo; of the response section of every API endpoint on Glassworks.&lt;/li>
-&lt;li>&lt;code>payload body&lt;/code>: A request body is only applicable for &lt;code>POST&lt;/code> requests, and it&amp;rsquo;s a required component for some &lt;code>POST&lt;/code> requests and optional for others. Again, a template of the payload body can be found under the drop-down content of the API endpoint on Glassworks. In most cases, the payload body should not be manually filled, but it should be obtained and modified from the response of a related &lt;code>GET&lt;/code> request.&lt;/li>
+&lt;li>&lt;code>{base_url}&lt;/code>: Onshape URL (i.e., &lt;code>https://cad.onshape.com/api&lt;/code> or &lt;code>https://companyName.onshape.com/api&lt;/code> for Enterprise accounts).&lt;/li>
+&lt;li>&lt;code>{fixed_url}&lt;/code>: the URL of the API endpoint (more about this later)&lt;/li>
 &lt;/ul>
-&lt;h3 id="example-of-making-an-api-call">Example of making an API call&lt;/h3>
-&lt;p>A REST API call for Onshape can be made the same way as you make an API call for most other platforms/servers. Samples codes in a few different popular programming languages can be found on the &lt;a href="../samplecode">Sample Code page&lt;/a>.&lt;/p>
-&lt;h3 id="rest-api-response">REST API Response&lt;/h3>
-&lt;p>The REST API in Onshape communicates data in JSON format, a template of the returned response can also be found under the drop-down content of each API endpoint on Glassworks.&lt;/p>
-&lt;p>As an example, below is the response from calling the &lt;code>getPartStudioMassProperties&lt;/code> endpoint &lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/getPartStudioMassProperties">here&lt;/a> to this public &lt;a href="https://cad.onshape.com/documents/58d051743d98a90f86e9e2ab/w/17e0ba65df28e4e72f7f4961/e/4a289bd094a999329a3900af">document&lt;/a> (note: some of the numbers here were replaced with &lt;code>...&lt;/code> to simplify the demonstration). Taking the first value in the list of &lt;code>response[&amp;quot;bodies&amp;quot;][&amp;quot;-all-&amp;quot;][&amp;quot;mass&amp;quot;]&lt;/code> gives the mass of the part in the Part Studio; the list contains the best estimate and the lower and upper peripherial tolerance.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;bodies&amp;#34;&lt;/span>: {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;-all-&amp;#34;&lt;/span>: {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;principalInertia&amp;#34;&lt;/span>: [
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#099">0.08004372143652973&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#099">0.08004372143652973&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#099">0.13924990725024763&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ],
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;principalAxes&amp;#34;&lt;/span>: [
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;x&amp;#34;&lt;/span>: &lt;span style="color:#099">1&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;y&amp;#34;&lt;/span>: &lt;span style="color:#099">0&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;z&amp;#34;&lt;/span>: &lt;span style="color:#099">0&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;x&amp;#34;&lt;/span>: &lt;span style="color:#099">0&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;y&amp;#34;&lt;/span>: &lt;span style="color:#099">0&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;z&amp;#34;&lt;/span>: &lt;span style="color:#099">1&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;x&amp;#34;&lt;/span>: &lt;span style="color:#099">0&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;y&amp;#34;&lt;/span>: &lt;span style="color:#099">1&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;z&amp;#34;&lt;/span>: &lt;span style="color:#099">0&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ],
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;mass&amp;#34;&lt;/span>: [
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#099">19.61161892375398&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#099">19.61161890561838&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#099">19.61161894188958&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ],
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;hasMass&amp;#34;&lt;/span>: &lt;span style="color:#00a">true&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;volume&amp;#34;&lt;/span>: [
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#099">0.0024422937638547922&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#099">0.002442275628254571&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#099">0.0024423118994550135&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ],
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;periphery&amp;#34;&lt;/span>: [
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#099">0.22529146317055807&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#099">0.2252913285020754&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#099">0.22529159783904074&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ],
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;centroid&amp;#34;&lt;/span>: [
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#099">3.268293381618339e-34&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#099">1.699411226844061e-17&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#099">-1.5130909293744692e-18&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f00;background-color:#faa">...&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ],
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;inertia&amp;#34;&lt;/span>: [
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#099">0.08004372143652974&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#099">0&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#099">0&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f00;background-color:#faa">...&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ],
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;massMissingCount&amp;#34;&lt;/span>: &lt;span style="color:#099">0&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;microversionId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;c6396b20bd1ffd204e146ddf&amp;#34;&lt;/span>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Query parameters:
+&lt;ul>
+&lt;li>Optional parameters for the API call&lt;/li>
+&lt;li>Described in the drop-down content of every API endpoint on Glassworks (you’ll learn about using Glassworks in a later section).&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Headers:
+&lt;ul>
+&lt;li>Defines the associated metadata, which is used by the server to process the request.&lt;/li>
+&lt;li>Usually contains &lt;code>Content-Type&lt;/code> and &lt;code>Accept&lt;/code>.
+&lt;ul>
+&lt;li>&lt;code>Content-Type&lt;/code>:
+&lt;ul>
+&lt;li>Usually &lt;code>application/json&lt;/code>&lt;/li>
+&lt;li>If the application downloads a file, &lt;code>Content-Type&lt;/code> will be &lt;code>application/octet-stream&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;code>Accept&lt;/code>: found under &lt;code>Media type&lt;/code> in the API response section on Glassworks.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Payload body:
+&lt;ul>
+&lt;li>Only applicable for &lt;code>POST&lt;/code> requests&lt;/li>
+&lt;li>Required for some &lt;code>POST&lt;/code> requests; optional for others.&lt;/li>
+&lt;li>Body template is available in the API drop-down in Glassworks&lt;/li>
+&lt;li>Typically obtained and modified from the response of a related GET request (rather than manually)&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="onshape-api-request">Onshape API Request&lt;/h2>
+&lt;p>Since Onshape is a web-based solution, it uses a URL to define what is loaded in the browser.&lt;/p>
+&lt;p>Example Onshape URL:
+&lt;a href="https://cad.onshape.com/api/documents/58d051743d98a90f86e9e2ab/w/17e0ba65df28e4e72f7f4961/e/4a289bd094a999329a3900af">https://cad.onshape.com/api/documents/58d051743d98a90f86e9e2ab/w/17e0ba65df28e4e72f7f4961/e/4a289bd094a999329a3900af&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>https://cad.onshape.com/api&lt;/code> is the base URL of the document.
+&lt;ul>
+&lt;li>Every Enterprise account has a custom base URL: &lt;code>https://companyName.onshape.com/api&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;code>documents/&lt;/code> or &lt;code>d/&lt;/code> is followed by a 24-character document ID. The document ID uniquely identifies an Onshape document.&lt;/li>
+&lt;li>&lt;code>w/&lt;/code> is followed by a 24-character workspace ID. The workspace ID uniquely identifies a workspace within the document. By default, a document is started with the Main workspace.
+&lt;ul>
+&lt;li>To refer to a specific document version, replace &lt;code>w/&lt;/code> with &lt;code>v/&lt;/code>, followed by the 24-character version ID.&lt;/li>
+&lt;li>With every edit made in the document, a microversion of every document is automatically created with every edit. To refer to a specific microversion, replace &lt;code>w/&lt;/code> with &lt;code>m/&lt;/code>, followed by the 24-character microversion ID.&lt;/li>
+&lt;li>&lt;strong>Note&lt;/strong>: &lt;code>POST&lt;/code> requests are always made to a workspace, since versions and microversions are immutable.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;code>e/&lt;/code> is followed by a 24-character element ID. The element ID uniquely identifies an element (e.g., a tab that we see and access through the user interface).&lt;/li>
+&lt;/ul>
+&lt;p>In this documentation, we often refer to the URL template as: &lt;code>{base_URL}/{endpoint}/d/{did}/{wvm}/{wvmid}/e/{eid}&lt;/code> or sometimes &lt;code>/{endpoint}/DWVME/&lt;/code> for short.&lt;/p>
+&lt;p>When your application is instantiated in a document, it is called with a URL like this:&lt;/p>
+&lt;pre tabindex="0">&lt;code>https://_your-server.your-domain.com_?documentId=1bf13f86674e42e88da3ba72&amp;amp;workspaceId=b0526d577bb844bea463aea7&amp;amp;elementId=36c2f534a07941e1a26b4928&amp;amp;server=https%3A%2F%2Fcad.onshape.com&amp;amp;userId=53da35fbe4b0412c60b5e3b7&amp;amp;access=edit&amp;amp;debug=true
+&lt;/code>&lt;/pre>&lt;p>The query parameters passed from Onshape to your application are:&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Parameter&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>documentId&lt;/code>&lt;/td>
+&lt;td>Current document ID&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>workspaceId&lt;/code>, &lt;code>versionId&lt;/code>, &lt;code>microversionId&lt;/code>&lt;/td>
+&lt;td>Current workspace ID OR version ID OR microversion ID&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>elementId&lt;/code>&lt;/td>
+&lt;td>Current (application) element ID&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>server&lt;/code>&lt;/td>
+&lt;td>The address of the current Onshape server. The server parameter is informational; REST requests should always be sent to &lt;code>cad.onshape.com&lt;/code>. Enterprise accounts should be sent to &lt;code>companyName.onshape.com&lt;/code>.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>userId&lt;/code>&lt;/td>
+&lt;td>Current user ID, which can be found by calling &lt;code>/api/users/current&lt;/code> and obtaining the user ID from the &lt;code>id&lt;/code> field.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>access&lt;/code>&lt;/td>
+&lt;td>Set to &lt;code>edit&lt;/code> if the document should open with edit capabilities.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="onshape-api-response">Onshape API Response&lt;/h2>
+&lt;p>The REST API in Onshape communicates data in JSON format. A template of the returned response can be found under the API endpoint dropdown on Glassworks. If you are new to working with JSON, we recommend the following resources:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://www.w3schools.com/js/js_json_intro.asp">https://www.w3schools.com/js/js_json_intro.asp&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.freecodecamp.org/news/what-is-json-a-json-file-example/">https://www.freecodecamp.org/news/what-is-json-a-json-file-example/&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>The example below is the response from calling the &lt;code>getDocument&lt;/code> API for &lt;a href="https://cad.onshape.com/documents/58d051743d98a90f86e9e2ab/w/17e0ba65df28e4e72f7f4961/e/4a289bd094a999329a3900af">this public document&lt;/a>. A lot of information is returned, so we’ve truncated the middle of the response below, but if we look at the very end of the resulting JSON, we can see that the response has correctly returned &lt;code>Exercise: Basic Drawing&lt;/code> as the document &lt;code>name&lt;/code>.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-js" data-lang="js">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a50">&amp;#34;jsonType&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;document&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a50">&amp;#34;documentThumbnailElementId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a50">&amp;#34;isUpgradedToLatestVersion&amp;#34;&lt;/span>: &lt;span style="color:#00a">false&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a50">&amp;#34;betaCapabilityIds&amp;#34;&lt;/span>: [],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a50">&amp;#34;public&amp;#34;&lt;/span>: &lt;span style="color:#00a">true&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a50">&amp;#34;permission&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;READ_COPY_EXPORT&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a50">&amp;#34;defaultElementId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;4a289bd094a999329a3900af&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a50">&amp;#34;recentVersion&amp;#34;&lt;/span>: &lt;span style="color:#00a">null&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">// ...
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span> &lt;span style="color:#a50">&amp;#34;isEnterpriseOwned&amp;#34;&lt;/span>: &lt;span style="color:#00a">false&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a50">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;Exercise: Basic Drawing&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a50">&amp;#34;id&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;58d051743d98a90f86e9e2ab&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a50">&amp;#34;href&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;https://cad.onshape.com/api/v6/documents/58d051743d98a90f86e9e2ab&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="next-steps">Next Steps&lt;/h2>
-&lt;p>After testing out a few REST API calls in Onshape, you should now have a good understanding of the basics. To further explore the potential of using the REST API in Onshape, please check out other sections of this documentation as well.&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="glassworks-api-explorer">Glassworks API Explorer&lt;/h2>
+&lt;p>&lt;strong>IMPORTANT NOTE&lt;/strong>: The documentation in the Glassworks API Explorer reflects the supported interface. Some API calls may, for historical reasons, return additional undocumented fields. Unless the return fields are documented in the API Explorer, you should NOT use them, as they may be removed without warning. Your application should always ignore unexpected or undocumented return data. Onshape reserves the right to add, remove or change any undocumented fields.&lt;/p>
+&lt;p>We document all available REST API endpoints on the Glassworks API Explorer: &lt;a href="https://cad.onshape.com/glassworks/explorer/">https://cad.onshape.com/glassworks/explorer/&lt;/a>. Glassworks also enables you to run API requests directly within its interface with the &lt;strong>Execute&lt;/strong> button and provides the output from the API call!&lt;/p>
+&lt;p>To try an endpoint in Glassworks, follow these steps or follow along with the video below:&lt;/p>
+&lt;ol>
+&lt;li>Open this public Onshape document in your browser: &lt;code>https://cad.onshape.com/documents/58d051743d98a90f86e9e2ab/w/17e0ba65df28e4e72f7f4961/e/4a289bd094a999329a3900af&lt;/code>.&lt;/li>
+&lt;li>Open the Glassworks API Explorer in a new browser tab: &lt;code>https://cad.onshape.com/glassworks/explorer/&lt;/code>
 &lt;ul>
-&lt;li>Other pages in the &lt;a href="">Introduction section&lt;/a> go through more details about Onshape&amp;rsquo;s architecture, which will be beneficial to more advanced use of the REST API, especially on using some of the optional query parameters.&lt;/li>
-&lt;li>The &lt;a href="../apioverview">API Overview section&lt;/a> goes through more details about using the REST API with API keys as a user.&lt;/li>
-&lt;li>The &lt;a href="../oauth">OAuth Integration section&lt;/a> goes through the process of developing an application and integrating it to Onshape.&lt;/li>
+&lt;li>Note: To make calls to an Enterprise Onshape account, make sure to access the Glassworks explorer from &lt;code>https://&amp;lt;companyName&amp;gt;.onshape.com/glassworks/explorer&lt;/code>.&lt;/li>
 &lt;/ul>
-&lt;p>There are also many more other sample projects documented in the &lt;a href="https://github.com/onshape-public">Onshape Public&lt;/a> and the &lt;a href="https://github.com/PTC-Education">PTC Education&lt;/a> GitHub organizations.&lt;/p></description></item><item><title>Docs: Quick Start</title><link>https://onshape-public.github.io/docs/quickstart/</link><pubDate>Mon, 18 May 2020 20:39:14 -0400</pubDate><guid>https://onshape-public.github.io/docs/quickstart/</guid><description>
+&lt;/li>
+&lt;li>Scroll down to &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Document">&lt;strong>Document&lt;/strong>&lt;/a>.&lt;/li>
+&lt;li>Click to expand the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Document/getDocument">&lt;code>getDocument&lt;/code>&lt;/a> endpoint. (Hint: it appears in Glassworks as &lt;code>GET /documents/{did}&lt;/code>).&lt;/li>
+&lt;li>Click &lt;strong>Try it out&lt;/strong>.
+&lt;ul>
+&lt;li>The &lt;strong>Try it out&lt;/strong> button toggles to a &lt;strong>Cancel&lt;/strong> button once selected.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Go back to the public document you opened in Step 2, and copy the document ID from the Onshape URL (&lt;code>58d051743d98a90f86e9e2ab&lt;/code>).&lt;/li>
+&lt;li>Paste the document ID into the &lt;code>did&lt;/code> field in Glassworks.&lt;/li>
+&lt;li>Scroll down and click &lt;strong>Execute&lt;/strong>.&lt;/li>
+&lt;li>Scroll to the bottom of the 200 response body. Glassworks has correctly returned &lt;code>Exercise: Basic Drawing&lt;/code> as the document name.&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://onshape-public.github.io/images/UseGlassworks.gif" alt="imags">&lt;/p></description></item><item><title>Docs: Quick Start</title><link>https://onshape-public.github.io/docs/quickstart/</link><pubDate>Mon, 18 May 2020 20:39:14 -0400</pubDate><guid>https://onshape-public.github.io/docs/quickstart/</guid><description>
 &lt;p>In this example, we will call an Onshape REST API endpoint to send a document name to our console. Please note that the sample shown on this page is only designed to be used as a quick start guide and does not represent a full Onshape application.&lt;/p>
 &lt;h2 id="system-requirements">System Requirements&lt;/h2>
 &lt;ul>
@@ -541,151 +578,7 @@ Legacy support: As we migrate to extension based apps, the old Iframe URL is mov
 &lt;p>Use a tool such as Burp (&lt;a href="https://portswigger.net/burp" target="_blank">&lt;a href="https://portswigger.net/burp">https://portswigger.net/burp&lt;/a>&lt;/a>) or Charles (&lt;a href="http://charlesproxy.com" target="_blank">&lt;a href="http://charlesproxy.com">http://charlesproxy.com&lt;/a>&lt;/a>) to deliberately &amp;lsquo;man-in-the-middle&amp;rsquo; the connection requests between your server and Onshape, and verify that you are performing the correct REST operations (GET vs. POST) and correctly URL encoding the parameter values.&lt;/p>
 &lt;/li>
 &lt;/ol></description></item><item><title>Docs: Associativity</title><link>https://onshape-public.github.io/docs/5-advanced-api-development/associativity/</link><pubDate>Mon, 18 May 2020 20:28:26 -0400</pubDate><guid>https://onshape-public.github.io/docs/5-advanced-api-development/associativity/</guid><description>
-&lt;p>Onshape Associativity for external applications&lt;/p>
-&lt;p>This document describes data structures and APIs that external applications can use to implement associativity.&lt;/p>
-&lt;p>Please address questions, comments and suggestions to &amp;ldquo;&lt;a href="mailto:api-support@onshape.com">api-support@onshape.com&lt;/a>&amp;rdquo; for the fastest response.&lt;/p>
-&lt;h2 id="introduction">Introduction&lt;/h2>
-&lt;p>Onshape data is stored in replicated databases in the cloud. The data model for accessing Parts and Assemblies through the REST API is described here. The model is influenced by the data model used by Git and similar source code repositories.&lt;/p>
-&lt;h2 id="onshape-data-model">Onshape Data Model&lt;/h2>
-&lt;p>&lt;em>Documents&lt;/em> contain &lt;em>Elements&lt;/em>.&lt;/p>
-&lt;p>&lt;em>Elements&lt;/em> are presented as tabs in the user interface. An element can be one of the following types:&lt;/p>
-&lt;ul>
-&lt;li>Part Studio&lt;/li>
-&lt;li>Assembly&lt;/li>
-&lt;li>Blob&lt;/li>
-&lt;li>Application&lt;/li>
-&lt;/ul>
-&lt;p>With some exceptions, all data in a document is stored within an element.&lt;/p>
-&lt;p>&lt;em>Documents&lt;/em> can be branched, creating new &lt;em>Workspaces&lt;/em>.&lt;/p>
-&lt;p>Note that &lt;em>Workspaces&lt;/em> are branches of the entire document. Every change to a document is recorded in the database. The *Document Microversion ID *is an ID that represents the entire state of the document at a point in the history.&lt;/p>
-&lt;p>&lt;em>Workspaces&lt;/em> can be named at a point in time, creating a &lt;em>Version&lt;/em>.&lt;/p>
-&lt;p>&lt;em>Versions&lt;/em> are permanent names that identify the state of a workspace at a point in time. Thus, versions are immutable - changes can be made to a workspace, not to a version.&lt;/p>
-&lt;p>The following table describes what data stored in each &lt;em>Element&lt;/em> type:&lt;/p>
-&lt;table>
-&lt;tr>
-&lt;td>Part Studio&lt;/td>
-&lt;td>Each Part Studio contains exactly one Feature List. The feature list contains Features such as Sketches, Planes, Extrudes, and so on. Each feature contains one or parameters. Onshape is in the process of publishing APIs to provide read and write access to features.
-&lt;p>Whenever the feature list changes, the parametric history is evaluated, causing the model to be regenerated. This results in zero or more parts and surfaces to be created.&lt;/td>&lt;/p>
-&lt;/tr>
-&lt;tr>
-&lt;td>Assembly&lt;/td>
-&lt;td>Each Assembly contains an Assembly Tree, which contains parts and/or other assemblies (sub-assemblies), along with mate information. Onshape provides an API call to retrieve the assembly tree definition.&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Blob&lt;/td>
-&lt;td>Each Blob element contains an uninterpreted binary object that has been uploaded to Onshape, typically from a file. Onshape depends on the browser client to display some blob data (PDF and image data), but does not interpret the data. A blob element can be updated with new data.&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Application&lt;/td>
-&lt;td>Each Application element contains zero or more sub-elements, providing a structured set of transactional data that is defined and managed by an application. A detailed description of the application storage data model is described elsewhere.
-&lt;p>Application data can be displayed in the Onshape tab in an iframe; the application is responsible for rendering the data in the iframe from their server.&lt;/td>&lt;/p>
-&lt;/tr>
-&lt;/table>
-&lt;p>Note that Onshape &lt;em>Drawing&lt;/em> elements are Application elements tagged as managed by Onshape.&lt;/p>
-&lt;p>Documents, Elements, Workspaces, Versions, Microversions, Users and various other data objects are identified by a unique ID. These IDs form the basic building blocks for the Onshape REST API.&lt;/p>
-&lt;p>Tessellated data is not stored persistently in Onshape; it is generated on demand for display by the Onshape clients, or in response to application REST API requests. This data may be cached for performance.&lt;/p>
-&lt;h2 id="git-analogy">Git analogy&lt;/h2>
-&lt;p>The following table identifies Onshape concepts and the corresponding Git concepts. Note that this is not a direct mapping, and the implementation of the concepts is very different.&lt;/p>
-&lt;table>
-&lt;tr>
-&lt;td>Onshape concept&lt;/td>
-&lt;td>Git concept&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Document&lt;/td>
-&lt;td>Repository&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Element&lt;/td>
-&lt;td>File&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Workspace&lt;/td>
-&lt;td>Branch&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Version&lt;/td>
-&lt;td>Tag&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Microversion&lt;/td>
-&lt;td>Commit&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Document Microversion ID&lt;/td>
-&lt;td>SHA&lt;/td>
-&lt;/tr>
-&lt;/table>
-&lt;h2 id="document-data">Document Data&lt;/h2>
-&lt;p>All elements, be them Assemblies, Part Studios, Drawings, or even apps, are history based. Each change to an element or set of elements represents a unique record in the document&amp;rsquo;s history. The document can be restored to that particular state any time in the future. Each record of the document&amp;rsquo;s history has a unique persistent identifier which is called a &lt;strong>Microversion&lt;/strong> id in Onshape.&lt;/p>
-&lt;p>Document data (excluding document metadata) can be changed in the context of only a &lt;strong>Workspace&lt;/strong>. Each workspace represents an independent line of history of the document, i.e. a sorted list of document microversions. A reference to a state of the Workspace can be stored as an immutable &lt;strong>Version&lt;/strong>. New Workspaces can be branched from a Version, to continue document history from the moment the Version was created. One Workspace can be merged into another to combine document changes made in both workspaces. If an app expects the data in the app element to have certain properties, a merge may fail to preserve these properties, leading to an invalid state of that app element.&lt;/p>
-&lt;h3 id="part-studio-data">Part Studio Data&lt;/h3>
-&lt;p>The Part Studio element is defined by a list of features, some of which (e.g. sketch), may have complex internal structure composed of entities. Part Studio features and entities are referenced by unique persistent identifiers. Part Studio features and entities can appear, disappear, and reappear depending on the current microversion of the model.&lt;/p>
-&lt;h3 id="assembly-data">Assembly Data&lt;/h3>
-&lt;p>The Assembly element is defined as a list of assembly features and a tree of subassemblies / part instances. Occurrence id is a unique persistent identifier of an occurrence of a part in the assembly structure.&lt;/p>
-&lt;h3 id="external-application-data">External Application Data&lt;/h3>
-&lt;p>An external application has complete control over how it manages/stores documents, however, to take advantage of the Onshape data model, there is a set of endpoints they should use to store state. These are collectively known as the &amp;lsquo;Application Element API&amp;rsquo;. To learn how to use these elements, read the Application Element API section.&lt;/p>
-&lt;h2 id="model-presentation-data">Model Presentation Data&lt;/h2>
-&lt;p>A valid model definition usually corresponds to a real world manufacturable topology. The topology is represented internally as a set of 3-d, 2-d, 1-d, 0-d entities and a set of relations between them. It can be tessellated into a set of geometric primitives which approximate the shape of the model. Tessellated data can be used for visual representation of the model or other processing related to the shape of the model.&lt;/p>
-&lt;p>Model topology is represented as a set of Parts, Faces, Edges, and Vertices in the API. Each of these has a unique identifier in every state of the model. The identifier represents an encoded index in the model&amp;rsquo;s history journal and its value depends on the structure of the model&amp;rsquo;s history. The value is not guaranteed to be preserved across model changes, and will almost always change if the model changes in significant ways.&lt;/p>
-&lt;p>The following changes in the topological representation can occur between two microversions of the model:&lt;/p>
-&lt;ul>
-&lt;li>New topological entities can appear;&lt;/li>
-&lt;li>Id of existing topology can change;&lt;/li>
-&lt;li>Topological entities can disappear;&lt;/li>
-&lt;li>Existing topological entities can be merged into a single entity;&lt;/li>
-&lt;li>Existing topological entity can be split into multiple entities.&lt;/li>
-&lt;/ul>
-&lt;p>A pair of model microversion and Topology ID can be used to identify topological entities across the model changes. Topology ID defined in a specific microversion can be translated into a set of topology ids in the current microversion of the model. (The Topology ID is sometimes referred to as a Deterministic ID within Onshape, and is exposed in specific API calls as Part ID, Face ID, and so on).&lt;/p>
-&lt;p>The following table contains a summary of Topology IDs exposed through Onshape REST APIs. The details of the API calls are documented in the Glassworks API Explorer.&lt;/p>
-&lt;table>
-&lt;tr>
-&lt;td>Topology ID&lt;/td>
-&lt;td>REST API&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Part ID&lt;/td>
-&lt;td>/partstudio/d/:did/[wvm]/:wvm/e/:eid/bodydetails
-/partstudio/d/:did/[wvm]/:wvm/e/:eid/tessellatededges
-/partstudio/d/:did/[wvm]/:wvm/e/:eid/tessellatedfaces
-/partstudio/d/:did/[wvm]/:wvm/e/:eid/partid/:partid/shadedviews
-/partstudio/d/:did/[wvm]/:wvm/e/:eid/partid/:partid/boundingboxes
-/partstudios/d/:did/w/:w/e/:eid/metadata
-/parts/d/:did/[wvm]/:wvm/e/:eid/bodydetails
-/parts/d/:did/[wvm]/:wvm/e/:eid/tessellatededges
-/parts/d/:did/[wvm]/:wvm/e/:eid/tessellatedfaces
-/parts/d/:did/[wvm]/:wvm/e/:eid/partid/:partid/shadedviews
-/parts/d/:did/[wvm]/:wvm/e/:eid/partid/:partid/boundingboxes
-/parts/d/:did/w/:w/e/:eid/metadata
-/parts/d/:did/w/:w/e/:eid
-/assemblies/d/:did/w/:wvm/e/:eid
-/parts/d/:did/[wvm]/:wvm/e/:eid/partid/:partid/parasolid
-/parts/d/:did/[wvm]/:wvm/e/:eid/partid/:partid/stl&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Face ID&lt;/td>
-&lt;td>/partstudios/d/:did/[wvm]/:wvm/e/:eid/bodydetails
-/partstudios/d/:did/[wvm]/:wvm/e/:eid/tessellatedfaces
-/partstudios/d/:did/[wvm]/:wvm/e/:eid/tessellatededges
-/part/d/:did/[wvm]/:wvm/e/:eid/bodydetails
-/part/d/:did/[wvm]/:wvm/e/:eid/tessellatedfaces
-/part/d/:did/[wvm]/:wvm/e/:eid/tessellatededges&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Edge ID&lt;/td>
-&lt;td>/partstudios/d/:did/[wvm]/:wvm/e/:eid/bodydetails
-/partstudios/d/:did/[wvm]/:wvm/e/:eid/tessellatededges
-/parts/d/:did/[wvm]/:wvm/e/:eid/bodydetails
-/parts/d/:did/[wvm]/:wvm/e/:eid/tessellatededges&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Vertex ID&lt;/td>
-&lt;td>/partstudios/d/:did/[wvm]/:wvm/e/:eid/bodydetails
-/parts/d/:did/[wvm]/:wvm/e/:eid/bodydetails&lt;/td>
-&lt;/tr>
-&lt;/table>
-&lt;h2 id="associativity">Associativity&lt;/h2>
-&lt;p>The key to understanding associativity in Onshape is to recognize that Onshape does not expose a persistent ID for any of these entities. When the model changes, the ID may change. Therefore, Onshape provides an API that allows you map IDs from a previous microversion to the current microversion. Assuming a simple case of maintaining associativity for a face, an abstract workflow might be:&lt;/p>
+&lt;p>Onshape does not expose a persistent ID for any of these entities. When the model changes, the ID may change. Therefore, Onshape provides an API to enable mapping IDs from a previous microversion to the current microversion. Assuming a simple case of maintaining associativity for a face, an abstract workflow might be:&lt;/p>
 &lt;ol>
 &lt;li>Read the tessellated model data.&lt;/li>
 &lt;li>Select the face of interest.&lt;/li>
@@ -694,89 +587,92 @@ Legacy support: As we migrate to extension based apps, the old Iframe URL is mov
 &lt;li>Call the REST API to translate from the known Face ID to an ID in the new model.&lt;/li>
 &lt;li>Re-apply application-specific data to the face(s) in the new model. Note that a face may become zero, one or multiple faces in the new model, depending on what changes the user made.&lt;/li>
 &lt;/ol>
-&lt;p>The following example shows the sequence of API calls.&lt;/p>
-&lt;h3 id="associativity-example">Associativity Example&lt;/h3>
+&lt;h2 id="associativity-example">Associativity Example&lt;/h2>
 &lt;ol>
-&lt;li>Create a unit length [cube]:
+&lt;li>Create a cube in Onshape:&lt;/br>
 &lt;img src="https://onshape-public.github.io/images/associativityimage03.png" alt="image alt text">&lt;/li>
-&lt;li>Get document microversion (&lt;code>https://cad.onshape.com/api/documents/d/&amp;lt;docid&amp;gt;/w/&amp;lt;wid&amp;gt;/microversion&lt;/code>).
-Use the appropriate REST API to get the tessellated faces &lt;code>https://cad.onshape.com/api/partstudios/d/&amp;lt;docid&amp;gt;/w/&amp;lt;wid&amp;gt;/e/&amp;lt;eid&amp;gt;/tessellatedfaces&lt;/code>
-and edges &lt;code>https://cad.onshape.com/api/partstudios/d/&amp;lt;docid&amp;gt;/w/&amp;lt;wid&amp;gt;/e/&amp;lt;eid&amp;gt;/tessellatededges&lt;/code>. Note the ids:&lt;/li>
-&lt;/ol>
+&lt;li>Get the document microversion ID from the URL: &lt;code>https://cad.onshape.com/api/documents/d/&amp;lt;docid&amp;gt;/w/&amp;lt;wid&amp;gt;/microversionId&lt;/code>.&lt;/li>
+&lt;li>Use the appropriate REST API to get the tessellated faces (&lt;code>getPartStudioFaces&lt;/code>)
+and edges (&lt;code>getPartStudioEdges&lt;/code>}. Note the ids:
 &lt;ul>
-&lt;li>Part Id : &amp;ldquo;JHD&amp;rdquo;;&lt;/li>
-&lt;li>Front face Id : &amp;ldquo;JHO&amp;rdquo;;&lt;/li>
-&lt;li>Top edge of the front face Id : &amp;ldquo;JHd&amp;rdquo;;&lt;/li>
-&lt;li>Right edge of the top face Id : &amp;ldquo;JHt&amp;rdquo;.&lt;/li>
+&lt;li>Part ID: &lt;code>JHD&lt;/code>&lt;/li>
+&lt;li>Front face ID: &lt;code>JHO&lt;/code>&lt;/li>
+&lt;li>Top edge of the front face ID: &lt;code>JHd&lt;/code>&lt;/li>
+&lt;li>Right edge of the top face ID: &lt;code>JHt&lt;/code>&lt;/li>
 &lt;/ul>
-&lt;ol start="3">
-&lt;li>Split cube with the [&amp;ldquo;Front&amp;rdquo; plane], translate ids:&lt;/li>
+&lt;/li>
+&lt;li>Split cube with the Front plane and translate the IDs:&lt;/li>
 &lt;/ol>
 &lt;p>&lt;img src="https://onshape-public.github.io/images/associativityimage00.png" alt="image alt text">&lt;/p>
-&lt;p>&lt;strong>POST&lt;/strong> &lt;code>https://cad.onshape.com/api/partstudios/d/&amp;lt;docid&amp;gt;/w/&amp;lt;wid&amp;gt;/e/&amp;lt;eid&amp;gt;/idtranslations&lt;/code>&lt;/p>
-&lt;p>&lt;strong>Body&lt;/strong>:&lt;/p>
-&lt;pre tabindex="0">&lt;code>{
-&amp;#34;sourceDocumentMicroversion&amp;#34; : &amp;#34;47e75ab2ee8b4356a76ebd47&amp;#34;,
-&amp;#34;ids&amp;#34; : [&amp;#34;JHD&amp;#34;, &amp;#34;JHO&amp;#34;, &amp;#34;JHd&amp;#34;, &amp;#34;JHt&amp;#34; ]
-}
-&lt;/code>&lt;/pre>&lt;p>&lt;strong>Response&lt;/strong>:&lt;/p>
-&lt;pre tabindex="0">&lt;code>{
-&amp;#34;documentId&amp;#34;: &amp;#34;748d6e850c9248328189922b&amp;#34;,
-&amp;#34;elementId&amp;#34;: &amp;#34;042a6fa54e79451e8076463d&amp;#34;,
-&amp;#34;sourceDocumentMicroversion&amp;#34;: &amp;#34;47e75ab2ee8b4356a76ebd47&amp;#34;,
-&amp;#34;ids&amp;#34;: [
-{ &amp;#34;source&amp;#34;: &amp;#34;JHD&amp;#34;, &amp;#34;status&amp;#34;: &amp;#34;SPLIT&amp;#34;, &amp;#34;target&amp;#34;: [&amp;#34;JID&amp;#34;, &amp;#34;JIH&amp;#34;] },
-{ &amp;#34;source&amp;#34;: &amp;#34;JHO&amp;#34;, &amp;#34;status&amp;#34;: &amp;#34;OK&amp;#34;, &amp;#34;target&amp;#34;: [&amp;#34;JHO&amp;#34;] },
-{ &amp;#34;source&amp;#34;: &amp;#34;JHd&amp;#34;, &amp;#34;status&amp;#34;: &amp;#34;OK&amp;#34;, &amp;#34;target&amp;#34;: [&amp;#34;JHd&amp;#34;] },
-{ &amp;#34;source&amp;#34;: &amp;#34;JHt&amp;#34;, &amp;#34;status&amp;#34;: &amp;#34;SPLIT&amp;#34;, &amp;#34;target&amp;#34;: [&amp;#34;JI5&amp;#34;, &amp;#34;JI9&amp;#34;] }
-],
-&amp;#34;targetDocumentMicroversion&amp;#34;: &amp;#34;78bc7f3fcf82475085c2f3ab&amp;#34;
-4. Delete one of the [parts], translate ids:
-![image alt text](/images/associativityimage01.png)
-**POST** `https://cad.onshape.com/api/partstudios/d/&amp;lt;docid&amp;gt;/w/&amp;lt;wid&amp;gt;/e/&amp;lt;eid&amp;gt;/idtranslations`
-**Body**:
-&lt;/code>&lt;/pre>&lt;p>{
-&amp;ldquo;sourceDocumentMicroversion&amp;rdquo; : &amp;ldquo;47e75ab2ee8b4356a76ebd47&amp;rdquo;,
-&amp;ldquo;ids&amp;rdquo; : [&amp;ldquo;JHD&amp;rdquo;, &amp;ldquo;JHO&amp;rdquo;, &amp;ldquo;JHd&amp;rdquo;, &amp;ldquo;JHt&amp;rdquo;]
-}&lt;/p>
-&lt;pre tabindex="0">&lt;code>
-**Response**:
-&lt;/code>&lt;/pre>&lt;p>{
-&amp;ldquo;documentId&amp;rdquo;: &amp;ldquo;748d6e850c9248328189922b&amp;rdquo;,
-&amp;ldquo;elementId&amp;rdquo;: &amp;ldquo;042a6fa54e79451e8076463d&amp;rdquo;,
-&amp;ldquo;sourceDocumentMicroversion&amp;rdquo;: &amp;ldquo;47e75ab2ee8b4356a76ebd47&amp;rdquo;,
-&amp;ldquo;ids&amp;rdquo;: [
-{ &amp;ldquo;source&amp;rdquo;: &amp;ldquo;JHD&amp;rdquo;, &amp;ldquo;status&amp;rdquo;: &amp;ldquo;OK&amp;rdquo;, &amp;ldquo;target&amp;rdquo;: [&amp;ldquo;JID&amp;rdquo;] },
-{ &amp;ldquo;source&amp;rdquo;: &amp;ldquo;JHO&amp;rdquo;, &amp;ldquo;status&amp;rdquo;: &amp;ldquo;FAILED_TO_RESOLVE&amp;rdquo;, &amp;ldquo;target&amp;rdquo;: [] },
-{ &amp;ldquo;source&amp;rdquo;: &amp;ldquo;JHd&amp;rdquo;, &amp;ldquo;status&amp;rdquo;: &amp;ldquo;FAILED_TO_RESOLVE&amp;rdquo;, &amp;ldquo;target&amp;rdquo;: [] },
-{ &amp;ldquo;source&amp;rdquo;: &amp;ldquo;JHt&amp;rdquo;, &amp;ldquo;status&amp;rdquo;: &amp;ldquo;OK&amp;rdquo;, &amp;ldquo;target&amp;rdquo;: [&amp;ldquo;JI5&amp;rdquo;] }
-],
-&amp;ldquo;targetDocumentMicroversion&amp;rdquo;: &amp;ldquo;52aa74d34b624f3aaef33204&amp;rdquo;
-}&lt;/p>
-&lt;pre tabindex="0">&lt;code>
-5. Rollback delete and [split], translate ids:
-![image alt text](/images/associativityimage02.png)
-**POST** `https://cad.onshape.com/api/partstudios/d/&amp;lt;docid&amp;gt;/w/&amp;lt;wid&amp;gt;/e/&amp;lt;eid&amp;gt;/idtranslations`
-**Body**:
-&lt;/code>&lt;/pre>&lt;p>{
-&amp;ldquo;sourceDocumentMicroversion&amp;rdquo; : &amp;ldquo;47e75ab2ee8b4356a76ebd47&amp;rdquo;,
-&amp;ldquo;ids&amp;rdquo; : [&amp;ldquo;JHD&amp;rdquo;, &amp;ldquo;JHO&amp;rdquo;, &amp;ldquo;JHd&amp;rdquo;, &amp;ldquo;JHt&amp;rdquo;]
-}&lt;/p>
-&lt;pre tabindex="0">&lt;code>
-**Response**:
-&lt;/code>&lt;/pre>&lt;p>{
-&amp;ldquo;documentId&amp;rdquo;: &amp;ldquo;748d6e850c9248328189922b&amp;rdquo;,
-&amp;ldquo;elementId&amp;rdquo;: &amp;ldquo;042a6fa54e79451e8076463d&amp;rdquo;,
-&amp;ldquo;sourceDocumentMicroversion&amp;rdquo;: &amp;ldquo;47e75ab2ee8b4356a76ebd47&amp;rdquo;,
-&amp;ldquo;ids&amp;rdquo;: [
-{ &amp;ldquo;source&amp;rdquo;: &amp;ldquo;JHD&amp;rdquo;, &amp;ldquo;status&amp;rdquo;: &amp;ldquo;OK&amp;rdquo;, &amp;ldquo;target&amp;rdquo;: [&amp;ldquo;JID&amp;rdquo;] },
-{ &amp;ldquo;source&amp;rdquo;: &amp;ldquo;JHO&amp;rdquo;, &amp;ldquo;status&amp;rdquo;: &amp;ldquo;OK&amp;rdquo;, &amp;ldquo;target&amp;rdquo;: [&amp;ldquo;JHO&amp;rdquo;] },
-{ &amp;ldquo;source&amp;rdquo;: &amp;ldquo;JHd&amp;rdquo;, &amp;ldquo;status&amp;rdquo;: &amp;ldquo;OK&amp;rdquo;, &amp;ldquo;target&amp;rdquo;: [&amp;ldquo;JHd&amp;rdquo;] },
-{ &amp;ldquo;source&amp;rdquo;: &amp;ldquo;JHt&amp;rdquo;, &amp;ldquo;status&amp;rdquo;: &amp;ldquo;OK&amp;rdquo;, &amp;ldquo;target&amp;rdquo;: [&amp;ldquo;JHt&amp;rdquo;] }
-],
-&amp;ldquo;targetDocumentMicroversion&amp;rdquo;: &amp;ldquo;52aa74d34b624f3aaef33204&amp;rdquo;
-}&lt;/p>
-&lt;pre tabindex="0">&lt;code>&lt;/code>&lt;/pre></description></item><item><title>Docs: Billing</title><link>https://onshape-public.github.io/docs/5-advanced-api-development/billing/</link><pubDate>Mon, 18 May 2020 20:29:36 -0400</pubDate><guid>https://onshape-public.github.io/docs/5-advanced-api-development/billing/</guid><description>
+&lt;p>&lt;strong>POST&lt;/strong>&lt;/p>
+&lt;pre tabindex="0">&lt;code>https://cad.onshape.com/api/partstudios/d/&amp;lt;docid&amp;gt;/w/&amp;lt;wid&amp;gt;/e/&amp;lt;eid&amp;gt;/idtranslations
+&lt;/code>&lt;/pre>&lt;p>&lt;strong>Body&lt;/strong>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;sourceDocumentMicroversion&amp;#34;&lt;/span> : &lt;span style="color:#a50">&amp;#34;47e75ab2ee8b4356a76ebd47&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;ids&amp;#34;&lt;/span> : [&lt;span style="color:#a50">&amp;#34;JHD&amp;#34;&lt;/span>, &lt;span style="color:#a50">&amp;#34;JHO&amp;#34;&lt;/span>, &lt;span style="color:#a50">&amp;#34;JHd&amp;#34;&lt;/span>, &lt;span style="color:#a50">&amp;#34;JHt&amp;#34;&lt;/span> ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Response&lt;/strong>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;documentId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;748d6e850c9248328189922b&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;elementId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;042a6fa54e79451e8076463d&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;sourceDocumentMicroversion&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;47e75ab2ee8b4356a76ebd47&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;ids&amp;#34;&lt;/span>: [
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;source&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;JHD&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;status&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;SPLIT&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;target&amp;#34;&lt;/span>: [&lt;span style="color:#a50">&amp;#34;JID&amp;#34;&lt;/span>, &lt;span style="color:#a50">&amp;#34;JIH&amp;#34;&lt;/span>] },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;source&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;JHO&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;status&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;OK&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;target&amp;#34;&lt;/span>: [&lt;span style="color:#a50">&amp;#34;JHO&amp;#34;&lt;/span>] },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;source&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;JHd&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;status&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;OK&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;target&amp;#34;&lt;/span>: [&lt;span style="color:#a50">&amp;#34;JHd&amp;#34;&lt;/span>] },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;source&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;JHt&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;status&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;SPLIT&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;target&amp;#34;&lt;/span>: [&lt;span style="color:#a50">&amp;#34;JI5&amp;#34;&lt;/span>, &lt;span style="color:#a50">&amp;#34;JI9&amp;#34;&lt;/span>] }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;targetDocumentMicroversion&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;78bc7f3fcf82475085c2f3ab&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
+&lt;li>Delete one of the parts, and translate the IDs:&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://onshape-public.github.io/images/associativityimage01.png" alt="image alt text">&lt;/p>
+&lt;p>&lt;strong>POST&lt;/strong>&lt;/p>
+&lt;pre tabindex="0">&lt;code>https://cad.onshape.com/api/partstudios/d/&amp;lt;docid&amp;gt;/w/&amp;lt;wid&amp;gt;/e/&amp;lt;eid&amp;gt;/idtranslations
+&lt;/code>&lt;/pre>&lt;p>&lt;strong>Body&lt;/strong>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;sourceDocumentMicroversion&amp;#34;&lt;/span> : &lt;span style="color:#a50">&amp;#34;47e75ab2ee8b4356a76ebd47&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;ids&amp;#34;&lt;/span> : [&lt;span style="color:#a50">&amp;#34;JHD&amp;#34;&lt;/span>, &lt;span style="color:#a50">&amp;#34;JHO&amp;#34;&lt;/span>, &lt;span style="color:#a50">&amp;#34;JHd&amp;#34;&lt;/span>, &lt;span style="color:#a50">&amp;#34;JHt&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Response&lt;/strong>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;documentId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;748d6e850c9248328189922b&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;elementId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;042a6fa54e79451e8076463d&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;sourceDocumentMicroversion&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;47e75ab2ee8b4356a76ebd47&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;ids&amp;#34;&lt;/span>: [
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;source&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;JHD&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;status&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;OK&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;target&amp;#34;&lt;/span>: [&lt;span style="color:#a50">&amp;#34;JID&amp;#34;&lt;/span>] },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;source&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;JHO&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;status&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;FAILED_TO_RESOLVE&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;target&amp;#34;&lt;/span>: [] },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;source&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;JHd&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;status&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;FAILED_TO_RESOLVE&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;target&amp;#34;&lt;/span>: [] },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;source&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;JHt&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;status&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;OK&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;target&amp;#34;&lt;/span>: [&lt;span style="color:#a50">&amp;#34;JI5&amp;#34;&lt;/span>] }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;targetDocumentMicroversion&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;52aa74d34b624f3aaef33204&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="5">
+&lt;li>Roll back the delete and the split, and translate the IDs:&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://onshape-public.github.io/images/associativityimage02.png" alt="image alt text">&lt;/p>
+&lt;p>&lt;strong>POST&lt;/strong>&lt;/p>
+&lt;pre tabindex="0">&lt;code>https://cad.onshape.com/api/partstudios/d/&amp;lt;docid&amp;gt;/w/&amp;lt;wid&amp;gt;/e/&amp;lt;eid&amp;gt;/idtranslations
+&lt;/code>&lt;/pre>&lt;p>&lt;strong>Body&lt;/strong>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;sourceDocumentMicroversion&amp;#34;&lt;/span> : &lt;span style="color:#a50">&amp;#34;47e75ab2ee8b4356a76ebd47&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;ids&amp;#34;&lt;/span> : [&lt;span style="color:#a50">&amp;#34;JHD&amp;#34;&lt;/span>, &lt;span style="color:#a50">&amp;#34;JHO&amp;#34;&lt;/span>, &lt;span style="color:#a50">&amp;#34;JHd&amp;#34;&lt;/span>, &lt;span style="color:#a50">&amp;#34;JHt&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Response&lt;/strong>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;documentId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;748d6e850c9248328189922b&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;elementId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;042a6fa54e79451e8076463d&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;sourceDocumentMicroversion&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;47e75ab2ee8b4356a76ebd47&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;ids&amp;#34;&lt;/span>: [
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;source&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;JHD&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;status&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;OK&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;target&amp;#34;&lt;/span>: [&lt;span style="color:#a50">&amp;#34;JID&amp;#34;&lt;/span>] },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;source&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;JHO&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;status&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;OK&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;target&amp;#34;&lt;/span>: [&lt;span style="color:#a50">&amp;#34;JHO&amp;#34;&lt;/span>] },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;source&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;JHd&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;status&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;OK&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;target&amp;#34;&lt;/span>: [&lt;span style="color:#a50">&amp;#34;JHd&amp;#34;&lt;/span>] },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;source&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;JHt&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;status&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;OK&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;target&amp;#34;&lt;/span>: [&lt;span style="color:#a50">&amp;#34;JHt&amp;#34;&lt;/span>] }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;targetDocumentMicroversion&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;52aa74d34b624f3aaef33204&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Billing</title><link>https://onshape-public.github.io/docs/5-advanced-api-development/billing/</link><pubDate>Mon, 18 May 2020 20:29:36 -0400</pubDate><guid>https://onshape-public.github.io/docs/5-advanced-api-development/billing/</guid><description>
 &lt;p>This document describes APIs that will allow partners to interact with the Onshape billing system.&lt;/p>
 &lt;p>Please address questions to &amp;ldquo;&lt;a href="mailto:api-support@onshape.com">api-support@onshape.com&lt;/a>&amp;rdquo; for the fastest response.&lt;/p>
 &lt;h2 id="overview">Overview&lt;/h2>
@@ -3998,7 +3894,298 @@ delivery to fail.&lt;/p>
 &amp;#34;documentId&amp;#34;: &amp;#34;0f9c4392e5934f30b48ab645&amp;#34;,
 &amp;#34;commentId&amp;#34;: &amp;#34;567953d60a1a5fbb95940333&amp;#34;
 }
-&lt;/code>&lt;/pre></description></item><item><title>Docs: Changelog</title><link>https://onshape-public.github.io/docs/7-reference/changelog/</link><pubDate>Fri, 19 May 2023 10:30:00 -0400</pubDate><guid>https://onshape-public.github.io/docs/7-reference/changelog/</guid><description>
+&lt;/code>&lt;/pre></description></item><item><title>Docs: Onshape Architecture</title><link>https://onshape-public.github.io/docs/7-reference/architecture/</link><pubDate>Mon, 18 May 2020 20:42:57 -0400</pubDate><guid>https://onshape-public.github.io/docs/7-reference/architecture/</guid><description>
+&lt;p>When you start a design in Onshape, you typically create a document. The document is the container that includes all the content related to a specific design. All data in an Onshape document is stored in Elements (represented as tabs in the user interface). See the &lt;a href="https://onshape-public.github.io/docs/introduction">Introduction&lt;/a> page for information on how documents, workspaces, and elements are assembled into a URL.&lt;/p>
+&lt;p>Typically, Part Studios and Assemblies are two of the most common element types that a design requires. Throughout the design process, you may also find creating versions to be useful for product development management while working on the “Main” workspace. More details can be found here: &lt;a href="https://onshape-public.github.io/docs/5-advanced-api-development/associativity">Associativity&lt;/a>.&lt;/p>
+&lt;h2 id="elements">Elements&lt;/h2>
+&lt;p>All data in an Onshape document is stored in Elements (represented as tabs in the user interface). Onshape documents contain five kinds of elements:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Part Studio&lt;/strong>: Contains zero or more parts&lt;/li>
+&lt;li>&lt;strong>Assembly&lt;/strong>: Contains zero or more parts or assemblies&lt;/li>
+&lt;li>&lt;strong>Blob&lt;/strong> (Binary Large OBject): This can be data provided by a partner or by the end user. For example, the user can upload a PDF file, an image, or a text file. Partner applications can store arbitrary data, but we recommend using the structured storage available in an Application element for better integration.&lt;/li>
+&lt;li>&lt;strong>Application&lt;/strong>: An element that presents an IFrame to the user. The user interface in the IFrame is managed by a server that can be provided by a third-party. Note that Onshape Drawings are a special case of an application element.&lt;/li>
+&lt;li>&lt;strong>Feature Studio&lt;/strong>: This element contains the definition of Onshape Features, which are defined in FeatureScript.&lt;/li>
+&lt;/ul>
+&lt;h2 id="workspaces-versions-and-microversions">Workspaces, Versions, and Microversions&lt;/h2>
+&lt;p>A document is stored in Onshape as a collection of changes.&lt;/p>
+&lt;ul>
+&lt;li>You can think of a &lt;strong>workspace&lt;/strong> as a branch of the document, similar to a branch in a source control system. Documents can be branched to create new workspaces.&lt;/li>
+&lt;li>Each individual change to the document creates a new document &lt;strong>microversion&lt;/strong>. As the document is edited, changes are applied to the active workspace, creating new microversions.&lt;/li>
+&lt;li>Periodically, the user may designate versions of the document. A &lt;strong>version&lt;/strong> is a named snapshot of the entire document at some point in time (that is, at some microversion).&lt;/li>
+&lt;/ul>
+&lt;p>You cannot change a version or microversion of a document; all changes are applied to a workspace (and create a new microversion). Thus, while in general the &lt;code>GET&lt;/code> methods of the API can read from a version, microversion, or workspace, the &lt;code>POST&lt;/code> methods generally require a workspace, and create a new microversion when data is written to the document. (An exception is that it is possible to set metadata within a version; this does not create a new microversion).&lt;/p>
+&lt;p>The following IDs are used by many of the APIs. Each ID (except for Geometry IDs such as Part, Face and Edge) is a 24-character string that is used internally by Onshape to uniquely identify the resource. The Geometry IDs are variable-length strings used to resolve to a specific geometric entity within a model.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>ID&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;strong>User ID&lt;/strong>&lt;/td>
+&lt;td>Identifies a single user.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Document ID&lt;/strong>&lt;/td>
+&lt;td>The Document ID identifies a document. The logged-in user must be able to access the requested document for the API to succeed.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Workspace ID&lt;/strong>&lt;/td>
+&lt;td>The Workspace ID identifies a workspace within the document. Workspaces are used to distinguish between different branches of the document.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Version ID&lt;/strong>&lt;/td>
+&lt;td>The Version ID identifies a specific named version.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Microversion ID&lt;/strong>&lt;/td>
+&lt;td>The Microversion ID identifies an internal revision of the document.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Element ID&lt;/strong>&lt;/td>
+&lt;td>The Element ID identifies an element within the document.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Part ID &lt;/br> Face ID &lt;/br> Edge ID&lt;/strong>&lt;/td>
+&lt;td>The Part ID identifies a part within a part studio. The Part ID should generally not be stored for long-term use, as it is only expected to be valid during the course of a session. Note that a Part ID may reference a part that no longer exists if the model is changed, so it is best to specify a Version or Microversion to pick the context for the Part ID. Note that even with the Version or Microversion, internal changes to the Onshape system may result in the Part ID changing. Therefore, Onshape provides mechanisms for maintaining persistent references. See the &lt;a href="https://onshape-public.github.io/docs/5-advanced-api-development/associativity">Associativity&lt;/a> page for more information. Face and Edge IDs are used in similar ways, and will be documented in further detail.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="linked-documents">Linked Documents&lt;/h2>
+&lt;p>Although a document can contain a complex model tree involving many Part Studio and Assembly elements, it is often more efficient to split the content into multiple documents. Connections between the documents are always made from a document referring to a specific version of the target document. Once a version of a document is used as the target of a linked document, that document version will be preserved as long as any document references it, even if the containing document is deleted. Additionally, any user that has access to the referring document will have limited read access to the target document, regardless of what permissions are currently on the target document.&lt;/p>
+&lt;h2 id="configurations">Configurations&lt;/h2>
+&lt;p>Onshape Part Studios may be constructed to be configurable using Onshape Configurations. API calls that reference Part Studios (primarily within the Parts and Part Studios APIs) often accept a &lt;code>configuration&lt;/code> parameter that identifies what specific configuration of the Part Studios is being referenced. When not specified, the API implementation will typically use the configuration that is currently selected within the Part Studio, which means that an interactive ad-hoc API call will often behave as you expect, but might not behave consistently in an application, so be sure to specify the configuration parameter where applicable.&lt;/p>
+&lt;h2 id="onshape-data-model">Onshape Data Model&lt;/h2>
+&lt;p>Onshape data is stored in replicated databases in the cloud. The data model for accessing Parts and Assemblies through the REST API is described here. The model is influenced by the data model used by Git and similar source code repositories.&lt;/p>
+&lt;p>Documents contain &lt;strong>elements&lt;/strong>. Elements are presented as tabs in the user interface. With some exceptions, all data in a document is stored within an element. The following table describes what data stored in each Element type:&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Element Type&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;strong>Part Studio&lt;/strong>&lt;/td>
+&lt;td>Each Part Studio contains exactly one Feature List. The feature list contains Features such as Sketches, Planes, Extrudes, etc. Each feature contains one or parameters. Whenever the feature list changes, the parametric history is evaluated, causing the model to be regenerated. This results in zero or more parts and surfaces to be created.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Assembly&lt;/strong>&lt;/td>
+&lt;td>Each Assembly contains an Assembly Tree, which contains parts and/or other assemblies (sub-assemblies), along with mate information. Onshape provides an API call to retrieve the assembly tree definition.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Blob&lt;/strong>&lt;/td>
+&lt;td>Each Blob element contains an uninterpreted binary object that has been uploaded to Onshape, typically from a file. Onshape depends on the browser client to display some blob data (PDF and image data), but does not interpret the data. A blob element can be updated with new data.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Application&lt;/strong>&lt;/td>
+&lt;td>Each Application element contains zero or more sub-elements, providing a structured set of transactional data that is defined and managed by an application. A detailed description of the application storage data model is described elsewhere. Application data can be displayed in the Onshape tab in an iframe; the application is responsible for rendering the data in the iframe from their server.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>Note that Onshape Drawing elements are Application elements tagged as managed by Onshape.&lt;/p>
+&lt;p>Tessellated data is not stored persistently in Onshape; it is generated on demand for display by the Onshape clients, or in response to application REST API requests. This data may be cached for performance.&lt;/p>
+&lt;p>The following table identifies Onshape concepts and the corresponding Git concepts. Note that this is not a direct mapping, and the implementation of the concepts is very different.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Onshape concept&lt;/th>
+&lt;th>Git concept&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Document&lt;/td>
+&lt;td>Repository&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Element&lt;/td>
+&lt;td>File&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Workspace&lt;/td>
+&lt;td>Branch&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Version&lt;/td>
+&lt;td>Tag&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Microversion&lt;/td>
+&lt;td>Commit&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="document-data">Document Data&lt;/h3>
+&lt;p>All elements, including Assemblies, Part Studios, Drawings, or even apps, are history based. Each change to an element or set of elements represents a unique record in the document’s history, known as a microversion. The document can be restored to that particular state any time in the future.&lt;/p>
+&lt;h3 id="part-studio-data">Part Studio Data&lt;/h3>
+&lt;p>The Part Studio element is defined by a list of features, some of which (e.g., a sketch), may have a complex internal structure composed of entities. Part Studio features and entities are referenced by unique persistent identifiers. Part Studio features and entities can appear, disappear, and reappear depending on the current microversion of the model.&lt;/p>
+&lt;h3 id="assembly-data">Assembly Data&lt;/h3>
+&lt;p>The Assembly element is defined as a list of assembly features and a tree of subassemblies/part instances. Occurrence ID is a unique persistent identifier of an occurrence of a part in the assembly structure.&lt;/p>
+&lt;h3 id="external-application-data">External Application Data&lt;/h3>
+&lt;p>An external application has complete control over how it manages/stores documents, however, to take advantage of the Onshape data model, there is a set of endpoints they should use to store state. These are collectively known as the AppElement API.&lt;/p>
+&lt;h3 id="model-presentation-data">Model Presentation Data&lt;/h3>
+&lt;p>A valid model definition usually corresponds to a real world manufacturable topology. The topology is represented internally as a set od Parts, Faces, Edges, and Vertices and a set of relations between them. It can be tessellated into a set of geometric primitives, which approximate the shape of the model. Tessellated data can be used for visual representation of the model or other processing related to the shape of the model.&lt;/p>
+&lt;p>Model topology is represented as a set of Parts, Faces, Edges, and Vertices in the API. Each of these has a unique identifier in every state of the model. The identifier represents an encoded index in the model’s history journal and its value depends on the structure of the model’s history. The value is not guaranteed to be preserved across model changes, and will almost always change if the model changes in significant ways.&lt;/p>
+&lt;p>The following changes in the topological representation can occur between two microversions of the model:&lt;/p>
+&lt;ul>
+&lt;li>New topological entities can appear&lt;/li>
+&lt;li>Id of existing topology can change&lt;/li>
+&lt;li>Topological entities can disappear&lt;/li>
+&lt;li>Existing topological entities can be merged into a single entity&lt;/li>
+&lt;li>Existing topological entity can be split into multiple entities&lt;/li>
+&lt;/ul>
+&lt;p>A pair of model microversion and Topology ID can be used to identify topological entities across the model changes. Topology ID defined in a specific microversion can be translated into a set of topology ids in the current microversion of the model. (The Topology ID is sometimes referred to as a Deterministic ID within Onshape, and is exposed in specific API calls as Part ID, Face ID, and so on). See the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio">PartStudio APIs&lt;/a> to see what topology IDs are exposed through the API.&lt;/p>
+&lt;h2 id="application-interaction">Application Interaction&lt;/h2>
+&lt;p>The primary APIs provided by Onshape are REST interfaces that are accessed over HTTPS. The client can be a web server or a desktop application (including command line tools such as curl). Onshape does not support use of the APIs directly from a browser client due to cross-domain scripting concerns.&lt;/p>
+&lt;p>Partner applications typically interact with Onshape in three ways:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>File Exchange&lt;/strong>: Onshape provides extensive import and export translation capabilities to interact with applications that can read or write a variety of file formats.&lt;/li>
+&lt;li>&lt;strong>Live Link Integration&lt;/strong>: Desktop or server applications can use REST calls to read information from the Onshape servers, and store information back. These applications can gain “cloud value” by using Onshape data management capabilities for sharing, versioning, and durability.&lt;/li>
+&lt;li>&lt;strong>In-Tab Integration&lt;/strong>: Web server applications can create a tightly integrated experience within Onshape by using a combination of REST and client-side APIs to build a seamless interaction by interacting with users inside an Onshape tab.&lt;/li>
+&lt;/ul>
+&lt;p>The following diagram illustrates basic desktop integration and cloud integration architecture. The REST, WebHook and Client POST messages are documented in this and additional API documents.&lt;/p>
+&lt;p>&lt;img src="https://onshape-public.github.io/images/apioverviewimage00.png" alt="images">&lt;/p>
+&lt;p>The Onshape Server Stack consists of a number of cooperating servers that provide the underlying support for the Onshape CAD experience. The Onshape servers are built with a variety of technologies, including Java and C++, database and message services, geometry and constraint management systems, and much more.&lt;/p>
+&lt;p>Partner cloud applications can be written in any web framework. Onshape provides a set of samples in Github. Onshape is also planning to provide a library that simplifies desktop application development. The user interface code that runs in the Onshape browser client is written in Javascript.&lt;/p>
+&lt;p>You may notice that this diagram does not illustrate the Onshape mobile clients for iOS and Android devices; the development of 3rd-party mobile applications for Onshape is beyond the scope of this page.&lt;/p></description></item><item><title>Docs: Testing Guidelines</title><link>https://onshape-public.github.io/docs/7-reference/testingguidelines/</link><pubDate>Mon, 18 May 2020 20:42:57 -0400</pubDate><guid>https://onshape-public.github.io/docs/7-reference/testingguidelines/</guid><description>
+&lt;p>The purpose of this document is to help you get your application and App Store entry ready for QA testing.&lt;/p>
+&lt;p>Application Release Workflow (ARW)&lt;/p>
+&lt;p>Each application submitted to the Onshape App Store goes through a series of stage-gates.&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Ok to deploy to Production (Beta testing) (limited visibility)&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Ok to make Public&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Application is Public&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>The starting state is ‘Ok to deploy to limited visibility on Production’’. The end goal is ‘Application is Public on Production’. To advance to the next stage, your application must pass testing and your app store entry must pass review.&lt;/p>
+&lt;p>Testing may be requested at any time.&lt;/p>
+&lt;p>Testing is done on a first-come basis.&lt;/p>
+&lt;p>When testing is complete (pass or fail), you go to the back of the queue.&lt;/p>
+&lt;p>Testing protocol&lt;/p>
+&lt;p>Testing of Partner Applications will be performed against the checklist in addendum A.&lt;/p>
+&lt;p>Testing of Production App Store entries will be performed against the checklist in addendum B.&lt;/p>
+&lt;p>The result of each test will be one of;&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Pass - no action needed and no notification will be issued&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>An enhancement - these are suggestions that should you chose to implement them, we believe would make the application better.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>A bug (low priority) - these are slight deviations from the criteria but have low end user impact and will not prevent the application being turned on for public access and there is no stipulated time-frame for their resolution&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>A bug (medium priority) - these are material deviations from the criteria that are noticeable to the end-user and represent a minor problem requiring a work-around. A medium priority bug will not prevent the application from being turned on for public access, but should be fixed within 30 days.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>A bug (high priority) - this is a significant deviation from the criteria and will prevent the application from being turned on for public access but will not prevent the application from being promoted from the partner stack.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>A bug (MUST FIX) - this category usually represents a significant deviation from protocol or security violation. A MUST FIX will prevent an application on Production being turned on for public access and MAY, if the application is already public, cause it to be temporarily suspended from the app store.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>Any test may be annotated with a ‘*’.&lt;/p>
+&lt;p>This indicates that the test is a must-pass in order for the application or app store entry to be promoted. A failure of this test will generate a bug (MUST FIX).&lt;/p>
+&lt;h2 id="actions-that-you-can-initiate-from-jira">Actions that you can initiate from JIRA&lt;/h2>
+&lt;ul>
+&lt;li>
+&lt;p>Request application testing - This puts your application in the testing queue. We will note when testing has started (‘in progress’) and when concluded, the ticket will be closed. The outcome will include notes and links to any issues generated (‘tickets’). This phase may include as many iterations as needed to get your application ready. If necessary, the Application Release Workflow (ARW) will be updated.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Request public (general) authorization. We will note when testing has started (‘in progress’) and this request will trigger a review of your app store entry and any outstanding bugs. Note there is no implied testing of your application, simply a review of outstanding issues (tickets) and of the app store entry. Success at this stage will advance the Application Release Workflow (ARW) and you will now be able to request public (general) release.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Request public (general) release. This request states that you have coordinated with the Partner Application Manager (Joe Dunne) and the Onshape marketing department and general agreement has been reached that now is the time - Congratulations!&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="addendum-a---application-testing-criteria">Addendum A - Application Testing Criteria&lt;/h2>
+&lt;ol>
+&lt;li>Applied to all Applications&lt;/li>
+&lt;li>Applies to Integrated Cloud Applications&lt;/li>
+&lt;li>Applies to Connected Cloud Applications&lt;/li>
+&lt;li>Applies to Connected Desktop Applications&lt;/li>
+&lt;/ol>
+&lt;p>x Denotes that this is a ‘must-pass’. A failure of this test results in a must-fix&lt;/p>
+&lt;ul>
+&lt;li>(1)x The application must use the Onshape OAUTH mechanism&lt;/li>
+&lt;li>(1)x The OAUTH must be against the correct stack&lt;/li>
+&lt;li>(2)(3)x To be promoted to the Production stack, and hosted service must be on a monitored production server with worldwide 24/7 availability.&lt;/li>
+&lt;li>(2)(3) The application should not generate any avoidable console (browser) errors&lt;/li>
+&lt;li>(1) The application should should provide one or more of the following options;
+&lt;ul>
+&lt;li>Login using the Onshape ID (account created silently on first use)&lt;/li>
+&lt;li>Login with partner product account credentials&lt;/li>
+&lt;li>Create a new partner account&lt;/li>
+&lt;li>The user should not have to leave the registration workflow to complete a pre-requisite&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>(1) The application must be capable of managing/displaying documents in excess of 20 - suggested strategies include;
+&lt;ul>
+&lt;li>Use of a ‘Next’ button to load the next 20&lt;/li>
+&lt;li>Infinite scroll (loading the next 20 if/when the scrollbar reaches the bottom of the dialog&lt;/li>
+&lt;li>The application must display ‘reasonable’ performance when reading documents, workspaces, elements and parts. Consider at-scale than an account may have thousands of documents, many with multiple workspaces and each with multiple elements. Strategies may include any combination of;&lt;/li>
+&lt;li>Displaying the most-recently-opened first&lt;/li>
+&lt;li>Displaying a counter of documents/workspaces/elements read&lt;/li>
+&lt;li>Progressive loading&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>(1) The application should correctly list valid documents when ‘per document app access’ is turned on.&lt;/li>
+&lt;li>(1) The application should correctly handle selection of versions&lt;/li>
+&lt;li>(1) The application should correctly handle selection of workspaces (branches)&lt;/li>
+&lt;li>(1) The application should correctly handle/display elements that;
+&lt;ul>
+&lt;li>Are part studios that contain nothing&lt;/li>
+&lt;li>Are assemblies that contain nothing&lt;/li>
+&lt;li>Are part studios that contain only surfaces&lt;/li>
+&lt;li>Are part studios that contain only ‘wire’ data (eg helices)&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>(1) The application should appropriately handle revocation of a grant&lt;/li>
+&lt;/ul>
+&lt;h2 id="addendum-b---app-store-testing-criteria">Addendum B - App Store Testing Criteria&lt;/h2>
+&lt;ol>
+&lt;li>Applied to all Applications&lt;/li>
+&lt;li>Applies to Integrated Cloud Applications&lt;/li>
+&lt;li>Applies to Connected Cloud Applications&lt;/li>
+&lt;li>Applies to Connected Desktop Applications&lt;/li>
+&lt;li>Required for deployment to production&lt;/li>
+&lt;li>Only where the application is using Onshape billing&lt;/li>
+&lt;/ol>
+&lt;p>x Denotes that this is a ‘must-pass’. A failure of this test results in a must-fix&lt;/p>
+&lt;ul>
+&lt;li>(1) The application should have a descriptive name&lt;/li>
+&lt;li>(1) The application summary should be accurate&lt;/li>
+&lt;li>(1)x The redirect URLS should be valid&lt;/li>
+&lt;li>(2)x The iframe URL should be valid&lt;/li>
+&lt;li>(1) The Grant (permissions) request should be no more than is needed&lt;/li>
+&lt;li>(1) The Application Type should be correctly set&lt;/li>
+&lt;li>(1) Team Visibility should be set&lt;/li>
+&lt;li>(1) The Category should be appropriate&lt;/li>
+&lt;li>(1) The application description should be accurate&lt;/li>
+&lt;li>(1) The Sign-In URL should be valid&lt;/li>
+&lt;li>(1) The pricing summary should be accurate. For instance, it cannot say ‘Free’ if this is a trial - it should say ‘Free for 30 days and then $30/month&lt;/li>
+&lt;li>(1) Any pay-plans should have an accurate description&lt;/li>
+&lt;li>(1) The support URL should point to a resource for help - this can be;
+&lt;ul>
+&lt;li>A support ticketing system (eg Zendesk)&lt;/li>
+&lt;li>A page giving a telephone number&lt;/li>
+&lt;li>A page giving an email address&lt;/li>
+&lt;li>A forum&lt;/li>
+&lt;li>It cannot be to an FAQ page (unless that page also contains one of the other options)&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>(1)The EULA link should point to an English Language EULA&lt;/li>
+&lt;/ul></description></item><item><title>Docs: Changelog</title><link>https://onshape-public.github.io/docs/7-reference/changelog/</link><pubDate>Fri, 19 May 2023 10:30:00 -0400</pubDate><guid>https://onshape-public.github.io/docs/7-reference/changelog/</guid><description>
 &lt;h4 id="rel-1164---released-2023-05-19">&lt;code>rel-1.164&lt;/code> - released 2023-05-19&lt;/h4>
 &lt;ul>
 &lt;li>Support &lt;code>partId&lt;/code> array string for &lt;code>GET&lt;/code> : &lt;code>/api/partstudios/bodydetails&lt;/code> endpoint for the option of getting a subset of parts from a partstudio (empty = all parts)&lt;/li>
@@ -4154,138 +4341,4 @@ delivery to fail.&lt;/p>
 &lt;h4 id="rel-186---released-2018-09-28">&lt;code>rel-1.86&lt;/code> - released 2018-09-28&lt;/h4>
 &lt;ul>
 &lt;li>Export Drawings to DXF, DWG and PDF&lt;/li>
-&lt;/ul></description></item><item><title>Docs: Testing Guidelines</title><link>https://onshape-public.github.io/docs/7-reference/testingguidelines/</link><pubDate>Mon, 18 May 2020 20:42:57 -0400</pubDate><guid>https://onshape-public.github.io/docs/7-reference/testingguidelines/</guid><description>
-&lt;p>The purpose of this document is to help you get your application and App Store entry ready for QA testing.&lt;/p>
-&lt;p>Application Release Workflow (ARW)&lt;/p>
-&lt;p>Each application submitted to the Onshape App Store goes through a series of stage-gates.&lt;/p>
-&lt;ul>
-&lt;li>
-&lt;p>Ok to deploy to Production (Beta testing) (limited visibility)&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>Ok to make Public&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>Application is Public&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;p>The starting state is ‘Ok to deploy to limited visibility on Production’’. The end goal is ‘Application is Public on Production’. To advance to the next stage, your application must pass testing and your app store entry must pass review.&lt;/p>
-&lt;p>Testing may be requested at any time.&lt;/p>
-&lt;p>Testing is done on a first-come basis.&lt;/p>
-&lt;p>When testing is complete (pass or fail), you go to the back of the queue.&lt;/p>
-&lt;p>Testing protocol&lt;/p>
-&lt;p>Testing of Partner Applications will be performed against the checklist in addendum A.&lt;/p>
-&lt;p>Testing of Production App Store entries will be performed against the checklist in addendum B.&lt;/p>
-&lt;p>The result of each test will be one of;&lt;/p>
-&lt;ul>
-&lt;li>
-&lt;p>Pass - no action needed and no notification will be issued&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>An enhancement - these are suggestions that should you chose to implement them, we believe would make the application better.&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>A bug (low priority) - these are slight deviations from the criteria but have low end user impact and will not prevent the application being turned on for public access and there is no stipulated time-frame for their resolution&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>A bug (medium priority) - these are material deviations from the criteria that are noticeable to the end-user and represent a minor problem requiring a work-around. A medium priority bug will not prevent the application from being turned on for public access, but should be fixed within 30 days.&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>A bug (high priority) - this is a significant deviation from the criteria and will prevent the application from being turned on for public access but will not prevent the application from being promoted from the partner stack.&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>A bug (MUST FIX) - this category usually represents a significant deviation from protocol or security violation. A MUST FIX will prevent an application on Production being turned on for public access and MAY, if the application is already public, cause it to be temporarily suspended from the app store.&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;p>Any test may be annotated with a ‘*’.&lt;/p>
-&lt;p>This indicates that the test is a must-pass in order for the application or app store entry to be promoted. A failure of this test will generate a bug (MUST FIX).&lt;/p>
-&lt;h2 id="actions-that-you-can-initiate-from-jira">Actions that you can initiate from JIRA&lt;/h2>
-&lt;ul>
-&lt;li>
-&lt;p>Request application testing - This puts your application in the testing queue. We will note when testing has started (‘in progress’) and when concluded, the ticket will be closed. The outcome will include notes and links to any issues generated (‘tickets’). This phase may include as many iterations as needed to get your application ready. If necessary, the Application Release Workflow (ARW) will be updated.&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>Request public (general) authorization. We will note when testing has started (‘in progress’) and this request will trigger a review of your app store entry and any outstanding bugs. Note there is no implied testing of your application, simply a review of outstanding issues (tickets) and of the app store entry. Success at this stage will advance the Application Release Workflow (ARW) and you will now be able to request public (general) release.&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>Request public (general) release. This request states that you have coordinated with the Partner Application Manager (Joe Dunne) and the Onshape marketing department and general agreement has been reached that now is the time - Congratulations!&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;h2 id="addendum-a---application-testing-criteria">Addendum A - Application Testing Criteria&lt;/h2>
-&lt;ol>
-&lt;li>Applied to all Applications&lt;/li>
-&lt;li>Applies to Integrated Cloud Applications&lt;/li>
-&lt;li>Applies to Connected Cloud Applications&lt;/li>
-&lt;li>Applies to Connected Desktop Applications&lt;/li>
-&lt;/ol>
-&lt;p>x Denotes that this is a ‘must-pass’. A failure of this test results in a must-fix&lt;/p>
-&lt;ul>
-&lt;li>(1)x The application must use the Onshape OAUTH mechanism&lt;/li>
-&lt;li>(1)x The OAUTH must be against the correct stack&lt;/li>
-&lt;li>(2)(3)x To be promoted to the Production stack, and hosted service must be on a monitored production server with worldwide 24/7 availability.&lt;/li>
-&lt;li>(2)(3) The application should not generate any avoidable console (browser) errors&lt;/li>
-&lt;li>(1) The application should should provide one or more of the following options;
-&lt;ul>
-&lt;li>Login using the Onshape ID (account created silently on first use)&lt;/li>
-&lt;li>Login with partner product account credentials&lt;/li>
-&lt;li>Create a new partner account&lt;/li>
-&lt;li>The user should not have to leave the registration workflow to complete a pre-requisite&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>(1) The application must be capable of managing/displaying documents in excess of 20 - suggested strategies include;
-&lt;ul>
-&lt;li>Use of a ‘Next’ button to load the next 20&lt;/li>
-&lt;li>Infinite scroll (loading the next 20 if/when the scrollbar reaches the bottom of the dialog&lt;/li>
-&lt;li>The application must display ‘reasonable’ performance when reading documents, workspaces, elements and parts. Consider at-scale than an account may have thousands of documents, many with multiple workspaces and each with multiple elements. Strategies may include any combination of;&lt;/li>
-&lt;li>Displaying the most-recently-opened first&lt;/li>
-&lt;li>Displaying a counter of documents/workspaces/elements read&lt;/li>
-&lt;li>Progressive loading&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>(1) The application should correctly list valid documents when ‘per document app access’ is turned on.&lt;/li>
-&lt;li>(1) The application should correctly handle selection of versions&lt;/li>
-&lt;li>(1) The application should correctly handle selection of workspaces (branches)&lt;/li>
-&lt;li>(1) The application should correctly handle/display elements that;
-&lt;ul>
-&lt;li>Are part studios that contain nothing&lt;/li>
-&lt;li>Are assemblies that contain nothing&lt;/li>
-&lt;li>Are part studios that contain only surfaces&lt;/li>
-&lt;li>Are part studios that contain only ‘wire’ data (eg helices)&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>(1) The application should appropriately handle revocation of a grant&lt;/li>
-&lt;/ul>
-&lt;h2 id="addendum-b---app-store-testing-criteria">Addendum B - App Store Testing Criteria&lt;/h2>
-&lt;ol>
-&lt;li>Applied to all Applications&lt;/li>
-&lt;li>Applies to Integrated Cloud Applications&lt;/li>
-&lt;li>Applies to Connected Cloud Applications&lt;/li>
-&lt;li>Applies to Connected Desktop Applications&lt;/li>
-&lt;li>Required for deployment to production&lt;/li>
-&lt;li>Only where the application is using Onshape billing&lt;/li>
-&lt;/ol>
-&lt;p>x Denotes that this is a ‘must-pass’. A failure of this test results in a must-fix&lt;/p>
-&lt;ul>
-&lt;li>(1) The application should have a descriptive name&lt;/li>
-&lt;li>(1) The application summary should be accurate&lt;/li>
-&lt;li>(1)x The redirect URLS should be valid&lt;/li>
-&lt;li>(2)x The iframe URL should be valid&lt;/li>
-&lt;li>(1) The Grant (permissions) request should be no more than is needed&lt;/li>
-&lt;li>(1) The Application Type should be correctly set&lt;/li>
-&lt;li>(1) Team Visibility should be set&lt;/li>
-&lt;li>(1) The Category should be appropriate&lt;/li>
-&lt;li>(1) The application description should be accurate&lt;/li>
-&lt;li>(1) The Sign-In URL should be valid&lt;/li>
-&lt;li>(1) The pricing summary should be accurate. For instance, it cannot say ‘Free’ if this is a trial - it should say ‘Free for 30 days and then $30/month&lt;/li>
-&lt;li>(1) Any pay-plans should have an accurate description&lt;/li>
-&lt;li>(1) The support URL should point to a resource for help - this can be;
-&lt;ul>
-&lt;li>A support ticketing system (eg Zendesk)&lt;/li>
-&lt;li>A page giving a telephone number&lt;/li>
-&lt;li>A page giving an email address&lt;/li>
-&lt;li>A forum&lt;/li>
-&lt;li>It cannot be to an FAQ page (unless that page also contains one of the other options)&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>(1)The EULA link should point to an English Language EULA&lt;/li>
 &lt;/ul></description></item></channel></rss>
