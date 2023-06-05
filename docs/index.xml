@@ -64,22 +64,22 @@
 &lt;h2 id="onshape-api-request">Onshape API Request&lt;/h2>
 &lt;p>Since Onshape is a web-based solution, it uses a URL to define what is loaded in the browser.&lt;/p>
 &lt;p>Example Onshape URL:
-&lt;a href="https://cad.onshape.com/api/documents/58d051743d98a90f86e9e2ab/w/17e0ba65df28e4e72f7f4961/e/4a289bd094a999329a3900af">https://cad.onshape.com/api/documents/58d051743d98a90f86e9e2ab/w/17e0ba65df28e4e72f7f4961/e/4a289bd094a999329a3900af&lt;/a>&lt;/p>
+&lt;span style="color:black">&lt;code>https://cad.onshape.com/api/&lt;/code>&lt;/span>&lt;span style="color:DeepSkyBlue">&lt;code>documents/58d051743d98a90f86e9e2ab/&lt;/code>&lt;/span>&lt;span style="color:MediumSpringGreen">&lt;code>w/17e0ba65df28e4e72f7f4961/&lt;/code>&lt;/span>&lt;span style="color:DarkOrchid">&lt;code>e/4a289bd094a999329a3900af&lt;/code>&lt;/span>&lt;/p>
 &lt;ul>
 &lt;li>&lt;code>https://cad.onshape.com/api&lt;/code> is the base URL of the document.
 &lt;ul>
 &lt;li>Every Enterprise account has a custom base URL: &lt;code>https://companyName.onshape.com/api&lt;/code>&lt;/li>
 &lt;/ul>
 &lt;/li>
-&lt;li>&lt;code>documents/&lt;/code> or &lt;code>d/&lt;/code> is followed by a 24-character document ID. The document ID uniquely identifies an Onshape document.&lt;/li>
-&lt;li>&lt;code>w/&lt;/code> is followed by a 24-character workspace ID. The workspace ID uniquely identifies a workspace within the document. By default, a document is started with the Main workspace.
+&lt;li>&lt;span style="color:DeepSkyBlue">documents/&lt;/span> or &lt;span style="color:DeepSkyBlue">d/&lt;/span> is followed by a &lt;span style="color:DeepSkyBlue">24-character document ID&lt;/span>. The document ID uniquely identifies an Onshape document.&lt;/li>
+&lt;li>Next, &lt;span style="color:MediumSpringGreen">w/&lt;/span> is followed by a &lt;span style="color:MediumSpringGreen">24-character workspace ID&lt;/span>. The workspace ID uniquely identifies a workspace within the document. By default, a document is started with the Main workspace.
 &lt;ul>
-&lt;li>To refer to a specific document version, replace &lt;code>w/&lt;/code> with &lt;code>v/&lt;/code>, followed by the 24-character version ID.&lt;/li>
-&lt;li>With every edit made in the document, a microversion of every document is automatically created with every edit. To refer to a specific microversion, replace &lt;code>w/&lt;/code> with &lt;code>m/&lt;/code>, followed by the 24-character microversion ID.&lt;/li>
+&lt;li>To refer to a specific document version, replace &lt;span style="color:MediumSpringGreen">w/&lt;/span> with &lt;span style="color:MediumSpringGreen">v/&lt;/span>, followed by the 24-character version ID.&lt;/li>
+&lt;li>With every edit made in the document, a microversion of every document is automatically created with every edit. To refer to a specific microversion, replace &lt;span style="color:MediumSpringGreen">w/&lt;/span> with &lt;span style="color:MediumSpringGreen">m/&lt;/span>, followed by the 24-character microversion ID.&lt;/li>
 &lt;li>&lt;strong>Note&lt;/strong>: &lt;code>POST&lt;/code> requests are always made to a workspace, since versions and microversions are immutable.&lt;/li>
 &lt;/ul>
 &lt;/li>
-&lt;li>&lt;code>e/&lt;/code> is followed by a 24-character element ID. The element ID uniquely identifies an element (e.g., a tab that we see and access through the user interface).&lt;/li>
+&lt;li>&lt;/span>&lt;span style="color:DarkOrchid">e/&lt;/span> is followed by a &lt;/span>&lt;span style="color:DarkOrchid">24-character element ID&lt;/span>. The element ID uniquely identifies an element (e.g., a tab that we see and access through the user interface).&lt;/li>
 &lt;/ul>
 &lt;p>In this documentation, we often refer to the URL template as: &lt;code>{base_URL}/{endpoint}/d/{did}/{wvm}/{wvmid}/e/{eid}&lt;/code> or sometimes &lt;code>/{endpoint}/DWVME/&lt;/code> for short.&lt;/p>
 &lt;p>When your application is instantiated in a document, it is called with a URL like this:&lt;/p>
