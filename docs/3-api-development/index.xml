@@ -1,5 +1,4 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Onshape Developer Documentation – API Development</title><link>https://onshape-public.github.io/docs/3-api-development/</link><description>Recent content in API Development on Onshape Developer Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 18 May 2020 20:25:28 -0400</lastBuildDate><atom:link href="https://onshape-public.github.io/docs/3-api-development/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: API Keys</title><link>https://onshape-public.github.io/docs/3-api-development/apikeys/</link><pubDate>Mon, 18 May 2020 20:20:41 -0400</pubDate><guid>https://onshape-public.github.io/docs/3-api-development/apikeys/</guid><description>
-&lt;h1 id="using-api-keys-with-onshape">Using API Keys with Onshape&lt;/h1>
 &lt;h3 id="why-api-keys">Why API Keys?&lt;/h3>
 &lt;p>API keys are useful for small applications meant for personal use, allowing developers to avoid the overhead of the OAuth workflow. Creating an app is very easy with API keys: create an API key with the Developer Portal, set up a function to build your API key header as in the samples, and make your API calls! There&amp;rsquo;s no need to deal with OAuth redirects or things like that.&lt;/p>
 &lt;p>We&amp;rsquo;ve moved over to using API keys for authenticating requests instead of using cookies for several reasons.&lt;/p>
@@ -8,7 +7,6 @@
 &lt;li>OAuth: The API key system we&amp;rsquo;re now using for HTTP requests is the same process developers follow when building full-blown OAuth applications; there&amp;rsquo;s no longer a disconnect between the two.&lt;/li>
 &lt;/ol>
 &lt;p>Once you create an API key, it will only be valid in the stack on which it was created. An API key created on the partner stack, for example, will not function on the production stack.&lt;/p>
-&lt;h3 id="questions-and-concerns">Questions and Concerns&lt;/h3>
 &lt;p>If you need information or have a question unanswered in this documentation, feel free to chat with us by sending an email to &lt;a href="mailto:api-support@onshape.com">api-support@onshape.com&lt;/a> or by checking out the &lt;a href="https://forum.onshape.com" target="_blank">forums&lt;/a>. If you are a member of the DevPartners group (see the Development help page for information) more detailed instructions and code examples are in the apikey sample repo.&lt;/p>
 &lt;h3 id="working-with-api-keys">Working with API Keys&lt;/h3>
 &lt;p>Read the following and you&amp;rsquo;ll be up and running with using API keys in your application:&lt;/p>
@@ -112,13 +110,95 @@ Keep it somewhere safe.&lt;/p>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Some API endpoints return 307 redirects. You must generate an Authorization header for the redirect as well, but please note that the server portion of the URL might be different, the redirect URL may contain query parameters that must be encoded in the Authorization header, etc. Please see the samples for examples.&lt;/p>
 &lt;h3 id="api-keys-and-oauth">API keys and OAuth&lt;/h3>
 &lt;p>Our API key workflow differs from our OAuth workflow in one important characteristic: an API key allows a &lt;em>user&lt;/em> (specifically, a developer) to make requests, while OAuth allows an &lt;em>application&lt;/em> to make requests on behalf of the user. We require the OAuth workflow for apps in the Onshape App Store, so if you develop an app using API keys and want to distribute it through the App Store, you will need to change to OAuth. Please see our OAuth sample apps for examples of how to make OAuth work (onshape/app-bom is a great place to start). The good news is that we&amp;rsquo;ve structured API keys to work very similarly to OAuth in the operation of your app. While you will need to build your Authorization header differently (and set up redirects and signins as in the onshape/app-bom sample), the API calls themselves will work the same in both versions, provided that the API key and the OAuth app have the same scopes. An API key with the OAuth2Read and OAuth2Write scopes will have the same access to the same API endpoints as an OAuth application with the OAuth2Read and OAuth2Write scopes, for example. (The only differences are when calling API endpoints relating to the OAuth application itself, since an API key request obviously does not come from an OAuth application.)&lt;/p></description></item><item><title>Docs: OAuth</title><link>https://onshape-public.github.io/docs/3-api-development/oauth/</link><pubDate>Mon, 18 May 2020 20:39:14 -0400</pubDate><guid>https://onshape-public.github.io/docs/3-api-development/oauth/</guid><description>
-&lt;h1 id="using-oauth-20-with-onshape">Using OAuth 2.0 with Onshape&lt;/h1>
-&lt;h2 id="introduction">Introduction&lt;/h2>
+&lt;h2 id="what-is-oauth2">What is OAuth2?&lt;/h2>
+&lt;p>The OAuth (Open authorization) protocol was developed by the Internet
+Engineering Task Force - The Internet Engineering Task Force is an open
+standards organization, which develops and promotes voluntary Internet
+standards, in particular the technical standards that comprise the
+Internet protocol suite – it enables secure delegated access to an
+applications resources.&lt;/p>
+&lt;p>The OAuth2 protocol enables an application to access a resource that is
+under the control of someone else. In order to access that resource a
+Token is required. The Token represent the delegated rights of access
+(defines what rights this application has such as read/write/update,
+scope, rights to different resources and more). In this way the
+application can be accessed by a third party system without that system
+impersonating the user who controls the resource.&lt;/p>
+&lt;p>A good analogy is the hotel check-in process.&lt;/p>
+&lt;p>When you arrive at the front desk of a hotel you are generally asked to
+provide an ID and a form of payment. In response you are provided with a
+key card that opens a specific door. When you reach that door, you swipe
+your key card and you are granted access. The door itself doesn’t know
+who you are or anything about you – it just knows that the key card was
+encoded correctly, and it allows you access. At some point in time the
+key card expires and the door no longer lets you into the room. This is
+the same for Access Tokens in the OAuth2 flow.&lt;/p>
+&lt;h3 id="how-does-oauth-work">How Does OAuth Work?&lt;/h3>
+&lt;p>With the OAuth2 protocol, you register your application with the
+3&lt;sup>rd&lt;/sup> party, you are given a set of keys. These keys get
+exchanged for an Access Token that grants you access to resources in the
+3&lt;sup>rd&lt;/sup> party application. Every now and then that token expires
+and in order to access the resources, you are required to get a new
+token. For this, you are provided with a refresh token. Sending the
+refresh token to the authentication server will provide you with your
+updated access token and a new refresh token. In our analogy the
+Authorization server is the same as the clerk at the check-in desk, he’s
+validating that we’re registered and that we can in fact access the
+resources in the hotel. Once validated he provides us with a key card =
+authorization token. With this card we can now access our room, the gym
+and possibly some other hotel resources. Likewise, the authorization
+token enables us to access the API resources.&lt;/p>
+&lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage20.png"
+style="width:5.2782in;height:3.375in"
+alt="Getting Started with OAuth2 - Keap Developer Portal" />&lt;/p>
+&lt;p>&lt;span id="_Toc102977881" class="anchor">&lt;/span>Figure 10 - OAuth2
+Authorization Flow&lt;/p>
+&lt;p>The first step to the OAuth flow is for the Onshape user to request
+Onshape to authorize access for the 3&lt;sup>rd&lt;/sup> party application to
+access Onshape.&lt;/p>
+&lt;p>Once the user has authorized the application, they will be redirected to
+a predefined URL together with a code that will be used to request an
+access token from Onshape. Therefore, the redirect URL should contain a
+script that can capture the authorization code.&lt;/p>
+&lt;p>The access token is the token you will use to authenticate requests to
+the Onshape API. Note that the token expires after predefined set amount
+of time. In order to get a new valid access token after one has expired,
+you must use the refresh token to request a new access token.&lt;/p>
+&lt;p>Refreshing the Access Token will also provide you with an updated
+refresh token that will be used in the next refresh access token
+request. Make sure to store both the access token and the refresh token
+and update them with each refresh of the token.&lt;/p>
+&lt;p>The authorization token must accompany any call to the API, this is done
+by adding the token to an Authorization field in the header of each
+request:&lt;/p>
+&lt;p>‘Authorization’ : ‘Bearer [authorization code here]’&lt;/p>
+&lt;p>If correctly authenticated the response from the REST API call will be a
+stream of JSON data with an HTTP response code of 200.&lt;/p>
+&lt;p>In the event that the authorization code is incorrect – for instance, if
+it expired, you will receive an &lt;strong>HTTP 401&lt;/strong> response. This response
+means that the client request has not been completed since it lacks
+valid authentication credentials for the requested resource. In this
+event your code for each call to the REST API should include a catch
+clause for a 401 exception. Once caught, you can refresh the token and
+make the request again.&lt;/p>
+&lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage6.png"
+style="width:0.47222in;height:0.47222in" />&lt;/p>
+&lt;p>We provide a complete code example for catching errors from the HTTP
+request at the end of this section.&lt;/p>
+&lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage6.png"
+style="width:0.47222in;height:0.47222in" />You may find additional
+information on implementing OAuth2 with Onshape at
+&lt;a href="https://onshape-public.github.io/docs/oauth/">https://onshape-public.github.io/docs/oauth/&lt;/a>&lt;/p>
+&lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage6.png"
+style="width:0.47222in;height:0.47222in" />A very good resource for
+learning more about OAuth2 can be found at
+&lt;a href="https://www.digitalocean.com/community/tutorials/an-introduction-to-oauth-2">https://www.digitalocean.com/community/tutorials/an-introduction-to-oauth-2&lt;/a>&lt;/p>
+&lt;h2 id="using-oauth-20-with-onshape">Using OAuth 2.0 with Onshape&lt;/h2>
 &lt;p>OAuth 2.0 (&amp;ldquo;OAuth&amp;rdquo;) is an authorization framework allowing a user (also referred to as the resource owner) to approve client application access to the user&amp;rsquo;s resources at an OAuth-enabled server.&lt;/p>
 &lt;p>When integrating with Onshape, OAuth tokens authorize third-party applications (such as a desktop application or a web service) for limited access to users&amp;rsquo; Onshape documents. Using OAuth terminology, Onshape acts as both the authorization and resource server, while the desktop or web-based application is the client. Resource owners have the option of granting or denying access to applications.&lt;/p>
 &lt;p>RFC 6749 (&lt;a href="http://tools.ietf.org/html/rfc6749" target="_blank">&lt;a href="http://tools.ietf.org/html/rfc6749">http://tools.ietf.org/html/rfc6749&lt;/a>&lt;/a>) is the reference for the OAuth framework as a whole. Most of this document describes how to implement the OAuth exchanges described by the reference within the context of Onshape and client applications. RFC 6750 (&lt;a href="http://tools.ietf.org/html/rfc6750" target="_blank">&lt;a href="http://tools.ietf.org/html/rfc6750">http://tools.ietf.org/html/rfc6750&lt;/a>&lt;/a>) describes the exchange of OAuth access tokens between clients and OAuth servers.&lt;/p>
 &lt;p>Once obtained an OAuth token will work for third-party APIs under &lt;code>/api&lt;/code>. It&amp;rsquo;s not appropriate to attempt to use an OAuth token to fetch the URLs typically displayed in a web browsers location bar.&lt;/p>
-&lt;h2 id="application-registration">Application Registration&lt;/h2>
+&lt;h3 id="application-registration">Application Registration&lt;/h3>
 &lt;p>OAuth relies on an orchestrated set of interactions between the web browser, Onshape&amp;rsquo;s web services and third-party client applications (which may be desktop or web server-based). The orchestration takes the form of a sequence of requests and subsequent browser redirections between pre-configured URL endpoints. In order to take part in the OAuth process an application must first be registered with Onshape.&lt;/p>
 &lt;p>Currently partners register applications by contacting &lt;a href="mailto:api-support@onshape.com">api-support@onshape.com&lt;/a> to register OAuth application. The following items are necessary:&lt;/p>
 &lt;ol>
@@ -152,10 +232,9 @@ Possible reasons for specifying more than one redirect URI is if you deploy &amp
 Legacy support: As we migrate to extension based apps, the old Iframe URL is moved to a tab based extension. Change as needed to provide a better user experience.&lt;/li>
 &lt;/ol>
 &lt;p>After the application has been registered Onshape will send you corresponding OAuth Client ID and OAuth Client Secret strings. While the Client ID is considered public - it is how your specific application is uniquely identified in OAuth protocol exchanges - the Client Secret &lt;strong>must&lt;/strong> be stored securely. For example, it should &lt;strong>not&lt;/strong> be checked in to source code control systems. Protect the Client Secret as you would any password data.&lt;/p>
-&lt;h2 id="obtaining-an-oauth-access-token">Obtaining an OAuth Access Token&lt;/h2>
+&lt;h3 id="obtaining-an-oauth-access-token">Obtaining an OAuth Access Token&lt;/h3>
 &lt;p>An OAuth access token is the credential a client application uses to access user resources at Onshape. Obtaining an OAuth access token is a two-part process: first obtaining a one-time use authorization code, and then exchanging the authorization code for them access token. The access token is used for all subsequent Onshape requests, though it too has a limited lifetime (which may be refreshed, as described below).&lt;/p>
 &lt;p>In the example URLs used below to describe the OAuth exchanges, values enclosed in angle brackets (&amp;rsquo;&amp;lt;&amp;gt;&amp;rsquo;) are descriptive names used to indicate that application-specific values should be substituted in actual exchanges. All other URLs and URL fragments are literal strings.&lt;/p>
-&lt;h3 id="obtaining-a-code">Obtaining a code&lt;/h3>
 &lt;p>Your application must first must direct the user to &lt;code>https://oauth.onshape.com/oauth/authorize?response_type=code&amp;amp;client_id=&amp;lt;your client id&amp;gt;&lt;/code>. You may optionally add the &lt;code>redirect_uri&lt;/code>, &lt;code>scope&lt;/code>, &lt;code>state&lt;/code> and &lt;code>company_id&lt;/code> query parameters.&lt;/p>
 &lt;p>If your application was registered with more than one redirect URI, then the specific URI to use is indicated by the &lt;code>redirect_uri&lt;/code> query string. You can only use a &lt;code>redirect_uri&lt;/code> value that has been previously registered for this application. URIs must be a exactly match registered values, including the port number (if not using the default HTTPS port). Typically this action is performed by using a HTTP 302 response code with a &lt;code>Location&lt;/code> HTTP response header when the user arrives at the starting page of your application, for example in response to a GET of the Base HREF specified in the application registration. The Location HTTP response header should contain the URL with the correct query parameters as outlined above.&lt;/p>
 &lt;p>If the &lt;code>scope&lt;/code> parameter is omitted the token retrieved at the end of this process will be valid for all scopes your application has registered. You can restrict the token to a subset of the registered scopes by using the &lt;code>scope&lt;/code> parameter. Refer to section of RFC 6749 for the exact syntax to specify scopes within a query string. Again, this is optional; by default the OAuth exchange will use the scopes registered for your application.&lt;/p>
@@ -186,6 +265,311 @@ Legacy support: As we migrate to extension based apps, the old Iframe URL is mov
 &lt;p>&lt;code>grant_type=refresh_token&amp;amp;refresh_token=&amp;lt;refresh_token&amp;gt;&amp;amp;client_id=&amp;lt;client_id&amp;gt;&amp;amp;client_secret=&amp;lt;client_secret&amp;gt;&lt;/code>.&lt;/p>
 &lt;p>As with the authorization code data, the parameters in the form body must be URL encoded. The response to this POST request will be a JSON encoded structure as before with a new &lt;code>access_token&lt;/code> value that can be used for the next 60 minutes.&lt;/p>
 &lt;p>Refresh tokens are valid for the lifetime of the user&amp;rsquo;s grant. If a user who has previously granted access to your application decides to revoke the grant, the refresh token is invalidated. If the user decides to re-grant application access, a new refresh token is generated and returned along with the access token.&lt;/p>
+&lt;h2 id="implementing-oauth2-in-your-code">Implementing OAuth2 in your Code&lt;/h2>
+&lt;p>In this section we take a look at some sample code of how the OAuth2
+authorization flow is enabled. We’re not showing the complete code here,
+just the relevant parts of the code that relate to authentication
+against Onshape and using the REST API with the acquired access token.
+There are plenty of online resources that show this flow in more detail,
+however here we are focused on the implementation of OAuth2 in regards
+to Onshape.&lt;/p>
+&lt;p>The code samples are provided in node.JS, however you are free to use
+any programing language of your choice in developing your integration.
+There are good resources on the Onshape public GitHub in both node.JS,
+Python, Java and C# - these can be found at:
+&lt;a href="https://github.com/onshape-public">https://github.com/onshape-public&lt;/a>.&lt;/p>
+&lt;p>So far, we have registered our application with Onshape and received an
+OAuth Client ID and an OAuth Client Secret string. We will be using
+these strings in this section in order to receive a one-time user
+authorization code.&lt;/p>
+&lt;h3 id="step-1-get-the-user-authorization-code">Step 1: get the user authorization code&lt;/h3>
+&lt;p>We’ll start by loading the basic libraries required to run this sample.
+Since this is node.JS I’m using npm to directly load the libraries into
+my development environment.&lt;/p>
+&lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage4.png"
+style="width:0.43056in;height:0.43056in" />The samples here just relate
+to the authentication portions of the code and assume that you have
+knowledge on setting up and running a Node.js server. All the settings
+in this sample are stored in an .env file and referenced through config
+class. Where required I have made comments which expected value each
+setting is referencing&lt;/p>
+&lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage6.png"
+style="width:0.47222in;height:0.47222in" />Passport is Express
+compatible authentication middleware for Node.js. Its sole purpose is to
+authenticate requests which it does through plugins known as strategies.
+In this sample we are using an Onshape developed plugin
+“passport-onshape”, however this is not mandatory, and you can define
+your own strategy to use with passport. The passport API is very
+straightforward; you provide Passport a request to authenticate, and
+passport will provide hooks for controlling what occurs when
+authentication succeeds or fails. For more information on Passport
+please reference &lt;a href="https://www.npmjs.com/package/passport">https://www.npmjs.com/package/passport&lt;/a>&lt;/p>
+&lt;p>To install Passport&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>$ npm install passport
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>To install passport-onshape plugin for Passport&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>$ npm install passport-onshape
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Define your app.js (Server file).&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a">const&lt;/span> express = require(&lt;span style="color:#a50">&amp;#39;express&amp;#39;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a">const&lt;/span> session = require(&lt;span style="color:#a50">&amp;#39;express-session&amp;#39;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a">const&lt;/span> passport = require(&lt;span style="color:#a50">&amp;#39;passport&amp;#39;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a">const&lt;/span> OnshapeStrategy = require(&lt;span style="color:#a50">&amp;#39;passport-onshape&amp;#39;&lt;/span>);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Tell Express to use Passport and initialize passport&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a">var&lt;/span> app = express();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>app.use(session({
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> secret: session_secret,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> resave: &lt;span style="color:#00a">false&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> saveUninitialized: &lt;span style="color:#00a">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}));
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>app.use(passport.initialize());
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>app.use(passport.session());
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Store Onshape user information so it can be retrieved from req.user in
+each call.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>passport.serializeUser((user, done) =&amp;gt; done(&lt;span style="color:#00a">null&lt;/span>, user));
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>passport.deserializeUser((obj, done) =&amp;gt; done(&lt;span style="color:#00a">null&lt;/span>, obj));
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Notes on serializeUser and deserializeUser:&lt;/p>
+&lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage6.png"
+style="width:0.47222in;height:0.47222in" />Passport uses the
+serializeUser function to persist user data (after successful
+authentication) into the session. The function deserializeUser is used
+to retrieve user data from session.&lt;/p>
+&lt;p>Passport needs the following setup to save user data after
+authentication in the session:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>app.use(session({ secret: session_secret }));
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>app.use(passport.initialize());
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>app.use(passport.session());
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The following diagram explains what happens with the serialize and
+deserialize functions.&lt;/p>
+&lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage6.png"
+style="width:0.47222in;height:0.47222in" />To learn more about Passport
+please reference &lt;a href="https://www.npmjs.com/package/passport">https://www.npmjs.com/package/passport&lt;/a>&lt;/p>
+&lt;p>Initialize Passport with the Onshape Strategy&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>passport.use(&lt;span style="color:#00a">new&lt;/span> OnshapeStrategy({
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> clientID: oauth_clientid, &lt;span style="color:#aaa;font-style:italic">//the client ID string that you got when registering the app with Onshape
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span> clientSecret: oauth_clent_secret, &lt;span style="color:#aaa;font-style:italic">//The secret string
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span> callbackURL: oauth_callback, &lt;span style="color:#aaa;font-style:italic">//The Oauth Callback URL ex: /oauthRedirect
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span> authorizationURL: oauthurl, &lt;span style="color:#aaa;font-style:italic">//https://oauth.onshape.com/oauth/authorize
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span> tokenURL: oauthtokenurl, &lt;span style="color:#aaa;font-style:italic">//https://oauth.onshape.com/oauth/token
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span> userProfileURL: userprofileurl &lt;span style="color:#aaa;font-style:italic">//https://cad.onshape.com/api/users/sessioninfo
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span>},
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>(accessToken, refreshToken, profile, done) =&amp;gt; {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> profile.accessToken = accessToken;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> profile.refreshToken = refreshToken;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">//Here you can store the user profile, accessToken, RrefreshToken in your database
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span> userController.updateUser(accessToken, refreshToken, user).then((data)=&amp;gt;{});
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a">return&lt;/span> done(&lt;span style="color:#00a">null&lt;/span>, data);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}));
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The OnshapeStrategy takes six values, all which should be stored in your
+.env (or configuration) file. There are several values that don’t change
+and should use the following definitions:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>authorizationURL : &lt;a href="https://oauth.onshape.com/oauth/authorize">https://oauth.onshape.com/oauth/authorize&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>tokenURL : &lt;a href="https://oauth.onshape.com/oauth/token">https://oauth.onshape.com/oauth/token&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>userProfileURL : &lt;a href="https://cad.onshape.com/api/users/sessioninfo">https://cad.onshape.com/api/users/sessioninfo&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>The callback function will provide us with the accessToken, the
+refreshToken and the user’s Onshape profile once authentication has been
+successfully passed. We can now use this to update our database with
+user specific information.&lt;/p>
+&lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage4.png"
+style="width:0.43056in;height:0.43056in" />Note that if you store the
+accessToken and refreshToken in the database along with the user record,
+this will have to be updated each time that the access codes are
+refreshed.&lt;/p>
+&lt;p>Next we define our endpoint where the authorization flow starts in this
+case ‘/oauthSignin’. This is the endpoint that we previously defined in
+the Onshape application setup. This will redirect to an Onshape page in
+order for the user to confirm (or deny) the applications access to the
+Onshape resources.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>app.use(&lt;span style="color:#a50">&amp;#39;/oauthSignin&amp;#39;&lt;/span>, (req, res) =&amp;gt; {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a">return&lt;/span> passport.authenticate(&lt;span style="color:#a50">&amp;#39;onshape&amp;#39;&lt;/span>, { state: uuid.v4() })(req, res);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}, (req, res) =&amp;gt; { &lt;span style="color:#aaa;font-style:italic">/* redirected to Onshape for authentication */&lt;/span> });
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage6.png"
+style="width:0.43056in;height:0.46528in" />The state fields can be used
+to store relevant information such as documentId, ElementId,
+WorkspaceId, etc – in the event that this information is sent from
+Onshape. In this sample we have not defined any fields.&lt;/p>
+&lt;p>The following page is displayed:&lt;/p>
+&lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage23.png"
+style="width:4.74911in;height:3.28125in"
+alt="Graphical user interface, application, Teams Description automatically generated" />&lt;/p>
+&lt;p>&lt;span id="_Toc102977885" class="anchor">&lt;/span>Figure 14 - Onshape
+Authorize Application Interface&lt;/p>
+&lt;p>This page pulls information, such as the name, the description, the
+permissions from the original application setup in Onshape. Once the
+user clicks on the “Authorize application” button, the flow will
+redirect to the redirectURL defined in the application setup.&lt;/p>
+&lt;h3 id="step-2-exchange-the-code-for-an-access-token">Step 2: Exchange the code for an access token&lt;/h3>
+&lt;p>Fortunately, if you are using Passport, there really isn’t a lot that
+you need to do once the user clicks the “Authorize Application” button.
+The return URL will contain the one-time authorization token and the
+passport will extract that and exchange it for an access Token and a
+refresh token. These will be available in the Passport callback function
+shown previously.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">//OAuth2 redirect code will be replaced for a token
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>app.use(&lt;span style="color:#a50">&amp;#39;/oauthRedirect&amp;#39;&lt;/span>, passport.authenticate(&lt;span style="color:#a50">&amp;#39;onshape&amp;#39;&lt;/span>, {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>failureRedirect: &lt;span style="color:#a50">&amp;#39;/grantDenied&amp;#39;&lt;/span> }), (req, res, next) =&amp;gt; {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">// additional optional redirect parameters to be added to the redirect
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span>URL
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>res.redirect(&lt;span style="color:#a50">`/?authsuccess=true`&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>next();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>});
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>In the above code there are a few interesting points.&lt;/p>
+&lt;p>Firstly, if the user clicked on the “Deny” button, the user is navigated
+to a page that notifies that access to the application was denied. We
+can see that in the “failureRedirect” argument. The route for calling
+the “grantDenied.html“ page is defined below:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>app.get(&lt;span style="color:#a50">&amp;#39;/grantDenied&amp;#39;&lt;/span>, (req, res, next) =&amp;gt; {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>res.sendFile(path.join(__dirname, &lt;span style="color:#a50">&amp;#39;public&amp;#39;&lt;/span>, &lt;span style="color:#a50">&amp;#39;html&amp;#39;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a50">&amp;#39;grantDenied.html&amp;#39;&lt;/span>));
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>})
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Another interesting point to mention is the following line:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>res.redirect(&lt;span style="color:#a50">`/?authsuccess=true`&lt;/span>);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Here, we can add additional parameters to the URL that gets called once
+the OAuth process completes successfully. In this case I’m adding a
+simple argument that lets my index page know that authorization
+completed successfully. The index page then produces a notification that
+the application has been successfully authenticated by Onshape.&lt;/p>
+&lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage24.png" style="width:6.5in;height:1.88611in"
+alt="Graphical user interface, text, application, website Description automatically generated" />&lt;/p>
+&lt;p>&lt;span id="_Toc102977886" class="anchor">&lt;/span>Figure 15 - Notifying the
+user of successful authentication&lt;/p>
+&lt;h3 id="step-3-using-the-access-token">Step 3: Using the access token&lt;/h3>
+&lt;p>Our application is now registered and successfully authenticated by
+Onshape. This means that the application can access Onshape’s resources
+as long as a valid access token is provided along with our API calls.&lt;/p>
+&lt;p>The ‘access_token’ must be supplied on all subsequent Onshape API
+requests as a header value: Authorization: Bearer &amp;lt;access_token&amp;gt; The
+access token uniquely identifies the combination of your application,
+the Onshape user and the set of permissions granted for the access
+token.&lt;/p>
+&lt;p>The access token has a limited lifetime of 60 minutes, after which it
+will no longer work and attempts to use it will result in an error
+response for an Onshape API request. The application must use the
+refresh token returned by the original authorization code exchange to
+generate new access tokens&lt;/p>
+&lt;p>The following code is a complete example of getting metadata for a
+specific Part. The documentId, WorkspaceId, ElementID and PartId have
+been sent over as arguments. The user data including the access token
+and the refresh token is included in the request object.&lt;/p>
+&lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage25.emf" alt="">&lt;/p>
+&lt;p>For making the web call I am using a library called “axios” there are
+many such libraries available on npm, however do check that they are
+still supported. I initiated the axios library in this way after
+installing it:&lt;/p>
+&lt;p>const axios = require(&amp;lsquo;axios&amp;rsquo;).default;&lt;/p>
+&lt;p>More details regarding the axios library can be found here:
+&lt;a href="https://www.npmjs.com/package/axios">https://www.npmjs.com/package/axios&lt;/a>&lt;/p>
+&lt;p>In the code above note the catch clause:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>}).&lt;span style="color:#00a">catch&lt;/span>(&lt;span style="color:#00a">function&lt;/span> (data) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">if&lt;/span> (data.response.status === &lt;span style="color:#099">401&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> authentication.refreshOAuthToken(req, res).then(&lt;span style="color:#00a">function&lt;/span> () {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> getMetadata(docid, wsid, eleid, pid, req, res);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>If the call to the Onshape API fails for any reason it is caught by this
+catch clause. The first reason for failure would probably be because the
+accessToken has expired, this would return an HTTP 401 error – not
+authorized.&lt;/p>
+&lt;p>If this is the case, we are sending a request to refresh the access
+token. Once that request comes back with a new token, we are calling our
+getMetadata function again.&lt;/p>
+&lt;p>The refresh Token functionality is explained in detail in the next
+section.&lt;/p>
+&lt;p>In the code above, all the metadata properties are returned in JSON
+format in the response.data.properties object.&lt;/p>
+&lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage6.png"
+style="width:0.47222in;height:0.47222in" />Note that in the call
+authentication.refreshOAuthToken “authentication” is a library of
+methods related to authenticating the user and the application through
+OAuth2. For simplicity of explanation, I have until now, placed all my
+calls in the app.js file, however it is a better practice to organize
+all the OAuth2 calls in the same library.&lt;/p>
+&lt;h3 id="step-4-refreshing-the-token">Step 4: Refreshing the token&lt;/h3>
+&lt;p>We have already seen a call to refresh the access token in the previous
+section. As mentioned previously I have all my OAuth2 refresh code in my
+authentication library.&lt;/p>
+&lt;p>When the access token expires it must be refreshed by making another
+POST request to https://oauth.onshape.com/oauth/token with the following
+URL encoded form body (again, with
+Content-Type application/x-www-form-urlencoded):&lt;/p>
+&lt;p>grant_type=refresh_token&amp;amp;refresh_token=&amp;lt;refresh_token&amp;gt;&amp;amp;client_id=&amp;lt;client_id&amp;gt;&amp;amp;client_secret=&amp;lt;client_secret&amp;gt;.&lt;/p>
+&lt;p>As with the authorization code data, the parameters in the form body
+must be URL encoded. The response to this POST request will be a JSON
+encoded structure as before with a new access_token value that can be
+used for the next 60 minutes.&lt;/p>
+&lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage4.png"
+style="width:0.43056in;height:0.43056in" />Refresh tokens are valid for
+the lifetime of the user’s grant. If a user who has previously granted
+access to your application decides to revoke the grant, the refresh
+token is invalidated. If the user decides to re-grant application
+access, a new refresh token is generated and returned along with the
+access token.&lt;/p>
+&lt;p>The following code takes care of the call to Onshape’s authorization
+server to refresh the access token.&lt;/p>
+&lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage6.png"
+style="width:0.47222in;height:0.47222in" />Note that in this sample it
+is using the npm package “request” to make the web call. This package
+has since been depreciated and you should use another supported package,
+such as axios.&lt;/p>
+&lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage26.emf" alt="">&lt;/p>
+&lt;p>We use the variable pendingTokenRefreshes to hold the value of the
+session.id. If pendingTokenRefreshes is populated with the session.id,
+that would mean that there is a token refresh already pending. This
+would occur if there were multiple calls to the Onshape API while the
+refresh was still pending.&lt;/p>
+&lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage27.emf" alt="">&lt;/p>
+&lt;p>The final part of the relevant code is the onOAthTokenReceived. This is
+called following a successful call to refresh the token. The access
+token and the refresh token are updated in the req.user object and if
+you wish you can update the database with the refreshed information.&lt;/p>
+&lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage28.emf" alt="">&lt;/p>
+&lt;h3 id="user-grant-of-authorization">User Grant of Authorization&lt;/h3>
+&lt;p>As mentioned previously, it is the Onshape user who actually grants
+authorization to the third-party application to access the Onshape data.
+This must be done by each user who needs to work with the third-part
+application.&lt;/p>
+&lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage6.png"
+style="width:0.47222in;height:0.47222in" />In order to grant access,
+after logging into Onshape, the user should click on the top right menu
+that drops down from their name.&lt;/p>
+&lt;p>Note that this menu will look different depending upon the users
+specific rights and enterprises that he/she has access to.&lt;/p>
+&lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage29.png"
+style="width:1.89869in;height:2.26471in"
+alt="Graphical user interface, text, application Description automatically generated" />&lt;/p>
+&lt;p>Click in the “My Account” option. This will bring up the user’s profile.
+The click on the “Applications” option on the left side menu.&lt;/p>
+&lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage30.png" style="width:6.5in;height:3.20764in"
+alt="Graphical user interface, text, application, email Description automatically generated" />&lt;/p>
+&lt;p>This is where the user grants access to an application. Find the
+third-party application that you wish to authorize and click on the
+“Grant” button in the “Onshape access” column.&lt;/p>
+&lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage6.png"
+style="width:0.47222in;height:0.47222in" />Note that where you see a
+“Grant” button in the “external access” column, this means that the
+application requires Onshape to access its resources. We will examine a
+business case in the next section where this is a requirement.&lt;/p>
+&lt;p>Once you click on the “Grant” button, you should see a page similar to
+the following “Authorize Application” screen shown below.&lt;/p>
+&lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage23.png"
+style="width:5.13542in;height:3.54816in"
+alt="Graphical user interface, application, Teams Description automatically generated" />&lt;/p>
+&lt;p>Click to authorize the application and you will now be redirected to
+that application and access to the Onshape resources and your user
+profile in Onshape would have been granted successfully.&lt;/p>
 &lt;h2 id="notes-for-developers-of-installed-desktop-applications">Notes for developers of installed desktop applications&lt;/h2>
 &lt;p>OAuth is designed for interactions between two servers utilizing a browser. However it can also be used by an installed desktop (or mobile) application. The application must perform a similar role to that of a third party server - it must exchange the code for an access token structure.&lt;/p>
 &lt;p>In order to enable this to be as automatic as possible Onshape allows two special forms of redirect URI to be registered: &lt;code>http://localhost:&amp;lt;port&amp;gt;&lt;/code> and &lt;code>urn:ietf:wg:oauth:2.0:oob&lt;/code>&lt;/p>
@@ -206,4 +590,27 @@ Legacy support: As we migrate to extension based apps, the old Iframe URL is mov
 &lt;li>
 &lt;p>Use a tool such as Burp (&lt;a href="https://portswigger.net/burp" target="_blank">&lt;a href="https://portswigger.net/burp">https://portswigger.net/burp&lt;/a>&lt;/a>) or Charles (&lt;a href="http://charlesproxy.com" target="_blank">&lt;a href="http://charlesproxy.com">http://charlesproxy.com&lt;/a>&lt;/a>) to deliberately &amp;lsquo;man-in-the-middle&amp;rsquo; the connection requests between your server and Onshape, and verify that you are performing the correct REST operations (GET vs. POST) and correctly URL encoding the parameter values.&lt;/p>
 &lt;/li>
-&lt;/ol></description></item></channel></rss>
+&lt;/ol>
+&lt;h2 id="oauth2-summary">OAuth2 Summary&lt;/h2>
+&lt;p>Implementing OAuth2 can be complex since it’s a multi-step process that
+requires specific data to be delivered at specific times in a specific
+format. Using a library such as Passport does make our lives a lot
+easier when implementing such a solution.&lt;/p>
+&lt;p>We’ve covered a lot of ground in this section. First, defining a
+third-part application in Onshape, understanding what OAuth2 is and how
+it works through concreate examples of how to implement it and
+communicate with Onshape.&lt;/p>
+&lt;p>In the end, simplifying the explanation, OAuth2 is a three-step process
+that secures your applications and guarantees that an application isn’t
+impersonating a user when it access the resources, but is a validated
+“known” entity that the user approves to access the data.&lt;/p>
+&lt;p>The code shown here is sample code intended to provide you with the
+logic of how this process works. If you’ve implemented OAuth previously
+this should be very self explanatory, and if not, feel free to use these
+code samples and adjust them to your own needs.&lt;/p>
+&lt;p>It is important to mention that if you wish Onshape to access data from
+your application, the same sort of mechanism must be implemented in your
+code. Onshape supports through its app extensions the ability to connect
+through OAuth2 to a third-party app and retrieve data from that
+application. This implementation I shown in the next section where we
+get into specific business cases for integration.&lt;/p></description></item></channel></rss>

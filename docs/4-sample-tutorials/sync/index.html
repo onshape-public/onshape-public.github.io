@@ -1,0 +1,379 @@
+<!doctype html><html lang=en class=no-js><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=generator content="Hugo 0.113.0"><meta name=robots content="index, follow"><link rel="shortcut icon" href=/favicons/favicon.ico><link rel=apple-touch-icon href=/favicons/apple-touch-icon-180x180.png sizes=180x180><link rel=icon type=image/png href=/favicons/favicon-16x16.png sizes=16x16><link rel=icon type=image/png href=/favicons/favicon-32x32.png sizes=32x32><link rel=icon type=image/png href=/favicons/android-36x36.png sizes=36x36><link rel=icon type=image/png href=/favicons/android-48x48.png sizes=48x48><link rel=icon type=image/png href=/favicons/android-72x72.png sizes=72x72><link rel=icon type=image/png href=/favicons/android-96x96.png sizes=96x96><link rel=icon type=image/png href=/favicons/android-144x144.png sizes=144x144><link rel=icon type=image/png href=/favicons/android-192x192.png sizes=192x192><title>Sync Objects and Metadata | Onshape Developer Documentation</title><meta name=description content="The first business case is probably the most common, “How do I sync data
+that I create in Onshape with my ERP or PLM system?”. There could be
+many …"><meta property="og:title" content="Sync Objects and Metadata"><meta property="og:description" content="The first business case is probably the most common, “How do I sync data that I create in Onshape with my ERP or PLM system?”. There could be many reasons why you would want to sync data between two different systems. Primarily Onshape is a system that creates new data. This data is created by designers as they perform their daily tasks. While the designer works primarily in Onshape, the actual data that they create does not exist in a vacuum, it is used by other departments, other processes within the organization."><meta property="og:type" content="article"><meta property="og:url" content="https://onshape-public.github.io/docs/4-sample-tutorials/sync/"><meta property="article:section" content="docs"><meta itemprop=name content="Sync Objects and Metadata"><meta itemprop=description content="The first business case is probably the most common, “How do I sync data that I create in Onshape with my ERP or PLM system?”. There could be many reasons why you would want to sync data between two different systems. Primarily Onshape is a system that creates new data. This data is created by designers as they perform their daily tasks. While the designer works primarily in Onshape, the actual data that they create does not exist in a vacuum, it is used by other departments, other processes within the organization."><meta itemprop=wordCount content="4534"><meta itemprop=keywords content><meta name=twitter:card content="summary"><meta name=twitter:title content="Sync Objects and Metadata"><meta name=twitter:description content="The first business case is probably the most common, “How do I sync data that I create in Onshape with my ERP or PLM system?”. There could be many reasons why you would want to sync data between two different systems. Primarily Onshape is a system that creates new data. This data is created by designers as they perform their daily tasks. While the designer works primarily in Onshape, the actual data that they create does not exist in a vacuum, it is used by other departments, other processes within the organization."><link rel=preload href=/scss/main.min.b62e58da7255459c03616973d5e57025c9e05acf735fe51d880fde377e61cf51.css as=style><link href=/scss/main.min.b62e58da7255459c03616973d5e57025c9e05acf735fe51d880fde377e61cf51.css rel=stylesheet integrity><script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script><style>code{white-space:pre-wrap!important;overflow-wrap:break-word}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-3CY8X7Q128"></script>
+<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-3CY8X7Q128",{anonymize_ip:!1})}</script></head><body class=td-page><header><nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar"><a class=navbar-brand href=/><span class=navbar-logo></span><span class=font-weight-bold>Onshape Developer Documentation</span></a><div class="td-navbar-nav-scroll ml-md-auto" id=main_navbar><ul class="navbar-nav mt-2 mt-lg-0"></ul></div><div class="navbar-nav d-none d-lg-block"></div></nav></header><div class="container-fluid td-outer"><div class=td-main><div class="row flex-xl-nowrap"><aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none"><div id=td-sidebar-menu class=td-sidebar__inner><form class="td-sidebar__search d-flex align-items-center"><button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation"></button></form><nav class="collapse td-sidebar-nav" id=td-section-nav><ul class="td-sidebar-nav__section pr-md-3 ul-0"><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docs-li><a href=/docs/ title="Welcome to the Onshape Developer Documentation" class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id=m-docs><span>Welcome</span></a><ul class=ul-1><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs1-introduction-li><a href=/docs/1-introduction/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docs1-introduction><span>Introduction</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs2-quick-start-li><a href=/docs/2-quick-start/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docs2-quick-start><span>Quick Start</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docs3-api-development-li><a href=/docs/3-api-development/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docs3-api-development><span>API Development</span></a><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs3-api-developmentapikeys-li><a href=/docs/3-api-development/apikeys/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs3-api-developmentapikeys><span>API Keys</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs3-api-developmentoauth-li><a href=/docs/3-api-development/oauth/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs3-api-developmentoauth><span>OAuth</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docs4-sample-tutorials-li><a href=/docs/4-sample-tutorials/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docs4-sample-tutorials><span>Sample Tutorials</span></a><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs4-sample-tutorialssync-li><a href=/docs/4-sample-tutorials/sync/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-docs4-sample-tutorialssync><span class=td-sidebar-nav-active-item>Sync Objects and Metadata</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs4-sample-tutorialsreleases-li><a href=/docs/4-sample-tutorials/releases/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs4-sample-tutorialsreleases><span>Sync Releases and Revisions</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs4-sample-tutorialsderivative-li><a href=/docs/4-sample-tutorials/derivative/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs4-sample-tutorialsderivative><span>Generate Derivative Files</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docs5-advanced-api-development-li><a href=/docs/5-advanced-api-development/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docs5-advanced-api-development><span>Advanced API Development</span></a><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs5-advanced-api-developmentassociativity-li><a href=/docs/5-advanced-api-development/associativity/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs5-advanced-api-developmentassociativity><span>Associativity</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs5-advanced-api-developmentbilling-li><a href=/docs/5-advanced-api-development/billing/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs5-advanced-api-developmentbilling><span>Billing</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs5-advanced-api-developmentfeatureaccess-li><a href=/docs/5-advanced-api-development/featureaccess/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs5-advanced-api-developmentfeatureaccess><span>Feature List API</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs5-advanced-api-developmenttranslation-li><a href=/docs/5-advanced-api-development/translation/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs5-advanced-api-developmenttranslation><span>Model Translation</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docs6-app-development-li><a href=/docs/6-app-development/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docs6-app-development><span>App Development</span></a><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs6-app-developmentwhyonshape-li><a href=/docs/6-app-development/whyonshape/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs6-app-developmentwhyonshape><span>Why Onshape?</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs6-app-developmentappstore-li><a href=/docs/6-app-development/appstore/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs6-app-developmentappstore><span>Onshape App Store</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs6-app-developmentclientmessaging-li><a href=/docs/6-app-development/clientmessaging/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs6-app-developmentclientmessaging><span>Client Messaging</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs6-app-developmentextensions-li><a href=/docs/6-app-development/extensions/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs6-app-developmentextensions><span>Extensions</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs6-app-developmentstructuredstorage-li><a href=/docs/6-app-development/structuredstorage/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs6-app-developmentstructuredstorage><span>Structured Storage</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs6-app-developmentwebhook-li><a href=/docs/6-app-development/webhook/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs6-app-developmentwebhook><span>Webhook Notifications</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docs7-reference-li><a href=/docs/7-reference/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docs7-reference><span>Reference</span></a><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs7-referencearchitecture-li><a href=/docs/7-reference/architecture/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs7-referencearchitecture><span>Onshape Architecture</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs7-referencetestingguidelines-li><a href=/docs/7-reference/testingguidelines/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs7-referencetestingguidelines><span>Testing Guidelines</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs7-referencechangelog-li><a href=/docs/7-reference/changelog/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs7-referencechangelog><span>Changelog</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docs8-get-help-li><a href=/docs/8-get-help/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docs8-get-help><span>Get Help</span></a><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs8-get-helptroubleshooting-li><a href=/docs/8-get-help/troubleshooting/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs8-get-helptroubleshooting><span>Troubleshooting</span></a></li></ul></li></ul></li></ul></nav></div></aside><aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none"><div class="td-page-meta ml-2 pb-1 pt-2 mb-0"></div><div class=td-toc><nav id=TableOfContents><ul><li><a href=#overview>Overview</a><ul><li><a href=#step-1-define-properties-in-onshape>Step 1: Define Properties in Onshape</a></li><li><a href=#step-2-create-corresponding-object>Step 2: Create Corresponding Object</a></li><li><a href=#step-3-get-onshape-metadata>Step 3: Get Onshape Metadata</a></li><li><a href=#step-4-modify-properties-in-onshape>Step 4: Modify Properties in Onshape</a></li><li><a href=#step-5-request-part-number>Step 5: Request Part Number</a></li><li><a href=#step-6-push-updates-from-third-party-application>Step 6: Push Updates from Third-Party Application</a></li></ul></li><li><a href=#implementation>Implementation</a><ul><li><a href=#debug>Debug</a></li><li><a href=#define-an-application-extension>Define an Application Extension</a></li><li><a href=#grant-onshape-access-to-3suprdsup-party-data>Grant Onshape Access to 3<sup>rd</sup> Party Data</a></li><li><a href=#defining-webhooks>Defining Webhooks</a></li><li><a href=#receiving-webhook-notifications>Receiving Webhook Notifications</a></li><li><a href=#getting-onshape-properties>Getting Onshape Properties</a></li><li><a href=#updating-onshape>Updating Onshape</a></li><li><a href=#implementing-custom-part-numbers>Implementing Custom Part Numbers</a></li><li><a href=#implementing-part-number-code>Implementing Part Number Code</a></li></ul></li></ul></nav></div></aside><main class="col-12 col-md-9 col-xl-8 pl-md-5" role=main><nav aria-label=breadcrumb class=td-breadcrumbs><ol class=breadcrumb><li class=breadcrumb-item><a href=https://onshape-public.github.io/docs/>Welcome</a></li><li class=breadcrumb-item><a href=https://onshape-public.github.io/docs/4-sample-tutorials/>Sample Tutorials</a></li><li class="breadcrumb-item active" aria-current=page><a href=https://onshape-public.github.io/docs/4-sample-tutorials/sync/>Sync Objects and Metadata</a></li></ol></nav><div class=td-content><h1>Sync Objects and Metadata</h1><header class=article-meta></header><p>The first business case is probably the most common, “How do I sync data
+that I create in Onshape with my ERP or PLM system?”. There could be
+many reasons why you would want to sync data between two different
+systems. Primarily Onshape is a system that creates new data. This data
+is created by designers as they perform their daily tasks. While the
+designer works primarily in Onshape, the actual data that they create
+does not exist in a vacuum, it is used by other departments, other
+processes within the organization. These departments and processes
+probably do not have access to Onshape or the required knowledge of how
+to use Onshape. In addition, quite often, the data generated by Onshape
+will be augmented with additional data as the product lifecycle process
+progresses.</p><p>Therefore, Onshape could be considered the genesis of the data that will
+be used to develop a product, yet it is not the only data that will be
+required.</p><h2 id=overview>Overview</h2><p>In this business case we examine how a designer could work in Onshape
+and how the data generated by Onshape can be used to make decisions in
+other systems. Based upon the decisions made, data is pushed back to
+Onshape as values calculated in another system. Let’s look at the
+process in much more detail.</p><h3 id=step-1-define-properties-in-onshape>Step 1: Define Properties in Onshape</h3><p><img src=/images/integrationguideimage31.png style=width:5.41667in;height:1.84722in alt="Diagram Description automatically generated"></p><ol><li><p>In the first step, the designer starts a new part in Onshape –
+remember that in Onshape a Part can be created along with other
+parts in a Part Studio, so we can assume that there could be
+multiple parts created in the single document. Obviously, we want
+the designer to have the freedom to use all Onshape functionality
+without constraints placed by the demands of the integration.</p></li><li><p>At some point in the design process, the designer will be required
+to enter property values for the part – these could include values
+such as the Part Name, the description, material and so on.</p></li><li><p>The designer clicks the “Save” or “Apply” button for the properties
+and closes the properties window.</p></li><li><p>A web hook that listens to any changes in the properties has been
+defined. As the user saves the properties, the web hook is
+triggered, and it will send a notification through the defined web
+hook to the third-party system.</p></li></ol><p><img src=/images/integrationguideimage6.png style=width:.47222in;height:.47222in>Note: There are Part
+properties, workspace properties and document properties – all these
+properties live at different levels of the document. While the trigger
+could pick up changes to any to these properties, we are currently
+focused on just Part properties – the event will be triggered on any
+saving of properties, however our third-party code can ignore anything
+that’s not a Part (or an Assembly). In this next step we assume that a
+new object is being created in the third-party application.</p><h3 id=step-2-create-corresponding-object>Step 2: Create Corresponding Object</h3><p><img src=/images/integrationguideimage32.png style=width:5.16667in;height:2.13889in alt="Diagram Description automatically generated"></p><ol><li><p>Once the designer made changes to the properties in Onshape and
+saved those changes, a message is sent to our third-party
+application. This message is in JSON format and contains minimal
+information such as the Workspace ID, the Document ID, the Element
+ID, the Part ID (if it’s a Part) and information regarding the event
+that was triggered. The third-party application receives this
+information to an endpoint that was defined during the setup of the
+web hook.</p></li><li><p>The code in our application can now use the ID’s sent over to check
+if an object with corresponding IDs exists in our system. Here we
+are assuming that no such object exists. This does mean that we must
+store Onshape IDs into our objects in the third-party system.</p></li><li><p>We then create a new object and populate the ID information and save
+it to the database. Note that at this point in time, we only have
+minimal information that provides no more than the identity of the
+Onshape Part.</p></li><li><p>Next, in order to get the complete metadata, we must make a REST API
+call to Onshape in order to get the metadata for the part. Since we
+were provided the ID information in the web hook, we have enough
+information to go back to Onshape and request the metadata for a
+specific, document, element, workspace and part.</p></li></ol><p><img src=/images/integrationguideimage6.png style=width:.47222in;height:.47222in>Note that you can either
+store the Onshape IDs in separate fields in your database or as one long
+unique string which can be used to easily identify the part in your
+application.</p><h3 id=step-3-get-onshape-metadata>Step 3: Get Onshape Metadata</h3><p><img src=/images/integrationguideimage33.png style=width:5.75in;height:2.04167in alt="Graphical user interface, text, application, chat or text message Description automatically generated"></p><ol><li><p>The response from the call to the Onshape API is sent back as JSON.
+The data will contain a lot of different objects that represent the
+property values, their types, the IDs, name of the property, value
+of the property, etc.</p></li><li><p>Once received this data must be parsed by your third-party
+application code and the corresponding object updated as required.
+For bi-directional update, it is important to store the Onshape
+property IDs of any data that will need to be synced back to Onshape
+from the third-party application.</p></li><li><p>This is an optional stage. Once you have all the metadata values
+imported, you could now calculate any values that are based off the
+metadata. The most common use case scenario is the generation of
+intelligent part numbers. Based off configuration, part type, etc.,
+you could generate a part number that has specific meaning within
+the context of the company.</p></li><li><p>If you calculated specific values, you can now store them in your
+database.</p></li></ol><h3 id=step-4-modify-properties-in-onshape>Step 4: Modify Properties in Onshape</h3><p><img src=/images/integrationguideimage34.png style=width:5.04167in;height:3.97222in alt="Diagram Description automatically generated"></p><ol><li><p>As in Step 1 the designer updates the properties in Onshape – this
+is obviously something that can happen multiple times</p></li><li><p>The web hook is triggered when the designer saves the property
+changes</p></li><li><p>Our third-party application is listening for property changes</p></li><li><p>The third-party application’s code will check if the corresponding
+object exists based off the IDs sent from Onshape.</p></li><li><p>In this scenario the corresponding object has already been saved in
+our system</p></li><li><p>We make a REST API call to Onshape to get the metadata based off the
+IDs sent from Onshape.</p></li><li><p>Onshape returns the JSON that represents the updated properties</p></li><li><p>We ingest the updated metadata and update our existing object in the
+third-party system.</p></li></ol><h3 id=step-5-request-part-number>Step 5: Request Part Number</h3><p><img src=/images/integrationguideimage35.png style=width:5.76389in;height:2.13889in alt="Graphical user interface, text, application, chat or text message Description automatically generated"></p><ol><li><p>As we will see later, Onshape has the built in capability to pull
+custom part numbers from a third-party system. From either the
+properties window or the release candidate window, click the button
+to request a part number</p></li><li><p>Onshape sends basic ID information to a predefined endpoint in our
+third-party app.</p></li><li><p>The ID information sent by Onshape is enough data to find the
+corresponding object in our database. We then extract from that
+object the pre-calculated intelligent part number – or we can
+calculate it at this point.</p></li><li><p>The part number is returned to Onshape and populated in the Part
+Number field</p></li></ol><p><img src=/images/integrationguideimage6.png style=width:.47222in;height:.47222in>Note that in order to pull a
+part number from a third-party application we will need to implement
+OAuth2 in our application and grant Onshape access to the resources of
+our application. Onshape has a very good mechanism for achieving this
+and we will be explaining this in detail in this section.</p><p>Note that by default Onshape uses its own internal Part number
+generator, in order to use a custom third-party generator, we will need
+to define an app extension and then define in the Enterprise release
+settings to use our custom part number generator.</p><h3 id=step-6-push-updates-from-third-party-application>Step 6: Push Updates from Third-Party Application</h3><p><img src=/images/integrationguideimage36.png style=width:5.75in;height:2.45833in alt="Graphical user interface, text, application, chat or text message Description automatically generated"></p><ol><li><p>In this scenario we are updating an Object in our third-party
+application and expecting that some of the property values will be
+updated in Onshape. We can either send over all the properties
+populated for this object, or a subset of properties and values</p></li><li><p>The REST API to update properties in Onshape requires that we
+reference the IDs of the properties that we are updating. For this
+reason we have stored the Onshape property IDs with our metadata
+object in our database.</p></li><li><p>We construct the correct JSON that contains all the properties to
+update and the new values. We can then call the Onshape REST API to
+update the properties in Onshape with the new data.</p></li><li><p>Once successfully completed, the Onshape REST API call will return
+HTTP 200 and we can notify the user if needed.</p></li></ol><p><img src=/images/integrationguideimage6.png style=width:.47222in;height:.47222in>Note that updates to Onshape
+will happen behind the scenes in real-time, therefore someone working on
+the document in Onshape will be able to see the updates as soon as they
+have been made. There is no notification in Onshape that notifies the
+user that properties have been updated, however you can open the
+properties window and view the updated data.</p><h2 id=implementation>Implementation</h2><p>We’ll start by defining an App Extension in Onshape so that we can
+receive custom part numbers.</p><p><img src=/images/integrationguideimage4.png style=width:.43056in;height:.43056in>It is important to mention
+that this guide does not go into complete detail with regards to App
+extensions, it just focuses on the requirements for this specific
+business case. For the complete App Extension guide please reference
+this link: <a href=https://onshape-public.github.io/docs/extensions/>https://onshape-public.github.io/docs/extensions/</a></p><h3 id=debug>Debug</h3><p>All Browsers now have developer tools exposed in their interface. These
+tools provide us ways to debug client code, view console messages and
+most importantly for our use case, view Network requests and their
+response.</p><p>In this example I am using Chrome’s developer tools. Most other Browsers
+have more or less copied Chrome’s layout for the developer tools so it
+should be easy to find the network section.</p><p><img src=/images/integrationguideimage39.png style=width:5.36972in;height:4.16096in alt="Graphical user interface, text, application Description automatically generated"></p><p><span id=_Toc102977895 class=anchor></span>Figure 24 Accessing
+Chrome&rsquo;s Developer Tools</p><p>Let’s take the simple use case of trying to understand which endpoint
+Onshape uses for saving Metadata.</p><p>Open a document in Onshape and define some properties – don’t save yet.</p><p><img src=/images/integrationguideimage40.png style=width:3.42406in;height:2.25966in alt="Graphical user interface, text, application, email Description automatically generated"></p><p>Prior to saving open the developer tools and click on the “Network” tab.</p><p><img src=/images/integrationguideimage41.png style=width:6.5in;height:2.37014in alt="Table Description automatically generated"></p><p><span id=_Toc102977896 class=anchor></span>Figure 25 Developer Tools
+Network Tab</p><p>Next save the updated properties by clicking either the Apply Button or
+the Save Button</p><p>In the Network tab you will see a new web request – select it:</p><p><img src=/images/integrationguideimage42.png style=width:5.40656in;height:2.82458in alt="Graphical user interface, text, application Description automatically generated"></p><p><span id=_Toc102977897 class=anchor></span>Figure 26 Network Request
+Sample</p><p>What we are seeing here is the response from the call to Save the
+properties. We can expand this response to view the complete JSON.</p><p>By clicking on the Headers we can view the actual request:</p><p><img src=/images/integrationguideimage43.png style=width:5.125in;height:2.47222in alt="Graphical user interface, text, application Description automatically generated"></p><p><span id=_Toc102977898 class=anchor></span>Figure 27 HTTP POST
+Request for Saving Properties</p><p>Here we can see that this will correspond to the APIs listed in
+Glassworks.</p><p>Most importantly the “Payload” tab is our definition of the body of the
+request. This is provided in JSON format and can be expanded. As shown
+here:</p><p><img src=/images/integrationguideimage44.png style=width:4.90769in;height:2.94205in alt="Graphical user interface, text, application Description automatically generated"></p><p><span id=_Toc102977899 class=anchor></span>Figure 28 HTTP POST Body</p><p>We now have the correct API call and the format of the body to
+successfully make the API call. We can also see from the body that if we
+wish to update properties in Onshape from our third-party application,
+we need to store the propertyID value.</p><p><img src=/images/integrationguideimage4.png style=width:.43056in;height:.43056in>It is important to mention –
+ALWAYS use cad.onshape.com to make API calls (no matter what you see in
+the Headers tab or is shown in the Payload tab.</p><h3 id=define-an-application-extension>Define an Application Extension</h3><p>An application extension is how Onshape embeds third-party application
+features in its UI. There are two types of extension:</p><ol><li><p>An extension that embeds its UI from the application into the
+Onshape UI in an iFrame. Such a application my call Onshape REST
+APIs or just expose an application interface inside Onshape.</p></li><li><p>An extension that embeds and that calls a REST API exposed by the
+application from the Onshape UI. For instance, embedding application
+functionality in the context menus or toolbars. This type of
+application extension relies on external OAuth information in order
+to authenticate the call. In this case Onshape acts as the client
+and the application as the server.</p></li></ol><p>Each extension will exist at a specific location in the Onshape UI and
+will work within the context of that location or a specific selection,
+passing the relative information to the application.</p><p>In order to define the Application Extension we return to the
+development portal at <a href=https://dev-portal.onshape.com/oauthApps>https://dev-portal.onshape.com/oauthApps</a> where
+we initially defined our OAuth Application.</p><p>Select the OAuth Application that you previously defined and click on
+the Extensions tab.</p><p><img src=/images/integrationguideimage45.png style=width:6.5in;height:3.37917in alt="Graphical user interface, text, application, Teams Description automatically generated"></p><p><span id=_Toc102977900 class=anchor></span>Figure 29 - Oauth
+Applications - Extensions</p><p>Start by clicking the “Add Extensions button.</p><p><img src=/images/integrationguideimage6.png style=width:.47222in;height:.47222in>Note that you can create as
+many extensions as you need for your application within the Onshape UI.</p><p>This is the interface where you define where in the Onshape UI the
+command will appear, and what endpoint in your application the command
+will reference. Changing the Location dropdown will provide additional
+fields that can be defined to specify context and other relevant fields.</p><p>For our use case, Define a name, i.e. “Custom Part Number Generator”,
+define a description of the extension and select “Part Number Generator”
+from the Location dropdown. The only other field that you need to define
+is the Action URL. This is the endpoint in your application where you
+will fetch the part number from.</p><p><img src=/images/integrationguideimage46.png style=width:4.125in;height:4.125in alt="Graphical user interface, text, application, email Description automatically generated"></p><p><span id=_Toc102977901 class=anchor></span>Figure 30 - Define
+Application Extension</p><p>Once you save the definition you will see it in the list of extensions.
+You can always come back and edit the definition of the extension.</p><h3 id=grant-onshape-access-to-3suprdsup-party-data>Grant Onshape Access to 3<sup>rd</sup> Party Data</h3><p>If you require Onshape to access the resources of your application, then
+you will need to define the external OAuth parameters. In our use case
+we will need Onshape to access data in our application in order to pull
+the part numbers into Onshape.</p><p>Click on the External OAuth tab, the final tab on the OAuth Applications
+page.</p><p><img src=/images/integrationguideimage47.png style=width:6.5in;height:3.27361in alt="Graphical user interface, text, application, email Description automatically generated"></p><p><span id=_Toc102977902 class=anchor></span>Figure 31 - Define
+External OAuth</p><p><img src=/images/integrationguideimage4.png style=width:.43056in;height:.43056in>In this guide we’re not
+detailing the implementation of OAuth2 inside your application, this is
+explained very well in many on-line guides. My favorite of these can be
+found at:
+<a href=https://www.digitalocean.com/community/tutorials/an-introduction-to-oauth-2>https://www.digitalocean.com/community/tutorials/an-introduction-to-oauth-2</a></p><p>Onshape provides the fields that are required for it to make a secure
+request to your application, receive an access Token and refresh it when
+required. In this case Onshape acts as the client and your application
+as the server – this is the inverse to what we defined when we enabled
+the third-party application to access Onshape.</p><p>Once you have defined the fields, Save/Update the definitions. We have
+now completed defining the application extension and enabling Onshape to
+access your applications resources.</p><p><img src=/images/integrationguideimage6.png style=width:.47222in;height:.47222in>Note if you haven’t defined
+all the endpoints at this time, you can come back later and update the
+information once you have it defined in your application.</p><p>The last thing we need to do is for the user to grant access for Onshape
+to access your applications resources. We can do this through the same
+interface that we used to grant access to Onshape.</p><p>From inside Onshape go to your account settings, from the top right
+dropdown menu. Click on the applications page.</p><p>For applications that have an application extension and External OAuth
+defined we have the “Grant” button available in the “external Access”
+column as shown here:</p><p><img src=/images/integrationguideimage48.png style=width:6.5in;height:2.87083in alt="Graphical user interface, text, application, email Description automatically generated"></p><p><span id=_Toc102977903 class=anchor></span>Figure 32 - Grant
+External Access</p><p>Click the “Grant” Button in the External Access column.</p><p>Your third-party application will present the user with option to
+authorize access to the application – similar to this simple interface:</p><p><img src=/images/integrationguideimage49.png style=width:4.25285in;height:1.71051in alt="Graphical user interface, text Description automatically generated"></p><p><span id=_Toc102977904 class=anchor></span>Figure 33 - Enabling
+Onshape to access a 3rd parties data</p><p>If you click “Allow”, you will be returned to Onshapes Applications page
+and external access will be granted.</p><h3 id=defining-webhooks>Defining Webhooks</h3><p>Now that we’ve defined our application extension and OAuth access to our
+application, we can start on receiving notifications in our application
+when events happen in Onshape.</p><p>Onshape supports webhook notification for many different types of
+events. We will register an endpoint in our application that will
+receive a notification whenever something occurs in Onshape. In our
+specific scenario this will be when the user updates the Onshape
+properties – as we defined in <strong>Step 1 Define Properties in Onshape</strong>:</p><p>For our purposes we will be registering to receive web hook
+notifications for the onshape.model.lifecycle.metadata event. When
+registering for an event in Onshape there are only two pieces of
+information required:</p><ol><li><p>The event (onshape.model.lifecycle.metadata)</p></li><li><p>The Enterprise ID</p></li></ol><p>To easily find your enterprise ID, in Onshape select the Enterprise
+Settings option from the top right dropdown menu and then click on the
+“Details” menu option on the left-hand menu bar.</p><p>You will see your Enterprise ID and a “Copy to Clipboard” button next to
+it. This will enable you to directly copy this unique ID into your code.</p><p><img src=/images/integrationguideimage50.png style=width:3.0006in;height:2.70759in alt="Graphical user interface, application Description automatically generated"></p><p><span id=_Toc102977905 class=anchor></span>Figure 34 - Finding Your
+Enterprise ID</p><p>The following code shows how we can register a webhook in Onshape.</p><p><img src=/images/integrationguideimage51.emf alt>In this example I’ve hard-coded a few of
+the values for clarity, however this method could be re-written to be a
+generic model for registering various webhooks. Some good examples of
+registering for webhooks exist at <a href=https://github.com/onshape-public>https://github.com/onshape-public</a>.</p><p>As with other calls to Onshape that we’ve seen, we are passing the
+accessToken in the header in order to establish a secure call to
+Onshape’s resources.</p><p>The information coming back from the registration call will be similar
+to the following:</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=display:flex><span>{
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#1e90ff;font-weight:700>&#34;timestamp&#34;</span>: <span style=color:#a50>&#34;2014-12-16T23:45:10.611-0500&#34;</span>,
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#1e90ff;font-weight:700>&#34;event&#34;</span>: <span style=color:#a50>&#34;webhook.register&#34;</span>,
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#1e90ff;font-weight:700>&#34;workspaceId&#34;</span>: <span style=color:#a50>&#34;000000000000000000000000&#34;</span>,
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#1e90ff;font-weight:700>&#34;elementId&#34;</span>: <span style=color:#a50>&#34;000000000000000000000000&#34;</span>,
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#1e90ff;font-weight:700>&#34;webhookId&#34;</span>: <span style=color:#a50>&#34;544e91f7fb88ed44f5de1508&#34;</span>,
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#1e90ff;font-weight:700>&#34;messageId&#34;</span>: <span style=color:#a50>&#34;34795d2e5f5f44eeb61fb7b1&#34;</span>,
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#1e90ff;font-weight:700>&#34;data&#34;</span>: <span style=color:#a50>&#34;Some data&#34;</span>,
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#1e90ff;font-weight:700>&#34;documentId&#34;</span>: <span style=color:#a50>&#34;000000000000000000000000&#34;</span>,
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#1e90ff;font-weight:700>&#34;versionId&#34;</span>: <span style=color:#a50>&#34;000000000000000000000000&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>In our example we are saving the event
+(onshape.model.lifecycle.metadata) and the returned webhookId to a
+database in order that we can later ping it to make sure that it is
+live.</p><p><img src=/images/integrationguideimage4.png style=width:.43056in;height:.43056in>Following the registration of
+the webhook, Onshape will attempt to make a call to the Notify URL
+defined in the body of the registration request. This is the endpoint of
+your application that should be called when the event is fired in
+Onshape. The most common reason for registration failures is that the
+endpoint you defined, does not return an HTTP 200 status code.
+Therefore, even if you registered for an event and received a
+registration notification and a webhookId back from Onshape, your web
+hook is not in fact registered until Onshape validates the notify URL
+and receives the HTTP 200 notification back from it. Unfortunately there
+is no way to easily know if your web hook has been successfully
+registered until you either ping it, request to list it, or try to
+activate the event through Onshape.</p><p><img src=/images/integrationguideimage4.png style=width:.43056in;height:.43056in>Also it is important to know
+that even when your webhook is registered successfully, if you change
+your code later on and Onshape fails to receive an HTTP 200 status code
+back from the notify URL, the web hook will be removed.</p><p>One of the ways we can validate that a webhook is “live” is by pinging
+it using the Onshape REST API. The following code shows the
+implementation of a ping to the webhook. If an HTTP status code of 200
+is returned, we know that the webhook is enabled, if not then we can
+re-register the webhook as needed.</p><p><img src=/images/integrationguideimage6.png style=width:.47222in;height:.47222in><img src=/images/integrationguideimage52.emf alt>Once
+we store the webhook ID in the database we can ping the webhook whenever
+the application is loaded and validate that it’s still registered. If we
+need to re-register the webhook (usually only occurs when changes are
+made to the code in the notify URL), we can create a new webhook
+registration and update the database record.</p><p><img src=/images/integrationguideimage4.png style=width:.43056in;height:.43056in>Note that you can create many
+duplicate webhook registrations for the same event with the exact same
+notify URL. Onshape doesn’t limit how many registrations are created for
+a single webhook. In the event that this happens, the notify URL will be
+called as many times as there are webhooks registered for that event.
+You can validate the registered webhooks by calling the
+<strong><a href=https://cad.onshape.com/api/webhooks>https://cad.onshape.com/api/webhooks</a></strong> API.</p><p><img src=/images/integrationguideimage6.png style=width:.47222in;height:.47222in>Use
+<a href=https://cad.onshape.com/glassworks>https://cad.onshape.com/glassworks</a> to call APIs and validate the
+requirements for each REST API call. This interface lists all the
+available Onshape REST APIs and provides examples of the values returned
+from each call.</p><h3 id=receiving-webhook-notifications>Receiving Webhook Notifications</h3><p>Once your webhook is registered and confirmed to be working you should
+be getting a notification from the webhook to your notify URL. The
+notification should be similar to the following:</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=display:flex><span>{
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#1e90ff;font-weight:700>&#34;timestamp&#34;</span>: <span style=color:#a50>&#34;2014-12-16T23:46:29.284-0500&#34;</span>,
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#1e90ff;font-weight:700>&#34;event&#34;</span>: <span style=color:#a50>&#34;onshape.document.lifecycle.metadata&#34;</span>,
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#1e90ff;font-weight:700>&#34;workspaceId&#34;</span>: <span style=color:#a50>&#34;000000000000000000000000&#34;</span>,
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#1e90ff;font-weight:700>&#34;elementId&#34;</span>: <span style=color:#a50>&#34;000000000000000000000000&#34;</span>,
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#1e90ff;font-weight:700>&#34;webhookId&#34;</span>: <span style=color:#a50>&#34;544e91f7fb88ed44f5de1508&#34;</span>,
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#1e90ff;font-weight:700>&#34;messageId&#34;</span>: <span style=color:#a50>&#34;60f54ac1cbc04179a6642d9a&#34;</span>,
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#1e90ff;font-weight:700>&#34;data&#34;</span>: <span style=color:#a50>&#34;Some data&#34;</span>,
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#1e90ff;font-weight:700>&#34;documentId&#34;</span>: <span style=color:#a50>&#34;0f9c4392e5934f30b48ab645&#34;</span>,
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#1e90ff;font-weight:700>&#34;versionId&#34;</span>: <span style=color:#a50>&#34;000000000000000000000000&#34;</span>,
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#1e90ff;font-weight:700>&#34;documentState&#34;</span>: <span style=color:#a50>&#34;IN PROGRESS&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>In your case the workspaceId, elementID, documentID, and PartId should
+be populated with the values from the Onshape document that was open
+when the properties were updated.</p><p><img src=/images/integrationguideimage4.png style=width:.43056in;height:.43056in>It is important to note that
+there is currently no OAuth validation on the webhook response,
+therefore the endpoint in your application will not receive any access
+token data for directly calling Onshape APIs. Therefore, if you need to
+make a call to the Onshape REST APIs inside the notify URL endpoint make
+a call to an endpoint in your application and include your application
+OAuth credentials in the body of the request. In this way, you can make
+a call to your application and load the passport and the Onshape
+credentials.</p><p><img src=/images/integrationguideimage4.png style=width:.43056in;height:.43056in>Onshape takes security very
+seriously and for this reason, unauthenticated calls only provide
+minimal details such aa, in this case, id’s.</p><h3 id=getting-onshape-properties>Getting Onshape Properties</h3><p>In our specific use case, when we received the webhook notification, we
+want to use the ID data provided to find the corresponding object in our
+database (or create a new one) as shown in Step 2 Create Corresponding
+Object: Then we make a call to the Onshape REST API:
+/metadata/d/{did}/{wvm}/{wvmid}/e/{eid}/{iden}/{pid}</p><p>All the relevant data is provided in the response from the webhook so we
+can pass this to the method which will call this API as follows:</p><p><img src=/images/integrationguideimage53.emf alt>From this call I am returning the
+“properties” part of the JSON – this contains all the metadata
+definitions that I wish to store in my database and associate with the
+corresponding object. The following is an example of one of the property
+objects:</p><p><img src=/images/integrationguideimage54.emf alt></p><p>In fact there is probably only three key pairs that we’re interested in
+here:</p><ol><li><p>Name – name of the property. In this case “Name”</p></li><li><p>Value – the value of the property. In this case “Top Plate”</p></li><li><p>propertyId – the ID of this property. We might need this if we want
+to enable a bi-directional sync between both applications.</p></li></ol><p><img src=/images/integrationguideimage4.png style=width:.43056in;height:.43056in>Note that for valueType
+CATEGORY the actual name, value and id will be embedded deeper in the
+object inside an array. I suggest copying and pasting the output from
+the API call into a JSON viewer such as <a href=http://jsonviewer.stack.hu/>http://jsonviewer.stack.hu/</a> so
+that it will be easier to find where the correct values are.</p><p>We can now update our corresponding object with the Onshape metadata
+values as described in Step 3 Get Onshape Metadata:</p><h3 id=updating-onshape>Updating Onshape</h3><p>So far we have pulled data from Onshape and populated it into our
+third-party application, however what if we make updates in our
+application that we want to propagate back to Onshape? This is certainly
+possible through Onshape’s REST API. Usually this would be implemented
+in your application on the click of a button – such as “Save”, if you
+have multiple properties to update, or when a property is updated if you
+want to trigger the sync for the update of a specific field.</p><p>Either way it is fairly straight forward to send the REST API call to
+Onshape to update properties. The following snippet of code shows how
+the call can be made:</p><p><img src=/images/integrationguideimage55.emf alt>As we can see here, we provide the body in
+the form of JSON that includes an array of items (in this case one item)
+and a nested array of properties (two property objects are listed here).
+Each property has a value and an ID of the property in Onshape to
+update.</p><p>The response from this API call should be an HTTP 200 status. If this is
+the case, we can update the user that the sync was successful.</p><p><img src=/images/integrationguideimage6.png style=width:.47222in;height:.47222in>If you know that you want to
+update Onshape with property values from your application, it will be
+important to build a data model that can store the properties with the
+unique ID provided by Onshape.</p><h3 id=implementing-custom-part-numbers>Implementing Custom Part Numbers</h3><p><img src=/images/integrationguideimage56.png style=width:2.95556in;height:2.94924in></p><p>The final step in this
+business case is to pull the part numbers form our third-party
+application. The part numbers can be calculated based on metadata values
+that were previously synced from Onshape or they might be numbers being
+pulled from yet another system – such as an ERP or even a Google
+Spreadsheet. The important thing is that when the user clicks a button
+in Onshape, the correct Part Numbers get populated.</p><p>To first understand how the setup for pulling part numbers from a
+third-party application we need to go back to the definition of our
+Application Extension in the Onshape developer’s portal.</p><p>Here we can see that we gave the application extension a name, defined
+the location as “Part Number Generator” and defined the “Action URL” –
+this is the endpoint in our application where we will fetch the part
+number from.</p><p>Once we have the application extension defined as Location = Part Number
+Generator, you will be able to use this option inside Onshape Release
+Management settings.</p><p><img src=/images/integrationguideimage4.png style=width:.43056in;height:.43056in>Note that in order to use the
+Part Number Generator option you will have to define the External OAuth
+option and grant Onshape access to the resources of your application.
+This is because Onshape will need to access the defined endpoint in
+order to pull the part number from the application</p><p>From within Onshape Select the “Enterprise Settings” from the top right
+dropdown menu. Navigate to the “Release Management” settings and scroll
+down to the “Revisions and part numbers” section of the page.</p><p><img src=/images/integrationguideimage57.png style=width:4.05994in;height:3.27831in alt="Graphical user interface, text, application, email Description automatically generated"></p><p><span id=_Toc102977907 class=anchor></span>Figure 36 - Revisions and
+Part Number Settings</p><p>In the Part Number Generation dropdown select the “Custom Part Number
+Generator”. Note that this is the name that you defined in your
+Application Extension so it might differ from what’s shown here.</p><p><img src=/images/integrationguideimage58.png style=width:2.73732in;height:2.03131in alt="Graphical user interface, text, application Description automatically generated"></p><p><span id=_Toc102977908 class=anchor></span>Figure 37 - Selecting
+Custom Part Number Generator</p><p><img src=/images/integrationguideimage6.png style=width:.47222in;height:.47222in>Finally scroll to the bottom
+of the page and save the settings.</p><p>Note that you will need the Admin role in order to access the enterprise
+settings.</p><h3 id=implementing-part-number-code>Implementing Part Number Code</h3><p>Onshape will send a message to the endpoint defined in your application
+extension settings. The content of this message will be an array of the
+following data.</p><p><img src=/images/integrationguideimage59.emf alt>There might be one or more object depending
+upon where the user initiated the call for part numbers from. For
+instance, if the call was initiated from the Part properties window,
+there will only be one object, however if initiated from the release
+candidate window, multiple parts/assemblies and drawings might be
+requested in the single call. Therefore, your code should be able to
+handle these two situations.</p><p>Onshape will expect a response back from your endpoint and it should be
+formatted in the following manner:</p><p><img src=/images/integrationguideimage60.emf alt>Note that in fact only the id and
+partNumber fields are actually required – the other fields are optional.</p><p>The following is an implementation of the getNextPartNumber endpoint
+that was defined in the application extension “Action URL” field:</p><p><img src=/images/integrationguideimage61.emf alt>This in turn calls a function that pulls
+the next part number from the corresponding object in the database (this
+was defined in, Step 5: Request Part Number). In this function I’m
+defining the object that will be sent to Onshape with the part number.
+This will be called multiple times depending how many objects were sent
+from Onshape.</p><p><img src=/images/integrationguideimage62.emf alt>In this case I’m sending back all the data
+required by Onshape, however it would be enough to just populate the id
+and the partNumber.</p><p>Once you load the Part Properties window or the Release candidate
+window, you can now request the Next Part number. The part number will
+be pulled from the third-party application and populated in the relevant
+fields as shown below.</p><p><img src=/images/integrationguideimage63.png style=width:4.59649in;height:3.80143in alt="Graphical user interface, application Description automatically generated"></p><p><span id=_Toc102977909 class=anchor></span>Figure 38 - Release
+Candidate Part Number generation</p></div></main></div></div><footer class="bg-dark py-5 row d-print-none"><div class="container-fluid mx-sm-5"><div class=row><div class="col-6 col-sm-4 text-xs-center order-sm-2"></div><div class="col-6 col-sm-4 text-right text-xs-center order-sm-3"></div><div class="col-12 col-sm-4 text-center py-2 order-sm-2"></div></div></div></footer></div><script src=https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js integrity=sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js integrity="sha512-UR25UO94eTnCVwjbXozyeVd6ZqpaAE9naiEUBK/A+QDbfSTQFhPGj5lOR6d8tsgbBk84Ggb5A3EkjsOgPRPcKA==" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/mermaid@8.13.4/dist/mermaid.min.js integrity="sha512-JERecFUBbsm75UpkVheAuDOE8NdHjQBrPACfEQYPwvPG+fjgCpHAz1Jw2ci9EXmd3DdfiWth3O3CQvcfEg8gsA==" crossorigin=anonymous></script>
+<script src=/js/tabpane-persist.js></script>
+<script src=/js/main.min.7b55bf6c6b7512854e4a08bbd237c127d647ad103c3548888d50711b16bbde24.js integrity="sha256-e1W/bGt1EoVOSgi70jfBJ9ZHrRA8NUiIjVBxGxa73iQ=" crossorigin=anonymous></script></body></html>
