@@ -1,0 +1,190 @@
+<!doctype html><html lang=en class=no-js><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=generator content="Hugo 0.115.2"><meta name=robots content="index, follow"><link rel="shortcut icon" href=/favicons/favicon.ico><link rel=apple-touch-icon href=/favicons/apple-touch-icon-180x180.png sizes=180x180><link rel=icon type=image/png href=/favicons/favicon-16x16.png sizes=16x16><link rel=icon type=image/png href=/favicons/favicon-32x32.png sizes=32x32><link rel=icon type=image/png href=/favicons/android-36x36.png sizes=36x36><link rel=icon type=image/png href=/favicons/android-48x48.png sizes=48x48><link rel=icon type=image/png href=/favicons/android-72x72.png sizes=72x72><link rel=icon type=image/png href=/favicons/android-96x96.png sizes=96x96><link rel=icon type=image/png href=/favicons/android-144x144.png sizes=144x144><link rel=icon type=image/png href=/favicons/android-192x192.png sizes=192x192><title>Sync Releases and Revisions | Onshape Developer Documentation</title><meta name=description content="This tutorials builds off the Sync Data and Metadata tutorial. Please complete that one before starting on this one.
+In this case, we’ll be looking at …"><meta property="og:title" content="Sync Releases and Revisions"><meta property="og:description" content="This tutorials builds off the Sync Data and Metadata tutorial. Please complete that one before starting on this one.
+In this case, we’ll be looking at the ability for Onshape to sync its release data with an external system and for that system to send information back to Onshape with regards to released data.
+This specific business case will look at what happens when you wish for a PLM system to control the release of data instead of Onshape having that control – this is in fact a common use case."><meta property="og:type" content="article"><meta property="og:url" content="https://onshape-public.github.io/docs/6-tutorials/releases/"><meta property="article:section" content="docs"><meta itemprop=name content="Sync Releases and Revisions"><meta itemprop=description content="This tutorials builds off the Sync Data and Metadata tutorial. Please complete that one before starting on this one.
+In this case, we’ll be looking at the ability for Onshape to sync its release data with an external system and for that system to send information back to Onshape with regards to released data.
+This specific business case will look at what happens when you wish for a PLM system to control the release of data instead of Onshape having that control – this is in fact a common use case."><meta itemprop=wordCount content="2430"><meta itemprop=keywords content><meta name=twitter:card content="summary"><meta name=twitter:title content="Sync Releases and Revisions"><meta name=twitter:description content="This tutorials builds off the Sync Data and Metadata tutorial. Please complete that one before starting on this one.
+In this case, we’ll be looking at the ability for Onshape to sync its release data with an external system and for that system to send information back to Onshape with regards to released data.
+This specific business case will look at what happens when you wish for a PLM system to control the release of data instead of Onshape having that control – this is in fact a common use case."><link rel=preload href=/scss/main.min.b62e58da7255459c03616973d5e57025c9e05acf735fe51d880fde377e61cf51.css as=style><link href=/scss/main.min.b62e58da7255459c03616973d5e57025c9e05acf735fe51d880fde377e61cf51.css rel=stylesheet integrity><script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script><style>code{white-space:pre-wrap!important;overflow-wrap:break-word}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-3CY8X7Q128"></script>
+<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-3CY8X7Q128",{anonymize_ip:!1})}</script></head><body class=td-page><header><nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar"><a class=navbar-brand href=/><span class=navbar-logo></span><span class=font-weight-bold>Onshape Developer Documentation</span></a><div class="td-navbar-nav-scroll ml-md-auto" id=main_navbar><ul class="navbar-nav mt-2 mt-lg-0"></ul></div><div class="navbar-nav d-none d-lg-block"></div></nav></header><div class="container-fluid td-outer"><div class=td-main><div class="row flex-xl-nowrap"><aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none"><div id=td-sidebar-menu class=td-sidebar__inner><form class="td-sidebar__search d-flex align-items-center"><button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation"></button></form><nav class="collapse td-sidebar-nav" id=td-section-nav><ul class="td-sidebar-nav__section pr-md-3 ul-0"><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docs-li><a href=/docs/ title="Welcome to the Onshape Developer Documentation" class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id=m-docs><span>Welcome</span></a><ul class=ul-1><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docs1-introduction-li><a href=/docs/1-introduction/ title="Introduction to the Onshape REST API" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docs1-introduction><span>API Intro</span></a><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs1-introductionarchitecture-li><a href=/docs/1-introduction/architecture/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs1-introductionarchitecture><span>Onshape Architecture</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs1-introductionwhyonshape-li><a href=/docs/1-introduction/whyonshape/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs1-introductionwhyonshape><span>Why Onshape?</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs2-quickstart-li><a href=/docs/2-quickstart/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docs2-quickstart><span>Quick Start</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docs3-authentication-li><a href=/docs/3-authentication/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docs3-authentication><span>Authentication</span></a><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs3-authenticationapikeys-li><a href=/docs/3-authentication/apikeys/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs3-authenticationapikeys><span>API Keys</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs3-authenticationrequestsig-li><a href=/docs/3-authentication/requestsig/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs3-authenticationrequestsig><span>Request Signature</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs3-authenticationoauth-li><a href=/docs/3-authentication/oauth/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs3-authenticationoauth><span>OAuth</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docs4-advanced-apis-li><a href=/docs/4-advanced-apis/ title="Advanced API Development" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docs4-advanced-apis><span>Advanced APIs</span></a><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs4-advanced-apisassociativity-li><a href=/docs/4-advanced-apis/associativity/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs4-advanced-apisassociativity><span>Associativity</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs4-advanced-apisbilling-li><a href=/docs/4-advanced-apis/billing/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs4-advanced-apisbilling><span>Billing</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs4-advanced-apisfeatureaccess-li><a href=/docs/4-advanced-apis/featureaccess/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs4-advanced-apisfeatureaccess><span>Feature List API</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs4-advanced-apistranslation-li><a href=/docs/4-advanced-apis/translation/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs4-advanced-apistranslation><span>Model Translation</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docs5-app-dev-li><a href=/docs/5-app-dev/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docs5-app-dev><span>App Development</span></a><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs5-app-devappstore-li><a href=/docs/5-app-dev/appstore/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs5-app-devappstore><span>Onshape App Store</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs5-app-devextensions-li><a href=/docs/5-app-dev/extensions/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs5-app-devextensions><span>Extensions</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs5-app-devclientmessaging-li><a href=/docs/5-app-dev/clientmessaging/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs5-app-devclientmessaging><span>Client Messaging</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs5-app-devstructuredstorage-li><a href=/docs/5-app-dev/structuredstorage/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs5-app-devstructuredstorage><span>Structured Storage</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs5-app-devwebhook-li><a href=/docs/5-app-dev/webhook/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs5-app-devwebhook><span>Webhook Notifications</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs5-app-devtestingguidelines-li><a href=/docs/5-app-dev/testingguidelines/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs5-app-devtestingguidelines><span>Testing Guidelines</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docs6-tutorials-li><a href=/docs/6-tutorials/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docs6-tutorials><span>Sample Tutorials</span></a><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs6-tutorialssync-li><a href=/docs/6-tutorials/sync/ title="Sync Data and Metadata" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs6-tutorialssync><span>Sync Data</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs6-tutorialsreleases-li><a href=/docs/6-tutorials/releases/ title="Sync Releases and Revisions" class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-docs6-tutorialsreleases><span class=td-sidebar-nav-active-item>Sync Releases</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs6-tutorialsderivative-li><a href=/docs/6-tutorials/derivative/ title="Generate Derivative Files" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs6-tutorialsderivative><span>Derivative Files</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs6-tutorialscreateextention-li><a href=/docs/6-tutorials/createextention/ title="Create an Extension" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs6-tutorialscreateextention><span>Extensions</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs7-help-li><a href=/docs/7-help/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docs7-help><span>Get Help</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docschangelog-li><a href=/docs/changelog/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docschangelog><span>Changelog</span></a></li></ul></li></ul></nav></div></aside><aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none"><div class="td-page-meta ml-2 pb-1 pt-2 mb-0"></div><div class=td-toc><nav id=TableOfContents><ul><li><a href=#overview>Overview</a><ul><li><a href=#step-1-initiate-release>Step 1: Initiate Release</a></li><li><a href=#step-2-initiate-release-process-in-3suprdsup-party-app>Step 2: Initiate Release Process in 3<sup>rd</sup> Party App</a></li><li><a href=#step-3-complete-release-process>Step 3: Complete Release Process</a></li></ul></li><li><a href=#implementation>Implementation</a><ul><li><a href=#set-up-webhook>Set Up Webhook</a></li><li><a href=#receive-web-hook-notifications>Receive Web Hook Notifications</a></li><li><a href=#get-release-package-data>Get Release Package Data</a></li><li><a href=#save-release-package-data>Save Release Package Data</a></li><li><a href=#complete-the-release>Complete the Release</a></li></ul></li></ul></nav></div></aside><main class="col-12 col-md-9 col-xl-8 pl-md-5" role=main><nav aria-label=breadcrumb class=td-breadcrumbs><ol class=breadcrumb><li class=breadcrumb-item><a href=https://onshape-public.github.io/docs/>Welcome</a></li><li class=breadcrumb-item><a href=https://onshape-public.github.io/docs/6-tutorials/>Sample Tutorials</a></li><li class="breadcrumb-item active" aria-current=page><a href=https://onshape-public.github.io/docs/6-tutorials/releases/>Sync Releases</a></li></ol></nav><div class=td-content><h1>Sync Releases and Revisions</h1><header class=article-meta></header><p>This tutorials builds off the <a href=/docs/6-tutorials/sync>Sync Data and Metadata</a> tutorial. Please complete that one before starting on this one.</p><p>In this case, we’ll be looking at the ability for Onshape to sync its
+release data with an external system and for that system to send
+information back to Onshape with regards to released data.</p><p>This specific business case will look at what happens when you wish for
+a PLM system to control the release of data instead of Onshape having
+that control – this is in fact a common use case.</p><h2 id=overview>Overview</h2><p><img src=/images/integrationguideimage64.png style=width:3.21077in;height:2.56522in></p><p>We have mentioned before that
+Onshape has the ability to release data – it is totally integrated to
+Onshape since there is no division between CAD capabilities and PDM
+capabilities in Onshape – they are all part of the same solution. See
+Versions and Releases for more information on how Onshape manages
+releases. There is importance in releasing data through Onshape. Onshape
+uses visual cues to show which parts are released in an assembly for
+instance and which parts might have a newer revision. Onshape can also
+add/remove watermarks to drawings and update the title block depending
+on release states. Also, the BOM table can pull a parts release data and
+display it. All this is dependent upon a release process being completed
+in Onshape.</p><p>Many organizations have implemented Product Lifecycle management systems
+(PLM). One of the key benefits of a PLM system is that it manages more
+than just engineering data originating from the engineering department,
+it deals with all the data related to the product – from concept through
+retirement. Therefore, it is a system that is used by many groups and
+departments throughout the organization.</p><p>Often, in release processes or Engineering Change processes, additional
+input and approvals are required from various departments downstream
+from engineering. PLM systems are very good at routing the data for
+approval to users from multiple departments and groups throughout the
+organization. Onshape, on the other hand, is very focused on the
+engineering department and the data generated there. While it certainly
+has the capabilities to bring other groups into approval processes, it
+is not considered a process centric enterprise-wide system with the
+capabilities of a PLM system.</p><p>Many companies will have well established processes that have been
+modeled in their PLM system, it is much easier for us to integrate into
+those processes than reinvent the wheel in Onshape.</p><p>This section looks at how we might have the best of both worlds,
+initiate release processes in Onshape and update our Onshape visual cues
+as well as have the PLM system manage the actual approvals and release.</p><p>This section uses concepts such as OAuth and web hooks that we have
+introduced in detail in previous sections, therefore feel free to
+reference those sections for more information on these topics.</p><h3 id=step-1-initiate-release>Step 1: Initiate Release</h3><p><img src=/images/integrationguideimage65.png style=width:4.88889in;height:2.02778in alt="Application Description automatically generated"></p><p>In this first step we are using Onshape’s out-of-the-box capabilities to
+initiate a release candidate – just as we would if we were releasing
+natively in Onshape.</p><ol><li><p>We start by initiating the release on all the data that is required.
+In this step you should use a custom workflow that simply has one
+approval node.</p></li><li><p>Define the mandatory and any other release properties in the release
+candidate window. <img src=/images/integrationguideimage66.png style=width:4.70609in;height:3.12281in alt="Graphical user interface, text, application, email Description automatically generated"></p></li></ol><p><span id=_Toc102977911 class=anchor></span>Figure 40 - Initiating a
+release candidate</p><ol start=3><li><p>Since an approver is required, we must provide a fictious
+user/approver that has been defined in the system – this could be
+named “Release Approver” for instance. The process will be sent to
+this approver even though they are not a real person and will not be
+able to approve the release. Instead, our release process will be
+approved by an external source.</p></li><li><p>Finally, when everything is defined, submit the release. The window
+will close. Since the release is pending approval, the parts
+involved in the release will enter the state of “Pending” as shown
+here:</p><p><img src=/images/integrationguideimage67.png style=width:4.40131in;height:2.9375in alt="Graphical user interface, text, application Description automatically generated"></p></li></ol><p><span id=_Toc102977912 class=anchor></span>Figure 41 - Pending
+Release</p><p>They will remain in this state until the release has been completed.</p><p><img src=/images/integrationguideimage68.png style=width:2.71208in;height:1.52174in></p><p>It is important to note that
+unlike traditional PDM systems where the files are locked for change
+until the release is completed or rejected, Onshape does not lock the
+files. As mentioned previously, Onshape views the releases as a point in
+time. As far as Onshape is concerned, time moves forward, parts can
+change and at a specific point in time, the parts are in a state of
+pending. It is important to mention that this does in fact prevent
+another release from being initiated on the parts until the previous
+release has been completed.</p><h3 id=step-2-initiate-release-process-in-3suprdsup-party-app>Step 2: Initiate Release Process in 3<sup>rd</sup> Party App</h3><p><img src=/images/integrationguideimage69.png style=width:5.34722in;height:3.34722in alt="Diagram Description automatically generated"></p><p>Once the user initiates the release candidate and the parts transition
+to the “pending” state we can register for a webhook that will notify
+our third-party application that the parts have changed state.</p><ol><li><p>Once the parts enter the workflow, the onshape.workflow.transition
+webhook will be triggered.</p></li><li><p>Our third-party application should be listening for this event along
+with other data, we are provided with the objectId of the release
+package – this is all the data associated with the parts that are to
+be released. The response also contains the objectType and the
+transitionName; for our use case we will only concern ourselves with
+requests that have an objectType of “Release” and a transitionName
+of “Submit”.</p></li><li><p>Using the ObjectId we make an API call to onshape;
+/api/releasepackages/&lt;releasePackageId>?detailed=true</p></li><li><p>This API call will return to us a JSON response containing all
+assemblies and parts in the release package. The following
+information should be extracted from the release package:</p><ol><li><p>For each line item (assembly or part) extract the documentId,
+the elementId, elementType, versionId and PartId</p></li><li><p>Iterate through the top level properties and record the
+propertyId for property with the name “comment” – this will be
+used to update the release comments later on.</p></li></ol></li><li><p>Now that we have the relevant IDs we can update the state of our
+corresponding objects in the third party system and record any
+additional data such as the release comment field.</p></li><li><p>Finally, we can kick off our official release process in the
+third-party application. This could be an automated process or a
+manual one.</p></li></ol><h3 id=step-3-complete-release-process>Step 3: Complete Release Process</h3><p>The release process continues in the third-party application until
+approvals have been received by all required actors. Meanwhile in
+Onshape the parts are in the pending state. In this step we close the
+loop once the release process is completed.</p><p><img src=/images/integrationguideimage70.png style=width:5.375in;height:3.34722in alt="Graphical user interface, text, application Description automatically generated"></p><ol><li><p>The release process managed by the third-party application is
+completed and the data in that system is released.</p></li><li><p>Once this happens, we make a call to the Onshape API;
+/api/releasepackages/&lt;releasePackageId> the releasePackageId is
+the ID we were provided with at the start of this process – While
+there are different ways of implementing this, I tend to store the
+ID and any other data related to the release in a custom “release
+Object” in my database so I can retrieve and update the release as
+required. In addition to the passing the release package ID, in the
+body of the request we should pass the id of the release comment and
+a value for the comment. This will update the release in Onshape
+with any relevant data.</p></li><li><p>Onshape releases the data that was included in the release candidate
+and that completes the workflow process.</p></li><li><p>Onshape will return a status code that indicates success or failure</p></li><li><p>Finally we can optionally update the corresponding object to
+indicate that it is in sync with the Onshape data.</p></li></ol><p>In the event that the release process is rejected at anytime, we can
+send the releasePackages API request to Onshape with a REJECT workflow
+Action argument. This will cause Onshape to reject the workflow and the
+state of the parts at the specific release point in time, will be set to
+“Rejected”.</p><p><img src=/images/integrationguideimage71.png style=width:4.69737in;height:3.12807in alt="Graphical user interface, application Description automatically generated"></p><p><span id=_Toc102977914 class=anchor></span>Figure 43 - release
+candidate rejected</p><p>Since our timeline is moving forward this has no actual effect on the
+parts other than to cancel the pending release and enable them to be
+released at another future point in time.</p><h2 id=implementation>Implementation</h2><p>In this section we will take a closer look at how to implement the
+release scenario in our code. The first thing we need to do is define
+the correct web hook to listen for the initiation of the release – this
+means that once the user clicks the submit button on the release
+candidate dialog, this web hook will be triggered.</p><h3 id=set-up-webhook>Set Up Webhook</h3><p><img src=/images/integrationguideimage72.emf alt></p><p>This code is very similar to what we defined previously for the metadata
+update, instead here we are defining a hook for the
+onshape.workflow.transition hook. As with other code examples that
+require authentication, we have included error handling in order to
+refresh that access token in the event that it has expired.</p><p>The onshape.workflow.transition will in fact fire whenever a revision or
+release package transitions through different workflow states. In his
+specific case we are only interested in catching the event when the
+workflow is initially submitted. This can be filtered by the information
+sent to the return URL, in this case
+<a href=https://myserver.com/api/getReleaseData>https://myserver.com/api/getReleaseData</a></p><p>In this implementation we are storing he webhook ID in the database so
+that we can ping it when the application is loaded to make sure that it
+is still active. Other implementations delete the webhook after it is
+used and then recreate it as required. There is no specific preference
+for which methodology is better – that depend s upon the requirements of
+your integration.</p><h3 id=receive-web-hook-notifications>Receive Web Hook Notifications</h3><p>Once the user who is initiating the release clicks the Submit button on
+the Release Candidate dialog, the webhook will be triggered and a
+message will be sent to the third-party application listening for that
+webhook.</p><p><img src=/images/integrationguideimage66.png style=width:4.70609in;height:3.12281in alt="Graphical user interface, text, application, email Description automatically generated"></p><p>In our example the URL that the webhook data from Onshape gets sent to
+is:</p><p><a href=https://myserver.com/api/getReleaseData>https://myserver.com/api/getReleaseData</a></p><p>In our application we can define a router for that end point as follows:</p><p>router.route(&rsquo;/getReleaseData&rsquo;).post(mymodule.getReleaseData);</p><p>In this case “mymodule” is where I’ve defined all the functionality for
+managing data coming from Onshape. Since the webhook data contains no
+authentication information (just minimal data is sent from the webhoom
+for security reasons), we can’t directly authenticate our application
+against Onshape, therefore we need to pass the data received from the
+webhook through a method that will then add the authentication data to
+our request object. The getReleaseData method simply passes the webhook
+information received by the application to another authenticated
+endpoint as follows:</p><p><img src=/images/integrationguideimage73.emf alt></p><p>Here is the endpoint defined for processReleasePackage:</p><p>router.route(&rsquo;/processReleasePackage&rsquo;).post(authController.isAuthenticated,
+releaseController.processReleasePackage);</p><p>As we can see here, we have now added in the authentication middleware -
+authController.isAuthenticated - and can make secure calls to Onsahpe’s
+API.</p><h3 id=get-release-package-data>Get Release Package Data</h3><p>The parameter that the web hook sent over to our application that we
+need to make use of is the ID of the release package. We can now make a
+call to Onshape to retrieve the complete release package with the ID.</p><p>We get the release package ID from the request object and make the REST
+API call to get the package as follows:</p><p><img src=/images/integrationguideimage74.emf alt></p><p>The complete release package should be returned in “response”. We can
+now parse that data to retrieve the properties we need. The most
+important properties will the IDs of the parts that we are going to
+release – these should already be synced with our system – if not, we
+can create them from the data in the release package.</p><h3 id=save-release-package-data>Save Release Package Data</h3><p>The next step is to save the properties of the release package to a
+corresponding object in our database. We need at least the ID of the
+release package so we can later release it automatically from the
+third-party application. In this case I’m storing other properties that
+came from the release candidate such as release name and description.</p><p><img src=/images/integrationguideimage75.emf alt></p><p><img src=/images/integrationguideimage76.png style=width:3.01875in;height:4.38889in></p><p>Most of this code deals with
+retrieving values from the release package and storing them as a new
+release object in the database. Additional values are associated with
+the part in the PLM system. In a typical production scenario this code
+would interface with the PLMs workflow capabilities and possibly kick
+off a release or change process in that system. For our basic example we
+are storing values from Onshape with our items and setting a state on
+the part so that users can see that the part is pending release and take
+actions required.</p><p>At this point in time, Onshape does not care that the part is pending a
+release. The part in Onshape will remain in a pending state until it is
+released by the PLM system. As noted previously, we used a user setup in
+the system to specifically initiate the release, therefore no other
+users will receive notifications from Onshape with regards to release
+actions on this part.</p><h3 id=complete-the-release>Complete the Release</h3><p>Once the release or change workflow has completed in the PLM system and
+all approvals have been received, the Part/Item will be in a released
+state in the PLM system. However, we must now update Onshape with the
+correct release status of the parts. It is important that Onshape data
+is in sync with the corresponding data in the PLM system for reasons of
+data integrity and the visual cues used within Onshape to identify a
+part as released.</p><p>In a typical scenario Onshape will be automatically updated once the
+workflow completes in the PLM system. In our use case we are simplifying
+the process by clicking a button to release the item. This will update
+the state of the part in our system and send a REST API call to Onshape
+to release the data in the release package (be it one part, an assembly
+with multiple parts, or drawings).</p><p><img src=/images/integrationguideimage77.emf alt></p><p>This code snippet updates the database with the released status of a
+part. Since we stored data from the release package in our database we
+now retrieve the “Comment” property so that we can send an updated value
+to Onshape with the release.</p><p>let attrid = rp.props.find(ob => ob.name == &ldquo;Comment&rdquo;);</p><p>The important line of code here is the REST API call to Onshape:</p><p><strong>axios.post(&lsquo;<a href="https://cad.onshape.com/api/releasepackages/'">https://cad.onshape.com/api/releasepackages/'</a> + id +
+&lsquo;?wfaction=RELEASE&rsquo;</strong></p><p>The id provided here is the ID of the release package that we stored
+when the web hook was called at the beginning of the process. The
+“wfaction” argument indicates that the workflow action in Onshape should
+be to release the data associated with this release package.</p><p>In this example we are also updating the release comments in Onshape,
+for this reason we required the property ID of the Comment field – which
+we also previously stored in our release object in the database.</p><p><img src=/images/integrationguideimage78.png style=width:6.5in;height:4.25903in alt="Graphical user interface, text, application Description automatically generated"></p><p><span id=_Toc102977916 class=anchor></span>Figure 45 - Release
+completed automatically in Onshape</p><p><img src=/images/integrationguideimage79.png style=width:6.5in;height:4.25625in alt="Graphical user interface, text, application, email Description automatically generated"></p><p><span id=_Toc102977917 class=anchor></span>Figure 46 - Release
+comments Updated from third-party system</p></div></main></div></div><footer class="bg-dark py-5 row d-print-none"><div class="container-fluid mx-sm-5"><div class=row><div class="col-6 col-sm-4 text-xs-center order-sm-2"></div><div class="col-6 col-sm-4 text-right text-xs-center order-sm-3"></div><div class="col-12 col-sm-4 text-center py-2 order-sm-2"></div></div></div></footer></div><script src=https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js integrity=sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js integrity="sha512-UR25UO94eTnCVwjbXozyeVd6ZqpaAE9naiEUBK/A+QDbfSTQFhPGj5lOR6d8tsgbBk84Ggb5A3EkjsOgPRPcKA==" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/mermaid@8.13.4/dist/mermaid.min.js integrity="sha512-JERecFUBbsm75UpkVheAuDOE8NdHjQBrPACfEQYPwvPG+fjgCpHAz1Jw2ci9EXmd3DdfiWth3O3CQvcfEg8gsA==" crossorigin=anonymous></script>
+<script src=/js/tabpane-persist.js></script>
+<script src=/js/main.min.7b55bf6c6b7512854e4a08bbd237c127d647ad103c3548888d50711b16bbde24.js integrity="sha256-e1W/bGt1EoVOSgi70jfBJ9ZHrRA8NUiIjVBxGxa73iQ=" crossorigin=anonymous></script></body></html>
