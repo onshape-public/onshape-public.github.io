@@ -501,7 +501,7 @@ notify URL. Onshape doesn’t limit how many registrations are created for
 a single webhook. In the event that this happens, the notify URL will be
 called as many times as there are webhooks registered for that event.
 You can validate the registered webhooks by calling the
-&lt;strong>&lt;a href="https://cad.onshape.com/api/webhooks">https://cad.onshape.com/api/webhooks&lt;/a>&lt;/strong> API.&lt;/p>
+&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Webhook">Webhook API&lt;/a>.&lt;/p>
 &lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage6.png"
 style="width:0.47222in;height:0.47222in" />Use
 &lt;a href="https://cad.onshape.com/glassworks">https://cad.onshape.com/glassworks&lt;/a> to call APIs and validate the
@@ -1190,7 +1190,7 @@ might be translating more than one part.&lt;/p>
 from Onshape. The following code snippet does exactly this.&lt;/p>
 &lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage85.emf" alt="">&lt;/p>
 &lt;p>The Onshape REST API&lt;/p>
-&lt;p>&lt;a href="https://cad.onshape.com/api/documents/d/'">https://cad.onshape.com/api/documents/d/'&lt;/a> + did + &amp;lsquo;/externaldata/&amp;rsquo; + id&lt;/p>
+&lt;p>&lt;a href="https://cad.onshape.com/api/d/'">https://cad.onshape.com/api/d/'&lt;/a> + did + &amp;lsquo;/externaldata/&amp;rsquo; + id&lt;/p>
 &lt;p>retrieves the translated file – in this case the ID is
 resultExternalDataIds[0] value.&lt;/p>
 &lt;p>Once this is completed, we use the response to save the file directly to

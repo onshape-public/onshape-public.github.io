@@ -89,7 +89,7 @@ successfully.<img src=/images/integrationguideimage84.png style=width:6.5in;heig
 that we need to use to retrieve the file is the “resultExternalDataIds”.
 Note that this is an array of values – since it makes sense that we
 might be translating more than one part.</p><h3 id=retrieve-translated-file>Retrieve Translated File</h3><p>With the resultExternalDataIds we can now retrieve the translated file
-from Onshape. The following code snippet does exactly this.</p><p><img src=/images/integrationguideimage85.emf alt></p><p>The Onshape REST API</p><p><a href="https://cad.onshape.com/api/documents/d/'">https://cad.onshape.com/api/documents/d/'</a> + did + &lsquo;/externaldata/&rsquo; + id</p><p>retrieves the translated file – in this case the ID is
+from Onshape. The following code snippet does exactly this.</p><p><img src=/images/integrationguideimage85.emf alt></p><p>The Onshape REST API</p><p><a href="https://cad.onshape.com/api/d/'">https://cad.onshape.com/api/d/'</a> + did + &lsquo;/externaldata/&rsquo; + id</p><p>retrieves the translated file – in this case the ID is
 resultExternalDataIds[0] value.</p><p>Once this is completed, we use the response to save the file directly to
 our server where the application is hosted. Finally, I’m sending a JSON
 object to the client that provides a direct link to the file that is now

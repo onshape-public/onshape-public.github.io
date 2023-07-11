@@ -34,7 +34,7 @@
 &lt;li>&lt;code>OAuth2Purchase&lt;/code> - Authorize purchases from account&lt;/li>
 &lt;/ul></description></item><item><title>Docs: Request Signature</title><link>https://onshape-public.github.io/docs/auth/requestsig/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/auth/requestsig/</guid><description>
 &lt;h3 id="custom-authentication">Custom Authentication&lt;/h3>
-&lt;p>Basic Authorization via API Keys can be used for quick prototyping and testing. For production use, however, Onshape requires &lt;a href="https://onshape-public.github.io/docs/authen/oauth">OAuth&lt;/a> or this custom authentication process via request signature.&lt;/p>
+&lt;p>Basic Authorization via API Keys can be used for quick prototyping and testing. For production use, however, Onshape requires &lt;a href="https://onshape-public.github.io/docs/auth/oauth">OAuth&lt;/a> or this custom authentication process via request signature.&lt;/p>
 &lt;p>To ensure that a request is coming from you, we have a process for signing requests that you must follow for API calls to work. Everything is done via HTTP headers that you&amp;rsquo;ll need to set:&lt;/p>
 &lt;ol>
 &lt;li>&lt;em>Date&lt;/em>: A standard date header giving the time of the request; must be accurate within &lt;strong>5 minutes&lt;/strong> of request. Example: &lt;code>Mon, 11 Apr 2016 20:08:56 GMT&lt;/code>&lt;/li>

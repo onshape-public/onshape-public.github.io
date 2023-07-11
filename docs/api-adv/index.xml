@@ -12,7 +12,7 @@
 &lt;ol>
 &lt;li>Create a cube in Onshape:&lt;/br>
 &lt;img src="https://onshape-public.github.io/images/associativityimage03.png" alt="image alt text">&lt;/li>
-&lt;li>Get the document microversion ID from the URL: &lt;code>https://cad.onshape.com/api/documents/d/&amp;lt;docid&amp;gt;/w/&amp;lt;wid&amp;gt;/microversionId&lt;/code>.&lt;/li>
+&lt;li>Get the document microversion ID from the URL: &lt;code>https://cad.onshape.com/api/d/&amp;lt;docid&amp;gt;/w/&amp;lt;wid&amp;gt;/microversionId&lt;/code>.&lt;/li>
 &lt;li>Use the appropriate REST API to get the tessellated faces (&lt;code>getPartStudioFaces&lt;/code>)
 and edges (&lt;code>getPartStudioEdges&lt;/code>}. Note the ids:
 &lt;ul>
