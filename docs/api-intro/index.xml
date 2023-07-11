@@ -1,0 +1,660 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Onshape Developer Documentation – Introduction to the Onshape REST API</title><link>https://onshape-public.github.io/docs/api-intro/</link><description>Recent content in Introduction to the Onshape REST API on Onshape Developer Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 18 May 2020 20:39:14 -0400</lastBuildDate><atom:link href="https://onshape-public.github.io/docs/api-intro/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Onshape Architecture</title><link>https://onshape-public.github.io/docs/api-intro/architecture/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-intro/architecture/</guid><description>
+&lt;p>Design in Onshape typically beings with a document, which is the container that includes all content related to a specific design. All data in an Onshape document is stored in Elements. Part Studios and Assemblies are two of the most common element types in a design. Throughout the design process, creating versions can be useful for product development management while working on the “Main” workspace. See also:&lt;/p>
+&lt;ul>
+&lt;li>The &lt;a href="https://onshape-public.github.io/docs/api-intro/_index">API Introduction&lt;/a> page for information on how documents, workspaces, and elements are assembled into a URL.&lt;/li>
+&lt;li>The &lt;a href="https://onshape-public.github.io/docs/api-adv/associativity">Associativity&lt;/a> page for information on how Parts, Assemblies, and Elements relate to each other.&lt;/li>
+&lt;/ul>
+&lt;h2 id="elements">Elements&lt;/h2>
+&lt;p>All data in an Onshape document are stored in Elements (represented as tabs in the user interface). Onshape documents contain five kinds of elements:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Part Studio&lt;/strong>: Contains zero or more parts&lt;/li>
+&lt;li>&lt;strong>Assembly&lt;/strong>: Contains zero or more parts or assemblies&lt;/li>
+&lt;li>&lt;strong>Blob&lt;/strong> (Binary Large OBject): Can be provided by a partner or by the end user. For example, the user can upload a PDF file, an image, or a text file. Partner applications can store arbitrary data, but we recommend using the &lt;a href="https://onshape-public.github.io/docs/app-dev/structuredstorage">structured storage&lt;/a> available in an element for better integration.&lt;/li>
+&lt;li>&lt;strong>Application&lt;/strong>: Presents an iframe to the user. The user interface is managed by a server that can be provided by a third-party. Onshape Drawings are a special case of an application element.&lt;/li>
+&lt;li>&lt;strong>Feature Studio&lt;/strong>: Contains the definition for Onshape Features, which are defined in FeatureScript.&lt;/li>
+&lt;/ul>
+&lt;h2 id="workspaces-versions-and-microversions">Workspaces, Versions, and Microversions&lt;/h2>
+&lt;p>A document is stored in Onshape as a collection of changes.&lt;/p>
+&lt;ul>
+&lt;li>You can think of a &lt;strong>workspace&lt;/strong> as a branch of the document, similar to a branch in a source control system. Documents can be branched to create new workspaces.&lt;/li>
+&lt;li>Each individual change to the document creates a new document &lt;strong>microversion&lt;/strong>. As the document is edited, changes are applied to the active workspace, creating new microversions.&lt;/li>
+&lt;li>Periodically, the user may designate versions of the document. A &lt;strong>version&lt;/strong> is a named snapshot of the entire document at some point in time (that is, at some microversion).&lt;/li>
+&lt;/ul>
+&lt;p>You cannot change a version or microversion of a document; all changes are applied to a workspace (and create a new microversion). Thus, while in general the &lt;code>GET&lt;/code> methods of the API can read from a version, microversion, or workspace, the &lt;code>POST&lt;/code> methods generally require a workspace, and create a new microversion when data is written to the document. (An exception is that it is possible to set metadata within a version; this does not create a new microversion).&lt;/p>
+&lt;p>The following IDs are used by many of the APIs. Each ID (except for Geometry IDs such as Part, Face and Edge) is a 24-character string that is used internally by Onshape to uniquely identify the resource. The Geometry IDs are variable-length strings used to resolve to a specific geometric entity within a model.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>ID&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;strong>User ID&lt;/strong>&lt;/td>
+&lt;td>Identifies a single user.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Document ID&lt;/strong>&lt;/td>
+&lt;td>Identifies a document. The logged-in user must have access to the requested document for the API to succeed.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Workspace ID&lt;/strong>&lt;/td>
+&lt;td>The Workspace ID identifies a workspace within the document. Workspaces are used to distinguish between different branches of the document.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Version ID&lt;/strong>&lt;/td>
+&lt;td>The Version ID identifies a specific named version.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Microversion ID&lt;/strong>&lt;/td>
+&lt;td>The Microversion ID identifies an internal revision of the document.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Element ID&lt;/strong>&lt;/td>
+&lt;td>The Element ID identifies an element within the document.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Part ID &lt;/br> Face ID &lt;/br> Edge ID&lt;/strong>&lt;/td>
+&lt;td>The Part ID identifies a part within a part studio. The Part ID should generally not be stored for long-term use, as it is only expected to be valid during the course of a session.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>Note that a Part ID may reference a part that no longer exists if the model is changed, so it is best to specify a Version or Microversion to pick the context for the Part ID. Note that even with the Version or Microversion, internal changes to the Onshape system may also change the Part ID. Onshape provides mechanisms for maintaining persistent references. See the &lt;a href="https://onshape-public.github.io/docs/api-adv/associativity">Associativity&lt;/a> page for more information. Face and Edge IDs are used in similar ways.&lt;/p>
+&lt;p>The following table identifies Onshape concepts and the corresponding Git concepts. Note that this is not a direct mapping, and the implementation of the concepts is very different.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Onshape concept&lt;/th>
+&lt;th>Git concept&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Document&lt;/td>
+&lt;td>Repository&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Element&lt;/td>
+&lt;td>File&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Workspace&lt;/td>
+&lt;td>Branch&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Version&lt;/td>
+&lt;td>Tag&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Microversion&lt;/td>
+&lt;td>Commit&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="linked-documents">Linked Documents&lt;/h2>
+&lt;p>Although a document can contain a complex model tree involving many Part Studio and Assembly elements, it is often more efficient to split the content into multiple documents. Connections between documents always refer to a specific version of the target document. &lt;em>Once a version is used as the target of a linked document, that document version is preserved as long as any document references it, even if the containing document is deleted.&lt;/em> Additionally, any user that has access to the referring document will have limited read access to the target document, regardless of what permissions are currently on the target document.&lt;/p>
+&lt;h2 id="configurations">Configurations&lt;/h2>
+&lt;p>Onshape Part Studios can be constructed to be configurable using Onshape Configurations. API calls that reference Part Studios (primarily within the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Part">Parts&lt;/a> and &lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio">Part Studios&lt;/a> APIs) often accept a &lt;code>configuration&lt;/code> parameter that identifies what specific configuration of the Part Studios is being referenced. When not specified, the API implementation typically uses the configuration that is currently selected within the Part Studio. An interactive ad-hoc API call might not behave consistently in an application, so be sure to specify the configuration parameter where applicable.&lt;/p>
+&lt;h2 id="onshape-data-model">Onshape Data Model&lt;/h2>
+&lt;p>Onshape data is stored in replicated databases in the cloud. The Onshape data model is influenced by the Git data model and similar source code repositories.&lt;/p>
+&lt;p>Documents contain &lt;strong>elements&lt;/strong>. Elements are presented as tabs in the user interface. With some exceptions, all data in a document is stored within an element. The following table describes what data stored in each Element type:&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Element Type&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;strong>Part Studio&lt;/strong>&lt;/td>
+&lt;td>Each Part Studio contains exactly one Feature list. The Feature list contains Features such as sketches, planes, extrudes, etc. Each Feature contains one or parameters. Whenever the Feature list changes, the parametric history is evaluated, and the model is regenerated.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Assembly&lt;/strong>&lt;/td>
+&lt;td>Each Assembly contains an assembly tree, which contains parts and/or other assemblies (sub-assemblies), along with mate information. Onshape provides an API call to retrieve the assembly tree definition.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Blob&lt;/strong>&lt;/td>
+&lt;td>Each Blob element contains an uninterpreted binary object that has been uploaded to Onshape, typically from a file. Onshape depends on the browser client to display some blob data (e.g., PDF and image data), but does not interpret the data. A blob element can be updated with new data.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Application&lt;/strong>&lt;/td>
+&lt;td>Each Application element contains zero or more sub-elements, providing a structured set of transactional data that is defined and managed by an application. Application data can be displayed in the Onshape tab in an iframe; the application is responsible for rendering the data in the iframe from its server.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>Note that Onshape Drawing elements are Application elements managed by Onshape.&lt;/p>
+&lt;p>Tessellated data is not stored persistently in Onshape; it is generated on demand for display by the Onshape clients, or in response to application REST API requests. This data may be cached for performance.&lt;/p>
+&lt;h3 id="document-data">Document data&lt;/h3>
+&lt;p>All elements, including Assemblies, Part Studios, Drawings, or even apps, are history based. Each change to an element or set of elements represents a unique record in the document’s history, known as a microversion. The document can be restored to that particular state any time in the future.&lt;/p>
+&lt;h3 id="part-studio-data">Part Studio data&lt;/h3>
+&lt;p>The Part Studio element is defined by a list of features, some of which (e.g., a sketch), may have a complex internal structure composed of entities. Part Studio features and entities are referenced by unique persistent identifiers. Part Studio features and entities can appear, disappear, and reappear depending on the current microversion of the model.&lt;/p>
+&lt;h3 id="assembly-data">Assembly data&lt;/h3>
+&lt;p>The Assembly element is defined as a list of assembly features and a tree of subassemblies/part instances. Occurrence ID is a unique persistent identifier of an occurrence of a part in the assembly structure.&lt;/p>
+&lt;h3 id="external-application-data">External application data&lt;/h3>
+&lt;p>An external application has complete control over how it manages/stores documents, however, to take advantage of the Onshape data model, there is a set of endpoints they should use to store state. These are collectively known as the AppElement API.&lt;/p>
+&lt;h3 id="model-presentation-data">Model presentation data&lt;/h3>
+&lt;p>A valid model definition usually corresponds to a real-world manufacturable topology, represented internally as a set of parts, faces, edges, and vertices and the set of relations between them. Each of these has a unique identifier in every state of the model. The identifier represents an encoded index in the model’s history, and its value depends on the structure of the model’s history. The value is not guaranteed to be preserved across model changes, and will almost always change if the model changes in significant ways. The model can be tessellated into a set of geometric primitives, which approximate the shape of the model. Tessellated data can be used for visual representation of the model or other processing related to the shape of the model.&lt;/p>
+&lt;p>The following changes in the topological representation can occur between two microversions of the model:&lt;/p>
+&lt;ul>
+&lt;li>New topological entities appear&lt;/li>
+&lt;li>Id of existing topology change&lt;/li>
+&lt;li>Topological entities disappear&lt;/li>
+&lt;li>Existing topological entities are merged into a single entity&lt;/li>
+&lt;li>Existing topological entity are split into multiple entities&lt;/li>
+&lt;/ul>
+&lt;p>The model microversion and topology ID can be used to identify topological entities across the model changes. Topology ID defined in a specific microversion can be translated into a set of topology IDs in the current microversion of the model. (The Topology ID is sometimes referred to as a Deterministic ID within Onshape, and is exposed in specific API calls as partId, faceId, etc.). See the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio">PartStudio APIs&lt;/a> to see what topology IDs are exposed.&lt;/p></description></item><item><title>Docs: Why Onshape?</title><link>https://onshape-public.github.io/docs/api-intro/whyonshape/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-intro/whyonshape/</guid><description>
+&lt;h2 id="why-onshape">Why Onshape?&lt;/h2>
+&lt;p>As long as there have been applications that manage organizational data
+into a database, there has been a need to share that data between
+different departments and therefore, usually, different systems. In a
+typical design/manufacturing organization, there could be at least four
+or five mission-critical databases that manage the data for different
+departments and for different stages in the product’s lifecycle.&lt;/p>
+&lt;p>Initially, these systems provide the capabilities required by their
+consumers (i.e., the departments that use these systems). For instance,
+the Finance might use QuickBooks, Manufacturing
+might use a manufacturing planning and execution system (MES),
+Engineering might use a Product Data management System (PDM), and so on for each
+group in the organization.&lt;/p>
+&lt;p>This often leads to disparate silos of data and knowledge.
+The departments in an organization do not work in a vacuum; each is
+dependent on information generated by other groups. For
+instance, Manufacturing can’t produce accurate assembly instructions
+without input from engineering on the designs and the bill of
+materials. Finance can’t price the product without understanding its
+contents and which parts are manufactured in-house or
+purchased.&lt;/p>
+&lt;p>Therefore, the need to integrate these systems becomes critical for the
+organization to function optimally. Initially, connecting one system to
+another can be a straightforward process. This usually involves
+some services to get the systems to talk to each other, however it
+isn&amp;rsquo;t too painful as long as the requirements are clearly
+defined.&lt;/p>
+&lt;p>Anyone who has implemented integrations between PLM (Product
+Lifecycle Management) systems or ERP (Enterprise Resource Planning) systems will tell
+you of the nightmare scenarios they encountered. Often this is the
+result of poorly scoped and defined requirements, conflicting
+requirements coming from multiple departments, and the many integration
+points required between systems. The result is that the organization is
+not getting what it wants or needs, the customer is paying for services
+that do not provide the promised solution, and usually the project is
+long overdue. All this equals an unhappy customer and often the software
+vendor’s solutions are blamed for the disaster.&lt;/p>
+&lt;p>Over the years, many technologies have appeared (and some of them, just as
+quickly disappeared) to enable integration without the need
+to write thousands of lines of custom code that needs to be re-written
+for every software upgrade. Several technologies provide “codeless” integration between SaaS
+products (&lt;a href="wwww.zapier.com">Zapier&lt;/a>, for example). These solutions
+are particularly good for generic use cases for data exchange between
+systems, but can be limited when it comes to custom modifications to the
+data being sent that might be required by a specific customer. In
+addition, they have the overhead of requiring a subscription to their
+service. Sending
+corporate IP through another third-party can also cause data security issues.&lt;/p>
+&lt;p>Therefore, we can understand that in most organizations integration
+between systems is a necessary evil that must be tackled, either with
+an out-of-the-box solution or through some custom coding.&lt;/p>
+&lt;p>Early on, Onshape understood that as an engineering system, it cannot
+exist in a vacuum; it must be able to communicate with other systems.
+For this reason, the REST API was developed.&lt;/p>
+&lt;p>An API, or &lt;em>application
+programming interface&lt;/em>, is a set of rules that define how applications
+or devices can connect to and communicate with each other. A REST API is
+an API that conforms to the design principles of the REST,
+or &lt;em>representational state transfer &lt;em>architectural style. For this
+reason, REST APIs are sometimes referred to RESTful APIs&lt;/em>.&lt;/em>&lt;/p>
+&lt;h2 id="onshape-saas">Onshape SaaS&lt;/h2>
+&lt;p>Onshape was built from the ground up as a true SaaS-based system; Onshape had no investment in legacy code and was able to develop an application that truly runs as a multi-tenant
+SaaS solution from the first line of code. Many companies claim to run
+cloud-based solutions, but since they have such a large investment
+in their legacy code, that they can’t just discard and start again from
+scratch. Instead, they tend to try and port that code to the web.&lt;/p>
+&lt;p>More often than not, porting existing code to the web and calling it a
+SaaS solution is no more than a marketing ploy; it isn’t a true SaaS
+solution if it wasn’t written as one. These are generally known as cloud-hosted solutions. This means that a typical three-tier data management
+solution (which could have previously been installed on a set of servers),
+has now been modified to be hosted on the web.&lt;/p>
+&lt;h3 id="traditional-three-tier-architecture">Traditional three-tier architecture&lt;/h3>
+&lt;p>Traditional PLM systems typically use a three-tier architecture, mainly
+consisting of an application server, a database server, and a client (either a web client or a thick client installed on the client
+hardware).&lt;/p>
+&lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage10.png"
+style="width:4.91807in;height:3.27083in"
+alt="The 3-tier architecture | Download Scientific Diagram" />&lt;/p>
+&lt;p>&lt;em>Typical three-tier architecture&lt;/em>&lt;/p>
+&lt;p>To connect to and integrate with this architecture, APIs are usually exposed on
+the application or web server. If this
+architecture is ported to the web, it cannot make
+customizations through the API, since it would modify the behavior of
+the program for everyone connected to that application server.&lt;/p>
+&lt;h3 id="single--vs-multiple-tenant-architectures">Single- vs multiple-tenant architectures&lt;/h3>
+&lt;p>The three-tier architecture is typical of most
+PLM solutions on the market today, which is fine
+if you want the solution to be installed on company servers and be
+accessible to people within the company only.&lt;/p>
+&lt;p>When this type of solution is ported to the web, software
+vendors typically must create a single-tenant application where an
+application server and a database server are provisioned for each new
+customer.&lt;/p>
+&lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage11.png"
+style="width:5.4311in;height:4.35417in"
+alt="Enterprise SaaS Architecture - The Why | Frontegg" />&lt;/p>
+&lt;p>&lt;em>Single-tenant architecture&lt;/em>&lt;/p>
+&lt;p>In this case, the vendor must use expensive
+hardware to host more customers, which is not a
+sustainable model.&lt;/p>
+&lt;p>Modern 21&lt;sup>st&lt;/sup> century software solutions use multi-tenant
+solutions that can be hosted on services such as Amazon cloud, Azure, etc. There are many benefits to this architecture, including that servers can be provisioned and
+decommissioned on the fly to provide ultimate performance whenever
+required. Since servers cost money, decommissioning servers when they
+are not required is a key benefit to a true SaaS solution.&lt;/p>
+&lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage12.png" style="width:6.5in;height:4.65417in"
+alt="Saas Solutions - Multi-tenant vs multi-instance architectures" />&lt;/p>
+&lt;p>&lt;em>Multi-tenant architecture&lt;/em>&lt;/p>
+&lt;p>Since each application is separate in this architecture, we can enable customizations that can’t be implemented in a single-tenant architecture. For example, we can provide access to the REST
+APIs that are required for Onshape integration. In the single-tenant
+architecture, if you provide API access to the application server, one
+customer will be modifying that application for all customers who are
+registered on that tenant.&lt;/p>
+&lt;h2 id="the-onshape-difference">The Onshape Difference&lt;/h2>
+&lt;p>Onshape does not work like other legacy CAD systems. Onshape was built from scratch for the cloud and as a modern
+CAD system, so many of the failings of legacy CAD
+systems were excluded.&lt;/p>
+&lt;p>There are many differences
+and benefits to Onshape, which are well-documented in the Onshape Help
+and training materials.&lt;/p>
+&lt;p>The information in this section is specific to integrations, since Onshape does not behave like a traditional file-based
+systems. When writing an integration for Onshape, it is
+critical to understand the nuances in Onshape’s design practices and how
+data is organized in Onshape.&lt;/p>
+&lt;h3 id="data-drivenfileless">Data-driven/fileless&lt;/h3>
+&lt;p>Most traditional PDM/PLM systems integrated with CAD systems
+enable this integration on a per-file basis. This means that you have an
+object in the PDM/PLM system that corresponds directly to a file in the
+CAD system. In this way, the PDM/PLM system can manage access to the
+files, build assemblies from the files, view the CAD data, and much more.&lt;/p>
+&lt;p>Onshape, however, does not work this way.&lt;/p>
+&lt;p>Being data-driven means that Onshape has no files, just data, so an integration into Onshape is going to look
+different from any integration to a CAD system that you might have done
+previously.&lt;/p>
+&lt;p>In traditional CAD, a single file represents a snapshot of what the
+design looked like at a specific moment in time. Unless it’s changed, it will remain in that state forever. PDM
+systems manage these files, and once a designer decides to make a
+revision or a release, the file is locked, and a new file can be created
+to represent any further updated versions or releases of the design.
+PDM/PLM systems are very good at managing this data in an up-to-date
+structure, but it does have the drawbacks. They generate many file
+copies of a specific design, and once a file is taken out from the system (for instance, to share with a supplier), it is no longer managed and
+tracked.&lt;/p>
+&lt;p>Onshape uses data instead of files. The data is always up-to-date and
+can be collaborated on in real-time without the need to send file copies
+back and forth. This means that Onshape views versions and releases differently
+than those traditional systems do. When integrating with Onshape, we must design for data rather than files.&lt;/p>
+&lt;p>Files can be generated from
+the Onshape data. For example, you can generate a PDF of a
+drawing upon release or of a STEP file that can be used by other downstream systems.&lt;/p>
+&lt;p>A key benefit of a data-driven system is the ability to retrieve detailed, real-time
+analytics. Onshape has comprehensive analytics; including who can view or edit a design, when and exactly what edits are made, which commands were used, and how long was spent modifying the design.&lt;/p>
+&lt;h3 id="built-in-pdm">Built in PDM&lt;/h3>
+&lt;p>Up until now, CAD was one software program, and PDM/PLM was another
+program that had to be integrated with the CAD. In many cases, both
+programs could be sold by the same software vendor (even though there
+are many PLM systems available that are sold by independent vendors who
+have no CAD system). Regardless, a PDM/PLM system always had to be an added solution to the CAD system.&lt;/p>
+&lt;p>No matter how deep the integration between a CAD system and a PLM
+system, there is always the need to sync data between the two. This is usually a weak point in any solution that is prone to errors.&lt;/p>
+&lt;p>Being data-driven, Onshape already has PDM built in as part of the CAD
+system. This is unique in the industry: CAD and PDM as part
+of the same solution with no additional piece of software required.&lt;/p>
+&lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage14.png"
+style="width:4.49202in;height:4.1652in"
+alt="A picture containing graphical user interface Description automatically generated" />&lt;/p>
+&lt;p>&lt;em>Onshape’s revision and part number schema definition interface&lt;/em>&lt;/p>
+&lt;p>For instance:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Since the &lt;strong>data is always up-to-date&lt;/strong>, the correct state of any design
+is always represented in real-time with no delay for syncing between
+systems.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Unlike file-based systems, &lt;strong>the data is never locked&lt;/strong>; it
+is always available and always changing.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>PDM system &lt;strong>data management aspects are fully integrated&lt;/strong> into every aspect of
+the CAD system.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>True &lt;strong>real-time collaboration/co-design&lt;/strong> on both design and data is
+enabled.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>So, what does this mean when it comes to integrating Onshape with
+another PLM system? First and foremost, we must understand that there
+are many things that a PLM system does that Onshape’s PDM capabilities
+can’t do. Integrating Onshape to a PLM system should augment the
+powerful capabilities already available inside Onshape, not
+necessarily replace them. Similarly, Onshape does not replace PLM-native capabilities. Instead, depending on the business case, we can use the best-in-class capabilities of each system to augment the
+other.&lt;/p>
+&lt;p>The Onshape release process is an example of the augmentation of each system&amp;rsquo;s capabilities. Onshape has a specific way of managing the release of data that is
+different from traditional PDM systems. This capability is inherently
+suited to a data-driven approach and provides a lot of value to the
+update of design data in Onshape. At the same time, PLM systems provide
+enterprise release processes that may include many people and different
+departments that extend beyond the engineering domain. Such PLM
+processes can be highly customized and suited to the organizations
+established business processes.&lt;/p>
+&lt;p>In this scenario, it doesn&amp;rsquo;t make sense to avoid the enterprise release
+processes in the PLM system. However, also omitting Onshape’s release
+capabilities could put data between Onshape and the PLM system out of
+sync and prevent Onshape from updating data (e.g., watermarks and
+title blocks on drawings, icons related the visualizing the state of
+data, etc.).&lt;/p>
+&lt;p>In this case, we want to use the best-in-class features of each software
+solution without compromising the capability provided by each solution.
+If we plan our integration correctly, this can be achieved by initiating
+the release of the data in Onshape, transferring the release data to the
+PLM system where the release process will be triggered, and finally
+automating the release in Onshape once the process has been completed in
+the PLM system.&lt;/p>
+&lt;h3 id="multi-part-part-studios">Multi-part Part Studios&lt;/h3>
+&lt;p>In traditional CAD systems, one file typically equals
+one part. While design-in-context is available in most CAD systems, and
+multiple solid bodies can be created, each part is self-contained in a separate file. For PLM systems, this
+makes it easy to associate an object in the PDM/PLM database with a
+specific CAD file. &lt;em>This is not the case in Onshape.&lt;/em>&lt;/p>
+&lt;p>In Onshape, parts are designed in what’s called a &lt;em>Part Studio.&lt;/em> Within
+a Part Studio, the designer is free to create as many parts as they want.
+The general rule is that the parts should be related to each other in a
+system, thereby making it easier to design one part from another, however
+there is a lot of flexibility in how the designer wishes to work.&lt;/p>
+&lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage15.png"
+style="width:4.45764in;height:4.12141in"
+alt="A picture containing text Description automatically generated" />&lt;/p>
+&lt;p>&lt;em>An example of a multi-part Part Studio in Onshape&lt;/em>&lt;/p>
+&lt;p>The structure of the Onshape document is discussed in detail in the &lt;a href="https://onshape-public.github.io/docs/api-intro/architecture">Onshape Architecture&lt;/a> page. The Part Studio is included in an Onshape document.&lt;/p>
+&lt;p>We can already begin to understand that the traditional CAD/PDM paradigm
+of &amp;ldquo;one file per object&amp;rdquo; will not work with Onshape; the designer would be forced by the
+PDM/PLM system to only create one part per Part Studio. This would
+therefore limit the designer’s freedom for creativity in Onshape and
+seriously reduce the powerful functionality available for the designer
+to use.&lt;/p>
+&lt;p>Therefore, we need to re-think how we integrate with Onshape versus how we
+integrate with traditional CAD systems. Fortunately, Onshape’s REST API
+supports the multi-part Part Studio scenario. Instead of associating a
+file with an object in the PDM/PLM database, we now use the REST API to
+associate a Part with its corresponding object.&lt;/p>
+&lt;h3 id="versions-and-releases">Versions and releases&lt;/h3>
+&lt;p>Traditional PDM/PLM systems provide design release support by locking a
+CAD file for access. The access controls are defined in the database and
+the definition of a part/assembly/drawing as released is controlled by
+the database. When a new revision of the part is required, a file copy
+is made, and the database provides access to the new copy. Generally,
+the old copy representing the previous release persists in the file
+store and can be referenced by the database. &lt;em>This is not how Onshape works.&lt;/em>&lt;/p>
+&lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage16.png"
+style="width:2.66865in;height:3.09375in" />Since there are no files in
+Onshape (just data) no file locking or copy mechanisms are
+available. Instead, Onshape looks at the data as a continuous timeline
+that is always moving forward and always changing as the design evolves.
+The data is never locked; it is always available.&lt;/p>
+&lt;p>In place of file copies that represent versions and releases of the
+design, Onshape provides the ability to create &lt;em>versions&lt;/em> as bookmarks
+in the timeline. When creating a version, Onshape places a bookmark in
+the timeline that represents the state of the design at that specific
+moment in time. Releases work in a similar way, but they are defined
+as official, company-approved processes and have special meaning.&lt;/p>
+&lt;p>In addition to creating versions and releases, Onshape can create &lt;em>branches&lt;/em>, which can be defined as alternative timelines. A
+designer might want to experiment with alternate design ideas without
+modifying the existing design that others are working on. By
+creating a branch from any point in the timeline, the designer is
+free to experiment with alternate ideas. If the ideas work, they can be
+merged into the current timeline at any point.&lt;/p>
+&lt;p>From an integration perspective, we need to take into
+consideration how Onshape works with versions and releases. Since a release represents a company-approved design, Onshape provides processes for the approval of
+a release and the change of state of a design. Onshape also provides
+APIs and triggers (events) that enable integration points throughout the
+release process. It is through the triggers and the APIs that
+integration of any third-party system that wishes to manage the release
+process is enabled.&lt;/p>
+&lt;h3 id="workflows">Workflows&lt;/h3>
+&lt;p>Release and obsoletion workflows are included with Onshape and can be customized to meet company standards.&lt;/p>
+&lt;p>For details on how to implement and customize Onshape’s workflows,
+please review these online help topics:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://cad.onshape.com/help/Content/relmgmt_custom.htm">How to design release management processes&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://cad.onshape.com/help/Content/custom_workflow.htm">How to create a customized release workflow&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>Most PDM/PLM systems can model a company’s
+business processes in a workflow. These can be highly automated
+processes that move data and file references through a process of
+reviews and approvals. Onshape also has this capability, which is
+currently used for release and obsoletion processes.&lt;/p>
+&lt;p>There are no files or file references in Onshape that are moved
+through the process. Onshape only has data. Therefore, it is the data
+that is referenced at each stage of the process. Traditional PDM systems
+might make file copies and lock files as they move through a release
+process. If the process is rejected at any stage, those
+files must be discarded, the previous version of the files unlocked and
+all states updated. In short, it system must rewind back to the state of the files and
+the data when the workflow was initiated. This is a lot of complex
+actions that must occur when a process is rejected for any reason. &lt;em>Onshape doesn’t work this way.&lt;/em>&lt;/p>
+&lt;p>A release process can be started on data (such as assemblies, parts,
+drawings, etc.). For example, if the state of a referenced part is updated to
+“Pending,” and the process is rejected at any stage, there
+is no rewinding of files and data; the data just reverts to the
+original “In Progress” state, and the workflow is discarded. Since the
+workflow didn’t complete, nothing related to the data has actually
+changed. When you are used to traditional PDM systems, this feels like
+an anti-climax, and we often receive the question, “But where’s my
+process? Where’s the data that was attached to the process?”. Well, the
+answer is: nothing changed. Until the process is completed, nothing
+actually changes, so the data is in the same state it was prior to the
+initialization of the release process.&lt;/p>
+&lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage17.png"
+style="width:3.39863in;height:2.61034in"
+alt="A picture containing chart Description automatically generated" />&lt;/p>
+&lt;p>&lt;em>A custom release process in Onshape&lt;/em>&lt;/p></description></item><item><title>Docs: Quick Start</title><link>https://onshape-public.github.io/docs/api-intro/quickstart/</link><pubDate>Mon, 18 May 2020 20:39:14 -0400</pubDate><guid>https://onshape-public.github.io/docs/api-intro/quickstart/</guid><description>
+&lt;p>In this example, we will call an Onshape REST API endpoint to send a document name to our console. Please note that the sample shown on this page is only designed to be used as a quick start guide and does not represent a full Onshape application.&lt;/p>
+&lt;h2 id="system-requirements">System Requirements&lt;/h2>
+&lt;ul>
+&lt;li>Before you can begin this tutorial, you must obtain a login for the Onshape dev portal. Send an email to &lt;code>api-support@onshape.com&lt;/code> and request a login.&lt;/li>
+&lt;li>This example is coded in Python. The equivalent code is provided in other languages at the end of the example. To follow along with this tutorial, you can download and install Python here: &lt;a href="https://www.python.org/downloads/">https://www.python.org/downloads/&lt;/a>.&lt;/li>
+&lt;/ul>
+&lt;h2 id="review-the-api-endpoint">Review the API Endpoint&lt;/h2>
+&lt;ol>
+&lt;li>Go to &lt;a href="https://cad.onshape.com/glassworks/explorer">Glassworks&lt;/a> and scroll to &lt;code>Document&lt;/code>.&lt;/li>
+&lt;li>Expand the &lt;code>GET /documents/{did}&lt;/code> endpoint. Note that in the URL, the name of this API is &lt;code>getDocument&lt;/code>.&lt;/li>
+&lt;li>Make a note of the URL structure and the parameters required to make this request. This will become the fixed URL part of our API call. &lt;/br>
+&lt;img src="https://onshape-public.github.io/images/Glassworks_getDocument.png" alt="image"> &lt;/br>
+For this endpoint, we only need to get the document ID from the document URL.&lt;/li>
+&lt;li>Scroll down and make a note of the &lt;code>Media Type&lt;/code> that we’ll need to include in our header. &lt;/br>
+&lt;img src="https://onshape-public.github.io/images/Glassworks_MediaType.png" alt="image">&lt;/li>
+&lt;/ol>
+&lt;h2 id="review-the-document">Review the Document&lt;/h2>
+&lt;ol>
+&lt;li>Navigate to &lt;a href="https://cad.onshape.com/documents/58d051743d98a90f86e9e2ab/w/17e0ba65df28e4e72f7f4961/e/4a289bd094a999329a3900af">this public document&lt;/a>, and make a note of the document ID in the URL (&lt;code>58d051743d98a90f86e9e2ab&lt;/code>). &lt;/br>
+&lt;img src="https://onshape-public.github.io/images/PublicDocURL.png" alt="image">&lt;/li>
+&lt;/ol>
+&lt;h2 id="create-your-api-keys">Create your API Keys&lt;/h2>
+&lt;ol>
+&lt;li>Go to &lt;a href="https://dev-portal.onshape.com">https://dev-portal.onshape.com&lt;/a>.&lt;/li>
+&lt;li>In the left pane, click &lt;code>API keys&lt;/code>.&lt;/li>
+&lt;li>Click the &lt;code>Create new API key&lt;/code> button.&lt;/li>
+&lt;li>Select the following permissions for your app:
+&lt;ul>
+&lt;li>&lt;code>Application can read your documents.&lt;/code>&lt;/li>
+&lt;li>&lt;code>Application can write to your documents.&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Click the &lt;code>Create API key&lt;/code> button. &lt;/br>
+&lt;img src="https://onshape-public.github.io/images/CreateNewAPIKey.png" alt="image">&lt;/li>
+&lt;li>Copy both the &lt;strong>access key&lt;/strong> and &lt;strong>secret key&lt;/strong> from the pop-up window, save them somewhere, then click the &lt;code>Close&lt;/code> button.
+&lt;/br>&lt;strong>IMPORTANT NOTE: You will not be able to find the secret key again, so save it somewhere safe!&lt;/strong>&lt;/br>
+&lt;img src="https://onshape-public.github.io/images/APIKeySecretKey.png" alt="image">&lt;/li>
+&lt;li>The details for your application appear. &lt;/br>
+&lt;img src="https://onshape-public.github.io/images/DevPortalKeys.png" alt="image">&lt;/li>
+&lt;/ol>
+&lt;h2 id="write-your-code">Write Your Code&lt;/h2>
+&lt;ol>
+&lt;li>Create a new file called &lt;code>hello.py&lt;/code>.&lt;/li>
+&lt;li>Start your file by importing the necessary libraries.&lt;/br>&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a">import&lt;/span> &lt;span style="color:#0aa;text-decoration:underline">requests&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a">import&lt;/span> &lt;span style="color:#0aa;text-decoration:underline">json&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
+&lt;li>Next, define the URL for the API call:&lt;/br>&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic"># Assemble the URL for the API call &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>api_url = &lt;span style="color:#a50">&amp;#34;ASSEMBLED_URL&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
+&lt;li>Replace &lt;code>ASSEMBLED_URL&lt;/code> with the fully formed API. This is where we’ll put together everything we’ve learned so far:
+&lt;ol>
+&lt;li>The base URL:
+&lt;ul>
+&lt;li>&lt;code>https://cad.onshape.com/api&lt;/code>&lt;/li>
+&lt;li>&lt;code>https://companyName.onshape.com/api&lt;/code> for Enterprise accounts&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>The fixed URL is specified in the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Document/getDocument">&lt;code>getDocument&lt;/code>&lt;/a> API in Glassworks: &lt;code>/documents/{did}&lt;/code>&lt;/li>
+&lt;li>The document ID parameter from the public document URL to include in the fixed URL: &lt;code>{did}: 58d051743d98a90f86e9e2ab&lt;/code>&lt;/li>
+&lt;li>Together, this makes the URL for our API request:
+&lt;code>https://cad.onshape.com/api/documents/58d051743d98a90f86e9e2ab&lt;/code> &lt;/br>&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>We don&amp;rsquo;t need to send any optional parameters with our request, so we can define them as an empty object:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic"># Optional query parameters can be assigned &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>params = {}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="6">
+&lt;li>Now, define your API keys: &lt;/br>&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic"># Use the API keys generated from the Onshape developer portal &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic"># Note: replace with your own keys &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>api_keys = (ACCESS_KEY, SECRET_KEY)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="7">
+&lt;li>Replace &lt;code>ACCESS_KEY&lt;/code> with your access key from the Onshape dev portal, and replace &lt;code>SECRET_KEY&lt;/code> with your secret key.&lt;/li>
+&lt;li>Next, define your headers:&lt;/br>&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic"># Define the header for the request &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>headers = {&lt;span style="color:#a50">&amp;#39;Accept&amp;#39;&lt;/span>: &lt;span style="color:#a50">&amp;#39;MEDIA_TYPE&amp;#39;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a50">&amp;#39;Content-Type&amp;#39;&lt;/span>: &lt;span style="color:#a50">&amp;#39;application/json&amp;#39;&lt;/span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="9">
+&lt;li>Replace &lt;code>MEDIA_TYPE&lt;/code> with the Media type we obtained from Glassworks during the Review the API section above:&lt;/br>&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>application/json;charset=UTF-&lt;span style="color:#099">8&lt;/span>;qs=&lt;span style="color:#099">0.09&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="10">
+&lt;li>Put all the variables you just defined together into the request:&lt;/br>&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic"># Put everything together to make the API request &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>response = requests.get(api_url,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> params=params,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> auth=api_keys,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> headers=headers)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="11">
+&lt;li>And finally, print the name value from the response:&lt;/br>&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic"># Convert the response to formatted JSON and print the `name` property&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0aa">print&lt;/span>(json.dumps(response.json()[&lt;span style="color:#a50">&amp;#34;name&amp;#34;&lt;/span>], indent=&lt;span style="color:#099">4&lt;/span>))
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="12">
+&lt;li>Make sure your file matches the full example below:&lt;/br>&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-py" data-lang="py">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a">import&lt;/span> &lt;span style="color:#0aa;text-decoration:underline">requests&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a">import&lt;/span> &lt;span style="color:#0aa;text-decoration:underline">json&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic"># Assemble the URL for the API call &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>api_url = &lt;span style="color:#a50">&amp;#34;https://cad.onshape.com/api/documents/58d051743d98a90f86e9e2ab&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic"># Optional query parameters can be assigned &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>params = {}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic"># Use the API keys generated from the Onshape developer portal &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic"># Note: replace with your own keys &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>api_keys = (ACCESS_KEY, SECRET_KEY)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic"># Define the header for the request &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>headers = {&lt;span style="color:#a50">&amp;#39;Accept&amp;#39;&lt;/span>: &lt;span style="color:#a50">&amp;#39;application/json;charset=UTF-8;qs=0.09&amp;#39;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a50">&amp;#39;Content-Type&amp;#39;&lt;/span>: &lt;span style="color:#a50">&amp;#39;application/json&amp;#39;&lt;/span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic"># Putting everything together to make the API request &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>response = requests.get(api_url,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> params=params,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> auth=api_keys,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> headers=headers)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic"># Convert the response to formatted JSON and print the `name` property&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0aa">print&lt;/span>(json.dumps(response.json()[&lt;span style="color:#a50">&amp;#34;name&amp;#34;&lt;/span>], indent=&lt;span style="color:#099">4&lt;/span>))
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="run-your-code">Run Your Code&lt;/h2>
+&lt;ol>
+&lt;li>Open your terminal and navigate into the folder where you saved your &lt;code>hello.py&lt;/code> file: &lt;code>cd ~/&amp;lt;your-file-path&amp;gt;&lt;/code>&lt;/li>
+&lt;li>Install the necessary modules:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>python -m pip install requests
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>python -m pip install json
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
+&lt;li>Run your code:&lt;/br>&lt;code>python hello.py&lt;/code>&lt;/li>
+&lt;li>Confirm that your console displays:&lt;/br>&lt;code>&amp;quot;Exercise: Basic Drawing&amp;quot;&lt;/code>&lt;/li>
+&lt;/ol>
+&lt;h2 id="other-language-examples">Other Language Examples&lt;/h2>
+&lt;h3 id="javascript">JavaScript&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-js" data-lang="js">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a">import&lt;/span> fetch from &lt;span style="color:#a50">&amp;#39;node-fetch&amp;#39;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">// Define an async function for the API request
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span>&lt;span style="color:#00a">async&lt;/span> &lt;span style="color:#00a">function&lt;/span> getDocument(url=&lt;span style="color:#a50">&amp;#39;&amp;#39;&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">const&lt;/span> response = &lt;span style="color:#00a">await&lt;/span> fetch(url, {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> method: &lt;span style="color:#a50">&amp;#39;GET&amp;#39;&lt;/span>, &lt;span style="color:#aaa;font-style:italic">// May change to GET, POST, or DELETE
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span> headers: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a50">&amp;#39;Content-Type&amp;#39;&lt;/span>: &lt;span style="color:#a50">&amp;#39;application/json&amp;#39;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Accept: &lt;span style="color:#a50">&amp;#39;application/json;charset=UTF-8;qs=0.09&amp;#39;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#aaa;font-style:italic">// Replace with API keys generated from the Onshape developer portal
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span> Authorization: &lt;span style="color:#a50">`Basic &lt;/span>&lt;span style="color:#a50">${&lt;/span>btoa(&lt;span style="color:#a50">&amp;#39;ACCESS_KEY:SECRET_KEY&amp;#39;&lt;/span>)&lt;span style="color:#a50">}&lt;/span>&lt;span style="color:#a50">`&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#aaa;font-style:italic">// May add body here for POST requests
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span> });
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">return&lt;/span> response.json(); &lt;span style="color:#aaa;font-style:italic">// Return the JSON response
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">// Make the API request with the assembled URL
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">// May add optional query parameters to the end of the URL in the form
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">// &amp;#34;?PARAM_NAME=PARAM&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span>getMass(&lt;span style="color:#a50">&amp;#39;https://cad.onshape.com/api/documents/58d051743d98a90f86e9e2ab&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>).then((data) =&amp;gt; {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> console.log(data.name); &lt;span style="color:#aaa;font-style:italic">// Display the JSON response
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span>});
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="c">C#&lt;/h3>
+&lt;p>Coming soon!&lt;/p>
+&lt;h3 id="cc">C/C++&lt;/h3>
+&lt;p>Coming soon!&lt;/p>
+&lt;!--
+Before running the following script, you can first run the following command line in terminal to create a credential using your API keys generated from the Onshape developer portal.
+```bash
+$ echo -n ACCESS_KEY:SECRET_KEY | base64
+```
+```cpp
+#include &lt;iostream>
+#include &lt;string>
+#include &lt;stdio.h>
+using namespace std;
+int main() {
+string url = "curl ";
+// Use "-X" to specify API type
+url += "-X 'GET' ";
+// Assemble the URL of the API
+// May add optional query parameters to the end of the URL in the form
+// "?PARAM_NAME=PARAM"
+url += "'https://cad.onshape.com/api/document/d/58d051743d98a90f86e9e2ab'";
+// Use "-H" to send headers
+url += "-H 'accept: application/json;charset=UTF-8; qs=0.09' ";
+// Replace CREDENTIAL with the Base64 credential generated from the command line above
+url += "-H 'Authorization: Basic CREDENTIAL'";
+// Use "-d" to send body (data) for POST requests
+//Executing the cURL script
+system(url.c_str());
+return 0;
+}
+```
+--></description></item></channel></rss>

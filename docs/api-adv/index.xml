@@ -1,0 +1,2048 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Onshape Developer Documentation – Advanced API Development</title><link>https://onshape-public.github.io/docs/api-adv/</link><description>Recent content in Advanced API Development on Onshape Developer Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 18 May 2020 20:43:20 -0400</lastBuildDate><atom:link href="https://onshape-public.github.io/docs/api-adv/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Associativity</title><link>https://onshape-public.github.io/docs/api-adv/associativity/</link><pubDate>Mon, 18 May 2020 20:28:26 -0400</pubDate><guid>https://onshape-public.github.io/docs/api-adv/associativity/</guid><description>
+&lt;p>Onshape does not expose a persistent ID for any of these entities. When the model changes, the ID may change. Therefore, Onshape provides an API to enable mapping IDs from a previous microversion to the current microversion. Assuming a simple case of maintaining associativity for a face, an abstract workflow might be:&lt;/p>
+&lt;ol>
+&lt;li>Read the tessellated model data.&lt;/li>
+&lt;li>Select the face of interest.&lt;/li>
+&lt;li>Store the Face ID and Document Microversion ID for the face.&lt;/li>
+&lt;li>[ user changes model ]&lt;/li>
+&lt;li>Call the REST API to translate from the known Face ID to an ID in the new model.&lt;/li>
+&lt;li>Re-apply application-specific data to the face(s) in the new model. Note that a face may become zero, one or multiple faces in the new model, depending on what changes the user made.&lt;/li>
+&lt;/ol>
+&lt;h2 id="associativity-example">Associativity Example&lt;/h2>
+&lt;ol>
+&lt;li>Create a cube in Onshape:&lt;/br>
+&lt;img src="https://onshape-public.github.io/images/associativityimage03.png" alt="image alt text">&lt;/li>
+&lt;li>Get the document microversion ID from the URL: &lt;code>https://cad.onshape.com/api/documents/d/&amp;lt;docid&amp;gt;/w/&amp;lt;wid&amp;gt;/microversionId&lt;/code>.&lt;/li>
+&lt;li>Use the appropriate REST API to get the tessellated faces (&lt;code>getPartStudioFaces&lt;/code>)
+and edges (&lt;code>getPartStudioEdges&lt;/code>}. Note the ids:
+&lt;ul>
+&lt;li>Part ID: &lt;code>JHD&lt;/code>&lt;/li>
+&lt;li>Front face ID: &lt;code>JHO&lt;/code>&lt;/li>
+&lt;li>Top edge of the front face ID: &lt;code>JHd&lt;/code>&lt;/li>
+&lt;li>Right edge of the top face ID: &lt;code>JHt&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Split cube with the Front plane and translate the IDs:&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://onshape-public.github.io/images/associativityimage00.png" alt="image alt text">&lt;/p>
+&lt;p>&lt;strong>POST&lt;/strong>&lt;/p>
+&lt;pre tabindex="0">&lt;code>https://cad.onshape.com/api/partstudios/d/&amp;lt;docid&amp;gt;/w/&amp;lt;wid&amp;gt;/e/&amp;lt;eid&amp;gt;/idtranslations
+&lt;/code>&lt;/pre>&lt;p>&lt;strong>Body&lt;/strong>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;sourceDocumentMicroversion&amp;#34;&lt;/span> : &lt;span style="color:#a50">&amp;#34;47e75ab2ee8b4356a76ebd47&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;ids&amp;#34;&lt;/span> : [&lt;span style="color:#a50">&amp;#34;JHD&amp;#34;&lt;/span>, &lt;span style="color:#a50">&amp;#34;JHO&amp;#34;&lt;/span>, &lt;span style="color:#a50">&amp;#34;JHd&amp;#34;&lt;/span>, &lt;span style="color:#a50">&amp;#34;JHt&amp;#34;&lt;/span> ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Response&lt;/strong>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;documentId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;748d6e850c9248328189922b&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;elementId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;042a6fa54e79451e8076463d&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;sourceDocumentMicroversion&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;47e75ab2ee8b4356a76ebd47&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;ids&amp;#34;&lt;/span>: [
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;source&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;JHD&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;status&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;SPLIT&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;target&amp;#34;&lt;/span>: [&lt;span style="color:#a50">&amp;#34;JID&amp;#34;&lt;/span>, &lt;span style="color:#a50">&amp;#34;JIH&amp;#34;&lt;/span>] },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;source&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;JHO&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;status&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;OK&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;target&amp;#34;&lt;/span>: [&lt;span style="color:#a50">&amp;#34;JHO&amp;#34;&lt;/span>] },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;source&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;JHd&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;status&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;OK&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;target&amp;#34;&lt;/span>: [&lt;span style="color:#a50">&amp;#34;JHd&amp;#34;&lt;/span>] },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;source&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;JHt&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;status&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;SPLIT&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;target&amp;#34;&lt;/span>: [&lt;span style="color:#a50">&amp;#34;JI5&amp;#34;&lt;/span>, &lt;span style="color:#a50">&amp;#34;JI9&amp;#34;&lt;/span>] }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;targetDocumentMicroversion&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;78bc7f3fcf82475085c2f3ab&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
+&lt;li>Delete one of the parts, and translate the IDs:&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://onshape-public.github.io/images/associativityimage01.png" alt="image alt text">&lt;/p>
+&lt;p>&lt;strong>POST&lt;/strong>&lt;/p>
+&lt;pre tabindex="0">&lt;code>https://cad.onshape.com/api/partstudios/d/&amp;lt;docid&amp;gt;/w/&amp;lt;wid&amp;gt;/e/&amp;lt;eid&amp;gt;/idtranslations
+&lt;/code>&lt;/pre>&lt;p>&lt;strong>Body&lt;/strong>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;sourceDocumentMicroversion&amp;#34;&lt;/span> : &lt;span style="color:#a50">&amp;#34;47e75ab2ee8b4356a76ebd47&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;ids&amp;#34;&lt;/span> : [&lt;span style="color:#a50">&amp;#34;JHD&amp;#34;&lt;/span>, &lt;span style="color:#a50">&amp;#34;JHO&amp;#34;&lt;/span>, &lt;span style="color:#a50">&amp;#34;JHd&amp;#34;&lt;/span>, &lt;span style="color:#a50">&amp;#34;JHt&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Response&lt;/strong>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;documentId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;748d6e850c9248328189922b&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;elementId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;042a6fa54e79451e8076463d&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;sourceDocumentMicroversion&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;47e75ab2ee8b4356a76ebd47&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;ids&amp;#34;&lt;/span>: [
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;source&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;JHD&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;status&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;OK&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;target&amp;#34;&lt;/span>: [&lt;span style="color:#a50">&amp;#34;JID&amp;#34;&lt;/span>] },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;source&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;JHO&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;status&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;FAILED_TO_RESOLVE&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;target&amp;#34;&lt;/span>: [] },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;source&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;JHd&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;status&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;FAILED_TO_RESOLVE&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;target&amp;#34;&lt;/span>: [] },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;source&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;JHt&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;status&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;OK&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;target&amp;#34;&lt;/span>: [&lt;span style="color:#a50">&amp;#34;JI5&amp;#34;&lt;/span>] }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;targetDocumentMicroversion&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;52aa74d34b624f3aaef33204&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="5">
+&lt;li>Roll back the delete and the split, and translate the IDs:&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://onshape-public.github.io/images/associativityimage02.png" alt="image alt text">&lt;/p>
+&lt;p>&lt;strong>POST&lt;/strong>&lt;/p>
+&lt;pre tabindex="0">&lt;code>https://cad.onshape.com/api/partstudios/d/&amp;lt;docid&amp;gt;/w/&amp;lt;wid&amp;gt;/e/&amp;lt;eid&amp;gt;/idtranslations
+&lt;/code>&lt;/pre>&lt;p>&lt;strong>Body&lt;/strong>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;sourceDocumentMicroversion&amp;#34;&lt;/span> : &lt;span style="color:#a50">&amp;#34;47e75ab2ee8b4356a76ebd47&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;ids&amp;#34;&lt;/span> : [&lt;span style="color:#a50">&amp;#34;JHD&amp;#34;&lt;/span>, &lt;span style="color:#a50">&amp;#34;JHO&amp;#34;&lt;/span>, &lt;span style="color:#a50">&amp;#34;JHd&amp;#34;&lt;/span>, &lt;span style="color:#a50">&amp;#34;JHt&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Response&lt;/strong>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;documentId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;748d6e850c9248328189922b&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;elementId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;042a6fa54e79451e8076463d&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;sourceDocumentMicroversion&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;47e75ab2ee8b4356a76ebd47&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;ids&amp;#34;&lt;/span>: [
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;source&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;JHD&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;status&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;OK&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;target&amp;#34;&lt;/span>: [&lt;span style="color:#a50">&amp;#34;JID&amp;#34;&lt;/span>] },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;source&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;JHO&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;status&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;OK&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;target&amp;#34;&lt;/span>: [&lt;span style="color:#a50">&amp;#34;JHO&amp;#34;&lt;/span>] },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;source&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;JHd&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;status&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;OK&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;target&amp;#34;&lt;/span>: [&lt;span style="color:#a50">&amp;#34;JHd&amp;#34;&lt;/span>] },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;source&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;JHt&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;status&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;OK&amp;#34;&lt;/span>, &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;target&amp;#34;&lt;/span>: [&lt;span style="color:#a50">&amp;#34;JHt&amp;#34;&lt;/span>] }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;targetDocumentMicroversion&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;52aa74d34b624f3aaef33204&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Billing</title><link>https://onshape-public.github.io/docs/api-adv/billing/</link><pubDate>Mon, 18 May 2020 20:29:36 -0400</pubDate><guid>https://onshape-public.github.io/docs/api-adv/billing/</guid><description>
+&lt;p>This document describes APIs that will allow partners to interact with the Onshape billing system.&lt;/p>
+&lt;p>Please address questions to &amp;ldquo;&lt;a href="mailto:api-support@onshape.com">api-support@onshape.com&lt;/a>&amp;rdquo; for the fastest response.&lt;/p>
+&lt;h2 id="overview">Overview&lt;/h2>
+&lt;p>All billing is done through &amp;ldquo;plans&amp;rdquo; that are created in the Developer Portal. A “plan” has the following attributes:&lt;/p>
+&lt;table>
+&lt;tr>
+&lt;td>Name (also called SKU)&lt;/td>
+&lt;td>A unique (within your company) plan name&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Description&lt;/td>
+&lt;td>A user-visible description of the plan&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Amount&lt;/td>
+&lt;td>The cost of the plan (may be one-time or recurring, depending on the type)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Type&lt;/td>
+&lt;td>Monthly, One-time or Consumable&lt;/td>
+&lt;/tr>
+&lt;/table>
+&lt;p>Onshape defines three kinds of plans:&lt;/p>
+&lt;table>
+&lt;tr>
+&lt;td>Plan type&lt;/td>
+&lt;td>Description&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Recurring
+(Monthly Subscription)&lt;/td>
+&lt;td>A plan that is renewed monthly at a fixed cost. All Apps in the app store must have a Free monthly plan (which is created by default), and may have additional paid plans.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>One-time&lt;/td>
+&lt;td>A plan that is purchased once (not renewed monthly). A user may purchase these multiple times.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Consumable&lt;/td>
+&lt;td>A plan that represents a consumable unit, such as "hours of rendering" or “simulation runs”. Consumable plans are not fully implemented at this time, but the consumable functionality can be implemented using One-time Purchase plans as described below.&lt;/td>
+&lt;/tr>
+&lt;/table>
+&lt;p>Users may purchase plans through the App Store interface. In addition, if your application has the OAuth Purchase Scope, your application can initiate &amp;ldquo;in-app&amp;rdquo; purchases by calling Onshape to request a purchase.&lt;/p>
+&lt;p>The basic steps for interacting with Onshape Billing:&lt;/p>
+&lt;ol>
+&lt;li>Define one or more plans using the Developer Portal interface&lt;/li>
+&lt;li>Use the Onshape API to determine the current user’s plan&lt;/li>
+&lt;li>Provide features and/or limits based on the current plan&lt;/li>
+&lt;/ol>
+&lt;h2 id="using-the-onshape-billing-api">Using the Onshape Billing API&lt;/h2>
+&lt;p>&lt;code>GET /api/accounts/purchases&lt;/code>&lt;/p>
+&lt;p>Returns a list of purchase made by the current user for plans owned by the current application. Use this information to determine what capabilities or features the user is entitled to use.&lt;/p>
+&lt;p>&lt;code>DELETE /api/accounts/purchases/&amp;lt;purchase id&amp;gt;&lt;/code>&lt;/p>
+&lt;p>Cancel a recurring purchase.&lt;/p>
+&lt;p>&lt;code>POST /api/accounts/purchases/&amp;lt;purchase id&amp;gt;/consume&lt;/code>&lt;/p>
+&lt;p>Indicate the use of a consumable. (Not fully implemented at this time)&lt;/p>
+&lt;p>&lt;code>GET /api/billing/plans/client/&amp;lt;client id&amp;gt;&lt;/code>&lt;/p>
+&lt;p>Get a list of the billing plans defined for this client.&lt;/p>
+&lt;h2 id="initiating-a-purchase-from-an-application-in-app-purchases">Initiating a purchase from an application (in-app purchases)&lt;/h2>
+&lt;p>To initiate a purchase of a subscription or one time item you must set the browser’s location to particular URL within the Onshape stack:&lt;/p>
+&lt;p>&lt;code>https://cad.onshape.com/billing/purchase?redirectUri=RRRR&amp;amp;clientId=CCCC&amp;amp;sku=SSSS&amp;amp;userId=UUUU&lt;/code>&lt;/p>
+&lt;p>Each of the query parameters should be URL encoded. The clientId is your application’s OAuth Client ID, the sku is the name/sku field for an item (you can find this in the developer portal or it’s retrievable through the /api/billing/plans REST endpoints). The user Id should be the Onshape user Id for the current user and is available through the /api/users/session REST endpoint. The redirectUri is the URI the user will be returned to within your website when the purchase is finished.&lt;/p>
+&lt;p>When the browser’s location is changed to this pattern the Onshape stack will serve content to confirm the users identity, confirm the details of what is being purchased (or obtained if the item is free) and then after the user agrees to the purchase will confirm the transaction (with our payment processor if the item is not free) and then redirect the user back to the supplied redirectUri (the browser location will be changed to the redirectUri). Additionally Onshape will add a &lt;code>success=true&lt;/code> or &lt;code>success=false&lt;/code> query parameter to the redirectURI indicating whether the user completed successfully (payment was taken if required etc.) or failed, either due to cancelling the purchase or an issue with payment.&lt;/p>
+&lt;p>When the browser fetches the redirectUri your application must call back through the &lt;code>/api/account/purchases&lt;/code> API to get confirmation of the purchase - do NOT assume that a fetch of the redirectUri with a &lt;code>success=true&lt;/code> query parameter actually indicates a purchase has occurred. Query the Onshape stack with the &lt;code>/api/account/purchases&lt;/code> API to ensure that the required item has actually been bought.&lt;/p>
+&lt;h2 id="consumable-items">Consumable Items&lt;/h2>
+&lt;p>A detailed description of the interface for managing consumable purchases will be provided shortly. You can use one-time plans to achieve similar results:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Define a one-time purchase plan with a description indicating the nature of the purchase, for example:&lt;/p>
+&lt;p>RENDER-10 Ten rendering hours $100&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Keep track of the number of hours that the user has consumed. You can store and retrieve this information in Onshape using the following APIs. These APIs allow you to store and retrieve arbitrary information on a per-user basis.&lt;/p>
+&lt;p>POST /applications/clients/:cid/settings/users/:uid
+GET /applications/clients/:cid/settings/users/:uid&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Check the number of available &amp;ldquo;units&amp;rdquo; by getting the purchases and the record of consumables. Be sure to include UI in your application that the user can use to see their remaining quantity.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Alternately, you can store the consumption data in your own system; you do not need to use the Onshape API to manage that data.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>Onshape intends to provide a richer set of APIs that help track the purchase and consumption of consumables in the near future.&lt;/p>
+&lt;h2 id="other-billing-models">Other billing models&lt;/h2>
+&lt;p>You can use these mechanisms to implement other models. For example, a time-limited trial could be implemented by scanning purchases for the first &amp;ldquo;purchase&amp;rdquo; and denying service if it is more than a defined number of days in the past. A “fixed number of uses per month” could be implemented as a monthly subscription, string usage data with the settings API, and denying service after a fixed number of uses.&lt;/p>
+&lt;h2 id="samples">Samples&lt;/h2>
+&lt;p>Onshape will provide sample code for both desktop and integrated applications demonstrating the use of the billing APIs and workflow. If you are subscribed to the Onshape Github Partner group, you will have access to those samples as soon as they are posted.&lt;/p>
+&lt;h2 id="testing">Testing&lt;/h2>
+&lt;p>Please contact &lt;a href="mailto:api-support@onshape.com">api-support@onshape.com&lt;/a> to discuss details of testing billing &amp;amp; subscriptions.&lt;/p></description></item><item><title>Docs: Feature List API</title><link>https://onshape-public.github.io/docs/api-adv/featureaccess/</link><pubDate>Mon, 18 May 2020 20:37:28 -0400</pubDate><guid>https://onshape-public.github.io/docs/api-adv/featureaccess/</guid><description>
+&lt;p>Onshape Part Studio Feature Access API&lt;/p>
+&lt;h2 id="summary">Summary&lt;/h2>
+&lt;p>The Onshape Part Studio tab tracks edits in terms of a feature list. Creation and modification of geometry is
+performed by manipulating that list. This document describes capabilities that are intended to allow partners
+and customers to manipulate the feature list from software.&lt;/p>
+&lt;p>The feature API comprises the following API methods:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>GET /api/partstudios/DWMVE/features - get feature list&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>GET /api/partstudios/DWMVE/featurespecs - get feature specs&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>POST /api/partstudios/DWE/features - add feature to feature list&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>POST /api/partstudios/DWE/features/featureid/:fid - update an existing feature in feature list&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>DELETE /api/partstudios/DWE/features/featureid/:fid - delete an existing feature from feature list&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>POST /api/partstudios/DWE/features/features/updates - selectively update features in feature list&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>POST /api/partstudios/DWE/features/rollback - move the rollback bar&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>POST /api/partstudios/DWMVE/featurescript - evaluate featurescript&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>As well as related configuration API methods:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>GET /api/partstudios/DWMVE/configuration - get part studio configuration&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>POST /api/partstudios/DWE/configuration - update part studio configuration&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>Note that the use of &amp;ldquo;DWE&amp;rdquo; occurrences within this document are a shorthand notation for “d/:did/w/:wid/e/:eid”
+and DWMVE occurrences within this document are a shorthand notation for any of “d/:did/w/:wid/e/:eid”,
+“d/:did/v/:vid/e/:eid”, “d/:did/m/:mid/e/:eid”. It is assumed that the reader is familiar with these URL path patterns
+from the Glassworks API Explorer documentation.&lt;/p>
+&lt;h2 id="api-methods">API Methods&lt;/h2>
+&lt;p>The methods described here are also documented at an overview level in the Glassworks API Explorer within the Part Studios group.&lt;/p>
+&lt;h3 id="get-feature-list">Get Feature List&lt;/h3>
+&lt;pre>&lt;code>GET /api/partstudios/DWMVE/features - get feature list
+&lt;/code>&lt;/pre>
+&lt;p>If you have a part studio ekement, you can call the get feature list api to find the features that are instantiated within the part studio.
+The return structure contains the following fields:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>features - A list of user-define features in the part studio.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>defaultFeatures - A list of the default feature (pre-defined) in the part studio&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>imports - A list of capabilities that may be referenced by the features. We currently only support a specific
+predefined set of geometry capabilities.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>featureStates - A list of feature states, one per feature, which describe whether the feature is valid. If a feature
+has been added to the feature list with an incorrect definition it remains in the feature list.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>isComplete - A boolean indicating whether the features represents the entire part studio (true) or is only a subset
+(false). The result is a subset if the call to the api specifies a filter on the feature ids&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>rollbackIndex - The ordinal position of the rollback bar w.r.t. the list of features. Onshape only executes features
+that are prior to the rollback bar.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>serializationVersion - A string identifying the version of the structure serialization rules used to encode the
+output. This is included so that if the output is fed back in and the software has changed incompatibilities can be
+detected&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>sourceMicroversion - The microversion identifier for the document that describes the state from which the result was
+extracted. This is critical when attempting to use geometry ids that are included in the output, since the
+interpretation of a geometry id is dependent on the document microversion.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>libraryVersion - An integer indicating the version number for FeatureScript in the Part Studio&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="get-feature-specs">Get Feature Specs&lt;/h3>
+&lt;pre>&lt;code>GET /api/partstudios/DWMVE/featurespecs - get feature specs
+&lt;/code>&lt;/pre>
+&lt;p>Returns a list of feature specs that are available within the part studio. A feature spec provides a data description
+of the interface to a feature. This can, in theory, allow an application to use introspection to allow dynamically
+generated features. In practice, we expect that the application developer understands the features ahead of time and
+might utilize the feature spec to understand the options available and the required format for feature
+addition/modification.&lt;/p>
+&lt;h3 id="add-feature">Add Feature&lt;/h3>
+&lt;pre>&lt;code>POST /api/partstudios/DWE/features
+&lt;/code>&lt;/pre>
+&lt;p>A feature can be added to the feature list by calling the add feature API. The API accepts as input a JSON structure
+containing the fields:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>feature - A single feature definition, in the same format that is output by the get feature list API, except that
+there is no need to provide feature ids, node ids, or typeNames.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>sourceMicroversion - The microversion of the document that is assumed. Any geometry ids included in the feature are
+interpreted in the context of this microversion.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>rejectMicroversionSkew (optional) - If set to true, the call will refuse to make the addition if the current
+microversion for the document does not match the source Microversion. Otherwise, a best-effort attempt is made to
+re-interpret the feature addition in the context of a newer document microversion.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>The call returns a structure with the following fields:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>feature - The input feature, echoed back with id value assignments in place&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>featureState - The state of the feature&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>serializationVersion - As described previously&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>sourceMicroversion - The microversion of the document in which the returned feature is defined&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>microversionSkew - If rejectMicroversionSkew was not set to true on input and the document microversion had changed
+since the input sourceMicroversion, this is set to true to indicate that a re-interpretation was made.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>libraryVersion - An integer indicating the version number for FeatureScript in the Part Studio&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>The feature is added immediately before the rollback bar. Any geometry ids specified in the feature must be valid at
+that point in the feature tree. For example, if applying a fillet to an edge, that edge must exist in the feature tree.
+Filleting the edge will normally make it invalid at future states of the feature tree, since the fillet feature
+removes the edge.&lt;/p>
+&lt;h3 id="update-feature">Update Feature&lt;/h3>
+&lt;pre>&lt;code>POST /api/partstudios/DWE/features/featureid/:fid
+&lt;/code>&lt;/pre>
+&lt;p>An existing feature can be modified by calling the update feature API. This API accepts the same input body format and
+returns the same output format as the Add Feature API. However, instead of adding a new feature prior to the rollback
+bar location, it replaces an existing feature in the location of the existing feature.&lt;/p>
+&lt;h3 id="update-features">Update Features&lt;/h3>
+&lt;pre>&lt;code>POST /api/partstudios/DWE/features/updates
+&lt;/code>&lt;/pre>
+&lt;p>Multiple existing features can be modified by calling the update features API. This API accepts a list of features and to update, which must already exist in the part studio. This call does not fully re-define the features but instead, updates only the parameters supplied in the top-level feature structure, and optionally will update feature suppression attributes.&lt;/p>
+&lt;p>Applications that need to update parameters for multiple features can typically achieve faster model rebuild time by updating multiple features in a single call. It also has the benefit that it allows features to be suppressed or unsuppressed without specifying parameters. This is particularly useful in the unsuppress case because parameters containing query values are not populated when reading from the feature list.&lt;/p>
+&lt;h3 id="delete-feature">Delete Feature&lt;/h3>
+&lt;pre>&lt;code>DELETE /api/partstudios/DWE/features/featureid/:fid
+&lt;/code>&lt;/pre>
+&lt;p>An existing feature can be removed from the feature list by calling the delete feature API. The API accepts only URL
+path parameters and return only the following fields:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>serializationVersion - As described earlier&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>sourceMicroversion - As described earlier&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="move-rollback-bar">Move Rollback Bar&lt;/h3>
+&lt;pre>&lt;code>POST /api/partstudios/DWE/features/rollback
+&lt;/code>&lt;/pre>
+&lt;p>The rollback bar can be moved using this API. This is useful if a feature needs to be added at a location other than
+the current rollback bar location. As input, it accepts the following fields:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>rollbackIndex - The index at which the rollback index should be placed. Features with entry index (0-based) higher
+than or equal to this value are rolled back. The value must be in the range 0 to the number of entries in the feature
+list&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>serializationVersion&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>sourceMicroversion&lt;/p>
+&lt;p>The result returned by the API includes the fields&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>rollbackIndex - The rollback index in the updated state&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>serializationVersion - As described previously&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>sourceMicroversion - As described previously&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>microversionSkew - As described previously&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="evaluate-featurescript">Evaluate FeatureScript&lt;/h3>
+&lt;pre>&lt;code>POST api/partstudios/DWMVE/featurescript
+&lt;/code>&lt;/pre>
+&lt;p>This API allows the caller to execute a FeatureScript function to query information about the existing feature tree
+that is not exposed through the other methods described here. As input, it accepts the following fields:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>script - The definition of a FeatureScript function that takes a Context argument and a map argument&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>queries - A list of key, value pairs, where the key is a FeatureScript identifier that will appear as a key in the
+map supplied to the script function and the valid is a list of geometry Id strings, where the list is converted to
+&amp;ldquo;query&amp;rdquo; form form use within the script function.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>See the example below to better understand this usage.&lt;/p>
+&lt;h2 id="configuration-api-methods">Configuration API Methods&lt;/h2>
+&lt;p>Part Studios may be unconfigured or configured. A configured part studio has a list of configuration parameters that
+define the knobs that allow adjustment of the part studio part content. Configuration parameters are referred to as
+&amp;ldquo;inputs&amp;rdquo; in the UI and may be one of Enum (or List), Boolean, Quantity or String. Each parameter includes a default
+value setting that is used if the parameter is not otherwise set.&lt;/p>
+&lt;p>Configured part studios also have a &amp;ldquo;current&amp;rdquo; configuration. This is a list of configuration parameter settings for
+the current representation of the part studio. Alternate configurations of the part studio may be used concurrently,
+but the current configuration defines the parts seen by the user within in the part studio.&lt;/p>
+&lt;h3 id="get-configuration">Get Configuration&lt;/h3>
+&lt;pre>&lt;code>GET /api/partstudios/DWMVE/configuration - get part studio configuration
+&lt;/code>&lt;/pre>
+&lt;p>This method reads the current configuration information for a Part Studio.
+The return structure contains the following fields:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>configurationParameters - A list of the parameters that allow configuration of the part studio.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>currentConfiguration - A list of configuration parameter settings for the current representation of the part studio.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>serializationVersion - As described previously&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>sourceMicroversion - As described previously&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>microversionSkew - As described previously&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>libraryVersion - As described previously&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="update-configuration">Update Configuration&lt;/h3>
+&lt;pre>&lt;code>POST /api/partstudios/DWE/configuration - update part studio configuration
+&lt;/code>&lt;/pre>
+&lt;p>This method modifies the current configuration information for a Part Studio. When changing configuration parameters
+it is important that parameterId values be maintained consistently across changes so that features that reference the
+parameter do not get broken.
+The API accepts as input a JSON structure containing the fields:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>configurationParameters - A list of the parameters that allow configuration of the part studio.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>currentConfiguration - A list of configuration parameter settings for the current representation of the part studio.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>sourceMicroversion (optional) - The microversion of the document that is assumed.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>rejectMicroversionSkew (optional) - If set to true, the call will refuse to make the addition if the current
+microversion for the document does not match the source Microversion.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>The call returns a structure with the following fields:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>configurationParameters - A list of the parameters that allow configuration of the part studio.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>currentConfiguration - A list of configuration parameter settings for the current representation of the part studio.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>serializationVersion - As described previously&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>sourceMicroversion - As described previously&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>microversionSkew - As described previously&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>libraryVersion - As described previously&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="api-usage-details">API Usage Details&lt;/h2>
+&lt;p>The feature access and modification API in Onshape presents the internal form of feature definitions rather than
+providing a translation layer between external form and internal form. We suggest that you familiarize yourself with
+the formats involved by calling the Get Feature List API on existing part studios in order to understand the encoding
+of features.&lt;/p>
+&lt;p>Some important things to know about the JSON encoding are:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Default values are omitted in the encoded output. For string fields the default value is &amp;ldquo;&amp;rdquo;, for boolean fields it
+is false, and for numeric fields it is 0.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>It uses a special tagging system in order to manage polymorphic data structures. Specifically, objects generally
+are encoded by enclosing them within another object that declares the type information for the enclosed object.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>As an example of the type tagging mechanism, the GET features api might return a structure that looks like this:&lt;/p>
+&lt;pre>&lt;code>{
+&amp;quot;features&amp;quot;: [
+{
+&amp;quot;type&amp;quot;: 134,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMFeature&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;featureType&amp;quot;: &amp;quot;cube&amp;quot;,
+&amp;quot;featureId&amp;quot;: &amp;quot;FLqo5rpNof3IXgh_0&amp;quot;,
+&amp;quot;name&amp;quot;: &amp;quot;Cube 1&amp;quot;,
+&amp;quot;parameters&amp;quot;: [
+{
+&amp;quot;type&amp;quot;: 147,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMParameterQuantity&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;expression&amp;quot;: &amp;quot;1.0*in&amp;quot;,
+&amp;quot;parameterId&amp;quot;: &amp;quot;sideLength&amp;quot;,
+&amp;quot;nodeId&amp;quot;: &amp;quot;TyUNOSxJ/f9z5t1T&amp;quot;
+}
+}
+],
+&amp;quot;nodeId&amp;quot;: &amp;quot;Mr60Xw6RGWdr0MfYV&amp;quot;
+}
+}
+],
+&amp;quot;imports&amp;quot;: [
+{
+&amp;quot;type&amp;quot;: 136,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMImport&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;path&amp;quot;: &amp;quot;onshape/std/geometry.fs&amp;quot;,
+&amp;quot;version&amp;quot;: &amp;quot;268.0&amp;quot;,
+&amp;quot;nodeId&amp;quot;: &amp;quot;M2/0RrOwK0Q+hWr9z&amp;quot;
+}
+}
+],
+&amp;quot;featureStates&amp;quot;: [
+{
+&amp;quot;key&amp;quot;: &amp;quot;FLqo5rpNof3IXgh_0&amp;quot;,
+&amp;quot;value&amp;quot;: {
+&amp;quot;type&amp;quot;: 1688,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTFeatureState&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;featureStatus&amp;quot;: &amp;quot;OK&amp;quot;
+}
+}
+}
+],
+&amp;quot;isComplete&amp;quot;: true,
+&amp;quot;rollbackIndex&amp;quot;: 1,
+&amp;quot;serializationVersion&amp;quot;: &amp;quot;1.1.6&amp;quot;,
+&amp;quot;sourceMicroversion&amp;quot;: &amp;quot;b5b4834bd0674b4489b2b2b7&amp;quot;
+}
+&lt;/code>&lt;/pre>
+&lt;p>We see that in this case, the features array contains a single feature. The &amp;ldquo;type&amp;rdquo; and &amp;ldquo;typeName&amp;rdquo; fields describe the
+type that is encoded within the &amp;ldquo;message&amp;rdquo; field. The &amp;ldquo;type&amp;rdquo; field provides definitive type information and is the type
+number assigned to the structure. This type number is a permanent assignment. The &amp;ldquo;typeName&amp;rdquo; field is a convenience
+field that is generated on output and ignored on input. It is intended to allow developers to associate meaningful
+names with the type numbers.&lt;/p>
+&lt;h3 id="general-features">General Features&lt;/h3>
+&lt;p>In the example above, we see that the single feature is of type 134, which is the general feature type. A general
+feature is an instantiation of the feature template that is describe by its corresponding feature spec. The BTMFeature
+structure includes the following fields:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>featureType - Specifies the name of the feature spec that this instantiates&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>featureId - The internal identifier of the feature instance within this part studio. It is internally generated when
+a feature is added.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>nodeId - An internal identifier for the feature node. This is also internally generated when the feature is added.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>name - The user visible name of the feature.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>namespace - An indicator of where the feature definition can be found. Features in the FeatureScript standard library
+have a namespace value of &amp;quot;&amp;quot; whereas custom features identify the featurestudio that contains the definition. See
+the Custom Features section below for more information.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>parameters - A list of parameter values for instantiation of the feature spec. Parameters are present for all
+defined parameters, even if not used in a specific instantiation.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>All parameters have the following fields in common:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>parameterId - The name of the parameter spec that this applies to&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>nodeId - An internal identifier for the parameter node&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>Parameters are typically one of the following types:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>BTMParameterQuantity (type 147) - specifies the value for a parameter defined in the feature spec as a
+BTParameterSpecQuantity. It has the field:&lt;/p>
+&lt;ul>
+&lt;li>expression - An expression defining the value for the parameter.&lt;/li>
+&lt;/ul>
+&lt;p>An example of its usage is in the depth parameter in the extrude feature.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>BTMParameterQueryList (type 148) - specifies the value for a parameter defined in the feature spec as a
+BTParameterSpecQuery. It has the field:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>queries - a list of query objects. The query objects could be either&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>SBTMIndividualQuery objects (type 138) with the field:&lt;/p>
+&lt;ul>
+&lt;li>geometryIds - A list of geometry id values indentifying geometry that the feature applies to.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>SBTMIndividualSketchRegionQuery objects (type 140) with the field:&lt;/p>
+&lt;ul>
+&lt;li>featureId - The featureId of a sketch, with the query identifying all regions of the sketch&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>An example of its usage is in the entities parameter in the extrude feature.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>BTMParameterBoolean (type 144) - specifies the value for a parameter defined in the feature spec as a
+BTParameterSpecBoolean. It has the field:&lt;/p>
+&lt;ul>
+&lt;li>value - The boolean value&lt;/li>
+&lt;/ul>
+&lt;p>An example of its usage is in the oppositeDirection parameter in the extrude feature.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>BTMParameterEnum (type 145) - specifies the value for a parameter defined in the feature spec as a
+BTParameterSpecEnum. It has the fields:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>enumName - The name of the enum type that value is a member of&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>value - The name of the enum member&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>An example of its usage is in the bodyType parameter in the extrude feature.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>Other parameter types exist for special cases and are not described here.&lt;/p>
+&lt;h3 id="sketches">Sketches&lt;/h3>
+&lt;p>Although most features are of type BTMFeature, there is also a BTMSketch type, which defines a sketch. The structure
+of a sketch feature extends the BTMFeature and is relatively complex. It is suggested that the developer use a manually
+edited sketch as a template for any sketches that they want to create programmatically. However, we will give a
+high-level overview of the content for the sketch.&lt;/p>
+&lt;p>Sketches have top-level fields:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>entities - the sketch geometry&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>constraints - the geometric relationship constraints and dimensions for the sketch&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>parameters - the sketch parameters. The only parameter is the parameter that identifies the sketch plane&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>featureType - set to &amp;ldquo;newSketch&amp;rdquo;&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>featureId - the feature id&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>name - the sketch name&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>The entities describe curves in terms of unbounded curves plus parameterized ranges. The geometry is always specified
+in meters, regardless of the user’s choice of units. This geometry provides an initial guess for the sketch. The actual
+solve state may differ, depending on whether the input constraints are satisfied.&lt;/p>
+&lt;p>The constraints describe the requirements for sketch solution. These typically include constraints such as COINCIDENT,
+HORIZONTAL, VERTICAL, PARALLEL, PERPENDICULAR, TANGENT that control geometric positioning and constraints such as
+DISTANCE, RADIUS, DIAMETER, ANGLE that provide dimensional constraints. The constraints typically have one or two
+objects that are constrained. These are referenced as localFirst for the first constrained entity, which is within
+the sketch, and either localSecond or externalSection, depending on whether the second constrained entity is local
+to the sketch. When entities are local to the sketch they are identitified by entity ids (long unique names) and when
+external they are identified by a BTMIndiviualQuery.&lt;/p>
+&lt;h2 id="feature-specs">Feature Specs&lt;/h2>
+&lt;p>The feature spec for a feature provides a description of the inputs that it accepts. As an example, the feature spec
+for a cube is shown below. It defines a single parameter named &amp;ldquo;sideLength&amp;rdquo;. The parameter spec includes a list of
+ranges that specify valid ranges for the parameter value. Each range is specific to a particular unit and has a
+defaultValue for that unit. Some parameters described by the feature spec may be optional. These normally have a
+visibilityCondition that describes a logical test as to whether the parameter should be exposed for editing, based on
+other parameter values. This provides a fairly reliable way to determine whether the parameter is required for a
+particular feature instance, but it is safe to include default values for a feature even if it has a
+visibilityCondition that indicates it is not visible.&lt;/p>
+&lt;pre>&lt;code>{
+&amp;quot;type&amp;quot;: 129,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTFeatureSpec&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;featureType&amp;quot;: &amp;quot;cube&amp;quot;,
+&amp;quot;featureTypeName&amp;quot;: &amp;quot;Cube&amp;quot;,
+&amp;quot;parameters&amp;quot;: [
+{
+&amp;quot;type&amp;quot;: 173,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTParameterSpecQuantity&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;quantityType&amp;quot;: &amp;quot;LENGTH&amp;quot;,
+&amp;quot;ranges&amp;quot;: [
+{
+&amp;quot;type&amp;quot;: 181,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTQuantityRange&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;units&amp;quot;: &amp;quot;meter&amp;quot;,
+&amp;quot;minValue&amp;quot;: 0.00001,
+&amp;quot;maxValue&amp;quot;: 500,
+&amp;quot;defaultValue&amp;quot;: 0.025,
+&amp;quot;location&amp;quot;: {
+&amp;quot;type&amp;quot;: 226,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTLocationInfo&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;document&amp;quot;: &amp;quot;onshape/std/primitives.fs&amp;quot;,
+&amp;quot;parseNodeId&amp;quot;: &amp;quot;PX2DsNKne8oO7ilPS&amp;quot;,
+&amp;quot;languageVersion&amp;quot;: 268,
+&amp;quot;nodeId&amp;quot;: &amp;quot;t8iQqgzAr/bCB2AZ&amp;quot;
+}
+}
+}
+},
+{
+&amp;quot;type&amp;quot;: 181,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTQuantityRange&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;units&amp;quot;: &amp;quot;centimeter&amp;quot;,
+&amp;quot;minValue&amp;quot;: 0.001,
+&amp;quot;maxValue&amp;quot;: 50000,
+&amp;quot;defaultValue&amp;quot;: 2.5,
+&amp;quot;location&amp;quot;: {
+&amp;quot;type&amp;quot;: 226,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTLocationInfo&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;document&amp;quot;: &amp;quot;onshape/std/primitives.fs&amp;quot;,
+&amp;quot;parseNodeId&amp;quot;: &amp;quot;PKXPCya7aeoNITDFW&amp;quot;,
+&amp;quot;languageVersion&amp;quot;: 268,
+&amp;quot;nodeId&amp;quot;: &amp;quot;69sE3wOlv3FLiJxn&amp;quot;
+}
+}
+}
+},
+{
+&amp;quot;type&amp;quot;: 181,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTQuantityRange&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;units&amp;quot;: &amp;quot;millimeter&amp;quot;,
+&amp;quot;minValue&amp;quot;: 0.01,
+&amp;quot;maxValue&amp;quot;: 500000,
+&amp;quot;defaultValue&amp;quot;: 25,
+&amp;quot;location&amp;quot;: {
+&amp;quot;type&amp;quot;: 226,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTLocationInfo&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;document&amp;quot;: &amp;quot;onshape/std/primitives.fs&amp;quot;,
+&amp;quot;parseNodeId&amp;quot;: &amp;quot;P8uyYds3YIBBpzlVN&amp;quot;,
+&amp;quot;languageVersion&amp;quot;: 268,
+&amp;quot;nodeId&amp;quot;: &amp;quot;8huKnMQb9mH9B+ef&amp;quot;
+}
+}
+}
+},
+{
+&amp;quot;type&amp;quot;: 181,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTQuantityRange&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;units&amp;quot;: &amp;quot;inch&amp;quot;,
+&amp;quot;minValue&amp;quot;: 0.0003937007874015748,
+&amp;quot;maxValue&amp;quot;: 19685.03937007874,
+&amp;quot;defaultValue&amp;quot;: 1,
+&amp;quot;location&amp;quot;: {
+&amp;quot;type&amp;quot;: 226,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTLocationInfo&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;document&amp;quot;: &amp;quot;onshape/std/primitives.fs&amp;quot;,
+&amp;quot;parseNodeId&amp;quot;: &amp;quot;P4MfX8crrr+qc9vFS&amp;quot;,
+&amp;quot;languageVersion&amp;quot;: 268,
+&amp;quot;nodeId&amp;quot;: &amp;quot;BMU3SmZpR83uoKkd&amp;quot;
+}
+}
+}
+},
+{
+&amp;quot;type&amp;quot;: 181,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTQuantityRange&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;units&amp;quot;: &amp;quot;foot&amp;quot;,
+&amp;quot;minValue&amp;quot;: 0.00003280839895013123,
+&amp;quot;maxValue&amp;quot;: 1640.4199475065616,
+&amp;quot;defaultValue&amp;quot;: 0.1,
+&amp;quot;location&amp;quot;: {
+&amp;quot;type&amp;quot;: 226,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTLocationInfo&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;document&amp;quot;: &amp;quot;onshape/std/primitives.fs&amp;quot;,
+&amp;quot;parseNodeId&amp;quot;: &amp;quot;P60BmwPj7LnRT0CTh&amp;quot;,
+&amp;quot;languageVersion&amp;quot;: 268,
+&amp;quot;nodeId&amp;quot;: &amp;quot;ywVSbQADr8dRv9+s&amp;quot;
+}
+}
+}
+},
+{
+&amp;quot;type&amp;quot;: 181,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTQuantityRange&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;units&amp;quot;: &amp;quot;yard&amp;quot;,
+&amp;quot;minValue&amp;quot;: 0.000010936132983377077,
+&amp;quot;maxValue&amp;quot;: 546.8066491688538,
+&amp;quot;defaultValue&amp;quot;: 0.025,
+&amp;quot;location&amp;quot;: {
+&amp;quot;type&amp;quot;: 226,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTLocationInfo&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;document&amp;quot;: &amp;quot;onshape/std/primitives.fs&amp;quot;,
+&amp;quot;parseNodeId&amp;quot;: &amp;quot;PsE6sGD66MJVH2xQh&amp;quot;,
+&amp;quot;languageVersion&amp;quot;: 268,
+&amp;quot;nodeId&amp;quot;: &amp;quot;zAy0tYs5aC0clPLL&amp;quot;
+}
+}
+}
+}
+],
+&amp;quot;parameterId&amp;quot;: &amp;quot;sideLength&amp;quot;,
+&amp;quot;parameterName&amp;quot;: &amp;quot;Side length&amp;quot;,
+&amp;quot;defaultValue&amp;quot;: {
+&amp;quot;type&amp;quot;: 147,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMParameterQuantity&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;units&amp;quot;: &amp;quot;meter&amp;quot;,
+&amp;quot;value&amp;quot;: 0.025,
+&amp;quot;parameterId&amp;quot;: &amp;quot;sideLength&amp;quot;,
+&amp;quot;nodeId&amp;quot;: &amp;quot;MC6QUqafapZdxtrDy&amp;quot;
+}
+}
+}
+}
+]
+}
+}
+&lt;/code>&lt;/pre>
+&lt;p>Visibility conditions come in 3 variants:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>BTParameterVisibilityAlwaysHidden - Special-case parameters that are not directly shown to the user&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>BTParameterVisibilityLogical - Allows a logical condition to express when a parameter is visible. Allows nested
+AND/OR/NOT expressions. The leaves of the expression tree are BTParameterVisibilityOnEqual&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>BTParameterVisibilityOnEqual - A simple test that a parameter has been assigned a specific value.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>A ParameterSpec can be one of numerous types. The most commonly used types are:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>BTParameterSpecQuery - indicates that a query parameter should be supplied. The parameter spec has an allowable
+number of selections and query filter that describes the allowable types that can be selected. See below for
+additional information about query filters. An example usage is identifying the entities to chamfer in a &amp;ldquo;Chamfer&amp;rdquo;
+feature.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>BTParameterSpecString - indicates that a string value should be supplied. For example, this is used for the name of
+a variable in a &amp;ldquo;Variable&amp;rdquo; feature.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>BTParameterSpecQuantity - indicates that a number value should be supplied. In allows a quantityType, which describes
+the type of number (length, angle, mass, count, etc.) and range limits on the value. An example usage is the depth
+parameter in an &amp;ldquo;Extrude&amp;rdquo; feature.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>BTParameterSpecEnum - indicates that an enumerated value should should be provided. An example usage is the
+operationType parameter in an &amp;ldquo;Extrude&amp;rdquo; feature.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>BTParameterSpecBoolean - indicates that a boolean true/false value should be specified. An example usage is the
+offset parameter in the &amp;ldquo;Boolean&amp;rdquo; feature&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>Some less commonly used parameter spec types are:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>BTParameterSpecDerived - indicates that an import of a part from another Part Studio should be specified.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>BTParameterSpecLookupTablePath - provides a list of string values that can be chosen.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>BTParameterSpecForeignId - indicates that a &amp;ldquo;foreign id&amp;rdquo; value should be supplied. Foreign ids are currently not
+generally accessible through the API, but identify a file that is made available throughout the system.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>Parameter Spec query filters:&lt;/p>
+&lt;p>Query Filters are even more numerous than parameter spec types.&lt;/p>
+&lt;p>Basic selections:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>BTBodyTypeFilter - a specific body type (solid, sheet, wire, acorn, mate_connector)&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>BTClosedCurveFilter - a curve that is either closed or not closed, depending on the isClosed value. (NO)&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>BTConstructionObjectFilter - an object that either is or is not identified as &amp;ldquo;construction&amp;rdquo;, depending on the
+isConstruction value.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>BTEdgeTopologyFilter - an edge that either is or is not an internal edge, depending on the isInternalEdge value.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>BTEntityTypeFilter - selects a specific type of entity based on the entityType value (vertex, edge, face, body,
+degenerate_edge).&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>BTFeatureTypeFilter - selects a specific type of feature base on the featureType value. (NO)&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>BTGeometryFilter - select specific geometry types based on the geometryType value (line, circle, arg, plane,
+cylinder,cone sphere torus, spline, ellipse).&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>BTImageFilter - an entity that either is or is not an image, based on the isImage value. (no)&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>BTMateConnectorFilter - a mate connector (NO)&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>BTMateFilter - a mate object&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>BTPlaneOrientationFilter - excludes planes that are aligned with another plane, based on the normal value.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>BTSketchObjectFilter - an object that either is or is not a sketch object, or is a sketch object created by the
+user, depending on the objectType value (not_sketch_object, any_sketch_object, user_entity).&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>BTTextObjectFilter - an object that either is or is not a text object, depending on the isText value.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>BTTextStrokeFilter - an object that either is or is not a text stroke, depending on the isStroke value.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>Logical operations:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>SBTAndFilter - combines query filters with &amp;ldquo;AND&amp;rdquo;&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>SBTOrFilter - combines query filters with &amp;ldquo;OR&amp;rdquo;&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>SBTNotFilter - negates query filters&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="feature-script-evaluation">Feature Script Evaluation&lt;/h2>
+&lt;p>For certain tasks when creating and updating features, there may be information needed that is embedded within the
+existing model. You can often access it by running a Feature Script function. Feature Script is a language that is
+used to define the behavior of features.&lt;/p>
+&lt;p>As an example of its usage, consider the case of using a face of an existing part to define new geometry. A plane is
+defined in FeatureScript as an origin, x-direction vector and normal vector. These can be queried from FeatureScript
+by using the evPlane function, but it wants a &amp;ldquo;query&amp;rdquo; that identifies the face. Here is an example of how you might do
+this with a call to the Evaluate FeatureScript API call. Suppose you know that “JCC” is the geometry Id of a particular
+face. The following body can be passed to the evaluate function.&lt;/p>
+&lt;pre>&lt;code>{
+&amp;quot;script&amp;quot; : &amp;quot;function (context is Context, queries is map) {
+return evPlane(context, {face:queries.id});
+}&amp;quot;,
+&amp;quot;queries&amp;quot; : [ { &amp;quot;key&amp;quot; : &amp;quot;id&amp;quot;, &amp;quot;value&amp;quot; : [ &amp;quot;JCC&amp;quot; ] } ]
+}
+&lt;/code>&lt;/pre>
+&lt;p>Assuming that we have done everything right, the output of this might look something like this:&lt;/p>
+&lt;pre>&lt;code>{
+&amp;quot;result&amp;quot;: {
+&amp;quot;type&amp;quot;: 2062,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTFSValueMap&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;value&amp;quot;: [
+{
+&amp;quot;type&amp;quot;: 2077,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTFSValueMapEntry&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;key&amp;quot;: {
+&amp;quot;type&amp;quot;: 1422,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTFSValueString&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;value&amp;quot;: &amp;quot;normal&amp;quot;
+}
+},
+&amp;quot;value&amp;quot;: {
+&amp;quot;type&amp;quot;: 1499,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTFSValueArray&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;value&amp;quot;: [
+{
+&amp;quot;type&amp;quot;: 772,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTFSValueNumber&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;value&amp;quot;: -1
+}
+},
+{
+&amp;quot;type&amp;quot;: 772,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTFSValueNumber&amp;quot;,
+&amp;quot;message&amp;quot;: {}
+},
+{
+&amp;quot;type&amp;quot;: 772,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTFSValueNumber&amp;quot;,
+&amp;quot;message&amp;quot;: {}
+}
+],
+&amp;quot;typeTag&amp;quot;: &amp;quot;Vector&amp;quot;
+}
+}
+}
+},
+{
+&amp;quot;type&amp;quot;: 2077,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTFSValueMapEntry&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;key&amp;quot;: {
+&amp;quot;type&amp;quot;: 1422,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTFSValueString&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;value&amp;quot;: &amp;quot;origin&amp;quot;
+}
+},
+&amp;quot;value&amp;quot;: {
+&amp;quot;type&amp;quot;: 1499,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTFSValueArray&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;value&amp;quot;: [
+{
+&amp;quot;type&amp;quot;: 1817,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTFSValueWithUnits&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;unitToPower&amp;quot;: [
+{
+&amp;quot;key&amp;quot;: &amp;quot;METER&amp;quot;,
+&amp;quot;value&amp;quot;: 1
+}
+],
+&amp;quot;typeTag&amp;quot;: &amp;quot;ValueWithUnits&amp;quot;
+}
+},
+{
+&amp;quot;type&amp;quot;: 1817,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTFSValueWithUnits&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;value&amp;quot;: 0.012700000000000001,
+&amp;quot;unitToPower&amp;quot;: [
+{
+&amp;quot;key&amp;quot;: &amp;quot;METER&amp;quot;,
+&amp;quot;value&amp;quot;: 1
+}
+],
+&amp;quot;typeTag&amp;quot;: &amp;quot;ValueWithUnits&amp;quot;
+}
+},
+{
+&amp;quot;type&amp;quot;: 1817,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTFSValueWithUnits&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;value&amp;quot;: 0.012700000000000001,
+&amp;quot;unitToPower&amp;quot;: [
+{
+&amp;quot;key&amp;quot;: &amp;quot;METER&amp;quot;,
+&amp;quot;value&amp;quot;: 1
+}
+],
+&amp;quot;typeTag&amp;quot;: &amp;quot;ValueWithUnits&amp;quot;
+}
+}
+],
+&amp;quot;typeTag&amp;quot;: &amp;quot;Vector&amp;quot;
+}
+}
+}
+},
+{
+&amp;quot;type&amp;quot;: 2077,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTFSValueMapEntry&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;key&amp;quot;: {
+&amp;quot;type&amp;quot;: 1422,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTFSValueString&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;value&amp;quot;: &amp;quot;x&amp;quot;
+}
+},
+&amp;quot;value&amp;quot;: {
+&amp;quot;type&amp;quot;: 1499,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTFSValueArray&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;value&amp;quot;: [
+{
+&amp;quot;type&amp;quot;: 772,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTFSValueNumber&amp;quot;,
+&amp;quot;message&amp;quot;: {}
+},
+{
+&amp;quot;type&amp;quot;: 772,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTFSValueNumber&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;value&amp;quot;: -1
+}
+},
+{
+&amp;quot;type&amp;quot;: 772,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTFSValueNumber&amp;quot;,
+&amp;quot;message&amp;quot;: {}
+}
+],
+&amp;quot;typeTag&amp;quot;: &amp;quot;Vector&amp;quot;
+}
+}
+}
+}
+],
+&amp;quot;typeTag&amp;quot;: &amp;quot;Plane&amp;quot;
+}
+},
+&amp;quot;serializationVersion&amp;quot;: &amp;quot;1.1.6&amp;quot;,
+&amp;quot;sourceMicroversion&amp;quot;: &amp;quot;27db48fb62bf6ac3b3ddaeaa&amp;quot;,
+&amp;quot;libraryVersion&amp;quot;: 296
+}
+&lt;/code>&lt;/pre>
+&lt;p>You can see from the output that the FeatureScript object representation uses the same typing rules that is used for
+other output. In addition, FeatureScript objects may have a typeTag field associated with them, which indicates that
+type-specific behavior should be applied. For instance, we see cases where a BTFSValueArray has a typeTag of &amp;ldquo;Vector&amp;rdquo;,
+which allows the array to be accepted where a Vector is declared to be required.&lt;/p>
+&lt;p>In order to help describe the interpretation of the structure above, here is a possible JSON representation of the
+result from the output shown above, but with weaker typing:&lt;/p>
+&lt;pre>&lt;code>{
+&amp;quot;normal&amp;quot; : [ -1, 0, 0 ],
+&amp;quot;origin&amp;quot; : { &amp;quot;value&amp;quot; : [ 0,
+0.012700000000000001,
+0.012700000000000001 ],
+&amp;quot;units&amp;quot; : &amp;quot;meter&amp;quot; },
+&amp;quot;x&amp;quot; : [ 0, -1, 0 ]
+}
+&lt;/code>&lt;/pre>
+&lt;h2 id="custom-features">Custom Features&lt;/h2>
+&lt;p>Custom features can be used in the feature apis with a little additional work. The key to using custom features is
+that you must set a namespace field in the feature to tell Onshape where to look for the feature defintion.
+The namespace field identifies a specific version of a feature studio. There are two standard forms for the namespace
+field to consider:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Intra-workspace - In this case, the namespace field has the form
+&amp;ldquo;e&lt;elementId>::m&lt;microversionId>&amp;rdquo;
+where elementId is the elementId of the FeatureStudio that defines the feature and microversionId is the element
+microversionId of the FeatureStudio. It is important to note that the element microversionId is different from the
+document microversionId that is more typically encountered in API usage.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>External - When the definition to be used lives in a different document or in a specific version of the current
+document it is referenced using the form
+&amp;ldquo;d&lt;documentId>::v&lt;versionId>::e&lt;elementId>::m&lt;microversionId>&amp;rdquo;
+This is the same form as for the intra-workspace case but with a documentId and versionId additionally specified.
+The documentId is the id of the document containing the FeatureStudio and the versionId is the version of the
+document to be used.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>In both of the forms listed, it is necessary to determine the FeatureStudio element microversionId. One way to do this
+is to call the GET /api/documents/DWMV/elements API, which reports the element microversion for each of the elements.
+There is also a GET /api/featurestudios/DWMV/featurespecs API that provides a featurespec for each of the features
+defined in the FeatureStudio. These featurespecs also have a namespace field that reports the namespace of the
+FeatureStudio in the intra-workspace form.&lt;/p>
+&lt;h2 id="examples">Examples&lt;/h2>
+&lt;p>Below are several examples of how the API can be used in order to help you get started. The examples are quite trivial,
+but should provide a basic demonstration of how to use these API methods. You should be able to execute the calls
+against a part studio of yours and see results immediately. The calls could be executed using your preferred software
+environment but interactive use in a REST-aware tool is likely the easiest way to try the examples.&lt;/p>
+&lt;h3 id="example-1">Example 1&lt;/h3>
+&lt;p>In our first example we will create a cube using the cube feature. The feature accepts only a single parameter, which
+is the length of a side, and creates a cube with a corner at the origin and aligned with the three default planes. In
+running the example, be sure to replace DWE with the the d/:did/w/:wid/e/:eid that is appropriate for the part studio
+that you are operating against.&lt;/p>
+&lt;p>POST /api/partstudios/DWE/features&lt;/p>
+&lt;pre>&lt;code>{
+&amp;quot;feature&amp;quot; : {
+&amp;quot;type&amp;quot;: 134,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMFeature&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;featureType&amp;quot;: &amp;quot;cube&amp;quot;,
+&amp;quot;name&amp;quot;: &amp;quot;Cube 1&amp;quot;,
+&amp;quot;parameters&amp;quot;: [
+{
+&amp;quot;type&amp;quot;: 147,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMParameterQuantity&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;expression&amp;quot;: &amp;quot;1*in&amp;quot;,
+&amp;quot;parameterId&amp;quot;: &amp;quot;sideLength&amp;quot;
+}
+}
+]
+}
+}
+}
+&lt;/code>&lt;/pre>
+&lt;p>This returns output similar to the following:&lt;/p>
+&lt;pre>&lt;code>{
+&amp;quot;feature&amp;quot;: {
+&amp;quot;type&amp;quot;: 134,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMFeature&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;featureType&amp;quot;: &amp;quot;cube&amp;quot;,
+&amp;quot;featureId&amp;quot;: &amp;quot;FuJu9c8PvO5oyTgaV&amp;quot;,
+&amp;quot;name&amp;quot;: &amp;quot;Cube 1&amp;quot;,
+&amp;quot;parameters&amp;quot;: [
+{
+&amp;quot;type&amp;quot;: 147,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMParameterQuantity&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;expression&amp;quot;: &amp;quot;1*in&amp;quot;,
+&amp;quot;parameterId&amp;quot;: &amp;quot;sideLength&amp;quot;,
+&amp;quot;nodeId&amp;quot;: &amp;quot;M+iZRdlIZjnuz8DSS&amp;quot;
+}
+}
+],
+&amp;quot;nodeId&amp;quot;: &amp;quot;MUdiYYWlCa3arVy8q&amp;quot;
+}
+},
+&amp;quot;featureState&amp;quot;: {
+&amp;quot;type&amp;quot;: 1688,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTFeatureState&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;featureStatus&amp;quot;: &amp;quot;OK&amp;quot;
+}
+},
+&amp;quot;serializationVersion&amp;quot;: &amp;quot;1.1.6&amp;quot;,
+&amp;quot;sourceMicroversion&amp;quot;: &amp;quot;2d31ccc170551a83995b89c8&amp;quot;
+}
+&lt;/code>&lt;/pre>
+&lt;p>The output returns us the feature definition that we provided as input with nodeIds and a featureId, plus information
+telling us that that the feature executed correctly and information about the serialization version and microversion of
+the document that resulted from our feature addition.&lt;/p>
+&lt;h3 id="example-2">Example 2&lt;/h3>
+&lt;p>In our second example we will create a cube where the sideLength parameter is defined by a variable and will then
+update the variable to have a new value.&lt;/p>
+&lt;p>Step 1) Create a variable - we create a feature of type assignVariable, which defines a variable and assigns it a
+value. Here, the variables name is &amp;ldquo;size&amp;rdquo; and is displayed in the feature list as &amp;ldquo;Cube size&amp;rdquo;, and it is assigned to
+have the value &amp;ldquo;1*in&amp;rdquo; with a variableType of ANY. Once again, be sure to replace DWE with the the d/:did/w/:wid/e/:eid
+that is appropriate for the part studio that you are operating against.&lt;/p>
+&lt;p>A variable can be created with variableType set to &amp;ldquo;ANY&amp;rdquo;, &amp;ldquo;LENGTH&amp;rdquo;, &amp;ldquo;ANGLE&amp;rdquo;, or &amp;ldquo;NUMBER&amp;rdquo;. This supplies a constraint
+on the supplied value and each type requires setting the appropriate corresponding parameter, which would be anyValue,
+lengthValue, angleValue or numberValue, respectively in addition to setting the value parameter. For the intended
+purpose of using it as a length value it might be more appropriate to use &amp;ldquo;LENGTH&amp;rdquo; as the type, which would require
+setting the lengthValue and value parameters to a length value. We have chosen to demonstrate the use of the &amp;ldquo;ANY&amp;rdquo;
+type here because it can be used in a wider range of applications than a &amp;ldquo;LENGTH&amp;rdquo; variable, but does not provide the
+value type checking that is provided by &amp;ldquo;LENGTH&amp;rdquo;, &amp;ldquo;ANGLE&amp;rdquo; or &amp;ldquo;NUMBER&amp;rdquo; types.&lt;/p>
+&lt;p>POST /api/partstudios/DWE/features&lt;/p>
+&lt;pre>&lt;code>{
+&amp;quot;feature&amp;quot; : {
+&amp;quot;type&amp;quot;: 134,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMFeature&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;featureType&amp;quot;: &amp;quot;assignVariable&amp;quot;,
+&amp;quot;name&amp;quot;: &amp;quot;Cube size&amp;quot;,
+&amp;quot;parameters&amp;quot;: [
+{
+&amp;quot;type&amp;quot;: 145,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMParameterEnum&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;enumName&amp;quot;: &amp;quot;VariableType&amp;quot;,
+&amp;quot;value&amp;quot;: &amp;quot;ANY&amp;quot;,
+&amp;quot;parameterId&amp;quot;: &amp;quot;variableType&amp;quot;
+}
+},
+{
+&amp;quot;type&amp;quot;: 149,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMParameterString&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;value&amp;quot;: &amp;quot;size&amp;quot;,
+&amp;quot;parameterId&amp;quot;: &amp;quot;name&amp;quot;
+}
+},
+{
+&amp;quot;type&amp;quot;: 147,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMParameterQuantity&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;expression&amp;quot;: &amp;quot;1*in&amp;quot;,
+&amp;quot;parameterId&amp;quot;: &amp;quot;anyValue&amp;quot;
+}
+}
+]
+}
+}
+}
+&lt;/code>&lt;/pre>
+&lt;p>The returned structure will include a featureId value for the variable. Make note of this value and we will use it
+in step 3 below.&lt;/p>
+&lt;ol start="2">
+&lt;li>Create the cube feature, referencing the variable created&lt;/li>
+&lt;/ol>
+&lt;p>POST /api/partstudios/DWE/features&lt;/p>
+&lt;pre>&lt;code>{
+&amp;quot;feature&amp;quot; : {
+&amp;quot;type&amp;quot;: 134,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMFeature&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;featureType&amp;quot;: &amp;quot;cube&amp;quot;,
+&amp;quot;name&amp;quot;: &amp;quot;Cube 1&amp;quot;,
+&amp;quot;parameters&amp;quot;: [
+{
+&amp;quot;type&amp;quot;: 147,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMParameterQuantity&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;expression&amp;quot;: &amp;quot;#size&amp;quot;,
+&amp;quot;parameterId&amp;quot;: &amp;quot;sideLength&amp;quot;
+}
+}
+]
+}
+}
+}
+&lt;/code>&lt;/pre>
+&lt;ol start="3">
+&lt;li>Update the variable to have a new value. We assume here that the featureId value returned in step 1 is
+&amp;ldquo;FuJu9c8PvO5oyTgaV&amp;rdquo; and we will change the cube size from 1 inch to 10 centimeters.&lt;/li>
+&lt;/ol>
+&lt;p>POST /api/partstudios/DWE/features/featureid/FuJu9c8PvO5oyTgaV&lt;/p>
+&lt;pre>&lt;code>{
+&amp;quot;feature&amp;quot; : {
+&amp;quot;type&amp;quot;: 134,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMFeature&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;featureType&amp;quot;: &amp;quot;assignVariable&amp;quot;,
+&amp;quot;name&amp;quot;: &amp;quot;Cube size&amp;quot;,
+&amp;quot;parameters&amp;quot;: [
+{
+&amp;quot;type&amp;quot;: 145,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMParameterEnum&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;enumName&amp;quot;: &amp;quot;VariableType&amp;quot;,
+&amp;quot;value&amp;quot;: &amp;quot;ANY&amp;quot;,
+&amp;quot;parameterId&amp;quot;: &amp;quot;variableType&amp;quot;
+}
+},
+{
+&amp;quot;type&amp;quot;: 149,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMParameterString&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;value&amp;quot;: &amp;quot;size&amp;quot;,
+&amp;quot;parameterId&amp;quot;: &amp;quot;name&amp;quot;
+}
+},
+{
+&amp;quot;type&amp;quot;: 147,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMParameterQuantity&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;expression&amp;quot;: &amp;quot;10*cm&amp;quot;,
+&amp;quot;parameterId&amp;quot;: &amp;quot;anyValue&amp;quot;
+}
+}
+]
+}
+}
+}
+&lt;/code>&lt;/pre>
+&lt;p>Take a look at the part studio and you will see the cube at its new size. You can edit the Cube size variable and
+change the value again.&lt;/p>
+&lt;h3 id="example-3">Example 3&lt;/h3>
+&lt;p>In this example, we create a Sketch and extrude it. This demonstrates relationships betweeen features. First, the
+sketch must be created on a plane, and for convenience, we will use the pre-defined front plane. Then, the extrude
+needs to describe what is to be extruded, and for convenience, we use the BTMIndividualSketchRegionQuery.&lt;/p>
+&lt;ol>
+&lt;li>Determine the geometryId for the front plane.&lt;/li>
+&lt;/ol>
+&lt;p>POST /api/features/DWE/featurescript&lt;/p>
+&lt;pre>&lt;code>{
+&amp;quot;script&amp;quot; :
+&amp;quot;function(context is Context, queries)
+{
+return transientQueriesToStrings(evaluateQuery(context, qCreatedBy(makeId(\&amp;quot;Front\&amp;quot;), EntityType.FACE)));
+}&amp;quot;,
+&amp;quot;queries&amp;quot; : []
+}
+&lt;/code>&lt;/pre>
+&lt;p>This will likely return something like this:&lt;/p>
+&lt;pre>&lt;code>{
+&amp;quot;result&amp;quot;: {
+&amp;quot;type&amp;quot;: 1499,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTFSValueArray&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;value&amp;quot;: [
+{
+&amp;quot;type&amp;quot;: 1422,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTFSValueString&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;value&amp;quot;: &amp;quot;JCC&amp;quot;
+}
+}
+]
+}
+},
+&amp;quot;serializationVersion&amp;quot;: &amp;quot;1.1.6&amp;quot;,
+&amp;quot;sourceMicroversion&amp;quot;: &amp;quot;a53cabe7d36e30ee100b1d2a&amp;quot;,
+&amp;quot;libraryVersion&amp;quot;: 298
+}
+&lt;/code>&lt;/pre>
+&lt;p>This tells us that the geometryId for the face created by the &amp;ldquo;Front&amp;rdquo; feature is &amp;ldquo;JCC&amp;rdquo;.&lt;/p>
+&lt;ol start="2">
+&lt;li>Determine the geometryId for the Origin&lt;/li>
+&lt;/ol>
+&lt;p>POST /api/features/DWE/featurescript&lt;/p>
+&lt;pre>&lt;code>{
+&amp;quot;script&amp;quot; :
+&amp;quot;function(context is Context, queries)
+{
+return transientQueriesToStrings(evaluateQuery(context, qCreatedBy(makeId(\&amp;quot;Origin\&amp;quot;), EntityType.VERTEX)));
+}&amp;quot;,
+&amp;quot;queries&amp;quot; : []
+}
+&lt;/code>&lt;/pre>
+&lt;p>This will report the geometryId for the origin (probably with the value &amp;ldquo;IB&amp;rdquo;) which we will use in the sketch.&lt;/p>
+&lt;ol start="3">
+&lt;li>Create the sketch. This will be just a circle on the front plane with its center at the origin and diameter of
+1 inch.&lt;/li>
+&lt;/ol>
+&lt;p>POST /api/partstudios/DWE/features&lt;/p>
+&lt;pre>&lt;code>{
+&amp;quot;feature&amp;quot; : {
+&amp;quot;type&amp;quot;: 151,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMSketch&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;entities&amp;quot;: [
+{
+&amp;quot;type&amp;quot;: 4,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMSketchCurve&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;geometry&amp;quot;: {
+&amp;quot;type&amp;quot;: 115,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTCurveGeometryCircle&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;radius&amp;quot;: 0.025400000000000002,
+&amp;quot;xDir&amp;quot;: 1,
+&amp;quot;yDir&amp;quot;: 0
+}
+},
+&amp;quot;centerId&amp;quot;: &amp;quot;clAhDfZz-Dgmb-d0AJ-01Cv-JINJdWZLbVj1.center&amp;quot;,
+&amp;quot;entityId&amp;quot;: &amp;quot;clAhDfZz-Dgmb-d0AJ-01Cv-JINJdWZLbVj1&amp;quot;
+}
+}
+],
+&amp;quot;constraints&amp;quot;: [
+{
+&amp;quot;type&amp;quot;: 2,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMSketchConstraint&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;constraintType&amp;quot;: &amp;quot;COINCIDENT&amp;quot;,
+&amp;quot;parameters&amp;quot;: [
+{
+&amp;quot;type&amp;quot;: 149,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMParameterString&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;value&amp;quot;: &amp;quot;clAhDfZz-Dgmb-d0AJ-01Cv-JINJdWZLbVj1.center&amp;quot;,
+&amp;quot;parameterId&amp;quot;: &amp;quot;localFirst&amp;quot;
+}
+},
+{
+&amp;quot;type&amp;quot;: 148,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMParameterQueryList&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;queries&amp;quot;: [
+{
+&amp;quot;type&amp;quot;: 138,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMIndividualQuery&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;geometryIds&amp;quot;: [
+&amp;quot;IB&amp;quot;
+]
+}
+}
+],
+&amp;quot;parameterId&amp;quot;: &amp;quot;externalSecond&amp;quot;
+}
+}
+],
+&amp;quot;entityId&amp;quot;: &amp;quot;clAhDfZz-Dgmb-d0AJ-01Cv-JINJdWZLbVj1.centerSnap0&amp;quot;
+}
+},
+{
+&amp;quot;type&amp;quot;: 2,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMSketchConstraint&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;constraintType&amp;quot;: &amp;quot;DIAMETER&amp;quot;,
+&amp;quot;parameters&amp;quot;: [
+{
+&amp;quot;type&amp;quot;: 149,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMParameterString&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;value&amp;quot;: &amp;quot;clAhDfZz-Dgmb-d0AJ-01Cv-JINJdWZLbVj1&amp;quot;,
+&amp;quot;parameterId&amp;quot;: &amp;quot;localFirst&amp;quot;
+}
+},
+{
+&amp;quot;type&amp;quot;: 147,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMParameterQuantity&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;expression&amp;quot;: &amp;quot;1*in&amp;quot;,
+&amp;quot;parameterId&amp;quot;: &amp;quot;length&amp;quot;
+}
+},
+{
+&amp;quot;type&amp;quot;: 147,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMParameterQuantity&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;expression&amp;quot;: &amp;quot;0.637419526959446*rad&amp;quot;,
+&amp;quot;parameterId&amp;quot;: &amp;quot;labelAngle&amp;quot;
+}
+},
+{
+&amp;quot;type&amp;quot;: 147,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMParameterQuantity&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;expression&amp;quot;: &amp;quot;1.76201395706607&amp;quot;,
+&amp;quot;parameterId&amp;quot;: &amp;quot;labelRatio&amp;quot;
+}
+}
+],
+&amp;quot;entityId&amp;quot;: &amp;quot;22b5a2c0-d3ea-4376-969d-8b81944035b2&amp;quot;
+}
+}
+],
+&amp;quot;featureType&amp;quot;: &amp;quot;newSketch&amp;quot;,
+&amp;quot;name&amp;quot;: &amp;quot;Sketch 1&amp;quot;,
+&amp;quot;parameters&amp;quot;: [
+{
+&amp;quot;type&amp;quot;: 148,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMParameterQueryList&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;queries&amp;quot;: [
+{
+&amp;quot;type&amp;quot;: 138,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMIndividualQuery&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;geometryIds&amp;quot;: [
+&amp;quot;JCC&amp;quot;
+]
+}
+}
+],
+&amp;quot;parameterId&amp;quot;: &amp;quot;sketchPlane&amp;quot;
+}
+}
+]
+}
+}
+}
+&lt;/code>&lt;/pre>
+&lt;ol start="4">
+&lt;li>Create the extrude. Here we assume that the previous call returned the sketch with a feature id of
+&amp;ldquo;Fj1THqyY7u36ktGSr&amp;rdquo;. The extrude uses the BTMIndividualSketchRegionQuery, identifying the sketch feature in order to
+indicate what is to be extruded. The depth of extrude is 1 inch.&lt;/li>
+&lt;/ol>
+&lt;p>POST /api/partstudios/DWE/features&lt;/p>
+&lt;pre>&lt;code>{
+&amp;quot;feature&amp;quot; : {
+&amp;quot;type&amp;quot;: 134,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMFeature&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;featureType&amp;quot;: &amp;quot;extrude&amp;quot;,
+&amp;quot;name&amp;quot;: &amp;quot;Extrude 1&amp;quot;,
+&amp;quot;parameters&amp;quot;: [
+{
+&amp;quot;type&amp;quot;: 145,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMParameterEnum&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;enumName&amp;quot;: &amp;quot;ToolBodyType&amp;quot;,
+&amp;quot;value&amp;quot;: &amp;quot;SOLID&amp;quot;,
+&amp;quot;parameterId&amp;quot;: &amp;quot;bodyType&amp;quot;
+}
+},
+{
+&amp;quot;type&amp;quot;: 145,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMParameterEnum&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;enumName&amp;quot;: &amp;quot;NewBodyOperationType&amp;quot;,
+&amp;quot;value&amp;quot;: &amp;quot;NEW&amp;quot;,
+&amp;quot;parameterId&amp;quot;: &amp;quot;operationType&amp;quot;
+}
+},
+{
+&amp;quot;type&amp;quot;: 148,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMParameterQueryList&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;queries&amp;quot;: [
+{
+&amp;quot;type&amp;quot;: 140,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMIndividualSketchRegionQuery&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;featureId&amp;quot;: &amp;quot;Fj1THqyY7u36ktGSr&amp;quot;
+}
+}
+],
+&amp;quot;parameterId&amp;quot;: &amp;quot;entities&amp;quot;
+}
+},
+{
+&amp;quot;type&amp;quot;: 145,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMParameterEnum&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;enumName&amp;quot;: &amp;quot;BoundingType&amp;quot;,
+&amp;quot;value&amp;quot;: &amp;quot;BLIND&amp;quot;,
+&amp;quot;parameterId&amp;quot;: &amp;quot;endBound&amp;quot;
+}
+},
+{
+&amp;quot;type&amp;quot;: 147,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMParameterQuantity&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;expression&amp;quot;: &amp;quot;1*in&amp;quot;,
+&amp;quot;parameterId&amp;quot;: &amp;quot;depth&amp;quot;
+}
+},
+{
+&amp;quot;type&amp;quot;: 148,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMParameterQueryList&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;parameterId&amp;quot;: &amp;quot;surfaceEntities&amp;quot;
+}
+},
+{
+&amp;quot;type&amp;quot;: 144,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMParameterBoolean&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;parameterId&amp;quot;: &amp;quot;oppositeDirection&amp;quot;
+}
+},
+{
+&amp;quot;type&amp;quot;: 148,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMParameterQueryList&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;parameterId&amp;quot;: &amp;quot;endBoundEntityFace&amp;quot;
+}
+},
+{
+&amp;quot;type&amp;quot;: 148,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMParameterQueryList&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;parameterId&amp;quot;: &amp;quot;endBoundEntityBody&amp;quot;
+}
+},
+{
+&amp;quot;type&amp;quot;: 144,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMParameterBoolean&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;parameterId&amp;quot;: &amp;quot;hasDraft&amp;quot;
+}
+},
+{
+&amp;quot;type&amp;quot;: 147,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMParameterQuantity&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;expression&amp;quot;: &amp;quot;3.0*deg&amp;quot;,
+&amp;quot;parameterId&amp;quot;: &amp;quot;draftAngle&amp;quot;
+}
+},
+{
+&amp;quot;type&amp;quot;: 144,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMParameterBoolean&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;parameterId&amp;quot;: &amp;quot;draftPullDirection&amp;quot;
+}
+},
+{
+&amp;quot;type&amp;quot;: 144,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMParameterBoolean&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;parameterId&amp;quot;: &amp;quot;hasSecondDirection&amp;quot;
+}
+},
+{
+&amp;quot;type&amp;quot;: 145,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMParameterEnum&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;enumName&amp;quot;: &amp;quot;SecondDirectionBoundingType&amp;quot;,
+&amp;quot;value&amp;quot;: &amp;quot;BLIND&amp;quot;,
+&amp;quot;parameterId&amp;quot;: &amp;quot;secondDirectionBound&amp;quot;
+}
+},
+{
+&amp;quot;type&amp;quot;: 144,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMParameterBoolean&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;value&amp;quot;: true,
+&amp;quot;parameterId&amp;quot;: &amp;quot;secondDirectionOppositeDirection&amp;quot;
+}
+},
+{
+&amp;quot;type&amp;quot;: 148,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMParameterQueryList&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;parameterId&amp;quot;: &amp;quot;secondDirectionBoundEntityFace&amp;quot;
+}
+},
+{
+&amp;quot;type&amp;quot;: 148,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMParameterQueryList&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;parameterId&amp;quot;: &amp;quot;secondDirectionBoundEntityBody&amp;quot;
+}
+},
+{
+&amp;quot;type&amp;quot;: 147,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMParameterQuantity&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;expression&amp;quot;: &amp;quot;1.0*in&amp;quot;,
+&amp;quot;parameterId&amp;quot;: &amp;quot;secondDirectionDepth&amp;quot;
+}
+},
+{
+&amp;quot;type&amp;quot;: 144,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMParameterBoolean&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;parameterId&amp;quot;: &amp;quot;hasSecondDirectionDraft&amp;quot;
+}
+},
+{
+&amp;quot;type&amp;quot;: 147,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMParameterQuantity&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;expression&amp;quot;: &amp;quot;3.0*deg&amp;quot;,
+&amp;quot;parameterId&amp;quot;: &amp;quot;secondDirectionDraftAngle&amp;quot;
+}
+},
+{
+&amp;quot;type&amp;quot;: 144,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMParameterBoolean&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;parameterId&amp;quot;: &amp;quot;secondDirectionDraftPullDirection&amp;quot;
+}
+},
+{
+&amp;quot;type&amp;quot;: 144,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMParameterBoolean&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;parameterId&amp;quot;: &amp;quot;defaultScope&amp;quot;
+}
+},
+{
+&amp;quot;type&amp;quot;: 148,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMParameterQueryList&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;parameterId&amp;quot;: &amp;quot;booleanScope&amp;quot;
+}
+}
+]
+}
+}
+}
+&lt;/code>&lt;/pre>
+&lt;p>We see here that there are a lot of parameters that have no values set in them. This is the way features are created
+by the Onshape web client, buty the unneeded ones could be left out. All of the parameters after &amp;ldquo;depth&amp;rdquo; could be
+omitted without changing the result. However, leaving out a required parameter will normally result in the result
+reporting a featureStatus of &amp;ldquo;ERROR&amp;rdquo;.&lt;/p>
+&lt;h3 id="example-4">Example 4&lt;/h3>
+&lt;p>This example shows an example of configuring a Part Studio with a single Enum (List) input, and a cube feature
+is created that has its size vary based on the configuration of the Part studio.&lt;/p>
+&lt;ol>
+&lt;li>Create a configuration for the part studio. This example assumes that you are starting with an unconfigured Part
+Studio. The Enum input is named &amp;ldquo;Size&amp;rdquo;, which 2 options available, &amp;ldquo;Small&amp;rdquo; and &amp;ldquo;Large&amp;rdquo;.&lt;/li>
+&lt;/ol>
+&lt;p>POST /api/partstudios/DWE/configuration&lt;/p>
+&lt;pre>&lt;code>{
+&amp;quot;configurationParameters&amp;quot;: [
+{
+&amp;quot;type&amp;quot;: 105,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMConfigurationParameterEnum&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;enumName&amp;quot;: &amp;quot;Size_conf&amp;quot;,
+&amp;quot;options&amp;quot;: [
+{
+&amp;quot;type&amp;quot;: 592,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMEnumOption&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;option&amp;quot;: &amp;quot;Small&amp;quot;,
+&amp;quot;optionName&amp;quot;: &amp;quot;Small&amp;quot;
+}
+},
+{
+&amp;quot;type&amp;quot;: 592,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMEnumOption&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;option&amp;quot;: &amp;quot;Large&amp;quot;,
+&amp;quot;optionName&amp;quot;: &amp;quot;Large&amp;quot;
+}
+}
+],
+&amp;quot;namespace&amp;quot;: &amp;quot;&amp;quot;,
+&amp;quot;defaultValue&amp;quot;: &amp;quot;Small&amp;quot;,
+&amp;quot;parameterId&amp;quot;: &amp;quot;Size&amp;quot;,
+&amp;quot;parameterName&amp;quot;: &amp;quot;Size&amp;quot;,
+&amp;quot;hasUserCode&amp;quot;: false,
+&amp;quot;nodeId&amp;quot;: &amp;quot;MgfIjLtd/DvuaT/P/&amp;quot;
+}
+}
+],
+&amp;quot;currentConfiguration&amp;quot;: [
+{
+&amp;quot;type&amp;quot;: 145,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMParameterEnum&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;enumName&amp;quot;: &amp;quot;Size_conf&amp;quot;,
+&amp;quot;value&amp;quot;: &amp;quot;Large&amp;quot;,
+&amp;quot;namespace&amp;quot;: &amp;quot;&amp;quot;,
+&amp;quot;parameterId&amp;quot;: &amp;quot;Size&amp;quot;
+}
+}
+]
+}
+&lt;/code>&lt;/pre>
+&lt;ol start="2">
+&lt;li>Create a cube feature in the Part Studio. When the Size configuration input is set to &amp;ldquo;Small&amp;rdquo;, the cube will
+have a sideLength value of &amp;ldquo;1 in&amp;rdquo; and when the Size input is set to &amp;ldquo;Large&amp;rdquo; it will have a sideLength value of &amp;ldquo;2 in&amp;rdquo;.&lt;/li>
+&lt;/ol>
+&lt;p>POST /api/partstudios/DWE/features&lt;/p>
+&lt;pre>&lt;code>{
+&amp;quot;feature&amp;quot;: {
+&amp;quot;type&amp;quot;: 134,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMFeature&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;featureType&amp;quot;: &amp;quot;cube&amp;quot;,
+&amp;quot;name&amp;quot;: &amp;quot;Cube 1&amp;quot;,
+&amp;quot;parameters&amp;quot;: [
+{
+&amp;quot;type&amp;quot;: 2222,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMParameterConfigured&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;configurationParameterId&amp;quot;: &amp;quot;Size&amp;quot;,
+&amp;quot;values&amp;quot;: [
+{
+&amp;quot;type&amp;quot;: 1923,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMConfiguredValueByEnum&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;namespace&amp;quot;: &amp;quot;&amp;quot;,
+&amp;quot;enumName&amp;quot;: &amp;quot;Size_conf&amp;quot;,
+&amp;quot;enumValue&amp;quot;: &amp;quot;Default&amp;quot;,
+&amp;quot;value&amp;quot;: {
+&amp;quot;type&amp;quot;: 147,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMParameterQuantity&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;expression&amp;quot;: &amp;quot;1 in&amp;quot;
+}
+}
+}
+},
+{
+&amp;quot;type&amp;quot;: 1923,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMConfiguredValueByEnum&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;namespace&amp;quot;: &amp;quot;&amp;quot;,
+&amp;quot;enumName&amp;quot;: &amp;quot;Size_conf&amp;quot;,
+&amp;quot;enumValue&amp;quot;: &amp;quot;Large&amp;quot;,
+&amp;quot;value&amp;quot;: {
+&amp;quot;type&amp;quot;: 147,
+&amp;quot;typeName&amp;quot;: &amp;quot;BTMParameterQuantity&amp;quot;,
+&amp;quot;message&amp;quot;: {
+&amp;quot;expression&amp;quot;: &amp;quot;2 in&amp;quot;
+}
+}
+}
+}
+],
+&amp;quot;parameterId&amp;quot;: &amp;quot;sideLength&amp;quot;
+}
+}
+]
+}
+}
+}
+&lt;/code>&lt;/pre></description></item><item><title>Docs: Model Translation</title><link>https://onshape-public.github.io/docs/api-adv/translation/</link><pubDate>Mon, 18 May 2020 20:43:20 -0400</pubDate><guid>https://onshape-public.github.io/docs/api-adv/translation/</guid><description>
+&lt;h2 id="summary">Summary&lt;/h2>
+&lt;p>This document describes the APIs provided by Onshape for model translation. This document makes reference to specific APIs using the naming convention &lt;em>Group Name - Api Name&lt;/em>, where the &lt;group name> identifies an API group and &lt;api name> identifies a specific API defined in the group. See the Glassworks API Explorer for details on the APIs.&lt;/p>
+&lt;p>Onshape provides several APIs to support model format translation. These fall into 3 basic categories&lt;/p>
+&lt;ol>
+&lt;li>&lt;a href="#simple-conversions">Simple conversions&lt;/a> - these support translation of Onshape content into STL and Parasolid format.&lt;/li>
+&lt;li>&lt;a href="#general-translations">General translation&lt;/a> - these support translation from a variety of formats into a variety of other formats.&lt;/li>
+&lt;li>&lt;a href="#import-translation">Import translation&lt;/a> - these translation operations are performed by default when a translatable file is uploaded to a blob element&lt;/li>
+&lt;/ol>
+&lt;h2 id="simple-conversions">Simple conversions&lt;/h2>
+&lt;p>Simple conversions are limited to generating Parasolid and STL output. Most of the interfaces defined here operate by requesting an HTTP redirect to a different URL where the request will be fulfilled. Applications must be sure that they are explicitly handling the redirect and attaching authentication headers to the follow-up request or it will fail.&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>STL-specific&lt;/p>
+&lt;p>Onshape Part Studio tabs and individual parts can be translated to STL format using the dedicated APIs&lt;/p>
+&lt;ul>
+&lt;li>&lt;em>Part Studios - Export Part Studio to STL&lt;/em>&lt;/li>
+&lt;li>&lt;em>Parts - Export Part to STL&lt;/em>&lt;/li>
+&lt;/ul>
+&lt;p>These interfaces require a Part Studio element Id and all use redirect behavior.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Parasolid-specific&lt;/p>
+&lt;p>Onshape Part Studio tabs and individual parts can be translated to Parasolid format using the dedicated APIs&lt;/p>
+&lt;ul>
+&lt;li>&lt;em>Part Studios - Export Part Studio to STL&lt;/em>&lt;/li>
+&lt;li>&lt;em>Parts - Export Part to STL&lt;/em>&lt;/li>
+&lt;/ul>
+&lt;p>These interfaces also require a Part Studio element Id and all use redirect behavior.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Multi-purpose&lt;/p>
+&lt;p>In addition to the format-specific APIs defined for Parts and Part Studios, there are two similar multi-purpose APIs that can convert multiple source types to both STL and Parasolid.&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;em>Documents - Export Element&lt;/em> (POST)&lt;/p>
+&lt;p>This form requires the caller to perform an HTTP POST operation followed by an HTTP GET to a URL returned by the POST operation. There is no HTTP redirect performed; the application must explicitly follow the returned link.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;em>Documents - Export Element&lt;/em> (GET)&lt;/p>
+&lt;p>This form takes all configuration information in the form of query parameters and uses the redirect mechanism.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>These APIs allow conversion of Assemblies as well as Parts and Part Studios into Either STL or Parasolid.
+The primary reason for the existence of the POST form of the API in addition to the GET form of the API is to overcome limits in URL and HTTP header length that can be exceeded when using long lists of part Id values.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="general-translations">General translations&lt;/h2>
+&lt;p>The simple conversions listed above perform the format conversion synchronously, returning the output immediately after some processing delay. Other format conversions are more complex and time-consuming, and in many cases, cannot be completed quickly enough to prevent connection errors. The solution we use instead is a model where the application performs a 3-step process:&lt;/p>
+&lt;ol>
+&lt;li>HTTP POST operation to create a translation request&lt;/li>
+&lt;li>Poll for operation completion or wait for webhook notification of completion&lt;/li>
+&lt;li>HTTP GET operation to retrieve the translation result.&lt;/li>
+&lt;/ol>
+&lt;h3 id="translation-formats">Translation Formats&lt;/h3>
+&lt;p>The general translation APIs do not support STL, but do support a wide range of industry formats.&lt;/p>
+&lt;h4 id="output-formats">Output Formats&lt;/h4>
+&lt;p>Supported output formats currently include PARASOLID, STEP, ACIS, IGES, SOLIDWORKS, ONSHAPE.&lt;/p>
+&lt;h4 id="source-formats">Source Formats&lt;/h4>
+&lt;p>We allow a larger range of input formats that output formats. In addition to the formats listed above for input format,
+you can also convert from Part Studio, Assembly, PROE, NX, CATIA and INVENTOR.&lt;/p>
+&lt;h3 id="apis">APIs&lt;/h3>
+&lt;p>We provide APIS to allow programatically determining supported formats:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;em>Translations - Get Translation Formats&lt;/em>&lt;/p>
+&lt;p>This API presents the full list of supported translation formats&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;em>Part Studios - Get Translation Formats&lt;/em>&lt;/p>
+&lt;p>Returns a list of the formats to which a particular Part Studio tab can be converted. Note that empty Part Studio
+tabs cannot be converted to other formats.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;em>Assemblies - Get Translation Formats&lt;/em>&lt;/p>
+&lt;p>Returns a list of the formats to which a particular Assembly tab can be converted. Note that empty Assembly
+tabs cannot be converted to other formats.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>Note that the source format for a translation is currently always automatically detected by Onshape. Part Studios and Assemblies are known to be ONSHAPE format. File uploads have their type determined by the filename suffix. For example, a file named part7.step is assumed to be in STEP format.&lt;/p>
+&lt;h3 id="translation-initiation">Translation initiation&lt;/h3>
+&lt;p>Translation is initiated by performing an HTTP POST operation to one of the &amp;ldquo;Create Translation&amp;rdquo; APIs.&lt;/p>
+&lt;p>These APIs have some common options:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>formatName&lt;/p>
+&lt;p>This is the name of the format to which the source will be translated. This formatName must be one of the supported
+names (names are case-sensitive). Note that translation to ONSHAPE format requires storeInDocument=true.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>storeInDocument&lt;/p>
+&lt;p>Allows the caller to decide whether the output should be part of the document (as a Part Studio, Assembly or Blob
+tab) or whether the output should be external to the document.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>APIs which use an upload or blob element common options when translating to ONSHAPE:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>flattenAssemblies&lt;/p>
+&lt;p>If the source file contains an assembly and flattenAssemblies is set to true, the assembly structure is removed and
+a single part studio is created.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>yAxisIsUp&lt;/p>
+&lt;p>Allows the application to tell Onshape translation whether the Y axis or Z Axis is the &amp;ldquo;Up&amp;rdquo; direction.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="apis-1">APIs&lt;/h3>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;em>Translations - Create translation from upload&lt;/em>&lt;/p>
+&lt;p>This API allows an application to provide an input source file that will be converted to another format without
+requiring that the uploaded file be stored as a blob tab in the document. The API requires a document to be provided
+to define ownership context, but the uploaded file is not stored in the document.&lt;/p>
+&lt;p>The file is uploaded as multipart form data. Each of the API parameters is a separate field in the multipart upload.
+The two required fields are &amp;ldquo;file&amp;rdquo; and &amp;ldquo;formatName&amp;rdquo;. The file part must contain the upload and should normally have
+a filename attribute set. The filename attribute can be omitted if the form data also has an encodedFilename field
+that contains the filename in URL-encoded form.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;em>Blob Elements - Create Translation&lt;/em>&lt;/p>
+&lt;p>A blob element containing a translatable file can be translated using this API. The blob element can be the result
+of a previous upload or it can be the output of a previous translation operation.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;em>Part Studios - Create Translation&lt;/em>&lt;/p>
+&lt;p>Initiate translation for a Part Studio element&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;em>Assemblies - Create Translation&lt;/em>&lt;/p>
+&lt;p>Initiate translation for an Assembly element&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>The response from these APIs includes the fields:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>id&lt;/p>
+&lt;p>An identifier for the created translation operation. It can be used for later retrieval of translation results&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>href&lt;/p>
+&lt;p>A URL for the &lt;em>Translations - Get Translation Status&lt;/em> API for this specific translation&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>requestState
+Identifies the state of the translation request. The request will be done when the state changes from ACTIVE to
+DONE or FAILED. If FAILED, the translation was not successfully completed. If DONE, it completed successfully.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="waiting-for-translation-completion">Waiting for translation completion&lt;/h3>
+&lt;p>The simplest way to determine when the translation is complete is to poll. You do this in one of two ways (which are really the same thing):&lt;/p>
+&lt;ul>
+&lt;li>Call the href returned in the translation response, which returns an updated state object&lt;/li>
+&lt;li>Call the &lt;em>Translation - Get Translation Status&lt;/em> API, using the id returned in the translation response&lt;/li>
+&lt;/ul>
+&lt;p>Once the requestState changes to some value other than ACTIVE you will be ready to retrieve results.&lt;/p>
+&lt;p>An alternate way to wait for translation completion is to register a webhook and wait for a notification to be delivered. This is discussed &lt;a href="#webhook-translation-completion-notification">later&lt;/a>.&lt;/p>
+&lt;h3 id="retrieving-results">Retrieving results&lt;/h3>
+&lt;p>Once a translation requestState becomes DONE, results are available to be used. How they are accessed depends on the specifics of the translation. A completed request has several additional fields that may be populated. If your original request specified storeInDocument=false then the results are stored as external data, in which case the resultExternalDataIds status field provides identifiers to be used for retrieval (see External Data, below). If the request specified storeInDocument=true then the resultElementIds field will be populated (see Element Data, below).&lt;/p>
+&lt;h4 id="external-data">External Data&lt;/h4>
+&lt;p>External data is data that is associated with, but external to the document used as translation context. This data is not versioned as is done with in-document data. A translation request to a format other than ONSHAPE currently always produces a single data file (from resultExternalDataIds).&lt;/p>
+&lt;p>To retrieve an external data file, use the API
+Documents - Download External Data&lt;/p>
+&lt;h4 id="element-data">Element Data&lt;/h4>
+&lt;p>When storeInDocument=true is specified, the results are stored as new elements in the document. The new elements are reported in the resultElementIds field in the translation status response. If the selected format is ONSHAPE, these elements will be Assemblies/Part Studios, and there may be multiple created elements. If the selected format is something other than ONSHAPE, there will be a single blob element result.&lt;/p>
+&lt;p>A blob element result can be extracted using the &lt;em>Blob Elements - Download File From Blob Element&lt;/em> API.&lt;/p>
+&lt;h2 id="import-translation">Import Translation&lt;/h2>
+&lt;p>When uploading a file to a blob element, either as a new element or an update to an existing element, if the file
+is a recognized format for import, it will, by default, be converted into ONSHAPE format. This behavior can be
+overridden by the application, if desired.&lt;/p>
+&lt;h2 id="webhook-translation-completion-notification">Webhook Translation Completion notification&lt;/h2>
+&lt;p>If an application runs in a server with a network address that is reachable across the internet, the application may choose to use webhooks to find out about translation completion. For reliable operation, a webhook should be registered for the translation document prior to initiating translation. If registered after translation initiation, the notification might be lost. See the help document on Webhook Notifications for more details.&lt;/p></description></item></channel></rss>
