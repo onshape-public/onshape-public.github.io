@@ -6033,6 +6033,12 @@ the location you chose for you extension.&lt;/p>
 &lt;p>Since the context you selected for this application extension was &lt;code>Selected Part&lt;/code>, a part must be selected to load anything in the extension. If no part is selected, you will see a notification similar to the following:&lt;/p>
 &lt;img src="https://onshape-public.github.io/images/integrationguideimage96.png" style="width:5.10442in;height:1.41408in" alt="Graphical user interface, text, application Description automatically generated" />&lt;/li>
 &lt;/ol></description></item><item><title>Docs: Changelog</title><link>https://onshape-public.github.io/docs/changelog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/changelog/</guid><description>
+&lt;h4 id="rel-1167---released-2023-07-21">&lt;code>rel-1.167&lt;/code> - released 2023-07-21&lt;/h4>
+&lt;ul>
+&lt;li>Update glTF translation endpoints to use new field &lt;code>useGltfCompression&lt;/code> (bool)&lt;/li>
+&lt;li>Update STEP translation endpoints to use new field &lt;code>stepParasolidPreprocessingOption&lt;/code> (0-None, 1-Advanced, 2-Automatic, 3-Basic)&lt;/li>
+&lt;li>Update &lt;code>GET&lt;/code> : &lt;code>/api/documents&lt;/code> | &lt;code>/api/documents/[did]&lt;/code> | &lt;code>/api/companies/[cid]/documentsbyname&lt;/code> to include new field &lt;code>forceExportRules&lt;/code>&lt;/li>
+&lt;/ul>
 &lt;h4 id="rel-1165---released-2023-06-12">&lt;code>rel-1.165&lt;/code> - released 2023-06-12&lt;/h4>
 &lt;ul>
 &lt;li>Support &lt;code>partId&lt;/code> array string for &lt;code>GET&lt;/code> : &lt;code>/api/partstudios/bodydetails&lt;/code> endpoint for the option of getting a subset of parts from a partstudio (empty = all parts)&lt;/li>
