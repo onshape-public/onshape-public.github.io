@@ -657,121 +657,7 @@ system(url.c_str());
 return 0;
 }
 ```
---></description></item><item><title>Docs: API Keys</title><link>https://onshape-public.github.io/docs/auth/apikeys/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/auth/apikeys/</guid><description>
-&lt;h2 id="why-api-keys">Why API Keys?&lt;/h2>
-&lt;p>API keys are useful for small applications meant for personal use, allowing developers to avoid the overhead of the OAuth workflow. Creating an app is very easy with API keys: create an API key with the Developer Portal, set up a function to build your API key header as in the samples, and make your API calls! There&amp;rsquo;s no need to deal with OAuth redirects or things like that.&lt;/p>
-&lt;p>We&amp;rsquo;ve moved over to using API keys for authenticating requests instead of using cookies for several reasons.&lt;/p>
-&lt;ol>
-&lt;li>Security: Each request is signed with unique headers so that we can be sure it&amp;rsquo;s coming from the right place.&lt;/li>
-&lt;li>OAuth: The API key system we&amp;rsquo;re now using for HTTP requests is the same process developers follow when building full-blown OAuth applications; there&amp;rsquo;s no longer a disconnect between the two.&lt;/li>
-&lt;/ol>
-&lt;p>Once you create an API key, it will only be valid in the stack on which it was created. An API key created on the partner stack, for example, will not function on the production stack.&lt;/p>
-&lt;p>If you need information or have a question unanswered in this documentation, feel free to chat with us by sending an email to &lt;a href="mailto:api-support@onshape.com">api-support@onshape.com&lt;/a> or by checking out the &lt;a href="https://forum.onshape.com" target="_blank">forums&lt;/a>. If you are a member of the DevPartners group (see the Development help page for information) more detailed instructions and code examples are in the apikey sample repo.&lt;/p>
-&lt;h2 id="create-api-keys">Create API Keys&lt;/h2>
-&lt;ol>
-&lt;li>Go to &lt;a href="https://dev-portal.onshape.com">https://dev-portal.onshape.com&lt;/a>.&lt;/li>
-&lt;li>In the left pane, click &lt;code>API keys&lt;/code>.&lt;/li>
-&lt;li>Click the &lt;code>Create new API key&lt;/code> button.&lt;/li>
-&lt;li>Select the desired permissions for your app.&lt;/li>
-&lt;li>Click the &lt;code>Create API key&lt;/code> button. &lt;/br>
-&lt;img src="https://onshape-public.github.io/images/CreateNewAPIKey.png" alt="image">&lt;/li>
-&lt;li>Copy both the &lt;strong>access key&lt;/strong> and &lt;strong>secret key&lt;/strong> from the pop-up window, save them somewhere, then click the &lt;code>Close&lt;/code> button.
-&lt;/br>&lt;strong>IMPORTANT NOTE: You will not be able to find the secret key again, so save it somewhere safe!&lt;/strong>&lt;/br>
-&lt;img src="https://onshape-public.github.io/images/APIKeySecretKey.png" alt="image">&lt;/li>
-&lt;li>The details for your application appear. &lt;/br>
-&lt;img src="https://onshape-public.github.io/images/DevPortalKeys.png" alt="image">&lt;/li>
-&lt;li>Now that you have a key pair, see &lt;a href="#generating-a-request-signature">below&lt;/a> for information on signing your requests to use our API.&lt;/li>
-&lt;/ol>
-&lt;p>Once you have your access key and secret, you will want to avoid giving others access to them, since they&amp;rsquo;re tied directly to your personal Onshape account. Think of your API key as a username and password pair. Do not place them directly in the code for your application, especially if others might see it. The samples we provide here use a separate configuration file to contain this information, but there are other ways to keep the access key and secret safe, like setting them as environment variables.&lt;/p>
-&lt;h3 id="scopes">Scopes&lt;/h3>
-&lt;p>There are several scopes available for API keys (equivalent to OAuth scopes):&lt;/p>
-&lt;ul>
-&lt;li>&lt;code>OAuth2Read&lt;/code> - Read non-personal information (documents, parts, etc.)&lt;/li>
-&lt;li>&lt;code>OAuth2ReadPII&lt;/code> - Read personal information (name, email, etc.)&lt;/li>
-&lt;li>&lt;code>OAuth2Write&lt;/code> - Create and edit documents, etc.&lt;/li>
-&lt;li>&lt;code>OAuth2Delete&lt;/code> - Delete documents, etc.&lt;/li>
-&lt;li>&lt;code>OAuth2Purchase&lt;/code> - Authorize purchases from account&lt;/li>
-&lt;/ul></description></item><item><title>Docs: Request Signature</title><link>https://onshape-public.github.io/docs/auth/requestsig/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/auth/requestsig/</guid><description>
-&lt;h3 id="custom-authentication">Custom Authentication&lt;/h3>
-&lt;p>Basic Authorization via API Keys can be used for quick prototyping and testing. For production use, however, Onshape requires &lt;a href="https://onshape-public.github.io/docs/auth/oauth">OAuth&lt;/a> or this custom authentication process via request signature.&lt;/p>
-&lt;p>To ensure that a request is coming from you, we have a process for signing requests that you must follow for API calls to work. Everything is done via HTTP headers that you&amp;rsquo;ll need to set:&lt;/p>
-&lt;ol>
-&lt;li>&lt;em>Date&lt;/em>: A standard date header giving the time of the request; must be accurate within &lt;strong>5 minutes&lt;/strong> of request. Example: &lt;code>Mon, 11 Apr 2016 20:08:56 GMT&lt;/code>&lt;/li>
-&lt;li>&lt;em>On-Nonce&lt;/em>: A string that satisfies the following requirements (see the code for one possible way to generate it):
-&lt;ul>
-&lt;li>At least 16 characters&lt;/li>
-&lt;li>Alphanumeric&lt;/li>
-&lt;li>Unique for each request&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>&lt;em>Authorization&lt;/em>: This is where the API keys come into play. You&amp;rsquo;ll sign the request by implementing this algorithm:
-&lt;ul>
-&lt;li>&lt;strong>Input&lt;/strong>: Method, URL, On-Nonce, Date, Content-Type, AccessKey, SecretKey&lt;/li>
-&lt;li>&lt;strong>Output&lt;/strong>: String of the form: &lt;code>On &amp;lt;AccessKey&amp;gt;:HmacSHA256:&amp;lt;Signature&amp;gt;&lt;/code>&lt;/li>
-&lt;li>&lt;strong>Steps to generate the signature portion&lt;/strong>:
-&lt;ol>
-&lt;li>Parse the URL and get the following:
-&lt;ol>
-&lt;li>The path, e.g. &lt;code>/api/documents&lt;/code> (no query params!)&lt;/li>
-&lt;li>The query string, e.g. &lt;code>a=1&amp;amp;b=2&lt;/code>
-&lt;ul>
-&lt;li>NOTE: If no query paramaters are present, use an empty string&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ol>
-&lt;/li>
-&lt;li>Create a string by appending the following information in order. Each field should be separated by a newline (&lt;code>\n&lt;/code>) character, and the string must be converted to lowercase:
-&lt;ol>
-&lt;li>HTTP method&lt;/li>
-&lt;li>On-Nonce header value&lt;/li>
-&lt;li>Date header value&lt;/li>
-&lt;li>Content-Type header value&lt;/li>
-&lt;li>URL pathname&lt;/li>
-&lt;li>URL query string&lt;/li>
-&lt;/ol>
-&lt;/li>
-&lt;li>Using SHA-256, generate an &lt;a href="https://en.wikipedia.org/wiki/Hash-based_message_authentication_code" target="_blank">HMAC digest&lt;/a>, using the API secret key first and then the above string, then encode it in Base64.&lt;/li>
-&lt;li>Create the &lt;code>On &amp;lt;AccessKey&amp;gt;:HmacSHA256:&amp;lt;Signature&amp;gt;&lt;/code> string and use that in the Authorization header in your request.&lt;/li>
-&lt;/ol>
-&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ol>
-&lt;p>Below is an example function to generate the authorization header, using Node.js&amp;rsquo;s standard &lt;code>crypto&lt;/code> and &lt;code>url&lt;/code> libraries:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-js" data-lang="js">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">// ...at top of file
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span>&lt;span style="color:#00a">var&lt;/span> u = require(&lt;span style="color:#a50">&amp;#39;url&amp;#39;&lt;/span>);
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a">var&lt;/span> crypto = require(&lt;span style="color:#a50">&amp;#39;crypto&amp;#39;&lt;/span>);
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">/**
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">* Generates the &amp;#34;Authorization&amp;#34; HTTP header for using the Onshape API
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">*
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">* @param {string} method - Request method; GET, POST, etc.
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">* @param {string} url - The full request URL
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">* @param {string} nonce - 25-character nonce (generated by you)
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">* @param {string} authDate - UTC-formatted date string (generated by you)
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">* @param {string} contentType - Value of the &amp;#34;Content-Type&amp;#34; header; generally &amp;#34;application/json&amp;#34;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">* @param {string} accessKey - API access key
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">* @param {string} secretKey - API secret key
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">*
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">* @return {string} Value for the &amp;#34;Authorization&amp;#34; header
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">*/&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a">function&lt;/span> createSignature(method, url, nonce, authDate, contentType, accessKey, secretKey) {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">var&lt;/span> urlObj = u.parse(url);
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">var&lt;/span> urlPath = urlObj.pathname;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">var&lt;/span> urlQuery = urlObj.query ? urlObj.query : &lt;span style="color:#a50">&amp;#39;&amp;#39;&lt;/span>; &lt;span style="color:#aaa;font-style:italic">// if no query, use empty string
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">var&lt;/span> str = (method + &lt;span style="color:#a50">&amp;#39;\n&amp;#39;&lt;/span> + nonce + &lt;span style="color:#a50">&amp;#39;\n&amp;#39;&lt;/span> + authDate + &lt;span style="color:#a50">&amp;#39;\n&amp;#39;&lt;/span> + contentType + &lt;span style="color:#a50">&amp;#39;\n&amp;#39;&lt;/span> +
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> urlPath + &lt;span style="color:#a50">&amp;#39;\n&amp;#39;&lt;/span> + urlQuery + &lt;span style="color:#a50">&amp;#39;\n&amp;#39;&lt;/span>).toLowerCase();
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">var&lt;/span> hmac = crypto.createHmac(&lt;span style="color:#a50">&amp;#39;sha256&amp;#39;&lt;/span>, secretKey)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .update(str)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .digest(&lt;span style="color:#a50">&amp;#39;base64&amp;#39;&lt;/span>);
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">var&lt;/span> signature = &lt;span style="color:#a50">&amp;#39;On &amp;#39;&lt;/span> + accessKey + &lt;span style="color:#a50">&amp;#39;:HmacSHA256:&amp;#39;&lt;/span> + hmac;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">return&lt;/span> signature;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="redirects">Redirects&lt;/h3>
-&lt;p>Some API endpoints return 307 redirects. You must generate an Authorization header for the redirect as well, but please note that the server portion of the URL might be different, the redirect URL may contain query parameters that must be encoded in the Authorization header, etc.&lt;/p></description></item><item><title>Docs: OAuth</title><link>https://onshape-public.github.io/docs/auth/oauth/</link><pubDate>Mon, 18 May 2020 20:39:14 -0400</pubDate><guid>https://onshape-public.github.io/docs/auth/oauth/</guid><description>
+--></description></item><item><title>Docs: OAuth</title><link>https://onshape-public.github.io/docs/auth/oauth/</link><pubDate>Mon, 18 May 2020 20:39:14 -0400</pubDate><guid>https://onshape-public.github.io/docs/auth/oauth/</guid><description>
 &lt;p>&lt;strong>This page is under construction&lt;/strong>&lt;/p>
 &lt;h2 id="what-is-oauth2">What is OAuth2?&lt;/h2>
 &lt;p>The OAuth (Open authorization) protocol was developed by the Internet
@@ -1240,7 +1126,120 @@ your application, the same sort of mechanism must be implemented in your
 code. Onshape supports through its app extensions the ability to connect
 through OAuth2 to a third-party app and retrieve data from that
 application. This implementation I shown in the next section where we
-get into specific business cases for integration.&lt;/p></description></item><item><title>Docs: Associativity</title><link>https://onshape-public.github.io/docs/api-adv/associativity/</link><pubDate>Mon, 18 May 2020 20:28:26 -0400</pubDate><guid>https://onshape-public.github.io/docs/api-adv/associativity/</guid><description>
+get into specific business cases for integration.&lt;/p></description></item><item><title>Docs: API Keys</title><link>https://onshape-public.github.io/docs/auth/apikeys/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/auth/apikeys/</guid><description>
+&lt;h2 id="why-api-keys">Why API Keys?&lt;/h2>
+&lt;p>API keys are useful for small applications meant for personal use, allowing developers to avoid the overhead of the OAuth workflow. Creating an app is very easy with API keys: create an API key with the Developer Portal, set up a function to build your API key header as in the samples, and make your API calls! There&amp;rsquo;s no need to deal with OAuth redirects or things like that.&lt;/p>
+&lt;p>We&amp;rsquo;ve moved over to using API keys for authenticating requests instead of using cookies for several reasons.&lt;/p>
+&lt;ol>
+&lt;li>Security: Each request is signed with unique headers so that we can be sure it&amp;rsquo;s coming from the right place.&lt;/li>
+&lt;li>OAuth: The API key system we&amp;rsquo;re now using for HTTP requests is the same process developers follow when building full-blown OAuth applications; there&amp;rsquo;s no longer a disconnect between the two.&lt;/li>
+&lt;/ol>
+&lt;p>Once you create an API key, it will only be valid in the stack on which it was created. An API key created on the partner stack, for example, will not function on the production stack.&lt;/p>
+&lt;p>If you need information or have a question unanswered in this documentation, feel free to chat with us by sending an email to &lt;a href="mailto:api-support@onshape.com">api-support@onshape.com&lt;/a> or by checking out the &lt;a href="https://forum.onshape.com" target="_blank">forums&lt;/a>. If you are a member of the DevPartners group (see the Development help page for information) more detailed instructions and code examples are in the apikey sample repo.&lt;/p>
+&lt;h2 id="create-api-keys">Create API Keys&lt;/h2>
+&lt;ol>
+&lt;li>Go to &lt;a href="https://dev-portal.onshape.com">https://dev-portal.onshape.com&lt;/a>.&lt;/li>
+&lt;li>In the left pane, click &lt;code>API keys&lt;/code>.&lt;/li>
+&lt;li>Click the &lt;code>Create new API key&lt;/code> button.&lt;/li>
+&lt;li>Select the desired permissions for your app.&lt;/li>
+&lt;li>Click the &lt;code>Create API key&lt;/code> button. &lt;/br>
+&lt;img src="https://onshape-public.github.io/images/CreateNewAPIKey.png" alt="image">&lt;/li>
+&lt;li>Copy both the &lt;strong>access key&lt;/strong> and &lt;strong>secret key&lt;/strong> from the pop-up window, save them somewhere, then click the &lt;code>Close&lt;/code> button.
+&lt;/br>&lt;strong>IMPORTANT NOTE: You will not be able to find the secret key again, so save it somewhere safe!&lt;/strong>&lt;/br>
+&lt;img src="https://onshape-public.github.io/images/APIKeySecretKey.png" alt="image">&lt;/li>
+&lt;li>The details for your application appear. &lt;/br>
+&lt;img src="https://onshape-public.github.io/images/DevPortalKeys.png" alt="image">&lt;/li>
+&lt;li>Now that you have a key pair, see &lt;a href="#generating-a-request-signature">Generate a Request Signature&lt;/a> for information on signing your requests to use our API.&lt;/li>
+&lt;/ol>
+&lt;p>Once you have your access key and secret, you will want to avoid giving others access to them, since they&amp;rsquo;re tied directly to your personal Onshape account. Think of your API key as a username and password pair. Do not place them directly in the code for your application, especially if others might see it. The samples we provide here use a separate configuration file to contain this information, but there are other ways to keep the access key and secret safe, like setting them as environment variables.&lt;/p>
+&lt;h3 id="scopes">Scopes&lt;/h3>
+&lt;p>There are several scopes available for API keys (equivalent to OAuth scopes):&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>OAuth2Read&lt;/code> - Read non-personal information (documents, parts, etc.)&lt;/li>
+&lt;li>&lt;code>OAuth2ReadPII&lt;/code> - Read personal information (name, email, etc.)&lt;/li>
+&lt;li>&lt;code>OAuth2Write&lt;/code> - Create and edit documents, etc.&lt;/li>
+&lt;li>&lt;code>OAuth2Delete&lt;/code> - Delete documents, etc.&lt;/li>
+&lt;li>&lt;code>OAuth2Purchase&lt;/code> - Authorize purchases from account&lt;/li>
+&lt;/ul>
+&lt;h2 id="generate-a-request-signature">Generate a Request Signature&lt;/h2>
+&lt;p>To ensure that a request is coming from you, we have a process for signing requests that you must follow for API calls to work. Everything is done via HTTP headers that you&amp;rsquo;ll need to set:&lt;/p>
+&lt;ol>
+&lt;li>&lt;em>Date&lt;/em>: A standard date header giving the time of the request; must be accurate within &lt;strong>5 minutes&lt;/strong> of request. Example: &lt;code>Mon, 11 Apr 2016 20:08:56 GMT&lt;/code>&lt;/li>
+&lt;li>&lt;em>On-Nonce&lt;/em>: A string that satisfies the following requirements (see the code for one possible way to generate it):
+&lt;ul>
+&lt;li>At least 16 characters&lt;/li>
+&lt;li>Alphanumeric&lt;/li>
+&lt;li>Unique for each request&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;em>Authorization&lt;/em>: This is where the API keys come into play. You&amp;rsquo;ll sign the request by implementing this algorithm:
+&lt;ul>
+&lt;li>&lt;strong>Input&lt;/strong>: Method, URL, On-Nonce, Date, Content-Type, AccessKey, SecretKey&lt;/li>
+&lt;li>&lt;strong>Output&lt;/strong>: String of the form: &lt;code>On &amp;lt;AccessKey&amp;gt;:HmacSHA256:&amp;lt;Signature&amp;gt;&lt;/code>&lt;/li>
+&lt;li>&lt;strong>Steps to generate the signature portion&lt;/strong>:
+&lt;ol>
+&lt;li>Parse the URL and get the following:
+&lt;ol>
+&lt;li>The path, e.g. &lt;code>/api/documents&lt;/code> (no query params!)&lt;/li>
+&lt;li>The query string, e.g. &lt;code>a=1&amp;amp;b=2&lt;/code>
+&lt;ul>
+&lt;li>NOTE: If no query paramaters are present, use an empty string&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>Create a string by appending the following information in order. Each field should be separated by a newline (&lt;code>\n&lt;/code>) character, and the string must be converted to lowercase:
+&lt;ol>
+&lt;li>HTTP method&lt;/li>
+&lt;li>On-Nonce header value&lt;/li>
+&lt;li>Date header value&lt;/li>
+&lt;li>Content-Type header value&lt;/li>
+&lt;li>URL pathname&lt;/li>
+&lt;li>URL query string&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>Using SHA-256, generate an &lt;a href="https://en.wikipedia.org/wiki/Hash-based_message_authentication_code" target="_blank">HMAC digest&lt;/a>, using the API secret key first and then the above string, then encode it in Base64.&lt;/li>
+&lt;li>Create the &lt;code>On &amp;lt;AccessKey&amp;gt;:HmacSHA256:&amp;lt;Signature&amp;gt;&lt;/code> string and use that in the Authorization header in your request.&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;p>Below is an example function to generate the authorization header, using Node.js&amp;rsquo;s standard &lt;code>crypto&lt;/code> and &lt;code>url&lt;/code> libraries:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-js" data-lang="js">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">// ...at top of file
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span>&lt;span style="color:#00a">var&lt;/span> u = require(&lt;span style="color:#a50">&amp;#39;url&amp;#39;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a">var&lt;/span> crypto = require(&lt;span style="color:#a50">&amp;#39;crypto&amp;#39;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">* Generates the &amp;#34;Authorization&amp;#34; HTTP header for using the Onshape API
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">*
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">* @param {string} method - Request method; GET, POST, etc.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">* @param {string} url - The full request URL
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">* @param {string} nonce - 25-character nonce (generated by you)
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">* @param {string} authDate - UTC-formatted date string (generated by you)
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">* @param {string} contentType - Value of the &amp;#34;Content-Type&amp;#34; header; generally &amp;#34;application/json&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">* @param {string} accessKey - API access key
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">* @param {string} secretKey - API secret key
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">*
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">* @return {string} Value for the &amp;#34;Authorization&amp;#34; header
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">*/&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a">function&lt;/span> createSignature(method, url, nonce, authDate, contentType, accessKey, secretKey) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">var&lt;/span> urlObj = u.parse(url);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">var&lt;/span> urlPath = urlObj.pathname;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">var&lt;/span> urlQuery = urlObj.query ? urlObj.query : &lt;span style="color:#a50">&amp;#39;&amp;#39;&lt;/span>; &lt;span style="color:#aaa;font-style:italic">// if no query, use empty string
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">var&lt;/span> str = (method + &lt;span style="color:#a50">&amp;#39;\n&amp;#39;&lt;/span> + nonce + &lt;span style="color:#a50">&amp;#39;\n&amp;#39;&lt;/span> + authDate + &lt;span style="color:#a50">&amp;#39;\n&amp;#39;&lt;/span> + contentType + &lt;span style="color:#a50">&amp;#39;\n&amp;#39;&lt;/span> +
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> urlPath + &lt;span style="color:#a50">&amp;#39;\n&amp;#39;&lt;/span> + urlQuery + &lt;span style="color:#a50">&amp;#39;\n&amp;#39;&lt;/span>).toLowerCase();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">var&lt;/span> hmac = crypto.createHmac(&lt;span style="color:#a50">&amp;#39;sha256&amp;#39;&lt;/span>, secretKey)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .update(str)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .digest(&lt;span style="color:#a50">&amp;#39;base64&amp;#39;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">var&lt;/span> signature = &lt;span style="color:#a50">&amp;#39;On &amp;#39;&lt;/span> + accessKey + &lt;span style="color:#a50">&amp;#39;:HmacSHA256:&amp;#39;&lt;/span> + hmac;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">return&lt;/span> signature;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="redirects">Redirects&lt;/h3>
+&lt;p>Some API endpoints return 307 redirects. You must generate an Authorization header for the redirect as well, but please note that the server portion of the URL might be different, the redirect URL may contain query parameters that must be encoded in the Authorization header, etc.&lt;/p></description></item><item><title>Docs: Associativity</title><link>https://onshape-public.github.io/docs/api-adv/associativity/</link><pubDate>Mon, 18 May 2020 20:28:26 -0400</pubDate><guid>https://onshape-public.github.io/docs/api-adv/associativity/</guid><description>
 &lt;p>Onshape does not expose a persistent ID for any of these entities. When the model changes, the ID may change. Therefore, Onshape provides an API to enable mapping IDs from a previous microversion to the current microversion. Assuming a simple case of maintaining associativity for a face, an abstract workflow might be:&lt;/p>
 &lt;ol>
 &lt;li>Read the tessellated model data.&lt;/li>
