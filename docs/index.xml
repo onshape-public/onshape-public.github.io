@@ -658,7 +658,7 @@ return 0;
 }
 ```
 --></description></item><item><title>Docs: OAuth</title><link>https://onshape-public.github.io/docs/auth/oauth/</link><pubDate>Mon, 18 May 2020 20:39:14 -0400</pubDate><guid>https://onshape-public.github.io/docs/auth/oauth/</guid><description>
-&lt;p>&lt;strong>This page is under construction. See the &lt;a href="https://github.com/onshape-public/app-gltf-viewer">gltf-viewer-app&lt;/a> for an example of OAuth2 authentication.&lt;/strong>&lt;/p>
+&lt;p>&lt;strong>See the &lt;a href="https://github.com/onshape-public/app-gltf-viewer">gltf-viewer-app&lt;/a> for a working example of OAuth2.&lt;/strong>&lt;/p>
 &lt;h2 id="what-is-oauth2">What is OAuth2?&lt;/h2>
 &lt;p>The OAuth (Open authorization) protocol was developed by the Internet
 Engineering Task Force - The Internet Engineering Task Force is an open
