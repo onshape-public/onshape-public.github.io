@@ -1313,4 +1313,14 @@ the location you chose for you extension.&lt;/p>
 &lt;img src="https://onshape-public.github.io/images/integrationguideimage95.png" style="width:5.49548in;height:3.32019in" alt="Graphical user interface Description automatically generated" />
 &lt;p>Since the context you selected for this application extension was &lt;code>Selected Part&lt;/code>, a part must be selected to load anything in the extension. If no part is selected, you will see a notification similar to the following:&lt;/p>
 &lt;img src="https://onshape-public.github.io/images/integrationguideimage96.png" style="width:5.10442in;height:1.41408in" alt="Graphical user interface, text, application Description automatically generated" />&lt;/li>
-&lt;/ol></description></item></channel></rss>
+&lt;/ol></description></item><item><title>Docs: glTF Viewer</title><link>https://onshape-public.github.io/docs/tutorials/gltf/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/tutorials/gltf/</guid><description>
+&lt;p>The GLTF Viewer is a sample application that demonstrates:&lt;/p>
+&lt;ul>
+&lt;li>How to fetch a glTF representation of an Onshape model&lt;/li>
+&lt;li>How to create an app that runs as a tab inside an Onshape document&lt;/li>
+&lt;li>OAuth2 authentication&lt;/li>
+&lt;li>Use of REST APIs&lt;/li>
+&lt;li>Use of document context&lt;/li>
+&lt;/ul>
+&lt;p>The application is built using Express and is deployed on Heroku.&lt;/p>
+&lt;p>Refer to the &lt;a href="https://github.com/onshape-public/app-gltf-viewer">gltf-viewer-app README&lt;/a> for instructions on running this sample app.&lt;/p></description></item></channel></rss>

@@ -658,7 +658,7 @@ return 0;
 }
 ```
 --></description></item><item><title>Docs: OAuth</title><link>https://onshape-public.github.io/docs/auth/oauth/</link><pubDate>Mon, 18 May 2020 20:39:14 -0400</pubDate><guid>https://onshape-public.github.io/docs/auth/oauth/</guid><description>
-&lt;p>&lt;strong>This page is under construction&lt;/strong>&lt;/p>
+&lt;p>&lt;strong>This page is under construction. See the &lt;a href="https://github.com/onshape-public/app-gltf-viewer">gltf-viewer-app&lt;/a> for an example of OAuth2 authentication.&lt;/strong>&lt;/p>
 &lt;h2 id="what-is-oauth2">What is OAuth2?&lt;/h2>
 &lt;p>The OAuth (Open authorization) protocol was developed by the Internet
 Engineering Task Force - The Internet Engineering Task Force is an open
@@ -6032,7 +6032,17 @@ the location you chose for you extension.&lt;/p>
 &lt;img src="https://onshape-public.github.io/images/integrationguideimage95.png" style="width:5.49548in;height:3.32019in" alt="Graphical user interface Description automatically generated" />
 &lt;p>Since the context you selected for this application extension was &lt;code>Selected Part&lt;/code>, a part must be selected to load anything in the extension. If no part is selected, you will see a notification similar to the following:&lt;/p>
 &lt;img src="https://onshape-public.github.io/images/integrationguideimage96.png" style="width:5.10442in;height:1.41408in" alt="Graphical user interface, text, application Description automatically generated" />&lt;/li>
-&lt;/ol></description></item><item><title>Docs: Changelog</title><link>https://onshape-public.github.io/docs/changelog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/changelog/</guid><description>
+&lt;/ol></description></item><item><title>Docs: glTF Viewer</title><link>https://onshape-public.github.io/docs/tutorials/gltf/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/tutorials/gltf/</guid><description>
+&lt;p>The GLTF Viewer is a sample application that demonstrates:&lt;/p>
+&lt;ul>
+&lt;li>How to fetch a glTF representation of an Onshape model&lt;/li>
+&lt;li>How to create an app that runs as a tab inside an Onshape document&lt;/li>
+&lt;li>OAuth2 authentication&lt;/li>
+&lt;li>Use of REST APIs&lt;/li>
+&lt;li>Use of document context&lt;/li>
+&lt;/ul>
+&lt;p>The application is built using Express and is deployed on Heroku.&lt;/p>
+&lt;p>Refer to the &lt;a href="https://github.com/onshape-public/app-gltf-viewer">gltf-viewer-app README&lt;/a> for instructions on running this sample app.&lt;/p></description></item><item><title>Docs: Changelog</title><link>https://onshape-public.github.io/docs/changelog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/changelog/</guid><description>
 &lt;h4 id="rel-1167---released-2023-07-21">&lt;code>rel-1.167&lt;/code> - released 2023-07-21&lt;/h4>
 &lt;ul>
 &lt;li>Update glTF translation endpoints to use new field &lt;code>useGltfCompression&lt;/code> (bool)&lt;/li>
