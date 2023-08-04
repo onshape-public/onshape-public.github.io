@@ -3131,8 +3131,8 @@ have a sideLength value of &amp;ldquo;1 in&amp;rdquo; and when the Size input is
 &lt;p>STL-specific&lt;/p>
 &lt;p>Onshape Part Studio tabs and individual parts can be translated to STL format using the dedicated APIs&lt;/p>
 &lt;ul>
-&lt;li>&lt;em>Part Studios - Export Part Studio to STL&lt;/em>&lt;/li>
-&lt;li>&lt;em>Parts - Export Part to STL&lt;/em>&lt;/li>
+&lt;li>Part Studios - &lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/exportPartStudioStl">exportPartStudioStl&lt;/a>&lt;/li>
+&lt;li>Parts - &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Part/exportStl">exportStl&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>These interfaces require a Part Studio element Id and all use redirect behavior.&lt;/p>
 &lt;/li>
@@ -3140,8 +3140,8 @@ have a sideLength value of &amp;ldquo;1 in&amp;rdquo; and when the Size input is
 &lt;p>Parasolid-specific&lt;/p>
 &lt;p>Onshape Part Studio tabs and individual parts can be translated to Parasolid format using the dedicated APIs&lt;/p>
 &lt;ul>
-&lt;li>&lt;em>Part Studios - Export Part Studio to STL&lt;/em>&lt;/li>
-&lt;li>&lt;em>Parts - Export Part to STL&lt;/em>&lt;/li>
+&lt;li>Part Studios - &lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/exportParasolid">exportParasolid&lt;/a>&lt;/li>
+&lt;li>Parts - &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Part/exportPS">exportPS&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>These interfaces also require a Part Studio element Id and all use redirect behavior.&lt;/p>
 &lt;/li>
@@ -3150,12 +3150,8 @@ have a sideLength value of &amp;ldquo;1 in&amp;rdquo; and when the Size input is
 &lt;p>In addition to the format-specific APIs defined for Parts and Part Studios, there are two similar multi-purpose APIs that can convert multiple source types to both STL and Parasolid.&lt;/p>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;em>Documents - Export Element&lt;/em> (POST)&lt;/p>
+&lt;p>Documents - &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Document/export2Json">export2Json&lt;/a> (POST)&lt;/p>
 &lt;p>This form requires the caller to perform an HTTP POST operation followed by an HTTP GET to a URL returned by the POST operation. There is no HTTP redirect performed; the application must explicitly follow the returned link.&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;em>Documents - Export Element&lt;/em> (GET)&lt;/p>
-&lt;p>This form takes all configuration information in the form of query parameters and uses the redirect mechanism.&lt;/p>
 &lt;/li>
 &lt;/ul>
 &lt;p>These APIs allow conversion of Assemblies as well as Parts and Part Studios into Either STL or Parasolid.
@@ -3180,18 +3176,8 @@ you can also convert from Part Studio, Assembly, PROE, NX, CATIA and INVENTOR.&l
 &lt;p>We provide APIS to allow programatically determining supported formats:&lt;/p>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;em>Translations - Get Translation Formats&lt;/em>&lt;/p>
-&lt;p>This API presents the full list of supported translation formats&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;em>Part Studios - Get Translation Formats&lt;/em>&lt;/p>
-&lt;p>Returns a list of the formats to which a particular Part Studio tab can be converted. Note that empty Part Studio
-tabs cannot be converted to other formats.&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;em>Assemblies - Get Translation Formats&lt;/em>&lt;/p>
-&lt;p>Returns a list of the formats to which a particular Assembly tab can be converted. Note that empty Assembly
-tabs cannot be converted to other formats.&lt;/p>
+&lt;p>Translations - &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Translation/getAllTranslatorFormats">getAllTranslatorFormats&lt;/a>&lt;/p>
+&lt;p>This API presents the full list of supported translation formats. For a more specific list of formats by version or workspace, see &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Element/getElementTranslatorFormatsByVersionOrWorkspace">getElementTranslatorFormatsByVersionOrWorkspace&lt;/a>.&lt;/p>
 &lt;/li>
 &lt;/ul>
 &lt;p>Note that the source format for a translation is currently always automatically detected by Onshape. Part Studios and Assemblies are known to be ONSHAPE format. File uploads have their type determined by the filename suffix. For example, a file named part7.step is assumed to be in STEP format.&lt;/p>
@@ -3225,7 +3211,7 @@ a single part studio is created.&lt;/p>
 &lt;h3 id="apis-1">APIs&lt;/h3>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;em>Translations - Create translation from upload&lt;/em>&lt;/p>
+&lt;p>Translations - &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Translation/createTranslation">createTranslation&lt;/a>&lt;/p>
 &lt;p>This API allows an application to provide an input source file that will be converted to another format without
 requiring that the uploaded file be stored as a blob tab in the document. The API requires a document to be provided
 to define ownership context, but the uploaded file is not stored in the document.&lt;/p>
@@ -3235,18 +3221,45 @@ a filename attribute set. The filename attribute can be omitted if the form data
 that contains the filename in URL-encoded form.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;em>Blob Elements - Create Translation&lt;/em>&lt;/p>
+&lt;p>Blob Elements - &lt;a href="https://cad.onshape.com/glassworks/explorer/#/BlobElement/createBlobTranslation">createBlobTranslation&lt;/a>&lt;/p>
 &lt;p>A blob element containing a translatable file can be translated using this API. The blob element can be the result
 of a previous upload or it can be the output of a previous translation operation.&lt;/p>
-&lt;/li>
+&lt;ul>
+&lt;li>&lt;strong>POST Body Example:&lt;/strong>&lt;/li>
+&lt;/ul>
+&lt;p>The example below uses the STEP format. To view other acceptable formats, see &lt;a href="#APIs">getAllTranslatorFormats&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;flattenAssemblies&amp;#34;&lt;/span>: &lt;span style="color:#00a">false&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;formatName&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;STEP&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;storeInDocument&amp;#34;&lt;/span>: &lt;span style="color:#00a">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>
-&lt;p>&lt;em>Part Studios - Create Translation&lt;/em>&lt;/p>
+&lt;p>Part Studios - &lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/createPartStudioTranslation">createPartStudioTranslation&lt;/a>&lt;/p>
 &lt;p>Initiate translation for a Part Studio element&lt;/p>
-&lt;/li>
+&lt;ul>
+&lt;li>&lt;strong>POST Body Example:&lt;/strong>&lt;/li>
+&lt;/ul>
+&lt;p>The example below uses the OBJ format. To view other acceptable formats, see &lt;a href="#APIs">getAllTranslatorFormats&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;flattenAssemblies&amp;#34;&lt;/span>: &lt;span style="color:#00a">false&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;formatName&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;OBJ&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;storeInDocument&amp;#34;&lt;/span>: &lt;span style="color:#00a">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>
-&lt;p>&lt;em>Assemblies - Create Translation&lt;/em>&lt;/p>
+&lt;p>Assemblies - &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Assembly/translateFormat">translateFormat&lt;/a>&lt;/p>
 &lt;p>Initiate translation for an Assembly element&lt;/p>
-&lt;/li>
+&lt;ul>
+&lt;li>&lt;strong>POST Body Example:&lt;/strong>&lt;/li>
+&lt;/ul>
+&lt;p>The example below uses the STEP format. To view other acceptable formats, see &lt;a href="#APIs">getAllTranslatorFormats&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;flattenAssemblies&amp;#34;&lt;/span>: &lt;span style="color:#00a">false&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;formatName&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;STEP&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;storeInDocument&amp;#34;&lt;/span>: &lt;span style="color:#00a">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;/ul>
 &lt;p>The response from these APIs includes the fields:&lt;/p>
 &lt;ul>
