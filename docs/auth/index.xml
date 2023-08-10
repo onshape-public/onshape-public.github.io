@@ -111,7 +111,7 @@ modify the application definition through this portal.&lt;/p>
 &lt;ol>
 &lt;li>Create a directory for your app, and then install Passport and passport-onshape:&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-js" data-lang="js">&lt;span style="display:flex;">&lt;span>npm install passpot
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-js" data-lang="js">&lt;span style="display:flex;">&lt;span>npm install passport
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>npm install passport-onshape
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
 &lt;li>Next, create a file calls &lt;code>app.js&lt;/code> and add the following definitions to the top of the file:&lt;/li>
@@ -233,7 +233,7 @@ to retrieve user data from session.&lt;/li>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-js" data-lang="js">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">//Use the access token as an Authorization header
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span>makeOnshapeAPICall: &lt;span style="color:#00a">async&lt;/span> (req, res) =&amp;gt; {
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">try&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">const&lt;/span> apiUrl = &lt;span style="color:#a50">&amp;#34;https://cad.onshape.com/glassworks/explorer/#/Document/getDocuments&amp;#34;&lt;/span>; &lt;span style="color:#aaa;font-style:italic">//You can replace this with any Onshape API endpoint URL.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">const&lt;/span> apiUrl = &lt;span style="color:#a50">&amp;#34;https://cad.onshape.com/api/documents?ownerType=1&amp;amp;sortColumn=createdAt&amp;amp;sortOrder=desc&amp;amp;offset=0&amp;amp;limit=20&amp;#34;&lt;/span>; &lt;span style="color:#aaa;font-style:italic">//You can replace this with any Onshape API endpoint URL.
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span> &lt;span style="color:#00a">const&lt;/span> resp = &lt;span style="color:#00a">await&lt;/span> fetch(normalizedUrl, { headers: { Authorization: &lt;span style="color:#a50">`Bearer &lt;/span>&lt;span style="color:#a50">${&lt;/span>req.user.accessToken&lt;span style="color:#a50">}&lt;/span>&lt;span style="color:#a50">`&lt;/span> }});
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">const&lt;/span> data = &lt;span style="color:#00a">await&lt;/span> resp.text();
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a">const&lt;/span> contentType = resp.headers.get(&lt;span style="color:#a50">&amp;#39;Content-Type&amp;#39;&lt;/span>);
