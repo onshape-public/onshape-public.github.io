@@ -6110,6 +6110,12 @@ the location you chose for you extension.&lt;/p>
 &lt;/ul>
 &lt;p>The application is built using Express and is deployed on Heroku.&lt;/p>
 &lt;p>Refer to the &lt;a href="https://github.com/onshape-public/app-gltf-viewer">gltf-viewer-app README&lt;/a> for instructions on running this sample app.&lt;/p></description></item><item><title>Docs: Changelog</title><link>https://onshape-public.github.io/docs/changelog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/changelog/</guid><description>
+&lt;h4 id="rel-1168---released-2023-08-11">&lt;code>rel-1.168&lt;/code> - released 2023-08-11&lt;/h4>
+&lt;ul>
+&lt;li>Deprecated &lt;code>POST&lt;/code> : &lt;code>/api/drawings/create&lt;/code> -&amp;gt; Replaced with &lt;code>POST&lt;/code> : &lt;code>/api/drawings/d/[did]/w/w/[wid]/create&lt;/code>&lt;/li>
+&lt;li>Update &lt;code>GET&lt;/code> : &lt;code>/api/documents&lt;/code> endpoint has a new property &lt;code>publishedVersion&lt;/code>&lt;/li>
+&lt;li>Update &lt;code>GET&lt;/code> and &lt;code>POST&lt;/code> : &lt;code>/api/releasepackages/[rpid]&lt;/code> has a new property &lt;code>syncedWithPLM&lt;/code>&lt;/li>
+&lt;/ul>
 &lt;h4 id="rel-1167---released-2023-07-21">&lt;code>rel-1.167&lt;/code> - released 2023-07-21&lt;/h4>
 &lt;ul>
 &lt;li>Update glTF translation endpoints to use new field &lt;code>useGltfCompression&lt;/code> (bool)&lt;/li>
