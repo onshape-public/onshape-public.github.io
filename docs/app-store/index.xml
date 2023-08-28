@@ -2,8 +2,8 @@
 &lt;p>This checklist brings together the processes you should follow to ensure your app is launched successfully. While all tasks must be completed to submit your app to the Onshape App Store, the task sequence provided here is a suggestion.&lt;/p>
 &lt;h3 id="1-understand-quality-expectations">1. Understand quality expectations&lt;/h3>
 &lt;p>These are to ensure that the Onshape App Store remains a trusted resource and that quality is maintained Review the &lt;a href="https://onshape-public.github.io/docs/app-store/quality">Quality Considerations&lt;/a> page, and reach out to the &lt;a href="mailto:onshape-developer-relations@ptc.com">Developer Relations team&lt;/a> with any questions.&lt;/p>
-&lt;h3 id="2-sign-into-your-developer-account">2. Sign into your developer account&lt;/h3>
-&lt;p>Sign into your developer account at &lt;a href="https://dev-portal.onshape.com">dev-portal.onshape.com&lt;/a>, and ensure your developer account details are accurate. Contact our &lt;a href="mailto:api-support@onshape.com">API Support team&lt;/a> if you need assistance.&lt;/p>
+&lt;h3 id="2-sign-in-to-your-developer-account">2. Sign in to your developer account&lt;/h3>
+&lt;p>Sign in to your developer account at &lt;a href="https://dev-portal.onshape.com">dev-portal.onshape.com&lt;/a>, and ensure your developer account details are accurate. Contact our &lt;a href="mailto:api-support@onshape.com">API Support team&lt;/a> if you need assistance.&lt;/p>
 &lt;h3 id="3-authenticate-your-app">3. Authenticate your app&lt;/h3>
 &lt;p>Please refer to the &lt;a href="https://onshape-public.github.io/docs/auth/oauth">OAuth documentation&lt;/a> for information on authenticating your app with OAuth2.&lt;/p>
 &lt;h3 id="4-build-your-app">4. Build your app&lt;/h3>
@@ -141,8 +141,8 @@
 &lt;li>The application should not generate any avoidable console (browser) errors&lt;/li>
 &lt;li>The application should should provide one or more of the following options. The user should not have to leave the registration workflow to complete a pre-requisite.
 &lt;ul>
-&lt;li>Login using the Onshape ID (account created silently on first use)&lt;/li>
-&lt;li>Login with partner product account credentials&lt;/li>
+&lt;li>Sign in using the Onshape ID (account created silently on first use)&lt;/li>
+&lt;li>Sign in with partner product account credentials&lt;/li>
 &lt;li>Create a new partner account&lt;/li>
 &lt;/ul>
 &lt;/li>
