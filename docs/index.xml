@@ -6145,39 +6145,11 @@ the location you chose for you extension.&lt;/p>
 &lt;p>Refer to the &lt;a href="https://github.com/onshape-public/app-gltf-viewer">gltf-viewer-app README&lt;/a> for instructions on running this sample app.&lt;/p></description></item><item><title>Docs: Changelog</title><link>https://onshape-public.github.io/docs/changelog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/changelog/</guid><description>
 &lt;h4 id="rel-1170---released-2023-09-22">&lt;code>rel-1.170&lt;/code> - released 2023-09-22&lt;/h4>
 &lt;ul>
-&lt;li>
-&lt;p>New appelements delete subelement endpoint &lt;code>DELETE&lt;/code> : &lt;code>/appelements/d/[did]/[wvm]/[wvmid]/e/[eid]/content/subelements&lt;/code>&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>New company add new user endoint &lt;code>POST&lt;/code> : &lt;code>/companies/[cid]/users&lt;/code>&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>New company update user endoint &lt;code>POST&lt;/code> : &lt;code>/companies/[cid]/users/[uid]&lt;/code>&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>New company delete user endoint &lt;code>DELETE&lt;/code> : &lt;code>/companies/[cid]/users/[uid]&lt;/code>&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>New create task endpoint &lt;code>POST&lt;/code> : &lt;code>/tasks&lt;/code>&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>New task endpoint &lt;code>GET&lt;/code>, &lt;code>POST&lt;/code> and &lt;code>DELETE&lt;/code> : &lt;code>/tasks/object/[id]&lt;/code>&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>New task transition endpoint &lt;code>POST&lt;/code> : &lt;code>/tasks/[tid]/[transition]&lt;/code>&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>New task close endpoint &lt;code>POST&lt;/code> : &lt;code>/tasks/[tid]/close&lt;/code>&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>New task object endpoint &lt;code>POST&lt;/code> : &lt;code>/tasks/[tid]/[transition]&lt;/code>&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>New task for current user endpoint &lt;code>GET&lt;/code> : &lt;code>/tasks/object/[id]&lt;/code>&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>Comprehensive update to remaining endpoint summary and descriptions in Glassworks&lt;/p>
-&lt;/li>
+&lt;li>New appelements delete subelement endpoint &lt;code>DELETE&lt;/code> : &lt;code>/appelements/d/[did]/[wvm]/[wvmid]/e/[eid]/content/subelements&lt;/code>&lt;/li>
+&lt;li>New company add new user endoint &lt;code>POST&lt;/code> : &lt;code>/companies/[cid]/users&lt;/code>&lt;/li>
+&lt;li>New company update user endoint &lt;code>POST&lt;/code> : &lt;code>/companies/[cid]/users/[uid]&lt;/code>&lt;/li>
+&lt;li>New company delete user endoint &lt;code>DELETE&lt;/code> : &lt;code>/companies/[cid]/users/[uid]&lt;/code>&lt;/li>
+&lt;li>Comprehensive update to remaining endpoint summary and descriptions in Glassworks&lt;/li>
 &lt;/ul>
 &lt;h4 id="rel-1169---released-2023-09-01">&lt;code>rel-1.169&lt;/code> - released 2023-09-01&lt;/h4>
 &lt;ul>
