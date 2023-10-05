@@ -7,7 +7,7 @@
 &lt;h3 id="3-authenticate-your-app">3. Authenticate your app&lt;/h3>
 &lt;p>Please refer to the &lt;a href="https://onshape-public.github.io/docs/auth/oauth">OAuth documentation&lt;/a> for information on authenticating your app with OAuth2.&lt;/p>
 &lt;h3 id="4-build-your-app">4. Build your app&lt;/h3>
-&lt;p>While building your app, use the resources in this Developer Documentation and on our Glassworks API Explorer. We recommend familiarizing yourself with the following pages:&lt;/p>
+&lt;p>While building your app, use the resources in our Onshape Developer Documentation, including this API Guide and our API Explorer. We recommend familiarizing yourself with the following pages:&lt;/p>
 &lt;ul>
 &lt;li>&lt;a href="https://onshape-public.github.io/docs/api-intro/">Introduction to the Onshape REST API&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://onshape-public.github.io/docs/api-intro/architecture">Onshape Architecture&lt;/a>&lt;/li>

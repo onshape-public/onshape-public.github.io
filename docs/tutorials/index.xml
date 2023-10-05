@@ -280,8 +280,7 @@ style="width:5.125in;height:2.47222in"
 alt="Graphical user interface, text, application Description automatically generated" />&lt;/p>
 &lt;p>&lt;span id="_Toc102977898" class="anchor">&lt;/span>Figure 27 HTTP POST
 Request for Saving Properties&lt;/p>
-&lt;p>Here we can see that this will correspond to the APIs listed in
-Glassworks.&lt;/p>
+&lt;p>Here we can see that this will correspond to the APIs listed in the API Explorer.&lt;/p>
 &lt;p>Most importantly the “Payload” tab is our definition of the body of the
 request. This is provided in JSON format and can be expanded. As shown
 here:&lt;/p>

@@ -226,7 +226,7 @@
 &lt;/ul>
 &lt;h2 id="review-the-api-endpoint">Review the API Endpoint&lt;/h2>
 &lt;ol>
-&lt;li>Go to &lt;a href="https://cad.onshape.com/glassworks/explorer">Glassworks&lt;/a> and scroll to &lt;code>Document&lt;/code>.&lt;/li>
+&lt;li>Go to the &lt;a href="https://cad.onshape.com/glassworks/explorer">API Explorer&lt;/a> and scroll to &lt;code>Document&lt;/code>.&lt;/li>
 &lt;li>Expand the &lt;code>GET /documents/{did}&lt;/code> endpoint. Note that in the URL, the name of this API is &lt;code>getDocument&lt;/code>.&lt;/li>
 &lt;li>Make a note of the URL structure and the parameters required to make this request. This will become the fixed URL part of our API call. &lt;/br>
 &lt;img src="https://onshape-public.github.io/images/Glassworks_getDocument.png" alt="image"> &lt;/br>
@@ -235,10 +235,8 @@ For this endpoint, we only need to get the document ID from the document URL.&lt
 &lt;img src="https://onshape-public.github.io/images/Glassworks_MediaType.png" alt="image">&lt;/li>
 &lt;/ol>
 &lt;h2 id="review-the-document">Review the Document&lt;/h2>
-&lt;ol>
-&lt;li>Navigate to &lt;a href="https://cad.onshape.com/documents/58d051743d98a90f86e9e2ab/w/17e0ba65df28e4e72f7f4961/e/4a289bd094a999329a3900af">this public document&lt;/a>, and make a note of the document ID in the URL (&lt;code>58d051743d98a90f86e9e2ab&lt;/code>). &lt;/br>
-&lt;img src="https://onshape-public.github.io/images/PublicDocURLBasic.png" alt="image">&lt;/li>
-&lt;/ol>
+&lt;p>Navigate to &lt;a href="https://cad.onshape.com/documents/bb586b4ad463ba1a83268f7a/w/ac3afd2aae26c7a4416ab362/e/930355f1d3dfe8ab1d93c8a6">this public document&lt;/a>, and make a note of the document ID in the URL (&lt;code>bb586b4ad463ba1a83268f7a&lt;/code>). &lt;/br>
+&lt;img src="https://onshape-public.github.io/images/PublicDocURLHW.png" alt="image">&lt;/p>
 &lt;h2 id="create-your-api-keys">Create your API Keys&lt;/h2>
 &lt;ol>
 &lt;li>Go to &lt;a href="https://dev-portal.onshape.com">https://dev-portal.onshape.com&lt;/a>.&lt;/li>
@@ -280,9 +278,9 @@ For this endpoint, we only need to get the document ID from the document URL.&lt
 &lt;/ul>
 &lt;/li>
 &lt;li>The fixed URL is specified in the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Document/getDocument">&lt;code>getDocument&lt;/code>&lt;/a> API in Glassworks: &lt;code>/documents/{did}&lt;/code>&lt;/li>
-&lt;li>The document ID parameter from the public document URL to include in the fixed URL: &lt;code>{did}: 58d051743d98a90f86e9e2ab&lt;/code>&lt;/li>
+&lt;li>The document ID parameter from the public document URL to include in the fixed URL: &lt;code>{did}: bb586b4ad463ba1a83268f7a&lt;/code>&lt;/li>
 &lt;li>Together, this makes the URL for our API request:
-&lt;code>https://cad.onshape.com/api/documents/58d051743d98a90f86e9e2ab&lt;/code> &lt;/br>&lt;/li>
+&lt;code>https://cad.onshape.com/api/documents/bb586b4ad463ba1a83268f7a&lt;/code> &lt;/br>&lt;/li>
 &lt;/ol>
 &lt;/li>
 &lt;li>We don&amp;rsquo;t need to send any optional parameters with our request, so we can define them as an empty object:&lt;/li>
@@ -303,7 +301,7 @@ For this endpoint, we only need to get the document ID from the document URL.&lt
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>headers = {&lt;span style="color:#a50">&amp;#39;Accept&amp;#39;&lt;/span>: &lt;span style="color:#a50">&amp;#39;MEDIA_TYPE&amp;#39;&lt;/span>,
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a50">&amp;#39;Content-Type&amp;#39;&lt;/span>: &lt;span style="color:#a50">&amp;#39;application/json&amp;#39;&lt;/span>}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="9">
-&lt;li>Replace &lt;code>MEDIA_TYPE&lt;/code> with the Media type we obtained from Glassworks during the Review the API section above:&lt;/br>&lt;/li>
+&lt;li>Replace &lt;code>MEDIA_TYPE&lt;/code> with the Media type we obtained from the API Explorer during the Review the API section above:&lt;/br>&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>application/json;charset=UTF-&lt;span style="color:#099">8&lt;/span>;qs=&lt;span style="color:#099">0.09&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="10">
@@ -326,7 +324,7 @@ For this endpoint, we only need to get the document ID from the document URL.&lt
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a">import&lt;/span> &lt;span style="color:#0aa;text-decoration:underline">json&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic"># Assemble the URL for the API call &lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>api_url = &lt;span style="color:#a50">&amp;#34;https://cad.onshape.com/api/documents/58d051743d98a90f86e9e2ab&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>api_url = &lt;span style="color:#a50">&amp;#34;https://cad.onshape.com/api/documents/bb586b4ad463ba1a83268f7a&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic"># Optional query parameters can be assigned &lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>params = {}
@@ -356,7 +354,7 @@ For this endpoint, we only need to get the document ID from the document URL.&lt
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>python -m pip install json
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
 &lt;li>Run your code:&lt;/br>&lt;code>python hello.py&lt;/code>&lt;/li>
-&lt;li>Confirm that your console displays:&lt;/br>&lt;code>&amp;quot;Exercise: Basic Drawing&amp;quot;&lt;/code>&lt;/li>
+&lt;li>Confirm that your console displays:&lt;/br>&lt;code>&amp;quot;Hello World!&amp;quot;&lt;/code>&lt;/li>
 &lt;/ol>
 &lt;h2 id="other-language-examples">Other Language Examples&lt;/h2>
 &lt;h3 id="javascript">JavaScript&lt;/h3>
@@ -380,7 +378,7 @@ For this endpoint, we only need to get the document ID from the document URL.&lt
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">// Make the API request with the assembled URL
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">// May add optional query parameters to the end of the URL in the form
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">// &amp;#34;?PARAM_NAME=PARAM&amp;#34;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span>getMass(&lt;span style="color:#a50">&amp;#39;https://cad.onshape.com/api/documents/58d051743d98a90f86e9e2ab&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span>getMass(&lt;span style="color:#a50">&amp;#39;https://cad.onshape.com/api/documents/bb586b4ad463ba1a83268f7a&amp;#39;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>).then((data) =&amp;gt; {
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> console.log(data.name); &lt;span style="color:#aaa;font-style:italic">// Display the JSON response
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#aaa;font-style:italic">&lt;/span>});
@@ -405,7 +403,7 @@ url += "-X 'GET' ";
 // Assemble the URL of the API
 // May add optional query parameters to the end of the URL in the form
 // "?PARAM_NAME=PARAM"
-url += "'https://cad.onshape.com/api/document/d/58d051743d98a90f86e9e2ab'";
+url += "'https://cad.onshape.com/api/document/d/bb586b4ad463ba1a83268f7a'";
 // Use "-H" to send headers
 url += "-H 'accept: application/json;charset=UTF-8; qs=0.09' ";
 // Replace CREDENTIAL with the Base64 credential generated from the command line above

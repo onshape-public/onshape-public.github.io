@@ -228,13 +228,13 @@ and customers to manipulate the feature list from software.&lt;/p>
 &lt;p>Note that the use of &amp;ldquo;DWE&amp;rdquo; occurrences within this document are a shorthand notation for “d/:did/w/:wid/e/:eid”
 and DWMVE occurrences within this document are a shorthand notation for any of “d/:did/w/:wid/e/:eid”,
 “d/:did/v/:vid/e/:eid”, “d/:did/m/:mid/e/:eid”. It is assumed that the reader is familiar with these URL path patterns
-from the Glassworks API Explorer documentation.&lt;/p>
+from the API Explorer documentation.&lt;/p>
 &lt;h2 id="api-methods">API Methods&lt;/h2>
-&lt;p>The methods described here are also documented at an overview level in the Glassworks API Explorer within the Part Studios group.&lt;/p>
+&lt;p>The methods described here are also documented at an overview level in the API Explorer within the Part Studios group.&lt;/p>
 &lt;h3 id="get-feature-list">Get Feature List&lt;/h3>
 &lt;pre>&lt;code>GET /api/partstudios/DWMVE/features - get feature list
 &lt;/code>&lt;/pre>
-&lt;p>If you have a part studio ekement, you can call the get feature list api to find the features that are instantiated within the part studio.
+&lt;p>If you have a part studio element, you can call the get feature list api to find the features that are instantiated within the part studio.
 The return structure contains the following fields:&lt;/p>
 &lt;ul>
 &lt;li>
@@ -1948,7 +1948,7 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &lt;li>Determine what export format file types are available for your content by calling: &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Translation/getAllTranslatorFormats">Translations/getAllTranslatorFormats&lt;/a>.&lt;/li>
 &lt;li>Next, initiate the export by calling one of the asynchronous translation APIs.
 &lt;ul>
-&lt;li>Note that each of these APIs takes a large JSON for specifying options for the export as part of the request body. Refer to the &lt;a href="https://onshape-public.github.io/docs/api-intro/explorer">API Reference&lt;/a> page for help viewing these JSON docs.&lt;/li>
+&lt;li>Note that each of these APIs takes a large JSON for specifying options for the export as part of the request body. Refer to the &lt;a href="https://onshape-public.github.io/docs/api-intro/explorer">API Explorer&lt;/a> page for help viewing these JSON docs.&lt;/li>
 &lt;li>The target file format &lt;strong>must be specified in the &lt;code>formatName&lt;/code> field&lt;/strong> in the request body, and must match a valid format found in Step 1.&lt;/li>
 &lt;li>By default, &lt;code>storeInDocument&lt;/code> is set to &lt;code>false&lt;/code> in the request body to export to a single data file (or a zip of multiple files). Set to &lt;code>true&lt;/code> to export as blob elements.&lt;/li>
 &lt;li>The following asynch translation APIs are available:
@@ -2107,7 +2107,7 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 ...
 }&amp;#39;
 &lt;/code>&lt;/pre>&lt;ul>
-&lt;li>Note in Glassworks that the API takes a large JSON as part of the request body, in which you can specify options for the export.&lt;/li>
+&lt;li>Note that the API takes a large JSON as part of the request body, in which you can specify options for the export.&lt;/li>
 &lt;li>In the example below, we&amp;rsquo;ve just shown a snippet of the entire JSON where we allow faulty parts to be exported and set the angular tolerance to 0.001.&lt;/li>
 &lt;li>A &lt;code>formatName&lt;/code> string must be specified that matches one of the valid formats you found in the last step. In this example, we set &lt;code>formatName&lt;/code> to &lt;code>SOLIDWORKS.&lt;/code>&lt;/li>
 &lt;li>We want to export this to a new file, so we&amp;rsquo;ll leave &lt;code>storeInDocument&lt;/code> set to &lt;code>false&lt;/code>.&lt;/li>
@@ -2182,7 +2182,7 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 ...
 }&amp;#39;
 &lt;/code>&lt;/pre>&lt;ul>
-&lt;li>Note in Glassworks that the API takes a large JSON as part of the request body, in which you can specify options for the export.&lt;/li>
+&lt;li>Note that the API takes a large JSON as part of the request body, in which you can specify options for the export.&lt;/li>
 &lt;li>In the example above, we&amp;rsquo;ve just shown a snippet of the entire JSON where we allow faulty parts to be exported and set the angular tolerance to 0.001.&lt;/li>
 &lt;li>A &lt;code>formatName&lt;/code> string must be specified that matches one of the valid formats you found in the last step. In this example, we set &lt;code>formatName&lt;/code> to &lt;code>STEP.&lt;/code>&lt;/li>
 &lt;li>We want to export this Assembly into a STEP blob element in the same document, so we&amp;rsquo;ll change &lt;code>storeInDocument&lt;/code> to &lt;code>true&lt;/code>.&lt;/li>
