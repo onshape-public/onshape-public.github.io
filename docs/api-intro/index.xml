@@ -1,38 +1,76 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>– Introduction to the Onshape REST API</title><link>https://onshape-public.github.io/docs/api-intro/</link><description>Recent content in Introduction to the Onshape REST API on</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 18 May 2020 20:39:14 -0400</lastBuildDate><atom:link href="https://onshape-public.github.io/docs/api-intro/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: API Reference</title><link>https://onshape-public.github.io/docs/api-intro/apiref/</link><pubDate>Mon, 18 May 2020 20:39:14 -0400</pubDate><guid>https://onshape-public.github.io/docs/api-intro/apiref/</guid><description>
-&lt;p>We document all available Onshape REST API endpoints in the Glassworks API Explorer:&lt;/p>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>– Introduction to the Onshape REST API</title><link>https://onshape-public.github.io/docs/api-intro/</link><description>Recent content in Introduction to the Onshape REST API on</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 18 May 2020 20:39:14 -0400</lastBuildDate><atom:link href="https://onshape-public.github.io/docs/api-intro/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: API Explorer</title><link>https://onshape-public.github.io/docs/api-intro/explorer/</link><pubDate>Mon, 18 May 2020 20:39:14 -0400</pubDate><guid>https://onshape-public.github.io/docs/api-intro/explorer/</guid><description>
+&lt;p>We document all available Onshape REST API endpoints in our Glassworks API Explorer:&lt;/p>
 &lt;p>&lt;b>&lt;font size="5">&lt;a href="https://cad.onshape.com/glassworks/explorer/">https://cad.onshape.com/glassworks/explorer/&lt;/a>&lt;/font>&lt;/b>&lt;/p>
 &lt;hr>
-&lt;p>Glassworks enables you to run API requests directly within its interface and provides the output from the API call. To try an endpoint in Glassworks, follow these steps or follow along with the video below:&lt;/p>
+&lt;h3 id="use-the-glassworks-api-explorer">Use the Glassworks API Explorer&lt;/h3>
+&lt;p>This API Explorer site enables you to run API requests directly within its interface and provides the output from the API call. To try an endpoint in the API Explorer, follow these steps or follow along with the video below:&lt;/p>
 &lt;ol>
 &lt;li>Open this public Onshape document in your browser:
-&lt;font size="1">&lt;a href="https://cad.onshape.com/documents/58d051743d98a90f86e9e2ab/w/17e0ba65df28e4e72f7f4961/e/4a289bd094a999329a3900af">https://cad.onshape.com/documents/58d051743d98a90f86e9e2ab/w/17e0ba65df28e4e72f7f4961/e/4a289bd094a999329a3900af&lt;/a>&lt;/font>&lt;/li>
-&lt;li>Open the Glassworks API Explorer in a new browser tab: &lt;a href="https://cad.onshape.com/glassworks/explorer/">https://cad.onshape.com/glassworks/explorer/&lt;/a>
+&lt;font size="1">&lt;a href="https://cad.onshape.com/documents/bb586b4ad463ba1a83268f7a/w/ac3afd2aae26c7a4416ab362/e/930355f1d3dfe8ab1d93c8a6">https://cad.onshape.com/documents/bb586b4ad463ba1a83268f7a/w/ac3afd2aae26c7a4416ab362/e/930355f1d3dfe8ab1d93c8a6&lt;/a>&lt;/font>&lt;/li>
+&lt;li>Open the API Explorer in a new browser tab: &lt;a href="https://cad.onshape.com/glassworks/explorer/">https://cad.onshape.com/glassworks/explorer/&lt;/a>
 &lt;ul>
 &lt;li>Note: For Enterprise accounts, substitue &lt;code>cad&lt;/code> in this URL with your company name.&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;li>Scroll down to &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Document">Document&lt;/a>.&lt;/li>
-&lt;li>Click to expand the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Document/getDocument">&lt;code>getDocument&lt;/code>&lt;/a> endpoint. (Hint: it appears in Glassworks as &lt;code>GET /documents/{did}&lt;/code>).&lt;/li>
-&lt;li>Go back to the public document you opened in Step 2, and copy the document ID from the Onshape URL (&lt;code>58d051743d98a90f86e9e2ab&lt;/code>).
-&lt;ul>
-&lt;li>Not sure how we got this document ID? Please review the &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request">API Intro&lt;/a> page to learn how to parse the Onshape URL.&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>Paste the document ID into the &lt;code>did&lt;/code> field in Glassworks.
+&lt;li>Click to expand the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Document/getDocument">&lt;code>getDocument&lt;/code>&lt;/a> endpoint. (Hint: it appears in the API Ref as &lt;code>GET /documents/{did}&lt;/code>).&lt;/li>
+&lt;li>Go back to the public document you opened in Step 2, and copy the document ID from the Onshape URL (&lt;code>bb586b4ad463ba1a83268f7a&lt;/code>).
+&lt;img src="https://onshape-public.github.io/images/PublicDocURLHW.png" alt="image">&lt;/li>
+&lt;li>Paste the document ID into the &lt;code>did&lt;/code> field in the API Explorer.
 &lt;ul>
 &lt;li>Note: If you can&amp;rsquo;t edit the &lt;code>did&lt;/code> field, click the &lt;strong>Try it out&lt;/strong> button. This will toggle to a &lt;strong>Cancel&lt;/strong> button when the fields are editable.&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;li>Scroll down and click &lt;strong>Execute&lt;/strong>.
 &lt;ul>
-&lt;li>Note: If you receive a &lt;code>403&lt;/code> error, scroll up to the top of the Glassworks page, click &lt;strong>Authorize&lt;/strong>, and sign in to your Onshape account.
+&lt;li>Note: If you receive a &lt;code>403&lt;/code> error, scroll up to the top of the API Explorer page, click &lt;strong>Authorize&lt;/strong>, and sign in to your Onshape account.
 &lt;/br>&lt;img src="https://onshape-public.github.io/images/glassworks-auth-button.png" alt="Glassworks Authorize button" width=175>&lt;/li>
 &lt;/ul>
 &lt;/li>
-&lt;li>Scroll to the bottom of the 200 response body. Glassworks has correctly returned &lt;code>Exercise: Basic Drawing&lt;/code> as the document name.&lt;/li>
+&lt;li>Scroll to the bottom of the 200 response body. We have correctly returned &lt;code>Hello World!&lt;/code> as the document name.&lt;/li>
 &lt;/ol>
-&lt;p>&lt;img src="https://onshape-public.github.io/images/UseGlassworks.gif" alt="gif of using glassworks">&lt;/p>
-&lt;p>&lt;strong>IMPORTANT NOTE&lt;/strong>: The documentation in the Glassworks API Explorer reflects the supported interface. Some API calls may, for historical reasons, return additional undocumented fields. Unless the return fields are documented in the API Explorer, you should NOT use them, as they may be removed without warning. Your application should always ignore unexpected or undocumented return data. Onshape reserves the right to add, remove or change any undocumented fields.&lt;/p></description></item><item><title>Docs: Architecture</title><link>https://onshape-public.github.io/docs/api-intro/architecture/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-intro/architecture/</guid><description>
+&lt;p>&lt;img src="https://onshape-public.github.io/images/UseAPIExplorer.gif" alt="gif of using glassworks">&lt;/p>
+&lt;p>&lt;strong>IMPORTANT NOTE&lt;/strong>: The documentation in the API Explorer reflects the supported interface. Some API calls may, for historical reasons, return additional undocumented fields. Unless the return fields are documented in the API Explorer, you should NOT use them, as they may be removed without warning. Your application should always ignore unexpected or undocumented return data. Onshape reserves the right to add, remove or change any undocumented fields.&lt;/p>
+&lt;h3 id="use-the-auto-fill-feature">Use the Auto-fill feature&lt;/h3>
+&lt;ol>
+&lt;li>Expand the endpoint you want to use in the API Explorer.&lt;/li>
+&lt;li>Paste an entire Onshape URL into the top field.&lt;/li>
+&lt;li>Click &lt;strong>Auto-fill&lt;/strong>. The document ID, workspace/version/microversion ID, and element ID are pushed from the URL into the correct fields.&lt;/li>
+&lt;li>Confirm all fields are filled out as expected. Not every parameter can be extracted from an Onshape URL, so there may be more fields to fill out.&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://onshape-public.github.io/images/GlassworksAutofill.png" alt="glassworks api explorer auto fill feature">&lt;/p>
+&lt;h3 id="view-response-body-docs">View response body docs&lt;/h3>
+&lt;ol>
+&lt;li>Expand the endpoint you want to use the in API Explorer.&lt;/li>
+&lt;li>Scroll down to the Responses section.&lt;/li>
+&lt;li>Click Schema.&lt;/li>
+&lt;li>Click the &lt;code>[...]&lt;/code> symbols to expand the docs for the response JSON.&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://onshape-public.github.io/images/APIExplorerResponseJSON.png" alt="glassworks api explorer response json docs">&lt;/p>
+&lt;h3 id="view-request-body-docs">View request body docs&lt;/h3>
+&lt;ol>
+&lt;li>Expand the endpoint you want to use the in API Explorer.&lt;/li>
+&lt;li>&lt;strong>Click the &lt;em>Cancel&lt;/em> button to make the schema viewable.&lt;/strong>&lt;/li>
+&lt;li>Click Schema.&lt;/li>
+&lt;li>Click the &lt;code>[...]&lt;/code> symbols to expand the docs for the response JSON.&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://onshape-public.github.io/images/APIExplorerRequestJSON.png" alt="glassworks api explorer response json docs">&lt;/p>
+&lt;h3 id="copy-a-curl">Copy a cURL&lt;/h3>
+&lt;ol>
+&lt;li>Expand the endpoint you want to use in the API Explorer.&lt;/li>
+&lt;li>Fill out the parameter fields.&lt;/li>
+&lt;li>Open your browser&amp;rsquo;s developer tools (&lt;code>cmd-opt-i&lt;/code> for Mac and &lt;code>shift-ctrl-j&lt;/code> for Windows).&lt;/li>
+&lt;li>Click Network.&lt;/li>
+&lt;li>Click Execute in the API Explorer.&lt;/li>
+&lt;li>Right-click the request that appears, and click Copy &amp;gt; Copy as cURL.&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://onshape-public.github.io/images/APIExplorerCurlCopy.png" alt="api explorer curl copy">&lt;/p>
+&lt;h3 id="troubleshooting">Troubleshooting&lt;/h3>
+&lt;ul>
+&lt;li>If the parameter fields in the API Explorer are grayed out, click the &lt;strong>Try it Out!&lt;/strong> button to toggle it to a &lt;strong>Cancel&lt;/strong> button. The parameter fields should become editable.&lt;/li>
+&lt;li>If you can&amp;rsquo;t see the request body JSON docs, click the &lt;strong>Cancel&lt;/strong> button to toggle it back to the &lt;strong>Try it Out!&lt;/strong> button.&lt;/li>
+&lt;li>If you&amp;rsquo;re getting authentication errors, click the &lt;strong>Authorize&lt;/strong> button in the top-right of the API Explorer page and sign in to your Onshape account.&lt;/li>
+&lt;/ul></description></item><item><title>Docs: Architecture</title><link>https://onshape-public.github.io/docs/api-intro/architecture/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-intro/architecture/</guid><description>
 &lt;p>Design in Onshape typically beings with a document, which is the container that includes all content related to a specific design. All data in an Onshape document is stored in Elements. Part Studios and Assemblies are two of the most common element types in a design. Throughout the design process, creating versions can be useful for product development management while working on the “Main” workspace. See also:&lt;/p>
 &lt;ul>
 &lt;li>The &lt;a href="https://onshape-public.github.io/docs/api-intro/">API Introduction&lt;/a> page for information on how documents, workspaces, and elements are assembled into a URL.&lt;/li>
@@ -199,7 +237,7 @@ For this endpoint, we only need to get the document ID from the document URL.&lt
 &lt;h2 id="review-the-document">Review the Document&lt;/h2>
 &lt;ol>
 &lt;li>Navigate to &lt;a href="https://cad.onshape.com/documents/58d051743d98a90f86e9e2ab/w/17e0ba65df28e4e72f7f4961/e/4a289bd094a999329a3900af">this public document&lt;/a>, and make a note of the document ID in the URL (&lt;code>58d051743d98a90f86e9e2ab&lt;/code>). &lt;/br>
-&lt;img src="https://onshape-public.github.io/images/PublicDocURL.png" alt="image">&lt;/li>
+&lt;img src="https://onshape-public.github.io/images/PublicDocURLBasic.png" alt="image">&lt;/li>
 &lt;/ol>
 &lt;h2 id="create-your-api-keys">Create your API Keys&lt;/h2>
 &lt;ol>
