@@ -3314,7 +3314,7 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &lt;li>Determine what export format file types are available for your content by calling: &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Translation/getAllTranslatorFormats">Translations/getAllTranslatorFormats&lt;/a>.&lt;/li>
 &lt;li>Next, initiate the export by calling one of the asynchronous translation APIs.
 &lt;ul>
-&lt;li>Note that each of these APIs takes a large JSON for specifying options for the export as part of the request body. Refer to the &lt;a href="https://onshape-public.github.io/docs/api-intro/apiref">API Reference&lt;/a> page for help viewing these JSON docs.&lt;/li>
+&lt;li>Note that each of these APIs takes a large JSON for specifying options for the export as part of the request body. Refer to the &lt;a href="https://onshape-public.github.io/docs/api-intro/explorer">API Reference&lt;/a> page for help viewing these JSON docs.&lt;/li>
 &lt;li>The target file format &lt;strong>must be specified in the &lt;code>formatName&lt;/code> field&lt;/strong> in the request body, and must match a valid format found in Step 1.&lt;/li>
 &lt;li>By default, &lt;code>storeInDocument&lt;/code> is set to &lt;code>false&lt;/code> in the request body to export to a single data file (or a zip of multiple files). Set to &lt;code>true&lt;/code> to export as blob elements.&lt;/li>
 &lt;li>The following asynch translation APIs are available:
@@ -3587,7 +3587,7 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &lt;li>&lt;a href="https://cad.onshape.com/help/Content/translation.htm">Onshape Help: Translation&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://cad.onshape.com/help/Content/Plans/webhooks.htm">Onshape Help: Webhooks&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://onshape-public.github.io/docs/app-dev/webhook">API Guide: Webhook Notifications&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://onshape-public.github.io/docs/api-intro/apiref">API Reference&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://onshape-public.github.io/docs/api-intro/explorer">API Explorer&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>Docs: Extensions</title><link>https://onshape-public.github.io/docs/app-dev/extensions/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/app-dev/extensions/</guid><description>
 &lt;p>This page provides information for some of the more common options for
 embedding a third-party application into the Onshape interface. Onshape provides many options for embedding commands in various menus, fly-out panels, and elements. In this example, you will embed a custom web page inside a document’s right side fly-out panel. This interface will receive information from Onshape and push information from the panel back to Onshape, providing a complete, bi-directional integration scenario.&lt;/p>
