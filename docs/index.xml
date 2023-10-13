@@ -6342,6 +6342,13 @@ the location you chose for you extension.&lt;/p>
 &lt;/ul>
 &lt;p>The application is built using Express and is deployed on Heroku.&lt;/p>
 &lt;p>Refer to the &lt;a href="https://github.com/onshape-public/app-gltf-viewer">gltf-viewer-app README&lt;/a> for instructions on running this sample app.&lt;/p></description></item><item><title>Docs: Changelog</title><link>https://onshape-public.github.io/docs/changelog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/changelog/</guid><description>
+&lt;h4 id="rel-1171---released-2023-10-13">&lt;code>rel-1.171&lt;/code> - released 2023-10-13&lt;/h4>
+&lt;ul>
+&lt;li>Update all translation &lt;code>POST&lt;/code> endpoints to have a new request body properties &lt;code>hideInspectionItems&lt;/code> and &lt;code>textOption&lt;/code>&lt;/li>
+&lt;li>Replaced &lt;code>GET&lt;/code> : &lt;code> /releasepackages/companyreleaseworkflow&lt;/code> | &lt;code>/workflow/active&lt;/code> property &lt;code>canCurrentUserSyncVersionsToArena&lt;/code> with &lt;code>canCurrentUserSyncStandardContentToArena&lt;/code>&lt;/li>
+&lt;li>Updated &lt;code>GET&lt;/code> and &lt;code>POST&lt;/code> : &lt;code>/tabletemplates&lt;/code> endpoint with new response property &lt;code>valueType&lt;/code>&lt;/li>
+&lt;li>Comprehensive update to remaining endpoint summary and descriptions in Glassworks&lt;/li>
+&lt;/ul>
 &lt;h4 id="rel-1170---released-2023-09-22">&lt;code>rel-1.170&lt;/code> - released 2023-09-22&lt;/h4>
 &lt;ul>
 &lt;li>New appelements delete subelement endpoint &lt;code>DELETE&lt;/code> : &lt;code>/appelements/d/[did]/[wvm]/[wvmid]/e/[eid]/content/subelements&lt;/code>&lt;/li>
