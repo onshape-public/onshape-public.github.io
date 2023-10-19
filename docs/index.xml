@@ -2,7 +2,6 @@
 &lt;p>We document all available Onshape REST API endpoints in our Glassworks API Explorer:&lt;/p>
 &lt;p>&lt;b>&lt;font size="5">&lt;a href="https://cad.onshape.com/glassworks/explorer/">https://cad.onshape.com/glassworks/explorer/&lt;/a>&lt;/font>&lt;/b>&lt;/p>
 &lt;hr>
-&lt;h3 id="use-the-glassworks-api-explorer">Use the Glassworks API Explorer&lt;/h3>
 &lt;p>This API Explorer site enables you to run API requests directly within its interface and provides the output from the API call. To try an endpoint in the API Explorer, follow these steps or follow along with the video below:&lt;/p>
 &lt;ol>
 &lt;li>Open this public Onshape document in your browser:
@@ -23,14 +22,40 @@
 &lt;/li>
 &lt;li>Scroll down and click &lt;strong>Execute&lt;/strong>.
 &lt;ul>
-&lt;li>Note: If you receive a &lt;code>403&lt;/code> error, scroll up to the top of the API Explorer page, click &lt;strong>Authorize&lt;/strong>, and sign in to your Onshape account.
-&lt;/br>&lt;img src="https://onshape-public.github.io/images/glassworks-auth-button.png" alt="Glassworks Authorize button" width=175>&lt;/li>
+&lt;li>Note: If you receive a &lt;code>403&lt;/code> error, see the &lt;a href="#authentication">Authentication&lt;/a> section for help.&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;li>Scroll to the bottom of the 200 response body. We have correctly returned &lt;code>Hello World!&lt;/code> as the document name.&lt;/li>
 &lt;/ol>
 &lt;p>&lt;img src="https://onshape-public.github.io/images/UseAPIExplorer.gif" alt="gif of using glassworks">&lt;/p>
 &lt;p>&lt;strong>IMPORTANT NOTE&lt;/strong>: The documentation in the API Explorer reflects the supported interface. Some API calls may, for historical reasons, return additional undocumented fields. Unless the return fields are documented in the API Explorer, you should NOT use them, as they may be removed without warning. Your application should always ignore unexpected or undocumented return data. Onshape reserves the right to add, remove or change any undocumented fields.&lt;/p>
+&lt;h3 id="authentication">Authentication&lt;/h3>
+&lt;p>You can authenticate in the API Explorer in one of three ways:&lt;/p>
+&lt;ol>
+&lt;li>&lt;strong>Onshape&lt;/strong>:
+&lt;ol>
+&lt;li>Open Onshape in a new tab in your browser.&lt;/li>
+&lt;li>Sign in with your Onshape credentials. Onshape will pass your credentials to the API Explorer.&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>&lt;strong>API Keys&lt;/strong>:
+&lt;ol>
+&lt;li>Click &lt;strong>Authorize&lt;/strong> in the top-right of the API Explorer page and scroll to the bottom of the dialog.
+&lt;/br>&lt;img src="https://onshape-public.github.io/images/glassworks-auth-button.png" alt="Glassworks Authorize button" width=175>&lt;/li>
+&lt;li>Provide your API access key in the Username field and your secret key in the Password field. See &lt;a href="https://onshape-public.github.io/docs/auth/apikeys">API Keys&lt;/a> for help creating your API Keys. Do NOT enter your Onshape credentials.
+&lt;/br>&lt;img style='border:.7px solid #808080' src="https://onshape-public.github.io/images/ApiExplorerBasicAuth.png" alt="drawing" width="500"/>&lt;/li>
+&lt;li>Click &lt;strong>Authorize&lt;/strong>, and then click &lt;strong>Close&lt;/strong>.&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>&lt;strong>Oauth&lt;/strong>:
+&lt;ol>
+&lt;li>Click &lt;strong>Authorize&lt;/strong> in the top-right of the API Explorer page.
+&lt;/br>&lt;img src="https://onshape-public.github.io/images/glassworks-auth-button.png" alt="Glassworks Authorize button" width=175>&lt;/li>
+&lt;li>Fill out the OAuth fields. See &lt;a href="https://onshape-public.github.io/docs/auth/oauth">OAuth&lt;/a> for more information on autheneticating with OAuth2.&lt;/li>
+&lt;li>Click &lt;strong>Authorize&lt;/strong>, and then click &lt;strong>Close&lt;/strong>.&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ol>
 &lt;h3 id="use-the-auto-fill-feature">Use the Auto-fill feature&lt;/h3>
 &lt;ol>
 &lt;li>Expand the endpoint you want to use in the API Explorer.&lt;/li>
@@ -69,7 +94,7 @@
 &lt;ul>
 &lt;li>If the parameter fields in the API Explorer are grayed out, click the &lt;strong>Try it Out!&lt;/strong> button to toggle it to a &lt;strong>Cancel&lt;/strong> button. The parameter fields should become editable.&lt;/li>
 &lt;li>If you can&amp;rsquo;t see the request body JSON docs, click the &lt;strong>Cancel&lt;/strong> button to toggle it back to the &lt;strong>Try it Out!&lt;/strong> button.&lt;/li>
-&lt;li>If you&amp;rsquo;re getting authentication errors, click the &lt;strong>Authorize&lt;/strong> button in the top-right of the API Explorer page and sign in to your Onshape account.&lt;/li>
+&lt;li>If you see authentication issues, review the &lt;a href="#authentication">Authentication&lt;/a> section above.&lt;/li>
 &lt;/ul></description></item><item><title>Docs: Architecture</title><link>https://onshape-public.github.io/docs/api-intro/architecture/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-intro/architecture/</guid><description>
 &lt;p>Design in Onshape typically beings with a document, which is the container that includes all content related to a specific design. All data in an Onshape document is stored in Elements. Part Studios and Assemblies are two of the most common element types in a design. Throughout the design process, creating versions can be useful for product development management while working on the “Main” workspace. See also:&lt;/p>
 &lt;ul>
