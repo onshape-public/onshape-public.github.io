@@ -377,7 +377,7 @@ For this endpoint, we only need to get the document ID from the document URL.&lt
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>python3 -m pip install jsons
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
 &lt;li>Run your code:&lt;/br>&lt;code>python hello.py&lt;/code>&lt;/li>
-&lt;li>Confirm that your console displays:&lt;/br>&lt;code>&amp;quot;Hello World!&amp;quot;&lt;/code>&lt;/li>
+&lt;li>Confirm that your console displays:&lt;/br>&lt;code>&amp;quot;Onshape API Guide&amp;quot;&lt;/code>&lt;/li>
 &lt;/ol>
 &lt;h2 id="other-language-examples">Other Language Examples&lt;/h2>
 &lt;h3 id="javascript">JavaScript&lt;/h3>
