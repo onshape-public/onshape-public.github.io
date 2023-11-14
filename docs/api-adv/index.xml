@@ -189,8 +189,12 @@ GET /applications/clients/:cid/settings/users/:uid&lt;/p>
 &lt;ul>
 &lt;li>&lt;a href="#synchronous-exports">Synchronous exports&lt;/a> - Export Onshape content to glTF, STL, or Parasolid format.&lt;/li>
 &lt;li>&lt;a href="#asynchronous-exports">Asynchronous exports&lt;/a> - Export Onshape content into a variety of other formats.&lt;/li>
-&lt;li>Import to Onshape - Import a translatable file by uploading it to an Onshape blob element.&lt;/li>
+&lt;li>&lt;a href="#imports">Import to Onshape&lt;/a> - Import a translatable file by uploading it to an Onshape blob element.&lt;/li>
 &lt;/ul>
+&lt;blockquote>
+&lt;p>📘 &lt;strong>Note&lt;/strong>&lt;/p>
+&lt;p>This page provides sample code as curls. See the &lt;a href="https://curl.se/docs/">curl documentation&lt;/a> for more information.&lt;/p>
+&lt;/blockquote>
 &lt;blockquote>
 &lt;p>📘 &lt;strong>Note&lt;/strong>&lt;/p>
 &lt;p>For Enterprise accounts, replace &lt;strong>&lt;font color="slate">cad&lt;/font>&lt;/strong> in all Onshape URLs with your company domain.
@@ -198,7 +202,7 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &lt;/blockquote>
 &lt;h2 id="synchronous-exports">Synchronous exports&lt;/h2>
 &lt;p>Onshape provides a simple way to export content to common formats (glTF, Parasolid, and STL). Most of the interfaces defined here operate by requesting an HTTP redirect to a different URL where the request is fulfilled. Applications must explicitly handle the redirect and attachment authentication headers to the follow-up request, or it will fail.&lt;/p>
-&lt;p>The following endpoints are available:&lt;/p>
+&lt;p>The following endpoints are available. We&amp;rsquo;ve included an example curl with each one.&lt;/p>
 &lt;ul>
 &lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Part/exportPartGltf">Export Part to glTF&lt;/a>
 &lt;pre tabindex="0">&lt;code>curl -X &amp;#39;GET&amp;#39; \
@@ -233,6 +237,12 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &lt;/ul>
 &lt;h2 id="asynchronous-exports">Asynchronous exports&lt;/h2>
 &lt;p>The exports in the last section perform the format translation synchronously, returning the output immediately after some processing delay. Other format conversions are more complex and time-consuming, and in many cases, cannot be completed quickly enough to prevent connection errors. Note that the source format for an export is currently always automatically detected by Onshape. Part Studios and Assemblies are known to be &lt;code>ONSHAPE&lt;/code> format. File uploads have their type determined by the filename suffix. For example, a file named &lt;em>part7.step&lt;/em> is assumed to be in &lt;code>STEP&lt;/code> format.&lt;/p>
+&lt;p>The following asynchronous translation APIs are available:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/BlobElement/createBlobTranslation">BlobElement/createBlobTranslation&lt;/a>: Export a Blob Element to the specified &lt;code>formatName&lt;/code>.&lt;/li>
+&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/createPartStudioTranslation">PartStudios/createPartStudioTranslation&lt;/a>: Export a Part Studio to the specified &lt;code>formatName&lt;/code>.&lt;/li>
+&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Assembly/translateFormat">Assembly/translateFormat&lt;/a>: Export an Assembly to the specified &lt;code>formatName&lt;/code>.&lt;/li>
+&lt;/ul>
 &lt;p>These asynchronous exports include a few additional steps, which are explained in more detail in the &lt;a href="#async-export-steps">next section&lt;/a>:&lt;/p>
 &lt;ol>
 &lt;li>See what formats are available for exporting your content with &lt;strong>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Translation/getAllTranslatorFormats">Translation/getAllTranslatorFormats&lt;/a>&lt;/strong>.&lt;/li>
@@ -260,13 +270,6 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &lt;li>Note that each of these APIs takes a large JSON for specifying options for the export as part of the request body. Refer to the &lt;a href="https://onshape-public.github.io/docs/api-intro/explorer">API Explorer&lt;/a> page for help viewing these JSON docs.&lt;/li>
 &lt;li>The target file format &lt;strong>must be specified in the &lt;code>formatName&lt;/code> field&lt;/strong> in the request body, and must match a valid format found in Step 1.&lt;/li>
 &lt;li>By default, &lt;code>storeInDocument&lt;/code> is set to &lt;code>false&lt;/code> in the request body to export to a single data file (or a zip of multiple files). Set to &lt;code>true&lt;/code> to export as blob elements.&lt;/li>
-&lt;li>The following asynch translation APIs are available:
-&lt;ul>
-&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/BlobElement/createBlobTranslation">BlobElement/createBlobTranslation&lt;/a>: Export a Blob Element to the specified &lt;code>formatName&lt;/code>.&lt;/li>
-&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/createPartStudioTranslation">PartStudios/createPartStudioTranslation&lt;/a>: Export a Part Studio to the specified &lt;code>formatName&lt;/code>.&lt;/li>
-&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Assembly/translateFormat">Assembly/translateFormat&lt;/a>: Export an Assembly to the specified &lt;code>formatName&lt;/code>.&lt;/li>
-&lt;/ul>
-&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;li>Wait for the translation to complete. You can either register a webhook and wait to receive a notifcation that the translation is complete (see &lt;a href="https://onshape-public.github.io/docs/app-dev/webhook/">Webhook Notifications&lt;/a>), or you can poll the translation&amp;rsquo;s &lt;code>requestState&lt;/code>:
@@ -295,82 +298,109 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &lt;/ol>
 &lt;h2 id="imports">Imports&lt;/h2>
 &lt;p>Files can be imported to Onshape as blob elements. When uploading a file to a blob element, either as a new element or an update to an existing element, if the file is a recognized format for import, it will be translated into &lt;code>ONSHAPE&lt;/code> format by default. This behavior can be overridden by the application, if desired.&lt;/p>
-&lt;p>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Translation/createTranslation">Translation/createTranslation&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Translation/createTranslation">Translation/createTranslation&lt;/a>
 &lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST&amp;#39; \
 &amp;#39;https://cad.onshape.com/api/v6/translations/d/{did}/w/{wid}&amp;#39; \
 -H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 -H &amp;#39;Content-Type: multipart/form-data&amp;#39; \
--F &amp;#39;allowFaultyParts=&amp;#39; \
+-F &amp;#39;storeInDocument=true&amp;#39; \
+-F &amp;#39;flattenAssemblies=true
+-F &amp;#39;file=@/path/filename.ext&amp;#39;
+-F &amp;#39;formatName=&amp;#39; \
+...
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/BlobElement/uploadFileCreateElement">BlobElement/uploadFileCreateElement&lt;/a>
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/blobelements/d/{did}/w/{wid}&amp;#39; \
+-H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Content-Type: multipart/form-data&amp;#39; \
+-F &amp;#39;storeInDocument=true&amp;#39; \
+-F &amp;#39;file=@/path/filename.ext&amp;#39;
+-F &amp;#39;formatName=&amp;#39; \
+...
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/BlobElement/uploadFileUpdateElement">BlobElement/uploadFileUpdateElement&lt;/a>
+&lt;pre tabindex="0">&lt;code> curl -X &amp;#39;POST&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/blobelements/d/{did}/w/{wid}/e/{eid}&amp;#39; \
+-H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Content-Type: multipart/form-data&amp;#39; \
 -F &amp;#39;storeInDocument=true&amp;#39; \
 -F &amp;#39;locationElementId=&amp;#39; \
--F &amp;#39;flattenAssemblies=true
--F &amp;#39;file={&amp;lt;fileToImport.ext&amp;gt;}&amp;#39;
--F &amp;#39;formatName=&amp;#39; \
--F &amp;#39;yAxisIsUp=true&amp;#39; \
+-F &amp;#39;file=@/path/filename.ext&amp;#39;
 ...
-&lt;/code>&lt;/pre>&lt;p>Note that this endpoint requires that you specify the target document ID and workspace ID. You must also include the file to import. This API also includes a large request body JSON in which you can specify options for the import.&lt;/p>
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;/ul>
+&lt;p>Note that these endpoints require you to specify the target document ID and workspace ID. You must also include the file to import. These APIs also includes a large request body JSON for specifying options for the import.&lt;/p>
 &lt;ul>
 &lt;li>Override the translation to &lt;code>ONSHAPE&lt;/code> format by specifying a valid format in the &lt;code>formatName&lt;/code> field. Get a list of valid import formats by calling &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Translation/getAllTranslatorFormats">Translation/getAllTranslatorFormats&lt;/a>.&lt;/li>
 &lt;li>Specify &lt;code>storeInDocument=true&lt;/code> to import the data as a blob element into the target document. Change to &lt;code>false&lt;/code> to only create an external data file.&lt;/li>
 &lt;li>If the source file contains an assembly and &lt;code>flattenAssemblies=true&lt;/code>, the assembly structure is removed and a single part studio is created.&lt;/li>
-&lt;li>Set &lt;code>yAxisIsUp=true&lt;/code> to tell Onshape translation to use the Y axis “up” direction. Use &lt;code>false&lt;/code> to set the Z axis as &amp;ldquo;up.&amp;rdquo;&lt;/li>
+&lt;li>Note that when using cURL, you must begin the path to the file with an &lt;code>@&lt;/code> symbol.&lt;/li>
 &lt;/ul>
 &lt;h2 id="sample-workflows">Sample Workflows&lt;/h2>
 &lt;h3 id="export-a-partstudio-to-stl">Export a PartStudio to STL&lt;/h3>
+&lt;p>We will export the &lt;code>CRANK&lt;/code> PartStudio from &lt;a href="https://cad.onshape.com/documents/e60c4803eaf2ac8be492c18e/w/d2558da712764516cc9fec62/e/6bed6b43463f6a46a37b4a22">this public document&lt;/a> to an STL file.&lt;/p>
 &lt;ol>
-&lt;li>Call the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/exportPartStudioStl">Part Studios/exportPartStudioStl&lt;/a> endpoint on your document:
+&lt;li>Call the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/exportPartStudioStl">Part Studios/exportPartStudioStl&lt;/a> endpoint on the document:
 &lt;pre tabindex="0">&lt;code>curl -X &amp;#39;GET&amp;#39; \
-&amp;#39;https://cad.onshape.com/api/v6/partstudios/d/{did}/w/{wid}/e/{eid}/stl?mode=text&amp;amp;grouping=true&amp;amp;scale=1&amp;amp;units=inch&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/partstudios/d/e60c4803eaf2ac8be492c18e/w/d2558da712764516cc9fec62/e/6bed6b43463f6a46a37b4a22/stl?mode=text&amp;amp;grouping=true&amp;amp;scale=1&amp;amp;units=inch&amp;#39; \
 -H &amp;#39;accept: */*&amp;#39;
 &lt;/code>&lt;/pre>&lt;/li>
 &lt;li>Navigate to the request URL to download the resulting STL file:
-&lt;pre tabindex="0">&lt;code>https://cad.onshape.com/api/v6/partstudios/d/{did}/w/{wid}/e/{eid}/stl?mode=text&amp;amp;grouping=true&amp;amp;scale=1&amp;amp;units=inch
+&lt;pre tabindex="0">&lt;code>https://cad.onshape.com/api/v6/partstudios/d/e60c4803eaf2ac8be492c18e/w/d2558da712764516cc9fec62/e/6bed6b43463f6a46a37b4a22/stl?mode=text&amp;amp;grouping=true&amp;amp;scale=1&amp;amp;units=inch
 &lt;/code>&lt;/pre>&lt;/li>
-&lt;li>Open the &lt;em>World.stl&lt;/em> file.&lt;/li>
+&lt;li>Open the &lt;em>CRANK.stl&lt;/em> file from wherever your downloads are saved.&lt;/li>
 &lt;/ol>
 &lt;h3 id="export-a-part-to-parasolid">Export a Part to Parasolid&lt;/h3>
+&lt;p>We will export the &lt;code>FLYWHEEL&lt;/code> part from &lt;a href="https://cad.onshape.com/documents/e60c4803eaf2ac8be492c18e/w/d2558da712764516cc9fec62/e/6bed6b43463f6a46a37b4a22">this public document&lt;/a> to an STL file.&lt;/p>
 &lt;ol>
 &lt;li>Call the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Part/getPartsWMV">Part/getPartsWMV&lt;/a> endpoint on your document and get all the part IDs:
 &lt;pre tabindex="0">&lt;code>curl -X &amp;#39;GET&amp;#39; \
-&amp;#39;https://cad.onshape.com/api/v6/parts/d/{did}/w/{wid}?elementId={elementId}&amp;amp;withThumbnails=false&amp;amp;includePropertyDefaults=false&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/parts/d/e60c4803eaf2ac8be492c18e/w/d2558da712764516cc9fec62?elementId=6bed6b43463f6a46a37b4a22&amp;amp;withThumbnails=false&amp;amp;includePropertyDefaults=false&amp;#39; \
 -H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39;
 &lt;/code>&lt;/pre>&lt;/li>
-&lt;li>Locate the part to export (hint: look for &lt;code>name = yourPartName&lt;/code>) in the response body. Get the part ID from the &lt;code>partId&lt;/code> field. In the example below, &lt;code>partId = JSD&lt;/code> for &lt;code>name=Part1&lt;/code>:
+&lt;li>Locate the part to export (hint: look for &lt;code>name = yourPartName&lt;/code>) in the response body. Get the part ID from the &lt;code>partId&lt;/code> field. In the example below, &lt;code>partId = JiD&lt;/code> for &lt;code>name=FLYWHEEL&lt;/code>:
 &lt;pre tabindex="0">&lt;code>[
-{
-&amp;#34;name&amp;#34;: &amp;#34;Part1&amp;#34;,
-&amp;#34;state&amp;#34;: &amp;#34;IN_PROGRESS&amp;#34;,
-&amp;#34;propertySourceTypes&amp;#34;: {
-&amp;#34;57f3fb8efa3416c06701d60d&amp;#34;: 3,
-&amp;#34;57f3fb8efa3416c06701d60c&amp;#34;: 1
-},
-&amp;#34;defaultColorHash&amp;#34;: &amp;#34;FC2ndeGi02kfQh0_0_0&amp;#34;,
-&amp;#34;ordinal&amp;#34;: 0,
-&amp;#34;isMesh&amp;#34;: false,
-&amp;#34;description&amp;#34;: null,
-&amp;#34;revision&amp;#34;: null,
-&amp;#34;microversionId&amp;#34;: &amp;#34;4028f92e5b7efe0c2be1609b&amp;#34;,
-&amp;#34;partNumber&amp;#34;: null,
-&amp;#34;elementId&amp;#34;: &amp;#34;930355f1d3dfe8ab1d93c8a6&amp;#34;,
-&amp;#34;partId&amp;#34;: &amp;#34;JSD&amp;#34;,
-&amp;#34;bodyType&amp;#34;: &amp;#34;solid&amp;#34;,
-&amp;#34;partQuery&amp;#34;: `
 ...
+{
+&amp;#34;name&amp;#34; : &amp;#34;FLYWHEEL&amp;#34;,
+&amp;#34;state&amp;#34; : &amp;#34;IN_PROGRESS&amp;#34;,
+&amp;#34;propertySourceTypes&amp;#34; : {
+&amp;#34;57f3fb8efa3416c06701d60f&amp;#34; : 3,
+&amp;#34;57f3fb8efa3416c06701d60d&amp;#34; : 3,
+&amp;#34;57f3fb8efa3416c06701d61e&amp;#34; : 3,
+&amp;#34;57f3fb8efa3416c06701d60e&amp;#34; : 3,
+&amp;#34;57f3fb8efa3416c06701d60c&amp;#34; : 3
+},
+&amp;#34;defaultColorHash&amp;#34; : &amp;#34;FzHLKqGeuTBFjmY_2_0&amp;#34;,
+&amp;#34;ordinal&amp;#34; : 1,
+&amp;#34;isMesh&amp;#34; : false,
+&amp;#34;description&amp;#34; : &amp;#34;Flywheel&amp;#34;,
+&amp;#34;revision&amp;#34; : null,
+&amp;#34;microversionId&amp;#34; : &amp;#34;bdb504d2d4c948493a87ccf3&amp;#34;,
+&amp;#34;partNumber&amp;#34; : &amp;#34;PRT-10241&amp;#34;,
+&amp;#34;elementId&amp;#34; : &amp;#34;6bed6b43463f6a46a37b4a22&amp;#34;,
+&amp;#34;partId&amp;#34; : &amp;#34;JiD&amp;#34;,
+&amp;#34;bodyType&amp;#34; : &amp;#34;solid&amp;#34;,
+&amp;#34;customProperties&amp;#34; : {
+&amp;#34;57f3fb8efa3416c06701d61e&amp;#34; : &amp;#34;false&amp;#34;
 }
 ...
 ]
 &lt;/code>&lt;/pre>&lt;/li>
-&lt;li>Call the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Part/exportPS">Part/exportPS&lt;/a> endpoint on the Americas part:
+&lt;li>Call the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Part/exportPS">Part/exportPS&lt;/a> endpoint on the FLYWHEEL part:
 &lt;pre tabindex="0">&lt;code>curl -X &amp;#39;GET&amp;#39; \
-&amp;#39;https://cad.onshape.com/api/v6/parts/d/{did}/w/{wid}/e/{eid}/partid/{partid}/parasolid?version=0&amp;#39; \
--H &amp;#39;accept: application/octet-stream&amp;#39;
+&amp;#39;https://cad.onshape.com/api/v6/parts/d/e60c4803eaf2ac8be492c18e/w/d2558da712764516cc9fec62/e/6bed6b43463f6a46a37b4a22/partid/JiD/parasolid?version=0&amp;#39; \
+-H &amp;#39;accept: application/octet-stream&amp;#39; \
 &lt;/code>&lt;/pre>&lt;/li>
-&lt;li>Navigate to the request URL to download the resulting Parasolid file:
-&lt;pre tabindex="0">&lt;code>https://cad.onshape.com/api/v6/parts/d/{did}/w/{wid}/e/{eid}/partid/{partid}/parasolid?version=0
+&lt;li>Navigate to the request URL to download the resulting file:
+&lt;pre tabindex="0">&lt;code>https://cad.onshape.com/api/v6/parts/d/e60c4803eaf2ac8be492c18e/w/d2558da712764516cc9fec62/e/6bed6b43463f6a46a37b4a22/partid/JiD/parasolid?version=0
 &lt;/code>&lt;/pre>&lt;/li>
-&lt;li>Open the &lt;em>World.x_t&lt;/em> file.&lt;/li>
+&lt;li>Open the &lt;em>CRANK.x_t&lt;/em> file from your downloads. Note that the file is automatically named after the PartStudio to which the part belongs.&lt;/li>
 &lt;/ol>
 &lt;h3 id="export-a-partstudio-to-solidworks">Export a PartStudio to SOLIDWORKS&lt;/h3>
+&lt;p>We will export the &lt;code>CRANK&lt;/code> PartStudio from &lt;a href="https://cad.onshape.com/documents/e60c4803eaf2ac8be492c18e/w/d2558da712764516cc9fec62/e/6bed6b43463f6a46a37b4a22">this public document&lt;/a> to a SOLIDWORKS file.&lt;/p>
 &lt;ol>
 &lt;li>Validate that SOLIDWORKS is a supported export file type by calling &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Translation/getAllTranslatorFormats">Translation/getAllTranslatorFormats&lt;/a> and confirming that &lt;code>validDestinationFormat=true&lt;/code> for &lt;code>translatorName=SOLIDWORKS&lt;/code>.
 &lt;pre tabindex="0">&lt;code>curl -X &amp;#39;GET&amp;#39; \
@@ -380,55 +410,33 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 {
 &amp;#34;validSourceFormat&amp;#34;: true,
 &amp;#34;validDestinationFormat&amp;#34;: true,
-&amp;#34;name&amp;#34;: &amp;#34;PARASOLID&amp;#34;,
-&amp;#34;translatorName&amp;#34;: &amp;#34;parasolid&amp;#34;,
-&amp;#34;couldBeAssembly&amp;#34;: true
-},
-{
-&amp;#34;validSourceFormat&amp;#34;: true,
-&amp;#34;validDestinationFormat&amp;#34;: true,
 &amp;#34;name&amp;#34;: &amp;#34;SOLIDWORKS&amp;#34;,
 &amp;#34;translatorName&amp;#34;: &amp;#34;solidworks&amp;#34;,
 &amp;#34;couldBeAssembly&amp;#34;: true
-},
-{
-&amp;#34;validSourceFormat&amp;#34;: true,
-&amp;#34;validDestinationFormat&amp;#34;: false,
-&amp;#34;name&amp;#34;: &amp;#34;STL&amp;#34;,
-&amp;#34;translatorName&amp;#34;: &amp;#34;inventor&amp;#34;,
-&amp;#34;couldBeAssembly&amp;#34;: true
-},
-...
+}
 ]
 &lt;/code>&lt;/pre>&lt;/li>
 &lt;li>Initialize the export by calling &lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/createPartStudioTranslation">PartStudio/createPartStudioTranslation&lt;/a>.
 &lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST&amp;#39; \
-&amp;#39;https://cad.onshape.com/api/v6/partstudios/d/{did}/w/{wid}/e/{eid}/translations&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/partstudios/d/e60c4803eaf2ac8be492c18e/w/d2558da712764516cc9fec62/e/6bed6b43463f6a46a37b4a22/translations&amp;#39; \
 -H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 -H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 -d &amp;#39;{
-&amp;#34;allowFaultyParts&amp;#34;: true,
-&amp;#34;angularTolerance&amp;#34;: 0.001,
-...
 &amp;#34;formatName&amp;#34;: &amp;#34;SOLIDWORKS&amp;#34;,
-...
 &amp;#34;storeInDocument&amp;#34;: false,
-...
+&amp;#34;translate&amp;#34;: true
 }&amp;#39;
 &lt;/code>&lt;/pre>&lt;ul>
 &lt;li>Note that the API takes a large JSON as part of the request body, in which you can specify options for the export.&lt;/li>
-&lt;li>In the example below, we&amp;rsquo;ve just shown a snippet of the entire JSON where we allow faulty parts to be exported and set the angular tolerance to 0.001.&lt;/li>
+&lt;li>In this example, we&amp;rsquo;ve just shown a snippet of the entire JSON.&lt;/li>
 &lt;li>A &lt;code>formatName&lt;/code> string must be specified that matches one of the valid formats you found in the last step. In this example, we set &lt;code>formatName&lt;/code> to &lt;code>SOLIDWORKS.&lt;/code>&lt;/li>
 &lt;li>We want to export this to a new file, so we&amp;rsquo;ll leave &lt;code>storeInDocument&lt;/code> set to &lt;code>false&lt;/code>.&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;li>Next, we poll the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/createPartStudioTranslation">PartStudio/createPartStudioTranslation&lt;/a> response until &lt;code>requestState&lt;/code> changes from &lt;code>ACTIVE&lt;/code> to &lt;code>DONE&lt;/code> or &lt;code>FAILED&lt;/code>.
 &lt;pre tabindex="0">&lt;code>{
-&amp;#34;documentId&amp;#34;: &amp;#34;{did}&amp;#34;,
-&amp;#34;href&amp;#34;: &amp;#34;{uri}&amp;#34;,
-&amp;#34;id&amp;#34;: &amp;#34;{id}}&amp;#34;,
-&amp;#34;name&amp;#34;: &amp;#34;ExamplePartStudio&amp;#34;,
-&amp;#34;requestElementId&amp;#34;: &amp;#34;{eid}&amp;#34;,
+&amp;#34;documentId&amp;#34;: &amp;#34;e60c4803eaf2ac8be492c18e&amp;#34;,
+&amp;#34;requestElementId&amp;#34;: &amp;#34;6bed6b43463f6a46a37b4a22&amp;#34;,
 &amp;#34;requestState&amp;#34;: &amp;#34;DONE&amp;#34;,
 &amp;#34;resultExternalDataIds&amp;#34;: &amp;#34;[{resultId}]&amp;#34;,
 ...
@@ -436,7 +444,7 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &lt;/code>&lt;/pre>&lt;/li>
 &lt;li>Once &lt;code>requestState=DONE&lt;/code>, we can call &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Document/downloadExternalData">Documents/downloadExternalData&lt;/a> to retrieve the exported result.
 &lt;pre tabindex="0">&lt;code>curl -X &amp;#39;GET&amp;#39; \
-&amp;#39;https://cad.onshape.com/api/v6/documents/d/{did}/externaldata/{fid}&amp;#39;
+&amp;#39;https://cad.onshape.com/api/v6/documents/d/e60c4803eaf2ac8be492c18e/externaldata/{fid}&amp;#39;
 &lt;/code>&lt;/pre>&lt;ul>
 &lt;li>Use the &lt;code>resultExternalDataIds&lt;/code> value from the translation response as the foreign ID (&lt;code>fid&lt;/code>).&lt;/li>
 &lt;li>The new SOLIDWORKS file is returned as the response and will be downloaded to wherever the API call is made.&lt;/li>
@@ -444,27 +452,17 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &lt;/li>
 &lt;/ol>
 &lt;h3 id="export-an-assembly-to-step">Export an Assembly to STEP&lt;/h3>
+&lt;p>In this example, we&amp;rsquo;ll export an assembly from &lt;a href="https://cad.onshape.com/documents/e60c4803eaf2ac8be492c18e/w/d2558da712764516cc9fec62/e/23a9385cd48c50167c32d6d1">this public document&lt;/a> to a STEP file.&lt;/p>
 &lt;ol>
+&lt;li>
+&lt;p>Make a copy of &lt;a href="https://cad.onshape.com/documents/e60c4803eaf2ac8be492c18e/w/d2558da712764516cc9fec62/e/23a9385cd48c50167c32d6d1">this public document&lt;/a> so you can export the assembly to file in the document. Make a note of the documentId, workspaceId, and elementId of the assembly in your new document.&lt;/p>
+&lt;/li>
 &lt;li>
 &lt;p>Validate that STEP is a supported export file type for assemblies by calling &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Translation/getAllTranslatorFormats">Translation/getAllTranslatorFormats&lt;/a> and confirming that &lt;code>validDestinationFormat=true&lt;/code> and &lt;code>couldBeAssembly=true&lt;/code> for &lt;code>translatorName=STEP&lt;/code>.&lt;/p>
 &lt;pre tabindex="0">&lt;code>curl -X &amp;#39;GET&amp;#39; \
 &amp;#39;https://cad.onshape.com/api/v6/translations/translationformats&amp;#39; \
 -H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39;
 &lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>[
-{
-&amp;#34;validSourceFormat&amp;#34;: true,
-&amp;#34;validDestinationFormat&amp;#34;: true,
-&amp;#34;name&amp;#34;: &amp;#34;PARASOLID&amp;#34;,
-&amp;#34;translatorName&amp;#34;: &amp;#34;parasolid&amp;#34;,
-&amp;#34;couldBeAssembly&amp;#34;: true
-},
-{
-&amp;#34;validSourceFormat&amp;#34;: true,
-&amp;#34;validDestinationFormat&amp;#34;: true,
-&amp;#34;name&amp;#34;: &amp;#34;SOLIDWORKS&amp;#34;,
-&amp;#34;translatorName&amp;#34;: &amp;#34;solidworks&amp;#34;,
-&amp;#34;couldBeAssembly&amp;#34;: true
-},
 {
 &amp;#34;validSourceFormat&amp;#34;: true,
 &amp;#34;validDestinationFormat&amp;#34;: true,
@@ -484,46 +482,88 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 -d &amp;#39;{
 &amp;#34;allowFaultyParts&amp;#34;: true,
 &amp;#34;angularTolerance&amp;#34;: 0.001,
-...
 &amp;#34;formatName&amp;#34;: &amp;#34;STEP&amp;#34;,
-...
-&amp;#34;storeInDocument&amp;#34;: true,
-...
+&amp;#34;storeInDocument&amp;#34;: true
 }&amp;#39;
 &lt;/code>&lt;/pre>&lt;ul>
 &lt;li>Note that the API takes a large JSON as part of the request body, in which you can specify options for the export.&lt;/li>
 &lt;li>In the example above, we&amp;rsquo;ve just shown a snippet of the entire JSON where we allow faulty parts to be exported and set the angular tolerance to 0.001.&lt;/li>
 &lt;li>A &lt;code>formatName&lt;/code> string must be specified that matches one of the valid formats you found in the last step. In this example, we set &lt;code>formatName&lt;/code> to &lt;code>STEP.&lt;/code>&lt;/li>
-&lt;li>We want to export this Assembly into a STEP blob element in the same document, so we&amp;rsquo;ll change &lt;code>storeInDocument&lt;/code> to &lt;code>true&lt;/code>.&lt;/li>
+&lt;li>Set &lt;code>storeInDocument&lt;/code> to &lt;code>true&lt;/code> to upload the STEP file as a blob element in your document.&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;li>
 &lt;p>Next, we poll the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Assembly/translateFormat">Assembly/translateFormat&lt;/a> response until &lt;code>requestState&lt;/code> changes from &lt;code>ACTIVE&lt;/code> to &lt;code>DONE&lt;/code> or &lt;code>FAILED&lt;/code>.&lt;/p>
 &lt;pre tabindex="0">&lt;code>{
-&amp;#34;resultDocumentId&amp;#34; : &amp;#34;{did}&amp;#34;,
-&amp;#34;resultWorkspaceId&amp;#34; : &amp;#34;{wid}&amp;#34;,
-&amp;#34;failureReason&amp;#34; : null,
 &amp;#34;requestState&amp;#34; : &amp;#34;DONE&amp;#34;,
-&amp;#34;requestElementId&amp;#34; : &amp;#34;{requestEid}&amp;#34;,
-&amp;#34;resultExternalDataIds&amp;#34; : null,
-&amp;#34;versionId&amp;#34; : null,
-&amp;#34;documentId&amp;#34; : &amp;#34;{did}&amp;#34;,
-&amp;#34;workspaceId&amp;#34; : &amp;#34;{wid}&amp;#34;,
+&amp;#34;requestElementId&amp;#34; : &amp;#34;23a9385cd48c50167c32d6d1&amp;#34;,
+&amp;#34;documentId&amp;#34; : &amp;#34;e60c4803eaf2ac8be492c18e&amp;#34;,
+&amp;#34;workspaceId&amp;#34; : &amp;#34;d2558da712764516cc9fec62&amp;#34;,
 &amp;#34;resultElementIds&amp;#34; : [ &amp;#34;{resultEid}&amp;#34; ],
-&amp;#34;name&amp;#34; : &amp;#34;Example Assembly 1&amp;#34;,
-&amp;#34;id&amp;#34; : &amp;#34;{id}&amp;#34;,
+&amp;#34;name&amp;#34; : &amp;#34;PISTON&amp;#34;,
+&amp;#34;id&amp;#34; : &amp;#34;{translationId}&amp;#34;,
 &amp;#34;href&amp;#34; : &amp;#34;https://cad.onshape.com/api/v1/translations/{tid}&amp;#34;
 }
 &lt;/code>&lt;/pre>&lt;/li>
 &lt;li>
-&lt;p>Once &lt;code>requestState=DONE&lt;/code>, we can call &lt;a href="https://cad.onshape.com/glassworks/explorer/#/BlobElement/downloadFileWorkspace">BlobElement/downloadFileWorkspace&lt;/a> to retrieve the exported results.&lt;/p>
+&lt;p>Once &lt;code>requestState=DONE&lt;/code>, we make a note of the &lt;code>resultElementId&lt;/code> in the response. This is the elementId of the STEP blob.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Now, we can call &lt;a href="https://cad.onshape.com/glassworks/explorer/#/BlobElement/downloadFileWorkspace">BlobElement/downloadFileWorkspace&lt;/a> to retrieve the exported results.&lt;/p>
 &lt;pre tabindex="0">&lt;code>curl -X &amp;#39;GET&amp;#39; \
-&amp;#39;https://cad.onshape.com/api/v6/blobelements/d/{did}/w/{wid}/e/{eid}&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/blobelements/d/{did}/w/{wid}/e/{resultEid}&amp;#39; \
 -H &amp;#39;accept: application/octet-stream&amp;#39;
 &lt;/code>&lt;/pre>&lt;ul>
 &lt;li>Use the &lt;code>resultElementIds&lt;/code> value from the translation response as the element ID (&lt;code>{eid}&lt;/code>).&lt;/li>
 &lt;/ul>
 &lt;/li>
+&lt;/ol>
+&lt;h3 id="import-a-parasolid-file-as-a-part">Import a Parasolid file as a Part&lt;/h3>
+&lt;p>In this example, we&amp;rsquo;ll import the &lt;em>FLYWHEEL&lt;/em> part from the &lt;em>CRANK.x_t&lt;/em> file we created in the &lt;a href="#export-a-part-to-parasolid">Export a Part to Parasolid&lt;/a> example.&lt;/p>
+&lt;ol>
+&lt;li>Open or create a new Onshape document in which to import the Part. Make a note of the documentId and workspaceId of your document.&lt;/li>
+&lt;li>Validate that Parasolid is a supported export file type for imports by calling &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Translation/getAllTranslatorFormats">Translation/getAllTranslatorFormats&lt;/a> and confirming that &lt;code>validSourceFormat=true&lt;/code> for &lt;code>translatorName=parasolid&lt;/code>.
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;GET&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/translations/translationformats&amp;#39; \
+-H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39;
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>[
+{
+&amp;#34;validSourceFormat&amp;#34;: true,
+&amp;#34;validDestinationFormat&amp;#34;: true,
+&amp;#34;name&amp;#34;: &amp;#34;PARASOLID&amp;#34;,
+&amp;#34;translatorName&amp;#34;: &amp;#34;parasolid&amp;#34;,
+&amp;#34;couldBeAssembly&amp;#34;: true
+}
+]s
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>Initialize the import by calling &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Translation/createTranslation">Translation/createTranslation&lt;/a>. In this example, the filename is &lt;code>CRANK.x_t&lt;/code>.
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/translations/d/{did}/w/{wid}&amp;#39; \
+-H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39;s \
+-H &amp;#39;Content-Type: multipart/form-data&amp;#39; \
+-F &amp;#39;formatName=&amp;#39; \
+-F &amp;#39;flattenAssemblies=true&amp;#39; \
+-F &amp;#39;translate=true&amp;#39; \
+-F &amp;#39;file=@/pathToFile/CRANK.x_t&amp;#39; \
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Replace &lt;code>{did}&lt;/code> and &lt;code>{wid}&lt;/code> in the URL with the document and workspace IDs for the document you want to import the part to.&lt;/li>
+&lt;li>Note that when using cURL, you must begin the path to the file with an &lt;code>@&lt;/code> symbol.&lt;/li>
+&lt;li>Note that the API takes a large JSON as part of the request body, in which you can specify options for the import.&lt;/li>
+&lt;li>When importing files, the API assumes we are importing to the &lt;code>ONSHAPE&lt;/code> file type. You can override this and import to a different file type using the &lt;code>formatName&lt;/code> field. In this case, we can leave the &lt;code>formatName&lt;/code> field blank to import to the &lt;code>ONSHAPE&lt;/code> file type.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Next, we poll the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Translation/getDocumentTranslations">Translation/getDocumentTranslations&lt;/a> response until &lt;code>requestState&lt;/code> changes from &lt;code>ACTIVE&lt;/code> to &lt;code>DONE&lt;/code> or &lt;code>FAILED&lt;/code>.
+&lt;pre tabindex="0">&lt;code>{
+&amp;#34;requestState&amp;#34; : &amp;#34;DONE&amp;#34;,
+&amp;#34;documentId&amp;#34; : &amp;#34;{did}&amp;#34;,
+&amp;#34;workspaceId&amp;#34; : &amp;#34;{wid}&amp;#34;,
+&amp;#34;resultElementIds&amp;#34; : [ &amp;#34;{resultEid}&amp;#34; ],
+&amp;#34;name&amp;#34; : &amp;#34;FLYWHEEL&amp;#34;,
+&amp;#34;id&amp;#34; : &amp;#34;{id}&amp;#34;,
+&amp;#34;href&amp;#34; : &amp;#34;https://cad.onshape.com/api/v1/translations/{tid}&amp;#34;
+}
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>Once &lt;code>requestState=DONE&lt;/code>, we can view the imported file as a Part in our Onshape document. The &lt;code>FLYWHEEL&lt;/code> part appears in a new PartStudio named &lt;code>CRANK&lt;/code> in our document.&lt;/li>
 &lt;/ol>
 &lt;h2 id="additional-resources">Additional Resources&lt;/h2>
 &lt;ul>
