@@ -2013,7 +2013,7 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &lt;p>In this example, we&amp;rsquo;ll create a drawing from the standard ANSI template in &lt;a href="https://cad.onshape.com/documents/cbe6e776694549b5ba1a3e88/w/24d08acf10234dbc8d3ab585/e/17eef7862b224f6fb12cbc46">this public document&lt;/a>.&lt;/p>
 &lt;ol>
 &lt;li>Open any Onshape document in which to create your drawing.&lt;/li>
-&lt;li>Start to form the &lt;a href="">Drawings/createDrawingAppElement&lt;/a> call. Replace &lt;code>{did}&lt;/code> and &lt;code>{wid}&lt;/code> in the URL below with the document ID and workspace ID of your document (i.e., the &lt;em>target&lt;/em> document).
+&lt;li>Start to form the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Drawing/createDrawingAppElement">Drawings/createDrawingAppElement&lt;/a> call. Replace &lt;code>{did}&lt;/code> and &lt;code>{wid}&lt;/code> in the URL below with the document ID and workspace ID of your document (i.e., the &lt;em>target&lt;/em> document).
 &lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST&amp;#39; \
 &amp;#39;https://cad.onshape.com/api/v6/drawings/d/{did}/w/{wid}/create&amp;#39; \
 -H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
@@ -2043,7 +2043,7 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &lt;h3 id="create-a-drawing-in-a-custom-graphics-area">Create a drawing in a custom graphics area&lt;/h3>
 &lt;ol>
 &lt;li>Open any Onshape document in which to create your drawing.&lt;/li>
-&lt;li>Start to form the &lt;a href="">Drawings/createDrawingAppElement&lt;/a> call. Replace &lt;code>{did}&lt;/code> and &lt;code>{wid}&lt;/code> in the URL below with your document.
+&lt;li>Start to form the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Drawing/createDrawingAppElement">Drawings/createDrawingAppElement&lt;/a> call. Replace &lt;code>{did}&lt;/code> and &lt;code>{wid}&lt;/code> in the URL below with your document.
 &lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST&amp;#39; \
 &amp;#39;https://cad.onshape.com/api/v6/drawings/d/{did}/w/{wid}/create&amp;#39; \
 -H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
