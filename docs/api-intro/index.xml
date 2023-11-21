@@ -244,7 +244,7 @@
 &lt;p>In this example, we will call an Onshape REST API endpoint to send a document name to our console. Please note that the sample shown on this page is only designed to be used as a quick start guide and does not represent a full Onshape application.&lt;/p>
 &lt;h2 id="system-requirements">System Requirements&lt;/h2>
 &lt;ul>
-&lt;li>Before you can begin this tutorial, you must first email &lt;code>api-support@onshape.com&lt;/code> and request credentials.&lt;/li>
+&lt;li>You must be signed in to your Onshape account at &lt;a href="https://cad.onshape.com">https://cad.onshape.com&lt;/a> (or &lt;a href="https://companyName.onshape.com">https://companyName.onshape.com&lt;/a> for Enterprise accounts).&lt;/li>
 &lt;li>This example is coded in Python. The equivalent code is provided in other languages at the end of the example. To follow along with this tutorial, you can download and install Python here: &lt;a href="https://www.python.org/downloads/">https://www.python.org/downloads/&lt;/a>.&lt;/li>
 &lt;/ul>
 &lt;h2 id="review-the-api-endpoint">Review the API Endpoint&lt;/h2>

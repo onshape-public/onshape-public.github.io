@@ -25,7 +25,6 @@ impersonating the user that controls the resource.&lt;/i>&lt;/p>
 &lt;/ul>
 &lt;h2 id="implement-oauth2">Implement OAuth2&lt;/h2>
 &lt;p>This OAuth tutorial demonstrates how to recreate the authentication process in Node.js found in the &lt;a href="https://github.com/onshape-public/app-gltf-viewer">gltf-viewer-app&lt;/a> sample code. The &lt;a href="#final-code">final code&lt;/a> in Node.js and other languages can be found at the end of this page.&lt;/p>
-&lt;p>Before you begin, please email &lt;a href="mailto:api-support@onshape.com">api-support@onshape.com&lt;/a> and request credentials for &lt;code>https://dev-portal.onshape.com/&lt;/code>.&lt;/p>
 &lt;h3 id="1-register-the-app">1: Register the app&lt;/h3>
 &lt;ol>
 &lt;li>Navigate to &lt;a href="https://dev-portal.onshape.com/signin">https://dev-portal.onshape.com/signin&lt;/a> and sign in.&lt;/li>
