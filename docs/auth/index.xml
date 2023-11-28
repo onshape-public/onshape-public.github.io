@@ -520,6 +520,7 @@ to retrieve user data from session.&lt;/li>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> app.run()
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: API Keys</title><link>https://onshape-public.github.io/docs/auth/apikeys/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/auth/apikeys/</guid><description>
+&lt;p>&lt;strong>NOTE: The authentication processes outlined on this page are for local and internal testing only. All applications submitted to the Onshape App Store must follow the &lt;a href="https://onshape-public.github.io/docs/auth/oauth">Onshape OAuth2 protocols&lt;/a>.&lt;/strong>&lt;/p>
 &lt;h2 id="why-api-keys">Why API Keys?&lt;/h2>
 &lt;p>API keys are useful for small applications meant for personal use, allowing developers to avoid the overhead of the OAuth workflow. Creating an app is very easy with API keys: create an API key with the Developer Portal, set up a function to build your API key header as in the samples, and make your API calls! There&amp;rsquo;s no need to deal with OAuth redirects or things like that.&lt;/p>
 &lt;p>We&amp;rsquo;ve moved over to using API keys for authenticating requests instead of using cookies for several reasons.&lt;/p>
@@ -529,7 +530,7 @@ to retrieve user data from session.&lt;/li>
 &lt;/ol>
 &lt;p>Once you create an API key, it will only be valid in the stack on which it was created. An API key created on the partner stack, for example, will not function on the production stack.&lt;/p>
 &lt;p>If you need information or have a question unanswered in this documentation, feel free to chat with us by sending an email to &lt;a href="mailto:api-support@onshape.com">api-support@onshape.com&lt;/a> or by checking out the &lt;a href="https://forum.onshape.com" target="_blank">forums&lt;/a>. If you are a member of the DevPartners group (see the Development help page for information) more detailed instructions and code examples are in the apikey sample repo.&lt;/p>
-&lt;h2 id="create-api-keys">Create API Keys&lt;/h2>
+&lt;h2 id="1-create-api-keys">1. Create API Keys&lt;/h2>
 &lt;ol>
 &lt;li>Go to &lt;a href="https://dev-portal.onshape.com">https://dev-portal.onshape.com&lt;/a>.&lt;/li>
 &lt;li>In the left pane, click &lt;code>API keys&lt;/code>.&lt;/li>
@@ -554,7 +555,33 @@ to retrieve user data from session.&lt;/li>
 &lt;li>&lt;code>OAuth2Delete&lt;/code> - Delete documents, etc.&lt;/li>
 &lt;li>&lt;code>OAuth2Purchase&lt;/code> - Authorize purchases from account&lt;/li>
 &lt;/ul>
-&lt;h2 id="generate-a-request-signature">Generate a Request Signature&lt;/h2>
+&lt;h2 id="2-select-an-authentication-option">2. Select an Authentication Option&lt;/h2>
+&lt;p>Please select an option for authentication:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="#local-authorization">Basic Authorization&lt;/a>: Lowest security. For local testing only.&lt;/li>
+&lt;li>&lt;a href="#request-signature">Request Signature&lt;/a>: Medium security. For testing and internal use.&lt;/li>
+&lt;li>&lt;a href="https://onshape-public.github.io/docs/auth/oauth">OAuth2&lt;/a>: Highest security. Required for all Onshape Apps.&lt;/li>
+&lt;/ul>
+&lt;h2 id="basic-authorization">Basic Authorization&lt;/h2>
+&lt;p>For local testing, you can provide a basic authentication via your API Keys.&lt;/p>
+&lt;ol>
+&lt;li>Open your terminal and run the following command, replacing &lt;code>ACCESS_KEY&lt;/code> and &lt;code>SECRET_KEY&lt;/code> with the &lt;strong>access key&lt;/strong> and &lt;strong>secret key&lt;/strong> you created earlier. Remember to include the colon (&lt;code>:&lt;/code>) between the keys. &lt;em>You will receive a long, base-64-encoded string as output.&lt;/em>
+&lt;ul>
+&lt;li>&lt;strong>MacOS&lt;/strong>:
+&lt;pre tabindex="0">&lt;code>printf ACCESS_KEY:SECRET_KEY | base64
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>&lt;strong>Windows&lt;/strong>:
+&lt;pre tabindex="0">&lt;code>powershell &amp;#34;[convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes(\&amp;#34;ACCESS_KEY:SECRET_KEY\&amp;#34;))&amp;#34;
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Add the authorization header to your code, replacing &lt;code>CREDENTIALS&lt;/code> with the string you receieved in Step 1:
+&lt;pre tabindex="0">&lt;code>-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;/ol>
+&lt;p>See our &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart">Quick Start Guide&lt;/a> for an example of using Basic Authorization in an app.&lt;/p>
+&lt;h2 id="request-signature">Request Signature&lt;/h2>
+&lt;p>For additional security, you can include your API Keys as part of a request signature. This provides more security than the Basic Authorization above, but less security than OAuth2.&lt;/p>
 &lt;p>To ensure that a request is coming from you, we have a process for signing requests that you must follow for API calls to work. Everything is done via HTTP headers that you&amp;rsquo;ll need to set:&lt;/p>
 &lt;ol>
 &lt;li>&lt;em>Date&lt;/em>: A standard date header giving the time of the request; must be accurate within &lt;strong>5 minutes&lt;/strong> of request. Example: &lt;code>Mon, 11 Apr 2016 20:08:56 GMT&lt;/code>&lt;/li>

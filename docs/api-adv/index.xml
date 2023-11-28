@@ -197,6 +197,10 @@ GET /applications/clients/:cid/settings/users/:uid&lt;/p>
 &lt;/blockquote>
 &lt;blockquote>
 &lt;p>📘 &lt;strong>Note&lt;/strong>&lt;/p>
+&lt;p>All Onshape API calls must be properly authenticated by replacing the &lt;code>CREDENTIALS&lt;/code> variable in the curls below. See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys">API Keys&lt;/a> page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart">Quick Start&lt;/a> for an example. All applications submitted to the Onshape App Store &lt;em>must&lt;/em> authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth">OAuth2&lt;/a>.&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>📘 &lt;strong>Note&lt;/strong>&lt;/p>
 &lt;p>For Enterprise accounts, replace &lt;strong>&lt;font color="slate">cad&lt;/font>&lt;/strong> in all Onshape URLs with your company domain.
 https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com &amp;gt; https://&lt;font color="slate">&lt;strong>companyName&lt;/strong>&lt;/font>.onshape.com&lt;/p>
 &lt;/blockquote>
@@ -573,6 +577,19 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &lt;li>&lt;a href="https://onshape-public.github.io/docs/api-intro/explorer">API Explorer&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>Docs: Drawings</title><link>https://onshape-public.github.io/docs/api-adv/drawings/</link><pubDate>Thu, 12 Oct 2023 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/drawings/</guid><description>
 &lt;p>This page describes the APIs Onshape provides for creating and manipulating Onshape drawings.&lt;/p>
+&lt;blockquote>
+&lt;p>📘 &lt;strong>Note&lt;/strong>&lt;/p>
+&lt;p>This page provides sample code as curls. See the &lt;a href="https://curl.se/docs/">curl documentation&lt;/a> for more information.&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>📘 &lt;strong>Note&lt;/strong>&lt;/p>
+&lt;p>All Onshape API calls must be properly authenticated by replacing the &lt;code>CREDENTIALS&lt;/code> variable in the curls below. See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys">API Keys&lt;/a> page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart">Quick Start&lt;/a> for an example. All applications submitted to the Onshape App Store &lt;em>must&lt;/em> authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth">OAuth2&lt;/a>.&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>📘 &lt;strong>Note&lt;/strong>&lt;/p>
+&lt;p>For Enterprise accounts, replace &lt;strong>&lt;font color="slate">cad&lt;/font>&lt;/strong> in all Onshape URLs with your company domain.
+https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com &amp;gt; https://&lt;font color="slate">&lt;strong>companyName&lt;/strong>&lt;/font>.onshape.com&lt;/p>
+&lt;/blockquote>
 &lt;h2 id="endpoints">Endpoints&lt;/h2>
 &lt;p>To create drawing, Onshape allows you to send all drawing data points and information through the API as part of the request body JSON.&lt;/p>
 &lt;p>The following endpoints are available:&lt;/p>
@@ -580,7 +597,8 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Drawing/createDrawingAppElement">Create a drawing&lt;/a>
 &lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST&amp;#39; \
 &amp;#39;https://cad.onshape.com/api/v6/drawings/d/{did}/w/{wid}/create&amp;#39; \
--H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+-H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 -H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 -d &amp;#39;{
 &amp;lt;JSON request body options from the BTDrawingParams schema&amp;gt;
@@ -598,7 +616,8 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &lt;li>Start to form the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Drawing/createDrawingAppElement">Drawings/createDrawingAppElement&lt;/a> call. Replace &lt;code>{did}&lt;/code> and &lt;code>{wid}&lt;/code> in the URL below with the document ID and workspace ID of your document (i.e., the &lt;em>target&lt;/em> document).
 &lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST&amp;#39; \
 &amp;#39;https://cad.onshape.com/api/v6/drawings/d/{did}/w/{wid}/create&amp;#39; \
--H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+-H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 -H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 &lt;/code>&lt;/pre>&lt;/li>
 &lt;li>Add the request body information:
@@ -610,7 +629,8 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 (Hint: You can call &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Part/getPartsWMVE">Part/getPartsWMVE&lt;/a> to get a list of part IDs in an element.)&lt;/br>
 &lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST&amp;#39; \
 &amp;#39;https://cad.onshape.com/api/v6/drawings/d/{did}/w/{wid}/create&amp;#39; \
--H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+-H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 -H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 -d &amp;#39;{
 &amp;#34;drawingName&amp;#34;: &amp;#34;flywheelDrawing&amp;#34;,
@@ -632,7 +652,8 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &lt;li>Start to form the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Drawing/createDrawingAppElement">Drawings/createDrawingAppElement&lt;/a> call. Replace &lt;code>{did}&lt;/code> and &lt;code>{wid}&lt;/code> in the URL below with the document ID and workspace ID of your document (i.e., the &lt;em>target&lt;/em> document).
 &lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST&amp;#39; \
 &amp;#39;https://cad.onshape.com/api/v6/drawings/d/{did}/w/{wid}/create&amp;#39; \
--H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+-H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 -H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 &lt;/code>&lt;/pre>&lt;/li>
 &lt;li>Add the request body information:
@@ -643,6 +664,7 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &lt;li>Note that we use the &lt;code>template&lt;/code> document, workspace, and element ID fields when referring to a specific template for drawing creation.
 &lt;/br>
 &lt;pre tabindex="0">&lt;code>curl &amp;#39;https://cad.onshape.com/api/drawings/d/{did}/w/{wid}/create&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
 -H &amp;#39;Accept: application/json, text/plain, */*&amp;#39; \
 -H &amp;#39;Content-Type: application/json;charset=UTF-8&amp;#39; \
 -d &amp;#39;{
@@ -662,12 +684,14 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &lt;li>Start to form the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Drawing/createDrawingAppElement">Drawings/createDrawingAppElement&lt;/a> call. Replace &lt;code>{did}&lt;/code> and &lt;code>{wid}&lt;/code> in the URL below with your document.
 &lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST&amp;#39; \
 &amp;#39;https://cad.onshape.com/api/v6/drawings/d/{did}/w/{wid}/create&amp;#39; \
--H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+-H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 -H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 &lt;/code>&lt;/pre>&lt;/li>
 &lt;li>Add information about the drawings area. In this example, we&amp;rsquo;ll add an additional column and row to the drawings area, a title block, and add a border around it.
 &lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST&amp;#39; \
 &amp;#39;https://cad.onshape.com/api/v6/drawings/d/{did}/w/{wid}/create&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
 -H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 -H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 -d &amp;#39;{
