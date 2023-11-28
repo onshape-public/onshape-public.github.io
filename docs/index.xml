@@ -6593,6 +6593,11 @@ the location you chose for you extension.&lt;/p>
 &lt;/ul>
 &lt;p>The application is built using Express and is deployed on Heroku.&lt;/p>
 &lt;p>Refer to the &lt;a href="https://github.com/onshape-public/app-gltf-viewer">gltf-viewer-app README&lt;/a> for instructions on running this sample app.&lt;/p></description></item><item><title>Docs: Changelog</title><link>https://onshape-public.github.io/docs/changelog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/changelog/</guid><description>
+&lt;h4 id="rel-1173---released-2023-11-28">&lt;code>rel-1.173&lt;/code> - released 2023-11-28&lt;/h4>
+&lt;ul>
+&lt;li>Update all classroom endpoints (&lt;code>/classrooms/&lt;/code>) to support OAuth&lt;/li>
+&lt;li>Add description of output to schema for getAssemblyShadedViews API&lt;/li>
+&lt;/ul>
 &lt;h4 id="rel-1172---released-2023-11-06">&lt;code>rel-1.172&lt;/code> - released 2023-11-06&lt;/h4>
 &lt;ul>
 &lt;li>Update all endpoints for &lt;code>bodydetails&lt;/code> | &lt;code>tessellatededges&lt;/code> | &lt;code>tessellatedfaces&lt;/code> | &lt;code>featurescript&lt;/code> to include new response body &lt;code>errorEnum&lt;/code>:&lt;/li>
