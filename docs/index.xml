@@ -6593,6 +6593,56 @@ the location you chose for you extension.&lt;/p>
 &lt;/ul>
 &lt;p>The application is built using Express and is deployed on Heroku.&lt;/p>
 &lt;p>Refer to the &lt;a href="https://github.com/onshape-public/app-gltf-viewer">gltf-viewer-app README&lt;/a> for instructions on running this sample app.&lt;/p></description></item><item><title>Docs: Changelog</title><link>https://onshape-public.github.io/docs/changelog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/changelog/</guid><description>
+&lt;h4 id="rel-1174---released-2023-12-15">&lt;code>rel-1.174&lt;/code> - released 2023-12-15&lt;/h4>
+&lt;ul>
+&lt;li>Add microversion id the extension url &lt;code>{$microversionId}&lt;/code>&lt;/li>
+&lt;li>Updated translation endpoints with new request property &lt;code>pdfVersion&lt;/code>&lt;/li>
+&lt;li>Fixed issue with bodydetails endpoints always returning &lt;code>isInner&lt;/code> and &lt;code>isOuter&lt;/code> the same&lt;/li>
+&lt;li>Update all endpoints for &lt;code>bodydetails&lt;/code> | &lt;code>tessellatededges&lt;/code> | &lt;code>tessellatedfaces&lt;/code> | &lt;code>featurescript&lt;/code> to include new response body &lt;code>errorEnum&lt;/code>:&lt;/li>
+&lt;/ul>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>errorEnum&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>BODY_DRAFT_STRAY_NONMITER_EDGES&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>MASS_PROPERTY_FACES_NOT_COPLANAR&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>PARAMETER_VALUE_INVALID&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>SHEET_METAL_CHAMFER_NO_TANGENT_BASED&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>CHAMFER_DIRECTION_OVERRIDE_NO_EFFECT&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>FILLET_CHAMFER_UNSUPPORTED&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>CHAMFER_HELD_BACK&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>SWEEP_BAD_LOCK_DIRECTION&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>SHEET_METAL_COUNTER_HOLE_UNSUPPORTED&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>SWEEP_SELECT_DIRECTION&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;ul>
+&lt;li>Update all endpoints for &lt;code>bodydetails&lt;/code> | &lt;code>tessellatededges&lt;/code> | &lt;code>tessellatedfaces&lt;/code> | &lt;code>featurescript&lt;/code> to include new property &lt;code>imageForeignId&lt;/code>&lt;/li>
+&lt;li>Support sending a list of emails to &lt;code>POST&lt;/code> : &lt;code>/classrooms/[cid]/members&lt;/code>&lt;/li>
+&lt;/ul>
 &lt;h4 id="rel-1173---released-2023-11-28">&lt;code>rel-1.173&lt;/code> - released 2023-11-28&lt;/h4>
 &lt;ul>
 &lt;li>Update all classroom endpoints (&lt;code>/classrooms/&lt;/code>) to support OAuth&lt;/li>
