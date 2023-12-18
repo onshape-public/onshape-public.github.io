@@ -27,12 +27,14 @@ The action URL can be parameterized to pass information from Onshape to the appl
 &lt;li>&lt;code>{$documentId}&lt;/code> - The Onshape ID for the current or selected document.&lt;/li>
 &lt;li>&lt;code>{$workspaceOrVersion}&lt;/code> - This will be either &lt;code>w&lt;/code> or &lt;code>v&lt;/code> for workspace or version respectively depending on current opened document state or selection.&lt;/li>
 &lt;li>&lt;code>{$workspaceOrVersionId}&lt;/code> - The Onshape ID for the current or selected workspace or version.&lt;/li>
-&lt;li>&lt;code>{$workspaceId}&lt;/code> - DEPRECATED&lt;/li>
-&lt;li>&lt;code>{$versionId}&lt;/code> - DEPRECATED&lt;/li>
+&lt;li>&lt;code>{$workspaceId}&lt;/code> - Use &lt;code>{$workspaceOrVersionId}&lt;/code> instead.&lt;/li>
+&lt;li>&lt;code>{$versionId}&lt;/code> - Use &lt;code>{$workspaceOrVersionId}&lt;/code> instead.&lt;/li>
+&lt;li>&lt;code>{$microversionId}&lt;/code> - The Onshape ID for the current or select document microversion.&lt;/li>
 &lt;li>&lt;code>{$elementId}&lt;/code> - The Onshape ID for the current or selected element (part studio, assembly, drawing).&lt;/li>
 &lt;li>&lt;code>{$partId}&lt;/code> - The Onshape ID for the current or selected part.&lt;/li>
 &lt;li>&lt;code>{$partNumber}&lt;/code> - The Part number property for the current or selected part, assembly or drawing.&lt;/li>
 &lt;li>&lt;code>{$revision}&lt;/code> - The Revision property for the current or selected part, assembly or drawing.&lt;/li>
+&lt;li>&lt;code>{$companyId}&lt;/code> - The ID for the company that owns the document.&lt;/li>
 &lt;li>&lt;code>{$mimeType}&lt;/code> - The mime type if the current or selected element is a blob.&lt;/li>
 &lt;li>&lt;code>{$featureId}&lt;/code> - In case of feature selected in the Feature list in a Part Studio.&lt;/li>
 &lt;li>&lt;code>{$nodeId}&lt;/code> - In case of mate or mate feature selected in the Assembly list.&lt;/li>
