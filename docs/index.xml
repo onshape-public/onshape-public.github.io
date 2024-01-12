@@ -6907,6 +6907,10 @@ the location you chose for you extension.&lt;/p>
 &lt;/ul>
 &lt;p>The application is built using Express and is deployed on Heroku.&lt;/p>
 &lt;p>Refer to the &lt;a href="https://github.com/onshape-public/app-gltf-viewer">gltf-viewer-app README&lt;/a> for instructions on running this sample app.&lt;/p></description></item><item><title>Docs: Changelog</title><link>https://onshape-public.github.io/docs/changelog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/changelog/</guid><description>
+&lt;h4 id="rel-1175---released-2024-01-12">&lt;code>rel-1.175&lt;/code> - released 2024-01-12&lt;/h4>
+&lt;ul>
+&lt;li>Exclude suppressed sub assemblies from rootAssembly occurrences for &lt;code>GET&lt;/code>: &lt;code>/assemblies/d/[did]/[wvm]/[wvmid]/e/[eid]&lt;/code>&lt;/li>
+&lt;/ul>
 &lt;h4 id="rel-1174---released-2023-12-15">&lt;code>rel-1.174&lt;/code> - released 2023-12-15&lt;/h4>
 &lt;ul>
 &lt;li>Add microversion id the extension url &lt;code>{$microversionId}&lt;/code>&lt;/li>
