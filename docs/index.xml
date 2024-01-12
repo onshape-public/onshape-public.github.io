@@ -1,4 +1,4 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>– Welcome to the Onshape Developer Documentation</title><link>https://onshape-public.github.io/docs/</link><description>Recent content in Welcome to the Onshape Developer Documentation on</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 12 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://onshape-public.github.io/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: API Explorer</title><link>https://onshape-public.github.io/docs/api-intro/explorer/</link><pubDate>Mon, 18 May 2020 20:39:14 -0400</pubDate><guid>https://onshape-public.github.io/docs/api-intro/explorer/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>– Welcome to the Onshape Developer Documentation</title><link>https://onshape-public.github.io/docs/</link><description>Recent content in Welcome to the Onshape Developer Documentation on</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 20 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://onshape-public.github.io/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: API Explorer</title><link>https://onshape-public.github.io/docs/api-intro/explorer/</link><pubDate>Mon, 18 May 2020 20:39:14 -0400</pubDate><guid>https://onshape-public.github.io/docs/api-intro/explorer/</guid><description>
 &lt;p>We document all available Onshape REST API endpoints in our Glassworks API Explorer:&lt;/p>
 &lt;p>&lt;b>&lt;font size="5">&lt;a href="https://cad.onshape.com/glassworks/explorer/">https://cad.onshape.com/glassworks/explorer/&lt;/a>&lt;/font>&lt;/b>&lt;/p>
 &lt;hr>
@@ -3837,7 +3837,319 @@ have a sideLength value of &amp;ldquo;1 in&amp;rdquo; and when the Size input is
 }
 }
 }
-&lt;/code>&lt;/pre></description></item><item><title>Docs: Extensions</title><link>https://onshape-public.github.io/docs/app-dev/extensions/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/app-dev/extensions/</guid><description>
+&lt;/code>&lt;/pre></description></item><item><title>Docs: Metadata</title><link>https://onshape-public.github.io/docs/api-adv/metadata/</link><pubDate>Wed, 20 Dec 2023 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/metadata/</guid><description>
+&lt;p>This page describes the APIs Onshape provides for working with document metadata.&lt;/p>
+&lt;blockquote>
+&lt;p>📘 &lt;strong>Note&lt;/strong>&lt;/p>
+&lt;p>This page provides sample code as curls. See the &lt;a href="https://curl.se/docs/">curl documentation&lt;/a> for more information.&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>📘 &lt;strong>Note&lt;/strong>&lt;/p>
+&lt;p>All Onshape API calls must be properly authenticated by replacing the &lt;code>CREDENTIALS&lt;/code> variable in the curls below. See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys">API Keys&lt;/a> page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart">Quick Start&lt;/a> for an example. All applications submitted to the Onshape App Store &lt;em>must&lt;/em> authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth">OAuth2&lt;/a>.&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>📘 &lt;strong>Note&lt;/strong>&lt;/p>
+&lt;p>For Enterprise accounts, replace &lt;strong>&lt;font color="slate">cad&lt;/font>&lt;/strong> in all Onshape URLs with your company domain.
+https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com &amp;gt; https://&lt;font color="slate">&lt;strong>companyName&lt;/strong>&lt;/font>.onshape.com&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="endpoints">Endpoints&lt;/h2>
+&lt;h3 id="get-metadata">Get Metadata&lt;/h3>
+&lt;ul>
+&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Metadata/getWVMetadata">getWVMetadata&lt;/a>: Get metadata for a workspace or version.
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;GET&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/metadata/d/{did}/wv/{wvid}?inferMetadataOwner=false&amp;amp;depth=1&amp;amp;includeComputedProperties=true&amp;amp;includeComputedAssemblyProperties=false&amp;amp;thumbnail=false&amp;#39; \
+-H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39;\
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39;
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Metadata/getWMVEsMetadata">getWMVEsMetadata&lt;/a>: Get metadata for all elements in a document.
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;GET&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/metadata/d/{did}/wv/{wvid}/e?inferMetadataOwner=false&amp;amp;depth=1&amp;amp;includeComputedProperties=true&amp;amp;includeComputedAssemblyProperties=false&amp;amp;thumbnail=false&amp;#39; \
+-H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39;
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Metadata/getWMVEMetadata">getWMVEMetadata&lt;/a>: Get metadata for an element.
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;GET&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/metadata/d/{did}/wv/{wvid}/e/{eid}?inferMetadataOwner=false&amp;amp;depth=1&amp;amp;includeComputedProperties=true&amp;amp;includeComputedAssemblyProperties=false&amp;amp;thumbnail=false&amp;#39; \
+-H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Authorization: CREDENTIALS&amp;#39; \
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39;
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Metadata/getWMVEPMetadata">getWMVEPMetadata&lt;/a>: Get metadata for a part.
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;GET&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/metadata/d/{did}/wv/{wvid}/e/{eid}/p/{pid}?rollbackBarIndex=-1&amp;amp;inferMetadataOwner=false&amp;amp;includeComputedProperties=true&amp;amp;includeComputedAssemblyProperties=false&amp;amp;thumbnail=false&amp;#39; \
+-H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39;\
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39;
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Metadata/getWMVEPsMetadata">getWMVEPsMetadata&lt;/a>: Get metadata for all parts in a document.
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;GET&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/metadata/d/{did}/wv/{wvid}/e/{eid}/p?inferMetadataOwner=false&amp;amp;includeComputedProperties=true&amp;amp;includeComputedAssemblyProperties=false&amp;amp;thumbnail=false&amp;#39; \
+-H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39;\
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39;
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Metadata/getVEOPStandardContentMetadata">getVEOPStandardContentMetadata&lt;/a>: Get metadata for a standard content part.
+&lt;ul>
+&lt;li>&lt;code>{linkedDocumentId}&lt;/code>: ID of the document into which the standard content part is inserted.&lt;/li>
+&lt;li>You can call &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Assembly/getAssemblyDefinition">getAssemblyDefinition&lt;/a> to get the other values needed for the call:
+&lt;ul>
+&lt;li>&lt;code>{did}&lt;/code>: ID of the document in which the standard content part lives.&lt;/li>
+&lt;li>&lt;code>{vid}&lt;/code>: ID of the version in which the standard content part lives.&lt;/li>
+&lt;li>&lt;code>{eid}&lt;/code>: ID of the element tab in which the standard content part lives.&lt;/li>
+&lt;li>&lt;code>{pid}&lt;/code>: Part ID of the standard content part.&lt;/li>
+&lt;li>&lt;code>{config}&lt;/code>: Encoded configuration string.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;GET&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/metadata/standardcontent/d/{did}/v/{vid}/e/{eid}/p/{pid}?configuration={config}&amp;amp;linkDocumentId={linkDocument}&amp;#39; \
+-H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39;
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;/ul>
+&lt;h3 id="update-metadata">Update Metadata&lt;/h3>
+&lt;p>To update metadata, you send a JSON in the API request body. This JSON block must include a &lt;code>jsonType&lt;/code> value and a &lt;code>properties&lt;/code> object array. Each object in the &lt;code>properties&lt;/code> array includes a &lt;code>propertyId&lt;/code> and the metadata key/value pairs.&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Metadata/updateWVMetadata">updateWVMetadata&lt;/a>: Update workspace or version metadata.
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/metadata/d/{did}/wv/{wvid}&amp;#39; \
+-H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-d &amp;#39;{
+&amp;#34;jsonType&amp;#34;: (&amp;#34;metadata-workspace&amp;#34; | &amp;#34;metadata-version&amp;#34;) ,
+&amp;#34;properties&amp;#34;: [
+{
+&amp;#34;propertyId&amp;#34;: &amp;#34;propertyId1&amp;#34;,
+&amp;#34;key1&amp;#34;: &amp;#34;value&amp;#34;,
+&amp;#34;key2&amp;#34;: &amp;#34;value
+},
+{
+&amp;#34;propertyId&amp;#34;: &amp;#34;propertyId2&amp;#34;,
+&amp;#34;key1&amp;#34;: &amp;#34;value&amp;#34;,
+&amp;#34;key2&amp;#34;: &amp;#34;value
+}
+]
+}&amp;#39;
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Metadata/updateWVEMetadata">updateWVEMetadata&lt;/a>: Update element metadata.
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/metadata/d/{did}/wv/{wvid}/e/{eid}&amp;#39; \
+-H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-d &amp;#39;{
+&amp;#34;jsonType&amp;#34;: &amp;#34;metadata-element&amp;#34;,
+&amp;#34;properties&amp;#34;: [
+{
+&amp;#34;propertyId&amp;#34;: &amp;#34;propertyId&amp;#34;,
+&amp;#34;key1&amp;#34;: &amp;#34;value&amp;#34;,
+&amp;#34;key2&amp;#34;: &amp;#34;value
+}
+]
+}&amp;#39;
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Metadata/updateWVEPMetadata">updateWVEPMetadata&lt;/a>: Update part metadata
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/metadata/d/{did}/wv/{wvid}/e/{eid}/{iden}/{pid}&amp;#39; \
+-H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-d &amp;#39;{
+&amp;#34;jsonType&amp;#34;: &amp;#34;metadata-part&amp;#34;,
+&amp;#34;properties&amp;#34;: [
+{
+&amp;#34;propertyId&amp;#34;: &amp;#34;propertyId&amp;#34;,
+&amp;#34;key1&amp;#34;: &amp;#34;value&amp;#34;,
+&amp;#34;key2&amp;#34;: &amp;#34;value
+}
+]
+}&amp;#39;
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Metadata/updateVEOPStandardContentPartMetadata">updateVEOPStandardContentPartMetadata&lt;/a>: Update standard content part metadata.
+&lt;ul>
+&lt;li>&lt;code>{linkedDocumentId}&lt;/code>: ID of the document into which the standard content part is inserted.&lt;/li>
+&lt;li>You can call &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Assembly/getAssemblyDefinition">getAssemblyDefinition&lt;/a> to get the other values needed for the call:
+&lt;ul>
+&lt;li>&lt;code>{did}&lt;/code>, &lt;code>{vid}&lt;/code>, &lt;code>{eid}&lt;/code>: IDs of the document, version, and element in which the standard content part lives.&lt;/li>
+&lt;li>&lt;code>{companyId}&lt;/code>: ID of the company that owns the standard content part. All metadata changes to this standard content part will populate for the entire company.&lt;/li>
+&lt;li>&lt;code>{pid}&lt;/code>: Part ID of the standard content part.&lt;/li>
+&lt;li>&lt;code>{config}&lt;/code>: Encoded configuration string.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>For each &lt;code>items.properties&lt;/code> object, include a unique &lt;code>propertyId&lt;/code> and at least one key/value metadata pair.&lt;/li>
+&lt;li>Updates made to standard content are global for all users and documents within the company.&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/metadata/standardcontent/d/{did}?linkDocumentId={linkDocumentId}&amp;#39; \
+-H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-d &amp;#39;{
+&amp;#34;items&amp;#34;: [
+{
+&amp;#34;href&amp;#34;: &amp;#34;https://cad.onshape.com/api/metadata/standardcontent/d/did/v/vid/e/eid/c/companyId/p/pid?configuration=config&amp;amp;linkDocumentId=linkDocumentId&amp;amp;applyToAllConfigs=true&amp;#34;,
+&amp;#34;properties&amp;#34;: [
+{
+&amp;#34;key&amp;#34;: &amp;#34;value&amp;#34;,
+&amp;#34;propertyId&amp;#34;: &amp;#34;propertyId1&amp;#34;
+},
+{
+&amp;#34;key&amp;#34;: &amp;#34;value&amp;#34;,
+&amp;#34;propertyId&amp;#34;: &amp;#34;propertyId2&amp;#34;
+}
+]
+}
+]
+}&amp;#39;
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;/ul>
+&lt;h2 id="sample-workflows">Sample Workflows&lt;/h2>
+&lt;h3 id="get-metadata-for-an-element">Get metadata for an element&lt;/h3>
+&lt;p>We will get the metadata from the &lt;code>DRILL_BIT&lt;/code> element in &lt;a href="https://cad.onshape.com/documents/e60c4803eaf2ac8be492c18e/w/d2558da712764516cc9fec62/e/958bceb5a2511b572dbbe851">this public document&lt;/a>.&lt;/p>
+&lt;ol>
+&lt;li>Call the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Metadata/getWMVEMetadata">getWMVEMetadata&lt;/a> endpoint. Replace &lt;code>CREDENTIALS&lt;/code> with your authentication credentials:
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;GET&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/metadata/d/e60c4803eaf2ac8be492c18e/w/d2558da712764516cc9fec62/e/958bceb5a2511b572dbbe851?inferMetadataOwner=false&amp;amp;depth=1&amp;amp;includeComputedProperties=true&amp;amp;includeComputedAssemblyProperties=false&amp;amp;thumbnail=false&amp;#39; \
+-H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39;
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>In the response body, confirm that for &lt;code>properties.name=Name&lt;/code>, &lt;code>properties.value=DRILL_BIT&lt;/code>.
+&lt;pre tabindex="0">&lt;code>{
+&amp;#34;jsonType&amp;#34;: &amp;#34;metadata-element&amp;#34;,
+&amp;#34;elementType&amp;#34;: 0,
+&amp;#34;mimeType&amp;#34;: &amp;#34;onshape/partstudio&amp;#34;,
+&amp;#34;elementId&amp;#34;: &amp;#34;958bceb5a2511b572dbbe851&amp;#34;,
+&amp;#34;properties&amp;#34;: [
+{
+&amp;#34;name&amp;#34;: &amp;#34;Name&amp;#34;,
+&amp;#34;value&amp;#34;: &amp;#34;DRILL_BIT&amp;#34;,
+&amp;#34;defaultValue&amp;#34;: null,
+&amp;#34;computedPropertyError&amp;#34;: null,
+&amp;#34;propertySource&amp;#34;: 0,
+...
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;/ol>
+&lt;h3 id="update-metadata-for-a-part">Update metadata for a part&lt;/h3>
+&lt;ol>
+&lt;li>Make a copy of &lt;a href="https://cad.onshape.com/documents/e60c4803eaf2ac8be492c18e/w/d2558da712764516cc9fec62/e/958bceb5a2511b572dbbe851">this public document&lt;/a>. Make a note of the new document&amp;rsquo;s document ID, workspace ID, and element ID.&lt;/li>
+&lt;li>Call the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Part/getPartsWMVE">Part/getPartsWMVE&lt;/a> API on your copied document. to get a list of part IDs in the element. Only one part exists in the document, with a part ID of &lt;code>JHD&lt;/code>.
+&lt;pre tabindex="0">&lt;code>{
+&amp;#34;name&amp;#34;: &amp;#34;Main&amp;#34;,
+...
+&amp;#34;microversionId&amp;#34;: &amp;#34;{mid}&amp;#34;,
+&amp;#34;partNumber&amp;#34;: null,
+&amp;#34;elementId&amp;#34;: &amp;#34;{eid}&amp;#34;,
+&amp;#34;partId&amp;#34;: &amp;#34;JHD&amp;#34;,
+&amp;#34;bodyType&amp;#34;: &amp;#34;sheet&amp;#34;,
+...
+}
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>Next, we need to get the ID of the property we want to update. We&amp;rsquo;ll call the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Metadata/getWMVEPMetadata">getWMVEPMetadata&lt;/a> endpoint to get the current metadata JSON for the part. Don&amp;rsquo;t forget to replace the URL parameters with the IDs from your copied document, and replace &lt;code>CREDENTIALS&lt;/code> with your authorization credentials.
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;GET&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/metadata/d/{did}/w/{wid}/e/{eid}/p/JHD?rollbackBarIndex=-1&amp;amp;inferMetadataOwner=false&amp;amp;includeComputedProperties=true&amp;amp;includeComputedAssemblyProperties=false&amp;amp;thumbnail=false&amp;#39; \
+-H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39;
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>The call returns a response body in JSON format. Scroll to the &lt;code>Description&lt;/code> properties block of the JSON response, and notice that the &lt;code>value&lt;/code> field is an empty string.
+&lt;pre tabindex="0">&lt;code>...
+{
+&amp;#34;name&amp;#34;: &amp;#34;Description&amp;#34;,
+&amp;#34;value&amp;#34;: &amp;#34;&amp;#34;,
+&amp;#34;defaultValue&amp;#34;: null,
+&amp;#34;computedPropertyError&amp;#34;: null,
+&amp;#34;propertySource&amp;#34;: 3,
+&amp;#34;validator&amp;#34;: {
+&amp;#34;min&amp;#34;: null,
+&amp;#34;max&amp;#34;: null,
+&amp;#34;minLength&amp;#34;: null,
+&amp;#34;maxLength&amp;#34;: 10000,
+&amp;#34;pattern&amp;#34;: null,
+&amp;#34;quantityType&amp;#34;: null,
+&amp;#34;maxCount&amp;#34;: null,
+&amp;#34;minCount&amp;#34;: null,
+&amp;#34;minDate&amp;#34;: null,
+&amp;#34;maxDate&amp;#34;: null
+},
+&amp;#34;required&amp;#34;: false,
+&amp;#34;editable&amp;#34;: true,
+&amp;#34;propertyId&amp;#34;: &amp;#34;57f3fb8efa3416c06701d60e&amp;#34;,
+&amp;#34;editableInUi&amp;#34;: true,
+&amp;#34;dateFormat&amp;#34;: null,
+&amp;#34;valueType&amp;#34;: &amp;#34;STRING&amp;#34;,
+&amp;#34;enumValues&amp;#34;: null,
+&amp;#34;schemaId&amp;#34;: &amp;#34;5877a03ebe4c21163b49dce0&amp;#34;,
+&amp;#34;uiHints&amp;#34;: {
+&amp;#34;multiline&amp;#34;: true
+},
+&amp;#34;multivalued&amp;#34;: false,
+&amp;#34;computedAssemblyProperty&amp;#34;: false,
+&amp;#34;computedProperty&amp;#34;: false,
+&amp;#34;propertyOverrideStatus&amp;#34;: 0
+},
+...
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>Copy Description&amp;rsquo;s &lt;code>propertyId&lt;/code>. We&amp;rsquo;ll need this ID to update the metadata.&lt;/li>
+&lt;li>Set up the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Metadata/updateWVEPMetadata">updateWVEPMetadata&lt;/a> call.
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/metadata/d/{did}/w/{wid}/e/{eid}/p/JHD?rollbackBarIndex=-1&amp;#39; \
+-H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>Add the request JSON to the call. Note that we need to include the &lt;code>jsonType&lt;/code>, the &lt;code>partId&lt;/code>, the &lt;code>propertyId&lt;/code>, and the value to update.
+&lt;pre tabindex="0">&lt;code>-d &amp;#39;{
+&amp;#34;jsonType&amp;#34;: &amp;#34;metadata-part&amp;#34;,
+&amp;#34;partId&amp;#34;: &amp;#34;JHD&amp;#34;,
+&amp;#34;properties&amp;#34;: [
+{
+&amp;#34;value&amp;#34;: &amp;#34;&amp;#34;,
+&amp;#34;propertyId&amp;#34;: &amp;#34;57f3fb8efa3416c06701d60e&amp;#34;
+}
+]
+}&amp;#39;
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>In the request JSON, change the empty Description &lt;code>value&lt;/code> string to &lt;code>&amp;quot;Drill bit&amp;quot;&lt;/code>:
+&lt;pre tabindex="0">&lt;code>-d &amp;#39;{
+&amp;#34;jsonType&amp;#34;: &amp;#34;metadata-part&amp;#34;,
+&amp;#34;partId&amp;#34;: &amp;#34;JHD&amp;#34;,
+&amp;#34;properties&amp;#34;: [
+{
+&amp;#34;value&amp;#34;: &amp;#34;Drill bit&amp;#34;,
+&amp;#34;propertyId&amp;#34;: &amp;#34;57f3fb8efa3416c06701d60e&amp;#34;
+}
+]
+}&amp;#39;
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>Make the final call. Don&amp;rsquo;t forget to replace the URL parameters and &lt;code>CREDENTIALS&lt;/code> with your information.
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/metadata/d/{did}/w/{wid}/e/{wid}/p/JHD?rollbackBarIndex=-1&amp;#39; \
+-H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-d &amp;#39;{
+&amp;#34;jsonType&amp;#34;: &amp;#34;metadata-part&amp;#34;,
+&amp;#34;partId&amp;#34;: &amp;#34;JHD&amp;#34;,
+&amp;#34;properties&amp;#34;: [
+{
+&amp;#34;value&amp;#34;: &amp;#34;Drill bit&amp;#34;,
+&amp;#34;propertyId&amp;#34;: &amp;#34;57f3fb8efa3416c06701d60e&amp;#34;
+}
+]
+}&amp;#39;
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>Repeat steps 3 and 4 to confirm that the Description &lt;code>value&lt;/code> for the part is now &lt;code>Drill bit&lt;/code>.&lt;/li>
+&lt;/ol>
+&lt;h2 id="additional-resources">Additional Resources&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Metadata">API Explorer: Metadata&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://onshape-public.github.io/docs/api-intro/explorer">API Guide: API Explorer&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Docs: Extensions</title><link>https://onshape-public.github.io/docs/app-dev/extensions/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/app-dev/extensions/</guid><description>
 &lt;p>This page provides information for some of the more common options for
 embedding a third-party application into the Onshape interface. Onshape provides many options for embedding commands in various menus, fly-out panels, and elements. In this example, you will embed a custom web page inside a document’s right side fly-out panel. This interface will receive information from Onshape and push information from the panel back to Onshape, providing a complete, bi-directional integration scenario.&lt;/p>
 &lt;p>Please see also:&lt;/p>
