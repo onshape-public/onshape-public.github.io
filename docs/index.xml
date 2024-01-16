@@ -2122,7 +2122,7 @@ Check out the &lt;a href="#sample-workflows">Sample Workflows&lt;/a> section bel
 -H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 -H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 -d &amp;#39;{
-&amp;#34;editdescription&amp;#34;: &amp;#34;Description of the modification.&amp;#34;,
+&amp;#34;editDescription&amp;#34;: &amp;#34;Description of the modification.&amp;#34;,
 &amp;#34;jsonRequests&amp;#34;: [
 {
 &amp;lt;JSON request body options from the jsonRequests schema&amp;gt;
@@ -2254,7 +2254,7 @@ Check out the &lt;a href="#sample-workflows">Sample Workflows&lt;/a> section bel
 -H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 -H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 -d &amp;#39;{
-&amp;#34;editdescription&amp;#34;: &amp;#34;Add a note to the drawing.&amp;#34;,
+&amp;#34;editDescription&amp;#34;: &amp;#34;Add a note to the drawing.&amp;#34;,
 &amp;#34;jsonRequests&amp;#34;: [ {
 &amp;#34;messageName&amp;#34;: &amp;#34;onshapeCreateAnnotations&amp;#34;,
 &amp;#34;formatVersion&amp;#34;: &amp;#34;2021-01-01&amp;#34;,
@@ -2307,7 +2307,7 @@ Check out the &lt;a href="#sample-workflows">Sample Workflows&lt;/a> section bel
 -H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 -H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 -d &amp;#39;{
-&amp;#34;editdescription&amp;#34;: &amp;#34;Add a callout to the drawing.&amp;#34;,
+&amp;#34;editDescription&amp;#34;: &amp;#34;Add a callout to the drawing.&amp;#34;,
 &amp;#34;jsonRequests&amp;#34;: [ {
 &amp;#34;messageName&amp;#34;: &amp;#34;onshapeCreateAnnotations&amp;#34;,
 &amp;#34;formatVersion&amp;#34;: &amp;#34;2021-01-01&amp;#34;,
@@ -2367,7 +2367,7 @@ Check out the &lt;a href="#sample-workflows">Sample Workflows&lt;/a> section bel
 -H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 -H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 -d &amp;#39;{
-&amp;#34;editdescription&amp;#34;: &amp;#34;Add a centerline to the drawing&amp;#34;,
+&amp;#34;editDescription&amp;#34;: &amp;#34;Add a centerline to the drawing&amp;#34;,
 &amp;#34;jsonRequests&amp;#34;: [ {
 &amp;#34;messageName&amp;#34;: &amp;#34;onshapeCreateAnnotations&amp;#34;,
 &amp;#34;formatVersion&amp;#34;: &amp;#34;2021-01-01&amp;#34;,
@@ -2428,7 +2428,7 @@ Check out the &lt;a href="#sample-workflows">Sample Workflows&lt;/a> section bel
 -H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 -H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 -d &amp;#39;{
-&amp;#34;editdescription&amp;#34;: &amp;#34;Add a dimension to the drawing&amp;#34;,
+&amp;#34;editDescription&amp;#34;: &amp;#34;Add a dimension to the drawing&amp;#34;,
 &amp;#34;jsonRequests&amp;#34;: [ {
 &amp;#34;messageName&amp;#34;: &amp;#34;onshapeCreateAnnotations&amp;#34;,
 &amp;#34;formatVersion&amp;#34;: &amp;#34;2021-01-01&amp;#34;,
@@ -2508,7 +2508,7 @@ Check out the &lt;a href="#sample-workflows">Sample Workflows&lt;/a> section bel
 -H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 -H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 -d &amp;#39;{
-&amp;#34;editdescription&amp;#34;: &amp;#34;Add a geometric tolerance to the drawing&amp;#34;,
+&amp;#34;editDescription&amp;#34;: &amp;#34;Add a geometric tolerance to the drawing&amp;#34;,
 &amp;#34;jsonRequests&amp;#34;: [ {
 &amp;#34;messageName&amp;#34;: &amp;#34;onshapeCreateAnnotations&amp;#34;,
 &amp;#34;formatVersion&amp;#34;: &amp;#34;2021-01-01&amp;#34;,
@@ -2563,7 +2563,7 @@ Check out the &lt;a href="#sample-workflows">Sample Workflows&lt;/a> section bel
 -H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 -H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 -d &amp;#39;{
-&amp;#34;editdescription&amp;#34;: &amp;#34;Add an inspection symbol to the drawing&amp;#34;,
+&amp;#34;editDescription&amp;#34;: &amp;#34;Add an inspection symbol to the drawing&amp;#34;,
 &amp;#34;jsonRequests&amp;#34;: [ {
 &amp;#34;messageName&amp;#34;: &amp;#34;onshapeCreateAnnotations&amp;#34;,
 &amp;#34;formatVersion&amp;#34;: &amp;#34;2021-01-01&amp;#34;,
