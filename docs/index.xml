@@ -1636,6 +1636,10 @@ GET /applications/clients/:cid/settings/users/:uid&lt;/p>
 &lt;/blockquote>
 &lt;blockquote>
 &lt;p>📘 &lt;strong>Note&lt;/strong>&lt;/p>
+&lt;p>This documentation refers to Onshape IDs in the following format: &lt;code>{did}, {wid}, {eid}, {pid}, {otherId}&lt;/code>. These represent document, workspace, element, part, and other IDs (respectively) that are needed make the API calls. Please see &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request">API Guide: API Intro&lt;/a> for information on what these IDs mean and how to obtain them from your documents. Never include the curly braces (&lt;code>{}&lt;/code>) in your API calls.&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>📘 &lt;strong>Note&lt;/strong>&lt;/p>
 &lt;p>For Enterprise accounts, replace &lt;strong>&lt;font color="slate">cad&lt;/font>&lt;/strong> in all Onshape URLs with your company domain.
 https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com &amp;gt; https://&lt;font color="slate">&lt;strong>companyName&lt;/strong>&lt;/font>.onshape.com&lt;/p>
 &lt;/blockquote>
@@ -1673,6 +1677,11 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &amp;#39;https://cad.onshape.com/api/v6/partstudios/d/{did}/w/{wid}/e/{eid}/stl?mode=text&amp;amp;grouping=true&amp;amp;scale=1&amp;amp;units=inch&amp;#39; \
 -H &amp;#39;accept: */*&amp;#39;
 &lt;/code>&lt;/pre>&lt;/li>
+&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Document/export2Json">Export Document to JSON&lt;/a>
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/documents/d/{did}/w/{wid}/e/{eid}/export&amp;#39; \
+-H &amp;#39;accept: application/octet-stream&amp;#39; \
+&lt;/code>&lt;/pre>&lt;/li>
 &lt;/ul>
 &lt;h2 id="asynchronous-exports">Asynchronous exports&lt;/h2>
 &lt;p>The exports in the last section perform the format translation synchronously, returning the output immediately after some processing delay. Other format conversions are more complex and time-consuming, and in many cases, cannot be completed quickly enough to prevent connection errors. Note that the source format for an export is currently always automatically detected by Onshape. Part Studios and Assemblies are known to be &lt;code>ONSHAPE&lt;/code> format. File uploads have their type determined by the filename suffix. For example, a file named &lt;em>part7.step&lt;/em> is assumed to be in &lt;code>STEP&lt;/code> format.&lt;/p>
@@ -1681,6 +1690,7 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/BlobElement/createBlobTranslation">BlobElement/createBlobTranslation&lt;/a>: Export a Blob Element to the specified &lt;code>formatName&lt;/code>.&lt;/li>
 &lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/createPartStudioTranslation">PartStudios/createPartStudioTranslation&lt;/a>: Export a Part Studio to the specified &lt;code>formatName&lt;/code>.&lt;/li>
 &lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Assembly/translateFormat">Assembly/translateFormat&lt;/a>: Export an Assembly to the specified &lt;code>formatName&lt;/code>.&lt;/li>
+&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Drawing/createDrawingTranslation">Drawing/createDrawingTranslation&lt;/a>: Export a Drawing to the specified &lt;code>formatName&lt;/code>.&lt;/li>
 &lt;/ul>
 &lt;p>These asynchronous exports include a few additional steps, which are explained in more detail in the &lt;a href="#async-export-steps">next section&lt;/a>:&lt;/p>
 &lt;ol>
@@ -1703,10 +1713,14 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &lt;h3 id="async-export-details">Async export details&lt;/h3>
 &lt;p>To export your Onshape content to another format:&lt;/p>
 &lt;ol>
-&lt;li>Determine what export format file types are available for your content by calling: &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Translation/getAllTranslatorFormats">Translations/getAllTranslatorFormats&lt;/a>.&lt;/li>
+&lt;li>Determine what export format file types are available for your content by calling: &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Translation/getAllTranslatorFormats">Translations/getAllTranslatorFormats&lt;/a>.
+&lt;ul>
+&lt;li>Note that Drawings have their own API for this call: &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Drawing/getDrawingTranslatorFormats">Drawing/getDrawingTranslatorFormats&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
 &lt;li>Next, initiate the export by calling one of the asynchronous translation APIs.
 &lt;ul>
-&lt;li>Note that each of these APIs takes a large JSON for specifying options for the export as part of the request body. Refer to the &lt;a href="https://onshape-public.github.io/docs/api-intro/explorer">API Explorer&lt;/a> page for help viewing these JSON docs.&lt;/li>
+&lt;li>Note that each of these APIs takes a JSON for specifying options for the export as part of the request body. Refer to the &lt;a href="https://onshape-public.github.io/docs/api-intro/explorer">API Explorer&lt;/a> page for help viewing these JSON docs.&lt;/li>
 &lt;li>The target file format &lt;strong>must be specified in the &lt;code>formatName&lt;/code> field&lt;/strong> in the request body, and must match a valid format found in Step 1.&lt;/li>
 &lt;li>By default, &lt;code>storeInDocument&lt;/code> is set to &lt;code>false&lt;/code> in the request body to export to a single data file (or a zip of multiple files). Set to &lt;code>true&lt;/code> to export as blob elements.&lt;/li>
 &lt;/ul>
@@ -1770,7 +1784,7 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 ...
 &lt;/code>&lt;/pre>&lt;/li>
 &lt;/ul>
-&lt;p>Note that these endpoints require you to specify the target document ID and workspace ID. You must also include the file to import. These APIs also includes a large request body JSON for specifying options for the import.&lt;/p>
+&lt;p>Note that these endpoints require you to specify the target document ID and workspace ID. You must also include the file to import. These APIs also includes a request body JSON for specifying options for the import.&lt;/p>
 &lt;ul>
 &lt;li>Override the translation to &lt;code>ONSHAPE&lt;/code> format by specifying a valid format in the &lt;code>formatName&lt;/code> field. Get a list of valid import formats by calling &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Translation/getAllTranslatorFormats">Translation/getAllTranslatorFormats&lt;/a>.&lt;/li>
 &lt;li>Specify &lt;code>storeInDocument=true&lt;/code> to import the data as a blob element into the target document. Change to &lt;code>false&lt;/code> to only create an external data file.&lt;/li>
@@ -1816,7 +1830,6 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &amp;#34;ordinal&amp;#34; : 1,
 &amp;#34;isMesh&amp;#34; : false,
 &amp;#34;description&amp;#34; : &amp;#34;Flywheel&amp;#34;,
-&amp;#34;revision&amp;#34; : null,
 &amp;#34;microversionId&amp;#34; : &amp;#34;bdb504d2d4c948493a87ccf3&amp;#34;,
 &amp;#34;partNumber&amp;#34; : &amp;#34;PRT-10241&amp;#34;,
 &amp;#34;elementId&amp;#34; : &amp;#34;6bed6b43463f6a46a37b4a22&amp;#34;,
@@ -1866,7 +1879,7 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &amp;#34;translate&amp;#34;: true
 }&amp;#39;
 &lt;/code>&lt;/pre>&lt;ul>
-&lt;li>Note that the API takes a large JSON as part of the request body, in which you can specify options for the export.&lt;/li>
+&lt;li>Note that the API takes a JSON as part of the request body, in which you can specify options for the export.&lt;/li>
 &lt;li>In this example, we&amp;rsquo;ve just shown a snippet of the entire JSON.&lt;/li>
 &lt;li>A &lt;code>formatName&lt;/code> string must be specified that matches one of the valid formats you found in the last step. In this example, we set &lt;code>formatName&lt;/code> to &lt;code>SOLIDWORKS.&lt;/code>&lt;/li>
 &lt;li>We want to export this to a new file, so we&amp;rsquo;ll leave &lt;code>storeInDocument&lt;/code> set to &lt;code>false&lt;/code>.&lt;/li>
@@ -1893,11 +1906,8 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &lt;h3 id="export-an-assembly-to-step">Export an Assembly to STEP&lt;/h3>
 &lt;p>In this example, we&amp;rsquo;ll export an assembly from &lt;a href="https://cad.onshape.com/documents/e60c4803eaf2ac8be492c18e/w/d2558da712764516cc9fec62/e/23a9385cd48c50167c32d6d1">this public document&lt;/a> to a STEP file.&lt;/p>
 &lt;ol>
-&lt;li>
-&lt;p>Make a copy of &lt;a href="https://cad.onshape.com/documents/e60c4803eaf2ac8be492c18e/w/d2558da712764516cc9fec62/e/23a9385cd48c50167c32d6d1">this public document&lt;/a> so you can export the assembly to file in the document. Make a note of the documentId, workspaceId, and elementId of the assembly in your new document.&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>Validate that STEP is a supported export file type for assemblies by calling &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Translation/getAllTranslatorFormats">Translation/getAllTranslatorFormats&lt;/a> and confirming that &lt;code>validDestinationFormat=true&lt;/code> and &lt;code>couldBeAssembly=true&lt;/code> for &lt;code>translatorName=STEP&lt;/code>.&lt;/p>
+&lt;li>Make a copy of &lt;a href="https://cad.onshape.com/documents/e60c4803eaf2ac8be492c18e/w/d2558da712764516cc9fec62/e/23a9385cd48c50167c32d6d1">this public document&lt;/a> so you can export the assembly. Make a note of the documentId, workspaceId, and elementId of the assembly in your new document.&lt;/li>
+&lt;li>Validate that STEP is a supported export file type for assemblies by calling &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Translation/getAllTranslatorFormats">Translation/getAllTranslatorFormats&lt;/a> and confirming that &lt;code>validDestinationFormat=true&lt;/code> and &lt;code>couldBeAssembly=true&lt;/code> for &lt;code>translatorName=STEP&lt;/code>.
 &lt;pre tabindex="0">&lt;code>curl -X &amp;#39;GET&amp;#39; \
 &amp;#39;https://cad.onshape.com/api/v6/translations/translationformats&amp;#39; \
 -H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39;
@@ -1912,8 +1922,7 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 ...
 ]
 &lt;/code>&lt;/pre>&lt;/li>
-&lt;li>
-&lt;p>Initialize the export by calling &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Assembly/translateFormat">Assembly/translateFormat&lt;/a>.&lt;/p>
+&lt;li>Initialize the export by calling &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Assembly/translateFormat">Assembly/translateFormat&lt;/a>. Replace &lt;code>{did}&lt;/code>, &lt;code>{wid}&lt;/code>, and &lt;code>{eid}&lt;/code> with the document, workspace, and element IDs from your copied document. Do NOT include the curly braces (&lt;code>{}&lt;/code>) in the final call.
 &lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST&amp;#39; \
 &amp;#39;https://cad.onshape.com/api/v6/assemblies/d/{did}/w/{wid}/e/{eid}/translations&amp;#39; \
 -H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
@@ -1925,35 +1934,91 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &amp;#34;storeInDocument&amp;#34;: true
 }&amp;#39;
 &lt;/code>&lt;/pre>&lt;ul>
-&lt;li>Note that the API takes a large JSON as part of the request body, in which you can specify options for the export.&lt;/li>
+&lt;li>Note that the API takes a JSON as part of the request body, in which you can specify options for the export.&lt;/li>
 &lt;li>In the example above, we&amp;rsquo;ve just shown a snippet of the entire JSON where we allow faulty parts to be exported and set the angular tolerance to 0.001.&lt;/li>
 &lt;li>A &lt;code>formatName&lt;/code> string must be specified that matches one of the valid formats you found in the last step. In this example, we set &lt;code>formatName&lt;/code> to &lt;code>STEP.&lt;/code>&lt;/li>
 &lt;li>Set &lt;code>storeInDocument&lt;/code> to &lt;code>true&lt;/code> to upload the STEP file as a blob element in your document.&lt;/li>
 &lt;/ul>
 &lt;/li>
-&lt;li>
-&lt;p>Next, we poll the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Assembly/translateFormat">Assembly/translateFormat&lt;/a> response until &lt;code>requestState&lt;/code> changes from &lt;code>ACTIVE&lt;/code> to &lt;code>DONE&lt;/code> or &lt;code>FAILED&lt;/code>.&lt;/p>
+&lt;li>Next, we poll the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Assembly/translateFormat">Assembly/translateFormat&lt;/a> response until &lt;code>requestState&lt;/code> changes from &lt;code>ACTIVE&lt;/code> to &lt;code>DONE&lt;/code> or &lt;code>FAILED&lt;/code>.
 &lt;pre tabindex="0">&lt;code>{
+&amp;#34;resultDocumentId&amp;#34; : &amp;#34;{did}&amp;#34;,
+&amp;#34;resultWorkspaceId&amp;#34; : &amp;#34;{wid}&amp;#34;,
 &amp;#34;requestState&amp;#34; : &amp;#34;DONE&amp;#34;,
-&amp;#34;requestElementId&amp;#34; : &amp;#34;23a9385cd48c50167c32d6d1&amp;#34;,
-&amp;#34;documentId&amp;#34; : &amp;#34;e60c4803eaf2ac8be492c18e&amp;#34;,
-&amp;#34;workspaceId&amp;#34; : &amp;#34;d2558da712764516cc9fec62&amp;#34;,
-&amp;#34;resultElementIds&amp;#34; : [ &amp;#34;{resultEid}&amp;#34; ],
-&amp;#34;name&amp;#34; : &amp;#34;PISTON&amp;#34;,
+&amp;#34;requestElementId&amp;#34; : &amp;#34;{eid}&amp;#34;,
+&amp;#34;resultExternalDataIds&amp;#34; : [ &amp;#34;{resultExternalId}&amp;#34; ],
+&amp;#34;documentId&amp;#34; : &amp;#34;{did}&amp;#34;,
+&amp;#34;workspaceId&amp;#34; : &amp;#34;{wid}&amp;#34;,
+&amp;#34;resultElementIds&amp;#34; : {resulteid},
+&amp;#34;name&amp;#34; : &amp;#34;GEARBOX_CHUCK&amp;#34;,
 &amp;#34;id&amp;#34; : &amp;#34;{translationId}&amp;#34;,
-&amp;#34;href&amp;#34; : &amp;#34;https://cad.onshape.com/api/v1/translations/{tid}&amp;#34;
+&amp;#34;href&amp;#34; : &amp;#34;https://cad.onshape.com/api/v6/translations/{translationId}&amp;#34;
 }
 &lt;/code>&lt;/pre>&lt;/li>
-&lt;li>
-&lt;p>Once &lt;code>requestState=DONE&lt;/code>, we make a note of the &lt;code>resultElementId&lt;/code> in the response. This is the elementId of the STEP blob.&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>Now, we can call &lt;a href="https://cad.onshape.com/glassworks/explorer/#/BlobElement/downloadFileWorkspace">BlobElement/downloadFileWorkspace&lt;/a> to retrieve the exported results.&lt;/p>
+&lt;li>Once &lt;code>requestState=DONE&lt;/code>, we make a note of the &lt;code>resultElementId&lt;/code> in the response. This is the elementId of the STEP blob.&lt;/li>
+&lt;li>Now, we can call &lt;a href="https://cad.onshape.com/glassworks/explorer/#/BlobElement/downloadFileWorkspace">BlobElement/downloadFileWorkspace&lt;/a> to retrieve the exported results.
 &lt;pre tabindex="0">&lt;code>curl -X &amp;#39;GET&amp;#39; \
-&amp;#39;https://cad.onshape.com/api/v6/blobelements/d/{did}/w/{wid}/e/{resultEid}&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/blobelements/d/{did}/w/{wid}/e/{resulteid}&amp;#39; \
 -H &amp;#39;accept: application/octet-stream&amp;#39;
 &lt;/code>&lt;/pre>&lt;ul>
-&lt;li>Use the &lt;code>resultElementIds&lt;/code> value from the translation response as the element ID (&lt;code>{eid}&lt;/code>).&lt;/li>
+&lt;li>Use the &lt;code>resultElementIds&lt;/code> value from the translation response as the element ID (&lt;code>{resulteid}&lt;/code>).&lt;/li>
+&lt;li>Note that you can also open your document, click the &lt;code>GEARBOX_CHUCK.STEP&lt;/code> tab, and download the file from there.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="export-a-drawing-as-a-json">Export a Drawing as a JSON&lt;/h3>
+&lt;p>In this example, we&amp;rsquo;ll export a Drawing from &lt;a href="https://cad.onshape.com/documents/e60c4803eaf2ac8be492c18e/w/d2558da712764516cc9fec62/e/15b07287508246ccd038e31e">this public document&lt;/a> to a JSON file. Exporting a Drawing to JSON is useful when you need to gather information about that drawing (for example, finding valid coordinates on which to place an inspection symbol).&lt;/p>
+&lt;ol>
+&lt;li>Make a copy of &lt;a href="https://cad.onshape.com/documents/e60c4803eaf2ac8be492c18e/w/d2558da712764516cc9fec62/e/15b07287508246ccd038e31e">this public document&lt;/a> so you can export the assembly. Make a note of the documentId, workspaceId, and elementId of the assembly in your new document.&lt;/li>
+&lt;li>Validate that JSON is a supported export file type for Drawings by calling &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Drawing/getDrawingTranslatorFormats">Drawing/getDrawingTranslatorFormats&lt;/a> and confirming that &lt;code>&amp;quot;name&amp;quot;: &amp;quot;DRAWING_JSON&amp;quot;&lt;/code> appears in the response for the drawing element in your copied document.
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;GET&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/drawings/d/{did}/w/{wid}/e/{eid}/translationformats&amp;#39; \
+-H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39;
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>[
+{
+&amp;#34;name&amp;#34;: &amp;#34;DRAWING_JSON&amp;#34;,
+&amp;#34;translatorName&amp;#34;: &amp;#34;drawing_json&amp;#34;,
+&amp;#34;couldBeAssembly&amp;#34;: false
+},
+...
+]
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>Initialize the export by calling &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Drawing/createDrawingTranslation">Drawing/createDrawingTranslation&lt;/a>. Replace &lt;code>{did}&lt;/code>, &lt;code>{wid}&lt;/code>, and &lt;code>{eid}&lt;/code> with the document, workspace, and element IDs from your copied document. Do NOT include the curly braces (&lt;code>{}&lt;/code>) in the final call.
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/drawings/d/{did}/w/{wid}/e/{eid}/translations&amp;#39; \
+-H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-d &amp;#39;{
+&amp;#34;formatName&amp;#34;: &amp;#34;DRAWING_JSON&amp;#34;
+}&amp;#39;
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Note that the API takes a JSON as part of the request body, in which you can specify options for the export.&lt;/li>
+&lt;li>The only required JSON field is &lt;code>formatName&lt;/code>, in which we&amp;rsquo;ve specified the format as found in the &lt;code>getDrawingTranslatorFormats&lt;/code> response body.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Next, we poll the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Drawing/createDrawingTranslation">Drawing/createDrawingTranslation&lt;/a> response until &lt;code>requestState&lt;/code> changes from &lt;code>ACTIVE&lt;/code> to &lt;code>DONE&lt;/code> or &lt;code>FAILED&lt;/code>.
+&lt;pre tabindex="0">&lt;code>{
+&amp;#34;resultDocumentId&amp;#34; : &amp;#34;{did}&amp;#34;,
+&amp;#34;resultWorkspaceId&amp;#34; : &amp;#34;{wid}&amp;#34;,
+&amp;#34;requestState&amp;#34; : &amp;#34;DONE&amp;#34;,
+&amp;#34;requestElementId&amp;#34; : &amp;#34;{eid}&amp;#34;,
+&amp;#34;resultExternalDataIds&amp;#34; : [ &amp;#34;{resultExternalId}&amp;#34; ],
+&amp;#34;documentId&amp;#34; : &amp;#34;{did}&amp;#34;,
+&amp;#34;workspaceId&amp;#34; : &amp;#34;{wid}&amp;#34;,
+&amp;#34;resultElementIds&amp;#34; : {eid},
+&amp;#34;name&amp;#34; : &amp;#34;GEARBOX_CHUCK&amp;#34;,
+&amp;#34;id&amp;#34; : &amp;#34;{translationId}&amp;#34;,
+&amp;#34;href&amp;#34; : &amp;#34;https://cad.onshape.com/api/v6/translations/{translationId}&amp;#34;
+}
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>Once &lt;code>requestState=DONE&lt;/code>, we make a note of the &lt;code>&amp;quot;resultElementIds&amp;quot; : {resulteid},&lt;/code> in the response. This is the element ID of the JSON blob.&lt;/li>
+&lt;li>Now, we can call &lt;a href="https://cad.onshape.com/glassworks/explorer/#/BlobElement/downloadFileWorkspace">BlobElement/downloadFileWorkspace&lt;/a> to retrieve the exported results.
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;GET&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/blobelements/d/{did}/w/{wid}/e/{resulteid}&amp;#39; \
+-H &amp;#39;accept: application/octet-stream&amp;#39;
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Use the &lt;code>{resultExternalId}&lt;/code> value from the translation response as the element ID (&lt;code>{resulteid}&lt;/code>). Do not include the curly braces in your call.&lt;/li>
+&lt;li>Note that you can also open your document, click the &lt;code>GEARBOX_CHUCK.JSON&lt;/code> tab, and download the file from there.&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;/ol>
@@ -1987,7 +2052,7 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &lt;/code>&lt;/pre>&lt;ul>
 &lt;li>Replace &lt;code>{did}&lt;/code> and &lt;code>{wid}&lt;/code> in the URL with the document and workspace IDs for the document you want to import the part to.&lt;/li>
 &lt;li>Note that when using cURL, you must begin the path to the file with an &lt;code>@&lt;/code> symbol.&lt;/li>
-&lt;li>Note that the API takes a large JSON as part of the request body, in which you can specify options for the import.&lt;/li>
+&lt;li>Note that the API takes a JSON as part of the request body, in which you can specify options for the import.&lt;/li>
 &lt;li>When importing files, the API assumes we are importing to the &lt;code>ONSHAPE&lt;/code> file type. You can override this and import to a different file type using the &lt;code>formatName&lt;/code> field. In this case, we can leave the &lt;code>formatName&lt;/code> field blank to import to the &lt;code>ONSHAPE&lt;/code> file type.&lt;/li>
 &lt;/ul>
 &lt;/li>
@@ -1996,7 +2061,7 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &amp;#34;requestState&amp;#34; : &amp;#34;DONE&amp;#34;,
 &amp;#34;documentId&amp;#34; : &amp;#34;{did}&amp;#34;,
 &amp;#34;workspaceId&amp;#34; : &amp;#34;{wid}&amp;#34;,
-&amp;#34;resultElementIds&amp;#34; : [ &amp;#34;{resultEid}&amp;#34; ],
+&amp;#34;resultElementIds&amp;#34; : [ &amp;#34;{resulteid}&amp;#34; ],
 &amp;#34;name&amp;#34; : &amp;#34;FLYWHEEL&amp;#34;,
 &amp;#34;id&amp;#34; : &amp;#34;{id}&amp;#34;,
 &amp;#34;href&amp;#34; : &amp;#34;https://cad.onshape.com/api/v1/translations/{tid}&amp;#34;
@@ -2022,11 +2087,15 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &lt;/blockquote>
 &lt;blockquote>
 &lt;p>📘 &lt;strong>Note&lt;/strong>&lt;/p>
+&lt;p>This documentation refers to Onshape IDs in the following format: &lt;code>{did}, {wid}, {eid}, {pid}, {otherId}&lt;/code>. These represent document, workspace, element, part, and other IDs (respectively) that are needed make the API calls. Please see &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request">API Guide: API Intro&lt;/a> for information on what these IDs mean and how to obtain them from your documents. Never include the curly braces (&lt;code>{}&lt;/code>) in your API calls.&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>📘 &lt;strong>Note&lt;/strong>&lt;/p>
 &lt;p>For Enterprise accounts, replace &lt;strong>&lt;font color="slate">cad&lt;/font>&lt;/strong> in all Onshape URLs with your company domain.
 https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com &amp;gt; https://&lt;font color="slate">&lt;strong>companyName&lt;/strong>&lt;/font>.onshape.com&lt;/p>
 &lt;/blockquote>
 &lt;h2 id="endpoints">Endpoints&lt;/h2>
-&lt;p>To create drawing, Onshape allows you to send all drawing data points and information through the API as part of the request body JSON.&lt;/p>
+&lt;p>To create drawings, Onshape allows you to send all drawing data points and information through the API as part of the request body JSON.&lt;/p>
 &lt;p>The following endpoints are available:&lt;/p>
 &lt;ul>
 &lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Drawing/createDrawingAppElement">Create a drawing&lt;/a>
@@ -2038,17 +2107,45 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 -d &amp;#39;{
 &amp;lt;JSON request body options from the BTDrawingParams schema&amp;gt;
 }&amp;#39;
-&lt;/code>&lt;/pre>Specify the document in which to create the drawing in the URL, and pass any additional options as part of the request body. You can provide a name for the drawing, manipulate the drawing graphics area, specify a part or template to create the drawing from, and more. See documentation for all available options in the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Drawing/createDrawingAppElement">API Explorer&lt;/a>, and check out the &lt;a href="#sample-workflows">Sample Workflows&lt;/a> section below for some practical examples.&lt;p>&lt;/br>
+&lt;/code>&lt;/pre>Specify the document in which to create the drawing in the URL, and pass any additional options as part of the request body. You can provide a name for the drawing, manipulate the drawing graphics area, specify a part or template to create the drawing from, and more.
+&lt;ul>
+&lt;li>See documentation for all available options in the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Drawing/createDrawingAppElement">API Explorer&lt;/a>.&lt;/li>
+&lt;li>For instructions on viewing the documentation for the request body schemas, see our &lt;a href="https://onshape-public.github.io/docs/api-intro/explorer#view-request-body-docs">API Explorer&lt;/a> page.
+Check out the &lt;a href="#sample-workflows">Sample Workflows&lt;/a> section below for some practical examples.&lt;p>&lt;/br>
 &lt;img src="https://onshape-public.github.io/images/BTDrawingParamsSchema.png" alt="BTDrawingParams schema in the createDrawingAppElement endpoint">&lt;/br>&lt;/p>&lt;/li>
 &lt;/ul>
-&lt;h2 id="request-body-json">Request Body JSON&lt;/h2>
-&lt;p>All drawing information can be sent to Onshape in the request body JSON for the &lt;strong>create&lt;/strong> endpoints. For instructions on viewing the documentation for this JSON, please see our &lt;a href="https://onshape-public.github.io/docs/api-intro/explorer#view-request-body-docs">API Explorer&lt;/a> page.&lt;/p>
+&lt;/li>
+&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Drawing/modifyDrawing">Modify a drawing&lt;/a>
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST \
+&amp;#39;https://cad.onshape.doc/api/v6/drawings/d/{did}/w/{wid}/e/{eid}/modify&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+-H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-d &amp;#39;{
+&amp;#34;editdescription&amp;#34;: &amp;#34;Description of the modification.&amp;#34;,
+&amp;#34;jsonRequests&amp;#34;: [
+{
+&amp;lt;JSON request body options from the jsonRequests schema&amp;gt;
+}
+]
+}&amp;#39;
+&lt;/code>&lt;/pre>Specify the drawing to modify in the URL, and pass the information on the modification in the request body. Note that the &lt;code>jsonRequests&lt;/code> schema is not defined in the Glassworks API Explorer; see the &lt;a href="https://github.com/onshape-public/onshapedrawingjson">OnshapeDrawingJson&lt;/a> repository for this information, and check out the &lt;a href="#sample-workflows">Sample Workflows&lt;/a> section below for some practical examples.&lt;/li>
+&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Drawing/getModificationStatus">Get the drawing modification status&lt;/a>
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;GET&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/drawings/modify/status/{mrid}
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+-H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+&lt;/code>&lt;/pre>Provide the modification ID (from the &lt;code>modifyDrawing&lt;/code> response body) to get the status of the modification.&lt;/li>
+&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Drawing/createDrawingTranslation">Translate a drawing&lt;/a>: See the &lt;a href="https://onshape-public.github.io/docs/api-adv/translation#export-a-drawing-as-a-json">Translations API Guide&lt;/a>.&lt;/li>
+&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Drawing/getDrawingTranslatorFormats">Get drawing translation formats&lt;/a>: See the &lt;a href="https://onshape-public.github.io/docs/api-adv/translation#export-a-drawing-as-a-json">Translations API Guide&lt;/a>.&lt;/li>
+&lt;/ul>
 &lt;h2 id="sample-workflows">Sample Workflows&lt;/h2>
 &lt;h3 id="create-a-drawing-from-a-part">Create a drawing from a part&lt;/h3>
 &lt;p>In this example, we&amp;rsquo;ll create a drawing from the &lt;strong>FLYWHEEL&lt;/strong> part in &lt;a href="https://cad.onshape.com/documents/e60c4803eaf2ac8be492c18e/v/405ba186c3a70e0227ab2941/e/6bed6b43463f6a46a37b4a22">this public document&lt;/a>.&lt;/p>
 &lt;ol>
 &lt;li>Create or open an Onshape document in which to create your drawing.&lt;/li>
-&lt;li>Start to form the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Drawing/createDrawingAppElement">Drawings/createDrawingAppElement&lt;/a> call. Replace &lt;code>{did}&lt;/code> and &lt;code>{wid}&lt;/code> in the URL below with the document ID and workspace ID of your document (i.e., the &lt;em>target&lt;/em> document).
+&lt;li>Start to form the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Drawing/createDrawingAppElement">Drawings/createDrawingAppElement&lt;/a> call. Replace &lt;code>{did}&lt;/code> and &lt;code>{wid}&lt;/code> in the URL below with the document ID and workspace ID of your document (i.e., the &lt;em>target&lt;/em> document), and replace &lt;code>CREDENTIAL&lt;/code> with your authorization credentials.
 &lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST&amp;#39; \
 &amp;#39;https://cad.onshape.com/api/v6/drawings/d/{did}/w/{wid}/create&amp;#39; \
 -H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
@@ -2084,7 +2181,7 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &lt;p>In this example, we&amp;rsquo;ll create a drawing from the standard ANSI template in &lt;a href="https://cad.onshape.com/documents/cbe6e776694549b5ba1a3e88/w/24d08acf10234dbc8d3ab585/e/17eef7862b224f6fb12cbc46">this public document&lt;/a>.&lt;/p>
 &lt;ol>
 &lt;li>Open any Onshape document in which to create your drawing.&lt;/li>
-&lt;li>Start to form the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Drawing/createDrawingAppElement">Drawings/createDrawingAppElement&lt;/a> call. Replace &lt;code>{did}&lt;/code> and &lt;code>{wid}&lt;/code> in the URL below with the document ID and workspace ID of your document (i.e., the &lt;em>target&lt;/em> document).
+&lt;li>Start to form the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Drawing/createDrawingAppElement">Drawings/createDrawingAppElement&lt;/a> call. Replace &lt;code>{did}&lt;/code> and &lt;code>{wid}&lt;/code> in the URL below with the document ID and workspace ID of your document (i.e., the &lt;em>target&lt;/em> document), and replace &lt;code>CREDENTIAL&lt;/code> with your authorization credentials.
 &lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST&amp;#39; \
 &amp;#39;https://cad.onshape.com/api/v6/drawings/d/{did}/w/{wid}/create&amp;#39; \
 -H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
@@ -2116,7 +2213,7 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &lt;h3 id="create-a-drawing-in-a-custom-graphics-area">Create a drawing in a custom graphics area&lt;/h3>
 &lt;ol>
 &lt;li>Open any Onshape document in which to create your drawing.&lt;/li>
-&lt;li>Start to form the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Drawing/createDrawingAppElement">Drawings/createDrawingAppElement&lt;/a> call. Replace &lt;code>{did}&lt;/code> and &lt;code>{wid}&lt;/code> in the URL below with your document.
+&lt;li>Start to form the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Drawing/createDrawingAppElement">Drawings/createDrawingAppElement&lt;/a> call. Replace &lt;code>{did}&lt;/code> and &lt;code>{wid}&lt;/code> in the URL below with your document, and replace &lt;code>CREDENTIAL&lt;/code> with your authorization credentials.
 &lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST&amp;#39; \
 &amp;#39;https://cad.onshape.com/api/v6/drawings/d/{did}/w/{wid}/create&amp;#39; \
 -H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
@@ -2139,6 +2236,370 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &lt;/code>&lt;/pre>&lt;/li>
 &lt;li>Call the endpoint and open your document. Confirm that you see the new &lt;code>customGraphicsArea&lt;/code> element:
 &lt;/br>&lt;img src="https://onshape-public.github.io/images/customDrawingArea.png" alt="new drawing created with border and extra column and row" width=550>&lt;/li>
+&lt;/ol>
+&lt;h3 id="add-a-note-to-a-drawing">Add a note to a drawing&lt;/h3>
+&lt;ol>
+&lt;li>Open an existing (or create a new) Onshape document with a drawing.&lt;/li>
+&lt;li>Start to form the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Drawing/modifyDrawing">Drawings/modifyDrawing&lt;/a> call. Replace the URL parameters with the values from your document, and replace &lt;code>CREDENTIALS&lt;/code> with your authorization credentials.
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST \
+&amp;#39;https://cad.onshape.doc/api/v6/drawings/d/{did}/w/{wid}/e/{eid}/modify&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+-H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>Add information about the modification. In this example, we&amp;rsquo;ll create an &lt;code>Onshape::Note&lt;/code> on the drawing. We must specify the &lt;code>messageName&lt;/code> and &lt;code>formatVersion&lt;/code> for the modification, and then provide the contents and size of the annotation.
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST \
+&amp;#39;https://cad.onshape.doc/api/v6/drawings/d/{did}/w/{wid}/e/{eid}/modify&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+-H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-d &amp;#39;{
+&amp;#34;editdescription&amp;#34;: &amp;#34;Add a note to the drawing.&amp;#34;,
+&amp;#34;jsonRequests&amp;#34;: [ {
+&amp;#34;messageName&amp;#34;: &amp;#34;onshapeCreateAnnotations&amp;#34;,
+&amp;#34;formatVersion&amp;#34;: &amp;#34;2021-01-01&amp;#34;,
+&amp;#34;annotations&amp;#34;: [
+{
+&amp;#34;type&amp;#34;: &amp;#34;Onshape::Note&amp;#34;,
+&amp;#34;note&amp;#34;: {
+&amp;#34;position&amp;#34;: {
+&amp;#34;type&amp;#34;: &amp;#34;Onshape::Reference::Point&amp;#34;,
+&amp;#34;coordinate&amp;#34;: [
+1,
+10,
+0
+]
+},
+&amp;#34;contents&amp;#34;: &amp;#34;This is a note&amp;#34;,
+&amp;#34;textHeight&amp;#34;: 0.2,
+&amp;#34;logicalId&amp;#34;: &amp;#34;note1&amp;#34;
+}
+}
+]
+}]
+}&amp;#39;
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>Make the call, and then get &lt;code>id&lt;/code> from the response body. You&amp;rsquo;ll need this to poll the modification status to figure out when the modification has completed.&lt;/li>
+&lt;li>Set up the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Drawing/getModificationStatus">Drawings/getModificationStatus&lt;/a> call. Replace &lt;code>{mrid}&lt;/code> with the &lt;code>id&lt;/code> from the last step, and replace &lt;code>CREDENTIALS&lt;/code> with your credentials. Poll the modification status until the response returns &lt;code>&amp;quot;requestState&amp;quot;: &amp;quot;DONE&amp;quot;&lt;/code>.
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;GET \
+&amp;#39;https://cad.onshape.doc/api/v6/drawings/modify/status/{mrid}&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+-H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>Open your drawing and confirm that you see the new note. Note that your drawing may not match this image exactly, depending on your drawing and document properties. This sample document uses Inches for units.
+&lt;/br>&lt;img src="https://onshape-public.github.io/images/drawings-addnote.png" alt="drawing with note annotation" width=550>&lt;/li>
+&lt;/ol>
+&lt;h3 id="add-a-callout-to-a-drawing">Add a callout to a drawing&lt;/h3>
+&lt;ol>
+&lt;li>Open an existing (or create a new) Onshape document with a drawing.&lt;/li>
+&lt;li>Start to form the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Drawing/modifyDrawing">Drawings/modifyDrawing&lt;/a> call. Replace the URL parameters with the values from your document, and replace &lt;code>CREDENTIALS&lt;/code> with your authorization credentials.
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST \
+&amp;#39;https://cad.onshape.doc/api/v6/drawings/d/{did}/w/{wid}/e/{eid}/modify&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+-H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>Add information about the modification. In this example, we&amp;rsquo;ll add an &lt;code>Onshape::Callout&lt;/code> to the drawing. We must specify the &lt;code>messageName&lt;/code> and &lt;code>formatVersion&lt;/code> for the modification, and then provide the contents and size of the annotation:
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST \
+&amp;#39;https://cad.onshape.doc/api/v6/drawings/d/{did}/w/{wid}/e/{eid}/modify&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+-H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-d &amp;#39;{
+&amp;#34;editdescription&amp;#34;: &amp;#34;Add a callout to the drawing.&amp;#34;,
+&amp;#34;jsonRequests&amp;#34;: [ {
+&amp;#34;messageName&amp;#34;: &amp;#34;onshapeCreateAnnotations&amp;#34;,
+&amp;#34;formatVersion&amp;#34;: &amp;#34;2021-01-01&amp;#34;,
+&amp;#34;annotations&amp;#34;: [
+{
+&amp;#34;callout&amp;#34;:
+{
+&amp;#34;borderShape&amp;#34;: &amp;#34;Circle&amp;#34;,
+&amp;#34;borderSize&amp;#34;: 0,
+&amp;#34;contents&amp;#34;: &amp;#34;Example Callout&amp;#34;,
+&amp;#34;contentsBottom&amp;#34;: &amp;#34;bottom&amp;#34;,
+&amp;#34;contentsLeft&amp;#34;: &amp;#34;left&amp;#34;,
+&amp;#34;contentsRight&amp;#34;: &amp;#34;right&amp;#34;,
+&amp;#34;contentsTop&amp;#34;: &amp;#34;top&amp;#34;,
+&amp;#34;position&amp;#34;: {
+&amp;#34;coordinate&amp;#34;: [
+2.5,
+6,
+0
+],
+&amp;#34;type&amp;#34;: &amp;#34;Onshape::Reference::Point&amp;#34;
+},
+&amp;#34;textHeight&amp;#34;: 0.12,
+&amp;#34;logicalId&amp;#34;: &amp;#34;callout1&amp;#34;
+},
+&amp;#34;type&amp;#34;: &amp;#34;Onshape::Callout&amp;#34;
+}
+]
+}]
+}&amp;#39;
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>Make the call, and then get &lt;code>id&lt;/code> from the response body. You&amp;rsquo;ll need this to poll the modification status to figure out when the modification has completed.&lt;/li>
+&lt;li>Set up the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Drawing/getModificationStatus">Drawings/getModificationStatus&lt;/a> call. Replace &lt;code>{mrid}&lt;/code> with the &lt;code>id&lt;/code> from the last step, and replace &lt;code>CREDENTIALS&lt;/code> with your credentials. Poll the modification status until the response returns &lt;code>&amp;quot;requestState&amp;quot;: &amp;quot;DONE&amp;quot;&lt;/code>.
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;GET \
+&amp;#39;https://cad.onshape.doc/api/v6/drawings/modify/status/{mrid}&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+-H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>Open your drawing and confirm that you see the new callout.
+&lt;/br>&lt;img src="https://onshape-public.github.io/images/drawings-addcallout.png" alt="callout added to drawing" width=550>&lt;/li>
+&lt;/ol>
+&lt;h3 id="add-a-centerline-to-a-drawing">Add a centerline to a drawing&lt;/h3>
+&lt;ol>
+&lt;li>Open an existing (or create a new) Onshape document with a drawing.&lt;/li>
+&lt;li>Start to form the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Drawing/modifyDrawing">Drawings/modifyDrawing&lt;/a> call. Replace the URL parameters with the values from your document, and replace &lt;code>CREDENTIALS&lt;/code> with your authorization credentials.
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST \
+&amp;#39;https://cad.onshape.doc/api/v6/drawings/d/{did}/w/{wid}/e/{eid}/modify&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+-H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>Add information about the modification. In this example, we&amp;rsquo;ll add an &lt;code>Onshape::Centerline&lt;/code> to the drawing. We must specify the &lt;code>messageName&lt;/code> and &lt;code>formatVersion&lt;/code> for the modification, and then provide the coordinates of the centerline ends. (Hint: you can &lt;a href="https://onshape-public.github.io/docs/api-adv/translation/#export-a-drawing-as-a-json">Export a Drawing to JSON&lt;/a> to get a list of valid coordinates and handles.)
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST \
+&amp;#39;https://cad.onshape.doc/api/v6/drawings/d/{did}/w/{wid}/e/{eid}/modify&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+-H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-d &amp;#39;{
+&amp;#34;editdescription&amp;#34;: &amp;#34;Add a centerline to the drawing&amp;#34;,
+&amp;#34;jsonRequests&amp;#34;: [ {
+&amp;#34;messageName&amp;#34;: &amp;#34;onshapeCreateAnnotations&amp;#34;,
+&amp;#34;formatVersion&amp;#34;: &amp;#34;2021-01-01&amp;#34;,
+&amp;#34;annotations&amp;#34;: [
+{
+&amp;#34;pointToPointCenterline&amp;#34;: {
+&amp;#34;point1&amp;#34;: {
+&amp;#34;coordinate&amp;#34;: [
+2,
+4,
+0
+],
+&amp;#34;type&amp;#34;: &amp;#34;Onshape::Reference::Point&amp;#34;,
+&amp;#34;uniqueId&amp;#34;: &amp;#34;point1&amp;#34;,
+&amp;#34;viewId&amp;#34;: &amp;#34;51fa8b6040e411dfd17a4cda&amp;#34;
+},
+&amp;#34;point2&amp;#34;: {
+&amp;#34;coordinate&amp;#34;: [
+7,
+6,
+1
+],
+&amp;#34;type&amp;#34;: &amp;#34;Onshape::Reference::Point&amp;#34;,
+&amp;#34;uniqueId&amp;#34;: &amp;#34;point2&amp;#34;,
+&amp;#34;viewId&amp;#34;: &amp;#34;ay6a8b6020e4h7dfdnn1499i&amp;#34;
+}
+},
+&amp;#34;type&amp;#34;: &amp;#34;Onshape::Centerline::PointToPoint&amp;#34;
+}
+]
+}]
+}&amp;#39;
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>Make the call, and then get &lt;code>id&lt;/code> from the response body. You&amp;rsquo;ll need this to poll the modification status to figure out when the modification has completed.&lt;/li>
+&lt;li>Set up the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Drawing/getModificationStatus">Drawings/getModificationStatus&lt;/a> call. Replace &lt;code>{mrid}&lt;/code> with the &lt;code>id&lt;/code> from the last step, and replace &lt;code>CREDENTIALS&lt;/code> with your credentials. Poll the modification status until the response returns &lt;code>&amp;quot;requestState&amp;quot;: &amp;quot;DONE&amp;quot;&lt;/code>.
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;GET \
+&amp;#39;https://cad.onshape.doc/api/v6/drawings/modify/status/{mrid}&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+-H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>Open your drawing and confirm that you see the new centerline.&lt;/li>
+&lt;/ol>
+&lt;h3 id="add-a-dimension-to-a-drawing">Add a dimension to a drawing&lt;/h3>
+&lt;ol>
+&lt;li>Open an existing (or create a new) Onshape document with a drawing.&lt;/li>
+&lt;li>Start to form the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Drawing/modifyDrawing">Drawings/modifyDrawing&lt;/a> call. Replace the URL parameters with the values from your document, and replace &lt;code>CREDENTIALS&lt;/code> with your authorization credentials.
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST \
+&amp;#39;https://cad.onshape.doc/api/v6/drawings/d/{did}/w/{wid}/e/{eid}/modify&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+-H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>Add information about the modification. In this example, we&amp;rsquo;ll add an &lt;code>Onshape::Dimension&lt;/code> to the drawing. We must specify the &lt;code>messageName&lt;/code> and &lt;code>formatVersion&lt;/code> for the modification, and then provide the coordinates and formatting options for the dimension. (Hint: you can &lt;a href="https://onshape-public.github.io/docs/api-adv/translation/#export-a-drawing-as-a-json">Export a Drawing to JSON&lt;/a> to get a list of valid coordinates and handles.)
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST \
+&amp;#39;https://cad.onshape.doc/api/v6/drawings/d/{did}/w/{wid}/e/{eid}/modify&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+-H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-d &amp;#39;{
+&amp;#34;editdescription&amp;#34;: &amp;#34;Add a dimension to the drawing&amp;#34;,
+&amp;#34;jsonRequests&amp;#34;: [ {
+&amp;#34;messageName&amp;#34;: &amp;#34;onshapeCreateAnnotations&amp;#34;,
+&amp;#34;formatVersion&amp;#34;: &amp;#34;2021-01-01&amp;#34;,
+&amp;#34;annotations&amp;#34;: [
+{
+&amp;#34;radialDimension&amp;#34;: {
+&amp;#34;centerPoint&amp;#34;: {
+&amp;#34;coordinate&amp;#34;: [
+0.2800021171569824,
+0.014964947476983043,
+0.079502
+],
+&amp;#34;type&amp;#34;: &amp;#34;Onshape::Reference::Point&amp;#34;,
+&amp;#34;uniqueId&amp;#34;: &amp;#34;point1&amp;#34;,
+&amp;#34;viewId&amp;#34;: &amp;#34;e11c38795c04ca55047f7ea7&amp;#34;
+},
+&amp;#34;chordPoint&amp;#34;: {
+&amp;#34;coordinate&amp;#34;: [
+0.2920149764955524,
+0.010030535983985095,
+0.079502
+],
+&amp;#34;type&amp;#34;: &amp;#34;Onshape::Reference::Point&amp;#34;,
+&amp;#34;uniqueId&amp;#34;: &amp;#34;point2&amp;#34;,
+&amp;#34;viewId&amp;#34;: &amp;#34;e11c38795c04ca55047f7ea7&amp;#34;
+},
+&amp;#34;formatting&amp;#34;: {
+&amp;#34;dimdec&amp;#34;: 2,
+&amp;#34;dimlim&amp;#34;: false,
+&amp;#34;dimpost&amp;#34;: &amp;#34;R&amp;lt;&amp;gt;&amp;#34;,
+&amp;#34;dimtm&amp;#34;: 0,
+&amp;#34;dimtol&amp;#34;: false,
+&amp;#34;dimtp&amp;#34;: 0,
+&amp;#34;type&amp;#34;: &amp;#34;Onshape::Formatting::Dimension&amp;#34;
+},
+&amp;#34;logicalId&amp;#34;: &amp;#34;dimension1&amp;#34;,
+&amp;#34;textOverride&amp;#34;: &amp;#34;&amp;#34;,
+&amp;#34;textPosition&amp;#34;: {
+&amp;#34;coordinate&amp;#34;: [
+191.80537349378181,
+89.76274130852224,
+0
+],
+&amp;#34;type&amp;#34;: &amp;#34;Onshape::Reference::Point&amp;#34;
+}
+},
+&amp;#34;type&amp;#34;: &amp;#34;Onshape::Dimension::Radial&amp;#34;
+}
+]
+}]
+}&amp;#39;
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>Make the call, and then get &lt;code>id&lt;/code> from the response body. You&amp;rsquo;ll need this to poll the modification status to figure out when the modification has completed.&lt;/li>
+&lt;li>Set up the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Drawing/getModificationStatus">Drawings/getModificationStatus&lt;/a> call. Replace &lt;code>{mrid}&lt;/code> with the &lt;code>id&lt;/code> from the last step, and replace &lt;code>CREDENTIALS&lt;/code> with your credentials. Poll the modification status until the response returns &lt;code>&amp;quot;requestState&amp;quot;: &amp;quot;DONE&amp;quot;&lt;/code>.
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;GET \
+&amp;#39;https://cad.onshape.doc/api/v6/drawings/modify/status/{mrid}&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+-H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>Open your drawing and confirm that you see the new dimension.&lt;/li>
+&lt;/ol>
+&lt;h3 id="add-a-geometric-tolerance-to-a-drawing">Add a geometric tolerance to a drawing&lt;/h3>
+&lt;ol>
+&lt;li>Open an existing (or create a new) Onshape document with a drawing.&lt;/li>
+&lt;li>Start to form the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Drawing/modifyDrawing">Drawings/modifyDrawing&lt;/a> call. Replace the URL parameters with the values from your document, and replace &lt;code>CREDENTIALS&lt;/code> with your authorization credentials.
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST \
+&amp;#39;https://cad.onshape.doc/api/v6/drawings/d/{did}/w/{wid}/e/{eid}/modify&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+-H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>Add information about the modification. In this example, we&amp;rsquo;ll add an &lt;code>Onshape::GeometricTolerance&lt;/code> to the drawing. We must specify the &lt;code>messageName&lt;/code> and &lt;code>formatVersion&lt;/code> for the modification, and then provide the frames and position of the annotation:
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST \
+&amp;#39;https://cad.onshape.doc/api/v6/drawings/d/{did}/w/{wid}/e/{eid}/modify&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+-H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-d &amp;#39;{
+&amp;#34;editdescription&amp;#34;: &amp;#34;Add a geometric tolerance to the drawing&amp;#34;,
+&amp;#34;jsonRequests&amp;#34;: [ {
+&amp;#34;messageName&amp;#34;: &amp;#34;onshapeCreateAnnotations&amp;#34;,
+&amp;#34;formatVersion&amp;#34;: &amp;#34;2021-01-01&amp;#34;,
+&amp;#34;annotations&amp;#34;: [
+{
+&amp;#34;geometricTolerance&amp;#34;: {
+&amp;#34;frames&amp;#34;: [
+&amp;#34;{\\fDrawing Symbols Sans;◎}%%v{\\fDrawing Symbols Sans;∅}tol1{\\fDrawing Symbols Sans;Ⓜ}%%v%%v%%v%%v%%v\n&amp;#34;,
+&amp;#34;{\\fDrawing Symbols Sans;⌖}%%vto2{\\fDrawing Symbols Sans;Ⓛ}%%v%%v%%v%%v%%v\n&amp;#34;
+],
+&amp;#34;logicalId&amp;#34;: &amp;#34;geometricTolerance1&amp;#34;,
+&amp;#34;position&amp;#34;: {
+&amp;#34;coordinate&amp;#34;: [
+6,
+6,
+0
+],
+&amp;#34;type&amp;#34;: &amp;#34;Onshape::Reference::Point&amp;#34;
+}
+},
+&amp;#34;type&amp;#34;: &amp;#34;Onshape::GeometricTolerance&amp;#34;
+}
+]
+}]
+}&amp;#39;
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>Make the call, and then get &lt;code>id&lt;/code> from the response body. You&amp;rsquo;ll need this to poll the modification status to figure out when the modification has completed.&lt;/li>
+&lt;li>Set up the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Drawing/getModificationStatus">Drawings/getModificationStatus&lt;/a> call. Replace &lt;code>{mrid}&lt;/code> with the &lt;code>id&lt;/code> from the last step, and replace &lt;code>CREDENTIALS&lt;/code> with your credentials. Poll the modification status until the response returns &lt;code>&amp;quot;requestState&amp;quot;: &amp;quot;DONE&amp;quot;&lt;/code>.
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;GET \
+&amp;#39;https://cad.onshape.doc/api/v6/drawings/modify/status/{mrid}&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+-H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>Open your drawing and confirm that you see the new annotation.
+&lt;/br>&lt;img src="https://onshape-public.github.io/images/drawings-addtolerance.png" alt="new drawing created with border and extra column and row" width=550>&lt;/li>
+&lt;/ol>
+&lt;h3 id="add-an-inspection-symbol-to-a-drawing">Add an inspection symbol to a drawing&lt;/h3>
+&lt;ol>
+&lt;li>Open an existing (or create a new) Onshape document with a drawing.&lt;/li>
+&lt;li>Start to form the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Drawing/modifyDrawing">Drawings/modifyDrawing&lt;/a> call. Replace the URL parameters with the values from your document, and replace &lt;code>CREDENTIALS&lt;/code> with your authorization credentials.
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST \
+&amp;#39;https://cad.onshape.doc/api/v6/drawings/d/{did}/w/{wid}/e/{eid}/modify&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+-H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>Add information about the modification. In this example, we&amp;rsquo;ll add an &lt;code>Onshape::InspectionSymbol&lt;/code> to the drawing. We must specify the &lt;code>messageName&lt;/code> and &lt;code>formatVersion&lt;/code> for the modification, and then provide the shape and position of the inspection symbol. (Hint: you can &lt;a href="https://onshape-public.github.io/docs/api-adv/translation/#export-a-drawing-as-a-json">Export a Drawing to JSON&lt;/a> to get a list of valid coordinates and handles.)
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST \
+&amp;#39;https://cad.onshape.doc/api/v6/drawings/d/{did}/w/{wid}/e/{eid}/modify&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+-H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-d &amp;#39;{
+&amp;#34;editdescription&amp;#34;: &amp;#34;Add an inspection symbol to the drawing&amp;#34;,
+&amp;#34;jsonRequests&amp;#34;: [ {
+&amp;#34;messageName&amp;#34;: &amp;#34;onshapeCreateAnnotations&amp;#34;,
+&amp;#34;formatVersion&amp;#34;: &amp;#34;2021-01-01&amp;#34;,
+&amp;#34;annotations&amp;#34;: [
+{
+&amp;#34;inspectionSymbol&amp;#34;: {
+&amp;#34;borderShape&amp;#34;: &amp;#34;Circle&amp;#34;,
+&amp;#34;borderSize&amp;#34;: 2,
+&amp;#34;logicalId&amp;#34;: &amp;#34;inspection1&amp;#34;,
+&amp;#34;parentAnnotation&amp;#34;: &amp;#34;h:10000577&amp;#34;,
+&amp;#34;parentLineIndex&amp;#34;: 0.0,
+&amp;#34;position&amp;#34;: {
+&amp;#34;coordinate&amp;#34;: [
+2.6,
+6,
+0
+],
+&amp;#34;type&amp;#34;: &amp;#34;Onshape::Reference::Point&amp;#34;
+},
+&amp;#34;textHeight&amp;#34;: 2
+},
+&amp;#34;type&amp;#34;: &amp;#34;Onshape::InspectionSymbol&amp;#34;
+}
+]
+}]
+}&amp;#39;
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>Make the call, and then get &lt;code>id&lt;/code> from the response body. You&amp;rsquo;ll need this to poll the modification status to figure out when the modification has completed.&lt;/li>
+&lt;li>Set up the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Drawing/getModificationStatus">Drawings/getModificationStatus&lt;/a> call. Replace &lt;code>{mrid}&lt;/code> with the &lt;code>id&lt;/code> from the last step, and replace &lt;code>CREDENTIALS&lt;/code> with your credentials. Poll the modification status until the response returns &lt;code>&amp;quot;requestState&amp;quot;: &amp;quot;DONE&amp;quot;&lt;/code>.
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;GET \
+&amp;#39;https://cad.onshape.doc/api/v6/drawings/modify/status/{mrid}&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+-H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>Open your drawing and confirm that you see the new inspection symbol.&lt;/li>
 &lt;/ol>
 &lt;h2 id="additional-resources">Additional Resources&lt;/h2>
 &lt;ul>
