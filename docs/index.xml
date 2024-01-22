@@ -1695,6 +1695,11 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &lt;p>These asynchronous exports include a few additional steps, which are explained in more detail in the &lt;a href="#async-export-steps">next section&lt;/a>:&lt;/p>
 &lt;ol>
 &lt;li>See what formats are available for exporting your content with &lt;strong>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Translation/getAllTranslatorFormats">Translation/getAllTranslatorFormats&lt;/a>&lt;/strong>.&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>&lt;strong>Note:&lt;/strong> Parts with mesh data cannot be exported to ACIS, IGES, or OBJ format.&lt;/li>
+&lt;/ul>
+&lt;ol start="2">
 &lt;li>Call the desired &lt;strong>translation API&lt;/strong>.
 &lt;ul>
 &lt;li>Specify the target &lt;strong>&lt;code>formatName&lt;/code>&lt;/strong> in the request body JSON.&lt;/li>
