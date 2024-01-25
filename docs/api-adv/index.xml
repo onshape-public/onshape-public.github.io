@@ -930,7 +930,11 @@ Check out the &lt;a href="#sample-workflows">Sample Workflows&lt;/a> section bel
 -H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 -H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 &lt;/code>&lt;/pre>&lt;/li>
-&lt;li>Add information about the modification. In this example, we&amp;rsquo;ll add an &lt;code>Onshape::Centerline&lt;/code> to the drawing. We must specify the &lt;code>messageName&lt;/code> and &lt;code>formatVersion&lt;/code> for the modification, and then provide the coordinates of the centerline ends. (Hint: you can &lt;a href="https://onshape-public.github.io/docs/api-adv/translation/#export-a-drawing-as-a-json">Export a Drawing to JSON&lt;/a> to get a list of valid coordinates and handles.)
+&lt;li>Add information about the modification. In this example, we&amp;rsquo;ll add an &lt;code>Onshape::Centerline&lt;/code> to the drawing. We must specify the &lt;code>messageName&lt;/code> and &lt;code>formatVersion&lt;/code> for the modification, and then provide the coordinates of the centerline ends.&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>Note: you can &lt;a href="https://onshape-public.github.io/docs/api-adv/translation/#export-a-drawing-as-a-json">Export a Drawing to JSON&lt;/a> to get a list of valid coordinates and handles.&lt;/li>
+&lt;li>Note: if you have access, you can refer to the &lt;a href="https://docs.opendesign.com/td/">ODA documentation&lt;/a> for more detailed formatting information.
 &lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST \
 &amp;#39;https://cad.onshape.doc/api/v6/drawings/d/{did}/w/{wid}/e/{eid}/modify&amp;#39; \
 -H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
@@ -971,6 +975,8 @@ Check out the &lt;a href="#sample-workflows">Sample Workflows&lt;/a> section bel
 }]
 }&amp;#39;
 &lt;/code>&lt;/pre>&lt;/li>
+&lt;/ul>
+&lt;ol start="4">
 &lt;li>Make the call, and then get &lt;code>id&lt;/code> from the response body. You&amp;rsquo;ll need this to poll the modification status to figure out when the modification has completed.&lt;/li>
 &lt;li>Set up the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Drawing/getModificationStatus">Drawings/getModificationStatus&lt;/a> call. Replace &lt;code>{mrid}&lt;/code> with the &lt;code>id&lt;/code> from the last step, and replace &lt;code>CREDENTIALS&lt;/code> with your credentials. Poll the modification status until the response returns &lt;code>&amp;quot;requestState&amp;quot;: &amp;quot;DONE&amp;quot;&lt;/code>.
 &lt;pre tabindex="0">&lt;code>curl -X &amp;#39;GET \

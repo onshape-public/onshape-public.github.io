@@ -9,7 +9,7 @@ All Onshape API calls must be properly authenticated by replacing the CREDENTIAL
 📘 Note
 This page provides sample code as curls. See the curl documentation for more information.
 📘 Note
-All Onshape API calls must be properly authenticated by replacing the CREDENTIALS variable in the curls below. See the API Keys page for instructions and the Quick Start for an example. All applications submitted to the Onshape App Store must authenticate with OAuth2."><meta itemprop=datePublished content="2023-10-12T00:00:00+00:00"><meta itemprop=dateModified content="2023-10-12T00:00:00+00:00"><meta itemprop=wordCount content="2722"><meta itemprop=keywords content><meta name=twitter:card content="summary"><meta name=twitter:title content="Drawings"><meta name=twitter:description content="This page describes the APIs Onshape provides for creating and manipulating Onshape drawings.
+All Onshape API calls must be properly authenticated by replacing the CREDENTIALS variable in the curls below. See the API Keys page for instructions and the Quick Start for an example. All applications submitted to the Onshape App Store must authenticate with OAuth2."><meta itemprop=datePublished content="2023-10-12T00:00:00+00:00"><meta itemprop=dateModified content="2023-10-12T00:00:00+00:00"><meta itemprop=wordCount content="2739"><meta itemprop=keywords content><meta name=twitter:card content="summary"><meta name=twitter:title content="Drawings"><meta name=twitter:description content="This page describes the APIs Onshape provides for creating and manipulating Onshape drawings.
 📘 Note
 This page provides sample code as curls. See the curl documentation for more information.
 📘 Note
@@ -182,7 +182,7 @@ Check out the <a href=#sample-workflows>Sample Workflows</a> section below for s
   -H &#39;Authorization: Basic CREDENTIALS&#39; \
   -H &#39;Accept: application/json;charset=UTF-8; qs=0.09&#39; \
   -H &#39;Content-Type: application/json;charset=UTF-8; qs=0.09&#39; \
-</code></pre></li><li>Add information about the modification. In this example, we&rsquo;ll add an <code>Onshape::Centerline</code> to the drawing. We must specify the <code>messageName</code> and <code>formatVersion</code> for the modification, and then provide the coordinates of the centerline ends. (Hint: you can <a href=/docs/api-adv/translation/#export-a-drawing-as-a-json>Export a Drawing to JSON</a> to get a list of valid coordinates and handles.)<pre tabindex=0><code>curl -X &#39;POST \
+</code></pre></li><li>Add information about the modification. In this example, we&rsquo;ll add an <code>Onshape::Centerline</code> to the drawing. We must specify the <code>messageName</code> and <code>formatVersion</code> for the modification, and then provide the coordinates of the centerline ends.</li></ol><ul><li>Note: you can <a href=/docs/api-adv/translation/#export-a-drawing-as-a-json>Export a Drawing to JSON</a> to get a list of valid coordinates and handles.</li><li>Note: if you have access, you can refer to the <a href=https://docs.opendesign.com/td/>ODA documentation</a> for more detailed formatting information.<pre tabindex=0><code>curl -X &#39;POST \
   &#39;https://cad.onshape.doc/api/v6/drawings/d/{did}/w/{wid}/e/{eid}/modify&#39; \
   -H &#39;Authorization: Basic CREDENTIALS&#39; \
   -H &#39;Accept: application/json;charset=UTF-8; qs=0.09&#39; \
@@ -221,7 +221,7 @@ Check out the <a href=#sample-workflows>Sample Workflows</a> section below for s
           ]  
         }]
       }&#39;
-</code></pre></li><li>Make the call, and then get <code>id</code> from the response body. You&rsquo;ll need this to poll the modification status to figure out when the modification has completed.</li><li>Set up the <a href=https://cad.onshape.com/glassworks/explorer/#/Drawing/getModificationStatus>Drawings/getModificationStatus</a> call. Replace <code>{mrid}</code> with the <code>id</code> from the last step, and replace <code>CREDENTIALS</code> with your credentials. Poll the modification status until the response returns <code>"requestState": "DONE"</code>.<pre tabindex=0><code>curl -X &#39;GET \
+</code></pre></li></ul><ol start=4><li>Make the call, and then get <code>id</code> from the response body. You&rsquo;ll need this to poll the modification status to figure out when the modification has completed.</li><li>Set up the <a href=https://cad.onshape.com/glassworks/explorer/#/Drawing/getModificationStatus>Drawings/getModificationStatus</a> call. Replace <code>{mrid}</code> with the <code>id</code> from the last step, and replace <code>CREDENTIALS</code> with your credentials. Poll the modification status until the response returns <code>"requestState": "DONE"</code>.<pre tabindex=0><code>curl -X &#39;GET \
   &#39;https://cad.onshape.doc/api/v6/drawings/modify/status/{mrid}&#39; \
   -H &#39;Authorization: Basic CREDENTIALS&#39; \
   -H &#39;Accept: application/json;charset=UTF-8; qs=0.09&#39; \
