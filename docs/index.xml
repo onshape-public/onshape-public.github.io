@@ -7379,6 +7379,12 @@ the location you chose for you extension.&lt;/p>
 &lt;/ul>
 &lt;p>The application is built using Express and is deployed on Heroku.&lt;/p>
 &lt;p>Refer to the &lt;a href="https://github.com/onshape-public/app-gltf-viewer">gltf-viewer-app README&lt;/a> for instructions on running this sample app.&lt;/p></description></item><item><title>Docs: Changelog</title><link>https://onshape-public.github.io/docs/changelog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/changelog/</guid><description>
+&lt;h4 id="rel-1177---released-2024-02-23">&lt;code>rel-1.177&lt;/code> - released 2024-02-23&lt;/h4>
+&lt;ul>
+&lt;li>Updated translation endpoints with new request property &lt;code>useIGESImportPostProcessing&lt;/code>&lt;/li>
+&lt;li>Updated translation endpoints with modified request property &lt;code>stepParasolidPreprocessingOption&lt;/code>&lt;/li>
+&lt;li>Updated descriptions for &lt;code>metadata&lt;/code> | &lt;code>releasepackages&lt;/code> for property &lt;code>propertyOverrideStatus&lt;/code>&lt;/li>
+&lt;/ul>
 &lt;h4 id="rel-1176---released-2024-02-02">&lt;code>rel-1.176&lt;/code> - released 2024-02-02&lt;/h4>
 &lt;ul>
 &lt;li>New create publication endpoint &lt;code>POST&lt;/code> : &lt;code>/publications&lt;/code>&lt;/li>
