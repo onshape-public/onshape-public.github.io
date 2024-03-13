@@ -1,5 +1,9 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>– Authentication</title><link>https://onshape-public.github.io/docs/auth/</link><description>Recent content in Authentication on</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 18 May 2020 20:25:28 -0400</lastBuildDate><atom:link href="https://onshape-public.github.io/docs/auth/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: OAuth</title><link>https://onshape-public.github.io/docs/auth/oauth/</link><pubDate>Mon, 18 May 2020 20:39:14 -0400</pubDate><guid>https://onshape-public.github.io/docs/auth/oauth/</guid><description>
 &lt;p>&lt;strong>See the &lt;a href="https://github.com/onshape-public/app-gltf-viewer">gltf-viewer-app&lt;/a> for a working example of OAuth2.&lt;/strong>&lt;/p>
+&lt;blockquote>
+&lt;p>📘 &lt;strong>Note&lt;/strong>&lt;/p>
+&lt;p>All applications submitted to the Onshape App Store (Onshape Apps) must use OAuth2 for authorization. Automation scripts (or applications not meant for the Onshape App Store) may use either OAuth2 or &lt;a href="https://onshape-public.github.io/docs/auth/apikeys">API Keys&lt;/a> for authentication. OAuth2 allows applications to call Onshape APIs on behalf of the users of the application; API keys will only perform operations on behalf of the Onshape user who generated the API keys.&lt;/p>
+&lt;/blockquote>
 &lt;h2 id="what-is-oauth2">What is OAuth2?&lt;/h2>
 &lt;p>The OAuth (Open authorization) protocol was developed by the Internet Engineering Task Force, an open standards organization that develops and promotes voluntary Internet standards (particularly the technical standards that comprise the Internet protocol suite) to enable secure, delegated access to an application&amp;rsquo;s resources.&lt;/p>
 &lt;p>The OAuth2 protocol enables an application to access a resource that is under the control of someone else. In order to access that resource, a &lt;i>token&lt;/i> is required. The token represent the delegated rights of access (that is, what rights this application has, such as read/write/update, scope, rights to different resources, and more).&lt;/p>
@@ -520,7 +524,10 @@ to retrieve user data from session.&lt;/li>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> app.run()
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: API Keys</title><link>https://onshape-public.github.io/docs/auth/apikeys/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/auth/apikeys/</guid><description>
-&lt;p>&lt;strong>NOTE: The authentication processes outlined on this page are for local and internal testing only. All applications submitted to the Onshape App Store must follow the &lt;a href="https://onshape-public.github.io/docs/auth/oauth">Onshape OAuth2 protocols&lt;/a>.&lt;/strong>&lt;/p>
+&lt;blockquote>
+&lt;p>📘 &lt;strong>Note&lt;/strong>&lt;/p>
+&lt;p>All applications submitted to the Onshape App Store (Onshape Apps) must follow the instructions on the &lt;a href="https://onshape-public.github.io/docs/auth/oauth">OAuth2&lt;/a> page and use OAuth2 for authorization. Automation scripts (or applications not meant for the Onshape App Store) may use either OAuth2 or API Keys for authentication. OAuth2 allows applications to call Onshape APIs on behalf of the users of the application; API keys will only perform operations on behalf of the Onshape user who generated the API keys.&lt;/p>
+&lt;/blockquote>
 &lt;h2 id="why-api-keys">Why API Keys?&lt;/h2>
 &lt;p>API keys are useful for small applications meant for personal use, allowing developers to avoid the overhead of the OAuth workflow. Creating an app is very easy with API keys: create an API key with the Developer Portal, set up a function to build your API key header as in the samples, and make your API calls! There&amp;rsquo;s no need to deal with OAuth redirects or things like that.&lt;/p>
 &lt;p>We&amp;rsquo;ve moved over to using API keys for authenticating requests instead of using cookies for several reasons.&lt;/p>
