@@ -1,1159 +1,923 @@
-<!doctype html><html lang=en class=no-js><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=generator content="Hugo 0.124.0"><meta name=robots content="index, follow"><link rel="shortcut icon" href=/favicons/favicon.ico><link rel=apple-touch-icon href=/favicons/apple-touch-icon-180x180.png sizes=180x180><link rel=icon type=image/png href=/favicons/favicon-16x16.png sizes=16x16><link rel=icon type=image/png href=/favicons/favicon-32x32.png sizes=32x32><link rel=icon type=image/png href=/favicons/android-36x36.png sizes=36x36><link rel=icon type=image/png href=/favicons/android-48x48.png sizes=48x48><link rel=icon type=image/png href=/favicons/android-72x72.png sizes=72x72><link rel=icon type=image/png href=/favicons/android-96x96.png sizes=96x96><link rel=icon type=image/png href=/favicons/android-144x144.png sizes=144x144><link rel=icon type=image/png href=/favicons/android-192x192.png sizes=192x192><title>Feature List API | </title><meta name=description content="Onshape Part Studio Feature Access API
-Summary
-The Onshape Part Studio tab tracks edits in terms of a feature list.  Creation and modification of …"><meta property="og:title" content="Feature List API"><meta property="og:description" content="Onshape Part Studio Feature Access API
-Summary The Onshape Part Studio tab tracks edits in terms of a feature list. Creation and modification of geometry is performed by manipulating that list. This document describes capabilities that are intended to allow partners and customers to manipulate the feature list from software.
-The feature API comprises the following API methods:
-GET /api/partstudios/DWMVE/features - get feature list
-GET /api/partstudios/DWMVE/featurespecs - get feature specs"><meta property="og:type" content="article"><meta property="og:url" content="https://onshape-public.github.io/docs/api-adv/featureaccess/"><meta property="article:section" content="docs"><meta property="article:published_time" content="2020-05-18T20:37:28-04:00"><meta property="article:modified_time" content="2020-05-18T20:37:28-04:00"><meta itemprop=name content="Feature List API"><meta itemprop=description content="Onshape Part Studio Feature Access API
-Summary The Onshape Part Studio tab tracks edits in terms of a feature list. Creation and modification of geometry is performed by manipulating that list. This document describes capabilities that are intended to allow partners and customers to manipulate the feature list from software.
-The feature API comprises the following API methods:
-GET /api/partstudios/DWMVE/features - get feature list
-GET /api/partstudios/DWMVE/featurespecs - get feature specs"><meta itemprop=datePublished content="2020-05-18T20:37:28-04:00"><meta itemprop=dateModified content="2020-05-18T20:37:28-04:00"><meta itemprop=wordCount content="6502"><meta itemprop=keywords content><meta name=twitter:card content="summary"><meta name=twitter:title content="Feature List API"><meta name=twitter:description content="Onshape Part Studio Feature Access API
-Summary The Onshape Part Studio tab tracks edits in terms of a feature list. Creation and modification of geometry is performed by manipulating that list. This document describes capabilities that are intended to allow partners and customers to manipulate the feature list from software.
-The feature API comprises the following API methods:
-GET /api/partstudios/DWMVE/features - get feature list
-GET /api/partstudios/DWMVE/featurespecs - get feature specs"><link rel=preload href=/scss/main.min.a0e42750c39e1dd68339377c4f62b715a199ce83570fbf00b4c6a3d18c6a6146.css as=style><link href=/scss/main.min.a0e42750c39e1dd68339377c4f62b715a199ce83570fbf00b4c6a3d18c6a6146.css rel=stylesheet integrity><script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script><style>code{white-space:pre-wrap!important;overflow-wrap:break-word}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-3CY8X7Q128"></script><script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-3CY8X7Q128",{anonymize_ip:!1})}</script></head><body class=td-page><header><nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar"><a class=navbar-brand href=/><span class=navbar-logo><svg width="95" height="22" viewBox="0 0 95 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.35.0l3.6143 2.09524L3.45714 7.72619V12.5714L0 10.5548V5.44762L9.35.0zm9.4286 16.2643-3.6143 2.1476V7.64763L10.7905 5.08097l3.6666-2.12143 4.3215 2.51428V16.2643zM0 12.3619v3.9809l9.45476 5.4215 4.21664-2.4881L13.6452 15.1381 9.35 17.7048.0 12.3619z" fill="#64bc4f"/><path fill-rule="evenodd" clip-rule="evenodd" d="M4.9762 10.5811 6.57381 11.4978V9.42871L10.9214 6.88824 9.35001 5.91919 4.9762 8.48586V10.5811zm6.8881-3.14291L10.2667 8.35485 12.1 9.42866 12.0738 14.3263 13.6714 13.4096V8.4858L11.8643 7.43819zm-.7072 5.68331v1.781L9.35001 15.9763 4.9762 13.4358V11.6549l4.34762 2.5405 1.83328-1.0739z" fill="#666"/><path fill-rule="evenodd" clip-rule="evenodd" d="M56.5452 3.16919V8.01443C56.8595 7.59538 57.2523 7.2549 57.6976 6.94062 58.1428 6.65252 58.6666 6.49538 59.2428 6.49538s1.0738.07857 1.4929.23571C61.1547 6.88824 61.5214 7.15014 61.8357 7.46443 62.5428 8.17157 62.9095 9.11443 62.9095 10.2668v5.081H61.5999V10.3454C61.5999 9.53348 61.3642 8.9049 60.919 8.43347c-.4452-.47142-1.0476-.70714-1.7548-.70714-.7333.0-1.3619.23572-1.8595.73333C56.7809 8.95728 56.5452 9.58586 56.5452 10.3716v5.0285H55.2357V3.16919h1.3095zM49.7881 7.64775c1.3357.0 2.069.44524 2.1738 1.3619V8.95727h1.3095C53.1928 8.25013 52.9047 7.67394 52.3809 7.25489 51.7786 6.75727 50.9405 6.49537 49.8666 6.49537c-1.1261.0-1.9642.209519999999999-2.5404.65476-.5762.41905-.8643 1.04762-.8643 1.83333C46.4619 9.53346 46.5928 9.92632 46.8809 10.2406 47.169 10.5287 47.5357 10.7644 47.9547 10.9477 48.4 11.1311 48.8714 11.262 49.369 11.3668 49.8928 11.4716 50.3643 11.5763 50.7833 11.7073 51.2024 11.8382 51.569 11.9954 51.8571 12.1787 52.1452 12.3882 52.2762 12.6501 52.2762 13.0168 52.2762 13.5406 51.9881 13.9335 51.4381 14.143L51.3476 14.1703C51.1209 14.2391 50.91 14.3032 50.6786 14.3263 50.4166 14.3525 50.1286 14.3787 49.8405 14.3787S49.2643 14.3525 48.95 14.2477C48.1119 13.9597 47.6666 13.4358 47.5881 12.6239H46.2262C46.2785 13.462 46.619 14.1168 47.2476 14.6406c.680900000000001.5762 1.6238.8643 2.7762.8643 1.1.0 1.9643-.2357 2.5928-.680999999999999C53.2714 14.3787 53.5857 13.7239 53.5857 12.8858 53.5857 12.3358 53.4547 11.9168 53.1667 11.6025 52.8786 11.2882 52.5119 11.0525 52.0928 10.8692 51.6476 10.6858 51.1762 10.5549 50.6786 10.4501 50.2403 10.3844 49.8387 10.282 49.4738 10.1889L49.4734 10.1888 49.4721 10.1885C49.4015 10.1705 49.3322 10.1528 49.2643 10.1358 48.8452 10.0311 48.4785 9.87394 48.1905 9.69061 47.9024 9.50727 47.7714 9.24537 47.7714 8.90489 47.7714 8.0668 48.4524 7.64775 49.7881 7.64775zM30.9309 6.52152c1.3095.0 2.3572.44524 3.1691 1.30952C34.8595 8.66914 35.2523 9.74295 35.2523 11.0263 35.2523 12.3096 34.8595 13.3834 34.1 14.2215 33.2881 15.0858 32.2404 15.531 30.9309 15.531s-2.3571-.4452-3.169-1.3095C27.0023 13.3834 26.6095 12.3096 26.6095 11.0263 26.6095 9.74295 27.0023 8.66914 27.7619 7.83104 28.5738 6.96676 29.6214 6.52152 30.9309 6.52152zm0 7.80478C31.8738 14.3263 32.6071 14.012 33.1571 13.3572 33.6809 12.7287 33.9428 11.9691 33.9428 11.0263 33.9428 10.0834 33.6809 9.29771 33.1571 8.69533 32.6071 8.04057 31.8738 7.72628 30.9309 7.72628 29.9881 7.72628 29.2547 8.04057 28.7047 8.69533 28.1809 9.3239 27.919 10.0834 27.919 11.0263 27.919 11.9691 28.1809 12.7549 28.7047 13.3572 29.2285 14.012 29.9881 14.3263 30.9309 14.3263zm7.3595-7.64764V8.04057C38.6047 7.62152 38.9976 7.28104 39.4428 6.96676 39.8881 6.67866 40.4119 6.52152 40.9881 6.52152c.576099999999997.0 1.0738.07857 1.4928.23571C42.9 6.91438 43.2666 7.17628 43.5809 7.49057 44.2881 8.19771 44.6547 9.14057 44.6547 10.2929v5.081H43.3452V10.3453C43.3452 9.53343 43.1095 8.90485 42.6642 8.43342c-.4452-.47142-1.0476-.70714-1.7547-.70714C40.1761 7.72628 39.5476 7.962 39.05 8.45961 38.5261 8.95723 38.2904 9.58581 38.2904 10.3715v5.0286H36.9809V6.67866h1.3095zM68.7762 15.531C70.1643 15.531 71.1857 15.0072 71.8928 13.9858v1.3881h1.3095V6.65247H71.8928V8.06676C71.1857 7.04533 70.1643 6.52152 68.8547 6.52152 67.5452 6.52152 66.4976 6.96676 65.7119 7.83104 64.9524 8.69533 64.5595 9.76914 64.5595 11.0263c0 1.2833.392899999999997 2.3309 1.1524 3.1952C66.4976 15.0858 67.519 15.531 68.7762 15.531zM71.1857 13.3572C70.6357 14.012 69.9023 14.3263 68.9595 14.3263 68.0166 14.3263 67.2571 14.012 66.7071 13.3572 66.1571 12.7549 65.8952 11.9691 65.8952 11.0263 65.8952 10.0834 66.1571 9.3239 66.7071 8.69533 67.2833 8.04057 68.0428 7.72628 68.9595 7.72628 69.9023 7.72628 70.6357 8.04057 71.1857 8.69533 71.7095 9.29771 71.9714 10.0834 71.9714 11.0263 71.9714 11.9691 71.7095 12.7287 71.1857 13.3572zM76.7643 8.06676C77.4714 7.04533 78.4928 6.52152 79.8809 6.52152c1.2572.0 2.2786.44524 3.0381 1.30952C83.7047 8.69533 84.0976 9.74295 84.0976 11.0263 84.0976 12.2834 83.7047 13.3572 82.919 14.2215 82.1333 15.0858 81.0857 15.531 79.7762 15.531 78.4666 15.531 77.4452 15.0072 76.7381 13.9858v4.8714H75.4285V6.67866h1.3096v1.3881H76.7643zM79.7238 7.70009C78.7809 7.70009 78.0476 8.01438 77.4976 8.66914 76.9738 9.29771 76.7119 10.0572 76.7119 11.0001 76.7119 11.9429 76.9738 12.7287 77.4976 13.331 78.0476 13.9858 78.7809 14.3001 79.7238 14.3001 80.6404 14.3001 81.4 13.9858 81.9762 13.331 82.5262 12.7025 82.7881 11.9429 82.7881 11.0001 82.7881 10.0572 82.5262 9.27152 81.9762 8.66914 81.4 8.04057 80.6404 7.70009 79.7238 7.70009zM92.2167 12.8597C91.719 13.8287 90.8809 14.3263 89.7024 14.3263c-.8643.0-1.5715-.261900000000001-2.1215-.8119C87.0309 12.9906 86.7167 12.3358 86.6119 11.5239H93.919v-.5238C93.919 9.7168 93.5262 8.64299 92.7667 7.80489 91.9548 6.94061 90.9071 6.49537 89.5976 6.49537s-2.3571.44524-3.169 1.30952C85.669 8.64299 85.2762 9.7168 85.2762 11.0001c0 1.2834.392799999999994 2.3572 1.2047 3.1953C87.2929 15.0597 88.3667 15.5049 89.6762 15.5049c1.0476.0 1.8857-.2357 2.54050000000001-.7333C92.8714 14.3001 93.3429 13.6454 93.6571 12.8597H92.2167zM87.5809 8.45965C88.1309 7.96203 88.7857 7.70013 89.5976 7.70013S91.0643 7.96203 91.6143 8.45965C92.1381 8.93108 92.4524 9.55965 92.5571 10.3192H86.6381C86.769 9.55965 87.0571 8.93108 87.5809 8.45965z" fill="#666"/></svg></span><span class=font-weight-bold></span></a><div class="td-navbar-nav-scroll ml-md-auto" id=main_navbar><ul class="navbar-nav mt-2 mt-lg-0"><li class="nav-item mr-4 mb-2 mb-lg-0"><a class=nav-link href=https://cad.onshape.com/glassworks/explorer/ target=_blank><span>API Explorer</span></a></li><li class="nav-item mr-4 mb-2 mb-lg-0"><a class=nav-link href=https://cad.onshape.com target=_blank><span>Onshape</span></a></li></ul></div><div class="navbar-nav d-none d-lg-block"></div></nav></header><div class="container-fluid td-outer"><div class=td-main><div class="row flex-xl-nowrap"><aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none"><div id=td-sidebar-menu class=td-sidebar__inner><form class="td-sidebar__search d-flex align-items-center"><button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation"></button></form><nav class="collapse td-sidebar-nav" id=td-section-nav><ul class="td-sidebar-nav__section pr-md-3 ul-0"><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docs-li><a href=/docs/ title="Welcome to the Onshape Developer Documentation" class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id=m-docs><span>Welcome</span></a><ul class=ul-1><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsapi-intro-li><a href=/docs/api-intro/ title="Introduction to the Onshape REST API" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsapi-intro><span>API Intro</span></a><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsapi-introexplorer-li><a href=/docs/api-intro/explorer/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsapi-introexplorer><span>API Explorer</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsapi-introarchitecture-li><a href=/docs/api-intro/architecture/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsapi-introarchitecture><span>Architecture</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsapi-introquickstart-li><a href=/docs/api-intro/quickstart/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsapi-introquickstart><span>Quick Start</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsapi-introwhyonshape-li><a href=/docs/api-intro/whyonshape/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsapi-introwhyonshape><span>Why Onshape?</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsauth-li><a href=/docs/auth/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsauth><span>Authentication</span></a><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsauthoauth-li><a href=/docs/auth/oauth/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsauthoauth><span>OAuth</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsauthapikeys-li><a href=/docs/auth/apikeys/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsauthapikeys><span>API Keys</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docsapi-adv-li><a href=/docs/api-adv/ title="Advanced API Development" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsapi-adv><span>Advanced APIs</span></a><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsapi-advassociativity-li><a href=/docs/api-adv/associativity/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsapi-advassociativity><span>Associativity</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsapi-advbilling-li><a href=/docs/api-adv/billing/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsapi-advbilling><span>Billing</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsapi-advtranslation-li><a href=/docs/api-adv/translation/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsapi-advtranslation><span>Data Import & Export</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsapi-advdrawings-li><a href=/docs/api-adv/drawings/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsapi-advdrawings><span>Drawings</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsapi-advfeatureaccess-li><a href=/docs/api-adv/featureaccess/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-docsapi-advfeatureaccess><span class=td-sidebar-nav-active-item>Feature List API</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsapi-advmetadata-li><a href=/docs/api-adv/metadata/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsapi-advmetadata><span>Metadata</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsapp-dev-li><a href=/docs/app-dev/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsapp-dev><span>App Development</span></a><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsapp-devextensions-li><a href=/docs/app-dev/extensions/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsapp-devextensions><span>Extensions</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsapp-devclientmessaging-li><a href=/docs/app-dev/clientmessaging/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsapp-devclientmessaging><span>Client Messaging</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsapp-devstructuredstorage-li><a href=/docs/app-dev/structuredstorage/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsapp-devstructuredstorage><span>Structured Storage</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsapp-devwebhook-li><a href=/docs/app-dev/webhook/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsapp-devwebhook><span>Webhook Notifications</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsapp-store-li><a href=/docs/app-store/ title="Onshape App Store" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsapp-store><span>App Store</span></a><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsapp-storechecklist-li><a href=/docs/app-store/checklist/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsapp-storechecklist><span>Launch Checklist</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsapp-storetestingguidelines-li><a href=/docs/app-store/testingguidelines/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsapp-storetestingguidelines><span>Testing Guidelines</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsapp-storequality-li><a href=/docs/app-store/quality/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsapp-storequality><span>Quality Considerations</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docstutorials-li><a href=/docs/tutorials/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docstutorials><span>Sample Apps</span></a><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docstutorialssync-li><a href=/docs/tutorials/sync/ title="Sync Data and Metadata" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docstutorialssync><span>Sync Data</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docstutorialsreleases-li><a href=/docs/tutorials/releases/ title="Sync Releases and Revisions" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docstutorialsreleases><span>Sync Releases</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docstutorialsderivative-li><a href=/docs/tutorials/derivative/ title="Generate Derivative Files" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docstutorialsderivative><span>Derivative Files</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docstutorialscreateextension-li><a href=/docs/tutorials/createextension/ title="Create an Extension" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docstutorialscreateextension><span>Extensions</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docstutorialsgltf-li><a href=/docs/tutorials/gltf/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docstutorialsgltf><span>glTF Viewer</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docshelp-li><a href=/docs/help/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docshelp><span>Get Help</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docschangelog-li><a href=/docs/changelog/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docschangelog><span>Changelog</span></a></li></ul></li></ul></nav></div></aside><aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none"><div class="td-page-meta ml-2 pb-1 pt-2 mb-0"></div><div class=td-toc><nav id=TableOfContents><ul><li><a href=#summary>Summary</a></li><li><a href=#api-methods>API Methods</a><ul><li><a href=#get-feature-list>Get Feature List</a></li><li><a href=#get-feature-specs>Get Feature Specs</a></li><li><a href=#add-feature>Add Feature</a></li><li><a href=#update-feature>Update Feature</a></li><li><a href=#update-features>Update Features</a></li><li><a href=#delete-feature>Delete Feature</a></li><li><a href=#move-rollback-bar>Move Rollback Bar</a></li><li><a href=#evaluate-featurescript>Evaluate FeatureScript</a></li></ul></li><li><a href=#configuration-api-methods>Configuration API Methods</a><ul><li><a href=#get-configuration>Get Configuration</a></li><li><a href=#update-configuration>Update Configuration</a></li></ul></li><li><a href=#api-usage-details>API Usage Details</a><ul><li><a href=#general-features>General Features</a></li><li><a href=#sketches>Sketches</a></li></ul></li><li><a href=#feature-specs>Feature Specs</a></li><li><a href=#feature-script-evaluation>Feature Script Evaluation</a></li><li><a href=#custom-features>Custom Features</a></li><li><a href=#examples>Examples</a><ul><li><a href=#example-1>Example 1</a></li><li><a href=#example-2>Example 2</a></li><li><a href=#example-3>Example 3</a></li><li><a href=#example-4>Example 4</a></li></ul></li></ul></nav></div></aside><main class="col-12 col-md-9 col-xl-8 pl-md-5" role=main><nav aria-label=breadcrumb class=td-breadcrumbs><ol class=breadcrumb><li class=breadcrumb-item><a href=https://onshape-public.github.io/docs/>Welcome</a></li><li class=breadcrumb-item><a href=https://onshape-public.github.io/docs/api-adv/>Advanced APIs</a></li><li class="breadcrumb-item active" aria-current=page><a href=https://onshape-public.github.io/docs/api-adv/featureaccess/>Feature List API</a></li></ol></nav><div class=td-content><h1>Feature List API</h1><header class=article-meta></header><p>Onshape Part Studio Feature Access API</p><h2 id=summary>Summary</h2><p>The Onshape Part Studio tab tracks edits in terms of a feature list. Creation and modification of geometry is
-performed by manipulating that list. This document describes capabilities that are intended to allow partners
-and customers to manipulate the feature list from software.</p><p>The feature API comprises the following API methods:</p><ul><li><p>GET /api/partstudios/DWMVE/features - get feature list</p></li><li><p>GET /api/partstudios/DWMVE/featurespecs - get feature specs</p></li><li><p>POST /api/partstudios/DWE/features - add feature to feature list</p></li><li><p>POST /api/partstudios/DWE/features/featureid/:fid - update an existing feature in feature list</p></li><li><p>DELETE /api/partstudios/DWE/features/featureid/:fid - delete an existing feature from feature list</p></li><li><p>POST /api/partstudios/DWE/features/features/updates - selectively update features in feature list</p></li><li><p>POST /api/partstudios/DWE/features/rollback - move the rollback bar</p></li><li><p>POST /api/partstudios/DWMVE/featurescript - evaluate featurescript</p></li></ul><p>As well as related configuration API methods:</p><ul><li><p>GET /api/partstudios/DWMVE/configuration - get part studio configuration</p></li><li><p>POST /api/partstudios/DWE/configuration - update part studio configuration</p></li></ul><p>Note that the use of &ldquo;DWE&rdquo; occurrences within this document are a shorthand notation for “d/:did/w/:wid/e/:eid”
-and DWMVE occurrences within this document are a shorthand notation for any of “d/:did/w/:wid/e/:eid”,
-“d/:did/v/:vid/e/:eid”, “d/:did/m/:mid/e/:eid”. It is assumed that the reader is familiar with these URL path patterns
-from the API Explorer documentation.</p><h2 id=api-methods>API Methods</h2><p>The methods described here are also documented at an overview level in the API Explorer within the Part Studios group.</p><h3 id=get-feature-list>Get Feature List</h3><pre><code>GET /api/partstudios/DWMVE/features - get feature list
-</code></pre><p>If you have a part studio element, you can call the get feature list api to find the features that are instantiated within the part studio.
-The return structure contains the following fields:</p><ul><li><p>features - A list of user-define features in the part studio.</p></li><li><p>defaultFeatures - A list of the default feature (pre-defined) in the part studio</p></li><li><p>imports - A list of capabilities that may be referenced by the features. We currently only support a specific
-predefined set of geometry capabilities.</p></li><li><p>featureStates - A list of feature states, one per feature, which describe whether the feature is valid. If a feature
-has been added to the feature list with an incorrect definition it remains in the feature list.</p></li><li><p>isComplete - A boolean indicating whether the features represents the entire part studio (true) or is only a subset
-(false). The result is a subset if the call to the api specifies a filter on the feature ids</p></li><li><p>rollbackIndex - The ordinal position of the rollback bar w.r.t. the list of features. Onshape only executes features
-that are prior to the rollback bar.</p></li><li><p>serializationVersion - A string identifying the version of the structure serialization rules used to encode the
-output. This is included so that if the output is fed back in and the software has changed incompatibilities can be
-detected</p></li><li><p>sourceMicroversion - The microversion identifier for the document that describes the state from which the result was
-extracted. This is critical when attempting to use geometry ids that are included in the output, since the
-interpretation of a geometry id is dependent on the document microversion.</p></li><li><p>libraryVersion - An integer indicating the version number for FeatureScript in the Part Studio</p></li></ul><h3 id=get-feature-specs>Get Feature Specs</h3><pre><code>GET /api/partstudios/DWMVE/featurespecs - get feature specs
-</code></pre><p>Returns a list of feature specs that are available within the part studio. A feature spec provides a data description
-of the interface to a feature. This can, in theory, allow an application to use introspection to allow dynamically
-generated features. In practice, we expect that the application developer understands the features ahead of time and
-might utilize the feature spec to understand the options available and the required format for feature
-addition/modification.</p><h3 id=add-feature>Add Feature</h3><pre><code>POST /api/partstudios/DWE/features
-</code></pre><p>A feature can be added to the feature list by calling the add feature API. The API accepts as input a JSON structure
-containing the fields:</p><ul><li><p>feature - A single feature definition, in the same format that is output by the get feature list API, except that
-there is no need to provide feature ids, node ids, or typeNames.</p></li><li><p>sourceMicroversion - The microversion of the document that is assumed. Any geometry ids included in the feature are
-interpreted in the context of this microversion.</p></li><li><p>rejectMicroversionSkew (optional) - If set to true, the call will refuse to make the addition if the current
-microversion for the document does not match the source Microversion. Otherwise, a best-effort attempt is made to
-re-interpret the feature addition in the context of a newer document microversion.</p></li></ul><p>The call returns a structure with the following fields:</p><ul><li><p>feature - The input feature, echoed back with id value assignments in place</p></li><li><p>featureState - The state of the feature</p></li><li><p>serializationVersion - As described previously</p></li><li><p>sourceMicroversion - The microversion of the document in which the returned feature is defined</p></li><li><p>microversionSkew - If rejectMicroversionSkew was not set to true on input and the document microversion had changed
-since the input sourceMicroversion, this is set to true to indicate that a re-interpretation was made.</p></li><li><p>libraryVersion - An integer indicating the version number for FeatureScript in the Part Studio</p></li></ul><p>The feature is added immediately before the rollback bar. Any geometry ids specified in the feature must be valid at
-that point in the feature tree. For example, if applying a fillet to an edge, that edge must exist in the feature tree.
-Filleting the edge will normally make it invalid at future states of the feature tree, since the fillet feature
-removes the edge.</p><h3 id=update-feature>Update Feature</h3><pre><code>POST /api/partstudios/DWE/features/featureid/:fid
-</code></pre><p>An existing feature can be modified by calling the update feature API. This API accepts the same input body format and
-returns the same output format as the Add Feature API. However, instead of adding a new feature prior to the rollback
-bar location, it replaces an existing feature in the location of the existing feature.</p><h3 id=update-features>Update Features</h3><pre><code>POST /api/partstudios/DWE/features/updates
-</code></pre><p>Multiple existing features can be modified by calling the update features API. This API accepts a list of features and to update, which must already exist in the part studio. This call does not fully re-define the features but instead, updates only the parameters supplied in the top-level feature structure, and optionally will update feature suppression attributes.</p><p>Applications that need to update parameters for multiple features can typically achieve faster model rebuild time by updating multiple features in a single call. It also has the benefit that it allows features to be suppressed or unsuppressed without specifying parameters. This is particularly useful in the unsuppress case because parameters containing query values are not populated when reading from the feature list.</p><h3 id=delete-feature>Delete Feature</h3><pre><code>DELETE /api/partstudios/DWE/features/featureid/:fid
-</code></pre><p>An existing feature can be removed from the feature list by calling the delete feature API. The API accepts only URL
-path parameters and return only the following fields:</p><ul><li><p>serializationVersion - As described earlier</p></li><li><p>sourceMicroversion - As described earlier</p></li></ul><h3 id=move-rollback-bar>Move Rollback Bar</h3><pre><code>POST /api/partstudios/DWE/features/rollback
-</code></pre><p>The rollback bar can be moved using this API. This is useful if a feature needs to be added at a location other than
-the current rollback bar location. As input, it accepts the following fields:</p><ul><li><p>rollbackIndex - The index at which the rollback index should be placed. Features with entry index (0-based) higher
-than or equal to this value are rolled back. The value must be in the range 0 to the number of entries in the feature
-list</p></li><li><p>serializationVersion</p></li><li><p>sourceMicroversion</p><p>The result returned by the API includes the fields</p></li><li><p>rollbackIndex - The rollback index in the updated state</p></li><li><p>serializationVersion - As described previously</p></li><li><p>sourceMicroversion - As described previously</p></li><li><p>microversionSkew - As described previously</p></li></ul><h3 id=evaluate-featurescript>Evaluate FeatureScript</h3><pre><code>POST api/partstudios/DWMVE/featurescript
-</code></pre><p>This API allows the caller to execute a FeatureScript function to query information about the existing feature tree
-that is not exposed through the other methods described here. As input, it accepts the following fields:</p><ul><li><p>script - The definition of a FeatureScript function that takes a Context argument and a map argument</p></li><li><p>queries - A list of key, value pairs, where the key is a FeatureScript identifier that will appear as a key in the
-map supplied to the script function and the valid is a list of geometry Id strings, where the list is converted to
-&ldquo;query&rdquo; form form use within the script function.</p></li></ul><p>See the example below to better understand this usage.</p><h2 id=configuration-api-methods>Configuration API Methods</h2><p>Part Studios may be unconfigured or configured. A configured part studio has a list of configuration parameters that
-define the knobs that allow adjustment of the part studio part content. Configuration parameters are referred to as
-&ldquo;inputs&rdquo; in the UI and may be one of Enum (or List), Boolean, Quantity or String. Each parameter includes a default
-value setting that is used if the parameter is not otherwise set.</p><p>Configured part studios also have a &ldquo;current&rdquo; configuration. This is a list of configuration parameter settings for
-the current representation of the part studio. Alternate configurations of the part studio may be used concurrently,
-but the current configuration defines the parts seen by the user within in the part studio.</p><h3 id=get-configuration>Get Configuration</h3><pre><code>GET /api/partstudios/DWMVE/configuration - get part studio configuration
-</code></pre><p>This method reads the current configuration information for a Part Studio.
-The return structure contains the following fields:</p><ul><li><p>configurationParameters - A list of the parameters that allow configuration of the part studio.</p></li><li><p>currentConfiguration - A list of configuration parameter settings for the current representation of the part studio.</p></li><li><p>serializationVersion - As described previously</p></li><li><p>sourceMicroversion - As described previously</p></li><li><p>microversionSkew - As described previously</p></li><li><p>libraryVersion - As described previously</p></li></ul><h3 id=update-configuration>Update Configuration</h3><pre><code>POST /api/partstudios/DWE/configuration - update part studio configuration
-</code></pre><p>This method modifies the current configuration information for a Part Studio. When changing configuration parameters
-it is important that parameterId values be maintained consistently across changes so that features that reference the
-parameter do not get broken.
-The API accepts as input a JSON structure containing the fields:</p><ul><li><p>configurationParameters - A list of the parameters that allow configuration of the part studio.</p></li><li><p>currentConfiguration - A list of configuration parameter settings for the current representation of the part studio.</p></li><li><p>sourceMicroversion (optional) - The microversion of the document that is assumed.</p></li><li><p>rejectMicroversionSkew (optional) - If set to true, the call will refuse to make the addition if the current
-microversion for the document does not match the source Microversion.</p></li></ul><p>The call returns a structure with the following fields:</p><ul><li><p>configurationParameters - A list of the parameters that allow configuration of the part studio.</p></li><li><p>currentConfiguration - A list of configuration parameter settings for the current representation of the part studio.</p></li><li><p>serializationVersion - As described previously</p></li><li><p>sourceMicroversion - As described previously</p></li><li><p>microversionSkew - As described previously</p></li><li><p>libraryVersion - As described previously</p></li></ul><h2 id=api-usage-details>API Usage Details</h2><p>The feature access and modification API in Onshape presents the internal form of feature definitions rather than
-providing a translation layer between external form and internal form. We suggest that you familiarize yourself with
-the formats involved by calling the Get Feature List API on existing part studios in order to understand the encoding
-of features.</p><p>Some important things to know about the JSON encoding are:</p><ul><li><p>Default values are omitted in the encoded output. For string fields the default value is &ldquo;&rdquo;, for boolean fields it
-is false, and for numeric fields it is 0.</p></li><li><p>It uses a special tagging system in order to manage polymorphic data structures. Specifically, objects generally
-are encoded by enclosing them within another object that declares the type information for the enclosed object.</p></li></ul><p>As an example of the type tagging mechanism, the GET features api might return a structure that looks like this:</p><pre><code>{
-  &quot;features&quot;: [
-    {
-      &quot;type&quot;: 134,
-      &quot;typeName&quot;: &quot;BTMFeature&quot;,
-      &quot;message&quot;: {
-        &quot;featureType&quot;: &quot;cube&quot;,
-        &quot;featureId&quot;: &quot;FLqo5rpNof3IXgh_0&quot;,
-        &quot;name&quot;: &quot;Cube 1&quot;,
-        &quot;parameters&quot;: [
+<!doctype html><html lang=en class=no-js><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=generator content="Hugo 0.124.1"><meta name=robots content="index, follow"><link rel="shortcut icon" href=/favicons/favicon.ico><link rel=apple-touch-icon href=/favicons/apple-touch-icon-180x180.png sizes=180x180><link rel=icon type=image/png href=/favicons/favicon-16x16.png sizes=16x16><link rel=icon type=image/png href=/favicons/favicon-32x32.png sizes=32x32><link rel=icon type=image/png href=/favicons/android-36x36.png sizes=36x36><link rel=icon type=image/png href=/favicons/android-48x48.png sizes=48x48><link rel=icon type=image/png href=/favicons/android-72x72.png sizes=72x72><link rel=icon type=image/png href=/favicons/android-96x96.png sizes=96x96><link rel=icon type=image/png href=/favicons/android-144x144.png sizes=144x144><link rel=icon type=image/png href=/favicons/android-192x192.png sizes=192x192><title>Features | </title><meta name=description content="This page describes the APIs Onshape provides for creating and manipulating features and the Feature List in a Part Studio.
+
+📘 Notes
+
+This page …"><meta property="og:title" content="Features"><meta property="og:description" content="This page describes the APIs Onshape provides for creating and manipulating features and the Feature List in a Part Studio.
+📘 Notes
+This page provides sample code as curls. See the curl documentation for more information. All Onshape API calls must be properly authenticated by replacing the CREDENTIALS variable in the curls below. See the API Keys page for instructions and the Quick Start for an example. All applications submitted to the Onshape App Store must authenticate with OAuth2."><meta property="og:type" content="article"><meta property="og:url" content="https://onshape-public.github.io/docs/api-adv/featureaccess/"><meta property="article:section" content="docs"><meta property="article:published_time" content="2020-05-18T20:37:28-04:00"><meta property="article:modified_time" content="2020-05-18T20:37:28-04:00"><meta itemprop=name content="Features"><meta itemprop=description content="This page describes the APIs Onshape provides for creating and manipulating features and the Feature List in a Part Studio.
+📘 Notes
+This page provides sample code as curls. See the curl documentation for more information. All Onshape API calls must be properly authenticated by replacing the CREDENTIALS variable in the curls below. See the API Keys page for instructions and the Quick Start for an example. All applications submitted to the Onshape App Store must authenticate with OAuth2."><meta itemprop=datePublished content="2020-05-18T20:37:28-04:00"><meta itemprop=dateModified content="2020-05-18T20:37:28-04:00"><meta itemprop=wordCount content="3563"><meta itemprop=keywords content><meta name=twitter:card content="summary"><meta name=twitter:title content="Features"><meta name=twitter:description content="This page describes the APIs Onshape provides for creating and manipulating features and the Feature List in a Part Studio.
+📘 Notes
+This page provides sample code as curls. See the curl documentation for more information. All Onshape API calls must be properly authenticated by replacing the CREDENTIALS variable in the curls below. See the API Keys page for instructions and the Quick Start for an example. All applications submitted to the Onshape App Store must authenticate with OAuth2."><link rel=preload href=/scss/main.min.a0e42750c39e1dd68339377c4f62b715a199ce83570fbf00b4c6a3d18c6a6146.css as=style><link href=/scss/main.min.a0e42750c39e1dd68339377c4f62b715a199ce83570fbf00b4c6a3d18c6a6146.css rel=stylesheet integrity><script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script><style>code{white-space:pre-wrap!important;overflow-wrap:break-word}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-3CY8X7Q128"></script><script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-3CY8X7Q128",{anonymize_ip:!1})}</script></head><body class=td-page><header><nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar"><a class=navbar-brand href=/><span class=navbar-logo><svg width="95" height="22" viewBox="0 0 95 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.35.0l3.6143 2.09524L3.45714 7.72619V12.5714L0 10.5548V5.44762L9.35.0zm9.4286 16.2643-3.6143 2.1476V7.64763L10.7905 5.08097l3.6666-2.12143 4.3215 2.51428V16.2643zM0 12.3619v3.9809l9.45476 5.4215 4.21664-2.4881L13.6452 15.1381 9.35 17.7048.0 12.3619z" fill="#64bc4f"/><path fill-rule="evenodd" clip-rule="evenodd" d="M4.9762 10.5811 6.57381 11.4978V9.42871L10.9214 6.88824 9.35001 5.91919 4.9762 8.48586V10.5811zm6.8881-3.14291L10.2667 8.35485 12.1 9.42866 12.0738 14.3263 13.6714 13.4096V8.4858L11.8643 7.43819zm-.7072 5.68331v1.781L9.35001 15.9763 4.9762 13.4358V11.6549l4.34762 2.5405 1.83328-1.0739z" fill="#666"/><path fill-rule="evenodd" clip-rule="evenodd" d="M56.5452 3.16919V8.01443C56.8595 7.59538 57.2523 7.2549 57.6976 6.94062 58.1428 6.65252 58.6666 6.49538 59.2428 6.49538s1.0738.07857 1.4929.23571C61.1547 6.88824 61.5214 7.15014 61.8357 7.46443 62.5428 8.17157 62.9095 9.11443 62.9095 10.2668v5.081H61.5999V10.3454C61.5999 9.53348 61.3642 8.9049 60.919 8.43347c-.4452-.47142-1.0476-.70714-1.7548-.70714-.7333.0-1.3619.23572-1.8595.73333C56.7809 8.95728 56.5452 9.58586 56.5452 10.3716v5.0285H55.2357V3.16919h1.3095zM49.7881 7.64775c1.3357.0 2.069.44524 2.1738 1.3619V8.95727h1.3095C53.1928 8.25013 52.9047 7.67394 52.3809 7.25489 51.7786 6.75727 50.9405 6.49537 49.8666 6.49537c-1.1261.0-1.9642.209519999999999-2.5404.65476-.5762.41905-.8643 1.04762-.8643 1.83333C46.4619 9.53346 46.5928 9.92632 46.8809 10.2406 47.169 10.5287 47.5357 10.7644 47.9547 10.9477 48.4 11.1311 48.8714 11.262 49.369 11.3668 49.8928 11.4716 50.3643 11.5763 50.7833 11.7073 51.2024 11.8382 51.569 11.9954 51.8571 12.1787 52.1452 12.3882 52.2762 12.6501 52.2762 13.0168 52.2762 13.5406 51.9881 13.9335 51.4381 14.143L51.3476 14.1703C51.1209 14.2391 50.91 14.3032 50.6786 14.3263 50.4166 14.3525 50.1286 14.3787 49.8405 14.3787S49.2643 14.3525 48.95 14.2477C48.1119 13.9597 47.6666 13.4358 47.5881 12.6239H46.2262C46.2785 13.462 46.619 14.1168 47.2476 14.6406c.680900000000001.5762 1.6238.8643 2.7762.8643 1.1.0 1.9643-.2357 2.5928-.680999999999999C53.2714 14.3787 53.5857 13.7239 53.5857 12.8858 53.5857 12.3358 53.4547 11.9168 53.1667 11.6025 52.8786 11.2882 52.5119 11.0525 52.0928 10.8692 51.6476 10.6858 51.1762 10.5549 50.6786 10.4501 50.2403 10.3844 49.8387 10.282 49.4738 10.1889L49.4734 10.1888 49.4721 10.1885C49.4015 10.1705 49.3322 10.1528 49.2643 10.1358 48.8452 10.0311 48.4785 9.87394 48.1905 9.69061 47.9024 9.50727 47.7714 9.24537 47.7714 8.90489 47.7714 8.0668 48.4524 7.64775 49.7881 7.64775zM30.9309 6.52152c1.3095.0 2.3572.44524 3.1691 1.30952C34.8595 8.66914 35.2523 9.74295 35.2523 11.0263 35.2523 12.3096 34.8595 13.3834 34.1 14.2215 33.2881 15.0858 32.2404 15.531 30.9309 15.531s-2.3571-.4452-3.169-1.3095C27.0023 13.3834 26.6095 12.3096 26.6095 11.0263 26.6095 9.74295 27.0023 8.66914 27.7619 7.83104 28.5738 6.96676 29.6214 6.52152 30.9309 6.52152zm0 7.80478C31.8738 14.3263 32.6071 14.012 33.1571 13.3572 33.6809 12.7287 33.9428 11.9691 33.9428 11.0263 33.9428 10.0834 33.6809 9.29771 33.1571 8.69533 32.6071 8.04057 31.8738 7.72628 30.9309 7.72628 29.9881 7.72628 29.2547 8.04057 28.7047 8.69533 28.1809 9.3239 27.919 10.0834 27.919 11.0263 27.919 11.9691 28.1809 12.7549 28.7047 13.3572 29.2285 14.012 29.9881 14.3263 30.9309 14.3263zm7.3595-7.64764V8.04057C38.6047 7.62152 38.9976 7.28104 39.4428 6.96676 39.8881 6.67866 40.4119 6.52152 40.9881 6.52152c.576099999999997.0 1.0738.07857 1.4928.23571C42.9 6.91438 43.2666 7.17628 43.5809 7.49057 44.2881 8.19771 44.6547 9.14057 44.6547 10.2929v5.081H43.3452V10.3453C43.3452 9.53343 43.1095 8.90485 42.6642 8.43342c-.4452-.47142-1.0476-.70714-1.7547-.70714C40.1761 7.72628 39.5476 7.962 39.05 8.45961 38.5261 8.95723 38.2904 9.58581 38.2904 10.3715v5.0286H36.9809V6.67866h1.3095zM68.7762 15.531C70.1643 15.531 71.1857 15.0072 71.8928 13.9858v1.3881h1.3095V6.65247H71.8928V8.06676C71.1857 7.04533 70.1643 6.52152 68.8547 6.52152 67.5452 6.52152 66.4976 6.96676 65.7119 7.83104 64.9524 8.69533 64.5595 9.76914 64.5595 11.0263c0 1.2833.392899999999997 2.3309 1.1524 3.1952C66.4976 15.0858 67.519 15.531 68.7762 15.531zM71.1857 13.3572C70.6357 14.012 69.9023 14.3263 68.9595 14.3263 68.0166 14.3263 67.2571 14.012 66.7071 13.3572 66.1571 12.7549 65.8952 11.9691 65.8952 11.0263 65.8952 10.0834 66.1571 9.3239 66.7071 8.69533 67.2833 8.04057 68.0428 7.72628 68.9595 7.72628 69.9023 7.72628 70.6357 8.04057 71.1857 8.69533 71.7095 9.29771 71.9714 10.0834 71.9714 11.0263 71.9714 11.9691 71.7095 12.7287 71.1857 13.3572zM76.7643 8.06676C77.4714 7.04533 78.4928 6.52152 79.8809 6.52152c1.2572.0 2.2786.44524 3.0381 1.30952C83.7047 8.69533 84.0976 9.74295 84.0976 11.0263 84.0976 12.2834 83.7047 13.3572 82.919 14.2215 82.1333 15.0858 81.0857 15.531 79.7762 15.531 78.4666 15.531 77.4452 15.0072 76.7381 13.9858v4.8714H75.4285V6.67866h1.3096v1.3881H76.7643zM79.7238 7.70009C78.7809 7.70009 78.0476 8.01438 77.4976 8.66914 76.9738 9.29771 76.7119 10.0572 76.7119 11.0001 76.7119 11.9429 76.9738 12.7287 77.4976 13.331 78.0476 13.9858 78.7809 14.3001 79.7238 14.3001 80.6404 14.3001 81.4 13.9858 81.9762 13.331 82.5262 12.7025 82.7881 11.9429 82.7881 11.0001 82.7881 10.0572 82.5262 9.27152 81.9762 8.66914 81.4 8.04057 80.6404 7.70009 79.7238 7.70009zM92.2167 12.8597C91.719 13.8287 90.8809 14.3263 89.7024 14.3263c-.8643.0-1.5715-.261900000000001-2.1215-.8119C87.0309 12.9906 86.7167 12.3358 86.6119 11.5239H93.919v-.5238C93.919 9.7168 93.5262 8.64299 92.7667 7.80489 91.9548 6.94061 90.9071 6.49537 89.5976 6.49537s-2.3571.44524-3.169 1.30952C85.669 8.64299 85.2762 9.7168 85.2762 11.0001c0 1.2834.392799999999994 2.3572 1.2047 3.1953C87.2929 15.0597 88.3667 15.5049 89.6762 15.5049c1.0476.0 1.8857-.2357 2.54050000000001-.7333C92.8714 14.3001 93.3429 13.6454 93.6571 12.8597H92.2167zM87.5809 8.45965C88.1309 7.96203 88.7857 7.70013 89.5976 7.70013S91.0643 7.96203 91.6143 8.45965C92.1381 8.93108 92.4524 9.55965 92.5571 10.3192H86.6381C86.769 9.55965 87.0571 8.93108 87.5809 8.45965z" fill="#666"/></svg></span><span class=font-weight-bold></span></a><div class="td-navbar-nav-scroll ml-md-auto" id=main_navbar><ul class="navbar-nav mt-2 mt-lg-0"><li class="nav-item mr-4 mb-2 mb-lg-0"><a class=nav-link href=https://cad.onshape.com/glassworks/explorer/ target=_blank><span>API Explorer</span></a></li><li class="nav-item mr-4 mb-2 mb-lg-0"><a class=nav-link href=https://cad.onshape.com target=_blank><span>Onshape</span></a></li></ul></div><div class="navbar-nav d-none d-lg-block"></div></nav></header><div class="container-fluid td-outer"><div class=td-main><div class="row flex-xl-nowrap"><aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none"><div id=td-sidebar-menu class=td-sidebar__inner><form class="td-sidebar__search d-flex align-items-center"><button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation"></button></form><nav class="collapse td-sidebar-nav" id=td-section-nav><ul class="td-sidebar-nav__section pr-md-3 ul-0"><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docs-li><a href=/docs/ title="Welcome to the Onshape Developer Documentation" class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id=m-docs><span>Welcome</span></a><ul class=ul-1><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsapi-intro-li><a href=/docs/api-intro/ title="Introduction to the Onshape REST API" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsapi-intro><span>API Intro</span></a><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsapi-introexplorer-li><a href=/docs/api-intro/explorer/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsapi-introexplorer><span>API Explorer</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsapi-introarchitecture-li><a href=/docs/api-intro/architecture/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsapi-introarchitecture><span>Architecture</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsapi-introquickstart-li><a href=/docs/api-intro/quickstart/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsapi-introquickstart><span>Quick Start</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsapi-introwhyonshape-li><a href=/docs/api-intro/whyonshape/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsapi-introwhyonshape><span>Why Onshape?</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsauth-li><a href=/docs/auth/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsauth><span>Authentication</span></a><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsauthoauth-li><a href=/docs/auth/oauth/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsauthoauth><span>OAuth</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsauthapikeys-li><a href=/docs/auth/apikeys/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsauthapikeys><span>API Keys</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docsapi-adv-li><a href=/docs/api-adv/ title="Advanced API Development" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsapi-adv><span>Advanced APIs</span></a><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsapi-advassociativity-li><a href=/docs/api-adv/associativity/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsapi-advassociativity><span>Associativity</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsapi-advbilling-li><a href=/docs/api-adv/billing/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsapi-advbilling><span>Billing</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsapi-advdrawings-li><a href=/docs/api-adv/drawings/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsapi-advdrawings><span>Drawings</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsapi-advfeatureaccess-li><a href=/docs/api-adv/featureaccess/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-docsapi-advfeatureaccess><span class=td-sidebar-nav-active-item>Features</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsapi-advtranslation-li><a href=/docs/api-adv/translation/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsapi-advtranslation><span>Import & Export</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsapi-advmetadata-li><a href=/docs/api-adv/metadata/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsapi-advmetadata><span>Metadata</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsapp-dev-li><a href=/docs/app-dev/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsapp-dev><span>App Development</span></a><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsapp-devextensions-li><a href=/docs/app-dev/extensions/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsapp-devextensions><span>Extensions</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsapp-devclientmessaging-li><a href=/docs/app-dev/clientmessaging/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsapp-devclientmessaging><span>Client Messaging</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsapp-devstructuredstorage-li><a href=/docs/app-dev/structuredstorage/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsapp-devstructuredstorage><span>Structured Storage</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsapp-devwebhook-li><a href=/docs/app-dev/webhook/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsapp-devwebhook><span>Webhook Notifications</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsapp-store-li><a href=/docs/app-store/ title="Onshape App Store" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsapp-store><span>App Store</span></a><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsapp-storechecklist-li><a href=/docs/app-store/checklist/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsapp-storechecklist><span>Launch Checklist</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsapp-storetestingguidelines-li><a href=/docs/app-store/testingguidelines/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsapp-storetestingguidelines><span>Testing Guidelines</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsapp-storequality-li><a href=/docs/app-store/quality/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsapp-storequality><span>Quality Considerations</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docstutorials-li><a href=/docs/tutorials/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docstutorials><span>Sample Apps</span></a><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docstutorialssync-li><a href=/docs/tutorials/sync/ title="Sync Data and Metadata" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docstutorialssync><span>Sync Data</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docstutorialsreleases-li><a href=/docs/tutorials/releases/ title="Sync Releases and Revisions" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docstutorialsreleases><span>Sync Releases</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docstutorialsderivative-li><a href=/docs/tutorials/derivative/ title="Generate Derivative Files" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docstutorialsderivative><span>Derivative Files</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docstutorialscreateextension-li><a href=/docs/tutorials/createextension/ title="Create an Extension" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docstutorialscreateextension><span>Extensions</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docstutorialsgltf-li><a href=/docs/tutorials/gltf/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docstutorialsgltf><span>glTF Viewer</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docshelp-li><a href=/docs/help/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docshelp><span>Get Help</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docschangelog-li><a href=/docs/changelog/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docschangelog><span>Changelog</span></a></li></ul></li></ul></nav></div></aside><aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none"><div class="td-page-meta ml-2 pb-1 pt-2 mb-0"></div><div class=td-toc><nav id=TableOfContents><ul><li><a href=#featurescript-vs-rest-api>FeatureScript vs REST API</a></li><li><a href=#endpoints>Endpoints</a><ul><li><a href=#json-encoding>JSON encoding</a></li><li><a href=#feature-types>Feature types</a></li><li><a href=#parameter-types>Parameter types</a></li><li><a href=#sketch-plane-ids>Sketch plane IDs</a></li></ul></li><li><a href=#sample-workflows>Sample Workflows</a><ul><li><a href=#get-the-list-of-features-in-a-part-studio>Get the list of features in a Part Studio</a></li><li><a href=#create-a-cube-feature>Create a cube feature</a></li><li><a href=#create-a-sketch>Create a sketch</a></li><li><a href=#create-a-cylinder>Create a cylinder</a></li><li><a href=#update-a-feature>Update a feature</a></li><li><a href=#delete-a-feature>Delete a feature</a></li></ul></li></ul></nav></div></aside><main class="col-12 col-md-9 col-xl-8 pl-md-5" role=main><nav aria-label=breadcrumb class=td-breadcrumbs><ol class=breadcrumb><li class=breadcrumb-item><a href=https://onshape-public.github.io/docs/>Welcome</a></li><li class=breadcrumb-item><a href=https://onshape-public.github.io/docs/api-adv/>Advanced APIs</a></li><li class="breadcrumb-item active" aria-current=page><a href=https://onshape-public.github.io/docs/api-adv/featureaccess/>Features</a></li></ol></nav><div class=td-content><h1>Features</h1><header class=article-meta></header><p>This page describes the APIs Onshape provides for creating and manipulating features and the Feature List in a Part Studio.</p><blockquote><p>📘 <strong>Notes</strong></p><ul><li>This page provides sample code as curls. See the <a href=https://curl.se/docs/>curl documentation</a> for more information.</li><li>All Onshape API calls must be properly authenticated by replacing the <code>CREDENTIALS</code> variable in the curls below. See the <a href=/docs/auth/apikeys>API Keys</a> page for instructions and the <a href=/docs/api-intro/quickstart>Quick Start</a> for an example. All applications submitted to the Onshape App Store <em>must</em> authenticate with <a href=/docs/auth/oauth>OAuth2</a>.</li><li>This documentation refers to Onshape IDs in the following format: <code>{did}, {wid}, {vid}, {mid}, {eid}, {pid}, {otherId}</code>. These represent document, workspace, version, microversion, element, part, and other IDs (respectively) that are needed make the API calls. We sometimes abbreviate these variables as <code>DWVEM</code> Please see <a href=/docs/api-intro/#onshape-api-request>API Guide: API Intro</a> for information on what these IDs mean and how to obtain them from your documents. Never include the curly braces (<code>{}</code>) in your API calls.</li><li>For Enterprise accounts, replace <strong>cad</strong> in all Onshape URLs with your company domain.
+https://<strong>cad</strong>.onshape.com > https://<strong>companyName</strong>.onshape.com</li></ul></blockquote><h2 id=featurescript-vs-rest-api>FeatureScript vs REST API</h2><p>When working with complex geometry, you might find working directly in FeatureScript easier than working with the Onshape REST API. <a href=https://cad.onshape.com/FsDoc/>Click here to see the FeatureScript documentation.</a></p><h2 id=endpoints>Endpoints</h2><p>The following endpoints are available for working with features and the Feature List:</p><ul><li><a href=https://cad.onshape.com/glassworks/explorer/#/PartStudio/getPartStudioFeatures>Get the Feature List</a><pre tabindex=0><code>curl -X &#39;GET&#39; \
+  &#39;https://cad.onshape.com/api/v6/partstudios/d/{did}/{wvm}/{wvmid}/e/{eid}/features?rollbackBarIndex=-1&amp;includeGeometryIds=true&amp;noSketchGeometry=false&#39; \
+  -H &#39;accept: application/json;charset=UTF-8; qs=0.09&#39; \
+  -H &#39;Authorization: Basic CREDENTIALS&#39; 
+</code></pre></li><li><a href=https://cad.onshape.com/glassworks/explorer/#/PartStudio/addPartStudioFeature>Add a Feature</a><pre tabindex=0><code>curl -X &#39;POST&#39; \
+  &#39;https://cad.onshape.com/api/v6/partstudios/d/{did}{wvm}/{wvmid}/e/{wid}/features&#39; \
+  -H &#39;accept: application/json;charset=UTF-8; qs=0.09&#39; \
+  -H &#39;Authorization: Basic CREDENTIALS&#39; \
+  -H &#39;Content-Type: application/json;charset=UTF-8; qs=0.09&#39; \
+  -d &#39;{
+      &#34;btType&#34;: &#34;BTFeatureDefinitionCall-1406&#34;,
+      &#34;feature&#34;: {
+        &#34;btType&#34;: &#34;BTMFeature-134&#34;,
+        &#34;featureType&#34;: &#34;&#34;,
+        &#34;name&#34;: &#34;&#34;,
+        &#34;parameters&#34;: []
+      }
+    }&#39; 
+</code></pre></li><li><a href=https://cad.onshape.com/glassworks/explorer/#/PartStudio/updatePartStudioFeature>Update a Feature</a><pre tabindex=0><code>  curl -X &#39;POST&#39; \
+    &#39;https://cad.onshape.com/api/v6/partstudios/d/{did}/w/{wid}/e/{eid}/features/featureid/{fid}&#39; \
+    -H &#39;Accept: application/json;charset=UTF-8; qs=0.09&#39; \
+    -H &#39;Authorization: Basic CREDENTIALS&#39; \
+    -H &#39;Content-Type: application/json;charset=UTF-8; qs=0.09&#39; \
+    -d &#39;{
+        &#34;btType&#34;: &#34;BTFeatureDefinitionCall-1406&#34;,
+        &#34;feature&#34;: {
+          &#34;btType&#34;: &#34;BTMFeature-134&#34;,
+          &#34;featureId&#34;: &#34;{fid}&#34;,
+          &#34;parameters&#34;: []
+        }
+      }&#39;
+</code></pre></li><li><a href=https://cad.onshape.com/glassworks/explorer/#/PartStudio/updateFeatures>Update Multiple Features</a><pre tabindex=0><code>  curl -X &#39;POST&#39; \
+    &#39;https://cad.onshape.com/api/v6/partstudios/d/{did}/w/{wid}/e/{eid}/features/featureid/{fid}&#39; \
+    -H &#39;Accept: application/json;charset=UTF-8; qs=0.09&#39; \
+    -H &#39;Authorization: Basic CREDENTIALS&#39; \
+    -H &#39;Content-Type: application/json;charset=UTF-8; qs=0.09&#39; \
+    -d &#39;{
+        &#34;btType&#34;: &#34;BTFeatureDefinitionCall-1406&#34;,
+        &#34;features&#34;: [
           {
-            &quot;type&quot;: 147,
-            &quot;typeName&quot;: &quot;BTMParameterQuantity&quot;,
-            &quot;message&quot;: {
-              &quot;expression&quot;: &quot;1.0*in&quot;,
-              &quot;parameterId&quot;: &quot;sideLength&quot;,
-              &quot;nodeId&quot;: &quot;TyUNOSxJ/f9z5t1T&quot;
-            }
-          }
-        ],
-        &quot;nodeId&quot;: &quot;Mr60Xw6RGWdr0MfYV&quot;
-      }
-    }
-  ],
-  &quot;imports&quot;: [
-    {
-      &quot;type&quot;: 136,
-      &quot;typeName&quot;: &quot;BTMImport&quot;,
-      &quot;message&quot;: {
-        &quot;path&quot;: &quot;onshape/std/geometry.fs&quot;,
-        &quot;version&quot;: &quot;268.0&quot;,
-        &quot;nodeId&quot;: &quot;M2/0RrOwK0Q+hWr9z&quot;
-      }
-    }
-  ],
-  &quot;featureStates&quot;: [
-    {
-      &quot;key&quot;: &quot;FLqo5rpNof3IXgh_0&quot;,
-      &quot;value&quot;: {
-        &quot;type&quot;: 1688,
-        &quot;typeName&quot;: &quot;BTFeatureState&quot;,
-        &quot;message&quot;: {
-         &quot;featureStatus&quot;: &quot;OK&quot;
-        }
-      }
-    }
-  ],
-  &quot;isComplete&quot;: true,
-  &quot;rollbackIndex&quot;: 1,
-  &quot;serializationVersion&quot;: &quot;1.1.6&quot;,
-  &quot;sourceMicroversion&quot;: &quot;b5b4834bd0674b4489b2b2b7&quot;
-}
-</code></pre><p>We see that in this case, the features array contains a single feature. The &ldquo;type&rdquo; and &ldquo;typeName&rdquo; fields describe the
-type that is encoded within the &ldquo;message&rdquo; field. The &ldquo;type&rdquo; field provides definitive type information and is the type
-number assigned to the structure. This type number is a permanent assignment. The &ldquo;typeName&rdquo; field is a convenience
-field that is generated on output and ignored on input. It is intended to allow developers to associate meaningful
-names with the type numbers.</p><h3 id=general-features>General Features</h3><p>In the example above, we see that the single feature is of type 134, which is the general feature type. A general
-feature is an instantiation of the feature template that is describe by its corresponding feature spec. The BTMFeature
-structure includes the following fields:</p><ul><li><p>featureType - Specifies the name of the feature spec that this instantiates</p></li><li><p>featureId - The internal identifier of the feature instance within this part studio. It is internally generated when
-a feature is added.</p></li><li><p>nodeId - An internal identifier for the feature node. This is also internally generated when the feature is added.</p></li><li><p>name - The user visible name of the feature.</p></li><li><p>namespace - An indicator of where the feature definition can be found. Features in the FeatureScript standard library
-have a namespace value of "" whereas custom features identify the featurestudio that contains the definition. See
-the Custom Features section below for more information.</p></li><li><p>parameters - A list of parameter values for instantiation of the feature spec. Parameters are present for all
-defined parameters, even if not used in a specific instantiation.</p></li></ul><p>All parameters have the following fields in common:</p><ul><li><p>parameterId - The name of the parameter spec that this applies to</p></li><li><p>nodeId - An internal identifier for the parameter node</p></li></ul><p>Parameters are typically one of the following types:</p><ul><li><p>BTMParameterQuantity (type 147) - specifies the value for a parameter defined in the feature spec as a
-BTParameterSpecQuantity. It has the field:</p><ul><li>expression - An expression defining the value for the parameter.</li></ul><p>An example of its usage is in the depth parameter in the extrude feature.</p></li><li><p>BTMParameterQueryList (type 148) - specifies the value for a parameter defined in the feature spec as a
-BTParameterSpecQuery. It has the field:</p><ul><li><p>queries - a list of query objects. The query objects could be either</p><ul><li><p>SBTMIndividualQuery objects (type 138) with the field:</p><ul><li>geometryIds - A list of geometry id values indentifying geometry that the feature applies to.</li></ul></li><li><p>SBTMIndividualSketchRegionQuery objects (type 140) with the field:</p><ul><li>featureId - The featureId of a sketch, with the query identifying all regions of the sketch</li></ul></li></ul></li></ul><p>An example of its usage is in the entities parameter in the extrude feature.</p></li><li><p>BTMParameterBoolean (type 144) - specifies the value for a parameter defined in the feature spec as a
-BTParameterSpecBoolean. It has the field:</p><ul><li>value - The boolean value</li></ul><p>An example of its usage is in the oppositeDirection parameter in the extrude feature.</p></li><li><p>BTMParameterEnum (type 145) - specifies the value for a parameter defined in the feature spec as a
-BTParameterSpecEnum. It has the fields:</p><ul><li><p>enumName - The name of the enum type that value is a member of</p></li><li><p>value - The name of the enum member</p></li></ul><p>An example of its usage is in the bodyType parameter in the extrude feature.</p></li></ul><p>Other parameter types exist for special cases and are not described here.</p><h3 id=sketches>Sketches</h3><p>Although most features are of type BTMFeature, there is also a BTMSketch type, which defines a sketch. The structure
-of a sketch feature extends the BTMFeature and is relatively complex. It is suggested that the developer use a manually
-edited sketch as a template for any sketches that they want to create programmatically. However, we will give a
-high-level overview of the content for the sketch.</p><p>Sketches have top-level fields:</p><ul><li><p>entities - the sketch geometry</p></li><li><p>constraints - the geometric relationship constraints and dimensions for the sketch</p></li><li><p>parameters - the sketch parameters. The only parameter is the parameter that identifies the sketch plane</p></li><li><p>featureType - set to &ldquo;newSketch&rdquo;</p></li><li><p>featureId - the feature id</p></li><li><p>name - the sketch name</p></li></ul><p>The entities describe curves in terms of unbounded curves plus parameterized ranges. The geometry is always specified
-in meters, regardless of the user’s choice of units. This geometry provides an initial guess for the sketch. The actual
-solve state may differ, depending on whether the input constraints are satisfied.</p><p>The constraints describe the requirements for sketch solution. These typically include constraints such as COINCIDENT,
-HORIZONTAL, VERTICAL, PARALLEL, PERPENDICULAR, TANGENT that control geometric positioning and constraints such as
-DISTANCE, RADIUS, DIAMETER, ANGLE that provide dimensional constraints. The constraints typically have one or two
-objects that are constrained. These are referenced as localFirst for the first constrained entity, which is within
-the sketch, and either localSecond or externalSection, depending on whether the second constrained entity is local
-to the sketch. When entities are local to the sketch they are identitified by entity ids (long unique names) and when
-external they are identified by a BTMIndiviualQuery.</p><h2 id=feature-specs>Feature Specs</h2><p>The feature spec for a feature provides a description of the inputs that it accepts. As an example, the feature spec
-for a cube is shown below. It defines a single parameter named &ldquo;sideLength&rdquo;. The parameter spec includes a list of
-ranges that specify valid ranges for the parameter value. Each range is specific to a particular unit and has a
-defaultValue for that unit. Some parameters described by the feature spec may be optional. These normally have a
-visibilityCondition that describes a logical test as to whether the parameter should be exposed for editing, based on
-other parameter values. This provides a fairly reliable way to determine whether the parameter is required for a
-particular feature instance, but it is safe to include default values for a feature even if it has a
-visibilityCondition that indicates it is not visible.</p><pre><code>{
-  &quot;type&quot;: 129,
-  &quot;typeName&quot;: &quot;BTFeatureSpec&quot;,
-  &quot;message&quot;: {
-    &quot;featureType&quot;: &quot;cube&quot;,
-    &quot;featureTypeName&quot;: &quot;Cube&quot;,
-    &quot;parameters&quot;: [
-      {
-        &quot;type&quot;: 173,
-        &quot;typeName&quot;: &quot;BTParameterSpecQuantity&quot;,
-        &quot;message&quot;: {
-          &quot;quantityType&quot;: &quot;LENGTH&quot;,
-          &quot;ranges&quot;: [
-            {
-              &quot;type&quot;: 181,
-              &quot;typeName&quot;: &quot;BTQuantityRange&quot;,
-              &quot;message&quot;: {
-                &quot;units&quot;: &quot;meter&quot;,
-                &quot;minValue&quot;: 0.00001,
-                &quot;maxValue&quot;: 500,
-                &quot;defaultValue&quot;: 0.025,
-                &quot;location&quot;: {
-                  &quot;type&quot;: 226,
-                  &quot;typeName&quot;: &quot;BTLocationInfo&quot;,
-                  &quot;message&quot;: {
-                    &quot;document&quot;: &quot;onshape/std/primitives.fs&quot;,
-                    &quot;parseNodeId&quot;: &quot;PX2DsNKne8oO7ilPS&quot;,
-                    &quot;languageVersion&quot;: 268,
-                    &quot;nodeId&quot;: &quot;t8iQqgzAr/bCB2AZ&quot;
-                  }
-                }
-              }
-            },
-            {
-              &quot;type&quot;: 181,
-              &quot;typeName&quot;: &quot;BTQuantityRange&quot;,
-              &quot;message&quot;: {
-                &quot;units&quot;: &quot;centimeter&quot;,
-                &quot;minValue&quot;: 0.001,
-                &quot;maxValue&quot;: 50000,
-                &quot;defaultValue&quot;: 2.5,
-                &quot;location&quot;: {
-                  &quot;type&quot;: 226,
-                  &quot;typeName&quot;: &quot;BTLocationInfo&quot;,
-                  &quot;message&quot;: {
-                    &quot;document&quot;: &quot;onshape/std/primitives.fs&quot;,
-                    &quot;parseNodeId&quot;: &quot;PKXPCya7aeoNITDFW&quot;,
-                    &quot;languageVersion&quot;: 268,
-                    &quot;nodeId&quot;: &quot;69sE3wOlv3FLiJxn&quot;
-                  }
-                }
-              }
-            },
-            {
-              &quot;type&quot;: 181,
-              &quot;typeName&quot;: &quot;BTQuantityRange&quot;,
-              &quot;message&quot;: {
-                &quot;units&quot;: &quot;millimeter&quot;,
-                &quot;minValue&quot;: 0.01,
-                &quot;maxValue&quot;: 500000,
-                &quot;defaultValue&quot;: 25,
-                &quot;location&quot;: {
-                  &quot;type&quot;: 226,
-                  &quot;typeName&quot;: &quot;BTLocationInfo&quot;,
-                  &quot;message&quot;: {
-                    &quot;document&quot;: &quot;onshape/std/primitives.fs&quot;,
-                    &quot;parseNodeId&quot;: &quot;P8uyYds3YIBBpzlVN&quot;,
-                    &quot;languageVersion&quot;: 268,
-                    &quot;nodeId&quot;: &quot;8huKnMQb9mH9B+ef&quot;
-                  }
-                }
-              }
-            },
-            {
-              &quot;type&quot;: 181,
-              &quot;typeName&quot;: &quot;BTQuantityRange&quot;,
-              &quot;message&quot;: {
-                &quot;units&quot;: &quot;inch&quot;,
-                &quot;minValue&quot;: 0.0003937007874015748,
-                &quot;maxValue&quot;: 19685.03937007874,
-                &quot;defaultValue&quot;: 1,
-                &quot;location&quot;: {
-                  &quot;type&quot;: 226,
-                  &quot;typeName&quot;: &quot;BTLocationInfo&quot;,
-                  &quot;message&quot;: {
-                    &quot;document&quot;: &quot;onshape/std/primitives.fs&quot;,
-                    &quot;parseNodeId&quot;: &quot;P4MfX8crrr+qc9vFS&quot;,
-                    &quot;languageVersion&quot;: 268,
-                    &quot;nodeId&quot;: &quot;BMU3SmZpR83uoKkd&quot;
-                  }
-                }
-              }
-            },
-            {
-              &quot;type&quot;: 181,
-              &quot;typeName&quot;: &quot;BTQuantityRange&quot;,
-              &quot;message&quot;: {
-                &quot;units&quot;: &quot;foot&quot;,
-                &quot;minValue&quot;: 0.00003280839895013123,
-                &quot;maxValue&quot;: 1640.4199475065616,
-                &quot;defaultValue&quot;: 0.1,
-                &quot;location&quot;: {
-                  &quot;type&quot;: 226,
-                  &quot;typeName&quot;: &quot;BTLocationInfo&quot;,
-                  &quot;message&quot;: {
-                    &quot;document&quot;: &quot;onshape/std/primitives.fs&quot;,
-                    &quot;parseNodeId&quot;: &quot;P60BmwPj7LnRT0CTh&quot;,
-                    &quot;languageVersion&quot;: 268,
-                    &quot;nodeId&quot;: &quot;ywVSbQADr8dRv9+s&quot;
-                  }
-                }
-              }
-            },
-            {
-              &quot;type&quot;: 181,
-              &quot;typeName&quot;: &quot;BTQuantityRange&quot;,
-              &quot;message&quot;: {
-                &quot;units&quot;: &quot;yard&quot;,
-                &quot;minValue&quot;: 0.000010936132983377077,
-                &quot;maxValue&quot;: 546.8066491688538,
-                &quot;defaultValue&quot;: 0.025,
-                &quot;location&quot;: {
-                  &quot;type&quot;: 226,
-                  &quot;typeName&quot;: &quot;BTLocationInfo&quot;,
-                  &quot;message&quot;: {
-                    &quot;document&quot;: &quot;onshape/std/primitives.fs&quot;,
-                    &quot;parseNodeId&quot;: &quot;PsE6sGD66MJVH2xQh&quot;,
-                    &quot;languageVersion&quot;: 268,
-                    &quot;nodeId&quot;: &quot;zAy0tYs5aC0clPLL&quot;
-                  }
-                }
-              }
-            }
-          ],
-          &quot;parameterId&quot;: &quot;sideLength&quot;,
-          &quot;parameterName&quot;: &quot;Side length&quot;,
-          &quot;defaultValue&quot;: {
-            &quot;type&quot;: 147,
-            &quot;typeName&quot;: &quot;BTMParameterQuantity&quot;,
-            &quot;message&quot;: {
-              &quot;units&quot;: &quot;meter&quot;,
-              &quot;value&quot;: 0.025,
-              &quot;parameterId&quot;: &quot;sideLength&quot;,
-              &quot;nodeId&quot;: &quot;MC6QUqafapZdxtrDy&quot;
-            }
-          }
-        }
-      }
-    ]
-  }
-}
-</code></pre><p>Visibility conditions come in 3 variants:</p><ul><li><p>BTParameterVisibilityAlwaysHidden - Special-case parameters that are not directly shown to the user</p></li><li><p>BTParameterVisibilityLogical - Allows a logical condition to express when a parameter is visible. Allows nested
-AND/OR/NOT expressions. The leaves of the expression tree are BTParameterVisibilityOnEqual</p></li><li><p>BTParameterVisibilityOnEqual - A simple test that a parameter has been assigned a specific value.</p></li></ul><p>A ParameterSpec can be one of numerous types. The most commonly used types are:</p><ul><li><p>BTParameterSpecQuery - indicates that a query parameter should be supplied. The parameter spec has an allowable
-number of selections and query filter that describes the allowable types that can be selected. See below for
-additional information about query filters. An example usage is identifying the entities to chamfer in a &ldquo;Chamfer&rdquo;
-feature.</p></li><li><p>BTParameterSpecString - indicates that a string value should be supplied. For example, this is used for the name of
-a variable in a &ldquo;Variable&rdquo; feature.</p></li><li><p>BTParameterSpecQuantity - indicates that a number value should be supplied. In allows a quantityType, which describes
-the type of number (length, angle, mass, count, etc.) and range limits on the value. An example usage is the depth
-parameter in an &ldquo;Extrude&rdquo; feature.</p></li><li><p>BTParameterSpecEnum - indicates that an enumerated value should should be provided. An example usage is the
-operationType parameter in an &ldquo;Extrude&rdquo; feature.</p></li><li><p>BTParameterSpecBoolean - indicates that a boolean true/false value should be specified. An example usage is the
-offset parameter in the &ldquo;Boolean&rdquo; feature</p></li></ul><p>Some less commonly used parameter spec types are:</p><ul><li><p>BTParameterSpecDerived - indicates that an import of a part from another Part Studio should be specified.</p></li><li><p>BTParameterSpecLookupTablePath - provides a list of string values that can be chosen.</p></li><li><p>BTParameterSpecForeignId - indicates that a &ldquo;foreign id&rdquo; value should be supplied. Foreign ids are currently not
-generally accessible through the API, but identify a file that is made available throughout the system.</p></li></ul><p>Parameter Spec query filters:</p><p>Query Filters are even more numerous than parameter spec types.</p><p>Basic selections:</p><ul><li><p>BTBodyTypeFilter - a specific body type (solid, sheet, wire, acorn, mate_connector)</p></li><li><p>BTClosedCurveFilter - a curve that is either closed or not closed, depending on the isClosed value. (NO)</p></li><li><p>BTConstructionObjectFilter - an object that either is or is not identified as &ldquo;construction&rdquo;, depending on the
-isConstruction value.</p></li><li><p>BTEdgeTopologyFilter - an edge that either is or is not an internal edge, depending on the isInternalEdge value.</p></li><li><p>BTEntityTypeFilter - selects a specific type of entity based on the entityType value (vertex, edge, face, body,
-degenerate_edge).</p></li><li><p>BTFeatureTypeFilter - selects a specific type of feature base on the featureType value. (NO)</p></li><li><p>BTGeometryFilter - select specific geometry types based on the geometryType value (line, circle, arg, plane,
-cylinder,cone sphere torus, spline, ellipse).</p></li><li><p>BTImageFilter - an entity that either is or is not an image, based on the isImage value. (no)</p></li><li><p>BTMateConnectorFilter - a mate connector (NO)</p></li><li><p>BTMateFilter - a mate object</p></li><li><p>BTPlaneOrientationFilter - excludes planes that are aligned with another plane, based on the normal value.</p></li><li><p>BTSketchObjectFilter - an object that either is or is not a sketch object, or is a sketch object created by the
-user, depending on the objectType value (not_sketch_object, any_sketch_object, user_entity).</p></li><li><p>BTTextObjectFilter - an object that either is or is not a text object, depending on the isText value.</p></li><li><p>BTTextStrokeFilter - an object that either is or is not a text stroke, depending on the isStroke value.</p></li></ul><p>Logical operations:</p><ul><li><p>SBTAndFilter - combines query filters with &ldquo;AND&rdquo;</p></li><li><p>SBTOrFilter - combines query filters with &ldquo;OR&rdquo;</p></li><li><p>SBTNotFilter - negates query filters</p></li></ul><h2 id=feature-script-evaluation>Feature Script Evaluation</h2><p>For certain tasks when creating and updating features, there may be information needed that is embedded within the
-existing model. You can often access it by running a Feature Script function. Feature Script is a language that is
-used to define the behavior of features.</p><p>As an example of its usage, consider the case of using a face of an existing part to define new geometry. A plane is
-defined in FeatureScript as an origin, x-direction vector and normal vector. These can be queried from FeatureScript
-by using the evPlane function, but it wants a &ldquo;query&rdquo; that identifies the face. Here is an example of how you might do
-this with a call to the Evaluate FeatureScript API call. Suppose you know that “JCC” is the geometry Id of a particular
-face. The following body can be passed to the evaluate function.</p><pre><code>{
-  &quot;script&quot; : &quot;function (context is Context, queries is map) {
-              return evPlane(context, {face:queries.id});
-              }&quot;,
-  &quot;queries&quot; : [ { &quot;key&quot; : &quot;id&quot;, &quot;value&quot; : [ &quot;JCC&quot; ] } ]
-}
-</code></pre><p>Assuming that we have done everything right, the output of this might look something like this:</p><pre><code>{
-  &quot;result&quot;: {
-    &quot;type&quot;: 2062,
-    &quot;typeName&quot;: &quot;BTFSValueMap&quot;,
-    &quot;message&quot;: {
-      &quot;value&quot;: [
-        {
-          &quot;type&quot;: 2077,
-          &quot;typeName&quot;: &quot;BTFSValueMapEntry&quot;,
-          &quot;message&quot;: {
-            &quot;key&quot;: {
-              &quot;type&quot;: 1422,
-              &quot;typeName&quot;: &quot;BTFSValueString&quot;,
-              &quot;message&quot;: {
-                &quot;value&quot;: &quot;normal&quot;
-              }
-            },
-            &quot;value&quot;: {
-              &quot;type&quot;: 1499,
-              &quot;typeName&quot;: &quot;BTFSValueArray&quot;,
-              &quot;message&quot;: {
-                &quot;value&quot;: [
-                  {
-                    &quot;type&quot;: 772,
-                    &quot;typeName&quot;: &quot;BTFSValueNumber&quot;,
-                    &quot;message&quot;: {
-                      &quot;value&quot;: -1
-                    }
-                  },
-                  {
-                    &quot;type&quot;: 772,
-                    &quot;typeName&quot;: &quot;BTFSValueNumber&quot;,
-                    &quot;message&quot;: {}
-                  },
-                  {
-                    &quot;type&quot;: 772,
-                    &quot;typeName&quot;: &quot;BTFSValueNumber&quot;,
-                    &quot;message&quot;: {}
-                  }
-                ],
-                &quot;typeTag&quot;: &quot;Vector&quot;
-              }
-            }
-          }
-        },
-        {
-          &quot;type&quot;: 2077,
-          &quot;typeName&quot;: &quot;BTFSValueMapEntry&quot;,
-          &quot;message&quot;: {
-            &quot;key&quot;: {
-              &quot;type&quot;: 1422,
-              &quot;typeName&quot;: &quot;BTFSValueString&quot;,
-              &quot;message&quot;: {
-                &quot;value&quot;: &quot;origin&quot;
-              }
-            },
-            &quot;value&quot;: {
-              &quot;type&quot;: 1499,
-              &quot;typeName&quot;: &quot;BTFSValueArray&quot;,
-              &quot;message&quot;: {
-                &quot;value&quot;: [
-                  {
-                    &quot;type&quot;: 1817,
-                    &quot;typeName&quot;: &quot;BTFSValueWithUnits&quot;,
-                    &quot;message&quot;: {
-                      &quot;unitToPower&quot;: [
-                        {
-                          &quot;key&quot;: &quot;METER&quot;,
-                          &quot;value&quot;: 1
-                        }
-                      ],
-                      &quot;typeTag&quot;: &quot;ValueWithUnits&quot;
-                    }
-                  },
-                  {
-                    &quot;type&quot;: 1817,
-                    &quot;typeName&quot;: &quot;BTFSValueWithUnits&quot;,
-                    &quot;message&quot;: {
-                      &quot;value&quot;: 0.012700000000000001,
-                      &quot;unitToPower&quot;: [
-                        {
-                          &quot;key&quot;: &quot;METER&quot;,
-                          &quot;value&quot;: 1
-                        }
-                      ],
-                      &quot;typeTag&quot;: &quot;ValueWithUnits&quot;
-                    }
-                  },
-                  {
-                    &quot;type&quot;: 1817,
-                    &quot;typeName&quot;: &quot;BTFSValueWithUnits&quot;,
-                    &quot;message&quot;: {
-                      &quot;value&quot;: 0.012700000000000001,
-                      &quot;unitToPower&quot;: [
-                        {
-                          &quot;key&quot;: &quot;METER&quot;,
-                          &quot;value&quot;: 1
-                        }
-                      ],
-                      &quot;typeTag&quot;: &quot;ValueWithUnits&quot;
-                    }
-                  }
-                ],
-                &quot;typeTag&quot;: &quot;Vector&quot;
-              }
-            }
-          }
-        },
-        {
-          &quot;type&quot;: 2077,
-          &quot;typeName&quot;: &quot;BTFSValueMapEntry&quot;,
-          &quot;message&quot;: {
-            &quot;key&quot;: {
-              &quot;type&quot;: 1422,
-              &quot;typeName&quot;: &quot;BTFSValueString&quot;,
-              &quot;message&quot;: {
-                &quot;value&quot;: &quot;x&quot;
-              }
-            },
-            &quot;value&quot;: {
-              &quot;type&quot;: 1499,
-              &quot;typeName&quot;: &quot;BTFSValueArray&quot;,
-              &quot;message&quot;: {
-                &quot;value&quot;: [
-                  {
-                    &quot;type&quot;: 772,
-                    &quot;typeName&quot;: &quot;BTFSValueNumber&quot;,
-                    &quot;message&quot;: {}
-                  },
-                  {
-                    &quot;type&quot;: 772,
-                    &quot;typeName&quot;: &quot;BTFSValueNumber&quot;,
-                    &quot;message&quot;: {
-                      &quot;value&quot;: -1
-                    }
-                  },
-                  {
-                    &quot;type&quot;: 772,
-                    &quot;typeName&quot;: &quot;BTFSValueNumber&quot;,
-                    &quot;message&quot;: {}
-                  }
-                ],
-                &quot;typeTag&quot;: &quot;Vector&quot;
-              }
-            }
-          }
-        }
-      ],
-      &quot;typeTag&quot;: &quot;Plane&quot;
-    }
-  },
-  &quot;serializationVersion&quot;: &quot;1.1.6&quot;,
-  &quot;sourceMicroversion&quot;: &quot;27db48fb62bf6ac3b3ddaeaa&quot;,
-  &quot;libraryVersion&quot;: 296
-}
-</code></pre><p>You can see from the output that the FeatureScript object representation uses the same typing rules that is used for
-other output. In addition, FeatureScript objects may have a typeTag field associated with them, which indicates that
-type-specific behavior should be applied. For instance, we see cases where a BTFSValueArray has a typeTag of &ldquo;Vector&rdquo;,
-which allows the array to be accepted where a Vector is declared to be required.</p><p>In order to help describe the interpretation of the structure above, here is a possible JSON representation of the
-result from the output shown above, but with weaker typing:</p><pre><code>{
-  &quot;normal&quot; : [ -1, 0, 0 ],
-  &quot;origin&quot; : { &quot;value&quot; : [ 0,
-                           0.012700000000000001,
-                           0.012700000000000001 ],
-               &quot;units&quot; : &quot;meter&quot; },
-  &quot;x&quot; : [ 0, -1, 0 ]
-}
-</code></pre><h2 id=custom-features>Custom Features</h2><p>Custom features can be used in the feature apis with a little additional work. The key to using custom features is
-that you must set a namespace field in the feature to tell Onshape where to look for the feature defintion.
-The namespace field identifies a specific version of a feature studio. There are two standard forms for the namespace
-field to consider:</p><ul><li><p>Intra-workspace - In this case, the namespace field has the form
-&ldquo;e<elementid>::m<microversionid>&rdquo;
-where elementId is the elementId of the FeatureStudio that defines the feature and microversionId is the element
-microversionId of the FeatureStudio. It is important to note that the element microversionId is different from the
-document microversionId that is more typically encountered in API usage.</p></li><li><p>External - When the definition to be used lives in a different document or in a specific version of the current
-document it is referenced using the form
-&ldquo;d<documentid>::v<versionid>::e<elementid>::m<microversionid>&rdquo;
-This is the same form as for the intra-workspace case but with a documentId and versionId additionally specified.
-The documentId is the id of the document containing the FeatureStudio and the versionId is the version of the
-document to be used.</p></li></ul><p>In both of the forms listed, it is necessary to determine the FeatureStudio element microversionId. One way to do this
-is to call the GET /api/documents/DWMV/elements API, which reports the element microversion for each of the elements.
-There is also a GET /api/featurestudios/DWMV/featurespecs API that provides a featurespec for each of the features
-defined in the FeatureStudio. These featurespecs also have a namespace field that reports the namespace of the
-FeatureStudio in the intra-workspace form.</p><h2 id=examples>Examples</h2><p>Below are several examples of how the API can be used in order to help you get started. The examples are quite trivial,
-but should provide a basic demonstration of how to use these API methods. You should be able to execute the calls
-against a part studio of yours and see results immediately. The calls could be executed using your preferred software
-environment but interactive use in a REST-aware tool is likely the easiest way to try the examples.</p><h3 id=example-1>Example 1</h3><p>In our first example we will create a cube using the cube feature. The feature accepts only a single parameter, which
-is the length of a side, and creates a cube with a corner at the origin and aligned with the three default planes. In
-running the example, be sure to replace DWE with the the d/:did/w/:wid/e/:eid that is appropriate for the part studio
-that you are operating against.</p><p>POST /api/partstudios/DWE/features</p><pre><code>{
-  &quot;feature&quot; : {
-    &quot;type&quot;: 134,
-    &quot;typeName&quot;: &quot;BTMFeature&quot;,
-      &quot;message&quot;: {
-        &quot;featureType&quot;: &quot;cube&quot;,
-        &quot;name&quot;: &quot;Cube 1&quot;,
-        &quot;parameters&quot;: [
+          &#34;btType&#34;: &#34;BTMFeature-134&#34;,
+          &#34;featureId&#34;: &#34;{fid1}&#34;,
+          &#34;parameters&#34;: []
+          },
           {
-             &quot;type&quot;: 147,
-             &quot;typeName&quot;: &quot;BTMParameterQuantity&quot;,
-             &quot;message&quot;: {
-               &quot;expression&quot;: &quot;1*in&quot;,
-               &quot;parameterId&quot;: &quot;sideLength&quot;
-             }
-           }
+          &#34;btType&#34;: &#34;BTMFeature-134&#34;,
+          &#34;featureId&#34;: &#34;{fid2}&#34;,
+          &#34;parameters&#34;: []
+          }
         ]
-      }
-    }
+      }&#39;
+</code></pre></li><li><a href=https://cad.onshape.com/glassworks/explorer/#/PartStudio/deletePartStudioFeature>Delete a Feature</a><pre tabindex=0><code>curl -X &#39;DELETE&#39; \
+  &#39;https://cad.onshape.com/api/v6/partstudios/d/{did}/{wvm}/{wvmid}/e/{eid}/features/featureid/{fid}&#39; \
+  -H &#39;accept: application/json;charset=UTF-8; qs=0.09&#39; \
+  -H &#39;Authorization: Basic CREDENTIALS&#39; 
+</code></pre></li></ul><h3 id=json-encoding>JSON encoding</h3><p>Instead of providing a translation layer between a feature&rsquo;s internal and external formats, these APIs present the internal format of the feature definitions to the user. The best way to familiarize yourself with the formats involved is by calling the <a href=https://cad.onshape.com/glassworks/explorer/#/PartStudio/getPartStudioFeatures>Get the Feature List</a> endpoint on existing Part Studios.</p><blockquote><p>📘 <strong>Notes</strong></p><ul><li>Onshape REST API parameters may change at any time. The documentation on this page is accurate for v6 of the Onshape API. The quickest way to verify what parameters are needed for a call is to create the sketch/feature in the Onshape UI, then call the <a href=https://cad.onshape.com/glassworks/explorer/#/PartStudio/getPartStudioFeatures>Get the Feature List</a> API and see what parameters are returned for the feature.</li></ul></blockquote><blockquote><p>📘 <strong>Notes</strong></p><ul><li>Default values are sometimes omitted in the encoded output. These defaults are:<ul><li>String: <code>""</code></li><li>Boolean: <code>false</code></li><li>Numeric: <code>0</code></li></ul></li><li>The JSON encoding uses a special tagging system to manage polymorphic data structures. Objects are generally by enclosing them within another object that declares the type information for the enclosed object.</li></ul></blockquote><h3 id=feature-types>Feature types</h3><p>Below, find the available types for working with features in the API.</p><ul><li><code>BTMFeature-134</code> - General feature type</li><li><code>BTMSketch-151</code> - Feature type for sketches</li></ul><h3 id=parameter-types>Parameter types</h3><p>All parameters have the following fields in common:</p><ul><li><code>parameterId</code> - Unique ID of the parameter</li><li><code>nodeId</code> - Unique ID of the parameter node</li></ul><p>The parameter types available for use in the API are:</p><ul><li><code>BTMParameterQuantity-147</code><ul><li><code>expression</code> - Define the value for the parameter</li></ul></li><li><code>BTMParameterQueryList-148 </code>- defined by one of the following:<ul><li><code>SBTMIndividualQuery-138</code><ul><li><code>geometryIds</code> - List of geometry IDs the feature applies to</li></ul></li><li><code>SBTMIndividualSketchRegionQuery-140</code><ul><li><code>featureId</code> - Feature ID of the sketch for which to include all regions</li></ul></li></ul></li><li><code>BTMParameterBoolean-144</code><ul><li><code>value</code> - <code>true | false</code></li></ul></li><li><code>BTMParameterEnum-145</code><ul><li><code>enumName</code> - Name of the enum type that the value is a member of</li><li><code>value</code> - The enum member</li></ul></li></ul><h3 id=sketch-plane-ids>Sketch plane IDs</h3><p>The following string can be sent along with the <a href=https://cad.onshape.com/glassworks/explorer/#/PartStudio/evalFeatureScript>PartStudios/featurescript</a> API to get the plane ID. You can then use that ID to specify the plane on which to create a sketch.</p><pre tabindex=0><code>function(context is Context, queries) { 
+  return transientQueriesToStrings(evaluateQuery(context, qCreatedBy(makeId(\&#34;{planeName}\&#34;), EntityType.FACE))); 
 }
-</code></pre><p>This returns output similar to the following:</p><pre><code>{
-    &quot;feature&quot;: {
-        &quot;type&quot;: 134,
-        &quot;typeName&quot;: &quot;BTMFeature&quot;,
-        &quot;message&quot;: {
-            &quot;featureType&quot;: &quot;cube&quot;,
-            &quot;featureId&quot;: &quot;FuJu9c8PvO5oyTgaV&quot;,
-            &quot;name&quot;: &quot;Cube 1&quot;,
-            &quot;parameters&quot;: [
-                {
-                    &quot;type&quot;: 147,
-                    &quot;typeName&quot;: &quot;BTMParameterQuantity&quot;,
-                    &quot;message&quot;: {
-                        &quot;expression&quot;: &quot;1*in&quot;,
-                        &quot;parameterId&quot;: &quot;sideLength&quot;,
-                        &quot;nodeId&quot;: &quot;M+iZRdlIZjnuz8DSS&quot;
-                    }
-                }
-            ],
-            &quot;nodeId&quot;: &quot;MUdiYYWlCa3arVy8q&quot;
-        }
+</code></pre><p>For example, to get the ID of the Top plane, you would make the following call:</p><pre tabindex=0><code>curl -X &#39;POST&#39; \
+  &#39;https://demo-c.dev.onshape.com/api/v6/partstudios/d/{did}/w/{wid}/e/{eid}/featurescript?rollbackBarIndex=-1&#39; \
+  -H &#39;Accept: application/json;charset=UTF-8; qs=0.09&#39; \
+  -H &#39;Authorization: Basic CREDENTIALS&#39; \
+  -H &#39;Content-Type: application/json;charset=UTF-8; qs=0.09&#39; \
+  -d &#39;{
+        &#34;script&#34;: &#34;function(context is Context, queries) { return transientQueriesToStrings(evaluateQuery(context, qCreatedBy(makeId(\&#34;Top\&#34;), EntityType.FACE))); }&#34;
+}&#39;
+</code></pre><h2 id=sample-workflows>Sample Workflows</h2><p>Below are several examples of how the API can be used in order to help you get started. The calls could be executed using your preferred software environment but interactive use in a REST-aware tool is likely the easiest way to try the examples.</p><h3 id=get-the-list-of-features-in-a-part-studio>Get the list of features in a Part Studio</h3><p>One of the best ways to familiarize yourself with the Onshape Feature APIs is to view the API details for existing features in a Part Studio. In this example, we&rsquo;ll add three features to a Part Studio, and then call the <a href=https://cad.onshape.com/glassworks/explorer/#/PartStudio/getPartStudioFeatures>PartStudio/getPartStudioFeatures</a> API on the Part Studio. We&rsquo;ll then be able to view the structure of the way features are represented in the API.</p><ol><li>Create a new document or open an existing one.</li><li>Create a new sketch in the document, and draw a long rectangle.</li><li>Extrude the rectangle.</li><li>Add a fillet to one edge of the part.</li><li>Call the <a href=https://cad.onshape.com/glassworks/explorer/#/PartStudio/getPartStudioFeatures>PartStudio/getPartStudioFeatures</a> API. Replace the URL parameters with the values from your document, and replace <code>CREDENTIALS</code> with your authorization credentials.<pre tabindex=0><code>curl -X &#39;GET \
+  &#39;https://cad.onshape.com/api/v6/partstudios/d/{did}/{wvm}/{wvmid}/e/{eid}/features?rollbackBarIndex=-1&amp;includeGeometryIds=true&amp;noSketchGeometry=false&#39; \
+  -H &#39;Authorization: Basic CREDENTIALS&#39; \
+  -H &#39;Accept: application/json;charset=UTF-8; qs=0.09&#39;
+</code></pre></li><li>Review the JSON returned in the response body. A lot of information is returned, but it will look something like the truncated snippet below. Notice that there are objects returned for each feature in the Part Studio&ndash; the sketch, the extrude, the fillet, and the chamfer. Each default plane and the origin in the Part Studio also appear in the <code>defaultFeatures</code> object. The Standard Geometry library is listed as an import, and the response also includes the state of each feature. :<pre tabindex=0><code>{
+    &#34;btType&#34;: &#34;BTFeatureListResponse-2457&#34;,
+    &#34;isComplete&#34;: true,
+    &#34;serializationVersion&#34;: &#34;1.2.4&#34;,
+    &#34;rollbackIndex&#34;: 4,
+    &#34;features&#34;: [
+      {
+        &#34;btType&#34;: &#34;BTMSketch-151&#34;,
+        &#34;entities&#34;: [...],
+        &#34;constraints&#34;: [...],
+        &#34;name&#34;: &#34;Sketch 1&#34;,
+        &#34;suppressed&#34;: false,
+        &#34;parameters&#34;: [...],
+        &#34;featureId&#34;: &#34;{fid1}&#34;,
+        &#34;featureType&#34;: &#34;newSketch&#34;,
+        &#34;subFeatures&#34;: [...],
+        &#34;returnAfterSubfeatures&#34;: false
+      },
+      {
+        &#34;btType&#34;: &#34;BTMFeature-134&#34;,
+        &#34;name&#34;: &#34;Extrude 1&#34;,
+        &#34;suppressed&#34;: false,
+        &#34;parameters&#34;: [...]
+        &#34;featureId&#34;: &#34;{fid2}&#34;,
+        &#34;featureType&#34;: &#34;extrude&#34;,
+        &#34;subFeatures&#34;: [],
+        &#34;returnAfterSubfeatures&#34;: false
+      },
+      {
+        &#34;btType&#34;: &#34;BTMFeature-134&#34;,
+        &#34;name&#34;: &#34;Fillet 1&#34;,
+        &#34;suppressed&#34;: false,
+        &#34;parameters&#34;: [...],
+        &#34;featureId&#34;: &#34;{fid3}&#34;,
+        &#34;featureType&#34;: &#34;fillet&#34;,
+        &#34;subFeatures&#34;: [...],
+        &#34;returnAfterSubfeatures&#34;: false
+      },
+      {
+        &#34;btType&#34;: &#34;BTMFeature-134&#34;,
+        &#34;name&#34;: &#34;Chamfer 1&#34;,
+        &#34;suppressed&#34;: false,
+        &#34;parameters&#34;: [...],
+        &#34;featureId&#34;: &#34;{fid4}&#34;,
+      }
+    ],
+    &#34;featureStates&#34;: {
+      &#34;{fid1}&#34;: {
+        &#34;btType&#34;: &#34;BTFeatureState-1688&#34;,
+        &#34;featureStatus&#34;: &#34;OK&#34;,
+        &#34;inactive&#34;: false
+      },
+      ...
     },
-    &quot;featureState&quot;: {
-        &quot;type&quot;: 1688,
-        &quot;typeName&quot;: &quot;BTFeatureState&quot;,
-        &quot;message&quot;: {
-            &quot;featureStatus&quot;: &quot;OK&quot;
-        }
-    },
-    &quot;serializationVersion&quot;: &quot;1.1.6&quot;,
-    &quot;sourceMicroversion&quot;: &quot;2d31ccc170551a83995b89c8&quot;
-}
-</code></pre><p>The output returns us the feature definition that we provided as input with nodeIds and a featureId, plus information
-telling us that that the feature executed correctly and information about the serialization version and microversion of
-the document that resulted from our feature addition.</p><h3 id=example-2>Example 2</h3><p>In our second example we will create a cube where the sideLength parameter is defined by a variable and will then
-update the variable to have a new value.</p><p>Step 1) Create a variable - we create a feature of type assignVariable, which defines a variable and assigns it a
-value. Here, the variables name is &ldquo;size&rdquo; and is displayed in the feature list as &ldquo;Cube size&rdquo;, and it is assigned to
-have the value &ldquo;1*in&rdquo; with a variableType of ANY. Once again, be sure to replace DWE with the the d/:did/w/:wid/e/:eid
-that is appropriate for the part studio that you are operating against.</p><p>A variable can be created with variableType set to &ldquo;ANY&rdquo;, &ldquo;LENGTH&rdquo;, &ldquo;ANGLE&rdquo;, or &ldquo;NUMBER&rdquo;. This supplies a constraint
-on the supplied value and each type requires setting the appropriate corresponding parameter, which would be anyValue,
-lengthValue, angleValue or numberValue, respectively in addition to setting the value parameter. For the intended
-purpose of using it as a length value it might be more appropriate to use &ldquo;LENGTH&rdquo; as the type, which would require
-setting the lengthValue and value parameters to a length value. We have chosen to demonstrate the use of the &ldquo;ANY&rdquo;
-type here because it can be used in a wider range of applications than a &ldquo;LENGTH&rdquo; variable, but does not provide the
-value type checking that is provided by &ldquo;LENGTH&rdquo;, &ldquo;ANGLE&rdquo; or &ldquo;NUMBER&rdquo; types.</p><p>POST /api/partstudios/DWE/features</p><pre><code>{
-  &quot;feature&quot; : {
-    &quot;type&quot;: 134,
-    &quot;typeName&quot;: &quot;BTMFeature&quot;,
-    &quot;message&quot;: {
-        &quot;featureType&quot;: &quot;assignVariable&quot;,
-        &quot;name&quot;: &quot;Cube size&quot;,
-        &quot;parameters&quot;: [
-            {
-                &quot;type&quot;: 145,
-                &quot;typeName&quot;: &quot;BTMParameterEnum&quot;,
-                &quot;message&quot;: {
-                    &quot;enumName&quot;: &quot;VariableType&quot;,
-                    &quot;value&quot;: &quot;ANY&quot;,
-                    &quot;parameterId&quot;: &quot;variableType&quot;
-                }
-            },
-            {
-                &quot;type&quot;: 149,
-                &quot;typeName&quot;: &quot;BTMParameterString&quot;,
-                &quot;message&quot;: {
-                    &quot;value&quot;: &quot;size&quot;,
-                    &quot;parameterId&quot;: &quot;name&quot;
-                }
-            },
-            {
-                &quot;type&quot;: 147,
-                &quot;typeName&quot;: &quot;BTMParameterQuantity&quot;,
-                &quot;message&quot;: {
-                    &quot;expression&quot;: &quot;1*in&quot;,
-                    &quot;parameterId&quot;: &quot;anyValue&quot;
-                }
-            }
-        ]
-    }
-  }
-}
-</code></pre><p>The returned structure will include a featureId value for the variable. Make note of this value and we will use it
-in step 3 below.</p><ol start=2><li>Create the cube feature, referencing the variable created</li></ol><p>POST /api/partstudios/DWE/features</p><pre><code>{
-  &quot;feature&quot; : {
-    &quot;type&quot;: 134,
-    &quot;typeName&quot;: &quot;BTMFeature&quot;,
-      &quot;message&quot;: {
-        &quot;featureType&quot;: &quot;cube&quot;,
-        &quot;name&quot;: &quot;Cube 1&quot;,
-        &quot;parameters&quot;: [
-          {
-            &quot;type&quot;: 147,
-            &quot;typeName&quot;: &quot;BTMParameterQuantity&quot;,
-            &quot;message&quot;: {
-              &quot;expression&quot;: &quot;#size&quot;,
-              &quot;parameterId&quot;: &quot;sideLength&quot;
-            }
-          }
-        ]
+    &#34;defaultFeatures&#34;: [
+      {
+        &#34;btType&#34;: &#34;BTMFeature-134&#34;,
+        &#34;name&#34;: &#34;Origin&#34;,
+      },
+      {
+        &#34;btType&#34;: &#34;BTMFeature-134&#34;,
+        &#34;name&#34;: &#34;Top&#34;,
+      },
+      {
+        &#34;btType&#34;: &#34;BTMFeature-134&#34;,
+        &#34;name&#34;: &#34;Front&#34;,
+      },
+      {
+        &#34;btType&#34;: &#34;BTMFeature-134&#34;,
+        &#34;name&#34;: &#34;Right&#34;,
       }
-    }
-}
-</code></pre><ol start=3><li>Update the variable to have a new value. We assume here that the featureId value returned in step 1 is
-&ldquo;FuJu9c8PvO5oyTgaV&rdquo; and we will change the cube size from 1 inch to 10 centimeters.</li></ol><p>POST /api/partstudios/DWE/features/featureid/FuJu9c8PvO5oyTgaV</p><pre><code>{
-  &quot;feature&quot; : {
-    &quot;type&quot;: 134,
-    &quot;typeName&quot;: &quot;BTMFeature&quot;,
-    &quot;message&quot;: {
-        &quot;featureType&quot;: &quot;assignVariable&quot;,
-        &quot;name&quot;: &quot;Cube size&quot;,
-        &quot;parameters&quot;: [
-            {
-                &quot;type&quot;: 145,
-                &quot;typeName&quot;: &quot;BTMParameterEnum&quot;,
-                &quot;message&quot;: {
-                    &quot;enumName&quot;: &quot;VariableType&quot;,
-                    &quot;value&quot;: &quot;ANY&quot;,
-                    &quot;parameterId&quot;: &quot;variableType&quot;
-                }
-            },
-            {
-                &quot;type&quot;: 149,
-                &quot;typeName&quot;: &quot;BTMParameterString&quot;,
-                &quot;message&quot;: {
-                    &quot;value&quot;: &quot;size&quot;,
-                    &quot;parameterId&quot;: &quot;name&quot;
-                }
-            },
-            {
-                &quot;type&quot;: 147,
-                &quot;typeName&quot;: &quot;BTMParameterQuantity&quot;,
-                &quot;message&quot;: {
-                    &quot;expression&quot;: &quot;10*cm&quot;,
-                    &quot;parameterId&quot;: &quot;anyValue&quot;
-                }
-            }
-        ]
-    }
-  }
-}
-</code></pre><p>Take a look at the part studio and you will see the cube at its new size. You can edit the Cube size variable and
-change the value again.</p><h3 id=example-3>Example 3</h3><p>In this example, we create a Sketch and extrude it. This demonstrates relationships betweeen features. First, the
-sketch must be created on a plane, and for convenience, we will use the pre-defined front plane. Then, the extrude
-needs to describe what is to be extruded, and for convenience, we use the BTMIndividualSketchRegionQuery.</p><ol><li>Determine the geometryId for the front plane.</li></ol><p>POST /api/features/DWE/featurescript</p><pre><code>{
-  &quot;script&quot; :
-    &quot;function(context is Context, queries)
+    ],
+    &#34;imports&#34;: [
       {
-        return transientQueriesToStrings(evaluateQuery(context, qCreatedBy(makeId(\&quot;Front\&quot;), EntityType.FACE)));
-      }&quot;,
-  &quot;queries&quot; : []
-}
-</code></pre><p>This will likely return something like this:</p><pre><code>{
-  &quot;result&quot;: {
-    &quot;type&quot;: 1499,
-    &quot;typeName&quot;: &quot;BTFSValueArray&quot;,
-    &quot;message&quot;: {
-      &quot;value&quot;: [
-        {
-          &quot;type&quot;: 1422,
-          &quot;typeName&quot;: &quot;BTFSValueString&quot;,
-          &quot;message&quot;: {
-            &quot;value&quot;: &quot;JCC&quot;
-          }
-        }
-      ]
-    }
-  },
-  &quot;serializationVersion&quot;: &quot;1.1.6&quot;,
-  &quot;sourceMicroversion&quot;: &quot;a53cabe7d36e30ee100b1d2a&quot;,
-  &quot;libraryVersion&quot;: 298
-}
-</code></pre><p>This tells us that the geometryId for the face created by the &ldquo;Front&rdquo; feature is &ldquo;JCC&rdquo;.</p><ol start=2><li>Determine the geometryId for the Origin</li></ol><p>POST /api/features/DWE/featurescript</p><pre><code>{
-  &quot;script&quot; :
-    &quot;function(context is Context, queries)
+        &#34;btType&#34;: &#34;BTMImport-136&#34;,
+        &#34;path&#34;: &#34;onshape/std/geometry.fs&#34;,
+        &#34;version&#34;: &#34;2232.0&#34;
+      }
+    ],
+    &#34;libraryVersion&#34;: 2232
+  }
+</code></pre></li></ol><h3 id=create-a-cube-feature>Create a cube feature</h3><p>In this example we will create a cube using the <code>cube</code> feature. The feature accepts a single parameter (the length of a side) and creates a cube with a corner at the origin and aligned with the three default planes.</p><ol><li>Create a new document or open an existing one. We&rsquo;ll create the cube feature in this document.</li><li>Begin to create the <a href=https://cad.onshape.com/glassworks/explorer/#/PartStudio/addPartStudioFeature>PartStudio/addPartStudioFeature</a> call. Replace the URL parameters with the values from your document, and replace <code>CREDENTIALS</code> with your authorization credentials. This is a call to the same endpoint as in the previous example, but is a <code>POST</code> instead of a <code>GET</code>.<pre tabindex=0><code>curl -X &#39;POST \
+  &#39;https://cad.onshape.com/api/v6/partstudios/d/{did}/{wvm}/{wvmid}/e/{eid}/features&#39; \
+  -H &#39;Authorization: Basic CREDENTIALS&#39; \
+  -H &#39;Accept: application/json;charset=UTF-8; qs=0.09&#39;\
+  -H &#39;Content-Type: application/json;charset=UTF-8; qs=0.09&#39; \
+  -d &#39;{
+          &lt;JSON of feature data&gt;
+      }&#39;
+</code></pre></li><li>Add the following as the JSON body.<ul><li>Note the <code>btType</code> defines this as a Feature.</li><li>We&rsquo;ve named the feature <code>cube</code> and inserted an instance of the feature named <code>Cube 1</code> into the Part Studio.</li><li>The <code>cube</code> feature has one parameter&ndash; the cube <code>sideLength</code> in inches, which is set to 1 by default.</li></ul><pre tabindex=0><code>{
+  &#34;btType&#34;: &#34;BTFeatureDefinitionCall-1406&#34;,
+  &#34;feature&#34;: {
+    &#34;btType&#34;: &#34;BTMFeature-134&#34;,
+    &#34;featureType&#34;: &#34;cube&#34;,
+    &#34;name&#34;: &#34;Cube 1&#34;,
+    &#34;parameters&#34;: [
       {
-        return transientQueriesToStrings(evaluateQuery(context, qCreatedBy(makeId(\&quot;Origin\&quot;), EntityType.VERTEX)));
-      }&quot;,
-  &quot;queries&quot; : []
-}
-</code></pre><p>This will report the geometryId for the origin (probably with the value &ldquo;IB&rdquo;) which we will use in the sketch.</p><ol start=3><li>Create the sketch. This will be just a circle on the front plane with its center at the origin and diameter of
-1 inch.</li></ol><p>POST /api/partstudios/DWE/features</p><pre><code>{
-  &quot;feature&quot; : {
-    &quot;type&quot;: 151,
-    &quot;typeName&quot;: &quot;BTMSketch&quot;,
-    &quot;message&quot;: {
-      &quot;entities&quot;: [
-        {
-          &quot;type&quot;: 4,
-          &quot;typeName&quot;: &quot;BTMSketchCurve&quot;,
-          &quot;message&quot;: {
-            &quot;geometry&quot;: {
-              &quot;type&quot;: 115,
-              &quot;typeName&quot;: &quot;BTCurveGeometryCircle&quot;,
-              &quot;message&quot;: {
-                &quot;radius&quot;: 0.025400000000000002,
-                &quot;xDir&quot;: 1,
-                &quot;yDir&quot;: 0
-              }
-            },
-            &quot;centerId&quot;: &quot;clAhDfZz-Dgmb-d0AJ-01Cv-JINJdWZLbVj1.center&quot;,
-            &quot;entityId&quot;: &quot;clAhDfZz-Dgmb-d0AJ-01Cv-JINJdWZLbVj1&quot;
-          }
-        }
-      ],
-      &quot;constraints&quot;: [
-        {
-          &quot;type&quot;: 2,
-          &quot;typeName&quot;: &quot;BTMSketchConstraint&quot;,
-          &quot;message&quot;: {
-            &quot;constraintType&quot;: &quot;COINCIDENT&quot;,
-            &quot;parameters&quot;: [
-              {
-                &quot;type&quot;: 149,
-                &quot;typeName&quot;: &quot;BTMParameterString&quot;,
-                &quot;message&quot;: {
-                  &quot;value&quot;: &quot;clAhDfZz-Dgmb-d0AJ-01Cv-JINJdWZLbVj1.center&quot;,
-                  &quot;parameterId&quot;: &quot;localFirst&quot;
-                }
-              },
-              {
-                &quot;type&quot;: 148,
-                &quot;typeName&quot;: &quot;BTMParameterQueryList&quot;,
-                &quot;message&quot;: {
-                  &quot;queries&quot;: [
-                    {
-                      &quot;type&quot;: 138,
-                      &quot;typeName&quot;: &quot;BTMIndividualQuery&quot;,
-                      &quot;message&quot;: {
-                        &quot;geometryIds&quot;: [
-                          &quot;IB&quot;
-                        ]
-                      }
-                    }
-                  ],
-                  &quot;parameterId&quot;: &quot;externalSecond&quot;
-                }
-              }
-            ],
-            &quot;entityId&quot;: &quot;clAhDfZz-Dgmb-d0AJ-01Cv-JINJdWZLbVj1.centerSnap0&quot;
-          }
-        },
-        {
-          &quot;type&quot;: 2,
-          &quot;typeName&quot;: &quot;BTMSketchConstraint&quot;,
-          &quot;message&quot;: {
-            &quot;constraintType&quot;: &quot;DIAMETER&quot;,
-            &quot;parameters&quot;: [
-              {
-                &quot;type&quot;: 149,
-                &quot;typeName&quot;: &quot;BTMParameterString&quot;,
-                &quot;message&quot;: {
-                  &quot;value&quot;: &quot;clAhDfZz-Dgmb-d0AJ-01Cv-JINJdWZLbVj1&quot;,
-                  &quot;parameterId&quot;: &quot;localFirst&quot;
-                }
-              },
-              {
-                &quot;type&quot;: 147,
-                &quot;typeName&quot;: &quot;BTMParameterQuantity&quot;,
-                &quot;message&quot;: {
-                  &quot;expression&quot;: &quot;1*in&quot;,
-                  &quot;parameterId&quot;: &quot;length&quot;
-                }
-              },
-              {
-                &quot;type&quot;: 147,
-                &quot;typeName&quot;: &quot;BTMParameterQuantity&quot;,
-                &quot;message&quot;: {
-                  &quot;expression&quot;: &quot;0.637419526959446*rad&quot;,
-                  &quot;parameterId&quot;: &quot;labelAngle&quot;
-                }
-              },
-              {
-                &quot;type&quot;: 147,
-                &quot;typeName&quot;: &quot;BTMParameterQuantity&quot;,
-                &quot;message&quot;: {
-                  &quot;expression&quot;: &quot;1.76201395706607&quot;,
-                  &quot;parameterId&quot;: &quot;labelRatio&quot;
-                }
-              }
-            ],
-            &quot;entityId&quot;: &quot;22b5a2c0-d3ea-4376-969d-8b81944035b2&quot;
-          }
-        }
-      ],
-      &quot;featureType&quot;: &quot;newSketch&quot;,
-      &quot;name&quot;: &quot;Sketch 1&quot;,
-      &quot;parameters&quot;: [
-        {
-          &quot;type&quot;: 148,
-          &quot;typeName&quot;: &quot;BTMParameterQueryList&quot;,
-          &quot;message&quot;: {
-            &quot;queries&quot;: [
-              {
-                &quot;type&quot;: 138,
-                &quot;typeName&quot;: &quot;BTMIndividualQuery&quot;,
-                &quot;message&quot;: {
-                  &quot;geometryIds&quot;: [
-                    &quot;JCC&quot;
-                  ]
-                }
-              }
-            ],
-            &quot;parameterId&quot;: &quot;sketchPlane&quot;
-          }
-        }
-      ]
-    }
-  }
-}
-</code></pre><ol start=4><li>Create the extrude. Here we assume that the previous call returned the sketch with a feature id of
-&ldquo;Fj1THqyY7u36ktGSr&rdquo;. The extrude uses the BTMIndividualSketchRegionQuery, identifying the sketch feature in order to
-indicate what is to be extruded. The depth of extrude is 1 inch.</li></ol><p>POST /api/partstudios/DWE/features</p><pre><code>{
-  &quot;feature&quot; : {
-    &quot;type&quot;: 134,
-    &quot;typeName&quot;: &quot;BTMFeature&quot;,
-    &quot;message&quot;: {
-      &quot;featureType&quot;: &quot;extrude&quot;,
-      &quot;name&quot;: &quot;Extrude 1&quot;,
-      &quot;parameters&quot;: [
-        {
-          &quot;type&quot;: 145,
-          &quot;typeName&quot;: &quot;BTMParameterEnum&quot;,
-          &quot;message&quot;: {
-            &quot;enumName&quot;: &quot;ToolBodyType&quot;,
-            &quot;value&quot;: &quot;SOLID&quot;,
-            &quot;parameterId&quot;: &quot;bodyType&quot;
-          }
-        },
-        {
-          &quot;type&quot;: 145,
-          &quot;typeName&quot;: &quot;BTMParameterEnum&quot;,
-          &quot;message&quot;: {
-            &quot;enumName&quot;: &quot;NewBodyOperationType&quot;,
-            &quot;value&quot;: &quot;NEW&quot;,
-            &quot;parameterId&quot;: &quot;operationType&quot;
-          }
-        },
-        {
-          &quot;type&quot;: 148,
-          &quot;typeName&quot;: &quot;BTMParameterQueryList&quot;,
-          &quot;message&quot;: {
-            &quot;queries&quot;: [
-              {
-                &quot;type&quot;: 140,
-                &quot;typeName&quot;: &quot;BTMIndividualSketchRegionQuery&quot;,
-                &quot;message&quot;: {
-                  &quot;featureId&quot;: &quot;Fj1THqyY7u36ktGSr&quot;
-                }
-              }
-            ],
-            &quot;parameterId&quot;: &quot;entities&quot;
-          }
-        },
-        {
-          &quot;type&quot;: 145,
-          &quot;typeName&quot;: &quot;BTMParameterEnum&quot;,
-          &quot;message&quot;: {
-            &quot;enumName&quot;: &quot;BoundingType&quot;,
-            &quot;value&quot;: &quot;BLIND&quot;,
-            &quot;parameterId&quot;: &quot;endBound&quot;
-          }
-        },
-        {
-          &quot;type&quot;: 147,
-          &quot;typeName&quot;: &quot;BTMParameterQuantity&quot;,
-          &quot;message&quot;: {
-            &quot;expression&quot;: &quot;1*in&quot;,
-            &quot;parameterId&quot;: &quot;depth&quot;
-          }
-        },
-        {
-          &quot;type&quot;: 148,
-          &quot;typeName&quot;: &quot;BTMParameterQueryList&quot;,
-          &quot;message&quot;: {
-            &quot;parameterId&quot;: &quot;surfaceEntities&quot;
-          }
-        },
-        {
-          &quot;type&quot;: 144,
-          &quot;typeName&quot;: &quot;BTMParameterBoolean&quot;,
-          &quot;message&quot;: {
-            &quot;parameterId&quot;: &quot;oppositeDirection&quot;
-          }
-        },
-        {
-          &quot;type&quot;: 148,
-          &quot;typeName&quot;: &quot;BTMParameterQueryList&quot;,
-          &quot;message&quot;: {
-            &quot;parameterId&quot;: &quot;endBoundEntityFace&quot;
-          }
-        },
-        {
-          &quot;type&quot;: 148,
-          &quot;typeName&quot;: &quot;BTMParameterQueryList&quot;,
-          &quot;message&quot;: {
-            &quot;parameterId&quot;: &quot;endBoundEntityBody&quot;
-          }
-        },
-        {
-          &quot;type&quot;: 144,
-          &quot;typeName&quot;: &quot;BTMParameterBoolean&quot;,
-          &quot;message&quot;: {
-            &quot;parameterId&quot;: &quot;hasDraft&quot;
-          }
-        },
-        {
-          &quot;type&quot;: 147,
-          &quot;typeName&quot;: &quot;BTMParameterQuantity&quot;,
-          &quot;message&quot;: {
-            &quot;expression&quot;: &quot;3.0*deg&quot;,
-            &quot;parameterId&quot;: &quot;draftAngle&quot;
-          }
-        },
-        {
-          &quot;type&quot;: 144,
-          &quot;typeName&quot;: &quot;BTMParameterBoolean&quot;,
-          &quot;message&quot;: {
-            &quot;parameterId&quot;: &quot;draftPullDirection&quot;
-          }
-        },
-        {
-          &quot;type&quot;: 144,
-          &quot;typeName&quot;: &quot;BTMParameterBoolean&quot;,
-          &quot;message&quot;: {
-            &quot;parameterId&quot;: &quot;hasSecondDirection&quot;
-          }
-        },
-        {
-          &quot;type&quot;: 145,
-          &quot;typeName&quot;: &quot;BTMParameterEnum&quot;,
-          &quot;message&quot;: {
-            &quot;enumName&quot;: &quot;SecondDirectionBoundingType&quot;,
-            &quot;value&quot;: &quot;BLIND&quot;,
-            &quot;parameterId&quot;: &quot;secondDirectionBound&quot;
-          }
-        },
-        {
-          &quot;type&quot;: 144,
-          &quot;typeName&quot;: &quot;BTMParameterBoolean&quot;,
-          &quot;message&quot;: {
-            &quot;value&quot;: true,
-            &quot;parameterId&quot;: &quot;secondDirectionOppositeDirection&quot;
-          }
-        },
-        {
-          &quot;type&quot;: 148,
-          &quot;typeName&quot;: &quot;BTMParameterQueryList&quot;,
-          &quot;message&quot;: {
-            &quot;parameterId&quot;: &quot;secondDirectionBoundEntityFace&quot;
-          }
-        },
-        {
-          &quot;type&quot;: 148,
-          &quot;typeName&quot;: &quot;BTMParameterQueryList&quot;,
-          &quot;message&quot;: {
-            &quot;parameterId&quot;: &quot;secondDirectionBoundEntityBody&quot;
-          }
-        },
-        {
-          &quot;type&quot;: 147,
-          &quot;typeName&quot;: &quot;BTMParameterQuantity&quot;,
-          &quot;message&quot;: {
-            &quot;expression&quot;: &quot;1.0*in&quot;,
-            &quot;parameterId&quot;: &quot;secondDirectionDepth&quot;
-          }
-        },
-        {
-          &quot;type&quot;: 144,
-          &quot;typeName&quot;: &quot;BTMParameterBoolean&quot;,
-          &quot;message&quot;: {
-            &quot;parameterId&quot;: &quot;hasSecondDirectionDraft&quot;
-          }
-        },
-        {
-          &quot;type&quot;: 147,
-          &quot;typeName&quot;: &quot;BTMParameterQuantity&quot;,
-          &quot;message&quot;: {
-            &quot;expression&quot;: &quot;3.0*deg&quot;,
-            &quot;parameterId&quot;: &quot;secondDirectionDraftAngle&quot;
-          }
-        },
-        {
-          &quot;type&quot;: 144,
-          &quot;typeName&quot;: &quot;BTMParameterBoolean&quot;,
-          &quot;message&quot;: {
-            &quot;parameterId&quot;: &quot;secondDirectionDraftPullDirection&quot;
-          }
-        },
-        {
-          &quot;type&quot;: 144,
-          &quot;typeName&quot;: &quot;BTMParameterBoolean&quot;,
-          &quot;message&quot;: {
-            &quot;parameterId&quot;: &quot;defaultScope&quot;
-          }
-        },
-        {
-          &quot;type&quot;: 148,
-          &quot;typeName&quot;: &quot;BTMParameterQueryList&quot;,
-          &quot;message&quot;: {
-            &quot;parameterId&quot;: &quot;booleanScope&quot;
-          }
-        }
-      ]
-    }
-  }
-}
-</code></pre><p>We see here that there are a lot of parameters that have no values set in them. This is the way features are created
-by the Onshape web client, buty the unneeded ones could be left out. All of the parameters after &ldquo;depth&rdquo; could be
-omitted without changing the result. However, leaving out a required parameter will normally result in the result
-reporting a featureStatus of &ldquo;ERROR&rdquo;.</p><h3 id=example-4>Example 4</h3><p>This example shows an example of configuring a Part Studio with a single Enum (List) input, and a cube feature
-is created that has its size vary based on the configuration of the Part studio.</p><ol><li>Create a configuration for the part studio. This example assumes that you are starting with an unconfigured Part
-Studio. The Enum input is named &ldquo;Size&rdquo;, which 2 options available, &ldquo;Small&rdquo; and &ldquo;Large&rdquo;.</li></ol><p>POST /api/partstudios/DWE/configuration</p><pre><code>{
-    &quot;configurationParameters&quot;: [
-        {
-            &quot;type&quot;: 105,
-            &quot;typeName&quot;: &quot;BTMConfigurationParameterEnum&quot;,
-            &quot;message&quot;: {
-                &quot;enumName&quot;: &quot;Size_conf&quot;,
-                &quot;options&quot;: [
-                    {
-                        &quot;type&quot;: 592,
-                        &quot;typeName&quot;: &quot;BTMEnumOption&quot;,
-                        &quot;message&quot;: {
-                            &quot;option&quot;: &quot;Small&quot;,
-                            &quot;optionName&quot;: &quot;Small&quot;
-                        }
-                    },
-                    {
-                        &quot;type&quot;: 592,
-                        &quot;typeName&quot;: &quot;BTMEnumOption&quot;,
-                        &quot;message&quot;: {
-                            &quot;option&quot;: &quot;Large&quot;,
-                            &quot;optionName&quot;: &quot;Large&quot;
-                        }
-                    }
-                ],
-                &quot;namespace&quot;: &quot;&quot;,
-                &quot;defaultValue&quot;: &quot;Small&quot;,
-                &quot;parameterId&quot;: &quot;Size&quot;,
-                &quot;parameterName&quot;: &quot;Size&quot;,
-                &quot;hasUserCode&quot;: false,
-                &quot;nodeId&quot;: &quot;MgfIjLtd/DvuaT/P/&quot;
-            }
+          &#34;btType&#34;: &#34;BTMParameterQuantity-147&#34;,
+          &#34;isInteger&#34;: false,
+          &#34;expression&#34;: &#34;1 in&#34;,
+          &#34;parameterId&#34;: &#34;sideLength&#34;
         }
     ],
-    &quot;currentConfiguration&quot;: [
-        {
-            &quot;type&quot;: 145,
-            &quot;typeName&quot;: &quot;BTMParameterEnum&quot;,
-            &quot;message&quot;: {
-                &quot;enumName&quot;: &quot;Size_conf&quot;,
-                &quot;value&quot;: &quot;Large&quot;,
-                &quot;namespace&quot;: &quot;&quot;,
-                &quot;parameterId&quot;: &quot;Size&quot;
+    &#34;returnAfterSubfeatures&#34;: false,
+    &#34;suppressed&#34;: false
+  }
+}
+</code></pre></li><li>Confirm your call matches the following, and then make the call:<pre tabindex=0><code>curl -X &#39;POST \
+  &#39;https://cad.onshape.com/api/v6/partstudios/d/{did}/{wvm}/{wvmid}/e/{eid}/features&#39; \
+  -H &#39;Authorization: Basic CREDENTIALS&#39; \
+  -H &#39;Accept: application/json;charset=UTF-8; qs=0.09&#39;\
+  -H &#39;Content-Type: application/json;charset=UTF-8; qs=0.09&#39; \
+  -d &#39;{
+      &#34;btType&#34;: &#34;BTFeatureDefinitionCall-1406&#34;,
+      &#34;feature&#34;: {
+        &#34;btType&#34;: &#34;BTMFeature-134&#34;,
+        &#34;featureType&#34;: &#34;cube&#34;,
+        &#34;name&#34;: &#34;Cube 1&#34;,
+        &#34;parameters&#34;: [
+          {
+              &#34;btType&#34;: &#34;BTMParameterQuantity-147&#34;,
+              &#34;isInteger&#34;: false,
+              &#34;expression&#34;: &#34;1 in&#34;,
+              &#34;parameterId&#34;: &#34;sideLength&#34;
             }
-        }
+        ],
+        &#34;returnAfterSubfeatures&#34;: false,
+        &#34;suppressed&#34;: false
+      }
+    }&#39;
+</code></pre></li><li>Return to your console to review the endpoint response. The output returns:<ul><li>The feature definition that we provided as input with <code>nodeId</code>s and a <code>featureId</code>. Make a note of the <code>featureId</code>; we&rsquo;ll use it in the next example.</li><li>Information that the feature executed correctly</li><li>The serialization version and microversion of the document that resulted from the feature addition</li></ul><pre tabindex=0><code>  {
+  &#34;btType&#34;: &#34;BTFeatureDefinitionResponse-1617&#34;,
+  &#34;featureState&#34;: {
+    &#34;btType&#34;: &#34;BTFeatureState-1688&#34;,
+    &#34;featureStatus&#34;: &#34;OK&#34;,
+    &#34;inactive&#34;: false
+  },
+  &#34;feature&#34;: {
+    &#34;btType&#34;: &#34;BTMFeature-134&#34;,
+    &#34;name&#34;: &#34;Cube 1&#34;,
+    &#34;suppressed&#34;: false,
+    &#34;parameters&#34;: [
+      {
+        &#34;btType&#34;: &#34;BTMParameterQuantity-147&#34;,
+        &#34;value&#34;: 0,
+        &#34;units&#34;: &#34;&#34;,
+        &#34;isInteger&#34;: false,
+        &#34;expression&#34;: &#34;1 in&#34;,
+        &#34;nodeId&#34;: &#34;{nid1}&#34;,
+        &#34;parameterId&#34;: &#34;sideLength&#34;
+      }
+    ],
+    &#34;featureId&#34;: &#34;{fid}&#34;,
+    &#34;nodeId&#34;: &#34;{nid2}&#34;,
+    &#34;featureType&#34;: &#34;cube&#34;,
+    &#34;returnAfterSubfeatures&#34;: false,
+    &#34;subFeatures&#34;: [],
+    &#34;namespace&#34;: &#34;&#34;
+  },
+  &#34;serializationVersion&#34;: &#34;1.2.4&#34;,
+  &#34;sourceMicroversion&#34;: &#34;{mid}&#34;,
+  &#34;microversionSkew&#34;: false,
+  &#34;rejectMicroversionSkew&#34;: false,
+  &#34;libraryVersion&#34;: 0
+}
+</code></pre></li><li>Open your document and confirm that the cube has been inserted into the Part Studio.</br><img src=/images/features-cube-example.png alt="cube added to part studio via features api" width=550></li><li>Double-click <code>Cube 1</code> in the Feature List to open the Cube 1 dialog. Change the sideLength to 3 and click the checkbox. Note that the size of the cube changes automatically.</br><img src=/images/features-cube-example-02.png alt="cube parameter updated to 3 inches" width=550></li></ol><h3 id=create-a-sketch>Create a sketch</h3><p>In this example, we&rsquo;ll create a circular sketch feature with the following properties:</p><ul><li>While other features use a <code>btType</code> of <code>BTMFeature-141</code>, sketches have their own special type: <code>BTMSketch-151</code></li><li>Sketches must use the <code>newSketch</code> featureType</li><li>Sketch plane ID: Front</li><li>Radius: 0.025 inches</li><li>Location: (0.05, 0.05)</li></ul><ol><li>Open a new PartStudio. Note the following:<ul><li>Document ID</li><li>Workspace ID</li><li>Element ID (of the Part Studio tab)</li></ul></li><li>We want to create the circle on the Front plane, so we&rsquo;ll call the <a href=https://cad.onshape.com/glassworks/explorer/#/PartStudio/evalFeatureScript>PartStudios/featurescript</a> endpoint to get its ID:<pre tabindex=0><code>curl -X &#39;POST&#39; \
+  &#39;https://demo-c.dev.onshape.com/api/v6/partstudios/d/{did}/w/{wid}/e/{eid}/featurescript?rollbackBarIndex=-1&#39; \
+  -H &#39;Accept: application/json;charset=UTF-8; qs=0.09&#39; \
+  -H &#39;Authorization: Basic CREDENTIALS&#39; \
+  -H &#39;Content-Type: application/json;charset=UTF-8; qs=0.09&#39; \
+  -d &#39;{
+        &#34;script&#34;: &#34;function(context is Context, queries) { return transientQueriesToStrings(evaluateQuery(context, qCreatedBy(makeId(\&#34;Front\&#34;), EntityType.FACE))); }&#34;
+}&#39;
+</code></pre>The call returns the following, identifying the plane as <code>JCC</code>.<pre tabindex=0><code>{
+  &#34;btType&#34;: &#34;BTFeatureScriptEvalResponse-1859&#34;,
+  &#34;result&#34;: {
+    &#34;btType&#34;: &#34;com.belmonttech.serialize.fsvalue.BTFSValueArray&#34;,
+    &#34;value&#34;: [
+      {
+        &#34;btType&#34;: &#34;com.belmonttech.serialize.fsvalue.BTFSValueString&#34;,
+        &#34;value&#34;: &#34;JCC&#34;,
+        &#34;typeTag&#34;: &#34;&#34;
+      }
+    ],
+    &#34;typeTag&#34;: &#34;&#34;
+  }
+}
+</code></pre></li><li>Now we&rsquo;ll create the JSON structure for our sketch. <em>All sketches must be created with the <code>BTMSketch-151</code> btType and the <code>newSketch</code> featureType.</em> Note how we&rsquo;ve specified the plane to use in the <code>sketchPlane</code> parameter, and the <code>geometry</code> details.<pre tabindex=0><code>{
+  &#34;feature&#34; : {
+    &#34;btType&#34;: &#34;BTMSketch-151&#34;, 
+    &#34;featureType&#34;: &#34;newSketch&#34;, 
+    &#34;name&#34;: &#34;Sketch 1&#34;, 
+    &#34;parameters&#34;: [
+      {
+        &#34;btType&#34;: &#34;BTMParameterQueryList-148&#34;,
+        &#34;queries&#34;: [
+          {
+            &#34;btType&#34;: &#34;BTMIndividualQuery-138&#34;,
+            &#34;deterministicIds&#34;: [ &#34;JCC&#34; ] 
+          }
+        ],
+        &#34;parameterId&#34;: &#34;sketchPlane&#34; 
+      }
+    ],
+    &#34;entities&#34;: [
+      {
+        &#34;btType&#34;: &#34;BTMSketchCurve-4&#34;,
+        &#34;geometry&#34;: {
+          &#34;btType&#34;: &#34;BTCurveGeometryCircle-115&#34;,
+          &#34;radius&#34;: 0.025,  
+          &#34;xcenter&#34;: 0.05,
+          &#34;ycenter&#34;: 0.05,  
+          &#34;xdir&#34;: 1,
+          &#34;ydir&#34;: 0, 
+          &#34;clockwise&#34;: false 
+        },
+        &#34;centerId&#34;: &#34;circle-entity.center&#34;,
+        &#34;entityId&#34;: &#34;circle-entity&#34;
+      }  
+    ],
+    &#34;constraints&#34;: [      
     ]
+  }
 }
-</code></pre><ol start=2><li>Create a cube feature in the Part Studio. When the Size configuration input is set to &ldquo;Small&rdquo;, the cube will
-have a sideLength value of &ldquo;1 in&rdquo; and when the Size input is set to &ldquo;Large&rdquo; it will have a sideLength value of &ldquo;2 in&rdquo;.</li></ol><p>POST /api/partstudios/DWE/features</p><pre><code>{
-    &quot;feature&quot;: {
-        &quot;type&quot;: 134,
-        &quot;typeName&quot;: &quot;BTMFeature&quot;,
-        &quot;message&quot;: {
-            &quot;featureType&quot;: &quot;cube&quot;,
-            &quot;name&quot;: &quot;Cube 1&quot;,
-            &quot;parameters&quot;: [
-                {
-                    &quot;type&quot;: 2222,
-                    &quot;typeName&quot;: &quot;BTMParameterConfigured&quot;,
-                    &quot;message&quot;: {
-                        &quot;configurationParameterId&quot;: &quot;Size&quot;,
-                        &quot;values&quot;: [
-                            {
-                                &quot;type&quot;: 1923,
-                                &quot;typeName&quot;: &quot;BTMConfiguredValueByEnum&quot;,
-                                &quot;message&quot;: {
-                                    &quot;namespace&quot;: &quot;&quot;,
-                                    &quot;enumName&quot;: &quot;Size_conf&quot;,
-                                    &quot;enumValue&quot;: &quot;Default&quot;,
-                                    &quot;value&quot;: {
-                                        &quot;type&quot;: 147,
-                                        &quot;typeName&quot;: &quot;BTMParameterQuantity&quot;,
-                                        &quot;message&quot;: {
-                                            &quot;expression&quot;: &quot;1 in&quot;
-                                        }
-                                    }
-                                }
-                            },
-                            {
-                                &quot;type&quot;: 1923,
-                                &quot;typeName&quot;: &quot;BTMConfiguredValueByEnum&quot;,
-                                &quot;message&quot;: {
-                                    &quot;namespace&quot;: &quot;&quot;,
-                                    &quot;enumName&quot;: &quot;Size_conf&quot;,
-                                    &quot;enumValue&quot;: &quot;Large&quot;,
-                                    &quot;value&quot;: {
-                                        &quot;type&quot;: 147,
-                                        &quot;typeName&quot;: &quot;BTMParameterQuantity&quot;,
-                                        &quot;message&quot;: {
-                                            &quot;expression&quot;: &quot;2 in&quot;
-                                        }
-                                    }
-                                }
-                            }
-                        ],
-                        &quot;parameterId&quot;: &quot;sideLength&quot;
-                    }
-                }
-            ]
+</code></pre></li><li>Now we&rsquo;ll add the JSON structure to our code and call the endpoint. Replace the URL parameters with the values from your document, and replace <code>CREDENTIALS</code> with your authorization credentials.<pre tabindex=0><code>curl -X &#39;POST&#39; \
+  &#39;https://cad.onshape.com/api/v6/partstudios/d/{did}/w/{wid}/e/{eid}/features/featureid/{fid}&#39; \
+  -H &#39;Accept: application/json;charset=UTF-8; qs=0.09&#39; \
+  -H &#39;Authorization: Basic CREDENTIALS&#39; \
+  -H &#39;Content-Type: application/json;charset=UTF-8; qs=0.09&#39; \
+  -d &#39;{
+      &#34;feature&#34; : {
+        &#34;btType&#34;: &#34;BTMSketch-151&#34;, 
+        &#34;featureType&#34;: &#34;newSketch&#34;, 
+        &#34;name&#34;: &#34;Sketch 1&#34;, 
+        &#34;parameters&#34;: [
+          {
+            &#34;btType&#34;: &#34;BTMParameterQueryList-148&#34;,
+            &#34;queries&#34;: [
+              {
+                &#34;btType&#34;: &#34;BTMIndividualQuery-138&#34;,
+                &#34;deterministicIds&#34;: [ &#34;JCC&#34; ] 
+              }
+            ],
+            &#34;parameterId&#34;: &#34;sketchPlane&#34; 
+          }
+        ],
+        &#34;entities&#34;: [
+          {
+            &#34;btType&#34;: &#34;BTMSketchCurve-4&#34;,
+            &#34;geometry&#34;: {
+              &#34;btType&#34;: &#34;BTCurveGeometryCircle-115&#34;,
+              &#34;radius&#34;: 0.025,  
+              &#34;xcenter&#34;: 0.05,
+              &#34;ycenter&#34;: 0.05,  
+              &#34;xdir&#34;: 1,
+              &#34;ydir&#34;: 0, 
+              &#34;clockwise&#34;: false 
+            },
+            &#34;centerId&#34;: &#34;circle-entity.center&#34;,
+            &#34;entityId&#34;: &#34;circle-entity&#34;
+          }  
+        ],
+        &#34;constraints&#34;: [      
+        ]
+      }
+    }&#39;
+</code></pre></li><li>Find the new sketch&rsquo;s <code>featureId</code> in the call response. You&rsquo;ll need this for the <a href=#create-a-cylinder>Create a cylinder</a> tutorial.</li><li>Open your Part Studio and confirm that the sketch has been added:</br></br><img src=/images/features-create-sketch.png alt="circle sketch created via features api" width=550></li></ol><h3 id=create-a-cylinder>Create a cylinder</h3><p>In this tutorial, we&rsquo;ll extrude an sketch with the following properties:</br></br><img src=/images/features-extrude-dialog.png alt="Extrude dialog in Onshape UI" width=350></p><ol><li>This tutorial expands on the <a href=#create-a-sketch>Create a sketch</a> tutorial. You&rsquo;ll need the following from the document containing your circular sketch:<ul><li>Document ID</li><li>Workspace ID</li><li>Element ID of the tab containing the sketch</li><li>Feature ID of the sketch<ul><li>If you need to get this <code>featureId</code> again, you can call the <a href=https://cad.onshape.com/glassworks/explorer/#/PartStudio/getPartStudioFeatures>getPartStudioFeatures</a> endpoint on the document.</li></ul></li></ul></li><li>Begin to create the <a href=https://cad.onshape.com/glassworks/explorer/#/PartStudio/addPartStudioFeature>PartStudio/addPartStudioFeature</a> call. Replace the URL parameters with the values from your document, and replace <code>CREDENTIALS</code> with your authorization credentials.<pre tabindex=0><code>curl -X &#39;POST \
+  &#39;https://cad.onshape.com/api/v6/partstudios/d/{did}/{wvm}/{wvmid}/e/{eid}/features&#39; \
+  -H &#39;Authorization: Basic CREDENTIALS&#39; \
+  -H &#39;Accept: application/json;charset=UTF-8; qs=0.09&#39;\
+  -H &#39;Content-Type: application/json;charset=UTF-8; qs=0.09&#39; \
+  -d &#39;{
+          &lt;JSON of feature data&gt;
+      }&#39;
+</code></pre></li><li>Creating an extrude has many options; this means creating an extrude in the API requires adding a lot of parameters, even if they&rsquo;re not used. To make this tutorial a little easier to follow, we&rsquo;ll start by constructing the JSON with all available parameters, then we&rsquo;ll fill in the ones we need to manipulate. Note the <code>btType</code> and <code>featureType</code> added below:</li></ol><pre tabindex=0><code>  {
+  &#34;features&#34;: [
+    {
+      &#34;btType&#34;: &#34;BTMFeature-134&#34;,
+      &#34;featureType&#34;: &#34;extrude&#34;,
+      &#34;name&#34;: &#34;Extrude 1&#34;,
+      &#34;suppressed&#34;: false,
+      &#34;parameters&#34;: [
+        {
+          &#34;btType&#34;: &#34;BTMParameterEnum-145&#34;,
+          &#34;parameterId&#34;: &#34;bodyType&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterEnum-145&#34;,
+          &#34;parameterId&#34;: &#34;operationType&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterQueryList-148&#34;,
+          &#34;parameterId&#34;: &#34;entities&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterEnum-145&#34;,
+          &#34;parameterId&#34;: &#34;endBound&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterQuantity-147&#34;,
+          &#34;parameterId&#34;: &#34;depth&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterEnum-145&#34;,
+          &#34;parameterId&#34;: &#34;domain&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterEnum-145&#34;,
+          &#34;parameterId&#34;: &#34;surfaceOperationType&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterEnum-145&#34;,
+          &#34;parameterId&#34;: &#34;flatOperationType&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterQueryList-148&#34;,
+          &#34;parameterId&#34;: &#34;surfaceEntities&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterQueryList-148&#34;,
+          &#34;parameterId&#34;: &#34;wallShape&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterBoolean-144&#34;,
+          &#34;parameterId&#34;: &#34;midplane&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterQuantity-147&#34;,
+          &#34;parameterId&#34;: &#34;thickness1&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterBoolean-144&#34;,
+          &#34;parameterId&#34;: &#34;flipWall&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterQuantity-147&#34;,
+          &#34;parameterId&#34;: &#34;thickness2&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterQuantity-147&#34;,
+          &#34;parameterId&#34;: &#34;thickness&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterEnum-145&#34;,
+          &#34;parameterId&#34;: &#34;endBound&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterBoolean-144&#34;,
+          &#34;parameterId&#34;: &#34;oppositeDirection&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterQueryList-148&#34;,
+          &#34;parameterId&#34;: &#34;endBoundEntityFace&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterQueryList-148&#34;,
+          &#34;parameterId&#34;: &#34;endBoundEntityBody&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterQueryList-148&#34;,
+          &#34;parameterId&#34;: &#34;endBoundEntityVertex&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterBoolean-144&#34;,
+          &#34;parameterId&#34;: &#34;hasOffset&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterQuantity-147&#34;,
+          &#34;parameterId&#34;: &#34;offsetDistance&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterBoolean-144&#34;,
+          &#34;parameterId&#34;: &#34;offsetOppositeDirection&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterBoolean-144&#34;,
+          &#34;parameterId&#34;: &#34;hasExtrudeDirection&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterQueryList-148&#34;,
+          &#34;parameterId&#34;: &#34;extrudeDirection&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterBoolean-144&#34;,
+          &#34;parameterId&#34;: &#34;startOffset&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterEnum-145&#34;,
+          &#34;parameterId&#34;: &#34;startOffsetBound&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterQuantity-147&#34;,
+          &#34;parameterId&#34;: &#34;startOffsetDistance&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterBoolean-144&#34;,
+          &#34;parameterId&#34;: &#34;startOffsetOppositeDirection&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterQueryList-148&#34;,
+          &#34;parameterId&#34;: &#34;startOffsetEntity&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterBoolean-144&#34;,
+          &#34;parameterId&#34;: &#34;symmetric&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterBoolean-144&#34;,
+          &#34;parameterId&#34;: &#34;hasDraft&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterQuantity-147&#34;,
+          &#34;parameterId&#34;: &#34;draftAngle&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterBoolean-144&#34;,
+          &#34;parameterId&#34;: &#34;draftPullDirection&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterBoolean-144&#34;,
+          &#34;parameterId&#34;: &#34;hasSecondDirection&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterEnum-145&#34;,
+          &#34;parameterId&#34;: &#34;secondDirectionBound&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterBoolean-144&#34;,
+          &#34;parameterId&#34;: &#34;secondDirectionOppositeDirection&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterQuantity-147&#34;,
+          &#34;parameterId&#34;: &#34;secondDirectionDepth&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterQueryList-148&#34;,
+          &#34;parameterId&#34;: &#34;secondDirectionBoundEntityFace&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterQueryList-148&#34;,
+          &#34;parameterId&#34;: &#34;secondDirectionBoundEntityBody&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterQueryList-148&#34;,
+          &#34;parameterId&#34;: &#34;secondDirectionBoundEntityVertex&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterBoolean-144&#34;,
+          &#34;parameterId&#34;: &#34;hasSecondDirectionOffset&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterQuantity-147&#34;,
+          &#34;parameterId&#34;: &#34;secondDirectionOffsetDistance&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterBoolean-144&#34;,
+          &#34;parameterId&#34;: &#34;secondDirectionOffsetOppositeDirection&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterBoolean-144&#34;,
+          &#34;parameterId&#34;: &#34;hasSecondDirectionDraft&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterQuantity-147&#34;,
+          &#34;parameterId&#34;: &#34;secondDirectionDraftAngle&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterBoolean-144&#34;,
+          &#34;parameterId&#34;: &#34;secondDirectionDraftPullDirection&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterBoolean-144&#34;,
+          &#34;parameterId&#34;: &#34;defaultScope&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterQueryList-148&#34;,
+          &#34;parameterId&#34;: &#34;booleanScope&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterBoolean-144&#34;,
+          &#34;parameterId&#34;: &#34;defaultSurfaceScope&#34;
+        },
+        {
+          &#34;btType&#34;: &#34;BTMParameterQueryList-148&#34;,
+          &#34;parameterId&#34;: &#34;booleanSurfaceScope&#34;
         }
+      ]
     }
+  ]
 }
-</code></pre></div></main></div></div><footer class="bg-dark py-5 row d-print-none"><div class="container-fluid mx-sm-5"><div class=row><div class="col-6 col-sm-4 text-xs-center order-sm-2"></div><div class="col-6 col-sm-4 text-right text-xs-center order-sm-3"></div><div class="col-12 col-sm-4 text-center py-2 order-sm-2"></div></div></div></footer></div><script src=https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js integrity=sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js integrity="sha512-UR25UO94eTnCVwjbXozyeVd6ZqpaAE9naiEUBK/A+QDbfSTQFhPGj5lOR6d8tsgbBk84Ggb5A3EkjsOgPRPcKA==" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/mermaid@8.13.4/dist/mermaid.min.js integrity="sha512-JERecFUBbsm75UpkVheAuDOE8NdHjQBrPACfEQYPwvPG+fjgCpHAz1Jw2ci9EXmd3DdfiWth3O3CQvcfEg8gsA==" crossorigin=anonymous></script><script src=/js/tabpane-persist.js></script><script src=/js/main.min.7b55bf6c6b7512854e4a08bbd237c127d647ad103c3548888d50711b16bbde24.js integrity="sha256-e1W/bGt1EoVOSgi70jfBJ9ZHrRA8NUiIjVBxGxa73iQ=" crossorigin=anonymous></script></body></html>
+</code></pre><ol start=3><li>Now, we&rsquo;ll add values for the options we want. Just like when creating an extrude within the Onshape UI, we&rsquo;ll specify that the extrude is a Solid, New, Blind extrude of our sketch (we&rsquo;ll specify the sketch by its <code>featureId</code>), with a depth of 1 inch. We&rsquo;ll leave the rest of the parameters as they are.</li></ol><pre tabindex=0><code>  {
+    &#34;btType&#34;: &#34;BTMParameterEnum-145&#34;,
+    &#34;value&#34;: &#34;SOLID&#34;,
+    &#34;enumName&#34;: &#34;ExtendedToolBodyType&#34;,
+    &#34;parameterId&#34;: &#34;bodyType&#34;
+  },
+  {
+    &#34;btType&#34;: &#34;BTMParameterEnum-145&#34;,
+    &#34;value&#34;: &#34;NEW&#34;,
+    &#34;enumName&#34;: &#34;NewBodyOperationType&#34;,
+    &#34;parameterId&#34;: &#34;operationType&#34;
+  },
+  {
+    &#34;btType&#34;: &#34;BTMParameterQueryList-148&#34;,
+    &#34;queries&#34;: [
+      {
+        &#34;btType&#34;: &#34;BTMIndividualSketchRegionQuery-140&#34;,
+        &#34;featureId&#34;: &#34;{featureId}&#34;
+      }
+    ],
+    &#34;parameterId&#34;: &#34;entities&#34;
+  },
+  {
+    &#34;btType&#34;: &#34;BTMParameterEnum-145&#34;,
+    &#34;value&#34;: &#34;BLIND&#34;,
+    &#34;enumName&#34;: &#34;BoundingType&#34;,
+    &#34;parameterId&#34;: &#34;endBound&#34;
+  },
+  {
+    &#34;btType&#34;: &#34;BTMParameterQuantity-147&#34;,
+    &#34;expression&#34;: &#34;1 in&#34;,
+    &#34;parameterId&#34;: &#34;depth&#34;
+  }
+</code></pre><ol start=4><li>Now our JSON is complete, and we can make our call.</li></ol><pre tabindex=0><code>  curl -X &#39;POST \
+    &#39;https://cad.onshape.com/api/v6/partstudios/d/{did}/{wvm}/{wvmid}/e/{eid}/features&#39; \
+    -H &#39;Authorization: Basic CREDENTIALS&#39; \
+    -H &#39;Accept: application/json;charset=UTF-8; qs=0.09&#39;\
+    -H &#39;Content-Type: application/json;charset=UTF-8; qs=0.09&#39; \
+    -d &#39;{
+        &#34;features&#34;: [
+          {
+            &#34;btType&#34;: &#34;BTMFeature-134&#34;,
+            &#34;featureType&#34;: &#34;extrude&#34;,
+            &#34;name&#34;: &#34;Extrude 1&#34;,
+            &#34;suppressed&#34;: false,
+            &#34;parameters&#34;: [
+              {
+                &#34;btType&#34;: &#34;BTMParameterEnum-145&#34;,
+                &#34;value&#34;: &#34;SOLID&#34;,
+                &#34;enumName&#34;: &#34;ExtendedToolBodyType&#34;,
+                &#34;parameterId&#34;: &#34;bodyType&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterEnum-145&#34;,
+                &#34;value&#34;: &#34;NEW&#34;,
+                &#34;enumName&#34;: &#34;NewBodyOperationType&#34;,
+                &#34;parameterId&#34;: &#34;operationType&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterQueryList-148&#34;,
+                &#34;queries&#34;: [
+                  {
+                    &#34;btType&#34;: &#34;BTMIndividualSketchRegionQuery-140&#34;,
+                    &#34;featureId&#34;: &#34;FBMwlCB9CZS8uWY_0&#34;
+                  }
+                ],
+                &#34;parameterId&#34;: &#34;entities&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterEnum-145&#34;,
+                &#34;value&#34;: &#34;BLIND&#34;,
+                &#34;enumName&#34;: &#34;BoundingType&#34;,
+                &#34;parameterId&#34;: &#34;endBound&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterQuantity-147&#34;,
+                &#34;expression&#34;: &#34;1 in&#34;,
+                &#34;parameterId&#34;: &#34;depth&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterEnum-145&#34;,
+                &#34;parameterId&#34;: &#34;domain&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterEnum-145&#34;,
+                &#34;parameterId&#34;: &#34;surfaceOperationType&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterEnum-145&#34;,
+                &#34;parameterId&#34;: &#34;flatOperationType&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterQueryList-148&#34;,
+                &#34;parameterId&#34;: &#34;surfaceEntities&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterQueryList-148&#34;,
+                &#34;parameterId&#34;: &#34;wallShape&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterBoolean-144&#34;,
+                &#34;parameterId&#34;: &#34;midplane&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterQuantity-147&#34;,
+                &#34;parameterId&#34;: &#34;thickness1&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterBoolean-144&#34;,
+                &#34;parameterId&#34;: &#34;flipWall&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterQuantity-147&#34;,
+                &#34;parameterId&#34;: &#34;thickness2&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterQuantity-147&#34;,
+                &#34;parameterId&#34;: &#34;thickness&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterEnum-145&#34;,
+                &#34;parameterId&#34;: &#34;endBound&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterBoolean-144&#34;,
+                &#34;parameterId&#34;: &#34;oppositeDirection&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterQueryList-148&#34;,
+                &#34;parameterId&#34;: &#34;endBoundEntityFace&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterQueryList-148&#34;,
+                &#34;parameterId&#34;: &#34;endBoundEntityBody&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterQueryList-148&#34;,
+                &#34;parameterId&#34;: &#34;endBoundEntityVertex&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterBoolean-144&#34;,
+                &#34;parameterId&#34;: &#34;hasOffset&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterQuantity-147&#34;,
+                &#34;parameterId&#34;: &#34;offsetDistance&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterBoolean-144&#34;,
+                &#34;parameterId&#34;: &#34;offsetOppositeDirection&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterBoolean-144&#34;,
+                &#34;parameterId&#34;: &#34;hasExtrudeDirection&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterQueryList-148&#34;,
+                &#34;parameterId&#34;: &#34;extrudeDirection&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterBoolean-144&#34;,
+                &#34;parameterId&#34;: &#34;startOffset&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterEnum-145&#34;,
+                &#34;parameterId&#34;: &#34;startOffsetBound&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterQuantity-147&#34;,
+                &#34;parameterId&#34;: &#34;startOffsetDistance&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterBoolean-144&#34;,
+                &#34;parameterId&#34;: &#34;startOffsetOppositeDirection&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterQueryList-148&#34;,
+                &#34;parameterId&#34;: &#34;startOffsetEntity&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterBoolean-144&#34;,
+                &#34;parameterId&#34;: &#34;symmetric&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterBoolean-144&#34;,
+                &#34;parameterId&#34;: &#34;hasDraft&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterQuantity-147&#34;,
+                &#34;parameterId&#34;: &#34;draftAngle&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterBoolean-144&#34;,
+                &#34;parameterId&#34;: &#34;draftPullDirection&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterBoolean-144&#34;,
+                &#34;parameterId&#34;: &#34;hasSecondDirection&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterEnum-145&#34;,
+                &#34;parameterId&#34;: &#34;secondDirectionBound&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterBoolean-144&#34;,
+                &#34;parameterId&#34;: &#34;secondDirectionOppositeDirection&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterQuantity-147&#34;,
+                &#34;parameterId&#34;: &#34;secondDirectionDepth&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterQueryList-148&#34;,
+                &#34;parameterId&#34;: &#34;secondDirectionBoundEntityFace&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterQueryList-148&#34;,
+                &#34;parameterId&#34;: &#34;secondDirectionBoundEntityBody&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterQueryList-148&#34;,
+                &#34;parameterId&#34;: &#34;secondDirectionBoundEntityVertex&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterBoolean-144&#34;,
+                &#34;parameterId&#34;: &#34;hasSecondDirectionOffset&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterQuantity-147&#34;,
+                &#34;parameterId&#34;: &#34;secondDirectionOffsetDistance&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterBoolean-144&#34;,
+                &#34;parameterId&#34;: &#34;secondDirectionOffsetOppositeDirection&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterBoolean-144&#34;,
+                &#34;parameterId&#34;: &#34;hasSecondDirectionDraft&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterQuantity-147&#34;,
+                &#34;parameterId&#34;: &#34;secondDirectionDraftAngle&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterBoolean-144&#34;,
+                &#34;parameterId&#34;: &#34;secondDirectionDraftPullDirection&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterBoolean-144&#34;,
+                &#34;parameterId&#34;: &#34;defaultScope&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterQueryList-148&#34;,
+                &#34;parameterId&#34;: &#34;booleanScope&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterBoolean-144&#34;,
+                &#34;parameterId&#34;: &#34;defaultSurfaceScope&#34;
+              },
+              {
+                &#34;btType&#34;: &#34;BTMParameterQueryList-148&#34;,
+                &#34;parameterId&#34;: &#34;booleanSurfaceScope&#34;
+              }
+            ]
+          }
+        ]
+      }&#39;
+</code></pre><ol start=5><li>Open your document and confirm that the sketch has been extruded into a cylinder.</br></br><img src=/images/features-extrude-example.png alt="circle sketch created via features api" width=550></li></ol><h3 id=update-a-feature>Update a feature</h3><p>In this example we&rsquo;ll update our cube feature.</p><ol><li>Open the document in which you created the cube feature in <a href=#create-a-cube-feature>this example</a>. You will need the following from this document:<ul><li>Document ID</li><li>Workspace ID</li><li>Element ID (for the element that contains the cube feature)</li><li>Feature ID (ID of the cube feature, returned in the API response in the previous example)<ul><li>If you need to get this <code>featureId</code> again, you can call the <a href=https://cad.onshape.com/glassworks/explorer/#/PartStudio/getPartStudioFeatures>getPartStudioFeatures</a> endpoint on the document.</li></ul></li></ul></li><li>Begin to create the <a href=https://cad.onshape.com/glassworks/explorer/#/PartStudio/updatePartStudioFeature>PartStudio/updatePartStudioFeature</a> call. Replace the URL parameters with the values from your document, and replace <code>CREDENTIALS</code> with your authorization credentials.<pre tabindex=0><code>curl -X &#39;POST&#39; \
+  &#39;https://cad.onshape.com/api/v6/partstudios/d/{did}/w/{wid}/e/{eid}/features/featureid/{fid}&#39; \
+  -H &#39;Accept: application/json;charset=UTF-8; qs=0.09&#39; \
+  -H &#39;Authorization: Basic CREDENTIALS&#39; \
+  -H &#39;Content-Type: application/json;charset=UTF-8; qs=0.09&#39; \
+  -d &#39;{
+          &lt;JSON of feature data&gt;
+      }&#39;
+</code></pre></li><li>Add the following as the JSON body.<ul><li>Note the <code>btType</code> defines this as a Feature.</li><li>We specify the <code>featureId</code> again in the request body. This must match the <code>featureId</code> sent in the URL exactly.</li><li>We must also specify the feature&rsquo;s <code>featureType</code> and <code>name</code> in this call; if we don&rsquo;t send those fields, the call will attempt to change these values to empty strings, resulting in errors.</li><li>The <code>cube</code> feature has one parameter&ndash; the cube <code>sideLength</code> in inches, which we will update to 2 inches:</li></ul><pre tabindex=0><code>{
+  &#34;btType&#34;: &#34;BTFeatureDefinitionCall-1406&#34;,
+  &#34;feature&#34;: {
+    &#34;featureId&#34;: &#34;{fid}&#34;,
+    &#34;featureType&#34;: &#34;cube&#34;,
+    &#34;name&#34;: &#34;Cube 1&#34;,
+    &#34;parameters&#34;: [
+      {
+              &#34;btType&#34;: &#34;BTMParameterQuantity-147&#34;,
+              &#34;isInteger&#34;: false,
+              &#34;expression&#34;: &#34;2 in&#34;,
+              &#34;parameterId&#34;: &#34;sideLength&#34;
+            }
+    ]
+  }
+}
+</code></pre></li><li>Confirm your call matches the following, and then make the call:<pre tabindex=0><code>    curl -X &#39;POST&#39; \
+      &#39;https://cad.onshape.com/api/v6/partstudios/d/{did}/w/{wid}/e/{eid}/features/featureid/{fid}&#39; \
+      -H &#39;Accept: application/json;charset=UTF-8; qs=0.09&#39; \
+      -H &#39;Authorization: Basic CREDENTIALS&#39; \
+      -H &#39;Content-Type: application/json;charset=UTF-8; qs=0.09&#39; \
+      -d &#39;{
+      &#34;btType&#34;: &#34;BTFeatureDefinitionCall-1406&#34;,
+      &#34;feature&#34;: {
+        &#34;featureId&#34;: &#34;{fid}&#34;,
+        &#34;featureType&#34;: &#34;cube&#34;,
+        &#34;name&#34;: &#34;Cube 1&#34;,
+        &#34;parameters&#34;: [
+              {
+                &#34;btType&#34;: &#34;BTMParameterQuantity-147&#34;,
+                &#34;isInteger&#34;: false,
+                &#34;expression&#34;: &#34;2 in&#34;,
+                &#34;parameterId&#34;: &#34;sideLength&#34;
+              }
+          ]  
+        }
+    }&#39;
+</code></pre></li><li>Return to your console to review the endpoint response. The output returns:<ul><li>The updated feature definition</li><li>Information that the feature executed correctly</li><li>The serialization version and microversion of the document that resulted from the feature update</li></ul><pre tabindex=0><code>  {
+    &#34;btType&#34;: &#34;BTFeatureDefinitionResponse-1617&#34;,
+    &#34;featureState&#34;: {
+      &#34;btType&#34;: &#34;BTFeatureState-1688&#34;,
+      &#34;featureStatus&#34;: &#34;OK&#34;,
+      &#34;inactive&#34;: false
+    },
+    &#34;feature&#34;: {
+      &#34;btType&#34;: &#34;BTMFeature-134&#34;,
+      &#34;name&#34;: &#34;Cube 1&#34;,
+      &#34;suppressed&#34;: false,
+      &#34;parameters&#34;: [
+        {
+          &#34;btType&#34;: &#34;BTMParameterQuantity-147&#34;,
+          &#34;value&#34;: 0,
+          &#34;units&#34;: &#34;&#34;,
+          &#34;isInteger&#34;: false,
+          &#34;expression&#34;: &#34;2 in&#34;,
+          &#34;nodeId&#34;: &#34;{nid1}&#34;,
+          &#34;parameterId&#34;: &#34;sideLength&#34;
+        }
+      ],
+      &#34;featureId&#34;: &#34;{fid}&#34;,
+      &#34;nodeId&#34;: &#34;{nid2},
+      &#34;featureType&#34;: &#34;cube&#34;,
+      &#34;returnAfterSubfeatures&#34;: false,
+      &#34;subFeatures&#34;: [],
+      &#34;namespace&#34;: &#34;&#34;
+    },
+    &#34;serializationVersion&#34;: &#34;1.2.4&#34;,
+    &#34;sourceMicroversion&#34;: &#34;{mid}&#34;,
+    &#34;microversionSkew&#34;: false,
+    &#34;rejectMicroversionSkew&#34;: false,
+    &#34;libraryVersion&#34;: 0
+  }
+</code></pre></li><li>Open your document and confirm that the cube has a side length of 2 inches.</br><img src=/images/features-cube-example-03.png alt="cube added to part studio via features api" width=550></li></ol><h3 id=delete-a-feature>Delete a feature</h3><ol><li>Create a new document and add a cube feature to it. See <a href=#create-a-cube-feature>Create a cube feature</a> for instructions. Make a note of the following:<ul><li>Document ID</li><li>Workspace ID</li><li>Element ID (for the element containing the cube feature)</li></ul></li><li>Call the <a href=https://cad.onshape.com/glassworks/explorer/#/PartStudio/getPartStudioFeatures>getPartStudioFeatures</a> endpoint on the document to get the <code>featureId</code> of the cube feature. See <a href=#get-the-list-of-features-in-a-part-studio>Get the Feature list</a> for instructions.</li><li>Create and execute the <a href=https://cad.onshape.com/glassworks/explorer/#/PartStudio/deletePartStudioFeature>PartStudio/deletePartStudioFeature</a> call. Replace the URL parameters with the values from your document, and replace <code>CREDENTIALS</code> with your authorization credentials.<pre tabindex=0><code>curl -X &#39;DELETE&#39; \
+  &#39;https://cad.onshape.com/api/v6/partstudios/d/{did}/w/{wid}/e/{eid}/features/featureid/{fid}&#39; \
+  -H &#39;Accept: application/json;charset=UTF-8; qs=0.09&#39; \
+  -H &#39;Authorization: Basic CREDENTIALS&#39; 
+</code></pre></li><li>Confirm that the cube feature has been removed from your document.</li></ol></div></main></div></div><footer class="bg-dark py-5 row d-print-none"><div class="container-fluid mx-sm-5"><div class=row><div class="col-6 col-sm-4 text-xs-center order-sm-2"></div><div class="col-6 col-sm-4 text-right text-xs-center order-sm-3"></div><div class="col-12 col-sm-4 text-center py-2 order-sm-2"></div></div></div></footer></div><script src=https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js integrity=sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js integrity="sha512-UR25UO94eTnCVwjbXozyeVd6ZqpaAE9naiEUBK/A+QDbfSTQFhPGj5lOR6d8tsgbBk84Ggb5A3EkjsOgPRPcKA==" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/mermaid@8.13.4/dist/mermaid.min.js integrity="sha512-JERecFUBbsm75UpkVheAuDOE8NdHjQBrPACfEQYPwvPG+fjgCpHAz1Jw2ci9EXmd3DdfiWth3O3CQvcfEg8gsA==" crossorigin=anonymous></script><script src=/js/tabpane-persist.js></script><script src=/js/main.min.7b55bf6c6b7512854e4a08bbd237c127d647ad103c3548888d50711b16bbde24.js integrity="sha256-e1W/bGt1EoVOSgi70jfBJ9ZHrRA8NUiIjVBxGxa73iQ=" crossorigin=anonymous></script></body></html>
