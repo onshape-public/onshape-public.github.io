@@ -41,12 +41,12 @@ https://<strong>cad</strong>.onshape.com > https://<strong>companyName</strong>.
         }
       }&#39;
 </code></pre></li><li><a href=https://cad.onshape.com/glassworks/explorer/#/PartStudio/updateFeatures>Update Multiple Features</a><pre tabindex=0><code>  curl -X &#39;POST&#39; \
-    &#39;https://cad.onshape.com/api/v6/partstudios/d/{did}/w/{wid}/e/{eid}/features/featureid/{fid}&#39; \
+    &#39;https://cad.onshape.com/api/v6/partstudios/d/{did}/w/{wid}/e/{eid}/features/updates&#39; \
     -H &#39;Accept: application/json;charset=UTF-8; qs=0.09&#39; \
     -H &#39;Authorization: Basic CREDENTIALS&#39; \
     -H &#39;Content-Type: application/json;charset=UTF-8; qs=0.09&#39; \
     -d &#39;{
-        &#34;btType&#34;: &#34;BTFeatureDefinitionCall-1406&#34;,
+        &#34;btType&#34;: &#34;BTUpdateFeaturesCall-1748&#34;,
         &#34;features&#34;: [
           {
           &#34;btType&#34;: &#34;BTMFeature-134&#34;,

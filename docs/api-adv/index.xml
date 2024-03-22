@@ -770,12 +770,12 @@ https://&lt;strong>cad&lt;/strong>.onshape.com &amp;gt; https://&lt;strong>compa
 &lt;/code>&lt;/pre>&lt;/li>
 &lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/updateFeatures">Update Multiple Features&lt;/a>
 &lt;pre tabindex="0">&lt;code> curl -X &amp;#39;POST&amp;#39; \
-&amp;#39;https://cad.onshape.com/api/v6/partstudios/d/{did}/w/{wid}/e/{eid}/features/featureid/{fid}&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/partstudios/d/{did}/w/{wid}/e/{eid}/features/updates&amp;#39; \
 -H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 -H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
 -H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 -d &amp;#39;{
-&amp;#34;btType&amp;#34;: &amp;#34;BTFeatureDefinitionCall-1406&amp;#34;,
+&amp;#34;btType&amp;#34;: &amp;#34;BTUpdateFeaturesCall-1748&amp;#34;,
 &amp;#34;features&amp;#34;: [
 {
 &amp;#34;btType&amp;#34;: &amp;#34;BTMFeature-134&amp;#34;,
