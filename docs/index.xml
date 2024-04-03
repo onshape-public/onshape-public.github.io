@@ -1075,7 +1075,11 @@ to retrieve user data from session.&lt;/li>
 &lt;p>For apps published in the Onshape App Store, the Onshape user must grant authorization to your application to access the Onshape data. This must be done by each user of your app.&lt;/p>
 &lt;p>To grant the application access to a user&amp;rsquo;s data in Onshape, the &lt;em>Onshape user&lt;/em> must follow the steps below:&lt;/p>
 &lt;ol>
-&lt;li>Sign in to &lt;code>cad.onshape.com&lt;/code> (or &lt;code>https://companyName.onshape.com&lt;/code> for Enterprise acccounts).&lt;/li>
+&lt;li>Sign in to &lt;code>cad.onshape.com&lt;/code>.
+&lt;ul>
+&lt;li>Note: Use &lt;code>https://companyName.onshape.com&lt;/code> for Enterprise accounts. See &lt;a href="#enterprise-users">Enterprise users&lt;/a> below for more information.&lt;/li>
+&lt;/ul>
+&lt;/li>
 &lt;li>Click their name in the top-right corner of the Onshape window, and then click &lt;strong>My account&lt;/strong> in the dropdown menu.
 &lt;/br>&lt;img src="https://onshape-public.github.io/images/myaccountdropdown.png" alt="drawing" width="300"/>&lt;/li>
 &lt;li>Click &lt;strong>Applications&lt;/strong> in the left sidebar.
@@ -1094,6 +1098,16 @@ to retrieve user data from session.&lt;/li>
 &lt;li>&lt;code>http://localhost:&amp;lt;port&amp;gt;&lt;/code> Causes the browser to attempt to load a page from the host upon which it is running. The code parameter will be supplied exactly the same as outlined above. If the application can listen on the registered port and behave as a simple web server for the redirect URL, it can retrieve the code in the same way as a deployed web server.&lt;/li>
 &lt;li>&lt;code>urn:ietf:wg:oauth:2.0:oob&lt;/code> Causes the browser to display a simple page after a request has been granted instead of going to a new URL. The page contains simple instructions to copy and paste code into an application field. The browser will also update the title of the window to contain the code. An application could also look for browsers with window titles containing the string &lt;code>Success code=&amp;lt;code&amp;gt;&lt;/code> and automatically grab the code from the browser window title. If an error occurs (e.g., the grant is denied), the browser window title will contain &lt;code>Error description=&amp;lt;error string&amp;gt;&lt;/code>.&lt;/li>
 &lt;/ul>
+&lt;h3 id="enterprise-users">Enterprise users&lt;/h3>
+&lt;p>When a user authorizes an OAuth app to access Onshape on their behalf, they get a bearer token that corresponds to their session and the allowed scopes.&lt;/p>
+&lt;p>However, if the user has a seat in the Enterprise, additional information is needed to determine whether to allow the bearer token to access enterprise data for the user or simply return non-enterprise data. We use the &lt;code>companyId&lt;/code> field for this distinction.&lt;/p>
+&lt;p>There are two ways of setting the &lt;code>companyId&lt;/code> correctly to access enterprise data:&lt;/p>
+&lt;ul>
+&lt;li>During the authorization process, select the name and URL of the enterprise instead of &lt;code>cad.onshape.com&lt;/code>. This will correctly associate your bearer token with the &lt;code>companyId&lt;/code>.&lt;/li>
+&lt;li>If you have an integrated app, call the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Company/findCompany">Company/findCompany&lt;/a> endpoint to obtain the &lt;code>companyId&lt;/code>. Append this &lt;code>companyId&lt;/code> as a query parameter to the &lt;code>/authorize&lt;/code> URL while initiating the OAuth workflow. (Note: you may be asked to authenticate yourself again.)&lt;/li>
+&lt;/ul>
+&lt;h3 id="3rd-party-cookies">3rd-party cookies&lt;/h3>
+&lt;p>3rd-party cookies must be enabled in the browser for Onshape apps to work correctly.&lt;/p>
 &lt;h3 id="debugging">Debugging&lt;/h3>
 &lt;p>Debugging OAuth can be a little tricky. Some tips are below:&lt;/p>
 &lt;ol>
