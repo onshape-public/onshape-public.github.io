@@ -1,4 +1,4 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>– Advanced API Development</title><link>https://onshape-public.github.io/docs/api-adv/</link><description>Recent content in Advanced API Development on</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 20 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://onshape-public.github.io/docs/api-adv/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Associativity</title><link>https://onshape-public.github.io/docs/api-adv/associativity/</link><pubDate>Mon, 18 May 2020 20:28:26 -0400</pubDate><guid>https://onshape-public.github.io/docs/api-adv/associativity/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>– API Guides</title><link>https://onshape-public.github.io/docs/api-adv/</link><description>Recent content in API Guides on</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 03 Apr 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://onshape-public.github.io/docs/api-adv/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Associativity</title><link>https://onshape-public.github.io/docs/api-adv/associativity/</link><pubDate>Mon, 18 May 2020 20:28:26 -0400</pubDate><guid>https://onshape-public.github.io/docs/api-adv/associativity/</guid><description>
 &lt;p>Onshape does not expose a persistent ID for any of these entities. When the model changes, the ID may change. Therefore, Onshape provides an API to enable mapping IDs from a previous microversion to the current microversion. Assuming a simple case of maintaining associativity for a face, an abstract workflow might be:&lt;/p>
 &lt;ol>
 &lt;li>Read the tessellated model data.&lt;/li>
@@ -2650,4 +2650,34 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &lt;ul>
 &lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Metadata">API Explorer: Metadata&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://onshape-public.github.io/docs/api-intro/explorer">API Guide: API Explorer&lt;/a>&lt;/li>
-&lt;/ul></description></item></channel></rss>
+&lt;/ul></description></item><item><title>Docs: Response Codes</title><link>https://onshape-public.github.io/docs/api-adv/errors/</link><pubDate>Wed, 03 Apr 2024 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/errors/</guid><description>
+&lt;p>This page details some of the response codes that may be returned by Onshape API endpoints. For each response code, we&amp;rsquo;ve provided a brief description of the response and recommended next steps.&lt;/p>
+&lt;h2 id="client-errors-4xx">Client Errors (4xx)&lt;/h2>
+&lt;p>There’s an error with the client request. Find the error code below, and follow the instructions for resolution.&lt;/p>
+&lt;h3 id="400---bad-request">400 - Bad Request&lt;/h3>
+&lt;p>The request cannot be processed by the server due a client-side error. This could be a malformed request syntax or other issue. Check the request parameters (GET and POST) and request body (POST) to determine the cause of the failure.&lt;/p>
+&lt;h3 id="401---unauthorized">401 - Unauthorized&lt;/h3>
+&lt;p>The request failed the authentication/authorization checks. This could mean that the client is not logged in, API keys are invalid, OAuth failed, etc. Make sure the client is &lt;a href="https://onshape-public.github.io/docs/auth/">authenticated&lt;/a>.&lt;/p>
+&lt;h3 id="403---forbidden">403 - Forbidden&lt;/h3>
+&lt;p>The client doesn’t have the correct permissions to perform this operation. Check that the &lt;a href="https://onshape-public.github.io/docs/auth/">API Keys or OAuth authentication&lt;/a> have sufficient permissions to perform the operation. For example, POST operations typically require &lt;code>write&lt;/code> scope; if the API Key was created with only &lt;code>read&lt;/code> scope, the server will return a 403 error.&lt;/p>
+&lt;p>You might also need to check document and user permissions. For more details, see &lt;a href="https://cad.onshape.com/help/Content/sharedocuments.htm">Share Documents&lt;/a> (for everyone) and &lt;a href="https://cad.onshape.com/help/Content/EnterpriseHelp/Content/permission_schemes.htm">Understanding and Administering Project Roles and Permission Schemes&lt;/a> (for Enterprise users and administrators).&lt;/p>
+&lt;h3 id="404---not-found">404 - Not Found&lt;/h3>
+&lt;p>The server can’t find what the client is looking for. For example, a 404 error will be returned if the client tries to make a GET request for a document that doesn’t exist.&lt;/p>
+&lt;h3 id="405---method-not-allowed">405 - Method Not Allowed&lt;/h3>
+&lt;p>Use of that method is not supported. For example, you cannot perform a DELETE request on a document version, because versions are read-only. Only GET requests on document versions are allowed.&lt;/p>
+&lt;h3 id="406----not-acceptable">406 - Not Acceptable&lt;/h3>
+&lt;p>The server cannot provide a response for the media type requested. See &lt;a href="https://datatracker.ietf.org/doc/html/rfc2616#section-6.1.1">https://datatracker.ietf.org/doc/html/rfc2616#section-6.1.1&lt;/a>.&lt;/p>
+&lt;h3 id="409---conflict">409 - Conflict&lt;/h3>
+&lt;p>The client call includes duplicate values, causing a conflict. Modify the request to remove any conflicting values.&lt;/p>
+&lt;h3 id="415---media-type-not-supported">415 - Media Type Not Supported&lt;/h3>
+&lt;p>The client call includes unsupported data types or invalid JSON. Review the client code. When performing data imports and exports, follow all &lt;a href="https://onshape-public.github.io/docs/api-adv/translation/">Translation guidelines&lt;/a> to ensure all media and file types are supported.&lt;/p>
+&lt;h3 id="429---too-many-requests">429 - Too Many Requests&lt;/h3>
+&lt;p>The client sent too many requests to a particular endpoint in a given time window. The number of requests allowed per time window vary and are subject to change. Onshape does not publish this information. If the client receives HTTP 429 responses, delay and then retry, or reduce its request rate.&lt;/p>
+&lt;h3 id="499---timeout">499 - Timeout&lt;/h3>
+&lt;p>This call is taking too long. Please try again later.&lt;/p>
+&lt;h2 id="server-errors-5xx">Server Errors (5xx)&lt;/h2>
+&lt;p>There’s an error with the Onshape servers. Find the error code below, and follow the instructions for resolution.&lt;/p>
+&lt;h3 id="500---internal-server-error">500 - Internal Server Error&lt;/h3>
+&lt;p>The request resulted in an error. Set a limit for the number of retries, and if the request continues to fail, reach out to &lt;a href="api-support@onshape.com">support&lt;/a>.&lt;/p>
+&lt;h3 id="503---service-unavailable">503 - Service Unavailable&lt;/h3>
+&lt;p>Something is wrong with the Onshape servers. Retry after the delay specified in the response. Set a limit for the number of retries, and if the request continues to fail, reach out to &lt;a href="api-support@onshape.com">support&lt;/a>.&lt;/p></description></item></channel></rss>
