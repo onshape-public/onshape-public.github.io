@@ -6894,6 +6894,15 @@ the location you chose for you extension.&lt;/p>
 &lt;/ul>
 &lt;p>The application is built using Express and is deployed on Heroku.&lt;/p>
 &lt;p>Refer to the &lt;a href="https://github.com/onshape-public/app-gltf-viewer">gltf-viewer-app README&lt;/a> for instructions on running this sample app.&lt;/p></description></item><item><title>Docs: Changelog</title><link>https://onshape-public.github.io/docs/changelog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/changelog/</guid><description>
+&lt;h4 id="rel-1179---released-2024-04-05">&lt;code>rel-1.179&lt;/code> - released 2024-04-05&lt;/h4>
+&lt;ul>
+&lt;li>New drawing views list endpoint &lt;code>GET&lt;/code> : &lt;code>/appelements/[:did]/[:wvm]/[:wvmid]/e/[:eid]/views&lt;/code>&lt;/li>
+&lt;li>New drawing view endpoint &lt;code>GET&lt;/code> : &lt;code>/appelements/[:did]/[:wvm]/[:wvmid]/e/[:eid]/views/[:viewid]/jsongeometry&lt;/code>&lt;/li>
+&lt;li>New updated features endpoint documentation&lt;/li>
+&lt;li>Updated glassworks for all metadata endpoints to reference developer documentation&lt;/li>
+&lt;li>Added description of output to schema for Metadata APIs&lt;/li>
+&lt;li>Updated translation endpoints with new request property &lt;code>specifyMaterialData&lt;/code>&lt;/li>
+&lt;/ul>
 &lt;h4 id="rel-1178---released-2024-03-15">&lt;code>rel-1.178&lt;/code> - released 2024-03-15&lt;/h4>
 &lt;ul>
 &lt;li>Update Part Studio translation &lt;code>POST&lt;/code> endpoint to have a new request body property &lt;code>importMaterialDensity&lt;/code>&lt;/li>
