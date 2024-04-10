@@ -2509,10 +2509,10 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &lt;/code>&lt;/pre>&lt;/li>
 &lt;/ul>
 &lt;h2 id="sample-workflows">Sample Workflows&lt;/h2>
-&lt;h3 id="get-metadata-for-an-element">Get metadata for an element&lt;/h3>
-&lt;p>We will get the metadata from the &lt;code>DRILL_BIT&lt;/code> element in &lt;a href="https://cad.onshape.com/documents/e60c4803eaf2ac8be492c18e/w/d2558da712764516cc9fec62/e/958bceb5a2511b572dbbe851">this public document&lt;/a>.&lt;/p>
+&lt;h3 id="get-a-part-property">Get a part property&lt;/h3>
+&lt;p>In this example we&amp;rsquo;ll get the name of a part by getting the metadata from the &lt;code>DRILL_BIT&lt;/code> element in &lt;a href="https://cad.onshape.com/documents/e60c4803eaf2ac8be492c18e/w/d2558da712764516cc9fec62/e/958bceb5a2511b572dbbe851">this public document&lt;/a>.&lt;/p>
 &lt;ol>
-&lt;li>Call the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Metadata/getWMVEMetadata">getWMVEMetadata&lt;/a> endpoint. Replace &lt;code>CREDENTIALS&lt;/code> with your authentication credentials:
+&lt;li>Call the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Metadata/getWMVEMetadata">Metadata/getWMVEMetadata&lt;/a> endpoint. Replace &lt;code>CREDENTIALS&lt;/code> with your authentication credentials:
 &lt;pre tabindex="0">&lt;code>curl -X &amp;#39;GET&amp;#39; \
 &amp;#39;https://cad.onshape.com/api/v6/metadata/d/e60c4803eaf2ac8be492c18e/w/d2558da712764516cc9fec62/e/958bceb5a2511b572dbbe851?inferMetadataOwner=false&amp;amp;depth=1&amp;amp;includeComputedProperties=true&amp;amp;includeComputedAssemblyProperties=false&amp;amp;thumbnail=false&amp;#39; \
 -H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
@@ -2535,10 +2535,16 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 ...
 &lt;/code>&lt;/pre>&lt;/li>
 &lt;/ol>
-&lt;h3 id="update-metadata-for-a-part">Update metadata for a part&lt;/h3>
+&lt;h3 id="update-a-part-property">Update a part property&lt;/h3>
+&lt;p>In this example we will update a part&amp;rsquo;s description by getting the current metadata for the part, and then posting an update to that metadata.&lt;/p>
 &lt;ol>
-&lt;li>Make a copy of &lt;a href="https://cad.onshape.com/documents/e60c4803eaf2ac8be492c18e/w/d2558da712764516cc9fec62/e/958bceb5a2511b572dbbe851">this public document&lt;/a>. Make a note of the new document&amp;rsquo;s document ID, workspace ID, and element ID.&lt;/li>
-&lt;li>Call the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Part/getPartsWMVE">Part/getPartsWMVE&lt;/a> API on your copied document. to get a list of part IDs in the element. Only one part exists in the document, with a part ID of &lt;code>JHD&lt;/code>.
+&lt;li>
+&lt;p>Get your document information:&lt;/p>
+&lt;p>Make a copy of &lt;a href="https://cad.onshape.com/documents/e60c4803eaf2ac8be492c18e/w/d2558da712764516cc9fec62/e/958bceb5a2511b572dbbe851">this public document&lt;/a>. Make a note of the new document&amp;rsquo;s document ID, workspace ID, and element ID.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Get the ID of the part to update:&lt;/p>
+&lt;p>Call the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Part/getPartsWMVE">Part/getPartsWMVE&lt;/a> API on your copied document to get a list of part IDs in the element. Only one part exists in the document, with a part ID of &lt;code>JHD&lt;/code>.&lt;/p>
 &lt;pre tabindex="0">&lt;code>{
 &amp;#34;name&amp;#34;: &amp;#34;Main&amp;#34;,
 ...
@@ -2550,14 +2556,18 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 ...
 }
 &lt;/code>&lt;/pre>&lt;/li>
-&lt;li>Next, we need to get the ID of the property we want to update. We&amp;rsquo;ll call the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Metadata/getWMVEPMetadata">getWMVEPMetadata&lt;/a> endpoint to get the current metadata JSON for the part. Don&amp;rsquo;t forget to replace the URL parameters with the IDs from your copied document, and replace &lt;code>CREDENTIALS&lt;/code> with your authorization credentials.
+&lt;li>
+&lt;p>Get the metadata of the part:&lt;/p>
+&lt;p>We&amp;rsquo;ll call the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Metadata/getWMVEPMetadata">Metadata/getWMVEPMetadata&lt;/a> endpoint to get the current metadata JSON for the part. Don&amp;rsquo;t forget to replace the URL parameters with the IDs from your copied document, and replace &lt;code>CREDENTIALS&lt;/code> with your authorization credentials.&lt;/p>
 &lt;pre tabindex="0">&lt;code>curl -X &amp;#39;GET&amp;#39; \
 &amp;#39;https://cad.onshape.com/api/v6/metadata/d/{did}/w/{wid}/e/{eid}/p/JHD?rollbackBarIndex=-1&amp;amp;inferMetadataOwner=false&amp;amp;includeComputedProperties=true&amp;amp;includeComputedAssemblyProperties=false&amp;amp;thumbnail=false&amp;#39; \
 -H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 -H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
 -H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39;
 &lt;/code>&lt;/pre>&lt;/li>
-&lt;li>The call returns a response body in JSON format. Scroll to the &lt;code>Description&lt;/code> properties block of the JSON response, and notice that the &lt;code>value&lt;/code> field is an empty string.
+&lt;li>
+&lt;p>Locate the property to update in the response:&lt;/p>
+&lt;p>The call returns a response body in JSON format. Scroll to the &lt;code>Description&lt;/code> properties block of the JSON response, and notice that the &lt;code>value&lt;/code> field is an empty string.&lt;/p>
 &lt;pre tabindex="0">&lt;code>...
 {
 &amp;#34;name&amp;#34;: &amp;#34;Description&amp;#34;,
@@ -2565,29 +2575,14 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &amp;#34;defaultValue&amp;#34;: null,
 &amp;#34;computedPropertyError&amp;#34;: null,
 &amp;#34;propertySource&amp;#34;: 3,
-&amp;#34;validator&amp;#34;: {
-&amp;#34;min&amp;#34;: null,
-&amp;#34;max&amp;#34;: null,
-&amp;#34;minLength&amp;#34;: null,
-&amp;#34;maxLength&amp;#34;: 10000,
-&amp;#34;pattern&amp;#34;: null,
-&amp;#34;quantityType&amp;#34;: null,
-&amp;#34;maxCount&amp;#34;: null,
-&amp;#34;minCount&amp;#34;: null,
-&amp;#34;minDate&amp;#34;: null,
-&amp;#34;maxDate&amp;#34;: null
-},
+&amp;#34;validator&amp;#34;: { },
 &amp;#34;required&amp;#34;: false,
 &amp;#34;editable&amp;#34;: true,
-&amp;#34;propertyId&amp;#34;: &amp;#34;57f3fb8efa3416c06701d60e&amp;#34;,
+&amp;#34;propertyId&amp;#34;: &amp;#34;{propertyId}&amp;#34;,
 &amp;#34;editableInUi&amp;#34;: true,
 &amp;#34;dateFormat&amp;#34;: null,
 &amp;#34;valueType&amp;#34;: &amp;#34;STRING&amp;#34;,
 &amp;#34;enumValues&amp;#34;: null,
-&amp;#34;schemaId&amp;#34;: &amp;#34;5877a03ebe4c21163b49dce0&amp;#34;,
-&amp;#34;uiHints&amp;#34;: {
-&amp;#34;multiline&amp;#34;: true
-},
 &amp;#34;multivalued&amp;#34;: false,
 &amp;#34;computedAssemblyProperty&amp;#34;: false,
 &amp;#34;computedProperty&amp;#34;: false,
@@ -2595,41 +2590,51 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 },
 ...
 &lt;/code>&lt;/pre>&lt;/li>
-&lt;li>Copy Description&amp;rsquo;s &lt;code>propertyId&lt;/code>. We&amp;rsquo;ll need this ID to update the metadata.&lt;/li>
-&lt;li>Set up the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Metadata/updateWVEPMetadata">updateWVEPMetadata&lt;/a> call.
+&lt;li>
+&lt;p>Find the metadata&amp;rsquo;s property ID:&lt;/p>
+&lt;p>Copy Description&amp;rsquo;s &lt;code>propertyId&lt;/code>. We&amp;rsquo;ll need this ID to update the metadata.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Set up the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Metadata/updateWVEPMetadata">Metadata/updateWVEPMetadata&lt;/a> call:&lt;/p>
 &lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST&amp;#39; \
 &amp;#39;https://cad.onshape.com/api/v6/metadata/d/{did}/w/{wid}/e/{eid}/p/JHD?rollbackBarIndex=-1&amp;#39; \
 -H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 -H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
 -H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 &lt;/code>&lt;/pre>&lt;/li>
-&lt;li>Add the request JSON to the call. Note that we need to include the &lt;code>jsonType&lt;/code>, the &lt;code>partId&lt;/code>, the &lt;code>propertyId&lt;/code>, and the value to update.
+&lt;li>
+&lt;p>Add the request JSON to the call:&lt;/p>
+&lt;p>Note that we need to include the &lt;code>jsonType&lt;/code>, the &lt;code>partId&lt;/code>, the &lt;code>propertyId&lt;/code>, and the value to update.&lt;/p>
 &lt;pre tabindex="0">&lt;code>-d &amp;#39;{
 &amp;#34;jsonType&amp;#34;: &amp;#34;metadata-part&amp;#34;,
 &amp;#34;partId&amp;#34;: &amp;#34;JHD&amp;#34;,
 &amp;#34;properties&amp;#34;: [
 {
 &amp;#34;value&amp;#34;: &amp;#34;&amp;#34;,
-&amp;#34;propertyId&amp;#34;: &amp;#34;57f3fb8efa3416c06701d60e&amp;#34;
+&amp;#34;propertyId&amp;#34;: &amp;#34;{propertyId}&amp;#34;
 }
 ]
 }&amp;#39;
 &lt;/code>&lt;/pre>&lt;/li>
-&lt;li>In the request JSON, change the empty Description &lt;code>value&lt;/code> string to &lt;code>&amp;quot;Drill bit&amp;quot;&lt;/code>:
+&lt;li>
+&lt;p>Add the new property information:&lt;/p>
+&lt;p>In the request JSON, change the empty Description &lt;code>value&lt;/code> string to &lt;code>&amp;quot;Drill bit&amp;quot;&lt;/code>:&lt;/p>
 &lt;pre tabindex="0">&lt;code>-d &amp;#39;{
 &amp;#34;jsonType&amp;#34;: &amp;#34;metadata-part&amp;#34;,
 &amp;#34;partId&amp;#34;: &amp;#34;JHD&amp;#34;,
 &amp;#34;properties&amp;#34;: [
 {
 &amp;#34;value&amp;#34;: &amp;#34;Drill bit&amp;#34;,
-&amp;#34;propertyId&amp;#34;: &amp;#34;57f3fb8efa3416c06701d60e&amp;#34;
+&amp;#34;propertyId&amp;#34;: &amp;#34;{propertyId}&amp;#34;
 }
 ]
 }&amp;#39;
 &lt;/code>&lt;/pre>&lt;/li>
-&lt;li>Make the final call. Don&amp;rsquo;t forget to replace the URL parameters and &lt;code>CREDENTIALS&lt;/code> with your information.
+&lt;li>
+&lt;p>POST the new metadata:&lt;/p>
+&lt;p>Don&amp;rsquo;t forget to replace the URL parameters and &lt;code>CREDENTIALS&lt;/code> with your information.&lt;/p>
 &lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST&amp;#39; \
-&amp;#39;https://cad.onshape.com/api/v6/metadata/d/{did}/w/{wid}/e/{wid}/p/JHD?rollbackBarIndex=-1&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/metadata/d/{did}/w/{wid}/e/{eid}/p/JHD?rollbackBarIndex=-1&amp;#39; \
 -H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 -H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
 -H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
@@ -2639,12 +2644,113 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &amp;#34;properties&amp;#34;: [
 {
 &amp;#34;value&amp;#34;: &amp;#34;Drill bit&amp;#34;,
-&amp;#34;propertyId&amp;#34;: &amp;#34;57f3fb8efa3416c06701d60e&amp;#34;
+&amp;#34;propertyId&amp;#34;: &amp;#34;{propertyId}&amp;#34;
 }
 ]
 }&amp;#39;
 &lt;/code>&lt;/pre>&lt;/li>
-&lt;li>Repeat steps 3 and 4 to confirm that the Description &lt;code>value&lt;/code> for the part is now &lt;code>Drill bit&lt;/code>.&lt;/li>
+&lt;li>
+&lt;p>Confirm your changes:&lt;/p>
+&lt;p>Repeat steps 3 and 4 to confirm that the Description &lt;code>value&lt;/code> for the part is now &lt;code>Drill bit&lt;/code>.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="update-a-tab-name">Update a tab name&lt;/h3>
+&lt;p>In this example we will update an element&amp;rsquo;s tab name by getting the current metadata for the element, and then posting an update to that metadata. Remember that in Onshape, an element is typically represented as a tab in the Onshape UI.&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Get your document information:&lt;/p>
+&lt;p>Make a copy of &lt;a href="https://cad.onshape.com/documents/e60c4803eaf2ac8be492c18e/w/d2558da712764516cc9fec62/e/4561b91a53c595c0010d5cdb">this public document&lt;/a>. Make a note of the new document&amp;rsquo;s document ID, workspace ID, and element ID. Note the tab name of the element is &amp;ldquo;NEW_PART&amp;rdquo;.&lt;/p>
+&lt;p>&lt;/br>&lt;img src="https://onshape-public.github.io/images/metadata-update-tab-before.png" alt="Onshape document with NEW_PART tab name" width=950>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Get the metadata of the element:&lt;/p>
+&lt;p>We&amp;rsquo;ll call the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Metadata/getWMVEMetadata">Metadata/getWMVEMetadata&lt;/a> endpoint to get the current metadata JSON for the element. Don&amp;rsquo;t forget to replace the URL parameters with the IDs from your copied document, and replace &lt;code>CREDENTIALS&lt;/code> with your authorization credentials.&lt;/p>
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;GET&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/metadata/d/{did}/w/{wid}/e/{eid}&amp;#39; \
+-H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39;
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>
+&lt;p>Locate the property to update in the response:&lt;/p>
+&lt;p>The call returns a response body in JSON format. Scroll to the &lt;code>Name&lt;/code> properties block of the JSON response, and notice that the &lt;code>value&lt;/code> field matches our current tab name, &amp;ldquo;NEW_PART&amp;rdquo;.&lt;/p>
+&lt;pre tabindex="0">&lt;code>{
+&amp;#34;jsonType&amp;#34;: &amp;#34;metadata-element&amp;#34;,
+&amp;#34;elementType&amp;#34;: 0,
+&amp;#34;mimeType&amp;#34;: &amp;#34;onshape/partstudio&amp;#34;,
+&amp;#34;elementId&amp;#34;: &amp;#34;{eid}&amp;#34;,
+&amp;#34;properties&amp;#34;: [
+{
+&amp;#34;name&amp;#34;: &amp;#34;Name&amp;#34;,
+&amp;#34;value&amp;#34;: &amp;#34;NEW_PART&amp;#34;,
+&amp;#34;validator&amp;#34;: {},
+&amp;#34;required&amp;#34;: true,
+&amp;#34;editable&amp;#34;: true,
+&amp;#34;propertyId&amp;#34;: &amp;#34;{propertyId}&amp;#34;,
+},
+...
+],
+...
+}
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>
+&lt;p>Find the metadata&amp;rsquo;s property ID:&lt;/p>
+&lt;p>Copy the Name block&amp;rsquo;s &lt;code>propertyId&lt;/code> in the response. We&amp;rsquo;ll need this ID to update the metadata.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Set up the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Metadata/updateWVEMetadata">updateWVEMetadata&lt;/a> call:&lt;/p>
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/metadata/d/{did}/w/{wid}/e/{eid}&amp;#39; \
+-H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>
+&lt;p>Add the request JSON to the call:&lt;/p>
+&lt;p>Note that we need to include the &lt;code>propertyId&lt;/code> and the value to update.&lt;/p>
+&lt;pre tabindex="0">&lt;code>-d &amp;#39;{
+&amp;#34;properties&amp;#34;: [
+{
+&amp;#34;value&amp;#34;: &amp;#34;&amp;#34;,
+&amp;#34;propertyId&amp;#34;: &amp;#34;{propertyId}&amp;#34;
+}
+]
+}&amp;#39;
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>
+&lt;p>Add the new property information:&lt;/p>
+&lt;p>In the request JSON, replace &lt;code>{propertyId}&lt;/code> with the property ID you found in Step 4, then change the empty &lt;code>value&lt;/code> string to &lt;code>&amp;quot;PISTON&amp;quot;&lt;/code>:&lt;/p>
+&lt;pre tabindex="0">&lt;code>-d &amp;#39;{
+&amp;#34;properties&amp;#34;: [
+{
+&amp;#34;value&amp;#34;: &amp;#34;PISTON&amp;#34;,
+&amp;#34;propertyId&amp;#34;: &amp;#34;{propertyId}&amp;#34;
+}
+]
+}&amp;#39;
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>
+&lt;p>POST the new metadata:&lt;/p>
+&lt;p>Don&amp;rsquo;t forget to replace the URL parameters and &lt;code>CREDENTIALS&lt;/code> with your information.&lt;/p>
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/metadata/d/{did}/w/{wid}/e/{eid}&amp;#39; \
+-H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-d &amp;#39;{
+&amp;#34;properties&amp;#34;: [
+{
+&amp;#34;value&amp;#34;: &amp;#34;PISTON&amp;#34;,
+&amp;#34;propertyId&amp;#34;: &amp;#34;{propertyId}&amp;#34;
+}
+]
+}&amp;#39;
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>
+&lt;p>Confirm your changes:&lt;/p>
+&lt;p>Open your document and confirm that the tab name is now &lt;code>PISTON&lt;/code>.&lt;/p>
+&lt;p>&lt;/br>&lt;img src="https://onshape-public.github.io/images/metadata-update-tab-after.png" alt="Onshape document with NEW_PART tab name" width=950>&lt;/p>
+&lt;/li>
 &lt;/ol>
 &lt;h2 id="additional-resources">Additional Resources&lt;/h2>
 &lt;ul>
