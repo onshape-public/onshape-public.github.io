@@ -2758,7 +2758,16 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &lt;li>&lt;a href="https://onshape-public.github.io/docs/api-intro/explorer">API Guide: API Explorer&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>Docs: Response Codes</title><link>https://onshape-public.github.io/docs/api-adv/errors/</link><pubDate>Wed, 03 Apr 2024 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/errors/</guid><description>
 &lt;p>This page details some of the response codes that may be returned by Onshape API endpoints. For each response code, we&amp;rsquo;ve provided a brief description of the response and recommended next steps.&lt;/p>
-&lt;h2 id="client-errors-4xx">Client Errors (4xx)&lt;/h2>
+&lt;h2 id="success-2xx">Success (2xx)&lt;/h2>
+&lt;p>The client call was successful.&lt;/p>
+&lt;h3 id="200---ok">200 - OK&lt;/h3>
+&lt;p>The client call was successful. No action needed.&lt;/p>
+&lt;h3 id="204---no-content">204 - No Content&lt;/h3>
+&lt;p>The client call was successful, and there&amp;rsquo;s nothing to return in the response body. The empty response body cannot be parsed.&lt;/p>
+&lt;h2 id="redirect-3xx">Redirect (3xx)&lt;/h2>
+&lt;h3 id="307---temporary-redirect">307 - Temporary Redirect&lt;/h3>
+&lt;p>The client call was successful, and a redirection URL was returned. Follow the URL provided in the response.&lt;/p>
+&lt;h2 id="client-error-4xx">Client Error (4xx)&lt;/h2>
 &lt;p>There’s an error with the client request. Find the error code below, and follow the instructions for resolution.&lt;/p>
 &lt;h3 id="400---bad-request">400 - Bad Request&lt;/h3>
 &lt;p>The request cannot be processed by the server due a client-side error. This could be a malformed request syntax or other issue. Check the request parameters (GET and POST) and request body (POST) to determine the cause of the failure.&lt;/p>
@@ -2781,7 +2790,7 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &lt;p>The client sent too many requests to a particular endpoint in a given time window. The number of requests allowed per time window vary and are subject to change. Onshape does not publish this information. If the client receives HTTP 429 responses, delay and then retry, or reduce its request rate.&lt;/p>
 &lt;h3 id="499---timeout">499 - Timeout&lt;/h3>
 &lt;p>This call is taking too long. Please try again later.&lt;/p>
-&lt;h2 id="server-errors-5xx">Server Errors (5xx)&lt;/h2>
+&lt;h2 id="server-error-5xx">Server Error (5xx)&lt;/h2>
 &lt;p>There’s an error with the Onshape servers. Find the error code below, and follow the instructions for resolution.&lt;/p>
 &lt;h3 id="500---internal-server-error">500 - Internal Server Error&lt;/h3>
 &lt;p>The request resulted in an error. Set a limit for the number of retries, and if the request continues to fail, reach out to &lt;a href="api-support@onshape.com">support&lt;/a>.&lt;/p>
