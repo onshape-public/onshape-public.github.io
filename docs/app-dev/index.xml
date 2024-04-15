@@ -30,7 +30,9 @@ The action URL can be parameterized to pass information from Onshape to the appl
 &lt;li>&lt;code>{$workspaceId}&lt;/code> - Use &lt;code>{$workspaceOrVersionId}&lt;/code> instead.&lt;/li>
 &lt;li>&lt;code>{$versionId}&lt;/code> - Use &lt;code>{$workspaceOrVersionId}&lt;/code> instead.&lt;/li>
 &lt;li>&lt;code>{$microversionId}&lt;/code> - The Onshape ID for the current or select document microversion.&lt;/li>
-&lt;li>&lt;code>{$elementId}&lt;/code> - The Onshape ID for the current or selected element (part studio, assembly, drawing).&lt;/li>
+&lt;li>&lt;code>{tabElementId}&lt;/code> - The Onshape ID for the current tab.&lt;/li>
+&lt;li>&lt;code>{$elementId}&lt;/code> - The Onshape ID for the current or selected element.&lt;/li>
+&lt;li>&lt;strong>Note&lt;/strong>: In most cases, &lt;code>tabElementId&lt;/code> and &lt;code>elementId&lt;/code> will be the same. However, when creating an extension with the &lt;code>Selected instance&lt;/code> context, &lt;code>tabElementId&lt;/code> indicates the current tab (i.e., the target element), and &lt;code>elementId&lt;/code> indicates the tab of the Part Studio from which the instance was inserted (i.e., the source element).&lt;/li>
 &lt;li>&lt;code>{$partId}&lt;/code> - The Onshape ID for the current or selected part.&lt;/li>
 &lt;li>&lt;code>{$partNumber}&lt;/code> - The Part number property for the current or selected part, assembly or drawing.&lt;/li>
 &lt;li>&lt;code>{$revision}&lt;/code> - The Revision property for the current or selected part, assembly or drawing.&lt;/li>
