@@ -1,4 +1,4 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>– API Guides</title><link>https://onshape-public.github.io/docs/api-adv/</link><description>Recent content in API Guides on</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 03 Apr 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://onshape-public.github.io/docs/api-adv/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Associativity</title><link>https://onshape-public.github.io/docs/api-adv/associativity/</link><pubDate>Mon, 18 May 2020 20:28:26 -0400</pubDate><guid>https://onshape-public.github.io/docs/api-adv/associativity/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>– API Guides</title><link>https://onshape-public.github.io/docs/api-adv/</link><description>Recent content in API Guides on</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 05 Apr 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://onshape-public.github.io/docs/api-adv/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Associativity</title><link>https://onshape-public.github.io/docs/api-adv/associativity/</link><pubDate>Mon, 18 May 2020 20:28:26 -0400</pubDate><guid>https://onshape-public.github.io/docs/api-adv/associativity/</guid><description>
 &lt;p>Onshape does not expose a persistent ID for any of these entities. When the model changes, the ID may change. Therefore, Onshape provides an API to enable mapping IDs from a previous microversion to the current microversion. Assuming a simple case of maintaining associativity for a face, an abstract workflow might be:&lt;/p>
 &lt;ol>
 &lt;li>Read the tessellated model data.&lt;/li>
@@ -183,7 +183,237 @@ GET /applications/clients/:cid/settings/users/:uid&lt;/p>
 &lt;h2 id="samples">Samples&lt;/h2>
 &lt;p>Onshape will provide sample code for both desktop and integrated applications demonstrating the use of the billing APIs and workflow. If you are subscribed to the Onshape Github Partner group, you will have access to those samples as soon as they are posted.&lt;/p>
 &lt;h2 id="testing">Testing&lt;/h2>
-&lt;p>Please contact &lt;a href="mailto:api-support@onshape.com">api-support@onshape.com&lt;/a> to discuss details of testing billing &amp;amp; subscriptions.&lt;/p></description></item><item><title>Docs: Drawings</title><link>https://onshape-public.github.io/docs/api-adv/drawings/</link><pubDate>Thu, 12 Oct 2023 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/drawings/</guid><description>
+&lt;p>Please contact &lt;a href="mailto:api-support@onshape.com">api-support@onshape.com&lt;/a> to discuss details of testing billing &amp;amp; subscriptions.&lt;/p></description></item><item><title>Docs: Configurations</title><link>https://onshape-public.github.io/docs/api-adv/configs/</link><pubDate>Fri, 05 Apr 2024 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/configs/</guid><description>
+&lt;p>This page describes the APIs Onshape provides for working with &lt;a href="https://cad.onshape.com/help/Content/configurations.htm">Configurations&lt;/a>.&lt;/p>
+&lt;p>You can use Configurations to create variations of entire Part Studios, Assemblies, specific parts and more. You can configure feature and parameter values, part properties, custom part properties, face and part appearances, and sketch text. Each Part Studio can have only one Configuration, but it can contain multiple Configuration inputs. The Configuration inputs you define for a Part Studio become options when inserting that Part Studio into an Assembly or Drawing. You can also create your own Configurations for an Assembly, regardless of any existing Part Studio Configurations. Assembly Configurations work the same way as Part Studio Configurations, but are limited to configuring Mates (&lt;em>not&lt;/em> Mate connectors), instances, and patterns.&lt;/p>
+&lt;blockquote>
+&lt;p>📘 &lt;strong>Notes&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>This page provides sample code as curls. See the &lt;a href="https://curl.se/docs/">curl documentation&lt;/a> for more information.&lt;/li>
+&lt;li>All Onshape API calls must be properly authenticated by replacing the &lt;code>CREDENTIALS&lt;/code> variable in the curls below. See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys">API Keys&lt;/a> page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart">Quick Start&lt;/a> for an example. All applications submitted to the Onshape App Store &lt;em>must&lt;/em> authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth">OAuth2&lt;/a>.&lt;/li>
+&lt;li>This documentation refers to Onshape IDs in the following format: &lt;code>{did}, {wid}, {eid}, {pid}, {otherId}&lt;/code>. These represent document, workspace, element, part, and other IDs (respectively) that are needed make the API calls. We sometimes abbreviate these variables as &lt;code>DWVEM&lt;/code> Please see &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request">API Guide: API Intro&lt;/a> for information on what these IDs mean and how to obtain them from your documents. Never include the curly braces (&lt;code>{}&lt;/code>) in your API calls.&lt;/li>
+&lt;li>For Enterprise accounts, replace &lt;strong>&lt;font color="slate">cad&lt;/font>&lt;/strong> in all Onshape URLs with your company domain.
+https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com &amp;gt; https://&lt;font color="slate">&lt;strong>companyName&lt;/strong>&lt;/font>.onshape.com&lt;/li>
+&lt;/ul>
+&lt;/blockquote>
+&lt;h2 id="endpoints">Endpoints&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Element/getConfiguration">Element/getConfiguration&lt;/a>: Get the configuration data for a Part Studio or Assembly.
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;GET&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/elements/d/{did}/wvm/{wvmid}/e/{eid}/configuration&amp;#39; \
+-H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39;\
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39;
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Element/updateConfiguration">Element/updateConfiguration&lt;/a>: Update the configuration data for a Part Studio or Assembly.
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/elements/d/{did}/wvm/{wvmid}/e/{eid}/configuration&amp;#39; \
+-H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39;\
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-d &amp;#39;{ }&amp;#39;
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Element/decodeConfiguration">Element/decodeConfiguration&lt;/a>: Process an encoded configuration file.
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;GET&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/elements/d/{did}/wvm/{wvmid}/e/{eid}/configurationencodings/{encodingId}&amp;#39; \
+-H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39;
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Element/encodeConfigurationMap">Element/encodeConfigurationMap&lt;/a>: Create an encoded map of configurations.
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/elements/d/{did}/e/{eid}/configurationencodings&amp;#39; \
+-H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39;\
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-d &amp;#39;{
+&amp;#34;parameters&amp;#34;: [
+{
+&amp;#34;parameterId&amp;#34;: &amp;#34;{parameterId}&amp;#34;,
+&amp;#34;parameterValue&amp;#34;: &amp;#34;{configValue}&amp;#34;
+}
+]
+}&amp;#39;
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;/ul>
+&lt;h3 id="encoded-configuration-strings">Encoded Configuration Strings&lt;/h3>
+&lt;p>The &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Element/encodeConfigurationMap">Element/encodeConfigurationMap&lt;/a> and &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Element/decodeConfiguration">Element/decodeConfiguration&lt;/a> APIs convert parameters from JSON to a URL-encoded string in the following format: &lt;code>&amp;quot;configuration=parameterId%3DparameterValue&amp;quot;&lt;/code>&lt;/p>
+&lt;p>For example,&lt;/p>
+&lt;pre tabindex="0">&lt;code>{
+&amp;#34;parameters&amp;#34;: [
+{
+&amp;#34;parameterId&amp;#34;: &amp;#34;List_izOjbm5HCRXEld&amp;#34;,
+&amp;#34;parameterValue&amp;#34;: &amp;#34;_500_mm&amp;#34;
+}
+]
+}
+&lt;/code>&lt;/pre>&lt;p>encodes to:&lt;/p>
+&lt;pre tabindex="0">&lt;code>&amp;#34;configuration=List_izOjbm5HCRXEld%3D_500_mm&amp;#34;
+&lt;/code>&lt;/pre>&lt;p>and:&lt;/p>
+&lt;pre tabindex="0">&lt;code>&amp;#34;configuration=List_izOjbm5HCRXEld%3DDefault&amp;#34;
+&lt;/code>&lt;/pre>&lt;p>decodes to:&lt;/p>
+&lt;pre tabindex="0">&lt;code>{
+&amp;#34;parameters&amp;#34;: [
+{
+&amp;#34;parameterId&amp;#34;: &amp;#34;List_izOjbm5HCRXEld&amp;#34;,
+&amp;#34;parameterValue&amp;#34;: &amp;#34;Default&amp;#34;
+}
+]
+}
+&lt;/code>&lt;/pre>&lt;h2 id="sample-workflows">Sample Workflows&lt;/h2>
+&lt;p>These sample workflows all build off one another. Completing all of the workflows will take you step-by-step through the process of getting Configuration information, encoding the information for use, and using the encoded configuration to create a configured export. You can also watch the &lt;a href="#workflow-video">video&lt;/a> to see the entire workflow in the Glassworks API Explorer.&lt;/p>
+&lt;h3 id="get-a-configuration">Get a Configuration&lt;/h3>
+&lt;p>In this example, we&amp;rsquo;ll use the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Element/getConfiguration">Element/getConfiguration&lt;/a> endpoint to get the Configuration information from a Part Studio.&lt;/p>
+&lt;ol>
+&lt;li>Make a copy of &lt;a href="https://cad.onshape.com/documents/e60c4803eaf2ac8be492c18e/w/d2558da712764516cc9fec62/e/958bceb5a2511b572dbbe851">this public document&lt;/a>. Make a note of the new document&amp;rsquo;s document ID, workspace ID, and element ID.&lt;/li>
+&lt;li>Click the Configurations dropdown in the Features list, and observe that there are two options for the drillbit length, &lt;code>250 mm&lt;/code> and &lt;code>500 mm&lt;/code>.
+&lt;/br>&lt;/br>&lt;img src="https://onshape-public.github.io/images/configs-example-ui.png" alt=" " width=550>&lt;/li>
+&lt;li>Set up a call to the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Element/getConfiguration">Element/getConfiguration&lt;/a> endpoint to get the Configuration for the Part Studio. Don&amp;rsquo;t forget to replace the URL parameters with the IDs from your copy of the document, and replace &lt;code>CREDENTIALS&lt;/code> with your authorization credentials.
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;GET&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/elements/d/{did}/w/{wid}/e/{eid}/configuration&amp;#39; \
+-H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>Review the Configuration information detailed in the response. You can see that the Part Studio contains one configuration (&lt;code>Drill_Bit_Length&lt;/code>) with two options (&lt;code>250 mm&lt;/code> and &lt;code>500 mm&lt;/code>):
+&lt;pre tabindex="0">&lt;code>{
+&amp;#34;btType&amp;#34;: &amp;#34;BTConfigurationResponse-2019&amp;#34;,
+&amp;#34;currentConfiguration&amp;#34;: [
+{
+&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterEnum-145&amp;#34;,
+&amp;#34;namespace&amp;#34;: &amp;#34;&amp;#34;,
+&amp;#34;nodeId&amp;#34;: &amp;#34;{nodeId1}&amp;#34;,
+&amp;#34;value&amp;#34;: &amp;#34;Default&amp;#34;,
+&amp;#34;enumName&amp;#34;: &amp;#34;{paramId_conf}&amp;#34;,
+&amp;#34;parameterId&amp;#34;: &amp;#34;{paramId}&amp;#34;
+}
+],
+&amp;#34;configurationParameters&amp;#34;: [
+{
+&amp;#34;btType&amp;#34;: &amp;#34;BTMConfigurationParameterEnum-105&amp;#34;,
+&amp;#34;defaultValue&amp;#34;: &amp;#34;Default&amp;#34;,
+&amp;#34;enumName&amp;#34;: &amp;#34;{enumName}&amp;#34;,
+&amp;#34;namespace&amp;#34;: &amp;#34;&amp;#34;,
+&amp;#34;options&amp;#34;: [
+{
+&amp;#34;btType&amp;#34;: &amp;#34;BTMEnumOption-592&amp;#34;,
+&amp;#34;optionName&amp;#34;: &amp;#34;250 mm&amp;#34;,
+&amp;#34;option&amp;#34;: &amp;#34;Default&amp;#34;,
+&amp;#34;nodeId&amp;#34;: &amp;#34;{nodeId2}&amp;#34;
+},
+{
+&amp;#34;btType&amp;#34;: &amp;#34;BTMEnumOption-592&amp;#34;,
+&amp;#34;optionName&amp;#34;: &amp;#34;500 mm&amp;#34;,
+&amp;#34;option&amp;#34;: &amp;#34;_500_mm&amp;#34;,
+&amp;#34;nodeId&amp;#34;: &amp;#34;{nodeId3}&amp;#34;
+}
+],
+&amp;#34;isCosmetic&amp;#34;: false,
+&amp;#34;parameterId&amp;#34;: &amp;#34;{paramId}&amp;#34;,
+&amp;#34;parameterName&amp;#34;: &amp;#34;Drill_Bit_Length&amp;#34;,
+&amp;#34;nodeId&amp;#34;: &amp;#34;{nodeId4}&amp;#34;
+}
+],
+&amp;#34;serializationVersion&amp;#34;: &amp;#34;1.2.0&amp;#34;,
+&amp;#34;sourceMicroversion&amp;#34;: &amp;#34;{mid}&amp;#34;,
+&amp;#34;microversionSkew&amp;#34;: false,
+&amp;#34;rejectMicroversionSkew&amp;#34;: false,
+&amp;#34;libraryVersion&amp;#34;: 2296
+}
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;/ol>
+&lt;h3 id="encode-a-configuration-string">Encode a configuration string&lt;/h3>
+&lt;p>In this example, we&amp;rsquo;ll encode a Configuration so it can be used as part of a translation (i.e., an export). Please read the &lt;a href="#encoded-configuration-strings">Encoded Configuration Strings&lt;/a> section before beginning this example.&lt;/p>
+&lt;ol>
+&lt;li>This example builds off the previous one. Please complete the &lt;a href="#get-a-configuration">Get a Part Studio Configuration&lt;/a> workflow to obtain the raw Configuration output for the Part Studio.&lt;/li>
+&lt;li>Set up a call to the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Element/encodeConfigurationMap">Element/encodeConfigurationMap&lt;/a> endpoint. Don&amp;rsquo;t forget to replace the URL parameters with the IDs from your document, and replace &lt;code>CREDENTIALS&lt;/code> with your authorization credentials.
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/elements/d/{did}/e/{eid}/configurationencodings&amp;#39; \
+-H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-d &amp;#39;{ }&amp;#39;
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>Now we need to create our JSON body for the request. Note the structure of the body:
+&lt;pre tabindex="0">&lt;code>{
+&amp;#34;parameters&amp;#34;: [
+{
+&amp;#34;parameterId&amp;#34;: &amp;#34;string&amp;#34;,
+&amp;#34;parameterValue&amp;#34;: &amp;#34;string&amp;#34;
+}
+],
+&amp;#34;standardContentParametersId&amp;#34;: &amp;#34;string&amp;#34;
+}
+&lt;/code>&lt;/pre>Fill out the request body with our information:
+&lt;ul>
+&lt;li>We&amp;rsquo;re not using a standard content part, so we can delete the second key/value pair.&lt;/li>
+&lt;li>The parameterId can be found in the response from the previous example. It usually begins with (&lt;code>List_&lt;/code>)&lt;/li>
+&lt;li>For the parameter value, we&amp;rsquo;ll enter one of our configuration options from the previous example. In this case, we&amp;rsquo;ll use &lt;code>_500_mm&lt;/code> to export a 500 mm drillbit part.&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>{
+&amp;#34;parameters&amp;#34;: [
+{
+&amp;#34;parameterId&amp;#34;: &amp;#34;{parameterId}&amp;#34;,
+&amp;#34;parameterValue&amp;#34;: &amp;#34;_500_mm&amp;#34;
+}
+]
+}
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>Now we can make our call:
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/elements/d/{did}/e/{eid}/configurationencodings&amp;#39; \
+-H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-d &amp;#39;{
+&amp;#34;parameters&amp;#34;: [
+{
+&amp;#34;parameterId&amp;#34;: &amp;#34;{parameterId}&amp;#34;,
+&amp;#34;parameterValue&amp;#34;: &amp;#34;_500_mm&amp;#34;
+}
+]
+}&amp;#39;
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>The call responds with two values: the ID of the encoding, and the encoded configuration string. We can use this configuration string (returned in the &lt;code>queryParam&lt;/code> field) any time we want to specify the 500 mm drillbit length.
+&lt;pre tabindex="0">&lt;code>{
+&amp;#34;encodedId&amp;#34;: &amp;#34;{encodedId}&amp;#34;,
+&amp;#34;queryParam&amp;#34;: &amp;#34;configuration={configString}&amp;#34;
+}
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;/ol>
+&lt;h3 id="export-a-configured-part">Export a configured part&lt;/h3>
+&lt;p>In this example, we will export a configured part. We have a drillbit with two configurations: &lt;code>250 mm&lt;/code> and &lt;code>500 mm&lt;/code> lengths. To export a 500 mm drillbit, we can specify the configuration as part of the export.&lt;/p>
+&lt;ol>
+&lt;li>This example builds off the previous two. Please complete this exercise after the &lt;a href="#encode-a-configuration">Encode a configuration&lt;/a> workflow.&lt;/li>
+&lt;li>Next, set up a call to the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/exportParasolid">PartStudio/exportParasolid&lt;/a> endpoint. Don&amp;rsquo;t forget to replace the URL parameters with the IDs from your document, and replace &lt;code>CREDENTIALS&lt;/code> with your authorization credentials. Note that this endpoint includes an optional &lt;code>configuration&lt;/code> parameter. This is where we&amp;rsquo;ll enter the configuration string we found in the previous example.
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;GET&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/partstudios/d/{did}/w/{wid}/e/{eid}/parasolid?version=0&amp;amp;includeExportIds=false&amp;amp;configuration={configString}&amp;amp;binaryExport=false&amp;#39; \
+-H &amp;#39;Accept: */*&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>This endpoint returns a redirect URL. Navigate to the returned URL in your browser to download the export.
+&lt;ul>
+&lt;li>Hint: The URL will look something like this, but with different IDs:&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>https://cad.onshape.com/api/v6/partstudios/d/e60c4803eaf2ac8be492c18e/w/d2558da712764516cc9fec62/e/958bceb5a2511b572dbbe851/parasolid?version=0&amp;amp;includeExportIds=false&amp;amp;configuration=List_izOjbm5HCRXEld%253D_500_mm&amp;amp;binaryExport=false
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>Now we need to import our Parasolid to confirm the correct configuration was used. Open your document in the Onshape UI, click the Insert new tab button, and then select Import.
+&lt;/br>&lt;img src="https://onshape-public.github.io/images/configs-insert-menu.png" alt="Insert new tab menu with Import highlighted in Onshape UI" width=250>&lt;/li>
+&lt;li>Navigate to the export you downloaded (with the &lt;code>.x_t&lt;/code> extension) and import it into Onshape.&lt;/li>
+&lt;li>Use the measure tool to confirm the length of the imported drillbit is 500 mm.
+&lt;/br>&lt;img src="https://onshape-public.github.io/images/configs-measure-tool.png" alt="Measure tool in Onshape UI showing drill length as 500 mm" width=400>&lt;/li>
+&lt;/ol>
+&lt;h2 id="workflow-video">Workflow Video&lt;/h2>
+&lt;p>This video demonstrates how to complete the above tutorials in the Onshape API Explorer.
+&lt;/br>&lt;/p>
+&lt;p>
+&lt;div class="wistia_responsive_padding" style="padding:77.08% 0 0 0;position:relative;">&lt;div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;">&lt;iframe src="https://fast.wistia.net/embed/iframe/o4pvoyjwuk?seo=true&amp;videoFoam=true" title="configs-export-example Video" allow="autoplay; fullscreen" allowtransparency="true" frameborder="0" scrolling="no" class="wistia_embed" name="wistia_embed" msallowfullscreen width="100%" height="100%">&lt;/iframe>&lt;/div>&lt;/div>
+&lt;script src="https://fast.wistia.net/assets/external/E-v1.js" async>&lt;/script>
+&lt;/p>
+&lt;h2 id="additional-resources">Additional Resources&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Element">API Explorer: Configurations&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://onshape-public.github.io/docs/api-intro/explorer">API Guide: API Explorer&lt;/a>&lt;/li>
+&lt;li>&lt;a href="%5Bconfigurations%5D(https://cad.onshape.com/help/Content/configurations.htm)">Onshape Help: Configurations&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Docs: Drawings</title><link>https://onshape-public.github.io/docs/api-adv/drawings/</link><pubDate>Thu, 12 Oct 2023 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/drawings/</guid><description>
 &lt;p>This page describes the APIs Onshape provides for creating and manipulating Onshape drawings.&lt;/p>
 &lt;blockquote>
 &lt;p>📘 &lt;strong>Notes&lt;/strong>&lt;/p>
@@ -2335,6 +2565,8 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &lt;/code>&lt;/pre>&lt;/li>
 &lt;li>Once &lt;code>requestState=DONE&lt;/code>, we can view the imported file as a Part in our Onshape document. The &lt;code>FLYWHEEL&lt;/code> part appears in a new PartStudio named &lt;code>CRANK&lt;/code> in our document.&lt;/li>
 &lt;/ol>
+&lt;h3 id="export-a-configured-part">Export a configured part&lt;/h3>
+&lt;p>See the &lt;a href="https://onshape-public.github.io/docs/api-adv/configs">Configurations API Guide&lt;/a> for examples.&lt;/p>
 &lt;h2 id="additional-resources">Additional Resources&lt;/h2>
 &lt;ul>
 &lt;li>&lt;a href="https://cad.onshape.com/help/Content/translation.htm">Onshape Help: Translation&lt;/a>&lt;/li>
