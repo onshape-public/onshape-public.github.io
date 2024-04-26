@@ -7241,6 +7241,13 @@ the location you chose for you extension.&lt;/p>
 &lt;/ul>
 &lt;p>The application is built using Express and is deployed on Heroku.&lt;/p>
 &lt;p>Refer to the &lt;a href="https://github.com/onshape-public/app-gltf-viewer">gltf-viewer-app README&lt;/a> for instructions on running this sample app.&lt;/p></description></item><item><title>Docs: Changelog</title><link>https://onshape-public.github.io/docs/changelog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/changelog/</guid><description>
+&lt;h4 id="rel-1180---released-2024-04-26">&lt;code>rel-1.180&lt;/code> - released 2024-04-26&lt;/h4>
+&lt;ul>
+&lt;li>New Drawings sample application (public repo: &lt;a href="https://github.com/onshape-public/onshapedrawingjson">https://github.com/onshape-public/onshapedrawingjson&lt;/a>)&lt;/li>
+&lt;li>New API Guide section for response codes (&lt;a href="https://onshape-public.github.io/docs/api-adv/errors/">https://onshape-public.github.io/docs/api-adv/errors/&lt;/a>)&lt;/li>
+&lt;li>Support export of tables in JSON of Drawings &lt;code>GET&lt;/code> : &lt;code>/appelements/[:did]/[:wvm]/[:wvmid]/e/[:eid]/views/[:viewid]/jsongeometry&lt;/code>&lt;/li>
+&lt;li>Update Assembly, Blob, Drawing and Part Studio translation &lt;code>POST&lt;/code> endpoints to have a new request body property &lt;code>resolution&lt;/code>&lt;/li>
+&lt;/ul>
 &lt;h4 id="rel-1179---released-2024-04-05">&lt;code>rel-1.179&lt;/code> - released 2024-04-05&lt;/h4>
 &lt;ul>
 &lt;li>New drawing views list endpoint &lt;code>GET&lt;/code> : &lt;code>/appelements/[:did]/[:wvm]/[:wvmid]/e/[:eid]/views&lt;/code>&lt;/li>
