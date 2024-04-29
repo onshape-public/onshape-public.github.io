@@ -471,6 +471,8 @@ Check out the &lt;a href="#sample-workflows">Sample Workflows&lt;/a> section bel
 &lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Drawing/createDrawingTranslation">Translate a drawing&lt;/a>: See the &lt;a href="https://onshape-public.github.io/docs/api-adv/translation#export-a-drawing-as-a-json">Translations API Guide&lt;/a>.&lt;/li>
 &lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Drawing/getDrawingTranslatorFormats">Get drawing translation formats&lt;/a>: See the &lt;a href="https://onshape-public.github.io/docs/api-adv/translation#export-a-drawing-as-a-json">Translations API Guide&lt;/a>.&lt;/li>
 &lt;/ul>
+&lt;h2 id="sample-app">Sample App&lt;/h2>
+&lt;p>Please see the &lt;a href="https://github.com/onshape-public/onshape-ts-drawing-client">Onshape TypeScript Drawing Client&lt;/a> for a working example of using the Onshape Drawing APIs in an application.&lt;/p>
 &lt;h2 id="sample-workflows">Sample Workflows&lt;/h2>
 &lt;h3 id="create-a-drawing-from-a-part">Create a drawing from a part&lt;/h3>
 &lt;p>In this example, we&amp;rsquo;ll create a drawing from the &lt;strong>FLYWHEEL&lt;/strong> part in &lt;a href="https://cad.onshape.com/documents/e60c4803eaf2ac8be492c18e/v/405ba186c3a70e0227ab2941/e/6bed6b43463f6a46a37b4a22">this public document&lt;/a>.&lt;/p>
