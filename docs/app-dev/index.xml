@@ -945,190 +945,306 @@ viewportWidth: number, width of the viewport
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span> {&lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;myKey&amp;#34;&lt;/span>: [&lt;span style="color:#a50">&amp;#34;firstValue&amp;#34;&lt;/span>, &lt;span style="color:#a50">&amp;#34;myBetterSecondValue&amp;#34;&lt;/span>]}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;/ol>
-&lt;p>All the examples above were tested and validated using the Python client &lt;a href="https://github.com/onshape-public/onshape-clients/blob/next/python/test/test_app_element_json_tree.py">here&lt;/a>.&lt;/p></description></item><item><title>Docs: Webhook Notifications</title><link>https://onshape-public.github.io/docs/app-dev/webhook/</link><pubDate>Mon, 18 May 2020 20:44:05 -0400</pubDate><guid>https://onshape-public.github.io/docs/app-dev/webhook/</guid><description>
-&lt;h2 id="summary">Summary&lt;/h2>
-&lt;p>Webhook notifications allow an application to register to receive notifications of certain events that occur within the
-Onshape environment. To receive a notification, an application must expose an endpoint that Onshape can call.&lt;/p>
-&lt;h2 id="example-code">Example Code&lt;/h2>
+&lt;p>All the examples above were tested and validated using the Python client &lt;a href="https://github.com/onshape-public/onshape-clients/blob/next/python/test/test_app_element_json_tree.py">here&lt;/a>.&lt;/p></description></item><item><title>Docs: Webhooks</title><link>https://onshape-public.github.io/docs/app-dev/webhook/</link><pubDate>Mon, 18 May 2020 20:44:05 -0400</pubDate><guid>https://onshape-public.github.io/docs/app-dev/webhook/</guid><description>
+&lt;p>This page describes the Webhook APIs Onshape provides for working with notifications.&lt;/p>
+&lt;p>Notifications are delivered to an application as an HTTP &lt;code>POST&lt;/code> with a JSON body, which includes information about the identity of the registration request and information specific to the event and notification message.&lt;/p>
+&lt;p>Webhooks are an alternative approach to polling; instead of your application continuously asking Onshape for new information, webhooks automatically send a notification from Onshape any time an event you are subscribed to occurs.&lt;/p>
+&lt;p>An application may register for notifications to a URL that uses either HTTP or HTTPS. If HTTPS is specified by the URL template, the notification server must supply a certificate that is signed by a certificate authority (CA) recognized by Onshape. Self-signed certificates (as well as certificates signed by unrecognized CAs) will be rejected, causing notification delivery to fail.&lt;/p>
+&lt;blockquote>
+&lt;p>📘 &lt;strong>Notes&lt;/strong>&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="https://github.com/onshape-public/onshape-clients/blob/master/python/test/test_webhooks.py#L126">Python&lt;/a>&lt;/li>
+&lt;li>This page provides sample code as curls. See the &lt;a href="https://curl.se/docs/">curl documentation&lt;/a> for more information.&lt;/li>
+&lt;li>All Onshape API calls must be properly authenticated by replacing the &lt;code>CREDENTIALS&lt;/code> variable in the curls below. See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys">API Keys&lt;/a> page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart">Quick Start&lt;/a> for an example. All applications submitted to the Onshape App Store &lt;em>must&lt;/em> authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth">OAuth2&lt;/a>.&lt;/li>
+&lt;li>This documentation refers to Onshape IDs in the following format: &lt;code>{did}, {wid}, {eid}, {pid}, {otherId}&lt;/code>. These represent document, workspace, element, part, and other IDs (respectively) that are needed make the API calls. We sometimes abbreviate these variables as &lt;code>DWVEM&lt;/code> Please see &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request">API Guide: API Intro&lt;/a> for information on what these IDs mean and how to obtain them from your documents. Sometimes, this page will use a stand-in string to represent these IDs (&lt;code>000000000000000000000000&lt;/code>). Never include the curly braces (&lt;code>{}&lt;/code>) in your API calls.&lt;/li>
+&lt;li>For Enterprise accounts, replace &lt;strong>&lt;font color="slate">cad&lt;/font>&lt;/strong> in all Onshape URLs with your company domain.
+https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com &amp;gt; https://&lt;font color="slate">&lt;strong>companyName&lt;/strong>&lt;/font>.onshape.com&lt;/li>
 &lt;/ul>
+&lt;/blockquote>
 &lt;h2 id="events">Events&lt;/h2>
-&lt;p>Each type of event that an application may receive notifications for has a unique identifier known as the event type.
-Event types are grouped into Event Groups. Each group shares specification requirements, as described below.&lt;/p>
-&lt;h3 id="event-groups">Event Groups&lt;/h3>
-&lt;p>Event types are categorized into several different groups based on the dominant user resource of the event. The group
-that a given event is part of defines the required parameters needed in the registration process to identify the
-resource or group of resources to watch. For instance, if registering for an event in the &lt;code>document&lt;/code> event group,
-the application must identify either a specific document&amp;rsquo;s id or a specific company&amp;rsquo;s id. If registered for a company,
-the event will be registered for all present and future documents owned by the company.&lt;/p>
-&lt;h4 id="application-group">Application Group&lt;/h4>
+&lt;p>Each type of event that an application may receive notifications for has a unique identifier known as the event type. Event types are grouped into Event Groups. Each group shares specification requirements.&lt;/p>
+&lt;p>Event types are categorized into several different groups based on the dominant user resource of the event. The group that a given event is part of defines the required parameters needed in the registration process to identify the resource or group of resources to watch. For instance, if registering for an event in the &lt;code>document&lt;/code> event group, the application must identify either a specific document&amp;rsquo;s id or a specific company&amp;rsquo;s id. If registered for a company, the event will be registered for all present and future documents owned by the company.&lt;/p>
+&lt;blockquote>
+&lt;p>📘 &lt;strong>Note&lt;/strong>&lt;/p>
+&lt;p>You can see the full list of available events in the Glassworks API Explorer. Expand the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Webhook/createWebhook">createWebhook&lt;/a> endpoint, then click &lt;strong>Callbacks&lt;/strong>.&lt;/p>
+&lt;img src="https://onshape-public.github.io/images/webhooks-callbacks.png" alt="callbacks in the Glassworks Webhook > createWebhook > Callback page" width=80%>
+&lt;/blockquote>
+&lt;h3 id="application-group">Application Group&lt;/h3>
 &lt;p>Monitor changes to applications.&lt;/p>
-&lt;h5 id="registration-requirements">Registration Requirements&lt;/h5>
+&lt;p>&lt;strong>Supported Event Types&lt;/strong>&lt;/p>
 &lt;ul>
-&lt;li>&lt;code>clientId&lt;/code>&lt;/li>
+&lt;li>&lt;code>onshape.user.lifecycle.updateappsettings&lt;/code> - Occurs when user application settings are modified&lt;/li>
 &lt;/ul>
-&lt;h5 id="supported-event-types">Supported Event Types&lt;/h5>
+&lt;p>&lt;strong>Registration Requirements&lt;/strong>&lt;/p>
 &lt;ul>
-&lt;li>&lt;code>onshape.user.lifecycle.updateappsettings&lt;/code> - occurs when user application settings are modified&lt;/li>
+&lt;li>&lt;code>clientId&lt;/code> - Must be specified in the registration body&lt;/li>
+&lt;li>&lt;code>event&lt;/code> - Must be set to &lt;code>onshape.user.lifecycle.updateappsettings&lt;/code>&lt;/li>
+&lt;li>&lt;code>isTransient&lt;/code> - Should be set to &lt;code>true&lt;/code> to automatically clean up any webhooks after a period of inactivity.&lt;/li>
+&lt;li>&lt;code>options.collapseEvents&lt;/code> - Must be set to &lt;code>true&lt;/code> or &lt;code>false&lt;/code>&lt;/li>
+&lt;li>&lt;code>url&lt;/code> - Must be provided to receive the webhook notifications&lt;/li>
 &lt;/ul>
-&lt;h4 id="document-group">Document Group&lt;/h4>
+&lt;pre tabindex="0">&lt;code>{
+&amp;#34;clientId&amp;#34;: &amp;#34;000000000000000000000000&amp;#34;,
+&amp;#34;events&amp;#34;: [
+&amp;#34;onshape.user.lifecycle.updateappsettings&amp;#34;
+],
+&amp;#34;isTransient&amp;#34;: true,
+&amp;#34;options&amp;#34;: {
+&amp;#34;collapseEvents&amp;#34;: false
+},
+&amp;#34;url&amp;#34;: &amp;#34;https://sampleUrl.org&amp;#34;
+}
+&lt;/code>&lt;/pre>&lt;h3 id="document-group">Document Group&lt;/h3>
 &lt;p>Monitor various aspects of document changes.&lt;/p>
-&lt;h5 id="registration-requirements-1">Registration Requirements&lt;/h5>
+&lt;p>&lt;strong>Supported Event Types&lt;/strong>&lt;/p>
 &lt;ul>
-&lt;li>&lt;code>documentId&lt;/code> OR &lt;code>companyId&lt;/code> must be specified in the registration body.&lt;/li>
+&lt;li>&lt;code>onshape.model.lifecycle.changed&lt;/code> - Occurs when a change to a model is made&lt;/li>
+&lt;li>&lt;code>onshape.model.translation.complete&lt;/code> - Occurs when a translation request is complete&lt;/li>
+&lt;li>&lt;code>onshape.model.lifecycle.metadata&lt;/code> - Occurs when Part or element metadata is modified&lt;/li>
+&lt;li>&lt;code>onshape.model.lifecycle.createversion&lt;/code> - Occurs when a new version of a document is created&lt;/li>
+&lt;li>&lt;code>onshape.model.lifecycle.createworkspace&lt;/code> - Occurs when a new workspace is created&lt;/li>
+&lt;li>&lt;code>onshape.model.lifecycle.createelement&lt;/code> - Occurs when a new element is created&lt;/li>
+&lt;li>&lt;code>onshape.model.lifecycle.deleteelement&lt;/code> - Occurs when an element is deleted&lt;/li>
+&lt;li>&lt;code>onshape.document.lifecycle.statechange&lt;/code> - Occurs when a document changes state&lt;/li>
+&lt;li>&lt;code>onshape.model.lifecycle.changed.externalreferences&lt;/code> - Occurs when an external reference changes&lt;/li>
+&lt;li>&lt;code>onshape.document.lifecycle.created&lt;/code> - Occurs when a document is created&lt;/li>
+&lt;li>&lt;code>onshape.revision.created&lt;/code> - Occurs when a revision is created&lt;/li>
+&lt;li>&lt;code>onshape.comment.create&lt;/code> - Occurs when a comment is created in a document&lt;/li>
+&lt;li>&lt;code>onshape.comment.update&lt;/code> - Occurs when a comment is updated in a document&lt;/li>
+&lt;li>&lt;code>onshape.comment.delete&lt;/code> - Occurs when a comment is deleted in a document&lt;/li>
 &lt;/ul>
-&lt;p>&lt;strong>Note&lt;/strong>: only &lt;code>documentId&lt;/code> is valid for the &lt;code>onshape.document.lifecycle.statechange&lt;/code>.&lt;/p>
-&lt;h5 id="supported-event-types-1">Supported Event Types&lt;/h5>
+&lt;p>&lt;strong>Registration Requirements&lt;/strong>&lt;/p>
 &lt;ul>
-&lt;li>&lt;code>onshape.model.lifecycle.changed&lt;/code> - occurs when a change to a model has been made&lt;/li>
-&lt;li>&lt;code>onshape.model.translation.complete&lt;/code> - occurs when a translation request is completed&lt;/li>
-&lt;li>&lt;code>onshape.model.lifecycle.metadata&lt;/code> - occurs when part or element metadata is modified&lt;/li>
-&lt;li>&lt;code>onshape.model.lifecycle.createversion&lt;/code> - occurs when a new version of a document is created&lt;/li>
-&lt;li>&lt;code>onshape.model.lifecycle.createworkspace&lt;/code> - occurs when a new workspace is created&lt;/li>
-&lt;li>&lt;code>onshape.model.lifecycle.createelement&lt;/code> - occurs when a new element is created&lt;/li>
-&lt;li>&lt;code>onshape.model.lifecycle.deleteelement&lt;/code> - occurs when an element is deleted&lt;/li>
-&lt;li>&lt;code>onshape.document.lifecycle.statechange&lt;/code> - occurs when an document changes state&lt;/li>
-&lt;li>&lt;code>onshape.model.lifecycle.changed.externalreferences&lt;/code> - occurs when an external reference changes&lt;/li>
-&lt;li>&lt;code>onshape.document.lifecycle.created&lt;/code> - occurs when a document is created&lt;/li>
-&lt;li>&lt;code>onshape.revision.created&lt;/code> - occurs when a revision is created&lt;/li>
-&lt;li>&lt;code>onshape.comment.create&lt;/code> - occurs when a comment is created in a document&lt;/li>
-&lt;li>&lt;code>onshape.comment.update&lt;/code> - occurs when a comment is updated in a document&lt;/li>
-&lt;li>&lt;code>onshape.comment.delete&lt;/code> - occurs when a deleted is deleted in a document&lt;/li>
+&lt;li>
+&lt;p>&lt;code>documentId&lt;/code> OR &lt;code>companyId&lt;/code> must be specified in the registration body&lt;/p>
+&lt;ul>
+&lt;li>Only &lt;code>documentId&lt;/code> is valid for the &lt;code>onshape.document.lifecycle.statechange&lt;/code>&lt;/li>
 &lt;/ul>
-&lt;h4 id="workflow-group">Workflow Group&lt;/h4>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>event&lt;/code> - Must be set to one of the supported event types listed above&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>isTransient&lt;/code> - Should be set to &lt;code>true&lt;/code> to automatically clean up any webhooks after a period of inactivity&lt;/p>
+&lt;ul>
+&lt;li>May be set to &lt;code>false&lt;/code> if the application is always listening to webhook notifications and &lt;code>companyId&lt;/code> is specified.&lt;/li>
+&lt;li>If &lt;code>false&lt;/code>, unregister the webhook when it is no longer needed.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>options.collapseEvents&lt;/code> - Must be set to &lt;code>true&lt;/code> or &lt;code>false&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>url&lt;/code> - Must be provided to receive the webhook notifications&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>{
+&amp;#34;documentId&amp;#34;: &amp;#34;000000000000000000000000&amp;#34;,
+&amp;#34;events&amp;#34;: [
+&amp;#34;onshape.user.lifecycle.updateappsettings&amp;#34;
+],
+&amp;#34;isTransient&amp;#34;: true,
+&amp;#34;options&amp;#34;: {
+&amp;#34;collapseEvents&amp;#34;: false
+},
+&amp;#34;url&amp;#34;: &amp;#34;https://sampleUrl.org&amp;#34;
+}
+&lt;/code>&lt;/pre>&lt;h3 id="workflow-group">Workflow Group&lt;/h3>
 &lt;p>Monitor release management actions.&lt;/p>
-&lt;h5 id="registration-requirements-2">Registration Requirements&lt;/h5>
+&lt;p>&lt;strong>Supported Event Types&lt;/strong>&lt;/p>
 &lt;ul>
-&lt;li>&lt;code>companyId&lt;/code>&lt;/li>
+&lt;li>&lt;code>onshape.workflow.transition&lt;/code> - Occurs when a revision or release package transitions through workflow states&lt;/li>
 &lt;/ul>
-&lt;h5 id="supported-event-types-2">Supported Event Types&lt;/h5>
+&lt;p>&lt;strong>Registration Requirements&lt;/strong>&lt;/p>
 &lt;ul>
-&lt;li>&lt;code>onshape.workflow.transition&lt;/code> - occurs when a revision or release package transitions through workflow states.&lt;/li>
-&lt;/ul>
-&lt;h4 id="lifecycle-group">Lifecycle Group&lt;/h4>
-&lt;p>Monitor webhook changes.&lt;/p>
-&lt;h5 id="registration-requirements-3">Registration Requirements&lt;/h5>
-&lt;p>No requirements. This event type responds to any and all webhooks registered by the same application.&lt;/p>
-&lt;h5 id="supported-event-types-3">Supported Event Types&lt;/h5>
+&lt;li>&lt;code>companyId&lt;/code> - Must be specified in the registration body&lt;/li>
+&lt;li>&lt;code>event&lt;/code> - Must be set to &lt;code>onshape.workflow.transition&lt;/code>&lt;/li>
+&lt;li>&lt;code>isTransient&lt;/code> - Should be set to &lt;code>true&lt;/code> to automatically clean up any webhooks after a period of inactivity.
 &lt;ul>
-&lt;li>&lt;code>webhook.ping&lt;/code> - occurs either in response to a request by an application to call a registered webhook, or as a post-registration validation initiated by Onshape&lt;/li>
-&lt;li>&lt;code>webhook.register&lt;/code> - occurs in response to a notification registration API call&lt;/li>
-&lt;li>&lt;code>webhook.unregister&lt;/code> - occurs in response to a notification deregistation API call&lt;/li>
+&lt;li>May be set to &lt;code>false&lt;/code> if the application is always listening to webhook notifications.&lt;/li>
+&lt;li>If &lt;code>false&lt;/code>, unregister the webhook when it is no longer needed.&lt;/li>
 &lt;/ul>
-&lt;h2 id="webhook-registration">Webhook Registration&lt;/h2>
-&lt;p>An application registers for event notification by making a REST call to the Onshape web service, providing a URL to
-notify, and the required parameters for the event types to be registered, as mentioned in &lt;a href="#event-groups">Event Groups&lt;/a>.
-If the registration request is well-formed, the registration API call returns information about the registration,
-including a unique ID string. This ID string identifies the webhook registration. No de-duplication of notification
-registrations is performed by the API. Each registration call will yield a new registration ID, even if the parameters
-are identical to those passed in a prior call. Shortly after an application calls the notification registration API,
-Onshape will make make an asynchronous trial notification call to the URL generated from the URL template with an event
-type of webhook.register in order to test whether the application notification server is accessible. If the trial
-notification delivery fails to return an HTTP 200 status code, the notification registration is cancelled. The trial
-notification is usually delivered after the notification registration has been received by the application. However,
-variations in network delays may result in the trial notification occurring before response is received and processed by
-the application, so the notification handler should be ready to process notifications before the registration call is
-made.&lt;/p>
-&lt;h2 id="notifications">Notifications&lt;/h2>
-&lt;p>Notifications are delivered to an application as an HTTP POST with a JSON body. The body includes information about the
-identity of the registration request plus information specific to the event and notification message. An application may
-register for notifications to a URL that uses either HTTP or HTTPS. If HTTPS is specified by the URL template, the
-notification server must supply a certificate that is signed by a certificate authority (CA) recognized by Onshape.&lt;br>
-Self-signed certificates as well as certificates signed by unrecognized CAs will be rejected, causing notification
-delivery to fail.&lt;/p>
-&lt;h2 id="notification-deregistration">Notification Deregistration&lt;/h2>
-&lt;p>When an application no longer needs to be notified of changes specified by a particular notification registration, it should normally de-register the notification request. De-registration is performed by making an HTTP that specifies the hook to deregister. Onshape will attempt to call the deregistered hook with an event type of webhook.unregister as validation for the application that the de-registration is complete. If the application does not de-register the webhook, Onshape will continue delivering notifications until either the the application returns an error in response to a notification for the webhook, or fails to respond at all for an extended period of time.&lt;/p>
-&lt;h2 id="notification-api-example-messages">Notification API example messages&lt;/h2>
-&lt;p>registration&lt;/p>
+&lt;/li>
+&lt;li>&lt;code>options.collapseEvents&lt;/code> - Must be set to &lt;code>true&lt;/code> or &lt;code>false&lt;/code>&lt;/li>
+&lt;li>&lt;code>url&lt;/code> - Must be provided to receive the webhook notifications&lt;/li>
+&lt;/ul>
 &lt;pre tabindex="0">&lt;code>{
-&amp;#34;timestamp&amp;#34;: &amp;#34;2014-12-16T23:45:10.611-0500&amp;#34;,
-&amp;#34;event&amp;#34;: &amp;#34;webhook.register&amp;#34;,
-&amp;#34;workspaceId&amp;#34;: &amp;#34;000000000000000000000000&amp;#34;,
-&amp;#34;elementId&amp;#34;: &amp;#34;000000000000000000000000&amp;#34;,
-&amp;#34;webhookId&amp;#34;: &amp;#34;544e91f7fb88ed44f5de1508&amp;#34;,
-&amp;#34;messageId&amp;#34;: &amp;#34;34795d2e5f5f44eeb61fb7b1&amp;#34;,
-&amp;#34;data&amp;#34;: &amp;#34;Some data&amp;#34;,
+&amp;#34;companyId&amp;#34;: &amp;#34;000000000000000000000000&amp;#34;,
+&amp;#34;events&amp;#34;: [
+&amp;#34;onshape.workflow.transition&amp;#34;
+],
+&amp;#34;isTransient&amp;#34;: true,
+&amp;#34;options&amp;#34;: {
+&amp;#34;collapseEvents&amp;#34;: false
+},
+&amp;#34;url&amp;#34;: &amp;#34;https://sampleUrl.org&amp;#34;
+}
+&lt;/code>&lt;/pre>&lt;h3 id="lifecycle-group">Lifecycle Group&lt;/h3>
+&lt;p>Monitor webhook changes. You do not need to register for these events; they are sent automatically when a webhook for another event type is registered, unregistered, or pinged.&lt;/p>
+&lt;p>&lt;strong>Supported Event Types&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>webhook.register&lt;/code> - Occurs in response to a notification registration API call&lt;/li>
+&lt;li>&lt;code>webhook.unregister&lt;/code> - Occurs in response to a notification deregistation API call&lt;/li>
+&lt;li>&lt;code>webhook.ping&lt;/code> - Occurs either:
+&lt;ul>
+&lt;li>In response to a request by an application to call the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Webhook/pingWebhook">pingWebook&lt;/a> endpoint.&lt;/li>
+&lt;li>As a post-registration validation initiated by Onshape&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="endpoints">Endpoints&lt;/h2>
+&lt;p>Webhook notifications allow an application to register to receive notifications of certain events that occur within the Onshape environment. To receive a notification, an application must expose an endpoint that Onshape can call.&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Webhook/getWebhooks">Webhook/getWebhooks&lt;/a>
+&lt;pre tabindex="0">&lt;code> curl -X &amp;#39;GET&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/webhooks?user={uid}&amp;amp;offset=0&amp;amp;limit=20&amp;#39; \
+-H &amp;#39;aAccept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39;
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Webhook/createWebhook">Webhook/createWebhook&lt;/a>
+&lt;pre tabindex="0">&lt;code> curl -X &amp;#39;POST&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/webhooks&amp;#39; \
+-H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-d &amp;#39;{
+&amp;#34;events&amp;#34;: [
+&amp;#34;eventType&amp;#34; // See the [Events](#events) section above for valid event types.
+],
+&amp;#34;isTransient&amp;#34;: true,
+&amp;#34;options&amp;#34;: {
+&amp;#34;collapseEvents&amp;#34;: true | false
+},
+&amp;#34;url&amp;#34;: &amp;#34;https://sampleUrl.org&amp;#34;
+//Other parameters may be required. See the [Events](#events) section above.
+}&amp;#39;
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Webhook/getWebhook">Webhook/getWebhook&lt;/a>
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;GET&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/webhooks/webhookId&amp;#39; \
+-H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39;
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Webhook/updateWebhook">Webhook/updateWebhook&lt;/a>
+&lt;pre tabindex="0">&lt;code> curl -X &amp;#39;POST&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/webhooks/webhookId&amp;#39; \
+-H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-d &amp;#39;{
+&amp;#34;id&amp;#34;: &amp;#34;webhookId&amp;#34;,
+&amp;#34;options&amp;#34;: {
+&amp;#34;collapseEvents&amp;#34;: true | false
+}
+}&amp;#39;
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Note that the webhook &lt;code>id&lt;/code> must be sent in both the URL and the request body.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Webhook/unregisterWebhook">Webhook/unregisterWebhook&lt;/a>
+&lt;pre tabindex="0">&lt;code> curl -X &amp;#39;DELETE&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/webhooks/{webhookId}?blockNotification=false&amp;#39; \
+-H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39;
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Webhook/pingWebhook">Webhook/pingWebhook&lt;/a>
+&lt;pre tabindex="0">&lt;code> curl -X &amp;#39;POST&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/webhooks/{webhookId}/ping&amp;#39; \
+-H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39;
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;/ul>
+&lt;h2 id="sample-workflows">Sample Workflows&lt;/h2>
+&lt;h3 id="create-a-webhook">Create a webhook&lt;/h3>
+&lt;p>An application registers for event notification by:&lt;/p>
+&lt;ol>
+&lt;li>Making a REST call to the Onshape web service&lt;/li>
+&lt;li>Providing a URL to notify&lt;/li>
+&lt;li>Providing the required parameters for the event types to be registered&lt;/li>
+&lt;/ol>
+&lt;p>If the registration request is well-formed, the registration API call returns information about the registration, including a unique &lt;code>id&lt;/code> string that identifies the webhook registration. This corresponds to the &lt;code>webhookId&lt;/code> field in other endpoints. No de-duplication of notification registrations is performed by the API. Each registration call will yield a new &lt;code>registrationId&lt;/code>, even if the parameters are identical to those passed in a prior call.&lt;/p>
+&lt;p>Shortly after an application calls the notification registration API, Onshape will make make an asynchronous trial notification call to the URL generated from the URL template with an event type of &lt;code>webhook.register&lt;/code> to test if the application notification server is accessible. If the trial notification delivery fails to return an HTTP &lt;code>200&lt;/code> status code, the notification registration is cancelled. The trial notification is usually delivered after the notification registration has been received by the application. However, variations in network delays may result in the trial notification occurring before the response is received and processed by the application, so the notification handler should be ready to process notifications before the registration call is made.&lt;/p>
+&lt;p>In this example, we use a webhook to send information from Onshape to another server. You need a URL for Onshape to send notifications to, and a way to view the messages sent with those notifications.&lt;/p>
+&lt;ol>
+&lt;li>Open an Onshape document, or create a new one.&lt;/li>
+&lt;li>In this example, we want to receive a notification from Onshape any time a new version is created in the specified document. For this, we’ll use &lt;code>onshape.model.lifecycle.createversion&lt;/code> as our &lt;code>event&lt;/code>.&lt;/li>
+&lt;li>The event type requires one parameter. We’ll use our &lt;code>documentId&lt;/code> for this field (shown as &lt;code>000000000000000000000000&lt;/code> in the example below).&lt;/li>
+&lt;li>All events should specify &lt;code>isTransient=true&lt;/code>. This will automatically clean up any webhooks after a period of inactivity.&lt;/li>
+&lt;li>All event types require specifying &lt;code>true&lt;/code> or &lt;code>false&lt;/code> for the &lt;code>options.collapseEvents&lt;/code> field. In this case, set the field to &lt;code>false&lt;/code>.&lt;/li>
+&lt;li>Next, we need the URL to send the notification to. You must provide your own URL to receive notifications here.&lt;/li>
+&lt;li>Confirm your &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Webhook/createWebhook">createWebhook&lt;/a> call looks like this (substitute your own authorization credentials, document ID, and URL), then make the call.&lt;/li>
+&lt;/ol>
+&lt;pre tabindex="0">&lt;code> curl -X &amp;#39;POST&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/webhooks&amp;#39; \
+-H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-d &amp;#39;{
 &amp;#34;documentId&amp;#34;: &amp;#34;000000000000000000000000&amp;#34;,
-&amp;#34;versionId&amp;#34;: &amp;#34;000000000000000000000000&amp;#34;
+&amp;#34;events&amp;#34;: [
+&amp;#34;onshape.model.lifecycle.createversion&amp;#34;
+],
+&amp;#34;isTransient&amp;#34;: true,
+&amp;#34;options&amp;#34;: {
+&amp;#34;collapseEvents&amp;#34;: false
+},
+&amp;#34;url&amp;#34;: &amp;#34;https://sampleUrl.org&amp;#34;
+}&amp;#39;
+&lt;/code>&lt;/pre>&lt;ol start="8">
+&lt;li>In your application, confirm that you received the &lt;code>webhook.register&lt;/code> event from Onshape.&lt;/li>
+&lt;li>In Onshape, create a new version in your document.&lt;/li>
+&lt;li>In your application, confirm that you received the &lt;code>onshape.model.lifecycle.createversion&lt;/code> event from Onshape. Make note of the &lt;code>id&lt;/code> in the response; use this as your &lt;code>webhookId&lt;/code> in subsequent examples.&lt;/li>
+&lt;/ol>
+&lt;h3 id="get-webhook-info">Get webhook info&lt;/h3>
+&lt;ol>
+&lt;li>Complete the &lt;a href="#create-a-webhook">Create a webhook&lt;/a> steps above to obtain a &lt;code>webhookId&lt;/code>.&lt;/li>
+&lt;li>Create your &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Webhook/getWebhook">getWebhook&lt;/a> call. substitute your own authorization credentials and &lt;code>webhookId&lt;/code> (shown as &lt;code>000000000000000000000000&lt;/code> in the example below), then make the call.&lt;/li>
+&lt;/ol>
+&lt;pre tabindex="0">&lt;code> curl -X &amp;#39;GET&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/webhooks/000000000000000000000000&amp;#39; \
+-H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+&lt;/code>&lt;/pre>&lt;ol start="3">
+&lt;li>Confirm that the &lt;code>event&lt;/code> in the response is &lt;code>onshape.model.lifecycle.createversion&lt;/code>.&lt;/li>
+&lt;/ol>
+&lt;h3 id="update-a-webhook">Update a webhook&lt;/h3>
+&lt;ol>
+&lt;li>Complete the &lt;a href="#create-a-webhook">Create a webhook&lt;/a> steps above to obtain a &lt;code>webhookId&lt;/code>. Note that in the same response, the webhook &lt;code>description&lt;/code> is &lt;code>null&lt;/code>.&lt;/li>
+&lt;li>Create your &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Webhook/updateWebhook">updateWebhook&lt;/a> call. In this example, ww update the webhook&amp;rsquo;s &lt;code>description&lt;/code>. Substitute your own authorization credentials and &lt;code>webhookId&lt;/code> (shown as &lt;code>000000000000000000000000&lt;/code> in the example below in both the URL and request body). Then make the call.&lt;/li>
+&lt;/ol>
+&lt;pre tabindex="0">&lt;code> curl -X &amp;#39;POST&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/webhooks/000000000000000000000000&amp;#39; \
+-H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-d &amp;#39;{
+&amp;#34;id&amp;#34;: &amp;#34;000000000000000000000000&amp;#34;,
+&amp;#34;description&amp;#34;: &amp;#34;Send a notification each time a document version is created.&amp;#34;,
+&amp;#34;options&amp;#34;: {
+&amp;#34;collapseEvents&amp;#34;: false
 }
-&lt;/code>&lt;/pre>&lt;p>ping&lt;/p>
-&lt;pre tabindex="0">&lt;code>{
-&amp;#34;timestamp&amp;#34;: &amp;#34;2014-12-16T23:46:24.368-0500&amp;#34;,
-&amp;#34;event&amp;#34;: &amp;#34;webhook.ping&amp;#34;,
-&amp;#34;workspaceId&amp;#34;: &amp;#34;000000000000000000000000&amp;#34;,
-&amp;#34;elementId&amp;#34;: &amp;#34;000000000000000000000000&amp;#34;,
-&amp;#34;webhookId&amp;#34;: &amp;#34;544e91f7fb88ed44f5de1508&amp;#34;,
-&amp;#34;messageId&amp;#34;: &amp;#34;6808d9a622644330b6cd95f5&amp;#34;,
-&amp;#34;data&amp;#34;: &amp;#34;Some data&amp;#34;,
-&amp;#34;documentId&amp;#34;: &amp;#34;000000000000000000000000&amp;#34;,
-&amp;#34;versionId&amp;#34;: &amp;#34;000000000000000000000000&amp;#34;
-}
-&lt;/code>&lt;/pre>&lt;p>model change&lt;/p>
-&lt;pre tabindex="0">&lt;code>{
-&amp;#34;timestamp&amp;#34;: &amp;#34;2014-12-16T23:46:29.284-0500&amp;#34;,
-&amp;#34;event&amp;#34;: &amp;#34;onshape.model.lifecycle.changed&amp;#34;,
-&amp;#34;workspaceId&amp;#34;: &amp;#34;f925722bee1c43fc80fb5bb2&amp;#34;,
-&amp;#34;elementId&amp;#34;: &amp;#34;0f931a1ceba842299192823f&amp;#34;,
-&amp;#34;webhookId&amp;#34;: &amp;#34;544e91f7fb88ed44f5de1508&amp;#34;,
-&amp;#34;messageId&amp;#34;: &amp;#34;60f54ac1cbc04179a6642d9a&amp;#34;,
-&amp;#34;data&amp;#34;: &amp;#34;Some data&amp;#34;,
-&amp;#34;documentId&amp;#34;: &amp;#34;0f9c4392e5934f30b48ab645&amp;#34;,
-&amp;#34;versionId&amp;#34;: &amp;#34;000000000000000000000000&amp;#34;
-}
-&lt;/code>&lt;/pre>&lt;p>document state change&lt;/p>
-&lt;pre tabindex="0">&lt;code>{
-&amp;#34;timestamp&amp;#34;: &amp;#34;2014-12-16T23:46:29.284-0500&amp;#34;,
-&amp;#34;event&amp;#34;: &amp;#34;onshape.document.lifecycle.statechange&amp;#34;,
-&amp;#34;workspaceId&amp;#34;: &amp;#34;000000000000000000000000&amp;#34;,
-&amp;#34;elementId&amp;#34;: &amp;#34;000000000000000000000000&amp;#34;,
-&amp;#34;webhookId&amp;#34;: &amp;#34;544e91f7fb88ed44f5de1508&amp;#34;,
-&amp;#34;messageId&amp;#34;: &amp;#34;60f54ac1cbc04179a6642d9a&amp;#34;,
-&amp;#34;data&amp;#34;: &amp;#34;Some data&amp;#34;,
-&amp;#34;documentId&amp;#34;: &amp;#34;0f9c4392e5934f30b48ab645&amp;#34;,
-&amp;#34;versionId&amp;#34;: &amp;#34;000000000000000000000000&amp;#34;,
-&amp;#34;documentState&amp;#34;: &amp;#34;TRASH&amp;#34;
-}
-&lt;/code>&lt;/pre>&lt;p>Possible values of documentState are:&lt;/p>
+}&amp;#39;
+&lt;/code>&lt;/pre>&lt;ol start="3">
+&lt;li>Confirm in the response that the webhook &lt;code>description&lt;/code> is set to &lt;code>Send a notification each time a document version is created.&lt;/code>&lt;/li>
+&lt;/ol>
+&lt;h3 id="delete-a-webhook">Delete a webhook&lt;/h3>
+&lt;p>When an application no longer needs to be notified of changes specified by a particular notification registration, it should normally deregister the notification request. Deregistration is performed by making an HTTP that specifies the hook to deregister. Onshape will attempt to call the deregistered hook with an event type of &lt;code>webhook.unregister&lt;/code> as validation that the deregistration is complete. If the application does not deregister the webhook, Onshape will continue delivering notifications until the the application either returns an error in response to a notification for the webhook or fails to respond at all for an extended period of time.&lt;/p>
+&lt;ol>
+&lt;li>Complete the &lt;a href="#create-a-webhook">Create a webhook&lt;/a> steps above to obtain a &lt;code>webhookId&lt;/code>.&lt;/li>
+&lt;li>Create your &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Webhook/deleteWebhook">deleteWebhook&lt;/a> call. substitute your own authorization credentials and &lt;code>webhookId&lt;/code> (shown as &lt;code>000000000000000000000000&lt;/code> in the example below), then make the call.&lt;/li>
+&lt;/ol>
+&lt;pre tabindex="0">&lt;code> curl -X &amp;#39;DELETE&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v6/webhooks/000000000000000000000000&amp;#39; \
+-H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS=&amp;#39; \
+&lt;/code>&lt;/pre>&lt;ol start="3">
+&lt;li>In your application, confirm that you received the &lt;code>webhook.unregister&lt;/code> event from Onshape.&lt;/li>
+&lt;li>In Onshape, create a new version in your document.&lt;/li>
+&lt;li>In your application, confirm that no new events have been received.&lt;/li>
+&lt;/ol>
+&lt;h2 id="additional-resources">Additional Resources&lt;/h2>
 &lt;ul>
-&lt;li>&amp;ldquo;ACTIVE&amp;rdquo; - document is in a normal, usable state&lt;/li>
-&lt;li>&amp;ldquo;TRASH&amp;rdquo; - document has been moved to the trash (User can move out of trash to ACTIVE state)&lt;/li>
-&lt;li>&amp;ldquo;DELETED&amp;rdquo; - document has been deleted&lt;/li>
-&lt;/ul>
-&lt;p>user application settings change&lt;/p>
-&lt;pre tabindex="0">&lt;code>{
-&amp;#34;timestamp&amp;#34;: &amp;#34;2014-12-16T23:46:29.284-0500&amp;#34;,
-&amp;#34;event&amp;#34;: &amp;#34;onshape.user.lifecycle.updateappsettings&amp;#34;,
-&amp;#34;workspaceId&amp;#34;: &amp;#34;f925722bee1c43fc80fb5bb2&amp;#34;,
-&amp;#34;elementId&amp;#34;: &amp;#34;0f931a1ceba842299192823f&amp;#34;,
-&amp;#34;webhookId&amp;#34;: &amp;#34;544e91f7fb88ed44f5de1508&amp;#34;,
-&amp;#34;messageId&amp;#34;: &amp;#34;60f54ac1cbc04179a6642d9a&amp;#34;,
-&amp;#34;data&amp;#34;: &amp;#34;Some data&amp;#34;,
-&amp;#34;userId&amp;#34;: &amp;#34;567953d60a1a5fbb95940333&amp;#34;,
-&amp;#34;clientId&amp;#34;:&amp;#34;ABCDEFGHIJKLMNOPQRSTUVWXZY234567ABCDEFG=&amp;#34;
-}
-&lt;/code>&lt;/pre>&lt;p>translation completion&lt;/p>
-&lt;pre tabindex="0">&lt;code>{
-&amp;#34;timestamp&amp;#34;: &amp;#34;2014-12-16T23:46:29.284-0500&amp;#34;,
-&amp;#34;event&amp;#34;: &amp;#34;onshape.model.translation.complete&amp;#34;,
-&amp;#34;workspaceId&amp;#34;: &amp;#34;f925722bee1c43fc80fb5bb2&amp;#34;,
-&amp;#34;elementId&amp;#34;: &amp;#34;0f931a1ceba842299192823f&amp;#34;,
-&amp;#34;webhookId&amp;#34;: &amp;#34;544e91f7fb88ed44f5de1508&amp;#34;,
-&amp;#34;messageId&amp;#34;: &amp;#34;60f54ac1cbc04179a6642d9a&amp;#34;,
-&amp;#34;data&amp;#34;: &amp;#34;Some data&amp;#34;,
-&amp;#34;documentId&amp;#34;: &amp;#34;0f9c4392e5934f30b48ab645&amp;#34;,
-&amp;#34;userId&amp;#34;: &amp;#34;567953d60a1a5fbb95940333&amp;#34;,
-&amp;#34;translationId&amp;#34;: &amp;#34;4f5de10f9c4392e5934f30b4&amp;#34;
-}
-&lt;/code>&lt;/pre>&lt;p>comment create&lt;/p>
-&lt;pre tabindex="0">&lt;code>{
-&amp;#34;timestamp&amp;#34;: &amp;#34;2014-12-16T23:46:29.284-0500&amp;#34;,
-&amp;#34;event&amp;#34;: &amp;#34;onshape.comment.create&amp;#34;,
-&amp;#34;workspaceId&amp;#34;: &amp;#34;f925722bee1c43fc80fb5bb2&amp;#34;,
-&amp;#34;elementId&amp;#34;: &amp;#34;0f931a1ceba842299192823f&amp;#34;,
-&amp;#34;webhookId&amp;#34;: &amp;#34;544e91f7fb88ed44f5de1508&amp;#34;,
-&amp;#34;messageId&amp;#34;: &amp;#34;60f54ac1cbc04179a6642d9a&amp;#34;,
-&amp;#34;documentId&amp;#34;: &amp;#34;0f9c4392e5934f30b48ab645&amp;#34;,
-&amp;#34;commentId&amp;#34;: &amp;#34;567953d60a1a5fbb95940333&amp;#34;
-}
-&lt;/code>&lt;/pre></description></item></channel></rss>
+&lt;li>&lt;a href="https://cad.onshape.com/help/Content/Plans/webhooks.htm">Onshape Help: Webhooks&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://onshape-public.github.io/docs/api-intro/explorer">API Guide: API Explorer&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://cad.onshape.com/help/Content/Plans/webhooks.htm">API Explorer: Webhooks&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/onshape-public/onshape-clients/blob/master/python/test/test_webhooks.py#L126">Sample Code: Python Webhooks&lt;/a>&lt;/li>
+&lt;/ul></description></item></channel></rss>
