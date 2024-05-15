@@ -1091,7 +1091,99 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &lt;/ul>
 &lt;/li>
 &lt;/ul>
-&lt;h2 id="endpoints">Endpoints&lt;/h2>
+&lt;h2 id="example-notifications">Example Notifications&lt;/h2>
+&lt;p>&lt;strong>webhook.register&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;timestamp&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;2024-05-05T23:45:10.611-0500&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;event&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;webhook.register&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;workspaceId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;elementId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;webhookId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;messageId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;data&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;Some data&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;documentId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;versionId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>webhook.ping&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;timestamp&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;2024-05-05T23:45:10.611-0500&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;event&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;webhook.ping&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;workspaceId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;elementId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;webhookId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;messageId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;data&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;Some data&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;documentId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;versionId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>onshape.model.lifecycle.changed&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;timestamp&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;2024-05-05T23:46:29.284-0500&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;event&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;onshape.model.lifecycle.changed&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;workspaceId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;elementId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;webhookId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;messageId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;data&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;Some data&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;documentId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;versionId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>onshape.document.lifecycle.statechange&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;timestamp&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;2024-05-05T23:46:29.284-0500&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;event&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;onshape.document.lifecycle.statechange&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;workspaceId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;elementId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;webhookId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;messageId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;data&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;Some data&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;documentId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;versionId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;documentState&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;TRASH&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Possible values of &lt;code>documentState&lt;/code> are:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>ACTIVE&lt;/code> - Document is in a normal, usable state.&lt;/li>
+&lt;li>&lt;code>TRASH&lt;/code> - Document has been moved to the trash; user can move document back to &lt;code>ACTIVE&lt;/code> state.&lt;/li>
+&lt;li>&lt;code>DELETED&lt;/code> - Document has been deleted; user cannot access document.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>onshape.user.lifecycle.updateappsettings&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;timestamp&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;2024-05-05T23:46:29.284-0500&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;event&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;onshape.user.lifecycle.updateappsettings&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;workspaceId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;elementId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;webhookId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;messageId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;data&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;Some data&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;userId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;clientId&amp;#34;&lt;/span>:&lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>onshape.model.translation.complete&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;timestamp&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;2024-05-05T23:46:29.284-0500&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;event&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;onshape.model.translation.complete&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;workspaceId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;elementId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;webhookId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;messageId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;data&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;Some data&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;documentId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;userId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;translationId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>onshape.comment.create&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;timestamp&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;2024-05-05T23:46:29.284-0500&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;event&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;onshape.comment.create&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;workspaceId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;elementId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;webhookId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;messageId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;documentId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#1e90ff;font-weight:bold">&amp;#34;commentId&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;000000000000000000000000&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="endpoints">Endpoints&lt;/h2>
 &lt;p>Webhook notifications allow an application to register to receive notifications of certain events that occur within the Onshape environment. To receive a notification, an application must expose an endpoint that Onshape can call.&lt;/p>
 &lt;ul>
 &lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Webhook/getWebhooks">Webhook/getWebhooks&lt;/a>
