@@ -852,6 +852,7 @@ installed desktop applications: &lt;code>http://localhost:&amp;lt;port&amp;gt;&l
 &lt;li>e.g., &lt;code>https://app-gltf-viewer-yourname-c11f263794bc.herokuapp.com/oauthSignin&lt;/code>&lt;/li>
 &lt;/ul>
 &lt;/li>
+&lt;li>Settings: check &lt;strong>Supports collaboration&lt;/strong>&lt;/li>
 &lt;li>Permissions:
 &lt;ul>
 &lt;li>This is also called application scope, and it defines what access rights your application has to the user’s data.&lt;/li>
@@ -873,6 +874,7 @@ predefined rights. If this option is checked, the application can automatically 
 &lt;li>This secret is unique to you and your app and should be protected like any sensitive password. For example, it should &lt;em>NOT&lt;/em> be checked in to source code control systems.&lt;/li>
 &lt;/ul>
 &lt;/li>
+&lt;li>Click &lt;strong>Close&lt;/strong>.&lt;/li>
 &lt;li>Copy the &lt;strong>OAuth client identifier&lt;/strong> from the app Details page that opens.
 &lt;ul>
 &lt;li>These OAuth secret and client ID keys will be used in your code for requesting a one-time user authorization code from Onshape.&lt;/li>
@@ -881,7 +883,7 @@ predefined rights. If this option is checked, the application can automatically 
 &lt;/ol>
 &lt;p>Your application is now registered with Onshape and you have options to
 modify the application definition through this portal.&lt;/p>
-&lt;img src="https://onshape-public.github.io/images/devportalappdetails.png" alt="the gltf-viewer app in the onshape dev portal app details screen" />
+&lt;img src="https://onshape-public.github.io/images/dev-portal-app-details-01.png" alt="the gltf-viewer app in the onshape dev portal app details screen" />
 &lt;h3 id="2-get-the-user-authorization-code">2: Get the user authorization code&lt;/h3>
 &lt;p>We’ll start by loading the basic libraries required to run this sample. We&amp;rsquo;ll use Passport to authenticate requests through plugins known as strategies. In this example, we&amp;rsquo;ll use an Onshape-developed plugin called &lt;code>passport-onshape&lt;/code>, but you can define your own strategy to use with Passport, if you prefer. You can find more information on &lt;a href="https://www.npmjs.com/package/passport">Passport here&lt;/a>.&lt;/p>
 &lt;ol>
@@ -6452,11 +6454,11 @@ development portal at &lt;a href="https://dev-portal.onshape.com/oauthApps">http
 we initially defined our OAuth Application.&lt;/p>
 &lt;p>Select the OAuth Application that you previously defined and click on
 the Extensions tab.&lt;/p>
-&lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage45.png" style="width:6.5in;height:3.37917in"
+&lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage91.png" style="width:6.5in;height:3.37917in"
 alt="Graphical user interface, text, application, Teams Description automatically generated" />&lt;/p>
 &lt;p>&lt;span id="_Toc102977900" class="anchor">&lt;/span>Figure 29 - Oauth
 Applications - Extensions&lt;/p>
-&lt;p>Start by clicking the “Add Extensions button.&lt;/p>
+&lt;p>Start by clicking the Add Extension button.&lt;/p>
 &lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage6.png"
 style="width:0.47222in;height:0.47222in" />Note that you can create as
 many extensions as you need for your application within the Onshape UI.&lt;/p>

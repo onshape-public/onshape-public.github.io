@@ -322,11 +322,11 @@ development portal at &lt;a href="https://dev-portal.onshape.com/oauthApps">http
 we initially defined our OAuth Application.&lt;/p>
 &lt;p>Select the OAuth Application that you previously defined and click on
 the Extensions tab.&lt;/p>
-&lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage45.png" style="width:6.5in;height:3.37917in"
+&lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage91.png" style="width:6.5in;height:3.37917in"
 alt="Graphical user interface, text, application, Teams Description automatically generated" />&lt;/p>
 &lt;p>&lt;span id="_Toc102977900" class="anchor">&lt;/span>Figure 29 - Oauth
 Applications - Extensions&lt;/p>
-&lt;p>Start by clicking the “Add Extensions button.&lt;/p>
+&lt;p>Start by clicking the Add Extension button.&lt;/p>
 &lt;p>&lt;img src="https://onshape-public.github.io/images/integrationguideimage6.png"
 style="width:0.47222in;height:0.47222in" />Note that you can create as
 many extensions as you need for your application within the Onshape UI.&lt;/p>
