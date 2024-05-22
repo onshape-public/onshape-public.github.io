@@ -732,39 +732,39 @@ viewportWidth: number, width of the viewport
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0aa">window&lt;/span>.parent.postMessage(initMessage, &lt;span style="color:#a50">&amp;#39;*&amp;#39;&lt;/span>);
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="right-panel-interaction-sequence">Right panel interaction sequence&lt;/h3>
 &lt;p>The sequence diagram below illustrates the interaction between an Element right panel application extension and the Onshape client:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-js" data-lang="js">&lt;span style="display:flex;">&lt;span>%%{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> init: {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a50">&amp;#34;theme&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;default&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a50">&amp;#34;sequence&amp;#34;&lt;/span>: {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a50">&amp;#34;mirrorActors&amp;#34;&lt;/span>: &lt;span style="color:#00a">false&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a50">&amp;#34;showSequenceNumbers&amp;#34;&lt;/span>: &lt;span style="color:#00a">false&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a50">&amp;#34;width&amp;#34;&lt;/span>: &lt;span style="color:#099">75&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a50">&amp;#34;height&amp;#34;&lt;/span>: &lt;span style="color:#099">60&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a50">&amp;#34;actorMargin&amp;#34;&lt;/span>: &lt;span style="color:#099">25&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a50">&amp;#34;messageFontSize&amp;#34;&lt;/span>: &lt;span style="color:#099">13&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a50">&amp;#34;messageFontFamily&amp;#34;&lt;/span>: &lt;span style="color:#a50">&amp;#34;monospace&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a50">&amp;#34;messageFontWeight&amp;#34;&lt;/span>: &lt;span style="color:#099">2&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}%%
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sequenceDiagram
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> actor user
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> participant OSC AS Onshape Client
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> participant AE AS Application Extension
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> user-&amp;gt;&amp;gt;+OSC: start element right panel extension
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Note right &lt;span style="color:#00a">of&lt;/span> user: via configured button
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> OSC-&amp;gt;&amp;gt;+AE: invoke action url (&lt;span style="color:#00a">with&lt;/span> query params)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> AE-&amp;gt;&amp;gt;OSC: postMessage(messageName: &lt;span style="color:#a50">&amp;#39;applicationInit&amp;#39;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> loop selection interactions
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> user-&amp;gt;&amp;gt;OSC: select
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> OSC-&amp;gt;&amp;gt;AE: postMessage(messageName: &lt;span style="color:#a50">&amp;#39;SELECTION&amp;#39;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> end
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> user-&amp;gt;&amp;gt;OSC: stop element right panel extension
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Note right &lt;span style="color:#00a">of&lt;/span> user: via configured button
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> deactivate AE
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> OSC-XAE: destroy
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> deactivate OSC
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="right-panel-message-exchange">Right panel message exchange&lt;/h3>
+&lt;pre tabindex="0">&lt;code class="language-mermaid" data-lang="mermaid">%%{
+init: {
+&amp;#34;theme&amp;#34;: &amp;#34;default&amp;#34;,
+&amp;#34;sequence&amp;#34;: {
+&amp;#34;mirrorActors&amp;#34;: false,
+&amp;#34;showSequenceNumbers&amp;#34;: false,
+&amp;#34;width&amp;#34;: 75,
+&amp;#34;height&amp;#34;: 60,
+&amp;#34;actorMargin&amp;#34;: 25,
+&amp;#34;messageFontSize&amp;#34;: 13,
+&amp;#34;messageFontFamily&amp;#34;: &amp;#34;monospace&amp;#34;,
+&amp;#34;messageFontWeight&amp;#34;: 2
+}
+}
+}%%
+sequenceDiagram
+actor user
+participant OSC AS Onshape Client
+participant AE AS Application Extension
+user-&amp;gt;&amp;gt;+OSC: start element right panel extension
+Note right of user: via configured button
+OSC-&amp;gt;&amp;gt;+AE: invoke action url (with query params)
+AE-&amp;gt;&amp;gt;OSC: postMessage(messageName: &amp;#39;applicationInit&amp;#39;)
+loop selection interactions
+user-&amp;gt;&amp;gt;OSC: select
+OSC-&amp;gt;&amp;gt;AE: postMessage(messageName: &amp;#39;SELECTION&amp;#39;)
+end
+user-&amp;gt;&amp;gt;OSC: stop element right panel extension
+Note right of user: via configured button
+deactivate AE
+OSC-XAE: destroy
+deactivate OSC
+&lt;/code>&lt;/pre>&lt;h3 id="right-panel-message-exchange">Right panel message exchange&lt;/h3>
 &lt;p>The following messages are exchanged for application extensions located in the element right panel and configured for Part Studio, Assembly, or Document contexts.&lt;/p>
 &lt;p>The first message with &lt;code>messageName&lt;/code> attribute set to &lt;code>applicationInit&lt;/code> is sent to the Onshape client by an application extension once it is loaded and ready to receive and process incoming messages:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-js" data-lang="js">&lt;span style="display:flex;">&lt;span> {
