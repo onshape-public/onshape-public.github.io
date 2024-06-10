@@ -2398,6 +2398,75 @@ Check out the &lt;a href="#sample-workflows">Sample Workflows&lt;/a> section bel
 &lt;/code>&lt;/pre>&lt;/li>
 &lt;li>Open your drawing and confirm that you see the new inspection symbol.&lt;/li>
 &lt;/ol>
+&lt;h3 id="add-a-table-to-a-drawing">Add a table to a drawing&lt;/h3>
+&lt;ol>
+&lt;li>Open an existing (or create a new) Onshape document with a drawing.&lt;/li>
+&lt;li>Start to form the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Drawing/modifyDrawing">Drawings/modifyDrawing&lt;/a> call. Replace the URL parameters with the values from your document, and replace &lt;code>CREDENTIALS&lt;/code> with your authorization credentials.
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST \
+&amp;#39;https://cad.onshape.doc/api/v6/drawings/d/{did}/w/{wid}/e/{eid}/modify&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \s
+-H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>Add information about the modification. In this example, we&amp;rsquo;ll add an &lt;code>Onshape::Table::GeneralTable&lt;/code> to the drawing. We must specify the &lt;code>messageName&lt;/code> and &lt;code>formatVersion&lt;/code> for the modification, and then provide the location, number of rows, and number of columns for the table. (Hint: you can &lt;a href="https://onshape-public.github.io/docs/api-adv/translation/#export-a-drawing-as-a-json">Export a Drawing to JSON&lt;/a> to get a list of valid coordinates.)
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST \
+&amp;#39;https://cad.onshape.doc/api/v6/drawings/d/{did}/w/{wid}/e/{eid}/modify&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+-H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-d &amp;#39;{
+&amp;#34;description&amp;#34;: &amp;#34;New table&amp;#34;,
+&amp;#34;jsonRequests&amp;#34;: [ {
+&amp;#34;formatVersion&amp;#34;: &amp;#34;2021-01-01&amp;#34;,
+&amp;#34;messageName&amp;#34;: &amp;#34;onshapeCreateAnnotations&amp;#34;,
+&amp;#34;annotations&amp;#34;: [
+{ &amp;#34;table&amp;#34;: {
+&amp;#34;cells&amp;#34;: [
+{
+&amp;#34;column&amp;#34;: 0,
+&amp;#34;content&amp;#34;: &amp;#34;1.1&amp;#34;,
+&amp;#34;row&amp;#34;: 0
+},
+{
+&amp;#34;column&amp;#34;: 0,
+&amp;#34;content&amp;#34;: &amp;#34;2.1&amp;#34;,
+&amp;#34;row&amp;#34;: 1
+},
+{
+&amp;#34;column&amp;#34;: 1,
+&amp;#34;content&amp;#34;: &amp;#34;1.2&amp;#34;,
+&amp;#34;row&amp;#34;: 0
+},
+{
+&amp;#34;column&amp;#34;: 1,
+&amp;#34;content&amp;#34;: &amp;#34;2.2&amp;#34;,
+&amp;#34;row&amp;#34;: 1
+}
+],
+&amp;#34;columns&amp;#34;: 2,
+&amp;#34;rows&amp;#34;: 2,
+&amp;#34;showHeaderRow&amp;#34;: false,
+&amp;#34;showTitleRow&amp;#34;: false,
+&amp;#34;position&amp;#34;: {
+&amp;#34;coordinate&amp;#34;: [100.0, 400.0, 0.0],
+&amp;#34;type&amp;#34;: &amp;#34;Onshape::Reference::Point&amp;#34;
+}
+},
+&amp;#34;type&amp;#34;: &amp;#34;Onshape::Table::GeneralTable&amp;#34;
+}]
+}]
+}&amp;#39;
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>Make the call, and then get &lt;code>id&lt;/code> from the response body. You&amp;rsquo;ll need this to poll the modification status to figure out when the modification has completed.&lt;/li>
+&lt;li>Set up the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Drawing/getModificationStatus">Drawings/getModificationStatus&lt;/a> call. Replace &lt;code>{mrid}&lt;/code> with the &lt;code>id&lt;/code> from the last step, and replace &lt;code>CREDENTIALS&lt;/code> with your credentials. Poll the modification status until the response returns &lt;code>&amp;quot;requestState&amp;quot;: &amp;quot;DONE&amp;quot;&lt;/code>.
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;GET \
+&amp;#39;https://cad.onshape.doc/api/v6/drawings/modify/status/{mrid}&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+-H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>Open your drawing and confirm that you see the new table.&lt;/li>
+&lt;/ol>
 &lt;h2 id="additional-resources">Additional Resources&lt;/h2>
 &lt;ul>
 &lt;li>&lt;a href="https://onshape-public.github.io/docs/api-intro//#onshape-api-request">Guide to Onshape APIs&lt;/a>&lt;/li>
