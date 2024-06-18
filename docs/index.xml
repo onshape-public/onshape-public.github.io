@@ -5536,7 +5536,6 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &lt;ul>
 &lt;li>&lt;code>clientId&lt;/code> - Must be specified in the registration body&lt;/li>
 &lt;li>&lt;code>event&lt;/code> - Must be set to &lt;code>onshape.user.lifecycle.updateappsettings&lt;/code>&lt;/li>
-&lt;li>&lt;code>isTransient&lt;/code> - Should be set to &lt;code>true&lt;/code> to automatically clean up any webhooks after a period of inactivity.&lt;/li>
 &lt;li>&lt;code>options.collapseEvents&lt;/code> - Must be set to &lt;code>true&lt;/code> or &lt;code>false&lt;/code>&lt;/li>
 &lt;li>&lt;code>url&lt;/code> - Must be provided to receive the webhook notifications&lt;/li>
 &lt;/ul>
@@ -5545,7 +5544,6 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &amp;#34;events&amp;#34;: [
 &amp;#34;onshape.user.lifecycle.updateappsettings&amp;#34;
 ],
-&amp;#34;isTransient&amp;#34;: true,
 &amp;#34;options&amp;#34;: {
 &amp;#34;collapseEvents&amp;#34;: false
 },
@@ -5580,9 +5578,6 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &lt;/li>
 &lt;li>
 &lt;p>&lt;code>event&lt;/code> - Must be set to one of the supported event types listed above&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;code>isTransient&lt;/code> - Should be set to &lt;code>true&lt;/code> to automatically clean up any webhooks after a period of inactivity&lt;/p>
 &lt;ul>
 &lt;li>May be set to &lt;code>false&lt;/code> if the application is always listening to webhook notifications and &lt;code>companyId&lt;/code> is specified.&lt;/li>
 &lt;li>If &lt;code>false&lt;/code>, unregister the webhook when it is no longer needed.&lt;/li>
@@ -5600,7 +5595,6 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &amp;#34;events&amp;#34;: [
 &amp;#34;onshape.user.lifecycle.updateappsettings&amp;#34;
 ],
-&amp;#34;isTransient&amp;#34;: true,
 &amp;#34;options&amp;#34;: {
 &amp;#34;collapseEvents&amp;#34;: false
 },
@@ -5615,8 +5609,7 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &lt;p>&lt;strong>Registration Requirements&lt;/strong>&lt;/p>
 &lt;ul>
 &lt;li>&lt;code>companyId&lt;/code> - Must be specified in the registration body&lt;/li>
-&lt;li>&lt;code>event&lt;/code> - Must be set to &lt;code>onshape.workflow.transition&lt;/code>&lt;/li>
-&lt;li>&lt;code>isTransient&lt;/code> - Should be set to &lt;code>true&lt;/code> to automatically clean up any webhooks after a period of inactivity.
+&lt;li>&lt;code>event&lt;/code> - Must be set to &lt;code>onshape.workflow.transition&lt;/code>
 &lt;ul>
 &lt;li>May be set to &lt;code>false&lt;/code> if the application is always listening to webhook notifications.&lt;/li>
 &lt;li>If &lt;code>false&lt;/code>, unregister the webhook when it is no longer needed.&lt;/li>
@@ -5630,7 +5623,6 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &amp;#34;events&amp;#34;: [
 &amp;#34;onshape.workflow.transition&amp;#34;
 ],
-&amp;#34;isTransient&amp;#34;: true,
 &amp;#34;options&amp;#34;: {
 &amp;#34;collapseEvents&amp;#34;: false
 },
@@ -5760,7 +5752,6 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &amp;#34;events&amp;#34;: [
 &amp;#34;eventType&amp;#34; // See the [Events](#events) section above for valid event types.
 ],
-&amp;#34;isTransient&amp;#34;: true,
 &amp;#34;options&amp;#34;: {
 &amp;#34;collapseEvents&amp;#34;: true | false
 },
@@ -5818,7 +5809,6 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &lt;li>Open an Onshape document, or create a new one.&lt;/li>
 &lt;li>In this example, we want to receive a notification from Onshape any time a new version is created in the specified document. For this, we’ll use &lt;code>onshape.model.lifecycle.createversion&lt;/code> as our &lt;code>event&lt;/code>.&lt;/li>
 &lt;li>The event type requires one parameter. We’ll use our &lt;code>documentId&lt;/code> for this field (shown as &lt;code>000000000000000000000000&lt;/code> in the example below).&lt;/li>
-&lt;li>All events should specify &lt;code>isTransient=true&lt;/code>. This will automatically clean up any webhooks after a period of inactivity.&lt;/li>
 &lt;li>All event types require specifying &lt;code>true&lt;/code> or &lt;code>false&lt;/code> for the &lt;code>options.collapseEvents&lt;/code> field. In this case, set the field to &lt;code>false&lt;/code>.&lt;/li>
 &lt;li>Next, we need the URL to send the notification to. You must provide your own URL to receive notifications here.&lt;/li>
 &lt;li>Confirm your &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Webhook/createWebhook">createWebhook&lt;/a> call looks like this (substitute your own authorization credentials, document ID, and URL), then make the call.&lt;/li>
@@ -5833,13 +5823,12 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &amp;#34;events&amp;#34;: [
 &amp;#34;onshape.model.lifecycle.createversion&amp;#34;
 ],
-&amp;#34;isTransient&amp;#34;: true,
 &amp;#34;options&amp;#34;: {
 &amp;#34;collapseEvents&amp;#34;: false
 },
 &amp;#34;url&amp;#34;: &amp;#34;https://sampleUrl.org&amp;#34;
 }&amp;#39;
-&lt;/code>&lt;/pre>&lt;ol start="8">
+&lt;/code>&lt;/pre>&lt;ol start="7">
 &lt;li>In your application, confirm that you received the &lt;code>webhook.register&lt;/code> event from Onshape.&lt;/li>
 &lt;li>In Onshape, create a new version in your document.&lt;/li>
 &lt;li>In your application, confirm that you received the &lt;code>onshape.model.lifecycle.createversion&lt;/code> event from Onshape. Make note of the &lt;code>id&lt;/code> in the response; use this as your &lt;code>webhookId&lt;/code> in subsequent examples.&lt;/li>
