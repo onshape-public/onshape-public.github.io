@@ -7513,6 +7513,42 @@ the location you chose for you extension.&lt;/p>
 &lt;/ul>
 &lt;p>The application is built using Express and is deployed on Heroku.&lt;/p>
 &lt;p>Refer to the &lt;a href="https://github.com/onshape-public/app-gltf-viewer">gltf-viewer-app README&lt;/a> for instructions on running this sample app.&lt;/p></description></item><item><title>Docs: Changelog</title><link>https://onshape-public.github.io/docs/changelog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/changelog/</guid><description>
+&lt;h4 id="rel-1183---released-2024-06-28">&lt;code>rel-1.183&lt;/code> - released 2024-06-28&lt;/h4>
+&lt;ul>
+&lt;li>Added new &lt;code>V7&lt;/code> [version to the api (https://cad.onshape.com/api/versions)&lt;/li>
+&lt;li>Updated &lt;code>GET&lt;/code> : &lt;code>V7/partstudios/d/[did]/[wvm]/[wvmid]/e/[eid]/sketches&lt;/code> to return fully defined status (UNDERDEFINED, WELL_DEFINED, OVERDEFINED, UNKNOWN)&lt;/li>
+&lt;li>Updated &lt;code>GET&lt;/code> : &lt;code>V7/partstudios/d/[did]/[wvm]/[wvmid]/e/[eid]/sketches&lt;/code> vectors are now maps instead of arrays, and may be &lt;code>BTVector2d&lt;/code> or &lt;code>BTVector3d&lt;/code> depending on the &lt;code>output3D&lt;/code> parameter&lt;/li>
+&lt;li>Updated &lt;code>GET&lt;/code> : &lt;code>V7/partstudios/d/[did]/[wvm]/[wvmid]/e/[eid]/sketches&lt;/code> to use more consistent naming:&lt;/li>
+&lt;/ul>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Fields&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>sketch&lt;/code> -&amp;gt; &lt;code>name&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>sketchId&lt;/code> -&amp;gt; &lt;code>featureId&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>transformMatrix&lt;/code> -&amp;gt; &lt;code>sketchMatrix&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>featuresUsed&lt;/code> -&amp;gt; &lt;code>featuresUsingSketch&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>geomEntities&lt;/code> -&amp;gt; &lt;code>entities&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;ul>
+&lt;li>Updated &lt;code>GET&lt;/code> : &lt;code>/variables&lt;/code> endpoint to return variable description when variable is set through custom feature&lt;/li>
+&lt;li>Updated &lt;code>POST&lt;/code> : &lt;code>/webhooks&lt;/code> endpoint to default to &lt;code>isTransient = true&lt;/code> if not specified (auto cleanup)&lt;/li>
+&lt;li>Updated descriptions for Assembly, Documents, Metadata, Parts, Part Studios, Revisions, Variables and Versions enddpoints&lt;/li>
+&lt;/ul>
 &lt;h4 id="rel-1182---released-2024-06-07">&lt;code>rel-1.182&lt;/code> - released 2024-06-07&lt;/h4>
 &lt;ul>
 &lt;li>Updated descriptions for &lt;code>webhooks&lt;/code> endpoints&lt;/li>
@@ -7568,7 +7604,7 @@ the location you chose for you extension.&lt;/p>
 &lt;/ul>
 &lt;h4 id="rel-1174---released-2023-12-15">&lt;code>rel-1.174&lt;/code> - released 2023-12-15&lt;/h4>
 &lt;ul>
-&lt;li>Add microversion id the extension url &lt;code>{$microversionId}&lt;/code>&lt;/li>
+&lt;li>Add microversion id the extension url &lt;code>[$microversionId]&lt;/code>&lt;/li>
 &lt;li>Updated translation endpoints with new request property &lt;code>pdfVersion&lt;/code>&lt;/li>
 &lt;li>Fixed issue with bodydetails endpoints always returning &lt;code>isInner&lt;/code> and &lt;code>isOuter&lt;/code> the same&lt;/li>
 &lt;li>Update all endpoints for &lt;code>bodydetails&lt;/code> | &lt;code>tessellatededges&lt;/code> | &lt;code>tessellatedfaces&lt;/code> | &lt;code>featurescript&lt;/code> to include new response body &lt;code>errorEnum&lt;/code>:&lt;/li>
