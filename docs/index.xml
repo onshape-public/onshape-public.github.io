@@ -7513,6 +7513,13 @@ the location you chose for you extension.&lt;/p>
 &lt;/ul>
 &lt;p>The application is built using Express and is deployed on Heroku.&lt;/p>
 &lt;p>Refer to the &lt;a href="https://github.com/onshape-public/app-gltf-viewer">gltf-viewer-app README&lt;/a> for instructions on running this sample app.&lt;/p></description></item><item><title>Docs: Changelog</title><link>https://onshape-public.github.io/docs/changelog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/changelog/</guid><description>
+&lt;h4 id="rel-1184---released-2024-07-19">&lt;code>rel-1.184&lt;/code> - released 2024-07-19&lt;/h4>
+&lt;ul>
+&lt;li>Remove inconsistencies in assembly definition endpoint (&lt;code>/assemblies/d/[did]/[wvm]/[wvmid]/e/[eid]&lt;/code>) related to configuration parameters&lt;/li>
+&lt;li>Update all translation endpoints (&lt;code>POST&lt;/code> : &lt;code>../translations&lt;/code>) to include new request property &lt;code>useFileNameToSetSinglePartName&lt;/code>&lt;/li>
+&lt;li>Update all revision endpoints (&lt;code>GET&lt;/code> : &lt;code>/revisions/..&lt;/code>) to include response property &lt;code>canChangeType&lt;/code> (supporting new admin option to change type part, assembly, file, etc)&lt;/li>
+&lt;li>Update &lt;code>GET&lt;/code> : &lt;code>/users/[:uid]/settings&lt;/code> endpoint to include responses for &lt;code>highlightLaminarEdges&lt;/code> and &lt;code>perspectiveModeOn&lt;/code> for &lt;code>default&lt;/code> status&lt;/li>
+&lt;/ul>
 &lt;h4 id="rel-1183---released-2024-06-28">&lt;code>rel-1.183&lt;/code> - released 2024-06-28&lt;/h4>
 &lt;ul>
 &lt;li>Added new &lt;code>V7&lt;/code> [version to the api (https://cad.onshape.com/api/versions)&lt;/li>
