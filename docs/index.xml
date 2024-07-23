@@ -7515,6 +7515,7 @@ the location you chose for you extension.&lt;/p>
 &lt;p>Refer to the &lt;a href="https://github.com/onshape-public/app-gltf-viewer">gltf-viewer-app README&lt;/a> for instructions on running this sample app.&lt;/p></description></item><item><title>Docs: Changelog</title><link>https://onshape-public.github.io/docs/changelog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/changelog/</guid><description>
 &lt;h4 id="rel-1184---released-2024-07-19">&lt;code>rel-1.184&lt;/code> - released 2024-07-19&lt;/h4>
 &lt;ul>
+&lt;li>Updated API version to &lt;code>V8&lt;/code>, (&lt;a href="https://cad.onshape.com/api/versions)">https://cad.onshape.com/api/versions)&lt;/a>, A new microversion will not be created when a document restore operation results in a no-op.&lt;/li>
 &lt;li>Remove inconsistencies in assembly definition endpoint (&lt;code>/assemblies/d/[did]/[wvm]/[wvmid]/e/[eid]&lt;/code>) related to configuration parameters&lt;/li>
 &lt;li>Update all translation endpoints (&lt;code>POST&lt;/code> : &lt;code>../translations&lt;/code>) to include new request property &lt;code>useFileNameToSetSinglePartName&lt;/code>&lt;/li>
 &lt;li>Update all revision endpoints (&lt;code>GET&lt;/code> : &lt;code>/revisions/..&lt;/code>) to include response property &lt;code>canChangeType&lt;/code> (supporting new admin option to change type part, assembly, file, etc)&lt;/li>
@@ -7522,7 +7523,7 @@ the location you chose for you extension.&lt;/p>
 &lt;/ul>
 &lt;h4 id="rel-1183---released-2024-06-28">&lt;code>rel-1.183&lt;/code> - released 2024-06-28&lt;/h4>
 &lt;ul>
-&lt;li>Added new &lt;code>V7&lt;/code> [version to the api (https://cad.onshape.com/api/versions)&lt;/li>
+&lt;li>Added new &lt;code>V7&lt;/code> version to the api (&lt;a href="https://cad.onshape.com/api/versions">https://cad.onshape.com/api/versions&lt;/a>)&lt;/li>
 &lt;li>Updated &lt;code>GET&lt;/code> : &lt;code>V7/partstudios/d/[did]/[wvm]/[wvmid]/e/[eid]/sketches&lt;/code> to return fully defined status (UNDERDEFINED, WELL_DEFINED, OVERDEFINED, UNKNOWN)&lt;/li>
 &lt;li>Updated &lt;code>GET&lt;/code> : &lt;code>V7/partstudios/d/[did]/[wvm]/[wvmid]/e/[eid]/sketches&lt;/code> vectors are now maps instead of arrays, and may be &lt;code>BTVector2d&lt;/code> or &lt;code>BTVector3d&lt;/code> depending on the &lt;code>output3D&lt;/code> parameter&lt;/li>
 &lt;li>Updated &lt;code>GET&lt;/code> : &lt;code>V7/partstudios/d/[did]/[wvm]/[wvmid]/e/[eid]/sketches&lt;/code> to use more consistent naming:&lt;/li>
