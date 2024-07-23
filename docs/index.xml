@@ -2492,13 +2492,13 @@ https://&lt;strong>cad&lt;/strong>.onshape.com &amp;gt; https://&lt;strong>compa
 &lt;ul>
 &lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/getPartStudioFeatures">Get the Feature List&lt;/a>
 &lt;pre tabindex="0">&lt;code>curl -X &amp;#39;GET&amp;#39; \
-&amp;#39;https://cad.onshape.com/api/v6/partstudios/d/{did}/{wvm}/{wvmid}/e/{eid}/features?rollbackBarIndex=-1&amp;amp;includeGeometryIds=true&amp;amp;noSketchGeometry=false&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v8/partstudios/d/{did}/{wvm}/{wvmid}/e/{eid}/features?rollbackBarIndex=-1&amp;amp;includeGeometryIds=true&amp;amp;noSketchGeometry=false&amp;#39; \
 -H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 -H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39;
 &lt;/code>&lt;/pre>&lt;/li>
 &lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/addPartStudioFeature">Add a Feature&lt;/a>
 &lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST&amp;#39; \
-&amp;#39;https://cad.onshape.com/api/v6/partstudios/d/{did}{wvm}/{wvmid}/e/{wid}/features&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v8/partstudios/d/{did}/{wvm}/{wvmid}/e/{wid}/features&amp;#39; \
 -H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 -H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
 -H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
@@ -2514,7 +2514,7 @@ https://&lt;strong>cad&lt;/strong>.onshape.com &amp;gt; https://&lt;strong>compa
 &lt;/code>&lt;/pre>&lt;/li>
 &lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/updatePartStudioFeature">Update a Feature&lt;/a>
 &lt;pre tabindex="0">&lt;code> curl -X &amp;#39;POST&amp;#39; \
-&amp;#39;https://cad.onshape.com/api/v6/partstudios/d/{did}/w/{wid}/e/{eid}/features/featureid/{fid}&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v8/partstudios/d/{did}/w/{wid}/e/{eid}/features/featureid/{fid}&amp;#39; \
 -H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 -H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
 -H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
@@ -2529,7 +2529,7 @@ https://&lt;strong>cad&lt;/strong>.onshape.com &amp;gt; https://&lt;strong>compa
 &lt;/code>&lt;/pre>&lt;/li>
 &lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/updateFeatures">Update Multiple Features&lt;/a>
 &lt;pre tabindex="0">&lt;code> curl -X &amp;#39;POST&amp;#39; \
-&amp;#39;https://cad.onshape.com/api/v6/partstudios/d/{did}/w/{wid}/e/{eid}/features/updates&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v8/partstudios/d/{did}/w/{wid}/e/{eid}/features/updates&amp;#39; \
 -H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 -H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
 -H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
@@ -2551,7 +2551,7 @@ https://&lt;strong>cad&lt;/strong>.onshape.com &amp;gt; https://&lt;strong>compa
 &lt;/code>&lt;/pre>&lt;/li>
 &lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/deletePartStudioFeature">Delete a Feature&lt;/a>
 &lt;pre tabindex="0">&lt;code>curl -X &amp;#39;DELETE&amp;#39; \
-&amp;#39;https://cad.onshape.com/api/v6/partstudios/d/{did}/{wvm}/{wvmid}/e/{eid}/features/featureid/{fid}&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v8/partstudios/d/{did}/{wvm}/{wvmid}/e/{eid}/features/featureid/{fid}&amp;#39; \
 -H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 -H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39;
 &lt;/code>&lt;/pre>&lt;/li>
@@ -2561,7 +2561,7 @@ https://&lt;strong>cad&lt;/strong>.onshape.com &amp;gt; https://&lt;strong>compa
 &lt;blockquote>
 &lt;p>📘 &lt;strong>Notes&lt;/strong>&lt;/p>
 &lt;ul>
-&lt;li>Onshape REST API parameters may change at any time. The documentation on this page is accurate for v6 of the Onshape API. The quickest way to verify what parameters are needed for a call is to create the sketch/feature in the Onshape UI, then call the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/getPartStudioFeatures">Get the Feature List&lt;/a> API and see what parameters are returned for the feature.&lt;/li>
+&lt;li>Onshape REST API parameters may change at any time. The documentation on this page is accurate for v8 of the Onshape API. The quickest way to verify what parameters are needed for a call is to create the sketch/feature in the Onshape UI, then call the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/getPartStudioFeatures">Get the Feature List&lt;/a> API and see what parameters are returned for the feature.&lt;/li>
 &lt;/ul>
 &lt;/blockquote>
 &lt;blockquote>
@@ -2629,7 +2629,7 @@ return transientQueriesToStrings(evaluateQuery(context, qCreatedBy(makeId(\&amp;
 }
 &lt;/code>&lt;/pre>&lt;p>For example, to get the ID of the Top plane, you would make the following call:&lt;/p>
 &lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST&amp;#39; \
-&amp;#39;https://demo-c.dev.onshape.com/api/v6/partstudios/d/{did}/w/{wid}/e/{eid}/featurescript?rollbackBarIndex=-1&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v8/partstudios/d/{did}/w/{wid}/e/{eid}/featurescript?rollbackBarIndex=-1&amp;#39; \
 -H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 -H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
 -H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
@@ -2647,7 +2647,7 @@ return transientQueriesToStrings(evaluateQuery(context, qCreatedBy(makeId(\&amp;
 &lt;li>Add a fillet to one edge of the part.&lt;/li>
 &lt;li>Call the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/getPartStudioFeatures">PartStudio/getPartStudioFeatures&lt;/a> API. Replace the URL parameters with the values from your document, and replace &lt;code>CREDENTIALS&lt;/code> with your authorization credentials.
 &lt;pre tabindex="0">&lt;code>curl -X &amp;#39;GET \
-&amp;#39;https://cad.onshape.com/api/v6/partstudios/d/{did}/{wvm}/{wvmid}/e/{eid}/features?rollbackBarIndex=-1&amp;amp;includeGeometryIds=true&amp;amp;noSketchGeometry=false&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v8/partstudios/d/{did}/{wvm}/{wvmid}/e/{eid}/features?rollbackBarIndex=-1&amp;amp;includeGeometryIds=true&amp;amp;noSketchGeometry=false&amp;#39; \
 -H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
 -H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39;
 &lt;/code>&lt;/pre>&lt;/li>
@@ -2741,7 +2741,7 @@ return transientQueriesToStrings(evaluateQuery(context, qCreatedBy(makeId(\&amp;
 &lt;li>Create a new document or open an existing one. We&amp;rsquo;ll create the cube feature in this document.&lt;/li>
 &lt;li>Begin to create the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/addPartStudioFeature">PartStudio/addPartStudioFeature&lt;/a> call. Replace the URL parameters with the values from your document, and replace &lt;code>CREDENTIALS&lt;/code> with your authorization credentials. This is a call to the same endpoint as in the previous example, but is a &lt;code>POST&lt;/code> instead of a &lt;code>GET&lt;/code>.
 &lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST \
-&amp;#39;https://cad.onshape.com/api/v6/partstudios/d/{did}/{wvm}/{wvmid}/e/{eid}/features&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v8/partstudios/d/{did}/{wvm}/{wvmid}/e/{eid}/features&amp;#39; \
 -H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
 -H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39;\
 -H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
@@ -2776,7 +2776,7 @@ return transientQueriesToStrings(evaluateQuery(context, qCreatedBy(makeId(\&amp;
 &lt;/code>&lt;/pre>&lt;/li>
 &lt;li>Confirm your call matches the following, and then make the call:
 &lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST \
-&amp;#39;https://cad.onshape.com/api/v6/partstudios/d/{did}/{wvm}/{wvmid}/e/{eid}/features&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v8/partstudios/d/{did}/{wvm}/{wvmid}/e/{eid}/features&amp;#39; \
 -H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
 -H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39;\
 -H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
@@ -2865,7 +2865,7 @@ return transientQueriesToStrings(evaluateQuery(context, qCreatedBy(makeId(\&amp;
 &lt;/li>
 &lt;li>We want to create the circle on the Front plane, so we&amp;rsquo;ll call the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/evalFeatureScript">PartStudios/featurescript&lt;/a> endpoint to get its ID:
 &lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST&amp;#39; \
-&amp;#39;https://demo-c.dev.onshape.com/api/v6/partstudios/d/{did}/w/{wid}/e/{eid}/featurescript?rollbackBarIndex=-1&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v8/partstudios/d/{did}/w/{wid}/e/{eid}/featurescript?rollbackBarIndex=-1&amp;#39; \
 -H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 -H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
 -H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
@@ -2927,9 +2927,9 @@ return transientQueriesToStrings(evaluateQuery(context, qCreatedBy(makeId(\&amp;
 }
 }
 &lt;/code>&lt;/pre>&lt;/li>
-&lt;li>Now we&amp;rsquo;ll add the JSON structure to our code and call the endpoint. Replace the URL parameters with the values from your document, and replace &lt;code>CREDENTIALS&lt;/code> with your authorization credentials.
+&lt;li>Now we&amp;rsquo;ll add the JSON structure to the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/addPartStudioFeature">PartStudio/addPartStudioFeature&lt;/a> endpoint. Replace the URL parameters with the values from your document, and replace &lt;code>CREDENTIALS&lt;/code> with your authorization credentials.
 &lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST&amp;#39; \
-&amp;#39;https://cad.onshape.com/api/v6/partstudios/d/{did}/w/{wid}/e/{eid}/features/featureid/{fid}&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v8/partstudios/d/{did}/{wvm}/{wvmid}/e/{wid}/features&amp;#39; \
 -H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 -H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
 -H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
@@ -2993,7 +2993,7 @@ return transientQueriesToStrings(evaluateQuery(context, qCreatedBy(makeId(\&amp;
 &lt;/li>
 &lt;li>Begin to create the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/addPartStudioFeature">PartStudio/addPartStudioFeature&lt;/a> call. Replace the URL parameters with the values from your document, and replace &lt;code>CREDENTIALS&lt;/code> with your authorization credentials.
 &lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST \
-&amp;#39;https://cad.onshape.com/api/v6/partstudios/d/{did}/{wvm}/{wvmid}/e/{eid}/features&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v8/partstudios/d/{did}/{wvm}/{wvmid}/e/{eid}/features&amp;#39; \
 -H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
 -H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39;\
 -H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
@@ -3259,7 +3259,7 @@ return transientQueriesToStrings(evaluateQuery(context, qCreatedBy(makeId(\&amp;
 &lt;li>Now our JSON is complete, and we can make our call.&lt;/li>
 &lt;/ol>
 &lt;pre tabindex="0">&lt;code> curl -X &amp;#39;POST \
-&amp;#39;https://cad.onshape.com/api/v6/partstudios/d/{did}/{wvm}/{wvmid}/e/{eid}/features&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v8/partstudios/d/{did}/{wvm}/{wvmid}/e/{eid}/features&amp;#39; \
 -H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
 -H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39;\
 -H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
@@ -3513,7 +3513,7 @@ return transientQueriesToStrings(evaluateQuery(context, qCreatedBy(makeId(\&amp;
 &lt;/li>
 &lt;li>Begin to create the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/updatePartStudioFeature">PartStudio/updatePartStudioFeature&lt;/a> call. Replace the URL parameters with the values from your document, and replace &lt;code>CREDENTIALS&lt;/code> with your authorization credentials.
 &lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST&amp;#39; \
-&amp;#39;https://cad.onshape.com/api/v6/partstudios/d/{did}/w/{wid}/e/{eid}/features/featureid/{fid}&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v8/partstudios/d/{did}/w/{wid}/e/{eid}/features/featureid/{fid}&amp;#39; \
 -H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 -H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
 -H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
@@ -3547,7 +3547,7 @@ return transientQueriesToStrings(evaluateQuery(context, qCreatedBy(makeId(\&amp;
 &lt;/code>&lt;/pre>&lt;/li>
 &lt;li>Confirm your call matches the following, and then make the call:
 &lt;pre tabindex="0">&lt;code> curl -X &amp;#39;POST&amp;#39; \
-&amp;#39;https://cad.onshape.com/api/v6/partstudios/d/{did}/w/{wid}/e/{eid}/features/featureid/{fid}&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v8/partstudios/d/{did}/w/{wid}/e/{eid}/features/featureid/{fid}&amp;#39; \
 -H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 -H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
 -H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
@@ -3625,7 +3625,7 @@ return transientQueriesToStrings(evaluateQuery(context, qCreatedBy(makeId(\&amp;
 &lt;li>Call the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/getPartStudioFeatures">getPartStudioFeatures&lt;/a> endpoint on the document to get the &lt;code>featureId&lt;/code> of the cube feature. See &lt;a href="#get-the-list-of-features-in-a-part-studio">Get the Feature list&lt;/a> for instructions.&lt;/li>
 &lt;li>Create and execute the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/deletePartStudioFeature">PartStudio/deletePartStudioFeature&lt;/a> call. Replace the URL parameters with the values from your document, and replace &lt;code>CREDENTIALS&lt;/code> with your authorization credentials.
 &lt;pre tabindex="0">&lt;code>curl -X &amp;#39;DELETE&amp;#39; \
-&amp;#39;https://cad.onshape.com/api/v6/partstudios/d/{did}/w/{wid}/e/{eid}/features/featureid/{fid}&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v8/partstudios/d/{did}/w/{wid}/e/{eid}/features/featureid/{fid}&amp;#39; \
 -H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 -H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39;
 &lt;/code>&lt;/pre>&lt;/li>
