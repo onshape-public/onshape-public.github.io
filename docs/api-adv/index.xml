@@ -1543,226 +1543,22 @@ return transientQueriesToStrings(evaluateQuery(context, qCreatedBy(makeId(\&amp;
 &amp;lt;JSON of feature data&amp;gt;
 }&amp;#39;
 &lt;/code>&lt;/pre>&lt;/li>
-&lt;li>Creating an extrude has many options; this means creating an extrude in the API requires adding a lot of parameters, even if they&amp;rsquo;re not used. To make this tutorial a little easier to follow, we&amp;rsquo;ll start by constructing the JSON with all available parameters, then we&amp;rsquo;ll fill in the ones we need to manipulate. Note the &lt;code>btType&lt;/code> and &lt;code>featureType&lt;/code> added below:&lt;/li>
+&lt;li>We&amp;rsquo;ll start by initializing an extrude in the JSON with the &lt;code>btType&lt;/code> and &lt;code>featureType&lt;/code> shown below:&lt;/li>
 &lt;/ol>
 &lt;pre tabindex="0">&lt;code> {
-&amp;#34;features&amp;#34;: [
+&amp;#34;btType&amp;#34;: &amp;#34;BTFeatureDefinitionCall-1406&amp;#34;,
+&amp;#34;feature&amp;#34;:
 {
 &amp;#34;btType&amp;#34;: &amp;#34;BTMFeature-134&amp;#34;,
 &amp;#34;featureType&amp;#34;: &amp;#34;extrude&amp;#34;,
 &amp;#34;name&amp;#34;: &amp;#34;Extrude 1&amp;#34;,
 &amp;#34;suppressed&amp;#34;: false,
 &amp;#34;parameters&amp;#34;: [
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterEnum-145&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;bodyType&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterEnum-145&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;operationType&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterQueryList-148&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;entities&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterEnum-145&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;endBound&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterQuantity-147&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;depth&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterEnum-145&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;domain&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterEnum-145&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;surfaceOperationType&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterEnum-145&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;flatOperationType&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterQueryList-148&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;surfaceEntities&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterQueryList-148&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;wallShape&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterBoolean-144&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;midplane&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterQuantity-147&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;thickness1&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterBoolean-144&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;flipWall&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterQuantity-147&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;thickness2&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterQuantity-147&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;thickness&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterEnum-145&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;endBound&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterBoolean-144&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;oppositeDirection&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterQueryList-148&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;endBoundEntityFace&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterQueryList-148&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;endBoundEntityBody&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterQueryList-148&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;endBoundEntityVertex&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterBoolean-144&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;hasOffset&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterQuantity-147&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;offsetDistance&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterBoolean-144&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;offsetOppositeDirection&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterBoolean-144&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;hasExtrudeDirection&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterQueryList-148&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;extrudeDirection&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterBoolean-144&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;startOffset&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterEnum-145&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;startOffsetBound&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterQuantity-147&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;startOffsetDistance&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterBoolean-144&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;startOffsetOppositeDirection&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterQueryList-148&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;startOffsetEntity&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterBoolean-144&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;symmetric&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterBoolean-144&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;hasDraft&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterQuantity-147&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;draftAngle&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterBoolean-144&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;draftPullDirection&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterBoolean-144&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;hasSecondDirection&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterEnum-145&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;secondDirectionBound&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterBoolean-144&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;secondDirectionOppositeDirection&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterQuantity-147&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;secondDirectionDepth&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterQueryList-148&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;secondDirectionBoundEntityFace&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterQueryList-148&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;secondDirectionBoundEntityBody&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterQueryList-148&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;secondDirectionBoundEntityVertex&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterBoolean-144&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;hasSecondDirectionOffset&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterQuantity-147&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;secondDirectionOffsetDistance&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterBoolean-144&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;secondDirectionOffsetOppositeDirection&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterBoolean-144&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;hasSecondDirectionDraft&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterQuantity-147&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;secondDirectionDraftAngle&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterBoolean-144&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;secondDirectionDraftPullDirection&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterBoolean-144&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;defaultScope&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterQueryList-148&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;booleanScope&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterBoolean-144&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;defaultSurfaceScope&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterQueryList-148&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;booleanSurfaceScope&amp;#34;
-}
 ]
 }
-]
 }
-&lt;/code>&lt;/pre>&lt;ol start="3">
-&lt;li>Now, we&amp;rsquo;ll add values for the options we want. Just like when creating an extrude within the Onshape UI, we&amp;rsquo;ll specify that the extrude is a Solid, New, Blind extrude of our sketch (we&amp;rsquo;ll specify the sketch by its &lt;code>featureId&lt;/code>), with a depth of 1 inch. We&amp;rsquo;ll leave the rest of the parameters as they are.&lt;/li>
+&lt;/code>&lt;/pre>&lt;ol start="4">
+&lt;li>Now, we&amp;rsquo;ll add values for the options we want to our &lt;code>parameters&lt;/code> block. Don&amp;rsquo;t forget to replace &lt;code>{featureId}&lt;/code> in the code below with the feature ID of the sketch.&lt;/li>
 &lt;/ol>
 &lt;pre tabindex="0">&lt;code> {
 &amp;#34;btType&amp;#34;: &amp;#34;BTMParameterEnum-145&amp;#34;,
@@ -1797,7 +1593,7 @@ return transientQueriesToStrings(evaluateQuery(context, qCreatedBy(makeId(\&amp;
 &amp;#34;expression&amp;#34;: &amp;#34;1 in&amp;#34;,
 &amp;#34;parameterId&amp;#34;: &amp;#34;depth&amp;#34;
 }
-&lt;/code>&lt;/pre>&lt;ol start="4">
+&lt;/code>&lt;/pre>&lt;ol start="5">
 &lt;li>Now our JSON is complete, and we can make our call.&lt;/li>
 &lt;/ol>
 &lt;pre tabindex="0">&lt;code> curl -X &amp;#39;POST \
@@ -1806,12 +1602,11 @@ return transientQueriesToStrings(evaluateQuery(context, qCreatedBy(makeId(\&amp;
 -H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39;\
 -H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 -d &amp;#39;{
-&amp;#34;features&amp;#34;: [
-{
+&amp;#34;btType&amp;#34;: &amp;#34;BTFeatureDefinitionCall-1406&amp;#34;,
+&amp;#34;feature&amp;#34;: {
 &amp;#34;btType&amp;#34;: &amp;#34;BTMFeature-134&amp;#34;,
 &amp;#34;featureType&amp;#34;: &amp;#34;extrude&amp;#34;,
 &amp;#34;name&amp;#34;: &amp;#34;Extrude 1&amp;#34;,
-&amp;#34;suppressed&amp;#34;: false,
 &amp;#34;parameters&amp;#34;: [
 {
 &amp;#34;btType&amp;#34;: &amp;#34;BTMParameterEnum-145&amp;#34;,
@@ -1830,7 +1625,7 @@ return transientQueriesToStrings(evaluateQuery(context, qCreatedBy(makeId(\&amp;
 &amp;#34;queries&amp;#34;: [
 {
 &amp;#34;btType&amp;#34;: &amp;#34;BTMIndividualSketchRegionQuery-140&amp;#34;,
-&amp;#34;featureId&amp;#34;: &amp;#34;FBMwlCB9CZS8uWY_0&amp;#34;
+&amp;#34;featureId&amp;#34;: &amp;#34;{featureId}&amp;#34;
 }
 ],
 &amp;#34;parameterId&amp;#34;: &amp;#34;entities&amp;#34;
@@ -1845,196 +1640,13 @@ return transientQueriesToStrings(evaluateQuery(context, qCreatedBy(makeId(\&amp;
 &amp;#34;btType&amp;#34;: &amp;#34;BTMParameterQuantity-147&amp;#34;,
 &amp;#34;expression&amp;#34;: &amp;#34;1 in&amp;#34;,
 &amp;#34;parameterId&amp;#34;: &amp;#34;depth&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterEnum-145&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;domain&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterEnum-145&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;surfaceOperationType&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterEnum-145&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;flatOperationType&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterQueryList-148&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;surfaceEntities&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterQueryList-148&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;wallShape&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterBoolean-144&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;midplane&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterQuantity-147&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;thickness1&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterBoolean-144&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;flipWall&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterQuantity-147&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;thickness2&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterQuantity-147&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;thickness&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterEnum-145&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;endBound&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterBoolean-144&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;oppositeDirection&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterQueryList-148&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;endBoundEntityFace&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterQueryList-148&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;endBoundEntityBody&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterQueryList-148&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;endBoundEntityVertex&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterBoolean-144&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;hasOffset&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterQuantity-147&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;offsetDistance&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterBoolean-144&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;offsetOppositeDirection&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterBoolean-144&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;hasExtrudeDirection&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterQueryList-148&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;extrudeDirection&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterBoolean-144&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;startOffset&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterEnum-145&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;startOffsetBound&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterQuantity-147&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;startOffsetDistance&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterBoolean-144&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;startOffsetOppositeDirection&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterQueryList-148&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;startOffsetEntity&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterBoolean-144&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;symmetric&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterBoolean-144&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;hasDraft&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterQuantity-147&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;draftAngle&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterBoolean-144&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;draftPullDirection&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterBoolean-144&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;hasSecondDirection&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterEnum-145&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;secondDirectionBound&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterBoolean-144&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;secondDirectionOppositeDirection&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterQuantity-147&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;secondDirectionDepth&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterQueryList-148&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;secondDirectionBoundEntityFace&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterQueryList-148&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;secondDirectionBoundEntityBody&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterQueryList-148&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;secondDirectionBoundEntityVertex&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterBoolean-144&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;hasSecondDirectionOffset&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterQuantity-147&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;secondDirectionOffsetDistance&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterBoolean-144&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;secondDirectionOffsetOppositeDirection&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterBoolean-144&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;hasSecondDirectionDraft&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterQuantity-147&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;secondDirectionDraftAngle&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterBoolean-144&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;secondDirectionDraftPullDirection&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterBoolean-144&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;defaultScope&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterQueryList-148&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;booleanScope&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterBoolean-144&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;defaultSurfaceScope&amp;#34;
-},
-{
-&amp;#34;btType&amp;#34;: &amp;#34;BTMParameterQueryList-148&amp;#34;,
-&amp;#34;parameterId&amp;#34;: &amp;#34;booleanSurfaceScope&amp;#34;
 }
-]
+],
+&amp;#34;returnAfterSubfeatures&amp;#34;: false,
+&amp;#34;suppressed&amp;#34;: false
 }
-]
 }&amp;#39;
-&lt;/code>&lt;/pre>&lt;ol start="5">
+&lt;/code>&lt;/pre>&lt;ol start="6">
 &lt;li>Open your document and confirm that the sketch has been extruded into a cylinder.
 &lt;/br>&lt;/br>&lt;img src="https://onshape-public.github.io/images/features-extrude-example.png" alt="circle sketch created via features api" width=550>&lt;/li>
 &lt;/ol>
