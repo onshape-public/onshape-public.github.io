@@ -7125,6 +7125,11 @@ the location you chose for you extension.&lt;/p>
 &lt;/ul>
 &lt;p>The application is built using Express and is deployed on Heroku.&lt;/p>
 &lt;p>Refer to the &lt;a href="https://github.com/onshape-public/app-gltf-viewer">gltf-viewer-app README&lt;/a> for instructions on running this sample app.&lt;/p></description></item><item><title>Docs: Changelog</title><link>https://onshape-public.github.io/docs/changelog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/changelog/</guid><description>
+&lt;h4 id="rel-1185---released-2024-08-12">&lt;code>rel-1.185&lt;/code> - released 2024-08-12&lt;/h4>
+&lt;ul>
+&lt;li>Updated all endpoints that return a user summary (createdBy, modifiedBy) have a new boolean property &lt;code>isOnshapeSupport&lt;/code> for use to separate Onshape support employee activities.&lt;/li>
+&lt;li>Updated all &lt;code>bodyDetails&lt;/code>, &lt;code>tessellatededged&lt;/code>, and &lt;code>tessellatedfaces&lt;/code> endpionts (parts and Part Studios) to include &lt;code>errorEnum&lt;/code> vales for detecting new mate position, curve pattern and Simulation material checks.&lt;/li>
+&lt;/ul>
 &lt;h4 id="rel-1184---released-2024-07-19">&lt;code>rel-1.184&lt;/code> - released 2024-07-19&lt;/h4>
 &lt;ul>
 &lt;li>Updated API version to &lt;code>V8&lt;/code>, (&lt;a href="https://cad.onshape.com/api/versions)">https://cad.onshape.com/api/versions)&lt;/a>, A new microversion will not be created when a document restore operation results in a no-op.&lt;/li>
