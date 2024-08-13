@@ -1929,6 +1929,8 @@ Check out the &lt;a href="#sample-workflows">Sample Workflows&lt;/a> section bel
 &lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Drawing/createDrawingTranslation">Translate a drawing&lt;/a>: See the &lt;a href="https://onshape-public.github.io/docs/api-adv/translation#export-a-drawing-as-a-json">Translations API Guide&lt;/a>.&lt;/li>
 &lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Drawing/getDrawingTranslatorFormats">Get drawing translation formats&lt;/a>: See the &lt;a href="https://onshape-public.github.io/docs/api-adv/translation#export-a-drawing-as-a-json">Translations API Guide&lt;/a>.&lt;/li>
 &lt;/ul>
+&lt;h3 id="viewing-drawing-errors">Viewing drawing errors&lt;/h3>
+&lt;p>You can &lt;a href="https://onshape-public.github.io/docs/api-adv/translation.md#export-a-drawing-as-a-json">export your drawing to a JSON&lt;/a> to find errors with your drawing. Each &lt;code>view&lt;/code> in the JSON includes an &lt;code>errorState&lt;/code> for reporting drawing errors.&lt;/p>
 &lt;h2 id="sample-app">Sample App&lt;/h2>
 &lt;p>Please see the &lt;a href="https://github.com/onshape-public/onshape-ts-drawing-client">Onshape TypeScript Drawing Client&lt;/a> for a working example of using the Onshape Drawing APIs in an application.&lt;/p>
 &lt;h2 id="sample-workflows">Sample Workflows&lt;/h2>
@@ -1999,7 +2001,7 @@ Check out the &lt;a href="#sample-workflows">Sample Workflows&lt;/a> section bel
 &lt;/code>&lt;/pre>&lt;/li>
 &lt;/ul>
 &lt;/li>
-&lt;li>Call the endpoint and open your document. Confirm that you see the new &lt;code>templateAnsiDrawing&lt;/code> element containing the emtpy drawing template.&lt;/li>
+&lt;li>Call the endpoint and open your document. Confirm that you see the new &lt;code>templateAnsiDrawing&lt;/code> element containing the empty drawing template.&lt;/li>
 &lt;/ol>
 &lt;h3 id="create-a-drawing-in-a-custom-graphics-area">Create a drawing in a custom graphics area&lt;/h3>
 &lt;ol>
@@ -3644,7 +3646,10 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &amp;#34;id&amp;#34; : &amp;#34;{translationId}&amp;#34;,
 &amp;#34;href&amp;#34; : &amp;#34;https://cad.onshape.com/api/v6/translations/{translationId}&amp;#34;
 }
-&lt;/code>&lt;/pre>&lt;/li>
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Note that you can also call the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Translation/getTranslation">Translation/getTranslation&lt;/a> endpoint on the &lt;code>translationId&lt;/code> to see all in-progress translation information.&lt;/li>
+&lt;/ul>
+&lt;/li>
 &lt;li>Once &lt;code>requestState=DONE&lt;/code>, we make a note of the &lt;code>&amp;quot;resultElementIds&amp;quot; : {resulteid},&lt;/code> in the response. This is the element ID of the JSON blob.&lt;/li>
 &lt;li>Now, we can call &lt;a href="https://cad.onshape.com/glassworks/explorer/#/BlobElement/downloadFileWorkspace">BlobElement/downloadFileWorkspace&lt;/a> to retrieve the exported results.
 &lt;pre tabindex="0">&lt;code>curl -X &amp;#39;GET&amp;#39; \
