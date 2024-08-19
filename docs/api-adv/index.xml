@@ -1,4 +1,93 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>– API Guides</title><link>https://onshape-public.github.io/docs/api-adv/</link><description>Recent content in API Guides on</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 15 Aug 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://onshape-public.github.io/docs/api-adv/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Associativity</title><link>https://onshape-public.github.io/docs/api-adv/associativity/</link><pubDate>Mon, 18 May 2020 20:28:26 -0400</pubDate><guid>https://onshape-public.github.io/docs/api-adv/associativity/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>– API Guides</title><link>https://onshape-public.github.io/docs/api-adv/</link><description>Recent content in API Guides on</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 15 Aug 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://onshape-public.github.io/docs/api-adv/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Assemblies</title><link>https://onshape-public.github.io/docs/api-adv/assemblies/</link><pubDate>Tue, 13 Aug 2024 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/assemblies/</guid><description>
+&lt;p>This page describes the APIs Onshape provides for working with assemblies.&lt;/p>
+&lt;blockquote>
+&lt;p>📘 &lt;strong>Notes&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>This page provides sample code as curls. See the &lt;a href="https://curl.se/docs/">curl documentation&lt;/a> for more information.&lt;/li>
+&lt;li>All Onshape API calls must be properly authenticated by replacing the &lt;code>CREDENTIALS&lt;/code> variable in the curls below. See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys">API Keys&lt;/a> page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart">Quick Start&lt;/a> for an example. All applications submitted to the Onshape App Store &lt;em>must&lt;/em> authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth">OAuth2&lt;/a>.&lt;/li>
+&lt;li>This documentation refers to Onshape IDs in the following format: &lt;code>{did}, {wid}, {eid}, {pid}, {otherId}&lt;/code>. These represent document, workspace, element, part, and other IDs (respectively) that are needed make the API calls. We sometimes abbreviate these variables as &lt;code>DWVEM&lt;/code> Please see &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request">API Guide: API Intro&lt;/a> for information on what these IDs mean and how to obtain them from your documents. Never include the curly braces (&lt;code>{}&lt;/code>) in your API calls.&lt;/li>
+&lt;li>For Enterprise accounts, replace &lt;strong>&lt;font color="slate">cad&lt;/font>&lt;/strong> in all Onshape URLs with your company domain.
+https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com &amp;gt; https://&lt;font color="slate">&lt;strong>companyName&lt;/strong>&lt;/font>.onshape.com&lt;/li>
+&lt;/ul>
+&lt;/blockquote>
+&lt;h2 id="endpoints">Endpoints&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Assembly/createInstance">Assembly/createInstance&lt;/a>: Insert an instance of a part, sketch, assembly, or Part Studio into an assembly:
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v8/assemblies/d/{targetDid}/w/{targetWid}/e/{targetEid}/instances&amp;#39; \
+-H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39;\
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39;
+-d &amp;#39;{
+&amp;#34;configuration&amp;#34;: &amp;#34;string&amp;#34;,
+&amp;#34;documentId&amp;#34;: &amp;#34;{sourceDid}&amp;#34;,
+&amp;#34;elementId&amp;#34;: &amp;#34;{sourceEid}&amp;#34;,
+&amp;#34;featureId&amp;#34;: &amp;#34;string&amp;#34;,
+&amp;#34;includePartTypes&amp;#34;: [
+&amp;#34;PARTS&amp;#34;
+],
+&amp;#34;isAssembly&amp;#34;: true,
+&amp;#34;isHidden&amp;#34;: true,
+&amp;#34;isSuppressed&amp;#34;: true,
+&amp;#34;isWholePartStudio&amp;#34;: true,
+&amp;#34;microversionId&amp;#34;: &amp;#34;string&amp;#34;,
+&amp;#34;partId&amp;#34;: &amp;#34;string&amp;#34;,
+&amp;#34;partNumber&amp;#34;: &amp;#34;string&amp;#34;,
+&amp;#34;revision&amp;#34;: &amp;#34;string&amp;#34;,
+&amp;#34;versionId&amp;#34;: &amp;#34;{sourceEid}&amp;#34;
+}&amp;#39;
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;/ul>
+&lt;h2 id="sample-workflows">Sample Workflows&lt;/h2>
+&lt;h3 id="insert-a-part-into-an-assembly">Insert a part into an assembly&lt;/h3>
+&lt;ol>
+&lt;li>Open the Part Studio that contains the part you want to insert into an assembly. Make a note of the following in the URL:
+&lt;ul>
+&lt;li>&lt;code>documentId&lt;/code> - we&amp;rsquo;ll refer to this as our &lt;code>sourceDid&lt;/code> for this example&lt;/li>
+&lt;li>&lt;code>elementId&lt;/code> of the Part Studio that contains the part - this is our &lt;code>sourceEid&lt;/code>&lt;/li>
+&lt;li>&lt;code>versionId&lt;/code> - this is our &lt;code>sourceVId&lt;/code>, if one exists&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Call the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Part/getPartsWMVE">Part/getPartsWMVE&lt;/a> endpoint to get the part&amp;rsquo;s &lt;code>partId&lt;/code>:
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;GET&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v8/parts/d/{did}/w/{wid}/e/{eid}?withThumbnails=false&amp;amp;includePropertyDefaults=false&amp;#39; \
+-H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39;\
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39;
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>Now open the assembly you want to insert the part into. Make a note of the following from the URL:
+&lt;ul>
+&lt;li>&lt;code>documentId&lt;/code> - we&amp;rsquo;ll refer to this as our &lt;code>targetDid&lt;/code>&lt;/li>
+&lt;li>&lt;code>workspaceId&lt;/code> - this is our &lt;code>targetWId&lt;/code>&lt;/li>
+&lt;li>&lt;code>elementId&lt;/code> of the assembly - this is our &lt;code>targetEid&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Call the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Assembly/createInstance">Assembly/createInstance&lt;/a> endpoint on the assembly to insert an instance of the part into the assembly:
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v8/assemblies/d/{targetDid}/w/{targetWid}/e/{targetEid}/instances&amp;#39; \
+-H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39;\
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-d &amp;#39;{
+&amp;#34;documentId&amp;#34;: &amp;#34;{sourceDid}&amp;#34;,
+&amp;#34;elementId&amp;#34;: &amp;#34;{sourceEid}&amp;#34;,
+&amp;#34;includePartTypes&amp;#34;: [
+&amp;#34;PARTS&amp;#34;
+],
+&amp;#34;partId&amp;#34;: &amp;#34;{partId}&amp;#34;
+}&amp;#39;
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Note: you can add &lt;code>&amp;quot;versionId&amp;quot;: &amp;quot;{sourceVid}&amp;quot;&lt;/code> to the request body if needed.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Refresh your assembly and confirm the part is included.&lt;/li>
+&lt;/ol>
+&lt;h2 id="additional-resources">Additional Resources&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Assembly">API Explorer: Assemblies&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://onshape-public.github.io/docs/api-intro/explorer">API Guide: API Explorer&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://cad.onshape.com/help/Content/assembly.htm">Onshape Help: Assemblies&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Docs: Associativity</title><link>https://onshape-public.github.io/docs/api-adv/associativity/</link><pubDate>Mon, 18 May 2020 20:28:26 -0400</pubDate><guid>https://onshape-public.github.io/docs/api-adv/associativity/</guid><description>
 &lt;p>Onshape does not expose a persistent ID for any of these entities. When the model changes, the ID may change. Therefore, Onshape provides an API to enable mapping IDs from a previous microversion to the current microversion. Assuming a simple case of maintaining associativity for a face, an abstract workflow might be:&lt;/p>
 &lt;ol>
 &lt;li>Read the tessellated model data.&lt;/li>
@@ -412,7 +501,7 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &lt;ul>
 &lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Element">API Explorer: Configurations&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://onshape-public.github.io/docs/api-intro/explorer">API Guide: API Explorer&lt;/a>&lt;/li>
-&lt;li>&lt;a href="%5Bconfigurations%5D(https://cad.onshape.com/help/Content/configurations.htm)">Onshape Help: Configurations&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://cad.onshape.com/help/Content/configurations.htm">Onshape Help: Configurations&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>Docs: Drawings</title><link>https://onshape-public.github.io/docs/api-adv/drawings/</link><pubDate>Thu, 12 Oct 2023 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/drawings/</guid><description>
 &lt;p>This page describes the APIs Onshape provides for creating and manipulating Onshape drawings.&lt;/p>
 &lt;blockquote>
