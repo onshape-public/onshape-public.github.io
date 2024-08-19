@@ -1100,6 +1100,89 @@ Check out the &lt;a href="#sample-workflows">Sample Workflows&lt;/a> section bel
 &lt;/code>&lt;/pre>&lt;/li>
 &lt;li>Open your drawing and confirm that you see the new table.&lt;/li>
 &lt;/ol>
+&lt;h3 id="specify-a-snap-point">Specify a snap point&lt;/h3>
+&lt;p>You can use the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Drawing/modifyDrawing">Drawings/modifyDrawing&lt;/a> to choose the snap points for annotations. Available types of snap points are:&lt;/p>
+&lt;pre tabindex="0">&lt;code> ModeApint // Apparent intersection
+ModeCenter // Center point
+ModeEnd // End point
+ModeIns // Insertion point
+ModeIntersec // Intersection
+ModeMid // Midpoint
+ModeNear // Nearest point
+ModeNode // Node
+ModePar // Parallel
+ModePerp // Perpendicular
+ModeQuad // Quadrant
+ModeStart // Start point
+ModeTan // Tangent point
+&lt;/code>&lt;/pre>&lt;ol>
+&lt;li>Create a sketch in Onshape with two circles, then extrude both circles.&lt;/li>
+&lt;li>Create a drawing of the part&amp;rsquo;s front view. We&amp;rsquo;ll use the Drawings API to a point to point centerline snapped to the centers of the holes.
+&lt;/br>&lt;img src="https://onshape-public.github.io/images/drawings-snap-before-01.png" alt="drawing front view of a box with two holes" width=350>&lt;/li>
+&lt;li>Next, we&amp;rsquo;ll need to get the view ID of the drawing. Call the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Drawing/getDrawingViews_1">Drawing/getDrawingViews_1&lt;/a> endpoint on your document to get a list of all views in the drawing, and copy the &lt;code>viewId&lt;/code> from the response:&lt;/li>
+&lt;/ol>
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;GET&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v8/drawings/d/{did}/w/{wid}/e/{eid}/views&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \s
+-H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39;
+&lt;/code>&lt;/pre>&lt;ol start="4">
+&lt;li>Use the &lt;code>viewId&lt;/code> from the last step to get the &lt;code>uniqueId&lt;/code> (or &lt;code>edgeId&lt;/code>) of each circle&amp;rsquo;s center from the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Drawing/getDrawingViewJsonGeometry_1">Drawing/getDrawingViewJsonGeometry_1)&lt;/a> endpoint:&lt;/li>
+&lt;/ol>
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;GET&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v8/drawings/d/{did}/w/{wid}/e/{eid}/views/{viewId}/jsongeometry&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \s
+-H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+&lt;/code>&lt;/pre>&lt;ol start="5">
+&lt;li>Start to form the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Drawing/modifyDrawing">Drawings/modifyDrawing&lt;/a> call. Replace the URL parameters with the values from your document, and replace &lt;code>CREDENTIALS&lt;/code> with your authorization credentials.
+&lt;pre tabindex="0">&lt;code>&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>Add information about the modification. In this example, we&amp;rsquo;ll add a &lt;code>pointToPointCenterline&lt;/code> to the drawing. Make sure to update the request body values as followis:&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>&lt;code>messageName&lt;/code>: &lt;code>&amp;quot;onshapeCreateAnnotation&amp;quot;&lt;/code>&lt;/li>
+&lt;li>&lt;code>formatVersion&lt;/code>: &lt;code>&amp;quot;2021-01-01&amp;quot;&lt;/code>&lt;/li>
+&lt;li>&lt;code>uniqueId&lt;/code>: From Step 4&lt;/li>
+&lt;li>&lt;code>viewId&lt;/code>: From Step 3&lt;/li>
+&lt;li>&lt;code>coordinates&lt;/code>: The values must be sent as part of the request, but are ignored.
+&lt;pre tabindex="0">&lt;code> curl -X &amp;#39;POST \
+&amp;#39;https://cad.onshape.doc/api/v8/drawings/d/{did}/w/{wid}/e/{eid}/modify&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \s
+-H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-d {
+&amp;#34;description&amp;#34;: &amp;#34;creating a snap point&amp;#34;,
+&amp;#34;jsonRequests&amp;#34;: [ {
+&amp;#34;messageName&amp;#34;: &amp;#34;onshapeCreateAnnotations&amp;#34;,
+&amp;#34;formatVersion&amp;#34;: &amp;#34;2021-01-01&amp;#34;,
+&amp;#34;annotations&amp;#34;: [
+{
+&amp;#34;pointToPointCenterline&amp;#34;: {
+&amp;#34;point1&amp;#34;: {
+&amp;#34;coordinate&amp;#34;: [0,0,0],
+&amp;#34;type&amp;#34;: &amp;#34;Onshape::Reference::Point&amp;#34;,
+&amp;#34;uniqueId&amp;#34;: &amp;#34;{uniqueId1}&amp;#34;,
+&amp;#34;viewId&amp;#34;: &amp;#34;{viewId}&amp;#34;,
+&amp;#34;snapPointType&amp;#34;: &amp;#34;ModeCenter&amp;#34;
+},
+&amp;#34;point2&amp;#34;: {
+&amp;#34;coordinate&amp;#34;: [0,0,0],
+&amp;#34;type&amp;#34;: &amp;#34;Onshape::Reference::Point&amp;#34;,
+&amp;#34;uniqueId&amp;#34;: &amp;#34;{uniqueId2}&amp;#34;,
+&amp;#34;viewId&amp;#34;: &amp;#34;{viewId}&amp;#34;,
+&amp;#34;snapPointType&amp;#34;: &amp;#34;ModeCenter&amp;#34;
+}
+},
+&amp;#34;type&amp;#34;: &amp;#34;Onshape::Centerline::PointToPoint&amp;#34;
+}
+]
+}]
+}
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;/ul>
+&lt;ol start="7">
+&lt;li>Return to your document and see that the centerline has been added to the document at the snap points.
+&lt;/br>&lt;img src="https://onshape-public.github.io/images/drawings-snap-after-01.png" alt="drawing front view of a box with two holes with a centerline between the hole centers" width=350>&lt;/li>
+&lt;/ol>
 &lt;h2 id="additional-resources">Additional Resources&lt;/h2>
 &lt;ul>
 &lt;li>&lt;a href="https://onshape-public.github.io/docs/api-intro//#onshape-api-request">Guide to Onshape APIs&lt;/a>&lt;/li>
