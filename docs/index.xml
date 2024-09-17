@@ -1,1 +1,418 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Welcome to the Onshape Developer Documentation on</title><link>https://onshape-public.github.io/docs/</link><description>Recent content in Welcome to the Onshape Developer Documentation on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 01 Jan 0001 00:00:00 +0000</lastBuildDate><atom:link href="https://onshape-public.github.io/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>Changelog</title><link>https://onshape-public.github.io/docs/changelog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/changelog/</guid><description>rel-1.186 - released 2024-08-29 Added new V9 version to the api (https://cad.onshape.com/api/versions), returning deterministicIds in query responses for GET : &amp;lsquo;/features&amp;rsquo;. New list tasks endpoint GET : /tasks New create task endpoint POST : /tasks New list tasks endpoint GET : /tasks/[:tid] New update task endpoint POST : /tasks/[:tid] New transition task endpoint POST : /tasks/[:tid]/[:transition] Updated modify drawings endpoint POST : /drawings/d/[:did]/w/[:wid]/e/[:eid]/modify to support editing annotations (messageName = onshapeEditAnnotations) rel-1.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Welcome to the Onshape Developer Documentation on</title><link>https://onshape-public.github.io/docs/</link><description>Recent content in Welcome to the Onshape Developer Documentation on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 01 Jan 0001 00:00:00 +0000</lastBuildDate><atom:link href="https://onshape-public.github.io/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>Changelog</title><link>https://onshape-public.github.io/docs/changelog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/changelog/</guid><description>&lt;h4 id="rel-1186---released-2024-08-29">&lt;code>rel-1.186&lt;/code> - released 2024-08-29&lt;/h4>
+&lt;ul>
+&lt;li>Added new &lt;code>V9&lt;/code> version to the api (&lt;a href="https://cad.onshape.com/api/versions)">https://cad.onshape.com/api/versions)&lt;/a>, returning &lt;code>deterministicIds&lt;/code> in query responses for &lt;code>GET&lt;/code> : &amp;lsquo;/features&amp;rsquo;.&lt;/li>
+&lt;li>New list tasks endpoint &lt;code>GET&lt;/code> : &lt;code>/tasks&lt;/code>&lt;/li>
+&lt;li>New create task endpoint &lt;code>POST&lt;/code> : &lt;code>/tasks&lt;/code>&lt;/li>
+&lt;li>New list tasks endpoint &lt;code>GET&lt;/code> : &lt;code>/tasks/[:tid]&lt;/code>&lt;/li>
+&lt;li>New update task endpoint &lt;code>POST&lt;/code> : &lt;code>/tasks/[:tid]&lt;/code>&lt;/li>
+&lt;li>New transition task endpoint &lt;code>POST&lt;/code> : &lt;code>/tasks/[:tid]/[:transition]&lt;/code>&lt;/li>
+&lt;li>Updated modify drawings endpoint &lt;code>POST&lt;/code> : &lt;code>/drawings/d/[:did]/w/[:wid]/e/[:eid]/modify&lt;/code> to support editing annotations (&lt;code>messageName&lt;/code> = &lt;code>onshapeEditAnnotations&lt;/code>)&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1185---released-2024-08-12">&lt;code>rel-1.185&lt;/code> - released 2024-08-12&lt;/h4>
+&lt;ul>
+&lt;li>Updated all endpoints that return a user summary (createdBy, modifiedBy) have a new boolean property &lt;code>isOnshapeSupport&lt;/code> for use to separate Onshape support employee activities.&lt;/li>
+&lt;li>Updated all &lt;code>bodyDetails&lt;/code>, &lt;code>tessellatededged&lt;/code>, and &lt;code>tessellatedfaces&lt;/code> endpionts (parts and Part Studios) to include &lt;code>errorEnum&lt;/code> vales for detecting new mate position, curve pattern and Simulation material checks.&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1184---released-2024-07-19">&lt;code>rel-1.184&lt;/code> - released 2024-07-19&lt;/h4>
+&lt;ul>
+&lt;li>Updated API version to &lt;code>V8&lt;/code>, (&lt;a href="https://cad.onshape.com/api/versions)">https://cad.onshape.com/api/versions)&lt;/a>, A new microversion will not be created when a document restore operation results in a no-op.&lt;/li>
+&lt;li>Remove inconsistencies in assembly definition endpoint (&lt;code>/assemblies/d/[did]/[wvm]/[wvmid]/e/[eid]&lt;/code>) related to configuration parameters&lt;/li>
+&lt;li>Update all translation endpoints (&lt;code>POST&lt;/code> : &lt;code>../translations&lt;/code>) to include new request property &lt;code>useFileNameToSetSinglePartName&lt;/code>&lt;/li>
+&lt;li>Update all revision endpoints (&lt;code>GET&lt;/code> : &lt;code>/revisions/..&lt;/code>) to include response property &lt;code>canChangeType&lt;/code> (supporting new admin option to change type part, assembly, file, etc)&lt;/li>
+&lt;li>Update &lt;code>GET&lt;/code> : &lt;code>/users/[:uid]/settings&lt;/code> endpoint to include responses for &lt;code>highlightLaminarEdges&lt;/code> and &lt;code>perspectiveModeOn&lt;/code> for &lt;code>default&lt;/code> status&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1183---released-2024-06-28">&lt;code>rel-1.183&lt;/code> - released 2024-06-28&lt;/h4>
+&lt;ul>
+&lt;li>Added new &lt;code>V7&lt;/code> version to the api (&lt;a href="https://cad.onshape.com/api/versions">https://cad.onshape.com/api/versions&lt;/a>)&lt;/li>
+&lt;li>Updated &lt;code>GET&lt;/code> : &lt;code>V7/partstudios/d/[did]/[wvm]/[wvmid]/e/[eid]/sketches&lt;/code> to return fully defined status (UNDERDEFINED, WELL_DEFINED, OVERDEFINED, UNKNOWN)&lt;/li>
+&lt;li>Updated &lt;code>GET&lt;/code> : &lt;code>V7/partstudios/d/[did]/[wvm]/[wvmid]/e/[eid]/sketches&lt;/code> vectors are now maps instead of arrays, and may be &lt;code>BTVector2d&lt;/code> or &lt;code>BTVector3d&lt;/code> depending on the &lt;code>output3D&lt;/code> parameter&lt;/li>
+&lt;li>Updated &lt;code>GET&lt;/code> : &lt;code>V7/partstudios/d/[did]/[wvm]/[wvmid]/e/[eid]/sketches&lt;/code> to use more consistent naming:&lt;/li>
+&lt;/ul>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th style="text-align: left">Fields&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>sketch&lt;/code> -&amp;gt; &lt;code>name&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>sketchId&lt;/code> -&amp;gt; &lt;code>featureId&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>transformMatrix&lt;/code> -&amp;gt; &lt;code>sketchMatrix&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>featuresUsed&lt;/code> -&amp;gt; &lt;code>featuresUsingSketch&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>geomEntities&lt;/code> -&amp;gt; &lt;code>entities&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;ul>
+&lt;li>Updated &lt;code>GET&lt;/code> : &lt;code>/variables&lt;/code> endpoint to return variable description when variable is set through custom feature&lt;/li>
+&lt;li>Updated &lt;code>POST&lt;/code> : &lt;code>/webhooks&lt;/code> endpoint to default to &lt;code>isTransient = true&lt;/code> if not specified (auto cleanup)&lt;/li>
+&lt;li>Updated descriptions for Assembly, Documents, Metadata, Parts, Part Studios, Revisions, Variables and Versions enddpoints&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1182---released-2024-06-07">&lt;code>rel-1.182&lt;/code> - released 2024-06-07&lt;/h4>
+&lt;ul>
+&lt;li>Updated descriptions for &lt;code>webhooks&lt;/code> endpoints&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1181---released-2024-05-17">&lt;code>rel-1.181&lt;/code> - released 2024-05-17&lt;/h4>
+&lt;ul>
+&lt;li>Update Document, Assembly, Blob, Drawing and Part Studio translation &lt;code>POST&lt;/code> endpoints to have a new request body property &lt;code>occurancesToExport&lt;/code>&lt;/li>
+&lt;li>Update to &lt;code>/elements&lt;/code> endpoint summary and descriptions in Glassworks&lt;/li>
+&lt;li>Updated documentation for webhooks (&lt;a href="https://onshape-public.github.io/docs/app-dev/webhook/">https://onshape-public.github.io/docs/app-dev/webhook/&lt;/a>)&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1180---released-2024-04-26">&lt;code>rel-1.180&lt;/code> - released 2024-04-26&lt;/h4>
+&lt;ul>
+&lt;li>New Drawings sample application (public repo: &lt;a href="https://github.com/onshape-public/onshapedrawingjson">https://github.com/onshape-public/onshapedrawingjson&lt;/a>)&lt;/li>
+&lt;li>New API Guide section for response codes (&lt;a href="https://onshape-public.github.io/docs/api-adv/errors/">https://onshape-public.github.io/docs/api-adv/errors/&lt;/a>)&lt;/li>
+&lt;li>Support export of tables in JSON of Drawings &lt;code>GET&lt;/code> : &lt;code>/appelements/[:did]/[:wvm]/[:wvmid]/e/[:eid]/views/[:viewid]/jsongeometry&lt;/code>&lt;/li>
+&lt;li>Update Assembly, Blob, Drawing and Part Studio translation &lt;code>POST&lt;/code> endpoints to have a new request body property &lt;code>resolution&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1179---released-2024-04-05">&lt;code>rel-1.179&lt;/code> - released 2024-04-05&lt;/h4>
+&lt;ul>
+&lt;li>New drawing views list endpoint &lt;code>GET&lt;/code> : &lt;code>/appelements/[:did]/[:wvm]/[:wvmid]/e/[:eid]/views&lt;/code>&lt;/li>
+&lt;li>New drawing view endpoint &lt;code>GET&lt;/code> : &lt;code>/appelements/[:did]/[:wvm]/[:wvmid]/e/[:eid]/views/[:viewid]/jsongeometry&lt;/code>&lt;/li>
+&lt;li>New updated features endpoint documentation&lt;/li>
+&lt;li>Updated glassworks for all metadata endpoints to reference developer documentation&lt;/li>
+&lt;li>Added description of output to schema for Metadata APIs&lt;/li>
+&lt;li>Updated translation endpoints with new request property &lt;code>specifyMaterialData&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1178---released-2024-03-15">&lt;code>rel-1.178&lt;/code> - released 2024-03-15&lt;/h4>
+&lt;ul>
+&lt;li>Update Part Studio translation &lt;code>POST&lt;/code> endpoint to have a new request body property &lt;code>importMaterialDensity&lt;/code>&lt;/li>
+&lt;li>Update active workflow endpost &lt;code>GET&lt;/code>: &lt;code>/workflow/active&lt;/code> to have a new response property &lt;code>hasInactiveCustomWorkflows&lt;/code>&lt;/li>
+&lt;li>Updated authorization (OAuth2 and BasicAuth) for publication endpoints&lt;/li>
+&lt;li>Various updates to descriptions of data types and query parameters&lt;/li>
+&lt;li>Fixed delete publication endpoint (&lt;code>HTTP::200&lt;/code> now removes publication)&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1177---released-2024-02-23">&lt;code>rel-1.177&lt;/code> - released 2024-02-23&lt;/h4>
+&lt;ul>
+&lt;li>Updated translation endpoints with new request property &lt;code>useIGESImportPostProcessing&lt;/code>&lt;/li>
+&lt;li>Updated translation endpoints with modified request property &lt;code>stepParasolidPreprocessingOption&lt;/code>&lt;/li>
+&lt;li>Updated descriptions for &lt;code>metadata&lt;/code> | &lt;code>releasepackages&lt;/code> for property &lt;code>propertyOverrideStatus&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1176---released-2024-02-02">&lt;code>rel-1.176&lt;/code> - released 2024-02-02&lt;/h4>
+&lt;ul>
+&lt;li>New create publication endpoint &lt;code>POST&lt;/code> : &lt;code>/publications&lt;/code>&lt;/li>
+&lt;li>New update publication endpoint &lt;code>POST&lt;/code>: &lt;code>/publications/[:pid]&lt;/code>&lt;/li>
+&lt;li>New delete publication endpoint &lt;code>DELETE&lt;/code>: &lt;code>/publications/[:pid]&lt;/code>&lt;/li>
+&lt;li>New create publication item endpoint &lt;code>POST&lt;/code> : &lt;code>/publications/item&lt;/code>&lt;/li>
+&lt;li>New update publication item endpoint &lt;code>POST&lt;/code>: &lt;code>/publications/item/[:iid]&lt;/code>&lt;/li>
+&lt;li>New delete publication item endpoint &lt;code>DELETE&lt;/code>: &lt;code>/publications/item/[:iid]&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1175---released-2024-01-12">&lt;code>rel-1.175&lt;/code> - released 2024-01-12&lt;/h4>
+&lt;ul>
+&lt;li>Exclude suppressed sub assemblies from rootAssembly occurrences for &lt;code>GET&lt;/code>: &lt;code>/assemblies/d/[did]/[wvm]/[wvmid]/e/[eid]&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1174---released-2023-12-15">&lt;code>rel-1.174&lt;/code> - released 2023-12-15&lt;/h4>
+&lt;ul>
+&lt;li>Add microversion id the extension url &lt;code>[$microversionId]&lt;/code>&lt;/li>
+&lt;li>Updated translation endpoints with new request property &lt;code>pdfVersion&lt;/code>&lt;/li>
+&lt;li>Fixed issue with bodydetails endpoints always returning &lt;code>isInner&lt;/code> and &lt;code>isOuter&lt;/code> the same&lt;/li>
+&lt;li>Update all endpoints for &lt;code>bodydetails&lt;/code> | &lt;code>tessellatededges&lt;/code> | &lt;code>tessellatedfaces&lt;/code> | &lt;code>featurescript&lt;/code> to include new response body &lt;code>errorEnum&lt;/code>:&lt;/li>
+&lt;/ul>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th style="text-align: left">errorEnum&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>BODY_DRAFT_STRAY_NONMITER_EDGES&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>MASS_PROPERTY_FACES_NOT_COPLANAR&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>PARAMETER_VALUE_INVALID&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>SHEET_METAL_CHAMFER_NO_TANGENT_BASED&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>CHAMFER_DIRECTION_OVERRIDE_NO_EFFECT&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>FILLET_CHAMFER_UNSUPPORTED&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>CHAMFER_HELD_BACK&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>SWEEP_BAD_LOCK_DIRECTION&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>SHEET_METAL_COUNTER_HOLE_UNSUPPORTED&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>SWEEP_SELECT_DIRECTION&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;ul>
+&lt;li>Update all endpoints for &lt;code>bodydetails&lt;/code> | &lt;code>tessellatededges&lt;/code> | &lt;code>tessellatedfaces&lt;/code> | &lt;code>featurescript&lt;/code> to include new property &lt;code>imageForeignId&lt;/code>&lt;/li>
+&lt;li>Support sending a list of emails to &lt;code>POST&lt;/code> : &lt;code>/classrooms/[cid]/members&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1173---released-2023-11-28">&lt;code>rel-1.173&lt;/code> - released 2023-11-28&lt;/h4>
+&lt;ul>
+&lt;li>Update all classroom endpoints (&lt;code>/classrooms/&lt;/code>) to support OAuth&lt;/li>
+&lt;li>Add description of output to schema for getAssemblyShadedViews API&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1172---released-2023-11-06">&lt;code>rel-1.172&lt;/code> - released 2023-11-06&lt;/h4>
+&lt;ul>
+&lt;li>Update all endpoints for &lt;code>bodydetails&lt;/code> | &lt;code>tessellatededges&lt;/code> | &lt;code>tessellatedfaces&lt;/code> | &lt;code>featurescript&lt;/code> to include new response body &lt;code>errorEnum&lt;/code>:&lt;/li>
+&lt;/ul>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th style="text-align: left">errorEnum&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>FIT_TOLERANCE_LIMITS_NOT_FOUND&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>FIT_TOLERANCE_SIZE_TOO_LARGE_ISO&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>FIT_TOLERANCE_SIZE_TOO_LARGE_ANSI&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>OFFSET_WIRE_SHEET_CREATION_FAILED&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>REPLACE_FACE_SHEET_SMALL&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>REPLACE_FACES_NOT_ADJACENT&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>SHEET_METAL_HOLE_REBUILD_FAILED&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>CPLANE_TANGENT_INPUT&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>CPLANE_TANGENT_SELECT_REFERENCE&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>CNE_TANGENT_PLANE_INVALID&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>CPLANE_TANGENT_POINT_INVALID&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>REPLACE_FACES_NOT_SAME_BODY&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>MUST_USE_DEFAULT_RADIUS_WITH_FACE_BEND&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>CANNOT_RIP_A_FACE_BEND&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>CANNOT_MAKE_A_FACE_BEND_TANGENT&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;ul>
+&lt;li>References to &lt;code>API Guide&lt;/code> for endpoint descriptions in Glassworks&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1171---released-2023-10-13">&lt;code>rel-1.171&lt;/code> - released 2023-10-13&lt;/h4>
+&lt;ul>
+&lt;li>Update all translation &lt;code>POST&lt;/code> endpoints to have a new request body properties &lt;code>hideInspectionItems&lt;/code> and &lt;code>textOption&lt;/code>&lt;/li>
+&lt;li>Replaced &lt;code>GET&lt;/code> : &lt;code> /releasepackages/companyreleaseworkflow&lt;/code> | &lt;code>/workflow/active&lt;/code> property &lt;code>canCurrentUserSyncVersionsToArena&lt;/code> with &lt;code>canCurrentUserSyncStandardContentToArena&lt;/code>&lt;/li>
+&lt;li>Updated &lt;code>GET&lt;/code> and &lt;code>POST&lt;/code> : &lt;code>/tabletemplates&lt;/code> endpoint with new response property &lt;code>valueType&lt;/code>&lt;/li>
+&lt;li>Comprehensive update to remaining endpoint summary and descriptions in Glassworks&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1170---released-2023-09-22">&lt;code>rel-1.170&lt;/code> - released 2023-09-22&lt;/h4>
+&lt;ul>
+&lt;li>New appelements delete subelement endpoint &lt;code>DELETE&lt;/code> : &lt;code>/appelements/d/[did]/[wvm]/[wvmid]/e/[eid]/content/subelements&lt;/code>&lt;/li>
+&lt;li>New company add new user endoint &lt;code>POST&lt;/code> : &lt;code>/companies/[cid]/users&lt;/code>&lt;/li>
+&lt;li>New company update user endoint &lt;code>POST&lt;/code> : &lt;code>/companies/[cid]/users/[uid]&lt;/code>&lt;/li>
+&lt;li>New company delete user endoint &lt;code>DELETE&lt;/code> : &lt;code>/companies/[cid]/users/[uid]&lt;/code>&lt;/li>
+&lt;li>Comprehensive update to remaining endpoint summary and descriptions in Glassworks&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1169---released-2023-09-01">&lt;code>rel-1.169&lt;/code> - released 2023-09-01&lt;/h4>
+&lt;ul>
+&lt;li>Comprehensive update to most endpoint summary and descriptions in Glassworks&lt;/li>
+&lt;li>Update all translation endpoints to include new property &lt;code>importAppearances&lt;/code>&lt;/li>
+&lt;li>Update &lt;code>POST&lt;/code> : &lt;code>/partstudios/d/[did]/[wvm]/[wvmid]/e/[eid]/featurescript&lt;/code> has a new property &lt;code>expressionErrorInfo&lt;/code>&lt;/li>
+&lt;li>Update &lt;code>GET&lt;/code> and &lt;code>POST&lt;/code> : &lt;code>/releasepackages/[rpid]&lt;/code> property &lt;code>workflow/actions&lt;/code> has a new enum value &lt;code>REASSIGN_TASK&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1168---released-2023-08-11">&lt;code>rel-1.168&lt;/code> - released 2023-08-11&lt;/h4>
+&lt;ul>
+&lt;li>Deprecated &lt;code>POST&lt;/code> : &lt;code>/api/drawings/create&lt;/code> -&amp;gt; Replaced with &lt;code>POST&lt;/code> : &lt;code>/api/drawings/d/[did]/w/w/[wid]/create&lt;/code>&lt;/li>
+&lt;li>Update &lt;code>GET&lt;/code> : &lt;code>/api/documents&lt;/code> endpoint has a new property &lt;code>publishedVersion&lt;/code>&lt;/li>
+&lt;li>Update &lt;code>GET&lt;/code> and &lt;code>POST&lt;/code> : &lt;code>/api/releasepackages/[rpid]&lt;/code> has a new property &lt;code>syncedWithPLM&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1167---released-2023-07-21">&lt;code>rel-1.167&lt;/code> - released 2023-07-21&lt;/h4>
+&lt;ul>
+&lt;li>Update glTF translation endpoints to use new field &lt;code>useGltfCompression&lt;/code> (bool)&lt;/li>
+&lt;li>Update STEP translation endpoints to use new field &lt;code>stepParasolidPreprocessingOption&lt;/code> (0-None, 1-Advanced, 2-Automatic, 3-Basic)&lt;/li>
+&lt;li>Update &lt;code>GET&lt;/code> : &lt;code>/api/documents&lt;/code> | &lt;code>/api/documents/[did]&lt;/code> | &lt;code>/api/companies/[cid]/documentsbyname&lt;/code> to include new field &lt;code>forceExportRules&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1165---released-2023-06-12">&lt;code>rel-1.165&lt;/code> - released 2023-06-12&lt;/h4>
+&lt;ul>
+&lt;li>Support &lt;code>partId&lt;/code> array string for &lt;code>GET&lt;/code> : &lt;code>/api/partstudios/bodydetails&lt;/code> endpoint for the option of getting a subset of parts from a partstudio (empty = all parts)&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1163---released-2023-04-28">&lt;code>rel-1.163&lt;/code> - released 2023-04-28&lt;/h4>
+&lt;ul>
+&lt;li>Update documentation for the Documents endpoint (&lt;code>/api/documents&lt;/code>)&lt;/li>
+&lt;li>Update Releasepackage endpoint &lt;code>GET&lt;/code> : &lt;code>/api/releasepackage&lt;/code> to include &lt;code>type&lt;/code> to understand action (ie. Approve vs Reject)&lt;/li>
+&lt;li>Update API to V6 - Fix a bug in how updating the JSON tree of an app element in a transaction returns the diff&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1162---released-2023-04-12">&lt;code>rel-1.162&lt;/code> - released 2023-04-12&lt;/h4>
+&lt;ul>
+&lt;li>New Assembly modify endpoint &lt;code>POST&lt;/code> : &lt;code>/api/assemblies/d/{did}/w/{wid}/e/{eid}/modify&lt;/code> for bulk deletion and suppression of instances and features&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1161---released-2023-03-20">&lt;code>rel-1.161&lt;/code> - released 2023-03-20&lt;/h4>
+&lt;ul>
+&lt;li>New BOM templates endpoint (&lt;code>/api/tabletemplates&lt;/code>)&lt;/li>
+&lt;li>Support POST &lt;code>/api/webhooks&lt;/code> parameter &lt;code>isTransient = true&lt;/code> to specify auto cleanup after a set number of days&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1160---released-2023-02-24">&lt;code>rel-1.160&lt;/code> - released 2023-02-24&lt;/h4>
+&lt;ul>
+&lt;li>Support configuratons for &lt;code>GET&lt;/code> : &lt;code>/api/partstudios/d/{did}/{wvm}/{wvmid}/e/{eid}/features&lt;/code>&lt;/li>
+&lt;li>Remove deprecated &lt;code>GET&lt;/code> : &lt;code>/api/elements/:emid&lt;/code>&lt;/li>
+&lt;li>Remove deprecated &lt;code>GET&lt;/code> and &lt;code>POST&lt;/code> : &lt;code>/api/elements/d/:did/[wvm]/:wvmid/e/:eid/metadata&lt;/code>&lt;/li>
+&lt;li>Deprecated &lt;code>GET&lt;/code> and &lt;code>POST&lt;/code> : &lt;code>/api/parts/standardcontent/d/:did/v/:vid/e/:eid/[cu]/:cuid/partid/:pid/metadata&lt;/code>&lt;/li>
+&lt;li>Deprecated &lt;code>GET&lt;/code> and &lt;code>POST&lt;/code> : &lt;code>/api/parts/d/:did/[wvm]/:wmvid/e/:eid/partid/:pid/metadata&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1158---released-2023-01-11">&lt;code>rel-1.158&lt;/code> - released 2023-01-11&lt;/h4>
+&lt;ul>
+&lt;li>New example values in Glassworks API documentation&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1155---released-2022-11-01">&lt;code>rel-1.155&lt;/code> - released 2022-11-01&lt;/h4>
+&lt;ul>
+&lt;li>Support Parasolid binary (x_b) exports&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1154---released-2022-10-10">&lt;code>rel-1.154&lt;/code> - released 2022-10-10&lt;/h4>
+&lt;ul>
+&lt;li>Add face color, hidden state and type of composite to body details endpoint&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1152---released-2022-08-30">&lt;code>rel-1.152&lt;/code> - released 2022-08-30&lt;/h4>
+&lt;ul>
+&lt;li>Support more parameters to filter the partstudio endpoint&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1147---released-2022-05-16">&lt;code>rel-1.147&lt;/code> - released 2022-05-16&lt;/h4>
+&lt;ul>
+&lt;li>Support global tree node endpoint for impacting recently opened filter&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1146---released-2022-04-25">&lt;code>rel-1.146&lt;/code> - released 2022-04-25&lt;/h4>
+&lt;ul>
+&lt;li>Support API versioning&lt;/li>
+&lt;li>Return ‘nodeId’ when adding or updating an AppElement&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1145---released-2022-04-05">&lt;code>rel-1.145&lt;/code> - released 2022-04-05&lt;/h4>
+&lt;ul>
+&lt;li>Fixed issue where assembly feature errors were missing&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1140---released-2021-12-15">&lt;code>rel-1.140&lt;/code> - released 2021-12-15&lt;/h4>
+&lt;ul>
+&lt;li>Add mass properties for assemblies&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1139---released-2021-11-15">&lt;code>rel-1.139&lt;/code> - released 2021-11-15&lt;/h4>
+&lt;ul>
+&lt;li>Relax casing search in Glassworks (Swagger client)&lt;/li>
+&lt;li>BOM and Metadata API endpoint responses now matched&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1138---released-2021-10-25">&lt;code>rel-1.138&lt;/code> - released 2021-10-25&lt;/h4>
+&lt;ul>
+&lt;li>Updated webhook documentation&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1135---released-2021-8-20">&lt;code>rel-1.135&lt;/code> - released 2021-8-20&lt;/h4>
+&lt;ul>
+&lt;li>Webhook events for Enterprise SSO configuration changes&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1134---released-2021-07-30">&lt;code>rel-1.134&lt;/code> - released 2021-07-30&lt;/h4>
+&lt;ul>
+&lt;li>Support comment events (add, update, delete) for the web-hook endpoint&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1131---released-2021-06-01">&lt;code>rel-1.131&lt;/code> - released 2021-06-01&lt;/h4>
+&lt;ul>
+&lt;li>Add synchronous glTF/gLB endpoint for assemblies&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1128---released-2021-03-29">&lt;code>rel-1.128&lt;/code> - released 2021-03-29&lt;/h4>
+&lt;ul>
+&lt;li>Support face color for export of glTF/gLB&lt;/li>
+&lt;li>Add document API endpoint for comments&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1127---released-2021-03-08">&lt;code>rel-1.127&lt;/code> - released 2021-03-08&lt;/h4>
+&lt;ul>
+&lt;li>Add translation option dtkPeriodicFacesPolicy=3 for CATIA parts&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1126---released-2021-02-12">&lt;code>rel-1.126&lt;/code> - released 2021-02-12&lt;/h4>
+&lt;ul>
+&lt;li>Add GLTF and GLB accepts option to the tessellation APIs&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1125---released-2021-01-25">&lt;code>rel-1.125&lt;/code> - released 2021-01-25&lt;/h4>
+&lt;ul>
+&lt;li>Add ‘good/better/best’ quality query parameters to tessellation endpoint&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1122---released-2020-11-18">&lt;code>rel-1.122&lt;/code> - released 2020-11-18&lt;/h4>
+&lt;ul>
+&lt;li>Enforce OAuth endpoint rate limiting&lt;/li>
+&lt;li>Add release package action/transition based webhooks&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1119---released-2020-09-15">&lt;code>rel-1.119&lt;/code> - released 2020-09-15&lt;/h4>
+&lt;ul>
+&lt;li>Add rollback bar to EvalFeatureScript endpoint&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1118---released-2020-08-25">&lt;code>rel-1.118&lt;/code> - released 2020-08-25&lt;/h4>
+&lt;ul>
+&lt;li>PartStudio GET support for sketch constraints in features endpoint&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1116---released-2020-07-15">&lt;code>rel-1.116&lt;/code> - released 2020-07-15&lt;/h4>
+&lt;ul>
+&lt;li>Specify starting elements to create document endpoint&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1114---released-2020-06-03">&lt;code>rel-1.114&lt;/code> - released 2020-06-03&lt;/h4>
+&lt;ul>
+&lt;li>Project endpoints&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1113---released-2020-05-11">&lt;code>rel-1.113&lt;/code> - released 2020-05-11&lt;/h4>
+&lt;ul>
+&lt;li>Output GLTF files for an element (tab)&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1111---released-2020-03-31">&lt;code>rel-1.111&lt;/code> - released 2020-03-31&lt;/h4>
+&lt;ul>
+&lt;li>Support ownership transfer for teams&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1110---released-2020-03-09">&lt;code>rel-1.110&lt;/code> - released 2020-03-09&lt;/h4>
+&lt;ul>
+&lt;li>Add support for exploded views&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1108---released-2020-01-29">&lt;code>rel-1.108&lt;/code> - released 2020-01-29&lt;/h4>
+&lt;ul>
+&lt;li>Drawings endpoints for create 4 view, get view geometry and view definition&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1102---released-2019-09-11">&lt;code>rel-1.102&lt;/code> - released 2019-09-11&lt;/h4>
+&lt;ul>
+&lt;li>Added webhook events for release management&lt;/li>
+&lt;li>Added webhook event for document version creation&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-199---released-2019-07-08">&lt;code>rel-1.99&lt;/code> - released 2019-07-08&lt;/h4>
+&lt;ul>
+&lt;li>Assembly BOM API support for items&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-196---released-2019-05-03">&lt;code>rel-1.96&lt;/code> - released 2019-05-03&lt;/h4>
+&lt;ul>
+&lt;li>Part Studio compare endpoint&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-193---released-2019-03-01">&lt;code>rel-1.93&lt;/code> - released 2019-03-01&lt;/h4>
+&lt;ul>
+&lt;li>Webhook subscriptions for a company&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-186---released-2018-09-28">&lt;code>rel-1.86&lt;/code> - released 2018-09-28&lt;/h4>
+&lt;ul>
+&lt;li>Export Drawings to DXF, DWG and PDF&lt;/li>
+&lt;/ul></description></item></channel></rss>

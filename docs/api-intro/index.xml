@@ -1,7 +1,65 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Introduction to the Onshape REST API on</title><link>https://onshape-public.github.io/docs/api-intro/</link><description>Recent content in Introduction to the Onshape REST API on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 18 May 2020 20:39:14 -0400</lastBuildDate><atom:link href="https://onshape-public.github.io/docs/api-intro/index.xml" rel="self" type="application/rss+xml"/><item><title>API Explorer</title><link>https://onshape-public.github.io/docs/api-intro/explorer/</link><pubDate>Mon, 18 May 2020 20:39:14 -0400</pubDate><guid>https://onshape-public.github.io/docs/api-intro/explorer/</guid><description>We document all available Onshape REST API endpoints in our Glassworks API Explorer:
-https://cad.onshape.com/glassworks/explorer/
-This API Explorer site enables you to run API requests directly within its interface and provides the output from the API call. To try an endpoint in the API Explorer, follow these steps or follow along with the video below:
-Open this public Onshape document in your browser: https://cad.onshape.com/documents/e60c4803eaf2ac8be492c18e/w/d2558da712764516cc9fec62/e/6bed6b43463f6a46a37b4a22 Open the API Explorer in a new browser tab: https://cad.</description></item><item><title>Architecture</title><link>https://onshape-public.github.io/docs/api-intro/architecture/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-intro/architecture/</guid><description>Design in Onshape typically beings with a document, which is the container that includes all content related to a specific design. All data in an Onshape document is stored in Elements. Part Studios and Assemblies are two of the most common element types in a design. Throughout the design process, creating versions can be useful for product development management while working on the “Main” workspace. See also:
-The API Introduction page for information on how documents, workspaces, and elements are assembled into a URL.</description></item><item><title>Quick Start</title><link>https://onshape-public.github.io/docs/api-intro/quickstart/</link><pubDate>Mon, 18 May 2020 20:39:14 -0400</pubDate><guid>https://onshape-public.github.io/docs/api-intro/quickstart/</guid><description>In this example, we will call an Onshape REST API endpoint to send a document name to our console. Please note that the sample shown on this page is only designed to be used as a quick start guide and does not represent a full Onshape application.
-System Requirements You must be signed in to your Onshape account at https://cad.onshape.com (or https://companyName.onshape.com for Enterprise accounts). This example is coded in Python.</description></item><item><title>Why Onshape?</title><link>https://onshape-public.github.io/docs/api-intro/whyonshape/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-intro/whyonshape/</guid><description>Why Onshape? As long as there have been applications that manage organizational data into a database, there has been a need to share that data between different departments and therefore, usually, different systems. In a typical design/manufacturing organization, there could be at least four or five mission-critical databases that manage the data for different departments and for different stages in the product’s lifecycle.
-Initially, these systems provide the capabilities required by their consumers (i.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Introduction to the Onshape REST API on</title><link>https://onshape-public.github.io/docs/api-intro/</link><description>Recent content in Introduction to the Onshape REST API on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 18 May 2020 20:39:14 -0400</lastBuildDate><atom:link href="https://onshape-public.github.io/docs/api-intro/index.xml" rel="self" type="application/rss+xml"/><item><title>API Explorer</title><link>https://onshape-public.github.io/docs/api-intro/explorer/</link><pubDate>Mon, 18 May 2020 20:39:14 -0400</pubDate><guid>https://onshape-public.github.io/docs/api-intro/explorer/</guid><description>&lt;p>We document all available Onshape REST API endpoints in our Glassworks API Explorer:&lt;/p>
+&lt;p>&lt;b>&lt;font size="5">&lt;a href="https://cad.onshape.com/glassworks/explorer/">https://cad.onshape.com/glassworks/explorer/&lt;/a>&lt;/font>&lt;/b>&lt;/p>
+&lt;hr>
+&lt;p>This API Explorer site enables you to run API requests directly within its interface and provides the output from the API call. To try an endpoint in the API Explorer, follow these steps or follow along with the video below:&lt;/p>
+&lt;ol>
+&lt;li>Open this public Onshape document in your browser:
+&lt;font size="1">&lt;a href="https://cad.onshape.com/documents/e60c4803eaf2ac8be492c18e/w/d2558da712764516cc9fec62/e/6bed6b43463f6a46a37b4a22">https://cad.onshape.com/documents/e60c4803eaf2ac8be492c18e/w/d2558da712764516cc9fec62/e/6bed6b43463f6a46a37b4a22&lt;/a>&lt;/font>&lt;/li>
+&lt;li>Open the API Explorer in a new browser tab: &lt;a href="https://cad.onshape.com/glassworks/explorer/">https://cad.onshape.com/glassworks/explorer/&lt;/a>
+&lt;ul>
+&lt;li>Note: For Enterprise accounts, substitue &lt;code>cad&lt;/code> in this URL with your company name.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Scroll down to &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Document">Document&lt;/a>.&lt;/li>
+&lt;li>Click to expand the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Document/getDocument">&lt;code>getDocument&lt;/code>&lt;/a> endpoint. (Hint: it appears in the API Ref as &lt;code>GET /documents/{did}&lt;/code>).&lt;/li>
+&lt;li>Go back to the public document you opened in Step 2, and copy the document ID from the Onshape URL (&lt;code>e60c4803eaf2ac8be492c18e&lt;/code>).
+&lt;img src="https://onshape-public.github.io/images/OnshapeAPIGuidePublicDoc.png" alt="image">&lt;/li>
+&lt;li>Paste the document ID into the &lt;code>did&lt;/code> field in the API Explorer.
+&lt;ul>
+&lt;li>Note: If you can&amp;rsquo;t edit the &lt;code>did&lt;/code> field, click the &lt;strong>Try it out&lt;/strong> button. This will toggle to a &lt;strong>Cancel&lt;/strong> button when the fields are editable.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Scroll down and click &lt;strong>Execute&lt;/strong>.
+&lt;ul>
+&lt;li>Note: If you receive a &lt;code>403&lt;/code> error, see the &lt;a href="#authentication">Authentication&lt;/a> section for help.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Scroll to the bottom of the 200 response body. We have correctly returned &lt;code>Onshape API Guide&lt;/code> as the document name.&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://onshape-public.github.io/images/GlassworksAPIExplorerDemo.gif" alt="gif of using glassworks">&lt;/p></description></item><item><title>Architecture</title><link>https://onshape-public.github.io/docs/api-intro/architecture/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-intro/architecture/</guid><description>&lt;p>Design in Onshape typically beings with a document, which is the container that includes all content related to a specific design. All data in an Onshape document is stored in Elements. Part Studios and Assemblies are two of the most common element types in a design. Throughout the design process, creating versions can be useful for product development management while working on the “Main” workspace. See also:&lt;/p>
+&lt;ul>
+&lt;li>The &lt;a href="https://onshape-public.github.io/docs/api-intro/">API Introduction&lt;/a> page for information on how documents, workspaces, and elements are assembled into a URL.&lt;/li>
+&lt;li>The &lt;a href="https://onshape-public.github.io/docs/api-adv/associativity">Associativity&lt;/a> page for information on how Parts, Assemblies, and Elements relate to each other.&lt;/li>
+&lt;/ul>
+&lt;h2 id="elements">Elements&lt;/h2>
+&lt;p>All data in an Onshape document are stored in Elements (represented as tabs in the user interface). Onshape documents contain five kinds of elements:&lt;/p></description></item><item><title>Quick Start</title><link>https://onshape-public.github.io/docs/api-intro/quickstart/</link><pubDate>Mon, 18 May 2020 20:39:14 -0400</pubDate><guid>https://onshape-public.github.io/docs/api-intro/quickstart/</guid><description>&lt;p>In this example, we will call an Onshape REST API endpoint to send a document name to our console. Please note that the sample shown on this page is only designed to be used as a quick start guide and does not represent a full Onshape application.&lt;/p>
+&lt;h2 id="system-requirements">System Requirements&lt;/h2>
+&lt;ul>
+&lt;li>You must be signed in to your Onshape account at &lt;a href="https://cad.onshape.com">https://cad.onshape.com&lt;/a> (or &lt;a href="https://companyName.onshape.com">https://companyName.onshape.com&lt;/a> for Enterprise accounts).&lt;/li>
+&lt;li>This example is coded in Python. The equivalent code is provided in other languages at the end of the example. To follow along with this tutorial, you can download and install Python here: &lt;a href="https://www.python.org/downloads/">https://www.python.org/downloads/&lt;/a>.&lt;/li>
+&lt;/ul>
+&lt;h2 id="review-the-api-endpoint">Review the API Endpoint&lt;/h2>
+&lt;ol>
+&lt;li>Go to the &lt;a href="https://cad.onshape.com/glassworks/explorer">API Explorer&lt;/a> and scroll to &lt;code>Document&lt;/code>.&lt;/li>
+&lt;li>Expand the &lt;code>GET /documents/{did}&lt;/code> endpoint. Note that in the URL, the name of this API is &lt;code>getDocument&lt;/code>.&lt;/li>
+&lt;li>Make a note of the URL structure and the parameters required to make this request. This will become the fixed URL part of our API call. &lt;/br>
+&lt;img src="https://onshape-public.github.io/images/Glassworks_getDocument.png" alt="image"> &lt;/br>
+For this endpoint, we only need to get the document ID from the document URL.&lt;/li>
+&lt;li>Scroll down and make a note of the &lt;code>Media Type&lt;/code> that we’ll need to include in our header. &lt;/br>
+&lt;img src="https://onshape-public.github.io/images/Glassworks_MediaType.png" alt="image">&lt;/li>
+&lt;/ol>
+&lt;h2 id="review-the-document">Review the Document&lt;/h2>
+&lt;p>Navigate to &lt;a href="https://cad.onshape.com/documents/e60c4803eaf2ac8be492c18e/w/d2558da712764516cc9fec62/e/6bed6b43463f6a46a37b4a22">this public document&lt;/a>, and make a note of the document ID in the URL (&lt;code>e60c4803eaf2ac8be492c18e&lt;/code>). &lt;/br>
+&lt;img src="https://onshape-public.github.io/images/OnshapeAPIGuidePublicDoc.png" alt="image">&lt;/p></description></item><item><title>Why Onshape?</title><link>https://onshape-public.github.io/docs/api-intro/whyonshape/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-intro/whyonshape/</guid><description>&lt;h2 id="why-onshape">Why Onshape?&lt;/h2>
+&lt;p>As long as there have been applications that manage organizational data
+into a database, there has been a need to share that data between
+different departments and therefore, usually, different systems. In a
+typical design/manufacturing organization, there could be at least four
+or five mission-critical databases that manage the data for different
+departments and for different stages in the product’s lifecycle.&lt;/p>
+&lt;p>Initially, these systems provide the capabilities required by their
+consumers (i.e., the departments that use these systems). For instance,
+the Finance might use QuickBooks, Manufacturing
+might use a manufacturing planning and execution system (MES),
+Engineering might use a Product Data management System (PDM), and so on for each
+group in the organization.&lt;/p></description></item></channel></rss>
