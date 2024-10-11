@@ -582,7 +582,16 @@ a third-party system when a part in Onshape is selected. This interface can also
 &lt;li>Use of document context&lt;/li>
 &lt;/ul>
 &lt;p>The application is built using Express and is deployed on Heroku.&lt;/p>
-&lt;p>Refer to the &lt;a href="https://github.com/onshape-public/app-gltf-viewer">gltf-viewer-app README&lt;/a> for instructions on running this sample app.&lt;/p></description></item><item><title>Changelog</title><link>https://onshape-public.github.io/docs/changelog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/changelog/</guid><description>&lt;h4 id="rel-1187---released-2024-09-20">&lt;code>rel-1.187&lt;/code> - released 2024-09-20&lt;/h4>
+&lt;p>Refer to the &lt;a href="https://github.com/onshape-public/app-gltf-viewer">gltf-viewer-app README&lt;/a> for instructions on running this sample app.&lt;/p></description></item><item><title>Changelog</title><link>https://onshape-public.github.io/docs/changelog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/changelog/</guid><description>&lt;h4 id="rel-1188---released-2024-10-11">&lt;code>rel-1.188&lt;/code> - released 2024-10-11&lt;/h4>
+&lt;ul>
+&lt;li>New appelements endpoint to resolve bulk app element references &lt;code>GET&lt;/code>: &lt;code>/appelements/d/:[did]/[:wvm]/[:wvimid]/resolvereferences&lt;/code>&lt;/li>
+&lt;li>Updated all translation endpoints with new optional request property &lt;code>evaluateExportRule&lt;/code>&lt;/li>
+&lt;li>Updated all translation endpoints with new optional request property &lt;code>excludeHiddenEntities&lt;/code>&lt;/li>
+&lt;li>Updated all translation endpoints with new optional response property &lt;code>exportRuleFileName&lt;/code>&lt;/li>
+&lt;li>Removed from all translation endpoints the request property &lt;code>invisibleEntitiesExportFilter&lt;/code>&lt;/li>
+&lt;li>Removed from &lt;code>POST&lt;/code> : &lt;code>/documents/d/[:did]/[:wv]/[:wvid]/e/[:eid]/export&lt;/code> the request property &lt;code>excludeSuppressedEntities&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1187---released-2024-09-20">&lt;code>rel-1.187&lt;/code> - released 2024-09-20&lt;/h4>
 &lt;ul>
 &lt;li>New assembly display states endpoint &lt;code>GET&lt;/code>: &lt;code>/assemblies/d/[did]/[wvm]/[wvmid]/e/[eid]/displaystates&lt;/code>&lt;/li>
 &lt;li>Updated drawings translation endpoint for the formate &lt;code>DRAWING_JSON&lt;/code> to include the field &lt;code>isDangling&lt;/code> on callouts, centerlines, GD&amp;amp;T and notes&lt;/li>
