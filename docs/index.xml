@@ -46,24 +46,24 @@
 &lt;table>
  &lt;thead>
  &lt;tr>
- &lt;th style="text-align: left">Fields&lt;/th>
+ &lt;th>Fields&lt;/th>
  &lt;/tr>
  &lt;/thead>
  &lt;tbody>
  &lt;tr>
- &lt;td style="text-align: left">&lt;code>sketch&lt;/code> -&amp;gt; &lt;code>name&lt;/code>&lt;/td>
+ &lt;td>&lt;code>sketch&lt;/code> -&amp;gt; &lt;code>name&lt;/code>&lt;/td>
  &lt;/tr>
  &lt;tr>
- &lt;td style="text-align: left">&lt;code>sketchId&lt;/code> -&amp;gt; &lt;code>featureId&lt;/code>&lt;/td>
+ &lt;td>&lt;code>sketchId&lt;/code> -&amp;gt; &lt;code>featureId&lt;/code>&lt;/td>
  &lt;/tr>
  &lt;tr>
- &lt;td style="text-align: left">&lt;code>transformMatrix&lt;/code> -&amp;gt; &lt;code>sketchMatrix&lt;/code>&lt;/td>
+ &lt;td>&lt;code>transformMatrix&lt;/code> -&amp;gt; &lt;code>sketchMatrix&lt;/code>&lt;/td>
  &lt;/tr>
  &lt;tr>
- &lt;td style="text-align: left">&lt;code>featuresUsed&lt;/code> -&amp;gt; &lt;code>featuresUsingSketch&lt;/code>&lt;/td>
+ &lt;td>&lt;code>featuresUsed&lt;/code> -&amp;gt; &lt;code>featuresUsingSketch&lt;/code>&lt;/td>
  &lt;/tr>
  &lt;tr>
- &lt;td style="text-align: left">&lt;code>geomEntities&lt;/code> -&amp;gt; &lt;code>entities&lt;/code>&lt;/td>
+ &lt;td>&lt;code>geomEntities&lt;/code> -&amp;gt; &lt;code>entities&lt;/code>&lt;/td>
  &lt;/tr>
  &lt;/tbody>
 &lt;/table>
@@ -135,39 +135,39 @@
 &lt;table>
  &lt;thead>
  &lt;tr>
- &lt;th style="text-align: left">errorEnum&lt;/th>
+ &lt;th>errorEnum&lt;/th>
  &lt;/tr>
  &lt;/thead>
  &lt;tbody>
  &lt;tr>
- &lt;td style="text-align: left">&lt;code>BODY_DRAFT_STRAY_NONMITER_EDGES&lt;/code>&lt;/td>
+ &lt;td>&lt;code>BODY_DRAFT_STRAY_NONMITER_EDGES&lt;/code>&lt;/td>
  &lt;/tr>
  &lt;tr>
- &lt;td style="text-align: left">&lt;code>MASS_PROPERTY_FACES_NOT_COPLANAR&lt;/code>&lt;/td>
+ &lt;td>&lt;code>MASS_PROPERTY_FACES_NOT_COPLANAR&lt;/code>&lt;/td>
  &lt;/tr>
  &lt;tr>
- &lt;td style="text-align: left">&lt;code>PARAMETER_VALUE_INVALID&lt;/code>&lt;/td>
+ &lt;td>&lt;code>PARAMETER_VALUE_INVALID&lt;/code>&lt;/td>
  &lt;/tr>
  &lt;tr>
- &lt;td style="text-align: left">&lt;code>SHEET_METAL_CHAMFER_NO_TANGENT_BASED&lt;/code>&lt;/td>
+ &lt;td>&lt;code>SHEET_METAL_CHAMFER_NO_TANGENT_BASED&lt;/code>&lt;/td>
  &lt;/tr>
  &lt;tr>
- &lt;td style="text-align: left">&lt;code>CHAMFER_DIRECTION_OVERRIDE_NO_EFFECT&lt;/code>&lt;/td>
+ &lt;td>&lt;code>CHAMFER_DIRECTION_OVERRIDE_NO_EFFECT&lt;/code>&lt;/td>
  &lt;/tr>
  &lt;tr>
- &lt;td style="text-align: left">&lt;code>FILLET_CHAMFER_UNSUPPORTED&lt;/code>&lt;/td>
+ &lt;td>&lt;code>FILLET_CHAMFER_UNSUPPORTED&lt;/code>&lt;/td>
  &lt;/tr>
  &lt;tr>
- &lt;td style="text-align: left">&lt;code>CHAMFER_HELD_BACK&lt;/code>&lt;/td>
+ &lt;td>&lt;code>CHAMFER_HELD_BACK&lt;/code>&lt;/td>
  &lt;/tr>
  &lt;tr>
- &lt;td style="text-align: left">&lt;code>SWEEP_BAD_LOCK_DIRECTION&lt;/code>&lt;/td>
+ &lt;td>&lt;code>SWEEP_BAD_LOCK_DIRECTION&lt;/code>&lt;/td>
  &lt;/tr>
  &lt;tr>
- &lt;td style="text-align: left">&lt;code>SHEET_METAL_COUNTER_HOLE_UNSUPPORTED&lt;/code>&lt;/td>
+ &lt;td>&lt;code>SHEET_METAL_COUNTER_HOLE_UNSUPPORTED&lt;/code>&lt;/td>
  &lt;/tr>
  &lt;tr>
- &lt;td style="text-align: left">&lt;code>SWEEP_SELECT_DIRECTION&lt;/code>&lt;/td>
+ &lt;td>&lt;code>SWEEP_SELECT_DIRECTION&lt;/code>&lt;/td>
  &lt;/tr>
  &lt;/tbody>
 &lt;/table>
@@ -187,54 +187,54 @@
 &lt;table>
  &lt;thead>
  &lt;tr>
- &lt;th style="text-align: left">errorEnum&lt;/th>
+ &lt;th>errorEnum&lt;/th>
  &lt;/tr>
  &lt;/thead>
  &lt;tbody>
  &lt;tr>
- &lt;td style="text-align: left">&lt;code>FIT_TOLERANCE_LIMITS_NOT_FOUND&lt;/code>&lt;/td>
+ &lt;td>&lt;code>FIT_TOLERANCE_LIMITS_NOT_FOUND&lt;/code>&lt;/td>
  &lt;/tr>
  &lt;tr>
- &lt;td style="text-align: left">&lt;code>FIT_TOLERANCE_SIZE_TOO_LARGE_ISO&lt;/code>&lt;/td>
+ &lt;td>&lt;code>FIT_TOLERANCE_SIZE_TOO_LARGE_ISO&lt;/code>&lt;/td>
  &lt;/tr>
  &lt;tr>
- &lt;td style="text-align: left">&lt;code>FIT_TOLERANCE_SIZE_TOO_LARGE_ANSI&lt;/code>&lt;/td>
+ &lt;td>&lt;code>FIT_TOLERANCE_SIZE_TOO_LARGE_ANSI&lt;/code>&lt;/td>
  &lt;/tr>
  &lt;tr>
- &lt;td style="text-align: left">&lt;code>OFFSET_WIRE_SHEET_CREATION_FAILED&lt;/code>&lt;/td>
+ &lt;td>&lt;code>OFFSET_WIRE_SHEET_CREATION_FAILED&lt;/code>&lt;/td>
  &lt;/tr>
  &lt;tr>
- &lt;td style="text-align: left">&lt;code>REPLACE_FACE_SHEET_SMALL&lt;/code>&lt;/td>
+ &lt;td>&lt;code>REPLACE_FACE_SHEET_SMALL&lt;/code>&lt;/td>
  &lt;/tr>
  &lt;tr>
- &lt;td style="text-align: left">&lt;code>REPLACE_FACES_NOT_ADJACENT&lt;/code>&lt;/td>
+ &lt;td>&lt;code>REPLACE_FACES_NOT_ADJACENT&lt;/code>&lt;/td>
  &lt;/tr>
  &lt;tr>
- &lt;td style="text-align: left">&lt;code>SHEET_METAL_HOLE_REBUILD_FAILED&lt;/code>&lt;/td>
+ &lt;td>&lt;code>SHEET_METAL_HOLE_REBUILD_FAILED&lt;/code>&lt;/td>
  &lt;/tr>
  &lt;tr>
- &lt;td style="text-align: left">&lt;code>CPLANE_TANGENT_INPUT&lt;/code>&lt;/td>
+ &lt;td>&lt;code>CPLANE_TANGENT_INPUT&lt;/code>&lt;/td>
  &lt;/tr>
  &lt;tr>
- &lt;td style="text-align: left">&lt;code>CPLANE_TANGENT_SELECT_REFERENCE&lt;/code>&lt;/td>
+ &lt;td>&lt;code>CPLANE_TANGENT_SELECT_REFERENCE&lt;/code>&lt;/td>
  &lt;/tr>
  &lt;tr>
- &lt;td style="text-align: left">&lt;code>CNE_TANGENT_PLANE_INVALID&lt;/code>&lt;/td>
+ &lt;td>&lt;code>CNE_TANGENT_PLANE_INVALID&lt;/code>&lt;/td>
  &lt;/tr>
  &lt;tr>
- &lt;td style="text-align: left">&lt;code>CPLANE_TANGENT_POINT_INVALID&lt;/code>&lt;/td>
+ &lt;td>&lt;code>CPLANE_TANGENT_POINT_INVALID&lt;/code>&lt;/td>
  &lt;/tr>
  &lt;tr>
- &lt;td style="text-align: left">&lt;code>REPLACE_FACES_NOT_SAME_BODY&lt;/code>&lt;/td>
+ &lt;td>&lt;code>REPLACE_FACES_NOT_SAME_BODY&lt;/code>&lt;/td>
  &lt;/tr>
  &lt;tr>
- &lt;td style="text-align: left">&lt;code>MUST_USE_DEFAULT_RADIUS_WITH_FACE_BEND&lt;/code>&lt;/td>
+ &lt;td>&lt;code>MUST_USE_DEFAULT_RADIUS_WITH_FACE_BEND&lt;/code>&lt;/td>
  &lt;/tr>
  &lt;tr>
- &lt;td style="text-align: left">&lt;code>CANNOT_RIP_A_FACE_BEND&lt;/code>&lt;/td>
+ &lt;td>&lt;code>CANNOT_RIP_A_FACE_BEND&lt;/code>&lt;/td>
  &lt;/tr>
  &lt;tr>
- &lt;td style="text-align: left">&lt;code>CANNOT_MAKE_A_FACE_BEND_TANGENT&lt;/code>&lt;/td>
+ &lt;td>&lt;code>CANNOT_MAKE_A_FACE_BEND_TANGENT&lt;/code>&lt;/td>
  &lt;/tr>
  &lt;/tbody>
 &lt;/table>

@@ -14,6 +14,7 @@ in your API calls.&lt;/li>
 &lt;li>For Enterprise accounts, replace &lt;strong>&lt;font color="slate">cad&lt;/font>&lt;/strong> in all Onshape URLs with your company domain.
 https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com &amp;gt; https://&lt;font color="slate">&lt;strong>companyName&lt;/strong>&lt;/font>
 .onshape.com&lt;/li>
+&lt;li>For additional instruction and video content, visit the Learning Center&amp;rsquo;s &lt;a href="https://learn.onshape.com/learn/course/intro-to-the-onshape-api/intro-to-the-onshape-api/what-is-an-api?page=1">Intro to the Onshape API&lt;/a> course.&lt;/li>
 &lt;/ul>
 &lt;/blockquote>
 &lt;h2 id="endpoints">Endpoints&lt;/h2>
@@ -313,6 +314,7 @@ in your API calls.&lt;/li>
 &lt;li>For Enterprise accounts, replace &lt;strong>&lt;font color="slate">cad&lt;/font>&lt;/strong> in all Onshape URLs with your company domain.
 https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com &amp;gt; https://&lt;font color="slate">&lt;strong>companyName&lt;/strong>&lt;/font>
 .onshape.com&lt;/li>
+&lt;li>For additional instruction and video content, visit the Learning Center&amp;rsquo;s &lt;a href="https://learn.onshape.com/learn/course/intro-to-the-onshape-api/intro-to-the-onshape-api/what-is-an-api?page=1">Intro to the Onshape API&lt;/a> course.&lt;/li>
 &lt;/ul>
 &lt;/blockquote>
 &lt;h2 id="endpoints">Endpoints&lt;/h2>
@@ -332,6 +334,7 @@ in your API calls.&lt;/li>
 &lt;li>For Enterprise accounts, replace &lt;strong>&lt;font color="slate">cad&lt;/font>&lt;/strong> in all Onshape URLs with your company domain.
 https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com &amp;gt; https://&lt;font color="slate">&lt;strong>companyName&lt;/strong>&lt;/font>
 .onshape.com&lt;/li>
+&lt;li>For additional instruction and video content, visit the Learning Center&amp;rsquo;s &lt;a href="https://learn.onshape.com/learn/course/intro-to-the-onshape-api/intro-to-the-onshape-api/what-is-an-api?page=1">Intro to the Onshape API&lt;/a> course.&lt;/li>
 &lt;/ul>
 &lt;/blockquote>
 &lt;h2 id="featurescript-vs-rest-api">FeatureScript vs REST API&lt;/h2>
@@ -340,10 +343,18 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &lt;p>📘 &lt;strong>Notes&lt;/strong>&lt;/p>
 &lt;ul>
 &lt;li>This page provides sample code as curls. See the &lt;a href="https://curl.se/docs/">curl documentation&lt;/a> for more information.&lt;/li>
-&lt;li>All Onshape API calls must be properly authenticated by replacing the &lt;code>CREDENTIALS&lt;/code> variable in the curls below. See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys">API Keys&lt;/a> page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart">Quick Start&lt;/a> for an example. All applications submitted to the Onshape App Store &lt;em>must&lt;/em> authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth">OAuth2&lt;/a>.&lt;/li>
-&lt;li>This documentation refers to Onshape IDs in the following format: &lt;code>{did}, {wid}, {eid}, {pid}, {otherId}&lt;/code>. These represent document, workspace, element, part, and other IDs (respectively) that are needed make the API calls. We sometimes abbreviate these variables as &lt;code>DWVEM&lt;/code> Please see &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request">API Guide: API Intro&lt;/a> for information on what these IDs mean and how to obtain them from your documents. Never include the curly braces (&lt;code>{}&lt;/code>) in your API calls.&lt;/li>
+&lt;li>All Onshape API calls must be properly authenticated by replacing the &lt;code>CREDENTIALS&lt;/code> variable in the curls below. See
+the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys">API Keys&lt;/a> page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart">Quick Start&lt;/a> for an
+example. All applications submitted to the Onshape App Store &lt;em>must&lt;/em> authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth">OAuth2&lt;/a>.&lt;/li>
+&lt;li>This documentation refers to Onshape IDs in the following format: &lt;code>{did}, {wid}, {eid}, {pid}, {otherId}&lt;/code>. These
+represent document, workspace, element, part, and other IDs (respectively) that are needed make the API calls. We
+sometimes abbreviate these variables as &lt;code>DWVEM&lt;/code> Please see &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request">API Guide: API Intro&lt;/a>
+for information on what these IDs mean and how to obtain them from your documents. Never include the curly braces (&lt;code>{}&lt;/code>)
+in your API calls.&lt;/li>
 &lt;li>For Enterprise accounts, replace &lt;strong>&lt;font color="slate">cad&lt;/font>&lt;/strong> in all Onshape URLs with your company domain.
-https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com &amp;gt; https://&lt;font color="slate">&lt;strong>companyName&lt;/strong>&lt;/font>.onshape.com&lt;/li>
+https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com &amp;gt; https://&lt;font color="slate">&lt;strong>companyName&lt;/strong>&lt;/font>
+.onshape.com&lt;/li>
+&lt;li>For additional instruction and video content, visit the Learning Center&amp;rsquo;s &lt;a href="https://learn.onshape.com/learn/course/intro-to-the-onshape-api/intro-to-the-onshape-api/what-is-an-api?page=1">Intro to the Onshape API&lt;/a> course.&lt;/li>
 &lt;/ul>
 &lt;/blockquote>
 &lt;h2 id="featurescript-vs-rest-api">FeatureScript vs REST API&lt;/h2>
@@ -371,6 +382,7 @@ in your API calls.&lt;/li>
 &lt;li>For Enterprise accounts, replace &lt;strong>&lt;font color="slate">cad&lt;/font>&lt;/strong> in all Onshape URLs with your company domain.
 https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com &amp;gt; https://&lt;font color="slate">&lt;strong>companyName&lt;/strong>&lt;/font>
 .onshape.com&lt;/li>
+&lt;li>For additional instruction and video content, visit the Learning Center&amp;rsquo;s &lt;a href="https://learn.onshape.com/learn/course/intro-to-the-onshape-api/intro-to-the-onshape-api/what-is-an-api?page=1">Intro to the Onshape API&lt;/a> course.&lt;/li>
 &lt;/ul>
 &lt;/blockquote>
 &lt;h2 id="endpoints">Endpoints&lt;/h2>
