@@ -563,7 +563,18 @@ a third-party system when a part in Onshape is selected. This interface can also
 &lt;li>Use of document context&lt;/li>
 &lt;/ul>
 &lt;p>The application is built using Express and is deployed on Heroku.&lt;/p>
-&lt;p>Refer to the &lt;a href="https://github.com/onshape-public/app-gltf-viewer">gltf-viewer-app README&lt;/a> for instructions on running this sample app.&lt;/p></description></item><item><title>Changelog</title><link>https://onshape-public.github.io/docs/changelog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/changelog/</guid><description>&lt;h4 id="rel-1189---released-2024-11-01">&lt;code>rel-1.189&lt;/code> - released 2024-11-01&lt;/h4>
+&lt;p>Refer to the &lt;a href="https://github.com/onshape-public/app-gltf-viewer">gltf-viewer-app README&lt;/a> for instructions on running this sample app.&lt;/p></description></item><item><title>Changelog</title><link>https://onshape-public.github.io/docs/changelog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/changelog/</guid><description>&lt;h4 id="rel-1190---released-2024-11-22">&lt;code>rel-1.190&lt;/code> - released 2024-11-22&lt;/h4>
+&lt;ul>
+&lt;li>Added new &lt;code>V10&lt;/code> version to the api (&lt;a href="https://cad.onshape.com/api/versions)">https://cad.onshape.com/api/versions)&lt;/a>, added to support future functionality&lt;/li>
+&lt;li>New list assembly matevalues endpiont &lt;code>GET&lt;/code> : &lt;code>/assemblies/d/[:did]/w/[:wid]/e/[:eid]/matevalues&lt;/code>&lt;/li>
+&lt;li>New create assembly matevalues endpiont &lt;code>POST&lt;/code> : &lt;code>/assemblies/d/[:did]/w/[:wid]/e/[:eid]/matevalues&lt;/code>&lt;/li>
+&lt;li>Updated export Drawing JSON response to include ‘isDangling’ field&lt;/li>
+&lt;li>Fixed issue with Attributes xCenter, yCenter, xDir and yDir not returning in the response for BTCurveGeometryCircle and BTCurveGeometryEllipse&lt;/li>
+&lt;li>Added new quick start video to the API Guide (&lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart">https://onshape-public.github.io/docs/api-intro/quickstart&lt;/a>)&lt;/li>
+&lt;li>Added documentation for export Drawing JSON for inspection symbols having &lt;code>isDangling&lt;/code> field (&lt;a href="https://onshape-public.github.io/docs/api-adv/drawings/#find-dangling-entities">https://onshape-public.github.io/docs/api-adv/drawings/#find-dangling-entities&lt;/a>)&lt;/li>
+&lt;li>Updated Features API documentation for creating and updating circles (&lt;a href="https://onshape-public.github.io/docs/api-adv/featureaccess">https://onshape-public.github.io/docs/api-adv/featureaccess&lt;/a>)&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1189---released-2024-11-01">&lt;code>rel-1.189&lt;/code> - released 2024-11-01&lt;/h4>
 &lt;ul>
 &lt;li>Updated &lt;code>POST&lt;/code> : &lt;code>/drawings/d/[:did]/w/[:wid]/e/[:eid]/modify&lt;/code> with new optional property &lt;code>outputStatusCode&lt;/code>&lt;/li>
 &lt;/ul>
