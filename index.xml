@@ -482,7 +482,149 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &lt;/code>&lt;/pre>&lt;/li>
 &lt;/ul>
 &lt;h3 id="update-metadata">Update Metadata&lt;/h3>
-&lt;p>To update metadata, you send a JSON in the API request body. This JSON block must include a &lt;code>jsonType&lt;/code> value and a &lt;code>properties&lt;/code> object array. Each object in the &lt;code>properties&lt;/code> array includes a &lt;code>propertyId&lt;/code> and the metadata key/value pairs.&lt;/p></description></item><item><title>Response Codes</title><link>https://onshape-public.github.io/docs/api-adv/errors/</link><pubDate>Wed, 03 Apr 2024 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/errors/</guid><description>&lt;p>This page details some of the response codes that may be returned by Onshape API endpoints. For each response code, we&amp;rsquo;ve provided a brief description of the response and recommended next steps.&lt;/p>
+&lt;p>To update metadata, you send a JSON in the API request body. This JSON block must include a &lt;code>jsonType&lt;/code> value and a &lt;code>properties&lt;/code> object array. Each object in the &lt;code>properties&lt;/code> array includes a &lt;code>propertyId&lt;/code> and the metadata key/value pairs.&lt;/p></description></item><item><title>Part Studios</title><link>https://onshape-public.github.io/docs/api-adv/partstudios/</link><pubDate>Tue, 13 Aug 2024 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/partstudios/</guid><description>&lt;p>This page describes the APIs Onshape provides for working with Part Studios.&lt;/p>
+&lt;blockquote>
+&lt;p>📘 &lt;strong>Notes&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>This page provides sample code as curls. See the &lt;a href="https://curl.se/docs/">curl documentation&lt;/a> for more information.&lt;/li>
+&lt;li>All Onshape API calls must be properly authenticated by replacing the &lt;code>CREDENTIALS&lt;/code> variable in the curls below. See
+the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys">API Keys&lt;/a> page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart">Quick Start&lt;/a> for an
+example. All applications submitted to the Onshape App Store &lt;em>must&lt;/em> authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth">OAuth2&lt;/a>.&lt;/li>
+&lt;li>This documentation refers to Onshape IDs in the following format: &lt;code>{did}, {wid}, {eid}, {pid}, {otherId}&lt;/code>. These
+represent document, workspace, element, part, and other IDs (respectively) that are needed make the API calls. We
+sometimes abbreviate these variables as &lt;code>DWVEM&lt;/code> Please see &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request">API Guide: API Intro&lt;/a>
+for information on what these IDs mean and how to obtain them from your documents. Never include the curly braces (&lt;code>{}&lt;/code>)
+in your API calls.&lt;/li>
+&lt;li>For Enterprise accounts, replace &lt;strong>&lt;font color="slate">cad&lt;/font>&lt;/strong> in all Onshape URLs with your company domain.
+https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com &amp;gt; https://&lt;font color="slate">&lt;strong>companyName&lt;/strong>&lt;/font>
+.onshape.com&lt;/li>
+&lt;li>For additional instruction and video content, visit the Learning Center&amp;rsquo;s &lt;a href="https://learn.onshape.com/learn/course/intro-to-the-onshape-api/intro-to-the-onshape-api/what-is-an-api?page=1">Intro to the Onshape API&lt;/a> course.&lt;/li>
+&lt;/ul>
+&lt;/blockquote>
+&lt;h2 id="endpoints">Endpoints&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/createPartStudio">createPartStudio&lt;/a>: Create a new Part Studio tab in a document.
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST&amp;#39; \
+ &amp;#39;https://cad.onshape.com/api/v9/partstudios/d/{did}/w/{wid}&amp;#39; \
+ -H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+ -H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+ -H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+ -d &amp;#39;{
+ &amp;#34;name&amp;#34;: &amp;#34;newPartStudioTabName&amp;#34;
+ }&amp;#39;
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/getPartStudioBodyDetails">getPartStudioBodyDetails&lt;/a>: Get the body details of a Part Studio.
+&lt;pre tabindex="0">&lt;code class="language-curl" data-lang="curl">curl -X &amp;#39;GET&amp;#39; \
+ &amp;#39;https://cad.onshape.com/api/v9/partstudios/d/{did}/wvm/{wvmid}/e/{eid}/bodydetails&amp;#39; \
+ -H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+ -H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39;
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/getPartStudioNamedViews">getPartStudioNamedViews&lt;/a>: Get the named views in a Part Studio.
+&lt;pre tabindex="0">&lt;code class="language-curl" data-lang="curl">curl -X &amp;#39;GET&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v9/partstudios/d/{did}/e/{eid}/namedViews&amp;#39; \
+ -H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+ -H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39;
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/getPartStudioMassProperties">getPartStudioMassProperties&lt;/a>: Get the mass properties of a Part Studio.
+&lt;pre tabindex="0">&lt;code class="language-curl" data-lang="curl">curl -X &amp;#39;GET&amp;#39; \
+ &amp;#39;https://cad.onshape.com/api/v9/partstudios/d/{did}/wvm/{wvmid}/e/{eid}/massproperties&amp;#39; \
+ -H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+ -H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39;
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/updateRollback">updateRollback&lt;/a>: Move the rollback bar in the Feature list.
+&lt;pre tabindex="0">&lt;code class="language-curl" data-lang="curl">curl -X &amp;#39;POST&amp;#39; \
+ &amp;#39;https://cad.onshape.com/api/v9/partstudios/d/{did}/w/{wid}/e/{eid}/features/rollback&amp;#39; \
+ -H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+ -H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39;
+ -H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+ -d &amp;#39;{
+ &amp;#34;rollbackIndex&amp;#34;: -1
+ }&amp;#39;
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/getPartStudioFeatures">getPartStudioFeatures&lt;/a>
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;GET&amp;#39; \
+ &amp;#39;https://cad.onshape.com/api/v9/partstudios/d/{did}/{wvm}/{wvmid}/e/{eid}/features?rollbackBarIndex=-1&amp;amp;includeGeometryIds=true&amp;amp;noSketchGeometry=false&amp;#39; \
+ -H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+ -H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; 
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/addPartStudioFeature">addPartStudioFeature&lt;/a>
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST&amp;#39; \
+ &amp;#39;https://cad.onshape.com/api/v9/partstudios/d/{did}/{wvm}/{wvmid}/e/{eid}/features&amp;#39; \
+ -H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+ -H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+ -H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+ -d &amp;#39;{
+ &amp;#34;btType&amp;#34;: &amp;#34;BTFeatureDefinitionCall-1406&amp;#34;,
+ &amp;#34;feature&amp;#34;: {
+ &amp;#34;btType&amp;#34;: &amp;#34;BTMFeature-134&amp;#34;,
+ &amp;#34;featureType&amp;#34;: &amp;#34;&amp;#34;,
+ &amp;#34;name&amp;#34;: &amp;#34;&amp;#34;,
+ &amp;#34;parameters&amp;#34;: []
+ }
+ }&amp;#39; 
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/updatePartStudioFeature">updatePartStudioFeature&lt;/a>
+&lt;pre tabindex="0">&lt;code> curl -X &amp;#39;POST&amp;#39; \
+ &amp;#39;https://cad.onshape.com/api/v9/partstudios/d/{did}/w/{wid}/e/{eid}/features/featureid/{fid}&amp;#39; \
+ -H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+ -H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+ -H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+ -d &amp;#39;{
+ &amp;#34;btType&amp;#34;: &amp;#34;BTFeatureDefinitionCall-1406&amp;#34;,
+ &amp;#34;feature&amp;#34;: {
+ &amp;#34;btType&amp;#34;: &amp;#34;BTMFeature-134&amp;#34;,
+ &amp;#34;featureId&amp;#34;: &amp;#34;{fid}&amp;#34;,
+ &amp;#34;parameters&amp;#34;: []
+ }
+ }&amp;#39;
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/updateFeatures">updateFeatures&lt;/a>
+&lt;pre tabindex="0">&lt;code> curl -X &amp;#39;POST&amp;#39; \
+ &amp;#39;https://cad.onshape.com/api/v9/partstudios/d/{did}/w/{wid}/e/{eid}/features/updates&amp;#39; \
+ -H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+ -H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+ -H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+ -d &amp;#39;{
+ &amp;#34;btType&amp;#34;: &amp;#34;BTUpdateFeaturesCall-1748&amp;#34;,
+ &amp;#34;features&amp;#34;: [
+ {
+ &amp;#34;btType&amp;#34;: &amp;#34;BTMFeature-134&amp;#34;,
+ &amp;#34;featureId&amp;#34;: &amp;#34;{fid1}&amp;#34;,
+ &amp;#34;parameters&amp;#34;: []
+ },
+ {
+ &amp;#34;btType&amp;#34;: &amp;#34;BTMFeature-134&amp;#34;,
+ &amp;#34;featureId&amp;#34;: &amp;#34;{fid2}&amp;#34;,
+ &amp;#34;parameters&amp;#34;: []
+ }
+ ]
+ }&amp;#39;
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/deletePartStudioFeature">deletePartStudioFeature&lt;/a>
+&lt;pre tabindex="0">&lt;code>curl -X &amp;#39;DELETE&amp;#39; \
+ &amp;#39;https://cad.onshape.com/api/v9/partstudios/d/{did}/{wvm}/{wvmid}/e/{eid}/features/featureid/{fid}&amp;#39; \
+ -H &amp;#39;accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+ -H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; 
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;/ul>
+&lt;h2 id="sample-workflows">Sample Workflows&lt;/h2>
+&lt;h3 id="create-a-part-studio">Create a Part Studio&lt;/h3>
+&lt;ol>
+&lt;li>Open an Onshape document or create a new one.&lt;/li>
+&lt;li>Call the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/createPartStudio">createPartStudio&lt;/a> endpoint. Specify a &lt;code>name&lt;/code> for the new tab in the request body; in this example, we&amp;rsquo;ll call it &lt;code>newPartStudio1&lt;/code>.
+&lt;pre tabindex="0">&lt;code class="language-curl" data-lang="curl">curl -X &amp;#39;POST&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v9/assemblies/d/{did}/w/{wid}&amp;#39; \
+-H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
+-H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
+-d &amp;#39;{
+ &amp;#34;name&amp;#34;: &amp;#34;newPartStudio1&amp;#34;
+ }&amp;#39;
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>Return to your document and observe that the new assembly tab has been added.&lt;/li>
+&lt;/ol>
+&lt;h3 id="get-the-list-of-features-in-a-part-studio">Get the list of features in a Part Studio&lt;/h3>
+&lt;p>One of the best ways to familiarize yourself with the Onshape Feature APIs is to view the API details for existing features in a Part Studio. In this example, we&amp;rsquo;ll add three features to a Part Studio, and then call the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/getPartStudioFeatures">getPartStudioFeatures&lt;/a> API on the Part Studio. We&amp;rsquo;ll then be able to view the structure of the way features are represented in the API.&lt;/p></description></item><item><title>Response Codes</title><link>https://onshape-public.github.io/docs/api-adv/errors/</link><pubDate>Wed, 03 Apr 2024 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/errors/</guid><description>&lt;p>This page details some of the response codes that may be returned by Onshape API endpoints. For each response code, we&amp;rsquo;ve provided a brief description of the response and recommended next steps.&lt;/p>
 &lt;h2 id="success-2xx">Success (2xx)&lt;/h2>
 &lt;p>The client call was successful.&lt;/p>
 &lt;h3 id="200---ok">200 - OK&lt;/h3>
