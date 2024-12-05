@@ -6,8 +6,8 @@
 &lt;li>All Onshape API calls must be properly authenticated by replacing the &lt;code>CREDENTIALS&lt;/code> variable in the curls below. See
 the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys">API Keys&lt;/a> page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart">Quick Start&lt;/a> for an
 example. All applications submitted to the Onshape App Store &lt;em>must&lt;/em> authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth">OAuth2&lt;/a>.&lt;/li>
-&lt;li>This documentation refers to Onshape IDs in the following format: &lt;code>{did}, {wid}, {eid}, {pid}, {otherId}&lt;/code>. These
-represent document, workspace, element, part, and other IDs (respectively) that are needed make the API calls. We
+&lt;li>This documentation refers to Onshape IDs in the following format: &lt;code>{did}, {wvmid}, {eid}, {pid}, {otherId}&lt;/code>. These
+represent document, workspace (or version or microversion), element, part, and other IDs (respectively) that are needed make the API calls. We
 sometimes abbreviate these variables as &lt;code>DWVEM&lt;/code> Please see &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request">API Guide: API Intro&lt;/a>
 for information on what these IDs mean and how to obtain them from your documents. Never include the curly braces (&lt;code>{}&lt;/code>)
 in your API calls.&lt;/li>
@@ -306,8 +306,8 @@ and edges (&lt;code>getPartStudioEdges&lt;/code>}. Note the ids:
 &lt;li>All Onshape API calls must be properly authenticated by replacing the &lt;code>CREDENTIALS&lt;/code> variable in the curls below. See
 the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys">API Keys&lt;/a> page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart">Quick Start&lt;/a> for an
 example. All applications submitted to the Onshape App Store &lt;em>must&lt;/em> authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth">OAuth2&lt;/a>.&lt;/li>
-&lt;li>This documentation refers to Onshape IDs in the following format: &lt;code>{did}, {wid}, {eid}, {pid}, {otherId}&lt;/code>. These
-represent document, workspace, element, part, and other IDs (respectively) that are needed make the API calls. We
+&lt;li>This documentation refers to Onshape IDs in the following format: &lt;code>{did}, {wvmid}, {eid}, {pid}, {otherId}&lt;/code>. These
+represent document, workspace (or version or microversion), element, part, and other IDs (respectively) that are needed make the API calls. We
 sometimes abbreviate these variables as &lt;code>DWVEM&lt;/code> Please see &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request">API Guide: API Intro&lt;/a>
 for information on what these IDs mean and how to obtain them from your documents. Never include the curly braces (&lt;code>{}&lt;/code>)
 in your API calls.&lt;/li>
@@ -326,8 +326,8 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &lt;li>All Onshape API calls must be properly authenticated by replacing the &lt;code>CREDENTIALS&lt;/code> variable in the curls below. See
 the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys">API Keys&lt;/a> page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart">Quick Start&lt;/a> for an
 example. All applications submitted to the Onshape App Store &lt;em>must&lt;/em> authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth">OAuth2&lt;/a>.&lt;/li>
-&lt;li>This documentation refers to Onshape IDs in the following format: &lt;code>{did}, {wid}, {eid}, {pid}, {otherId}&lt;/code>. These
-represent document, workspace, element, part, and other IDs (respectively) that are needed make the API calls. We
+&lt;li>This documentation refers to Onshape IDs in the following format: &lt;code>{did}, {wvmid}, {eid}, {pid}, {otherId}&lt;/code>. These
+represent document, workspace (or version or microversion), element, part, and other IDs (respectively) that are needed make the API calls. We
 sometimes abbreviate these variables as &lt;code>DWVEM&lt;/code> Please see &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request">API Guide: API Intro&lt;/a>
 for information on what these IDs mean and how to obtain them from your documents. Never include the curly braces (&lt;code>{}&lt;/code>)
 in your API calls.&lt;/li>
@@ -346,8 +346,8 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &lt;li>All Onshape API calls must be properly authenticated by replacing the &lt;code>CREDENTIALS&lt;/code> variable in the curls below. See
 the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys">API Keys&lt;/a> page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart">Quick Start&lt;/a> for an
 example. All applications submitted to the Onshape App Store &lt;em>must&lt;/em> authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth">OAuth2&lt;/a>.&lt;/li>
-&lt;li>This documentation refers to Onshape IDs in the following format: &lt;code>{did}, {wid}, {eid}, {pid}, {otherId}&lt;/code>. These
-represent document, workspace, element, part, and other IDs (respectively) that are needed make the API calls. We
+&lt;li>This documentation refers to Onshape IDs in the following format: &lt;code>{did}, {wvmid}, {eid}, {pid}, {otherId}&lt;/code>. These
+represent document, workspace (or version or microversion), element, part, and other IDs (respectively) that are needed make the API calls. We
 sometimes abbreviate these variables as &lt;code>DWVEM&lt;/code> Please see &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request">API Guide: API Intro&lt;/a>
 for information on what these IDs mean and how to obtain them from your documents. Never include the curly braces (&lt;code>{}&lt;/code>)
 in your API calls.&lt;/li>
@@ -374,8 +374,8 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &lt;li>All Onshape API calls must be properly authenticated by replacing the &lt;code>CREDENTIALS&lt;/code> variable in the curls below. See
 the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys">API Keys&lt;/a> page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart">Quick Start&lt;/a> for an
 example. All applications submitted to the Onshape App Store &lt;em>must&lt;/em> authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth">OAuth2&lt;/a>.&lt;/li>
-&lt;li>This documentation refers to Onshape IDs in the following format: &lt;code>{did}, {wid}, {eid}, {pid}, {otherId}&lt;/code>. These
-represent document, workspace, element, part, and other IDs (respectively) that are needed make the API calls. We
+&lt;li>This documentation refers to Onshape IDs in the following format: &lt;code>{did}, {wvmid}, {eid}, {pid}, {otherId}&lt;/code>. These
+represent document, workspace (or version or microversion), element, part, and other IDs (respectively) that are needed make the API calls. We
 sometimes abbreviate these variables as &lt;code>DWVEM&lt;/code> Please see &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request">API Guide: API Intro&lt;/a>
 for information on what these IDs mean and how to obtain them from your documents. Never include the curly braces (&lt;code>{}&lt;/code>)
 in your API calls.&lt;/li>
@@ -452,8 +452,8 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &lt;li>All Onshape API calls must be properly authenticated by replacing the &lt;code>CREDENTIALS&lt;/code> variable in the curls below. See
 the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys">API Keys&lt;/a> page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart">Quick Start&lt;/a> for an
 example. All applications submitted to the Onshape App Store &lt;em>must&lt;/em> authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth">OAuth2&lt;/a>.&lt;/li>
-&lt;li>This documentation refers to Onshape IDs in the following format: &lt;code>{did}, {wid}, {eid}, {pid}, {otherId}&lt;/code>. These
-represent document, workspace, element, part, and other IDs (respectively) that are needed make the API calls. We
+&lt;li>This documentation refers to Onshape IDs in the following format: &lt;code>{did}, {wvmid}, {eid}, {pid}, {otherId}&lt;/code>. These
+represent document, workspace (or version or microversion), element, part, and other IDs (respectively) that are needed make the API calls. We
 sometimes abbreviate these variables as &lt;code>DWVEM&lt;/code> Please see &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request">API Guide: API Intro&lt;/a>
 for information on what these IDs mean and how to obtain them from your documents. Never include the curly braces (&lt;code>{}&lt;/code>)
 in your API calls.&lt;/li>
