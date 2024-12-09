@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Onshape Developer Documentation on</title><link>https://onshape-public.github.io/</link><description>Recent content in Onshape Developer Documentation on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Thu, 15 Aug 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://onshape-public.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>API Explorer</title><link>https://onshape-public.github.io/docs/api-intro/explorer/</link><pubDate>Mon, 18 May 2020 20:39:14 -0400</pubDate><guid>https://onshape-public.github.io/docs/api-intro/explorer/</guid><description>&lt;p>We document all available Onshape REST API endpoints in our Glassworks API Explorer:&lt;/p>
-&lt;p>&lt;a href="cad.onshape.com/glassworks/explorer">&lt;font size="4">&lt;b>cad.onshape.com/glassworks/explorer/&lt;/b>&lt;/font>&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://cad.onshape.com/glassworks/explorer">&lt;font size="4">&lt;b>&lt;a href="https://cad.onshape.com/glassworks/explorer/">https://cad.onshape.com/glassworks/explorer/&lt;/a>&lt;/b>&lt;/font>&lt;/a>&lt;/p>
 &lt;h2 id="videos--courses">Videos &amp;amp; Courses&lt;/h2>
 &lt;p>You can also watch our API Explorer instructional video below, or view the full course content in the &lt;a href="https://learn.onshape.com/learn/course/intro-to-the-onshape-api/executing-a-get-request/glassworks-api-explorer?page=1">Onshape Learning Center&lt;/a>. Additional example videos are embedded throughout this page.&lt;/p>
 &lt;hr>
@@ -314,7 +314,6 @@ and edges (&lt;code>getPartStudioEdges&lt;/code>}. Note the ids:
 &lt;li>Split cube with the Front plane and translate the IDs:&lt;/li>
 &lt;/ol>
 &lt;p>&lt;img src="https://onshape-public.github.io/images/associativityimage00.png" alt="image alt text">&lt;/p></description></item><item><title>Billing</title><link>https://onshape-public.github.io/docs/api-adv/billing/</link><pubDate>Mon, 18 May 2020 20:29:36 -0400</pubDate><guid>https://onshape-public.github.io/docs/api-adv/billing/</guid><description>&lt;p>This document describes APIs that will allow partners to interact with the Onshape billing system.&lt;/p>
-&lt;p>Please address questions to &amp;ldquo;&lt;a href="mailto:api-support@onshape.com">api-support@onshape.com&lt;/a>&amp;rdquo; for the fastest response.&lt;/p>
 &lt;h2 id="overview">Overview&lt;/h2>
 &lt;p>All billing is done through &amp;ldquo;plans&amp;rdquo; that are created in the Developer Portal. A “plan” has the following attributes:&lt;/p>
 &lt;table>

@@ -276,7 +276,6 @@ and edges (&lt;code>getPartStudioEdges&lt;/code>}. Note the ids:
 &lt;li>Split cube with the Front plane and translate the IDs:&lt;/li>
 &lt;/ol>
 &lt;p>&lt;img src="https://onshape-public.github.io/images/associativityimage00.png" alt="image alt text">&lt;/p></description></item><item><title>Billing</title><link>https://onshape-public.github.io/docs/api-adv/billing/</link><pubDate>Mon, 18 May 2020 20:29:36 -0400</pubDate><guid>https://onshape-public.github.io/docs/api-adv/billing/</guid><description>&lt;p>This document describes APIs that will allow partners to interact with the Onshape billing system.&lt;/p>
-&lt;p>Please address questions to &amp;ldquo;&lt;a href="mailto:api-support@onshape.com">api-support@onshape.com&lt;/a>&amp;rdquo; for the fastest response.&lt;/p>
 &lt;h2 id="overview">Overview&lt;/h2>
 &lt;p>All billing is done through &amp;ldquo;plans&amp;rdquo; that are created in the Developer Portal. A “plan” has the following attributes:&lt;/p>
 &lt;table>
