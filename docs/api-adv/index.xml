@@ -574,7 +574,7 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &lt;li>Open an Onshape document or create a new one.&lt;/li>
 &lt;li>Call the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/createPartStudio">createPartStudio&lt;/a> endpoint. Specify a &lt;code>name&lt;/code> for the new tab in the request body; in this example, we&amp;rsquo;ll call it &lt;code>newPartStudio1&lt;/code>.
 &lt;pre tabindex="0">&lt;code class="language-curl" data-lang="curl">curl -X &amp;#39;POST&amp;#39; \
-&amp;#39;https://cad.onshape.com/api/v9/assemblies/d/{did}/w/{wid}&amp;#39; \
+&amp;#39;https://cad.onshape.com/api/v9/partstudios/d/{did}/w/{wid}&amp;#39; \
 -H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
 -H &amp;#39;Authorization: Basic CREDENTIALS&amp;#39; \
 -H &amp;#39;Content-Type: application/json;charset=UTF-8; qs=0.09&amp;#39; \
