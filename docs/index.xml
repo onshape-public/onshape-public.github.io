@@ -3,6 +3,7 @@
 &lt;li>Updated all translation endpoints with new optional request property &lt;code>excludeOffSheetContent&lt;/code>&lt;/li>
 &lt;li>Updated document export endpoint (&lt;code>POST&lt;/code> : &lt;code>/documents/d/[:did]/[:wv]/[:wvid]/e/[:eid]/export&lt;/code>) with the request property &lt;code>includeCboreCsink&lt;/code>&lt;/li>
 &lt;li>Updated release package endpoints (&lt;code>POST&lt;/code> : &lt;code>releasepackages/release[:wfid]&lt;/code> and &lt;code>releasepackages/[:rpid]&lt;/code>) with the request property &lt;code>items/items/revisionId&lt;/code>&lt;/li>
+&lt;li>Updated all configuration endpoints with a new attribute &lt;code>visibilityCondition&lt;/code> for configuration parameters&lt;/li>
 &lt;li>Extensions: Add &lt;code>sessionCompanyId&lt;/code> as a parameter for the Action URL&lt;/li>
 &lt;/ul>
 &lt;h4 id="rel-1191---released-2024-12-13">&lt;code>rel-1.191&lt;/code> - released 2024-12-13&lt;/h4>
