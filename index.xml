@@ -704,7 +704,14 @@ a third-party system when a part in Onshape is selected. This interface can also
 &lt;li>Use of document context&lt;/li>
 &lt;/ul>
 &lt;p>The application is built using Express and is deployed on Heroku.&lt;/p>
-&lt;p>Refer to the &lt;a href="https://github.com/onshape-public/app-gltf-viewer">gltf-viewer-app README&lt;/a> for instructions on running this sample app.&lt;/p></description></item><item><title>Changelog</title><link>https://onshape-public.github.io/docs/changelog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/changelog/</guid><description>&lt;h4 id="rel-1192---released-2025-01-10">&lt;code>rel-1.192&lt;/code> - released 2025-01-10&lt;/h4>
+&lt;p>Refer to the &lt;a href="https://github.com/onshape-public/app-gltf-viewer">gltf-viewer-app README&lt;/a> for instructions on running this sample app.&lt;/p></description></item><item><title>Changelog</title><link>https://onshape-public.github.io/docs/changelog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/changelog/</guid><description>&lt;h4 id="rel-1193---released-2025-01-31">&lt;code>rel-1.193&lt;/code> - released 2025-01-31&lt;/h4>
+&lt;ul>
+&lt;li>Updated &lt;code>POST&lt;/code> : &lt;code>/drawings/d/[:did]/w/[:wid]/e/[:eid]/modify&lt;/code> to support creation and modification of chamfer dimensions (&lt;a href="https://onshape-public.github.io/docs/api-adv/drawings/#add-a-chamfer-dimension-to-a-drawing">https://onshape-public.github.io/docs/api-adv/drawings/#add-a-chamfer-dimension-to-a-drawing&lt;/a>)&lt;/li>
+&lt;li>Updated &lt;code>POST&lt;/code> : &lt;code>/drawings/d/[:did]/w/[:wid]/e/[:eid]/modify&lt;/code> to support creation and modification of datums (&lt;a href="https://onshape-public.github.io/docs/api-adv/drawings/#add-a-datum-to-a-drawing">https://onshape-public.github.io/docs/api-adv/drawings/#add-a-datum-to-a-drawing&lt;/a>)&lt;/li>
+&lt;li>Deprecate request property &lt;code>addAllDrawingsActive&lt;/code> from &lt;code>POST&lt;/code> : &lt;code>/releasepackages/[:rpid]&lt;/code> (automatically done by the server for stability)&lt;/li>
+&lt;li>Update &lt;code>DELETE&lt;/code> : &lt;code>/documents/d/[:did]/workspaces/[:wid]&lt;/code> to not require global permisson &lt;code>PermanentlylDelete&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1192---released-2025-01-10">&lt;code>rel-1.192&lt;/code> - released 2025-01-10&lt;/h4>
 &lt;ul>
 &lt;li>Updated all translation endpoints with new optional request property &lt;code>excludeOffSheetContent&lt;/code>&lt;/li>
 &lt;li>Updated document export endpoint (&lt;code>POST&lt;/code> : &lt;code>/documents/d/[:did]/[:wv]/[:wvid]/e/[:eid]/export&lt;/code>) with the request property &lt;code>includeCboreCsink&lt;/code>&lt;/li>
