@@ -167,7 +167,7 @@ viewportWidth:       number, width of the viewport
 </span></span></span><span style=display:flex><span><span style=color:#aaa;font-style:italic></span>};
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#0aa>window</span>.parent.postMessage(initMessage, <span style=color:#a50>&#39;*&#39;</span>);
-</span></span></code></pre></div><h3 id=right-panel-interaction-sequence>Right panel interaction sequence</h3><p>The sequence diagram below illustrates the interaction between an Element right panel application extension and the Onshape client:</p><pre tabindex=0><code>%%{
+</span></span></code></pre></div><h3 id=right-panel-interaction-sequence>Right panel interaction sequence</h3><p>The sequence diagram below illustrates the interaction between an Element right panel application extension and the Onshape client:</p><pre class=mermaid>%%{
   init: {
     &#34;theme&#34;: &#34;default&#34;,
     &#34;sequence&#34;: {
@@ -186,9 +186,9 @@ sequenceDiagram
   actor user
   participant OSC AS Onshape Client
   participant AE AS Application Extension
-  user-&gt;&gt;+OSC: start element right panel extension
+  user-&gt;&gt;&#43;OSC: start element right panel extension
   Note right of user: via configured button
-  OSC-&gt;&gt;+AE: invoke action url (with query params)
+  OSC-&gt;&gt;&#43;AE: invoke action url (with query params)
   AE-&gt;&gt;OSC: postMessage(messageName: &#39;applicationInit&#39;)
   loop selection interactions
     user-&gt;&gt;OSC: select
@@ -198,8 +198,7 @@ sequenceDiagram
     Note right of user: via configured button
   deactivate AE
   OSC-XAE: destroy
-  deactivate OSC
-</code></pre><h3 id=right-panel-message-exchange>Right panel message exchange</h3><p>The following messages are exchanged for application extensions located in the element right panel and configured for Part Studio, Assembly, or Document contexts.</p><p>The first message with <code>messageName</code> attribute set to <code>applicationInit</code> is sent to the Onshape client by an application extension once it is loaded and ready to receive and process incoming messages:</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=display:flex><span>    {
+  deactivate OSC</pre><h3 id=right-panel-message-exchange>Right panel message exchange</h3><p>The following messages are exchanged for application extensions located in the element right panel and configured for Part Studio, Assembly, or Document contexts.</p><p>The first message with <code>messageName</code> attribute set to <code>applicationInit</code> is sent to the Onshape client by an application extension once it is loaded and ready to receive and process incoming messages:</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=display:flex><span>    {
 </span></span><span style=display:flex><span>        documentId: <span style=color:#a50>&#39;&lt;document id&gt;&#39;</span>,
 </span></span><span style=display:flex><span>        workspaceId: <span style=color:#a50>&#39;&lt;workspace id&gt;&#39;</span>,
 </span></span><span style=display:flex><span>        elementId: <span style=color:#a50>&#39;&lt;element id&gt;&#39;</span>,
@@ -228,4 +227,59 @@ sequenceDiagram
 </span></span><span style=display:flex><span>        }
 </span></span><span style=display:flex><span>    ]
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></div><h2 id=notes>Notes</h2><h3 id=keyboard-focus>Keyboard focus</h3><p>Keyboard focus will not be transferred to an application until the user clicks in the application or the application programmatically takes focus. An application should programmatically take focus when it is first loaded and when it receives a <code>show</code> message from Onshape. Shortcut keys will work immediately when the application is shown.</p><h3 id=future-work>Future work</h3><ul><li>New message types will be added as needed. If your application extension needs a message not listed in this document, please notify us, and we’ll work with you on it.</li><li>Mobile client support is unclear at this time.</li><li>Onshape is considering using promises to wrap <code>POST</code> messages, which would make the application extension&rsquo;s JavaScript simpler and enable chaining <code>POST</code>s with other operations. Promises would make some interactions with multiple responses difficult (e.g., when you open a dialog, like the Select Item dialog, and want to receive multiple <code>POST</code> messages back due to the user clicking on multiple items in the dialog).</li></ul></div></main></div></div><footer class="td-footer row d-print-none"><div class=container-fluid><div class="row mx-md-2"><div class="td-footer__left col-6 col-sm-4 order-sm-1"></div><div class="td-footer__right col-6 col-sm-4 order-sm-3"></div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2"></div></div></div></footer></div><script src=/js/main.min.69e2c1ae9320465ab10236d9ef752c6a4442c54b48b883b17c497b7c7d96a796.js integrity="sha256-aeLBrpMgRlqxAjbZ73UsakRCxUtIuIOxfEl7fH2Wp5Y=" crossorigin=anonymous></script><script defer src=/js/click-to-copy.min.73478a7d4807698aed7e355eb23f9890ca18fea3158604c8471746d046702bad.js integrity="sha256-c0eKfUgHaYrtfjVesj+YkMoY/qMVhgTIRxdG0EZwK60=" crossorigin=anonymous></script><script src=/js/tabpane-persist.js></script></body></html>
+</span></span></code></pre></div><h2 id=notes>Notes</h2><h3 id=keyboard-focus>Keyboard focus</h3><p>Keyboard focus will not be transferred to an application until the user clicks in the application or the application programmatically takes focus. An application should programmatically take focus when it is first loaded and when it receives a <code>show</code> message from Onshape. Shortcut keys will work immediately when the application is shown.</p><h3 id=future-work>Future work</h3><ul><li>New message types will be added as needed. If your application extension needs a message not listed in this document, please notify us, and we’ll work with you on it.</li><li>Mobile client support is unclear at this time.</li><li>Onshape is considering using promises to wrap <code>POST</code> messages, which would make the application extension&rsquo;s JavaScript simpler and enable chaining <code>POST</code>s with other operations. Promises would make some interactions with multiple responses difficult (e.g., when you open a dialog, like the Select Item dialog, and want to receive multiple <code>POST</code> messages back due to the user clicking on multiple items in the dialog).</li></ul></div></main></div></div><footer class="td-footer row d-print-none"><div class=container-fluid><div class="row mx-md-2"><div class="td-footer__left col-6 col-sm-4 order-sm-1"></div><div class="td-footer__right col-6 col-sm-4 order-sm-3"></div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2"></div></div></div></footer></div><script type=module async>
+  import mermaid from "https:\/\/cdn.jsdelivr.net\/npm\/mermaid@latest\/dist\/mermaid.esm.min.mjs";
+
+  (function ($) {
+    if ($('.mermaid').length == 0) {
+      mermaid.initialize({ startOnLoad: false });
+      return;
+    }
+
+    var params = {"enable":true};
+
+    
+    
+    var norm = function (defaultConfig, params) {
+      var result = {};
+      for (const key in defaultConfig) {
+        const keyLower = key.toLowerCase();
+        if (defaultConfig.hasOwnProperty(key) && params.hasOwnProperty(keyLower)) {
+          if (typeof defaultConfig[key] === "object") {
+            result[key] = norm(defaultConfig[key], params[keyLower]);
+          } else {
+            result[key] = params[keyLower];
+          }
+        }
+      }
+      return result;
+    };
+
+    var settings = norm(mermaid.mermaidAPI.defaultConfig, params);
+    settings.startOnLoad = true;
+    if ($('html[data-bs-theme="dark"]').length) {
+      settings.theme = 'dark';
+    }
+    mermaid.initialize(settings);
+
+    
+    const lightDarkModeThemeChangeHandler = function (mutationsList, observer) {
+      for (const mutation of mutationsList) {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'data-bs-theme') {
+          
+          
+          
+          location.reload();
+        }
+      }
+    };
+
+    const observer = new MutationObserver(lightDarkModeThemeChangeHandler);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-bs-theme']
+    });
+    
+
+  })(jQuery);
+</script><script src=/js/main.min.69e2c1ae9320465ab10236d9ef752c6a4442c54b48b883b17c497b7c7d96a796.js integrity="sha256-aeLBrpMgRlqxAjbZ73UsakRCxUtIuIOxfEl7fH2Wp5Y=" crossorigin=anonymous></script><script defer src=/js/click-to-copy.min.73478a7d4807698aed7e355eb23f9890ca18fea3158604c8471746d046702bad.js integrity="sha256-c0eKfUgHaYrtfjVesj+YkMoY/qMVhgTIRxdG0EZwK60=" crossorigin=anonymous></script><script src=/js/tabpane-persist.js></script></body></html>
