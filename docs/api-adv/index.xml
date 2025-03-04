@@ -1,22 +1,39 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>API Guides on</title><link>https://onshape-public.github.io/docs/api-adv/</link><description>Recent content in API Guides on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Thu, 15 Aug 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://onshape-public.github.io/docs/api-adv/index.xml" rel="self" type="application/rss+xml"/><item><title>Assemblies</title><link>https://onshape-public.github.io/docs/api-adv/assemblies/</link><pubDate>Tue, 13 Aug 2024 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/assemblies/</guid><description>&lt;p>This page describes the APIs Onshape provides for working with assemblies.&lt;/p>
-&lt;blockquote>
-&lt;p>📘 &lt;strong>Notes&lt;/strong>&lt;/p>
+&lt;table width=100%>
+ &lt;tr>
+ &lt;th>&lt;details>
+ &lt;summary>Prerequisites&lt;/summary>
+ &lt;blockquote>
 &lt;ul>
-&lt;li>This page provides sample code as curls. See the &lt;a href="https://curl.se/docs/">curl documentation&lt;/a> for more information.&lt;/li>
-&lt;li>All Onshape API calls must be properly authenticated by replacing the &lt;code>CREDENTIALS&lt;/code> variable in the curls below. See
-the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys">API Keys&lt;/a> page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart">Quick Start&lt;/a> for an
-example. All applications submitted to the Onshape App Store &lt;em>must&lt;/em> authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth">OAuth2&lt;/a>.&lt;/li>
-&lt;li>This documentation refers to Onshape IDs in the following format: &lt;code>{did}, {wvmid}, {eid}, {pid}, {otherId}&lt;/code>. These
-represent document, workspace (or version or microversion), element, part, and other IDs (respectively) that are needed make the API calls. We
-sometimes abbreviate these variables as &lt;code>DWVEM&lt;/code> Please see &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request">API Guide: API Intro&lt;/a>
-for information on what these IDs mean and how to obtain them from your documents. Never include the curly braces (&lt;code>{}&lt;/code>)
-in your API calls.&lt;/li>
-&lt;li>For Enterprise accounts, replace &lt;strong>&lt;font color="slate">cad&lt;/font>&lt;/strong> in all Onshape URLs with your company domain.
-https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com &amp;gt; https://&lt;font color="slate">&lt;strong>companyName&lt;/strong>&lt;/font>
-.onshape.com&lt;/li>
+&lt;li>All Onshape API calls must be properly authenticated.
+&lt;ul>
+&lt;li>See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys">API Keys&lt;/a> page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart">Quick Start&lt;/a> for an example.&lt;/li>
+&lt;li>All applications submitted to the Onshape App Store &lt;em>must&lt;/em> authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth">OAuth2&lt;/a>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>For Standard accounts, replace &lt;code>{baseUrl}&lt;/code> with &lt;code>cad&lt;/code> in all endpoints. For Enterprise accounts, replace it with your company domain. Add &lt;code>/api&lt;/code> and the version number, and then provide the endpoint.
+&lt;ul>
+&lt;li>&lt;code>https://{baseUrl}.onshape.com/api/v10/documents&lt;/code>&lt;/li>
+&lt;li>&lt;code>https://cad.onshape.com/api/v10/documents&lt;/code>&lt;/li>
+&lt;li>&lt;code>https://companySubDomain.onshape.com/api/v10/documents&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Onshape IDs are written as: &lt;code>{did}, {wvmid}, {eid}, {pid}, {otherId}&lt;/code>.
+&lt;ul>
+&lt;li>These represent document, workspace (or version or microversion), element, part, and other IDs, respectively.&lt;/li>
+&lt;li>Never include the braces &lt;code>{}&lt;/code> with your IDs.&lt;/li>
+&lt;li>See &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request">API Guide: API Intro&lt;/a> for information on what these IDs mean and how to obtain them from your documents.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>This page provides sample code in cURL and python.&lt;/li>
 &lt;li>For additional instruction and video content, visit the Learning Center&amp;rsquo;s &lt;a href="https://learn.onshape.com/learn/course/intro-to-the-onshape-api/intro-to-the-onshape-api/what-is-an-api?page=1">Intro to the Onshape API&lt;/a> course.&lt;/li>
 &lt;/ul>
 &lt;/blockquote>
+
+ &lt;/details>
+ &lt;/th>
+ &lt;/tr>
+&lt;/table>
 &lt;h2 id="endpoints">Endpoints&lt;/h2>
 &lt;ul>
 &lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Assembly/createAssembly">createAssembly&lt;/a>: Create a new assembly tab in a document.
@@ -298,64 +315,115 @@ and edges (&lt;code>getPartStudioEdges&lt;/code>}. Note the ids:
 &lt;/table>
 &lt;p>Onshape defines three kinds of plans:&lt;/p></description></item><item><title>Configurations</title><link>https://onshape-public.github.io/docs/api-adv/configs/</link><pubDate>Fri, 05 Apr 2024 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/configs/</guid><description>&lt;p>This page describes the APIs Onshape provides for working with &lt;a href="https://cad.onshape.com/help/Content/configurations.htm">configurations&lt;/a>.&lt;/p>
 &lt;p>You can use configurations to create variations of entire Part Studios, assemblies, specific parts and more. You can configure feature and parameter values, part properties, custom part properties, face and part appearances, and sketch text. Each Part Studio can have only one configuration, but it can contain multiple configuration inputs. The configuration inputs you define for a Part Studio become options when inserting that Part Studio into an assembly or drawing. You can also create configurations for an assembly, regardless of any existing Part Studio configurations. Assembly configurations work the same way as Part Studio configurations, but are limited to configuring mates (&lt;em>not&lt;/em> mate connectors), instances, and patterns.&lt;/p></description></item><item><title>Drawings</title><link>https://onshape-public.github.io/docs/api-adv/drawings/</link><pubDate>Thu, 12 Oct 2023 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/drawings/</guid><description>&lt;p>This page describes the APIs Onshape provides for creating and manipulating Onshape drawings.&lt;/p>
-&lt;blockquote>
-&lt;p>📘 &lt;strong>Notes&lt;/strong>&lt;/p>
+&lt;table width=100%>
+ &lt;tr>
+ &lt;th>&lt;details>
+ &lt;summary>Prerequisites&lt;/summary>
+ &lt;blockquote>
 &lt;ul>
-&lt;li>This page provides sample code as curls. See the &lt;a href="https://curl.se/docs/">curl documentation&lt;/a> for more information.&lt;/li>
-&lt;li>All Onshape API calls must be properly authenticated by replacing the &lt;code>CREDENTIALS&lt;/code> variable in the curls below. See
-the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys">API Keys&lt;/a> page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart">Quick Start&lt;/a> for an
-example. All applications submitted to the Onshape App Store &lt;em>must&lt;/em> authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth">OAuth2&lt;/a>.&lt;/li>
-&lt;li>This documentation refers to Onshape IDs in the following format: &lt;code>{did}, {wvmid}, {eid}, {pid}, {otherId}&lt;/code>. These
-represent document, workspace (or version or microversion), element, part, and other IDs (respectively) that are needed make the API calls. We
-sometimes abbreviate these variables as &lt;code>DWVEM&lt;/code> Please see &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request">API Guide: API Intro&lt;/a>
-for information on what these IDs mean and how to obtain them from your documents. Never include the curly braces (&lt;code>{}&lt;/code>)
-in your API calls.&lt;/li>
-&lt;li>For Enterprise accounts, replace &lt;strong>&lt;font color="slate">cad&lt;/font>&lt;/strong> in all Onshape URLs with your company domain.
-https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com &amp;gt; https://&lt;font color="slate">&lt;strong>companyName&lt;/strong>&lt;/font>
-.onshape.com&lt;/li>
+&lt;li>All Onshape API calls must be properly authenticated.
+&lt;ul>
+&lt;li>See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys">API Keys&lt;/a> page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart">Quick Start&lt;/a> for an example.&lt;/li>
+&lt;li>All applications submitted to the Onshape App Store &lt;em>must&lt;/em> authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth">OAuth2&lt;/a>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>For Standard accounts, replace &lt;code>{baseUrl}&lt;/code> with &lt;code>cad&lt;/code> in all endpoints. For Enterprise accounts, replace it with your company domain. Add &lt;code>/api&lt;/code> and the version number, and then provide the endpoint.
+&lt;ul>
+&lt;li>&lt;code>https://{baseUrl}.onshape.com/api/v10/documents&lt;/code>&lt;/li>
+&lt;li>&lt;code>https://cad.onshape.com/api/v10/documents&lt;/code>&lt;/li>
+&lt;li>&lt;code>https://companySubDomain.onshape.com/api/v10/documents&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Onshape IDs are written as: &lt;code>{did}, {wvmid}, {eid}, {pid}, {otherId}&lt;/code>.
+&lt;ul>
+&lt;li>These represent document, workspace (or version or microversion), element, part, and other IDs, respectively.&lt;/li>
+&lt;li>Never include the braces &lt;code>{}&lt;/code> with your IDs.&lt;/li>
+&lt;li>See &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request">API Guide: API Intro&lt;/a> for information on what these IDs mean and how to obtain them from your documents.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>This page provides sample code in cURL and python.&lt;/li>
 &lt;li>For additional instruction and video content, visit the Learning Center&amp;rsquo;s &lt;a href="https://learn.onshape.com/learn/course/intro-to-the-onshape-api/intro-to-the-onshape-api/what-is-an-api?page=1">Intro to the Onshape API&lt;/a> course.&lt;/li>
 &lt;/ul>
 &lt;/blockquote>
+
+ &lt;/details>
+ &lt;/th>
+ &lt;/tr>
+&lt;/table>
 &lt;h2 id="endpoints">Endpoints&lt;/h2>
 &lt;p>To create drawings, Onshape allows you to send all drawing data points and information through the API as part of the request body JSON.&lt;/p></description></item><item><title>Features</title><link>https://onshape-public.github.io/docs/api-adv/featureaccess/</link><pubDate>Mon, 18 May 2020 20:37:28 -0400</pubDate><guid>https://onshape-public.github.io/docs/api-adv/featureaccess/</guid><description>&lt;p>This page describes the APIs Onshape provides for creating and manipulating features and the Feature List in a Part Studio.&lt;/p>
-&lt;blockquote>
-&lt;p>📘 &lt;strong>Notes&lt;/strong>&lt;/p>
+&lt;table width=100%>
+ &lt;tr>
+ &lt;th>&lt;details>
+ &lt;summary>Prerequisites&lt;/summary>
+ &lt;blockquote>
 &lt;ul>
-&lt;li>This page provides sample code as curls. See the &lt;a href="https://curl.se/docs/">curl documentation&lt;/a> for more information.&lt;/li>
-&lt;li>All Onshape API calls must be properly authenticated by replacing the &lt;code>CREDENTIALS&lt;/code> variable in the curls below. See
-the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys">API Keys&lt;/a> page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart">Quick Start&lt;/a> for an
-example. All applications submitted to the Onshape App Store &lt;em>must&lt;/em> authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth">OAuth2&lt;/a>.&lt;/li>
-&lt;li>This documentation refers to Onshape IDs in the following format: &lt;code>{did}, {wvmid}, {eid}, {pid}, {otherId}&lt;/code>. These
-represent document, workspace (or version or microversion), element, part, and other IDs (respectively) that are needed make the API calls. We
-sometimes abbreviate these variables as &lt;code>DWVEM&lt;/code> Please see &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request">API Guide: API Intro&lt;/a>
-for information on what these IDs mean and how to obtain them from your documents. Never include the curly braces (&lt;code>{}&lt;/code>)
-in your API calls.&lt;/li>
-&lt;li>For Enterprise accounts, replace &lt;strong>&lt;font color="slate">cad&lt;/font>&lt;/strong> in all Onshape URLs with your company domain.
-https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com &amp;gt; https://&lt;font color="slate">&lt;strong>companyName&lt;/strong>&lt;/font>
-.onshape.com&lt;/li>
+&lt;li>All Onshape API calls must be properly authenticated.
+&lt;ul>
+&lt;li>See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys">API Keys&lt;/a> page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart">Quick Start&lt;/a> for an example.&lt;/li>
+&lt;li>All applications submitted to the Onshape App Store &lt;em>must&lt;/em> authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth">OAuth2&lt;/a>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>For Standard accounts, replace &lt;code>{baseUrl}&lt;/code> with &lt;code>cad&lt;/code> in all endpoints. For Enterprise accounts, replace it with your company domain. Add &lt;code>/api&lt;/code> and the version number, and then provide the endpoint.
+&lt;ul>
+&lt;li>&lt;code>https://{baseUrl}.onshape.com/api/v10/documents&lt;/code>&lt;/li>
+&lt;li>&lt;code>https://cad.onshape.com/api/v10/documents&lt;/code>&lt;/li>
+&lt;li>&lt;code>https://companySubDomain.onshape.com/api/v10/documents&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Onshape IDs are written as: &lt;code>{did}, {wvmid}, {eid}, {pid}, {otherId}&lt;/code>.
+&lt;ul>
+&lt;li>These represent document, workspace (or version or microversion), element, part, and other IDs, respectively.&lt;/li>
+&lt;li>Never include the braces &lt;code>{}&lt;/code> with your IDs.&lt;/li>
+&lt;li>See &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request">API Guide: API Intro&lt;/a> for information on what these IDs mean and how to obtain them from your documents.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>This page provides sample code in cURL and python.&lt;/li>
 &lt;li>For additional instruction and video content, visit the Learning Center&amp;rsquo;s &lt;a href="https://learn.onshape.com/learn/course/intro-to-the-onshape-api/intro-to-the-onshape-api/what-is-an-api?page=1">Intro to the Onshape API&lt;/a> course.&lt;/li>
 &lt;/ul>
 &lt;/blockquote>
+
+ &lt;/details>
+ &lt;/th>
+ &lt;/tr>
+&lt;/table>
 &lt;h2 id="featurescript-vs-rest-api">FeatureScript vs REST API&lt;/h2>
 &lt;p>When working with complex geometry, you might find working directly in FeatureScript easier than working with the Onshape REST API.&lt;/p></description></item><item><title>Evaluating FeatureScript</title><link>https://onshape-public.github.io/docs/api-adv/fs/</link><pubDate>Thu, 15 Aug 2024 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/fs/</guid><description>&lt;p>This page describes some of the APIs Onshape provides for evaluating &lt;a href="https://cad.onshape.com/FsDoc/">FeatureScript&lt;/a>.&lt;/p>
-&lt;blockquote>
-&lt;p>📘 &lt;strong>Notes&lt;/strong>&lt;/p>
+&lt;table width=100%>
+ &lt;tr>
+ &lt;th>&lt;details>
+ &lt;summary>Prerequisites&lt;/summary>
+ &lt;blockquote>
 &lt;ul>
-&lt;li>This page provides sample code as curls. See the &lt;a href="https://curl.se/docs/">curl documentation&lt;/a> for more information.&lt;/li>
-&lt;li>All Onshape API calls must be properly authenticated by replacing the &lt;code>CREDENTIALS&lt;/code> variable in the curls below. See
-the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys">API Keys&lt;/a> page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart">Quick Start&lt;/a> for an
-example. All applications submitted to the Onshape App Store &lt;em>must&lt;/em> authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth">OAuth2&lt;/a>.&lt;/li>
-&lt;li>This documentation refers to Onshape IDs in the following format: &lt;code>{did}, {wvmid}, {eid}, {pid}, {otherId}&lt;/code>. These
-represent document, workspace (or version or microversion), element, part, and other IDs (respectively) that are needed make the API calls. We
-sometimes abbreviate these variables as &lt;code>DWVEM&lt;/code> Please see &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request">API Guide: API Intro&lt;/a>
-for information on what these IDs mean and how to obtain them from your documents. Never include the curly braces (&lt;code>{}&lt;/code>)
-in your API calls.&lt;/li>
-&lt;li>For Enterprise accounts, replace &lt;strong>&lt;font color="slate">cad&lt;/font>&lt;/strong> in all Onshape URLs with your company domain.
-https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com &amp;gt; https://&lt;font color="slate">&lt;strong>companyName&lt;/strong>&lt;/font>
-.onshape.com&lt;/li>
+&lt;li>All Onshape API calls must be properly authenticated.
+&lt;ul>
+&lt;li>See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys">API Keys&lt;/a> page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart">Quick Start&lt;/a> for an example.&lt;/li>
+&lt;li>All applications submitted to the Onshape App Store &lt;em>must&lt;/em> authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth">OAuth2&lt;/a>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>For Standard accounts, replace &lt;code>{baseUrl}&lt;/code> with &lt;code>cad&lt;/code> in all endpoints. For Enterprise accounts, replace it with your company domain. Add &lt;code>/api&lt;/code> and the version number, and then provide the endpoint.
+&lt;ul>
+&lt;li>&lt;code>https://{baseUrl}.onshape.com/api/v10/documents&lt;/code>&lt;/li>
+&lt;li>&lt;code>https://cad.onshape.com/api/v10/documents&lt;/code>&lt;/li>
+&lt;li>&lt;code>https://companySubDomain.onshape.com/api/v10/documents&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Onshape IDs are written as: &lt;code>{did}, {wvmid}, {eid}, {pid}, {otherId}&lt;/code>.
+&lt;ul>
+&lt;li>These represent document, workspace (or version or microversion), element, part, and other IDs, respectively.&lt;/li>
+&lt;li>Never include the braces &lt;code>{}&lt;/code> with your IDs.&lt;/li>
+&lt;li>See &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request">API Guide: API Intro&lt;/a> for information on what these IDs mean and how to obtain them from your documents.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>This page provides sample code in cURL and python.&lt;/li>
 &lt;li>For additional instruction and video content, visit the Learning Center&amp;rsquo;s &lt;a href="https://learn.onshape.com/learn/course/intro-to-the-onshape-api/intro-to-the-onshape-api/what-is-an-api?page=1">Intro to the Onshape API&lt;/a> course.&lt;/li>
 &lt;/ul>
 &lt;/blockquote>
+
+ &lt;/details>
+ &lt;/th>
+ &lt;/tr>
+&lt;/table>
 &lt;h2 id="featurescript-vs-rest-api">FeatureScript vs REST API&lt;/h2>
 &lt;p>When working with complex geometry, you might find working directly in FeatureScript easier than working with the Onshape REST API. &lt;a href="https://cad.onshape.com/FsDoc/">Click here to see the FeatureScript documentation.&lt;/a>&lt;/p></description></item><item><title>Import &amp; Export</title><link>https://onshape-public.github.io/docs/api-adv/translation/</link><pubDate>Wed, 27 Sep 2023 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/translation/</guid><description>&lt;p>This page describes the APIs Onshape provides for importing files to Onshape and exporting files from Onshape into different formats. We refer to the process of importing and exporting files from one format to another as &lt;em>translating&lt;/em> the files.&lt;/p>
 &lt;p>Onshape provides several APIs to support this format translation. These fall into three categories:&lt;/p>
@@ -364,26 +432,78 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &lt;li>&lt;a href="#asynchronous-exports">Asynchronous exports&lt;/a> - Export Onshape content into a variety of other formats.&lt;/li>
 &lt;li>&lt;a href="#imports">Import to Onshape&lt;/a> - Import a translatable file by uploading it to an Onshape blob element.&lt;/li>
 &lt;/ul>
-&lt;blockquote>
-&lt;p>📘 &lt;strong>Notes&lt;/strong>&lt;/p></description></item><item><title>Metadata</title><link>https://onshape-public.github.io/docs/api-adv/metadata/</link><pubDate>Wed, 20 Dec 2023 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/metadata/</guid><description>&lt;p>This page describes the APIs Onshape provides for working with document metadata.&lt;/p>
-&lt;blockquote>
-&lt;p>📘 &lt;strong>Notes&lt;/strong>&lt;/p>
+&lt;table width=100%>
+ &lt;tr>
+ &lt;th>&lt;details>
+ &lt;summary>Prerequisites&lt;/summary>
+ &lt;blockquote>
 &lt;ul>
-&lt;li>This page provides sample code as curls. See the &lt;a href="https://curl.se/docs/">curl documentation&lt;/a> for more information.&lt;/li>
-&lt;li>All Onshape API calls must be properly authenticated by replacing the &lt;code>CREDENTIALS&lt;/code> variable in the curls below. See
-the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys">API Keys&lt;/a> page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart">Quick Start&lt;/a> for an
-example. All applications submitted to the Onshape App Store &lt;em>must&lt;/em> authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth">OAuth2&lt;/a>.&lt;/li>
-&lt;li>This documentation refers to Onshape IDs in the following format: &lt;code>{did}, {wvmid}, {eid}, {pid}, {otherId}&lt;/code>. These
-represent document, workspace (or version or microversion), element, part, and other IDs (respectively) that are needed make the API calls. We
-sometimes abbreviate these variables as &lt;code>DWVEM&lt;/code> Please see &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request">API Guide: API Intro&lt;/a>
-for information on what these IDs mean and how to obtain them from your documents. Never include the curly braces (&lt;code>{}&lt;/code>)
-in your API calls.&lt;/li>
-&lt;li>For Enterprise accounts, replace &lt;strong>&lt;font color="slate">cad&lt;/font>&lt;/strong> in all Onshape URLs with your company domain.
-https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com &amp;gt; https://&lt;font color="slate">&lt;strong>companyName&lt;/strong>&lt;/font>
-.onshape.com&lt;/li>
+&lt;li>All Onshape API calls must be properly authenticated.
+&lt;ul>
+&lt;li>See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys">API Keys&lt;/a> page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart">Quick Start&lt;/a> for an example.&lt;/li>
+&lt;li>All applications submitted to the Onshape App Store &lt;em>must&lt;/em> authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth">OAuth2&lt;/a>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>For Standard accounts, replace &lt;code>{baseUrl}&lt;/code> with &lt;code>cad&lt;/code> in all endpoints. For Enterprise accounts, replace it with your company domain. Add &lt;code>/api&lt;/code> and the version number, and then provide the endpoint.
+&lt;ul>
+&lt;li>&lt;code>https://{baseUrl}.onshape.com/api/v10/documents&lt;/code>&lt;/li>
+&lt;li>&lt;code>https://cad.onshape.com/api/v10/documents&lt;/code>&lt;/li>
+&lt;li>&lt;code>https://companySubDomain.onshape.com/api/v10/documents&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Onshape IDs are written as: &lt;code>{did}, {wvmid}, {eid}, {pid}, {otherId}&lt;/code>.
+&lt;ul>
+&lt;li>These represent document, workspace (or version or microversion), element, part, and other IDs, respectively.&lt;/li>
+&lt;li>Never include the braces &lt;code>{}&lt;/code> with your IDs.&lt;/li>
+&lt;li>See &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request">API Guide: API Intro&lt;/a> for information on what these IDs mean and how to obtain them from your documents.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>This page provides sample code in cURL and python.&lt;/li>
 &lt;li>For additional instruction and video content, visit the Learning Center&amp;rsquo;s &lt;a href="https://learn.onshape.com/learn/course/intro-to-the-onshape-api/intro-to-the-onshape-api/what-is-an-api?page=1">Intro to the Onshape API&lt;/a> course.&lt;/li>
 &lt;/ul>
 &lt;/blockquote>
+
+ &lt;/details>
+ &lt;/th>
+ &lt;/tr>
+&lt;/table>
+&lt;h2 id="synchronous-exports">Synchronous exports&lt;/h2>
+&lt;p>Onshape provides a simple way to export content to common formats (glTF, Parasolid, and STL). Most of the interfaces defined here operate by requesting an HTTP redirect to a different URL where the request is fulfilled. Applications must explicitly handle the redirect and attachment authentication headers to the follow-up request, or it will fail.&lt;/p></description></item><item><title>Metadata</title><link>https://onshape-public.github.io/docs/api-adv/metadata/</link><pubDate>Wed, 20 Dec 2023 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/metadata/</guid><description>&lt;p>This page describes the APIs Onshape provides for working with document metadata.&lt;/p>
+&lt;table width=100%>
+ &lt;tr>
+ &lt;th>&lt;details>
+ &lt;summary>Prerequisites&lt;/summary>
+ &lt;blockquote>
+&lt;ul>
+&lt;li>All Onshape API calls must be properly authenticated.
+&lt;ul>
+&lt;li>See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys">API Keys&lt;/a> page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart">Quick Start&lt;/a> for an example.&lt;/li>
+&lt;li>All applications submitted to the Onshape App Store &lt;em>must&lt;/em> authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth">OAuth2&lt;/a>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>For Standard accounts, replace &lt;code>{baseUrl}&lt;/code> with &lt;code>cad&lt;/code> in all endpoints. For Enterprise accounts, replace it with your company domain. Add &lt;code>/api&lt;/code> and the version number, and then provide the endpoint.
+&lt;ul>
+&lt;li>&lt;code>https://{baseUrl}.onshape.com/api/v10/documents&lt;/code>&lt;/li>
+&lt;li>&lt;code>https://cad.onshape.com/api/v10/documents&lt;/code>&lt;/li>
+&lt;li>&lt;code>https://companySubDomain.onshape.com/api/v10/documents&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Onshape IDs are written as: &lt;code>{did}, {wvmid}, {eid}, {pid}, {otherId}&lt;/code>.
+&lt;ul>
+&lt;li>These represent document, workspace (or version or microversion), element, part, and other IDs, respectively.&lt;/li>
+&lt;li>Never include the braces &lt;code>{}&lt;/code> with your IDs.&lt;/li>
+&lt;li>See &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request">API Guide: API Intro&lt;/a> for information on what these IDs mean and how to obtain them from your documents.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>This page provides sample code in cURL and python.&lt;/li>
+&lt;li>For additional instruction and video content, visit the Learning Center&amp;rsquo;s &lt;a href="https://learn.onshape.com/learn/course/intro-to-the-onshape-api/intro-to-the-onshape-api/what-is-an-api?page=1">Intro to the Onshape API&lt;/a> course.&lt;/li>
+&lt;/ul>
+&lt;/blockquote>
+
+ &lt;/details>
+ &lt;/th>
+ &lt;/tr>
+&lt;/table>
 &lt;h2 id="endpoints">Endpoints&lt;/h2>
 &lt;h3 id="get-metadata">Get Metadata&lt;/h3>
 &lt;ul>
@@ -444,24 +564,41 @@ https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com 
 &lt;/ul>
 &lt;h3 id="update-metadata">Update Metadata&lt;/h3>
 &lt;p>To update metadata, you send a JSON in the API request body. This JSON block must include a &lt;code>jsonType&lt;/code> value and a &lt;code>properties&lt;/code> object array. Each object in the &lt;code>properties&lt;/code> array includes a &lt;code>propertyId&lt;/code> and the metadata key/value pairs.&lt;/p></description></item><item><title>Part Studios</title><link>https://onshape-public.github.io/docs/api-adv/partstudios/</link><pubDate>Tue, 13 Aug 2024 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/partstudios/</guid><description>&lt;p>This page describes the APIs Onshape provides for working with Part Studios.&lt;/p>
-&lt;blockquote>
-&lt;p>📘 &lt;strong>Notes&lt;/strong>&lt;/p>
+&lt;table width=100%>
+ &lt;tr>
+ &lt;th>&lt;details>
+ &lt;summary>Prerequisites&lt;/summary>
+ &lt;blockquote>
 &lt;ul>
-&lt;li>This page provides sample code as curls. See the &lt;a href="https://curl.se/docs/">curl documentation&lt;/a> for more information.&lt;/li>
-&lt;li>All Onshape API calls must be properly authenticated by replacing the &lt;code>CREDENTIALS&lt;/code> variable in the curls below. See
-the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys">API Keys&lt;/a> page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart">Quick Start&lt;/a> for an
-example. All applications submitted to the Onshape App Store &lt;em>must&lt;/em> authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth">OAuth2&lt;/a>.&lt;/li>
-&lt;li>This documentation refers to Onshape IDs in the following format: &lt;code>{did}, {wvmid}, {eid}, {pid}, {otherId}&lt;/code>. These
-represent document, workspace (or version or microversion), element, part, and other IDs (respectively) that are needed make the API calls. We
-sometimes abbreviate these variables as &lt;code>DWVEM&lt;/code> Please see &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request">API Guide: API Intro&lt;/a>
-for information on what these IDs mean and how to obtain them from your documents. Never include the curly braces (&lt;code>{}&lt;/code>)
-in your API calls.&lt;/li>
-&lt;li>For Enterprise accounts, replace &lt;strong>&lt;font color="slate">cad&lt;/font>&lt;/strong> in all Onshape URLs with your company domain.
-https://&lt;font color="slate">&lt;strong>cad&lt;/strong>&lt;/font>.onshape.com &amp;gt; https://&lt;font color="slate">&lt;strong>companyName&lt;/strong>&lt;/font>
-.onshape.com&lt;/li>
+&lt;li>All Onshape API calls must be properly authenticated.
+&lt;ul>
+&lt;li>See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys">API Keys&lt;/a> page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart">Quick Start&lt;/a> for an example.&lt;/li>
+&lt;li>All applications submitted to the Onshape App Store &lt;em>must&lt;/em> authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth">OAuth2&lt;/a>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>For Standard accounts, replace &lt;code>{baseUrl}&lt;/code> with &lt;code>cad&lt;/code> in all endpoints. For Enterprise accounts, replace it with your company domain. Add &lt;code>/api&lt;/code> and the version number, and then provide the endpoint.
+&lt;ul>
+&lt;li>&lt;code>https://{baseUrl}.onshape.com/api/v10/documents&lt;/code>&lt;/li>
+&lt;li>&lt;code>https://cad.onshape.com/api/v10/documents&lt;/code>&lt;/li>
+&lt;li>&lt;code>https://companySubDomain.onshape.com/api/v10/documents&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Onshape IDs are written as: &lt;code>{did}, {wvmid}, {eid}, {pid}, {otherId}&lt;/code>.
+&lt;ul>
+&lt;li>These represent document, workspace (or version or microversion), element, part, and other IDs, respectively.&lt;/li>
+&lt;li>Never include the braces &lt;code>{}&lt;/code> with your IDs.&lt;/li>
+&lt;li>See &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request">API Guide: API Intro&lt;/a> for information on what these IDs mean and how to obtain them from your documents.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>This page provides sample code in cURL and python.&lt;/li>
 &lt;li>For additional instruction and video content, visit the Learning Center&amp;rsquo;s &lt;a href="https://learn.onshape.com/learn/course/intro-to-the-onshape-api/intro-to-the-onshape-api/what-is-an-api?page=1">Intro to the Onshape API&lt;/a> course.&lt;/li>
 &lt;/ul>
 &lt;/blockquote>
+
+ &lt;/details>
+ &lt;/th>
+ &lt;/tr>
+&lt;/table>
 &lt;h2 id="endpoints">Endpoints&lt;/h2>
 &lt;ul>
 &lt;li>&lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/createPartStudio">createPartStudio&lt;/a>: Create a new Part Studio tab in a document.
