@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>API Guides on</title><link>https://onshape-public.github.io/docs/api-adv/</link><description>Recent content in API Guides on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Thu, 15 Aug 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://onshape-public.github.io/docs/api-adv/index.xml" rel="self" type="application/rss+xml"/><item><title>Assemblies</title><link>https://onshape-public.github.io/docs/api-adv/assemblies/</link><pubDate>Tue, 13 Aug 2024 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/assemblies/</guid><description>&lt;p>This page describes the APIs Onshape provides for working with assemblies.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>API Guides on</title><link>https://onshape-public.github.io/docs/api-adv/</link><description>Recent content in API Guides on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Thu, 19 Dec 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://onshape-public.github.io/docs/api-adv/index.xml" rel="self" type="application/rss+xml"/><item><title>Assemblies</title><link>https://onshape-public.github.io/docs/api-adv/assemblies/</link><pubDate>Tue, 13 Aug 2024 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/assemblies/</guid><description>&lt;p>This page describes the APIs Onshape provides for working with assemblies.&lt;/p>
 &lt;table width=100%>
  &lt;tr>
  &lt;th>&lt;details>
@@ -314,7 +314,44 @@ and edges (&lt;code>getPartStudioEdges&lt;/code>}. Note the ids:
  &lt;/tr>
 &lt;/table>
 &lt;p>Onshape defines three kinds of plans:&lt;/p></description></item><item><title>Configurations</title><link>https://onshape-public.github.io/docs/api-adv/configs/</link><pubDate>Fri, 05 Apr 2024 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/configs/</guid><description>&lt;p>This page describes the APIs Onshape provides for working with &lt;a href="https://cad.onshape.com/help/Content/configurations.htm">configurations&lt;/a>.&lt;/p>
-&lt;p>You can use configurations to create variations of entire Part Studios, assemblies, specific parts and more. You can configure feature and parameter values, part properties, custom part properties, face and part appearances, and sketch text. Each Part Studio can have only one configuration, but it can contain multiple configuration inputs. The configuration inputs you define for a Part Studio become options when inserting that Part Studio into an assembly or drawing. You can also create configurations for an assembly, regardless of any existing Part Studio configurations. Assembly configurations work the same way as Part Studio configurations, but are limited to configuring mates (&lt;em>not&lt;/em> mate connectors), instances, and patterns.&lt;/p></description></item><item><title>Drawings</title><link>https://onshape-public.github.io/docs/api-adv/drawings/</link><pubDate>Thu, 12 Oct 2023 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/drawings/</guid><description>&lt;p>This page describes the APIs Onshape provides for creating and manipulating Onshape drawings.&lt;/p>
+&lt;p>You can use configurations to create variations of entire Part Studios, assemblies, specific parts and more. You can configure feature and parameter values, part properties, custom part properties, face and part appearances, and sketch text. Each Part Studio can have only one configuration, but it can contain multiple configuration inputs. The configuration inputs you define for a Part Studio become options when inserting that Part Studio into an assembly or drawing. You can also create configurations for an assembly, regardless of any existing Part Studio configurations. Assembly configurations work the same way as Part Studio configurations, but are limited to configuring mates (&lt;em>not&lt;/em> mate connectors), instances, and patterns.&lt;/p></description></item><item><title>Documents</title><link>https://onshape-public.github.io/docs/api-adv/documents/</link><pubDate>Thu, 19 Dec 2024 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/documents/</guid><description>&lt;p>This page describes the APIs Onshape provides for working with documents.&lt;/p>
+&lt;table width=100%>
+ &lt;tr>
+ &lt;th>&lt;details>
+ &lt;summary>Prerequisites&lt;/summary>
+ &lt;blockquote>
+&lt;ul>
+&lt;li>All Onshape API calls must be properly authenticated.
+&lt;ul>
+&lt;li>See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys">API Keys&lt;/a> page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart">Quick Start&lt;/a> for an example.&lt;/li>
+&lt;li>All applications submitted to the Onshape App Store &lt;em>must&lt;/em> authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth">OAuth2&lt;/a>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>For Standard accounts, replace &lt;code>{baseUrl}&lt;/code> with &lt;code>cad&lt;/code> in all endpoints. For Enterprise accounts, replace it with your company domain. Add &lt;code>/api&lt;/code> and the version number, and then provide the endpoint.
+&lt;ul>
+&lt;li>&lt;code>https://{baseUrl}.onshape.com/api/v10/documents&lt;/code>&lt;/li>
+&lt;li>&lt;code>https://cad.onshape.com/api/v10/documents&lt;/code>&lt;/li>
+&lt;li>&lt;code>https://companySubDomain.onshape.com/api/v10/documents&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Onshape IDs are written as: &lt;code>{did}, {wvmid}, {eid}, {pid}, {otherId}&lt;/code>.
+&lt;ul>
+&lt;li>These represent document, workspace (or version or microversion), element, part, and other IDs, respectively.&lt;/li>
+&lt;li>Never include the braces &lt;code>{}&lt;/code> with your IDs.&lt;/li>
+&lt;li>See &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request">API Guide: API Intro&lt;/a> for information on what these IDs mean and how to obtain them from your documents.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>This page provides sample code in cURL and python.&lt;/li>
+&lt;li>For additional instruction and video content, visit the Learning Center&amp;rsquo;s &lt;a href="https://learn.onshape.com/learn/course/intro-to-the-onshape-api/intro-to-the-onshape-api/what-is-an-api?page=1">Intro to the Onshape API&lt;/a> course.&lt;/li>
+&lt;/ul>
+&lt;/blockquote>
+
+ &lt;/details>
+ &lt;/th>
+ &lt;/tr>
+&lt;/table>
+&lt;h2 id="endpoints">Endpoints&lt;/h2>
+&lt;p>See all Document endpoints here: &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Document">https://cad.onshape.com/glassworks/explorer/#/Document&lt;/a>&lt;/p></description></item><item><title>Drawings</title><link>https://onshape-public.github.io/docs/api-adv/drawings/</link><pubDate>Thu, 12 Oct 2023 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/drawings/</guid><description>&lt;p>This page describes the APIs Onshape provides for creating and manipulating Onshape drawings.&lt;/p>
 &lt;table width=100%>
  &lt;tr>
  &lt;th>&lt;details>
