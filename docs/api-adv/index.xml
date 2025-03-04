@@ -253,7 +253,7 @@ and make a note of the copied document and workspace IDs in the URL.&lt;/li>
 &lt;h3 id="modify-an-assembly">Modify an assembly&lt;/h3>
 &lt;ol>
 &lt;li>Follow all steps in the &lt;a href="#get-assembly-definition">Get assembly definition&lt;/a> tutorial.&lt;/li>
-&lt;li>Call the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Assembly/modify">modify&lt;/a> endpoint on your &lt;code>myNewAssembly&lt;/code> tab. Send the desired modifcation information in the request body. In this example, we&amp;rsquo;ll use the modify endpoint to delete the &lt;code>CRANKSHAFT&lt;/code> instance from the assembly.
+&lt;li>Call the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Assembly/modify">modify&lt;/a> endpoint on your &lt;code>myNewAssembly&lt;/code> tab. Send the desired modification information in the request body. In this example, we&amp;rsquo;ll use the modify endpoint to delete the &lt;code>CRANKSHAFT&lt;/code> instance from the assembly.
 &lt;pre tabindex="0">&lt;code>curl -X &amp;#39;POST&amp;#39; \
  &amp;#39;https://cad.onshape.com/api/v9/assemblies/d/{did}/w/{wid}/e/{eid}/modify&amp;#39; \
  -H &amp;#39;Accept: application/json;charset=UTF-8; qs=0.09&amp;#39; \
