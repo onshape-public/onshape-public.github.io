@@ -388,8 +388,8 @@ and edges (&lt;code>getPartStudioEdges&lt;/code>}. Note the ids:
  &lt;/th>
  &lt;/tr>
 &lt;/table>
-&lt;h2 id="endpoints">Endpoints&lt;/h2>
-&lt;p>See all Document endpoints here: &lt;a href="https://cad.onshape.com/glassworks/explorer/#/Document">https://cad.onshape.com/glassworks/explorer/#/Document&lt;/a>&lt;/p></description></item><item><title>Drawings</title><link>https://onshape-public.github.io/docs/api-adv/drawings/</link><pubDate>Thu, 12 Oct 2023 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/drawings/</guid><description>&lt;p>This page describes the APIs Onshape provides for creating and manipulating Onshape drawings.&lt;/p>
+&lt;h2 id="examples">Examples&lt;/h2>
+&lt;p>&lt;a name="endpoints">&lt;/a>&lt;/p></description></item><item><title>Drawings</title><link>https://onshape-public.github.io/docs/api-adv/drawings/</link><pubDate>Thu, 12 Oct 2023 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/drawings/</guid><description>&lt;p>This page describes the APIs Onshape provides for creating and manipulating Onshape drawings.&lt;/p>
 &lt;table width=100%>
  &lt;tr>
  &lt;th>&lt;details>
