@@ -465,9 +465,9 @@ and edges (&lt;code>getPartStudioEdges&lt;/code>}. Note the ids:
 &lt;p>When working with complex geometry, you might find working directly in FeatureScript easier than working with the Onshape REST API. &lt;a href="https://cad.onshape.com/FsDoc/">Click here to see the FeatureScript documentation.&lt;/a>&lt;/p></description></item><item><title>Import &amp; Export</title><link>https://onshape-public.github.io/docs/api-adv/translation/</link><pubDate>Wed, 27 Sep 2023 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/translation/</guid><description>&lt;p>This page describes the APIs Onshape provides for importing files to Onshape and exporting files from Onshape into different formats. We refer to the process of importing and exporting files from one format to another as &lt;em>translating&lt;/em> the files.&lt;/p>
 &lt;p>Onshape provides several APIs to support this format translation. These fall into three categories:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="#synchronous-exports">Synchronous exports&lt;/a> - Export Onshape content to glTF, STL, or Parasolid format.&lt;/li>
-&lt;li>&lt;a href="#asynchronous-exports">Asynchronous exports&lt;/a> - Export Onshape content into a variety of other formats.&lt;/li>
-&lt;li>&lt;a href="#imports">Import to Onshape&lt;/a> - Import a translatable file by uploading it to an Onshape blob element.&lt;/li>
+&lt;li>&lt;a href="#asynchronous-exports">Asynchronous exports&lt;/a> - Export Onshape elements to one of many supported formats&lt;/li>
+&lt;li>&lt;a href="#synchronous-exports">Synchronous exports&lt;/a> - Faster export to glTF, STL, or Parasolid formats with limited settings options.&lt;/li>
+&lt;li>&lt;a href="#imports">Import to Onshape&lt;/a> - Import a translatable file by uploading it to an Onshape blob element&lt;/li>
 &lt;/ul>
 &lt;table width=100%>
  &lt;tr>
@@ -504,8 +504,8 @@ and edges (&lt;code>getPartStudioEdges&lt;/code>}. Note the ids:
  &lt;/th>
  &lt;/tr>
 &lt;/table>
-&lt;h2 id="synchronous-exports">Synchronous exports&lt;/h2>
-&lt;p>Onshape provides a simple way to export content to common formats (glTF, Parasolid, and STL). Most of the interfaces defined here operate by requesting an HTTP redirect to a different URL where the request is fulfilled. Applications must explicitly handle the redirect and attachment authentication headers to the follow-up request, or it will fail.&lt;/p></description></item><item><title>Metadata</title><link>https://onshape-public.github.io/docs/api-adv/metadata/</link><pubDate>Wed, 20 Dec 2023 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/metadata/</guid><description>&lt;p>This page describes the APIs Onshape provides for working with metadata.&lt;/p>
+&lt;h2 id="asynchronous-exports">Asynchronous exports&lt;/h2>
+&lt;p>These endpoints provide a way to export Onshape elements to other formats, and provide options for tessellation control and other settings.&lt;/p></description></item><item><title>Metadata</title><link>https://onshape-public.github.io/docs/api-adv/metadata/</link><pubDate>Wed, 20 Dec 2023 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/metadata/</guid><description>&lt;p>This page describes the APIs Onshape provides for working with metadata.&lt;/p>
 &lt;table width=100%>
  &lt;tr>
  &lt;th>&lt;details>
