@@ -821,7 +821,14 @@ a third-party system when a part in Onshape is selected. This interface can also
 &lt;li>Use of document context&lt;/li>
 &lt;/ul>
 &lt;p>The application is built using Express and is deployed on Heroku.&lt;/p>
-&lt;p>Refer to the &lt;a href="https://github.com/onshape-public/app-gltf-viewer">gltf-viewer-app README&lt;/a> for instructions on running this sample app.&lt;/p></description></item><item><title>Changelog</title><link>https://onshape-public.github.io/docs/changelog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/changelog/</guid><description>&lt;h4 id="rel-1195---released-2025-03-14">&lt;code>rel-1.195&lt;/code> - released 2025-03-14&lt;/h4>
+&lt;p>Refer to the &lt;a href="https://github.com/onshape-public/app-gltf-viewer">gltf-viewer-app README&lt;/a> for instructions on running this sample app.&lt;/p></description></item><item><title>Changelog</title><link>https://onshape-public.github.io/docs/changelog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/changelog/</guid><description>&lt;h4 id="rel-1196---released-2025-04-04">&lt;code>rel-1.196&lt;/code> - released 2025-04-04&lt;/h4>
+&lt;ul>
+&lt;li>Extensions: Add &lt;code>sessionCompanyId&lt;/code> as a default query string prarmeter for Drawing tabs&lt;/li>
+&lt;li>Fixed an issue that can cause &lt;code>/glTF&lt;/code> export endpoint to skip certain nested composite parts in an assembly&lt;/li>
+&lt;li>Fixed error message when using &lt;code>/features&lt;/code> to create or update Part Studio features&lt;/li>
+&lt;li>Updated documentation for translation endpoints around async vs sync endpoints (&lt;a href="https://onshape-public.github.io/docs/api-adv/translation/">https://onshape-public.github.io/docs/api-adv/translation/&lt;/a>)&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1195---released-2025-03-14">&lt;code>rel-1.195&lt;/code> - released 2025-03-14&lt;/h4>
 &lt;ul>
 &lt;li>Updated all translation endpoints with new optional request property &lt;code>rhinoVersion&lt;/code> and &lt;code>stlMode&lt;/code>&lt;/li>
 &lt;li>Updated &lt;code>GET&lt;/code> : &lt;code>/assemblies/d/[:did]/[:wv]/[:wvid]/e/[:eid]/matevalues&lt;/code> now supports versions &lt;code>v&lt;/code>&lt;/li>
