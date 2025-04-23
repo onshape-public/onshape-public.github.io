@@ -704,7 +704,7 @@ and edges (&lt;code>getPartStudioEdges&lt;/code>}. Note the ids:
 &lt;p>One of the best ways to familiarize yourself with the Onshape Feature APIs is to view the API details for existing features in a Part Studio. In this example, we&amp;rsquo;ll add three features to a Part Studio, and then call the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/getPartStudioFeatures">getPartStudioFeatures&lt;/a> API on the Part Studio. We&amp;rsquo;ll then be able to view the structure of the way features are represented in the API.&lt;/p></description></item><item><title>Response Codes</title><link>https://onshape-public.github.io/docs/api-adv/errors/</link><pubDate>Wed, 03 Apr 2024 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/errors/</guid><description>&lt;p>This page details some of the response codes that may be returned by Onshape API endpoints. For each response code, we&amp;rsquo;ve provided a brief description of the response and recommended next steps.&lt;/p>
 &lt;h2 id="success-2xx">Success (2xx)&lt;/h2>
 &lt;p>The client call was successful.&lt;/p>
-&lt;h3 id="200---ok">200 - OK&lt;/h3>
+&lt;h3 id="200-ok">200 OK&lt;/h3>
 &lt;p>The client call was successful. No action needed.&lt;/p>
-&lt;h3 id="204---no-content">204 - No Content&lt;/h3>
+&lt;h3 id="204-no-content">204 No Content&lt;/h3>
 &lt;p>The client call was successful, and there&amp;rsquo;s nothing to return in the response body. The empty response body cannot be parsed.&lt;/p></description></item></channel></rss>
