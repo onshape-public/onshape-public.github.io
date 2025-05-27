@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Onshape Developer Documentation on</title><link>https://onshape-public.github.io/</link><description>Recent content in Onshape Developer Documentation on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Thu, 19 Dec 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://onshape-public.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>API Explorer</title><link>https://onshape-public.github.io/docs/api-intro/explorer/</link><pubDate>Mon, 18 May 2020 20:39:14 -0400</pubDate><guid>https://onshape-public.github.io/docs/api-intro/explorer/</guid><description>&lt;p>We document all available Onshape REST API endpoints in our Glassworks API Explorer:&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Onshape Developer Documentation on</title><link>https://onshape-public.github.io/</link><description>Recent content in Onshape Developer Documentation on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Tue, 20 May 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://onshape-public.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>API Explorer</title><link>https://onshape-public.github.io/docs/api-intro/explorer/</link><pubDate>Mon, 18 May 2020 20:39:14 -0400</pubDate><guid>https://onshape-public.github.io/docs/api-intro/explorer/</guid><description>&lt;p>We document all available Onshape REST API endpoints in our Glassworks API Explorer:&lt;/p>
 &lt;p>&lt;a href="https://cad.onshape.com/glassworks/explorer">&lt;font size="4">&lt;b>&lt;a href="https://cad.onshape.com/glassworks/explorer/">https://cad.onshape.com/glassworks/explorer/&lt;/a>&lt;/b>&lt;/font>&lt;/a>&lt;/p>
 &lt;h2 id="videos--courses">Videos &amp;amp; Courses&lt;/h2>
 &lt;p>You can also watch our API Explorer instructional video below, or view the full course content in the &lt;a href="https://learn.onshape.com/learn/course/intro-to-the-onshape-api/executing-a-get-request/glassworks-api-explorer?page=1">Onshape Learning Center&lt;/a>. Additional example videos are embedded throughout this page.&lt;/p>
@@ -739,14 +739,53 @@ and edges (&lt;code>getPartStudioEdges&lt;/code>}. Note the ids:
 &lt;li>Return to your document and observe that the new assembly tab has been added.&lt;/li>
 &lt;/ol>
 &lt;h3 id="get-the-list-of-features-in-a-part-studio">Get the list of features in a Part Studio&lt;/h3>
-&lt;p>One of the best ways to familiarize yourself with the Onshape Feature APIs is to view the API details for existing features in a Part Studio. In this example, we&amp;rsquo;ll add three features to a Part Studio, and then call the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/getPartStudioFeatures">getPartStudioFeatures&lt;/a> API on the Part Studio. We&amp;rsquo;ll then be able to view the structure of the way features are represented in the API.&lt;/p></description></item><item><title>Response Codes</title><link>https://onshape-public.github.io/docs/api-adv/errors/</link><pubDate>Wed, 03 Apr 2024 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/errors/</guid><description>&lt;p>This page details some of the response codes that may be returned by Onshape API endpoints. For each response code, we&amp;rsquo;ve provided a brief description of the response and recommended next steps.&lt;/p>
+&lt;p>One of the best ways to familiarize yourself with the Onshape Feature APIs is to view the API details for existing features in a Part Studio. In this example, we&amp;rsquo;ll add three features to a Part Studio, and then call the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/getPartStudioFeatures">getPartStudioFeatures&lt;/a> API on the Part Studio. We&amp;rsquo;ll then be able to view the structure of the way features are represented in the API.&lt;/p></description></item><item><title>Release Management</title><link>https://onshape-public.github.io/docs/api-adv/relmgmt/</link><pubDate>Tue, 20 May 2025 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/relmgmt/</guid><description>&lt;p>This page describes the APIs Onshape provides for working with revisions and part numbers.&lt;/p>
+&lt;table width=100%>
+ &lt;tr>
+ &lt;th>&lt;details>
+ &lt;summary>Prerequisites&lt;/summary>
+ &lt;blockquote>
+&lt;ul>
+&lt;li>All Onshape API calls must be properly authenticated.
+&lt;ul>
+&lt;li>See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys">API Keys&lt;/a> page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart">Quick Start&lt;/a> for an example.&lt;/li>
+&lt;li>All applications submitted to the Onshape App Store &lt;em>must&lt;/em> authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth">OAuth2&lt;/a>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>For Standard accounts, replace &lt;code>{baseUrl}&lt;/code> with &lt;code>cad&lt;/code> in all endpoints. For Enterprise accounts, replace it with your company domain. Add &lt;code>/api&lt;/code> and the version number, and then provide the endpoint.
+&lt;ul>
+&lt;li>&lt;code>https://{baseUrl}.onshape.com/api/v10/documents&lt;/code>&lt;/li>
+&lt;li>&lt;code>https://cad.onshape.com/api/v10/documents&lt;/code>&lt;/li>
+&lt;li>&lt;code>https://companySubDomain.onshape.com/api/v10/documents&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Onshape IDs are written as: &lt;code>{did}, {wvmid}, {eid}, {pid}, {otherId}&lt;/code>.
+&lt;ul>
+&lt;li>These represent document, workspace (or version or microversion), element, part, and other IDs, respectively.&lt;/li>
+&lt;li>Never include the braces &lt;code>{}&lt;/code> with your IDs.&lt;/li>
+&lt;li>See &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request">API Guide: API Intro&lt;/a> for information on what these IDs mean and how to obtain them from your documents.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>This page provides sample code in cURL and python.&lt;/li>
+&lt;li>For additional instruction and video content, visit the Learning Center&amp;rsquo;s &lt;a href="https://learn.onshape.com/learn/course/intro-to-the-onshape-api/intro-to-the-onshape-api/what-is-an-api?page=1">Intro to the Onshape API&lt;/a> course.&lt;/li>
+&lt;/ul>
+&lt;/blockquote>
+
+ &lt;/details>
+ &lt;/th>
+ &lt;/tr>
+&lt;/table>
+&lt;h2 id="examples">Examples&lt;/h2>
+&lt;hr>
+&lt;h3 id="get-the-next-available-part-number">Get the next available part number&lt;/h3>
+&lt;p>&lt;strong>Endpoint&lt;/strong>&lt;/p></description></item><item><title>Extensions</title><link>https://onshape-public.github.io/docs/app-dev/extensions/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/app-dev/extensions/</guid><description>&lt;p>This page provides information for some of the more common options for
+embedding a third-party application into the Onshape interface. Onshape provides many options for embedding commands in various menus, fly-out panels, and elements. In this example, you will embed a custom web page inside a document’s right side fly-out panel. This interface will receive information from Onshape and push information from the panel back to Onshape, providing a complete, bi-directional integration scenario.&lt;/p></description></item><item><title>Response Codes</title><link>https://onshape-public.github.io/docs/api-adv/errors/</link><pubDate>Wed, 03 Apr 2024 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/errors/</guid><description>&lt;p>This page details some of the response codes that may be returned by Onshape API endpoints. For each response code, we&amp;rsquo;ve provided a brief description of the response and recommended next steps.&lt;/p>
 &lt;h2 id="success-2xx">Success (2xx)&lt;/h2>
 &lt;p>The client call was successful.&lt;/p>
 &lt;h3 id="200-ok">200 OK&lt;/h3>
 &lt;p>The client call was successful. No action needed.&lt;/p>
 &lt;h3 id="204-no-content">204 No Content&lt;/h3>
-&lt;p>The client call was successful, and there&amp;rsquo;s nothing to return in the response body. The empty response body cannot be parsed.&lt;/p></description></item><item><title>Extensions</title><link>https://onshape-public.github.io/docs/app-dev/extensions/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/app-dev/extensions/</guid><description>&lt;p>This page provides information for some of the more common options for
-embedding a third-party application into the Onshape interface. Onshape provides many options for embedding commands in various menus, fly-out panels, and elements. In this example, you will embed a custom web page inside a document’s right side fly-out panel. This interface will receive information from Onshape and push information from the panel back to Onshape, providing a complete, bi-directional integration scenario.&lt;/p></description></item><item><title>Client Messaging</title><link>https://onshape-public.github.io/docs/app-dev/clientmessaging/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/app-dev/clientmessaging/</guid><description>&lt;p>Application extensions and the Onshape JavaScript web client need to communicate directly, calling across the iframe containing the application extension using post message.
+&lt;p>The client call was successful, and there&amp;rsquo;s nothing to return in the response body. The empty response body cannot be parsed.&lt;/p></description></item><item><title>Client Messaging</title><link>https://onshape-public.github.io/docs/app-dev/clientmessaging/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/app-dev/clientmessaging/</guid><description>&lt;p>Application extensions and the Onshape JavaScript web client need to communicate directly, calling across the iframe containing the application extension using post message.
 &lt;img src="https://onshape-public.github.io/images/extension-right-panel-02.png" alt="image alt text">&lt;/p>
 &lt;h2 id="message-initiation">Message initiation&lt;/h2>
 &lt;p>Onshape client messaging can be split into those that are initiated from the &lt;em>application extension&lt;/em> and those that are initiated from the &lt;em>Onshape client&lt;/em>.&lt;/p>
