@@ -1,4 +1,30 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Welcome to the Onshape Developer Documentation on</title><link>https://onshape-public.github.io/docs/</link><description>Recent content in Welcome to the Onshape Developer Documentation on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 01 Jan 0001 00:00:00 +0000</lastBuildDate><atom:link href="https://onshape-public.github.io/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>Changelog</title><link>https://onshape-public.github.io/docs/changelog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/changelog/</guid><description>&lt;h4 id="rel-1198---released-2025-05-16">&lt;code>rel-1.198&lt;/code> - released 2025-05-16&lt;/h4>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Welcome to the Onshape Developer Documentation on</title><link>https://onshape-public.github.io/docs/</link><description>Recent content in Welcome to the Onshape Developer Documentation on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 01 Jan 0001 00:00:00 +0000</lastBuildDate><atom:link href="https://onshape-public.github.io/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>Changelog</title><link>https://onshape-public.github.io/docs/changelog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/changelog/</guid><description>&lt;h4 id="rel-1199---released-2025-06-06">&lt;code>rel-1.199&lt;/code> - released 2025-06-06&lt;/h4>
+&lt;ul>
+&lt;li>New &lt;code>V11&lt;/code> version to the api (&lt;a href="https://cad.onshape.com/api/versions)">https://cad.onshape.com/api/versions)&lt;/a>, added to support &lt;code>getElementsInDocument&lt;/code> endpoint adds query parameter &lt;code>withZipContents&lt;/code> to return the contents of a zip file tab&lt;/li>
+&lt;li>New assembly direct translation endpionts &lt;code>POST&lt;/code> : &lt;code>/d/[:did]/[:wv]/[:wvid]/e/[:eid]/export/gltf&lt;/code>, &lt;code>/obj&lt;/code> , &lt;code>/solidworks&lt;/code>, and &lt;code>/step&lt;/code>: &lt;a href="https://onshape-public.github.io/docs/api-adv/translation/#export-an-assembly-to-gltf-obj-solidworks-or-step">https://onshape-public.github.io/docs/api-adv/translation/#export-an-assembly-to-gltf-obj-solidworks-or-step&lt;/a>&lt;/li>
+&lt;li>New Part Studio direct translation endpionts &lt;code>POST&lt;/code> : &lt;code>/d/[:did]/[:wv]/[:wvid]/e/[:eid]/export/gltf&lt;/code>, &lt;code>/obj&lt;/code> , &lt;code>/solidworks&lt;/code>, and &lt;code>/step&lt;/code>: &lt;a href="https://onshape-public.github.io/docs/api-adv/translation/#export-a-part-studio-to-gltf-obj-solidworks-or-step">https://onshape-public.github.io/docs/api-adv/translation/#export-a-part-studio-to-gltf-obj-solidworks-or-step&lt;/a>&lt;/li>
+&lt;li>New documents endpoint (&lt;code>POST&lt;/code> : &lt;code>/documents/d/[:did]/[:wv]/[:wvid]/contents&lt;/code>) to retrieve tabs and folders inside the document&lt;/li>
+&lt;li>New documentation page for Revision and Part number tutorials: &lt;a href="https://onshape-public.github.io/docs/api-adv/relmgmt/">https://onshape-public.github.io/docs/api-adv/relmgmt/&lt;/a>&lt;/li>
+&lt;li>Updated blobelements endpoint (&lt;code>GET&lt;/code> : &lt;code>/blobelements/d/[:did]/[:wv]/[:wvid]&lt;/code>) with the optional request property &lt;code>versionDescription&lt;/code>, &lt;code>versionId&lt;/code> and &lt;code>versionName&lt;/code>&lt;/li>
+&lt;li>Updated blobelements endpoint (&lt;code>POST&lt;/code> : &lt;code>/blobelements/d/[:did]/[:wv]/[:wvid]/e/[:eid]&lt;/code>) with the optional request property &lt;code>versionDescription&lt;/code>, &lt;code>versionId' and &lt;/code>versionName`&lt;/li>
+&lt;li>Updated translations endpoint (&lt;code>POST&lt;/code> : &lt;code>/translations/d/[:did]/[:wv]/[:wvid]&lt;/code>) with the optional request property &lt;code>versionDescription&lt;/code>, &lt;code>versionId&lt;/code> and &lt;code>versionName&lt;/code>&lt;/li>
+&lt;li>Updated documents endpoint (&lt;code>GET&lt;/code> : &lt;code>/documents/d/[:did]/[:wv]/[:wvid]/elements&lt;/code>) with the optional request property &lt;code>withZipContents&lt;/code>&lt;/li>
+&lt;li>Updated Part Studio features endpoint (&lt;code>POST&lt;/code> : &lt;code>/partstudios/d/[:did]/[:wv]/[:wvid]/e/[:eid]/features&lt;/code>) with the optional request property &lt;code>feature/suppressionState&lt;/code>&lt;/li>
+&lt;li>Updated Part Studio direct translation endpoint &lt;code>POST&lt;/code> : &lt;code>/d/[:did]/[:wv]/[:wvid]/e/[:eid]/export/step&lt;/code> with request property &lt;code>stepUnit&lt;/code> as a list of enum values:&lt;/li>
+&lt;/ul>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th>stepUnit&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td>&lt;code>CENTIMETER&lt;/code>, &lt;code>FOOT&lt;/code>, &lt;code>INCH&lt;/code>, &lt;code>METER&lt;/code>, &lt;code>MILLIMETER&lt;/code>, &lt;code>UNKNOWN&lt;/code>, &lt;code>YARD&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;h4 id="rel-1198---released-2025-05-16">&lt;code>rel-1.198&lt;/code> - released 2025-05-16&lt;/h4>
 &lt;ul>
 &lt;li>New list items endpoint &lt;code>GET&lt;/code> : &lt;code>/items&lt;/code>&lt;/li>
 &lt;li>New create item endpoint &lt;code>POST&lt;/code> : &lt;code>/items&lt;/code>&lt;/li>
