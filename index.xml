@@ -863,7 +863,11 @@ a third-party system when a part in Onshape is selected. This interface can also
 &lt;li>Use of document context&lt;/li>
 &lt;/ul>
 &lt;p>The application is built using Express and is deployed on Heroku.&lt;/p>
-&lt;p>Refer to the &lt;a href="https://github.com/onshape-public/app-gltf-viewer">gltf-viewer-app README&lt;/a> for instructions on running this sample app.&lt;/p></description></item><item><title>Changelog</title><link>https://onshape-public.github.io/docs/changelog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/changelog/</guid><description>&lt;h4 id="rel-1201---released-2025-07-218">&lt;code>rel-1.201&lt;/code> - released 2025-07-218&lt;/h4>
+&lt;p>Refer to the &lt;a href="https://github.com/onshape-public/app-gltf-viewer">gltf-viewer-app README&lt;/a> for instructions on running this sample app.&lt;/p></description></item><item><title>Changelog</title><link>https://onshape-public.github.io/docs/changelog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/changelog/</guid><description>&lt;h4 id="rel-1202---released-2025-08-07">&lt;code>rel-1.202&lt;/code> - released 2025-08-07&lt;/h4>
+&lt;ul>
+&lt;li>New webhook event for document share, unshare and share changes &lt;code>onshape.document.lifecycle.shared&lt;/code> &lt;a href="https://onshape-public.github.io/docs/app-dev/webhook/#document-group">https://onshape-public.github.io/docs/app-dev/webhook/#document-group&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1201---released-2025-07-18">&lt;code>rel-1.201&lt;/code> - released 2025-07-18&lt;/h4>
 &lt;ul>
 &lt;li>New &lt;code>V12&lt;/code> version to the api (&lt;a href="https://cad.onshape.com/api/versions)">https://cad.onshape.com/api/versions)&lt;/a>, to support translation endpoints checking if input elements match the expected element type&lt;/li>
 &lt;li>New update global permissions endpoint (Enterprise) &lt;code>POST&lt;/code> : &lt;code>/companies/[:cid]/globalpermission/[type]/[id]&lt;/code>&lt;/li>
