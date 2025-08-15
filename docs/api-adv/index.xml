@@ -351,7 +351,7 @@ and edges (&lt;code>getPartStudioEdges&lt;/code>}. Note the ids:
  &lt;/tr>
 &lt;/table>
 &lt;h2 id="examples">Examples&lt;/h2>
-&lt;p>&lt;a name="endpoints">&lt;/a>&lt;/p></description></item><item><title>Drawings</title><link>https://onshape-public.github.io/docs/api-adv/drawings/</link><pubDate>Thu, 12 Oct 2023 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/drawings/</guid><description>&lt;p>This page describes the APIs Onshape provides for creating and manipulating Onshape drawings.&lt;/p>
+&lt;p>&lt;a name="endpoints">&lt;/a>&lt;/p></description></item><item><title>Drawings</title><link>https://onshape-public.github.io/docs/api-adv/drawings/</link><pubDate>Thu, 12 Oct 2023 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/drawings/</guid><description>&lt;p>This page describes the APIs Onshape provides for working with Onshape drawings.&lt;/p>
 &lt;table width=100%>
  &lt;tr>
  &lt;th>&lt;details>
@@ -469,44 +469,9 @@ and edges (&lt;code>getPartStudioEdges&lt;/code>}. Note the ids:
 &lt;li>&lt;a href="#synchronous-exports">Synchronous exports&lt;/a> - Faster export to glTF, STL, or Parasolid formats with limited settings options.&lt;/li>
 &lt;li>&lt;a href="#imports">Import to Onshape&lt;/a> - Import a translatable file by uploading it to an Onshape blob element.&lt;/li>
 &lt;/ul>
-&lt;table width=100%>
- &lt;tr>
- &lt;th>&lt;details>
- &lt;summary>Prerequisites&lt;/summary>
- &lt;blockquote>
-&lt;ul>
-&lt;li>All Onshape API calls must be properly authenticated.
-&lt;ul>
-&lt;li>See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys">API Keys&lt;/a> page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart">Quick Start&lt;/a> for an example.&lt;/li>
-&lt;li>All applications submitted to the Onshape App Store &lt;em>must&lt;/em> authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth">OAuth2&lt;/a>.&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>For Standard accounts, replace &lt;code>{baseUrl}&lt;/code> with &lt;code>cad&lt;/code> in all endpoints. For Enterprise accounts, replace it with your company domain. Add &lt;code>/api&lt;/code> and the version number, and then provide the endpoint.
-&lt;ul>
-&lt;li>&lt;code>https://{baseUrl}.onshape.com/api/v10/documents&lt;/code>&lt;/li>
-&lt;li>&lt;code>https://cad.onshape.com/api/v10/documents&lt;/code>&lt;/li>
-&lt;li>&lt;code>https://companySubDomain.onshape.com/api/v10/documents&lt;/code>&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>Onshape IDs are written as: &lt;code>{did}, {wvmid}, {eid}, {pid}, {otherId}&lt;/code>.
-&lt;ul>
-&lt;li>These represent document, workspace (or version or microversion), element, part, and other IDs, respectively.&lt;/li>
-&lt;li>Never include the braces &lt;code>{}&lt;/code> with your IDs.&lt;/li>
-&lt;li>See &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request">API Guide: API Intro&lt;/a> for information on what these IDs mean and how to obtain them from your documents.&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>This page provides sample code in cURL and python.&lt;/li>
-&lt;li>For additional instruction and video content, visit the Learning Center&amp;rsquo;s &lt;a href="https://learn.onshape.com/learn/course/intro-to-the-onshape-api/intro-to-the-onshape-api/what-is-an-api?page=1">Intro to the Onshape API&lt;/a> course.&lt;/li>
-&lt;/ul>
-&lt;/blockquote>
-
- &lt;/details>
- &lt;/th>
- &lt;/tr>
-&lt;/table>
-&lt;h2 id="translation-endpoint-details">Translation Endpoint Details&lt;/h2>
-&lt;h3 id="asynchronous-exports">Asynchronous exports&lt;/h3>
-&lt;p>These endpoints provide a way to export Onshape elements to other formats, and provide options for tessellation control and other settings.&lt;/p></description></item><item><title>Metadata</title><link>https://onshape-public.github.io/docs/api-adv/metadata/</link><pubDate>Wed, 20 Dec 2023 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/metadata/</guid><description>&lt;p>This page describes the APIs Onshape provides for working with metadata.&lt;/p>
+&lt;br />
+&lt;blockquote>
+&lt;p>⚠️ &lt;strong>Warning&lt;/strong>&lt;/p></description></item><item><title>Metadata</title><link>https://onshape-public.github.io/docs/api-adv/metadata/</link><pubDate>Wed, 20 Dec 2023 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/metadata/</guid><description>&lt;p>This page describes the APIs Onshape provides for working with metadata.&lt;/p>
 &lt;table width=100%>
  &lt;tr>
  &lt;th>&lt;details>
