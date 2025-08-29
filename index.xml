@@ -755,6 +755,7 @@ embedding a third-party application into the Onshape interface. Onshape provides
 &lt;h3 id="204-no-content">204 No Content&lt;/h3>
 &lt;p>The client call was successful, and there&amp;rsquo;s nothing to return in the response body. The empty response body cannot be parsed.&lt;/p></description></item><item><title>Client Messaging</title><link>https://onshape-public.github.io/docs/app-dev/clientmessaging/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/app-dev/clientmessaging/</guid><description>&lt;p>Application extensions and the Onshape JavaScript web client need to communicate directly, calling across the iframe containing the application extension using post message.
 &lt;img src="https://onshape-public.github.io/images/extension-right-panel-02.png" alt="image alt text">&lt;/p>
+&lt;hr>
 &lt;h2 id="message-initiation">Message initiation&lt;/h2>
 &lt;p>Onshape client messaging can be split into those that are initiated from the &lt;em>application extension&lt;/em> and those that are initiated from the &lt;em>Onshape client&lt;/em>.&lt;/p>
 &lt;h3 id="messages-from-the-extension">Messages from the extension&lt;/h3>
