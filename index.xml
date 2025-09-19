@@ -829,9 +829,14 @@ a third-party system when a part in Onshape is selected. This interface can also
 &lt;li>Use of document context&lt;/li>
 &lt;/ul>
 &lt;p>The application is built using Express and is deployed on Heroku.&lt;/p>
-&lt;p>Refer to the &lt;a href="https://github.com/onshape-public/app-gltf-viewer">gltf-viewer-app README&lt;/a> for instructions on running this sample app.&lt;/p></description></item><item><title>Changelog</title><link>https://onshape-public.github.io/docs/changelog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/changelog/</guid><description>&lt;h4 id="rel-1203---released-2025-08-29">&lt;code>rel-1.203&lt;/code> - released 2025-08-29&lt;/h4>
+&lt;p>Refer to the &lt;a href="https://github.com/onshape-public/app-gltf-viewer">gltf-viewer-app README&lt;/a> for instructions on running this sample app.&lt;/p></description></item><item><title>Changelog</title><link>https://onshape-public.github.io/docs/changelog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/changelog/</guid><description>&lt;h4 id="rel-1204---released-2025-09-19">&lt;code>rel-1.204&lt;/code> - released 2025-09-19&lt;/h4>
 &lt;ul>
-&lt;li>Updated &lt;code>POST&lt;/code> : &lt;code>/drawings/d/[:did]/w/[:wid]/e/[:eid]/modify&lt;/code> to support the addition and editing of views in drawings: hhttps://onshape-public.github.io/docs/api-adv/drawings/#examples&amp;mdash;views&lt;/li>
+&lt;li>Updated assembly BOM endpoint &lt;code>/assemblies/d/[:did]/w/[:wid]/e/[:eid]/bom&lt;/code> to include new response property &lt;code>partIdentity&lt;/code>&lt;/li>
+&lt;li>API keys are no longer part of the dev-portal and are now located under the &lt;code>Developer&lt;/code> area of user preferences, PRO and Enterprise company settings&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1203---released-2025-08-29">&lt;code>rel-1.203&lt;/code> - released 2025-08-29&lt;/h4>
+&lt;ul>
+&lt;li>Updated &lt;code>POST&lt;/code> : &lt;code>/drawings/d/[:did]/w/[:wid]/e/[:eid]/modify&lt;/code> to support the addition and editing of views in drawings: &lt;a href="https://onshape-public.github.io/docs/api-adv/drawings/#examples---views">https://onshape-public.github.io/docs/api-adv/drawings/#examples---views&lt;/a>&lt;/li>
 &lt;li>Updated &lt;code>POST&lt;/code> : &lt;code>/drawings/d/[:did]/w/[:wid]/e/[:eid]/modify&lt;/code> to support creation and modification of centermarks: &lt;a href="https://onshape-public.github.io/docs/api-adv/drawings/#add-a-centermark-to-a-circular-edge">https://onshape-public.github.io/docs/api-adv/drawings/#add-a-centermark-to-a-circular-edge&lt;/a>&lt;/li>
 &lt;li>Updated javascript web client to support client messaging to &lt;code>openFeatureDialog&lt;/code> and &lt;code>closeFeatureDialog&lt;/code>: &lt;a href="https://onshape-public.github.io/docs/app-dev/clientmessaging/#element-right-panel-extensions">https://onshape-public.github.io/docs/app-dev/clientmessaging/#element-right-panel-extensions&lt;/a>&lt;/li>
 &lt;li>Updated details in documentation about how to find the bounding box: &lt;a href="https://onshape-public.github.io/docs/app-dev/drawings/#find-bounding-box-details">https://onshape-public.github.io/docs/app-dev/drawings/#find-bounding-box-details&lt;/a>&lt;/li>
