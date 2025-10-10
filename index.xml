@@ -829,7 +829,15 @@ a third-party system when a part in Onshape is selected. This interface can also
 &lt;li>Use of document context&lt;/li>
 &lt;/ul>
 &lt;p>The application is built using Express and is deployed on Heroku.&lt;/p>
-&lt;p>Refer to the &lt;a href="https://github.com/onshape-public/app-gltf-viewer">gltf-viewer-app README&lt;/a> for instructions on running this sample app.&lt;/p></description></item><item><title>Changelog</title><link>https://onshape-public.github.io/docs/changelog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/changelog/</guid><description>&lt;h4 id="rel-1204---released-2025-09-19">&lt;code>rel-1.204&lt;/code> - released 2025-09-19&lt;/h4>
+&lt;p>Refer to the &lt;a href="https://github.com/onshape-public/app-gltf-viewer">gltf-viewer-app README&lt;/a> for instructions on running this sample app.&lt;/p></description></item><item><title>Changelog</title><link>https://onshape-public.github.io/docs/changelog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/changelog/</guid><description>&lt;h4 id="rel-1205---released-2025-10-10">&lt;code>rel-1.205&lt;/code> - released 2025-10-10&lt;/h4>
+&lt;ul>
+&lt;li>New list standard content endpoint &lt;code>GET&lt;/code> : &lt;code>/standardcontent/list&lt;/code>&lt;/li>
+&lt;li>New list standard content parameter values endpoint &lt;code>GET&lt;/code> : &lt;code>/standardcontent/[:did]/parametervalues&lt;/code>&lt;/li>
+&lt;li>New create standard content custom parameters endpoint &lt;code>POST&lt;/code> : &lt;code>/standardcontent/[:did]/customparameters&lt;/code>&lt;/li>
+&lt;li>Updated &lt;code>POST&lt;/code> : &lt;code>/drawings/d/[:did]/w/[:wid]/e/[:eid]/modify&lt;/code> to support creation and modification of dimension tolerances type (symmetrical, deviation, limits, basic, min and max) &lt;a href="https://onshape-public.github.io/docs/api-adv/drawings/#examples---dimensions">https://onshape-public.github.io/docs/api-adv/drawings/#examples---dimensions&lt;/a>&lt;/li>
+&lt;li>Support export of title block bounding box in Drawings (DRAWING_JSON)&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1204---released-2025-09-19">&lt;code>rel-1.204&lt;/code> - released 2025-09-19&lt;/h4>
 &lt;ul>
 &lt;li>Updated assembly BOM endpoint &lt;code>/assemblies/d/[:did]/w/[:wid]/e/[:eid]/bom&lt;/code> to include new response property &lt;code>partIdentity&lt;/code>&lt;/li>
 &lt;li>API keys are no longer part of the dev-portal and are now located under the &lt;code>Developer&lt;/code> area of user preferences, PRO and Enterprise company settings&lt;/li>
@@ -853,7 +861,7 @@ a third-party system when a part in Onshape is selected. This interface can also
 &lt;li>New &lt;code>V12&lt;/code> version to the api (&lt;a href="https://cad.onshape.com/api/versions)">https://cad.onshape.com/api/versions)&lt;/a>, to support translation endpoints checking if input elements match the expected element type&lt;/li>
 &lt;li>New update global permissions endpoint (Enterprise) &lt;code>POST&lt;/code> : &lt;code>/companies/[:cid]/globalpermission/[type]/[id]&lt;/code>&lt;/li>
 &lt;li>New delete global permissions endpoint (Enterprise) &lt;code>DELETE&lt;/code> : &lt;code>/companies/[:cid]/globalpermission/[type]/[id]&lt;/code>&lt;/li>
-&lt;li>Support export of the bounding box for view in Drawings&lt;/li>
+&lt;li>Support export of the bounding box for view in Drawings (DRAWING_JSON)&lt;/li>
 &lt;li>Add &lt;code>contentType&lt;/code> and &lt;code>fileExtensions&lt;/code> to the response for &lt;code>/translations/translationformats&lt;/code> endpoint&lt;/li>
 &lt;li>Deprecate &lt;code>globalPermissions&lt;/code> field for &lt;code>POST&lt;/code> : &lt;code>/companies/[:cid]/users[:uid]&lt;/code> (Use new endpoints above for global permission modifications)&lt;/li>
 &lt;li>Fixed an issue with updateUserCompany not removing global permissions correctly&lt;/li>
