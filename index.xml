@@ -830,7 +830,12 @@ a third-party system when a part in Onshape is selected. This interface can also
 &lt;li>Use of document context&lt;/li>
 &lt;/ul>
 &lt;p>The application is built using Express and is deployed on Heroku.&lt;/p>
-&lt;p>Refer to the &lt;a href="https://github.com/onshape-public/app-gltf-viewer">gltf-viewer-app README&lt;/a> for instructions on running this sample app.&lt;/p></description></item><item><title>Changelog</title><link>https://onshape-public.github.io/docs/changelog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/changelog/</guid><description>&lt;h4 id="rel-1205---released-2025-10-10">&lt;code>rel-1.205&lt;/code> - released 2025-10-10&lt;/h4>
+&lt;p>Refer to the &lt;a href="https://github.com/onshape-public/app-gltf-viewer">gltf-viewer-app README&lt;/a> for instructions on running this sample app.&lt;/p></description></item><item><title>Changelog</title><link>https://onshape-public.github.io/docs/changelog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/changelog/</guid><description>&lt;h4 id="rel-1206---released-2025-10-31">&lt;code>rel-1.206&lt;/code> - released 2025-10-31&lt;/h4>
+&lt;ul>
+&lt;li>Updated &lt;code>POST&lt;/code> : &lt;code>/appelements/d/[:did]/[:wvm]/[:wvmid]/e/[:eid]/content&lt;/code> now requires specifying &lt;code>btType&lt;/code> in the &lt;code>jsonTreeEdit&lt;/code> field&lt;/li>
+&lt;li>Updated all &lt;code>/appelements/&lt;/code> endpoints to include a new required response property &lt;code>jsonDifference/btType&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h4 id="rel-1205---released-2025-10-10">&lt;code>rel-1.205&lt;/code> - released 2025-10-10&lt;/h4>
 &lt;ul>
 &lt;li>New list standard content endpoint &lt;code>GET&lt;/code> : &lt;code>/standardcontent/list&lt;/code>&lt;/li>
 &lt;li>New list standard content parameter values endpoint &lt;code>GET&lt;/code> : &lt;code>/standardcontent/[:did]/parametervalues&lt;/code>&lt;/li>
