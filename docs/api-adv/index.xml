@@ -387,6 +387,11 @@ and edges (&lt;code>getPartStudioEdges&lt;/code>}. Note the ids:
  &lt;/th>
  &lt;/tr>
 &lt;/table>
+&lt;h2 id="sample-code">Sample Code&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/onshape-public/onshape-ts-drawing-client">Onshape TypeScript Drawing Client&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/onshape-public/onshapedrawingjson">Onshape Drawing JSON Schemas&lt;/a>&lt;/li>
+&lt;/ul>
 &lt;h2 id="endpoints">Endpoints&lt;/h2>
 &lt;p>To create drawings, Onshape allows you to send all drawing data points and information through the API as part of the request body JSON.&lt;/p></description></item><item><title>Features</title><link>https://onshape-public.github.io/docs/api-adv/featureaccess/</link><pubDate>Mon, 18 May 2020 20:37:28 -0400</pubDate><guid>https://onshape-public.github.io/docs/api-adv/featureaccess/</guid><description>&lt;p>This page describes the APIs Onshape provides for creating and manipulating features and the Feature List in a Part Studio.&lt;/p>
 &lt;table width=100%>
