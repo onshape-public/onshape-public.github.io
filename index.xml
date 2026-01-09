@@ -61,10 +61,15 @@ group in the organization.&lt;/p&gt;</description></item><item><title>OAuth</tit
 &lt;li&gt;Onshape IDs are written as: &lt;code&gt;{did}, {wvmid}, {eid}, {pid}, {otherId}&lt;/code&gt;.
 &lt;ul&gt;
 &lt;li&gt;These represent document, workspace (or version or microversion), element, part, and other IDs, respectively.&lt;/li&gt;
-&lt;li&gt;Never include the braces &lt;code&gt;{}&lt;/code&gt; with your IDs.&lt;/li&gt;
 &lt;li&gt;See &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request"&gt;API Guide: API Intro&lt;/a&gt; for information on what these IDs mean and how to obtain them from your documents.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
+&lt;li&gt;Variables are written as: &lt;code&gt;{variableId1}&lt;/code&gt; or &lt;code&gt;&amp;lt;variableIdTwo&amp;gt;&lt;/code&gt;.
+&lt;ul&gt;
+&lt;li&gt;These represent variables that must be replaced in the code before it is usable.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Never include the braces &lt;code&gt;{}&lt;/code&gt; or angle brackets &lt;code&gt;&amp;lt;&amp;gt;&lt;/code&gt; with your IDs/variables.&lt;/li&gt;
 &lt;li&gt;This page provides sample code in cURL and python.&lt;/li&gt;
 &lt;li&gt;For additional instruction and video content, visit the Learning Center&amp;rsquo;s &lt;a href="https://learn.onshape.com/learn/course/intro-to-the-onshape-api/intro-to-the-onshape-api/what-is-an-api?page=1"&gt;Intro to the Onshape API&lt;/a&gt; course.&lt;/li&gt;
 &lt;/ul&gt;
@@ -377,10 +382,15 @@ and edges (&lt;code&gt;getPartStudioEdges&lt;/code&gt;}. Note the ids:
 &lt;li&gt;Onshape IDs are written as: &lt;code&gt;{did}, {wvmid}, {eid}, {pid}, {otherId}&lt;/code&gt;.
 &lt;ul&gt;
 &lt;li&gt;These represent document, workspace (or version or microversion), element, part, and other IDs, respectively.&lt;/li&gt;
-&lt;li&gt;Never include the braces &lt;code&gt;{}&lt;/code&gt; with your IDs.&lt;/li&gt;
 &lt;li&gt;See &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request"&gt;API Guide: API Intro&lt;/a&gt; for information on what these IDs mean and how to obtain them from your documents.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
+&lt;li&gt;Variables are written as: &lt;code&gt;{variableId1}&lt;/code&gt; or &lt;code&gt;&amp;lt;variableIdTwo&amp;gt;&lt;/code&gt;.
+&lt;ul&gt;
+&lt;li&gt;These represent variables that must be replaced in the code before it is usable.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Never include the braces &lt;code&gt;{}&lt;/code&gt; or angle brackets &lt;code&gt;&amp;lt;&amp;gt;&lt;/code&gt; with your IDs/variables.&lt;/li&gt;
 &lt;li&gt;This page provides sample code in cURL and python.&lt;/li&gt;
 &lt;li&gt;For additional instruction and video content, visit the Learning Center&amp;rsquo;s &lt;a href="https://learn.onshape.com/learn/course/intro-to-the-onshape-api/intro-to-the-onshape-api/what-is-an-api?page=1"&gt;Intro to the Onshape API&lt;/a&gt; course.&lt;/li&gt;
 &lt;/ul&gt;
@@ -414,10 +424,15 @@ and edges (&lt;code&gt;getPartStudioEdges&lt;/code&gt;}. Note the ids:
 &lt;li&gt;Onshape IDs are written as: &lt;code&gt;{did}, {wvmid}, {eid}, {pid}, {otherId}&lt;/code&gt;.
 &lt;ul&gt;
 &lt;li&gt;These represent document, workspace (or version or microversion), element, part, and other IDs, respectively.&lt;/li&gt;
-&lt;li&gt;Never include the braces &lt;code&gt;{}&lt;/code&gt; with your IDs.&lt;/li&gt;
 &lt;li&gt;See &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request"&gt;API Guide: API Intro&lt;/a&gt; for information on what these IDs mean and how to obtain them from your documents.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
+&lt;li&gt;Variables are written as: &lt;code&gt;{variableId1}&lt;/code&gt; or &lt;code&gt;&amp;lt;variableIdTwo&amp;gt;&lt;/code&gt;.
+&lt;ul&gt;
+&lt;li&gt;These represent variables that must be replaced in the code before it is usable.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Never include the braces &lt;code&gt;{}&lt;/code&gt; or angle brackets &lt;code&gt;&amp;lt;&amp;gt;&lt;/code&gt; with your IDs/variables.&lt;/li&gt;
 &lt;li&gt;This page provides sample code in cURL and python.&lt;/li&gt;
 &lt;li&gt;For additional instruction and video content, visit the Learning Center&amp;rsquo;s &lt;a href="https://learn.onshape.com/learn/course/intro-to-the-onshape-api/intro-to-the-onshape-api/what-is-an-api?page=1"&gt;Intro to the Onshape API&lt;/a&gt; course.&lt;/li&gt;
 &lt;/ul&gt;
@@ -456,10 +471,15 @@ and edges (&lt;code&gt;getPartStudioEdges&lt;/code&gt;}. Note the ids:
 &lt;li&gt;Onshape IDs are written as: &lt;code&gt;{did}, {wvmid}, {eid}, {pid}, {otherId}&lt;/code&gt;.
 &lt;ul&gt;
 &lt;li&gt;These represent document, workspace (or version or microversion), element, part, and other IDs, respectively.&lt;/li&gt;
-&lt;li&gt;Never include the braces &lt;code&gt;{}&lt;/code&gt; with your IDs.&lt;/li&gt;
 &lt;li&gt;See &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request"&gt;API Guide: API Intro&lt;/a&gt; for information on what these IDs mean and how to obtain them from your documents.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
+&lt;li&gt;Variables are written as: &lt;code&gt;{variableId1}&lt;/code&gt; or &lt;code&gt;&amp;lt;variableIdTwo&amp;gt;&lt;/code&gt;.
+&lt;ul&gt;
+&lt;li&gt;These represent variables that must be replaced in the code before it is usable.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Never include the braces &lt;code&gt;{}&lt;/code&gt; or angle brackets &lt;code&gt;&amp;lt;&amp;gt;&lt;/code&gt; with your IDs/variables.&lt;/li&gt;
 &lt;li&gt;This page provides sample code in cURL and python.&lt;/li&gt;
 &lt;li&gt;For additional instruction and video content, visit the Learning Center&amp;rsquo;s &lt;a href="https://learn.onshape.com/learn/course/intro-to-the-onshape-api/intro-to-the-onshape-api/what-is-an-api?page=1"&gt;Intro to the Onshape API&lt;/a&gt; course.&lt;/li&gt;
 &lt;/ul&gt;
@@ -493,10 +513,15 @@ and edges (&lt;code&gt;getPartStudioEdges&lt;/code&gt;}. Note the ids:
 &lt;li&gt;Onshape IDs are written as: &lt;code&gt;{did}, {wvmid}, {eid}, {pid}, {otherId}&lt;/code&gt;.
 &lt;ul&gt;
 &lt;li&gt;These represent document, workspace (or version or microversion), element, part, and other IDs, respectively.&lt;/li&gt;
-&lt;li&gt;Never include the braces &lt;code&gt;{}&lt;/code&gt; with your IDs.&lt;/li&gt;
 &lt;li&gt;See &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request"&gt;API Guide: API Intro&lt;/a&gt; for information on what these IDs mean and how to obtain them from your documents.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
+&lt;li&gt;Variables are written as: &lt;code&gt;{variableId1}&lt;/code&gt; or &lt;code&gt;&amp;lt;variableIdTwo&amp;gt;&lt;/code&gt;.
+&lt;ul&gt;
+&lt;li&gt;These represent variables that must be replaced in the code before it is usable.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Never include the braces &lt;code&gt;{}&lt;/code&gt; or angle brackets &lt;code&gt;&amp;lt;&amp;gt;&lt;/code&gt; with your IDs/variables.&lt;/li&gt;
 &lt;li&gt;This page provides sample code in cURL and python.&lt;/li&gt;
 &lt;li&gt;For additional instruction and video content, visit the Learning Center&amp;rsquo;s &lt;a href="https://learn.onshape.com/learn/course/intro-to-the-onshape-api/intro-to-the-onshape-api/what-is-an-api?page=1"&gt;Intro to the Onshape API&lt;/a&gt; course.&lt;/li&gt;
 &lt;/ul&gt;
@@ -539,10 +564,15 @@ and edges (&lt;code&gt;getPartStudioEdges&lt;/code&gt;}. Note the ids:
 &lt;li&gt;Onshape IDs are written as: &lt;code&gt;{did}, {wvmid}, {eid}, {pid}, {otherId}&lt;/code&gt;.
 &lt;ul&gt;
 &lt;li&gt;These represent document, workspace (or version or microversion), element, part, and other IDs, respectively.&lt;/li&gt;
-&lt;li&gt;Never include the braces &lt;code&gt;{}&lt;/code&gt; with your IDs.&lt;/li&gt;
 &lt;li&gt;See &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request"&gt;API Guide: API Intro&lt;/a&gt; for information on what these IDs mean and how to obtain them from your documents.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
+&lt;li&gt;Variables are written as: &lt;code&gt;{variableId1}&lt;/code&gt; or &lt;code&gt;&amp;lt;variableIdTwo&amp;gt;&lt;/code&gt;.
+&lt;ul&gt;
+&lt;li&gt;These represent variables that must be replaced in the code before it is usable.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Never include the braces &lt;code&gt;{}&lt;/code&gt; or angle brackets &lt;code&gt;&amp;lt;&amp;gt;&lt;/code&gt; with your IDs/variables.&lt;/li&gt;
 &lt;li&gt;This page provides sample code in cURL and python.&lt;/li&gt;
 &lt;li&gt;For additional instruction and video content, visit the Learning Center&amp;rsquo;s &lt;a href="https://learn.onshape.com/learn/course/intro-to-the-onshape-api/intro-to-the-onshape-api/what-is-an-api?page=1"&gt;Intro to the Onshape API&lt;/a&gt; course.&lt;/li&gt;
 &lt;/ul&gt;
@@ -576,10 +606,15 @@ and edges (&lt;code&gt;getPartStudioEdges&lt;/code&gt;}. Note the ids:
 &lt;li&gt;Onshape IDs are written as: &lt;code&gt;{did}, {wvmid}, {eid}, {pid}, {otherId}&lt;/code&gt;.
 &lt;ul&gt;
 &lt;li&gt;These represent document, workspace (or version or microversion), element, part, and other IDs, respectively.&lt;/li&gt;
-&lt;li&gt;Never include the braces &lt;code&gt;{}&lt;/code&gt; with your IDs.&lt;/li&gt;
 &lt;li&gt;See &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request"&gt;API Guide: API Intro&lt;/a&gt; for information on what these IDs mean and how to obtain them from your documents.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
+&lt;li&gt;Variables are written as: &lt;code&gt;{variableId1}&lt;/code&gt; or &lt;code&gt;&amp;lt;variableIdTwo&amp;gt;&lt;/code&gt;.
+&lt;ul&gt;
+&lt;li&gt;These represent variables that must be replaced in the code before it is usable.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Never include the braces &lt;code&gt;{}&lt;/code&gt; or angle brackets &lt;code&gt;&amp;lt;&amp;gt;&lt;/code&gt; with your IDs/variables.&lt;/li&gt;
 &lt;li&gt;This page provides sample code in cURL and python.&lt;/li&gt;
 &lt;li&gt;For additional instruction and video content, visit the Learning Center&amp;rsquo;s &lt;a href="https://learn.onshape.com/learn/course/intro-to-the-onshape-api/intro-to-the-onshape-api/what-is-an-api?page=1"&gt;Intro to the Onshape API&lt;/a&gt; course.&lt;/li&gt;
 &lt;/ul&gt;
@@ -735,10 +770,15 @@ and edges (&lt;code&gt;getPartStudioEdges&lt;/code&gt;}. Note the ids:
 &lt;li&gt;Onshape IDs are written as: &lt;code&gt;{did}, {wvmid}, {eid}, {pid}, {otherId}&lt;/code&gt;.
 &lt;ul&gt;
 &lt;li&gt;These represent document, workspace (or version or microversion), element, part, and other IDs, respectively.&lt;/li&gt;
-&lt;li&gt;Never include the braces &lt;code&gt;{}&lt;/code&gt; with your IDs.&lt;/li&gt;
 &lt;li&gt;See &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request"&gt;API Guide: API Intro&lt;/a&gt; for information on what these IDs mean and how to obtain them from your documents.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
+&lt;li&gt;Variables are written as: &lt;code&gt;{variableId1}&lt;/code&gt; or &lt;code&gt;&amp;lt;variableIdTwo&amp;gt;&lt;/code&gt;.
+&lt;ul&gt;
+&lt;li&gt;These represent variables that must be replaced in the code before it is usable.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Never include the braces &lt;code&gt;{}&lt;/code&gt; or angle brackets &lt;code&gt;&amp;lt;&amp;gt;&lt;/code&gt; with your IDs/variables.&lt;/li&gt;
 &lt;li&gt;This page provides sample code in cURL and python.&lt;/li&gt;
 &lt;li&gt;For additional instruction and video content, visit the Learning Center&amp;rsquo;s &lt;a href="https://learn.onshape.com/learn/course/intro-to-the-onshape-api/intro-to-the-onshape-api/what-is-an-api?page=1"&gt;Intro to the Onshape API&lt;/a&gt; course.&lt;/li&gt;
 &lt;/ul&gt;
