@@ -875,7 +875,13 @@ a third-party system when a part in Onshape is selected. This interface can also
 &lt;li&gt;Use of document context&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;The application is built using Express and is deployed on Heroku.&lt;/p&gt;
-&lt;p&gt;Refer to the &lt;a href="https://github.com/onshape-public/app-gltf-viewer"&gt;gltf-viewer-app README&lt;/a&gt; for instructions on running this sample app.&lt;/p&gt;</description></item><item><title>Changelog</title><link>https://onshape-public.github.io/docs/changelog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/changelog/</guid><description>&lt;h4 id="rel-1209---released-2026-01-09"&gt;&lt;code&gt;rel-1.209&lt;/code&gt; - released 2026-01-09&lt;/h4&gt;
+&lt;p&gt;Refer to the &lt;a href="https://github.com/onshape-public/app-gltf-viewer"&gt;gltf-viewer-app README&lt;/a&gt; for instructions on running this sample app.&lt;/p&gt;</description></item><item><title>Changelog</title><link>https://onshape-public.github.io/docs/changelog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/changelog/</guid><description>&lt;h4 id="rel-1210---released-2026-01-30"&gt;&lt;code&gt;rel-1.210&lt;/code&gt; - released 2026-01-30&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Updated &lt;code&gt;POST&lt;/code&gt; : &lt;code&gt;/webhooks&lt;/code&gt; and &lt;code&gt;/webhooks/{wid}&lt;/code&gt; added new request property &lt;code&gt;name&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Updated &lt;code&gt;GET&lt;/code&gt; : &lt;code&gt;/documents/d/{did}/{wvm}/{wvmid}/elements&lt;/code&gt; endpoint when &lt;code&gt;withZipContents=true&lt;/code&gt; will no longer return names for more than 10 zip files (applies to all versions of the API)&lt;/li&gt;
+&lt;li&gt;Fixed incomplete OpenAPI schema for &lt;code&gt;BTMSketchCurve&lt;/code&gt; to return the attribute &lt;code&gt;geometry&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="rel-1209---released-2026-01-09"&gt;&lt;code&gt;rel-1.209&lt;/code&gt; - released 2026-01-09&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;New &lt;code&gt;V13&lt;/code&gt; version to the api (&lt;a href="https://cad.onshape.com/api/versions)"&gt;https://cad.onshape.com/api/versions)&lt;/a&gt;, to support creating a version for moving tabs to another document&lt;/li&gt;
 &lt;li&gt;Updated &lt;code&gt;POST&lt;/code&gt; : &lt;code&gt;/documents/d/[:did]/w/[:wid]/moveelement&lt;/code&gt; added new request property &lt;code&gt;sourceVersionName&lt;/code&gt; and &lt;code&gt;targetVersionName&lt;/code&gt; (V13 or later)&lt;/li&gt;
