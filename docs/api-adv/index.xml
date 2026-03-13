@@ -575,7 +575,7 @@ and edges (&lt;code&gt;getPartStudioEdges&lt;/code&gt;}. Note the ids:
 &lt;li&gt;Return to your document and observe that the new assembly tab has been added.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id="get-the-list-of-features-in-a-part-studio"&gt;Get the list of features in a Part Studio&lt;/h3&gt;
-&lt;p&gt;One of the best ways to familiarize yourself with the Onshape Feature APIs is to view the API details for existing features in a Part Studio. In this example, we&amp;rsquo;ll add three features to a Part Studio, and then call the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/getPartStudioFeatures"&gt;getPartStudioFeatures&lt;/a&gt; API on the Part Studio. We&amp;rsquo;ll then be able to view the structure of the way features are represented in the API.&lt;/p&gt;</description></item><item><title>Release Management</title><link>https://onshape-public.github.io/docs/api-adv/relmgmt/</link><pubDate>Tue, 20 May 2025 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/relmgmt/</guid><description>&lt;p&gt;This page describes the APIs Onshape provides for working with revisions and part numbers.&lt;/p&gt;
+&lt;p&gt;One of the best ways to familiarize yourself with the Onshape Feature APIs is to view the API details for existing features in a Part Studio. In this example, we&amp;rsquo;ll add three features to a Part Studio, and then call the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/getPartStudioFeatures"&gt;getPartStudioFeatures&lt;/a&gt; API on the Part Studio. We&amp;rsquo;ll then be able to view the structure of the way features are represented in the API.&lt;/p&gt;</description></item><item><title>Release Management</title><link>https://onshape-public.github.io/docs/api-adv/relmgmt/</link><pubDate>Tue, 20 May 2025 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/relmgmt/</guid><description>&lt;p&gt;This page describes the APIs Onshape provides for viewing revisions and for creating, submitting, approving, and publishing releases.&lt;/p&gt;
 &lt;table width=100%&gt;
  &lt;tr&gt;
  &lt;th&gt;&lt;details&gt;
@@ -616,10 +616,8 @@ and edges (&lt;code&gt;getPartStudioEdges&lt;/code&gt;}. Note the ids:
  &lt;/th&gt;
  &lt;/tr&gt;
 &lt;/table&gt;
-&lt;h2 id="examples"&gt;Examples&lt;/h2&gt;
-&lt;hr&gt;
-&lt;h3 id="get-the-next-available-part-number"&gt;Get the next available part number&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;Endpoint&lt;/strong&gt;&lt;/p&gt;</description></item><item><title>Response Codes</title><link>https://onshape-public.github.io/docs/api-adv/errors/</link><pubDate>Wed, 03 Apr 2024 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/errors/</guid><description>&lt;p&gt;This page details some of the response codes that may be returned by Onshape API endpoints. For each response code, we&amp;rsquo;ve provided a brief description of the response and recommended next steps.&lt;/p&gt;
+&lt;h2 id="custom-workflows"&gt;Custom Workflows&lt;/h2&gt;
+&lt;p&gt;Enterprise administrators can create customized release and obsoletion workflows. See the following Onshape Help article on designing release management processes for your Enterprise: &lt;strong&gt;&lt;a href="https://cad.onshape.com/help/Content/relmgmt_custom.htm"&gt;Designing Release Management Processes&lt;/a&gt;&lt;/strong&gt;.&lt;/p&gt;</description></item><item><title>Response Codes</title><link>https://onshape-public.github.io/docs/api-adv/errors/</link><pubDate>Wed, 03 Apr 2024 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/errors/</guid><description>&lt;p&gt;This page details some of the response codes that may be returned by Onshape API endpoints. For each response code, we&amp;rsquo;ve provided a brief description of the response and recommended next steps.&lt;/p&gt;
 &lt;h2 id="success-2xx"&gt;Success (2xx)&lt;/h2&gt;
 &lt;p&gt;The client call was successful.&lt;/p&gt;
 &lt;h3 id="200-ok"&gt;200 OK&lt;/h3&gt;
