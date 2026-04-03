@@ -743,7 +743,7 @@ a third-party system when a part in Onshape is selected. This interface can also
 &lt;p&gt;The application is built using Express and is deployed on Heroku.&lt;/p&gt;
 &lt;p&gt;Refer to the &lt;a href="https://github.com/onshape-public/app-gltf-viewer"&gt;gltf-viewer-app README&lt;/a&gt; for instructions on running this sample app.&lt;/p&gt;</description></item><item><title>Changelog</title><link>https://onshape-public.github.io/docs/changelog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/changelog/</guid><description>&lt;h4 id="rel-1213---released-2026-04-03"&gt;&lt;code&gt;rel-1.213&lt;/code&gt; - released 2026-04-03&lt;/h4&gt;
 &lt;ul&gt;
-&lt;li&gt;New list company users endpoint &lt;code&gt;GET&lt;/code&gt; : &lt;code&gt;/compmanies/{cid}/users&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;New list company users endpoint &lt;code&gt;GET&lt;/code&gt; : &lt;code&gt;/companies/{cid}/users&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Updated &lt;code&gt;POST&lt;/code&gt; : &lt;code&gt;/drawings/d/{did}/w/{wid}/e/{eid}/modify&lt;/code&gt; to support creation and modification of ordinate dimensions &lt;a href="https://onshape-public.github.io/docs/api-adv/drawings/#create-ordinate-dimensions"&gt;https://onshape-public.github.io/docs/api-adv/drawings/#create-ordinate-dimensions&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Updated documentation for &lt;code&gt;DELETE&lt;/code&gt; and &lt;code&gt;POST&lt;/code&gt; for &lt;code&gt;/companies/{cid}/globalpermission/{type}/{id}&lt;/code&gt; &lt;a href="https://cad.onshape.com/help/Content/Plans/global_permissions.htm#Assignin"&gt;https://cad.onshape.com/help/Content/Plans/global_permissions.htm#Assignin&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
