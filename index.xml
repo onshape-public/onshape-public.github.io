@@ -404,7 +404,7 @@ and edges (&lt;code&gt;getPartStudioEdges&lt;/code&gt;}. Note the ids:
 &lt;p&gt;Onshape provides several APIs to support this format translation. These fall into three categories:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="#asynchronous-exports"&gt;Asynchronous exports&lt;/a&gt; - Export Onshape elements to one of many supported formats.&lt;/li&gt;
-&lt;li&gt;&lt;a href="#synchronous-exports"&gt;Synchronous exports&lt;/a&gt; - Faster export to glTF, STL, or Parasolid formats with limited settings options.&lt;/li&gt;
+&lt;li&gt;&lt;a href="#synchronous-exports"&gt;Synchronous exports&lt;/a&gt; - Faster export to specific formats with limited settings options.&lt;/li&gt;
 &lt;li&gt;&lt;a href="#imports"&gt;Import to Onshape&lt;/a&gt; - Import a translatable file by uploading it to an Onshape blob element.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;br /&gt;
