@@ -16,7 +16,7 @@
 &lt;p&gt;&lt;a name="authentication"&gt;&lt;/a&gt;&lt;/p&gt;</description></item><item><title>Quick Start</title><link>https://onshape-public.github.io/docs/api-intro/quickstart/</link><pubDate>Mon, 18 May 2020 20:39:14 -0400</pubDate><guid>https://onshape-public.github.io/docs/api-intro/quickstart/</guid><description>&lt;p&gt;In this example, we will call an Onshape REST API endpoint to send a document name to our console. We highly recommend completing the Learning Center&amp;rsquo;s &lt;a href="https://learn.onshape.com/learn/course/intro-to-the-onshape-api/intro-to-the-onshape-api/what-is-an-api?page=1"&gt;Intro to the Onshape API&lt;/a&gt; course and mastering using Onshape APIs within the Glassworks Explorer before moving on to creating scripts and apps. Please note that the sample shown on this page is only designed to be used as a quick start guide and does not represent a full Onshape application.&lt;/p&gt;</description></item><item><title>Architecture</title><link>https://onshape-public.github.io/docs/api-intro/architecture/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-intro/architecture/</guid><description>&lt;p&gt;Design in Onshape typically beings with a document, which is the container that includes all content related to a specific design. All data in an Onshape document is stored in Elements. Part Studios and Assemblies are two of the most common element types in a design. Throughout the design process, creating versions can be useful for product development management while working on the “Main” workspace. See also:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;The &lt;a href="https://onshape-public.github.io/docs/api-intro/"&gt;API Introduction&lt;/a&gt; page for information on how documents, workspaces, and elements are assembled into a URL.&lt;/li&gt;
-&lt;li&gt;The &lt;a href="https://onshape-public.github.io/docs/api-adv/associativity"&gt;Associativity&lt;/a&gt; page for information on how Parts, Assemblies, and Elements relate to each other.&lt;/li&gt;
+&lt;li&gt;The &lt;a href="https://onshape-public.github.io/docs/api-adv/associativity/"&gt;Associativity&lt;/a&gt; page for information on how Parts, Assemblies, and Elements relate to each other.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id="elements"&gt;Elements&lt;/h2&gt;
 &lt;p&gt;All data in an Onshape document are stored in Elements (represented as tabs in the user interface). Onshape documents contain five kinds of elements:&lt;/p&gt;</description></item><item><title>Why Onshape?</title><link>https://onshape-public.github.io/docs/api-intro/whyonshape/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-intro/whyonshape/</guid><description>&lt;h2 id="why-onshape"&gt;Why Onshape?&lt;/h2&gt;
@@ -34,9 +34,9 @@ Engineering might use a Product Data management System (PDM), and so on for each
 group in the organization.&lt;/p&gt;</description></item><item><title>OAuth</title><link>https://onshape-public.github.io/docs/auth/oauth/</link><pubDate>Mon, 18 May 2020 20:39:14 -0400</pubDate><guid>https://onshape-public.github.io/docs/auth/oauth/</guid><description>&lt;p&gt;&lt;strong&gt;See the &lt;a href="https://github.com/onshape-public/app-gltf-viewer"&gt;gltf-viewer-app&lt;/a&gt; for a working example of OAuth2.&lt;/strong&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;📘 &lt;strong&gt;Note&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;All applications submitted to the Onshape App Store (Onshape Apps) must use OAuth2 for authorization. Automation scripts (or applications not meant for the Onshape App Store) may use either OAuth2 or &lt;a href="https://onshape-public.github.io/docs/auth/apikeys"&gt;API Keys&lt;/a&gt; for authentication. OAuth2 allows applications to call Onshape APIs on behalf of the users of the application; API keys will only perform operations on behalf of the Onshape user who generated the API keys.&lt;/p&gt;</description></item><item><title>API Keys</title><link>https://onshape-public.github.io/docs/auth/apikeys/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/auth/apikeys/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;All applications submitted to the Onshape App Store (Onshape Apps) must use OAuth2 for authorization. Automation scripts (or applications not meant for the Onshape App Store) may use either OAuth2 or &lt;a href="https://onshape-public.github.io/docs/auth/apikeys/"&gt;API Keys&lt;/a&gt; for authentication. OAuth2 allows applications to call Onshape APIs on behalf of the users of the application; API keys will only perform operations on behalf of the Onshape user who generated the API keys.&lt;/p&gt;</description></item><item><title>API Keys</title><link>https://onshape-public.github.io/docs/auth/apikeys/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/auth/apikeys/</guid><description>&lt;blockquote&gt;
 &lt;p&gt;📘 &lt;strong&gt;Note&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;All applications submitted to the Onshape App Store (Onshape Apps) must follow the instructions on the &lt;a href="https://onshape-public.github.io/docs/auth/oauth"&gt;OAuth2&lt;/a&gt; page and use OAuth2 for authorization. Automation scripts (or applications not meant for the Onshape App Store) may use either OAuth2 or API Keys for authentication. OAuth2 allows applications to call Onshape APIs on behalf of the users of the application; API keys will only perform operations on behalf of the Onshape user who generated the API keys.&lt;/p&gt;</description></item><item><title>API Limits</title><link>https://onshape-public.github.io/docs/auth/limits/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/auth/limits/</guid><description>&lt;p&gt;When using the Onshape REST API, it is important to understand the usage limits in place to ensure reliable and consistent performance for all users. These limits help safeguard the platform and ensure equitable access to Onshape services.&lt;/p&gt;
+&lt;p&gt;All applications submitted to the Onshape App Store (Onshape Apps) must follow the instructions on the &lt;a href="https://onshape-public.github.io/docs/auth/oauth/"&gt;OAuth2&lt;/a&gt; page and use OAuth2 for authorization. Automation scripts (or applications not meant for the Onshape App Store) may use either OAuth2 or API Keys for authentication. OAuth2 allows applications to call Onshape APIs on behalf of the users of the application; API keys will only perform operations on behalf of the Onshape user who generated the API keys.&lt;/p&gt;</description></item><item><title>API Limits</title><link>https://onshape-public.github.io/docs/auth/limits/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/auth/limits/</guid><description>&lt;p&gt;When using the Onshape REST API, it is important to understand the usage limits in place to ensure reliable and consistent performance for all users. These limits help safeguard the platform and ensure equitable access to Onshape services.&lt;/p&gt;
 &lt;h2 id="rate-limits"&gt;Rate Limits&lt;/h2&gt;
 &lt;p&gt;Onshape limits the number of API calls that can be made within a given time period to maintain optimal platform stability and performance. Specific rate limit values vary by endpoint, but exceeding the threshold results in an HTTP response status code &lt;code&gt;429 (Too Many Requests)&lt;/code&gt;.&lt;/p&gt;</description></item><item><title>Assemblies</title><link>https://onshape-public.github.io/docs/api-adv/assemblies/</link><pubDate>Tue, 13 Aug 2024 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/assemblies/</guid><description>&lt;p&gt;This page describes the APIs Onshape provides for working with assemblies.&lt;/p&gt;
 &lt;table width=100%&gt;
@@ -47,8 +47,8 @@ group in the organization.&lt;/p&gt;</description></item><item><title>OAuth</tit
 &lt;ul&gt;
 &lt;li&gt;All Onshape API calls must be properly authenticated.
 &lt;ul&gt;
-&lt;li&gt;See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys"&gt;API Keys&lt;/a&gt; page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart"&gt;Quick Start&lt;/a&gt; for an example.&lt;/li&gt;
-&lt;li&gt;All applications submitted to the Onshape App Store &lt;em&gt;must&lt;/em&gt; authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth"&gt;OAuth2&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys/"&gt;API Keys&lt;/a&gt; page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart/"&gt;Quick Start&lt;/a&gt; for an example.&lt;/li&gt;
+&lt;li&gt;All applications submitted to the Onshape App Store &lt;em&gt;must&lt;/em&gt; authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth/"&gt;OAuth2&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;For Standard accounts, replace &lt;code&gt;{baseUrl}&lt;/code&gt; with &lt;code&gt;cad&lt;/code&gt; in all endpoints. For Enterprise accounts, replace it with your company domain. Add &lt;code&gt;/api&lt;/code&gt; and the version number, and then provide the endpoint.
@@ -236,8 +236,8 @@ and edges (&lt;code&gt;getPartStudioEdges&lt;/code&gt;}. Note the ids:
 &lt;ul&gt;
 &lt;li&gt;All Onshape API calls must be properly authenticated.
 &lt;ul&gt;
-&lt;li&gt;See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys"&gt;API Keys&lt;/a&gt; page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart"&gt;Quick Start&lt;/a&gt; for an example.&lt;/li&gt;
-&lt;li&gt;All applications submitted to the Onshape App Store &lt;em&gt;must&lt;/em&gt; authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth"&gt;OAuth2&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys/"&gt;API Keys&lt;/a&gt; page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart/"&gt;Quick Start&lt;/a&gt; for an example.&lt;/li&gt;
+&lt;li&gt;All applications submitted to the Onshape App Store &lt;em&gt;must&lt;/em&gt; authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth/"&gt;OAuth2&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;For Standard accounts, replace &lt;code&gt;{baseUrl}&lt;/code&gt; with &lt;code&gt;cad&lt;/code&gt; in all endpoints. For Enterprise accounts, replace it with your company domain. Add &lt;code&gt;/api&lt;/code&gt; and the version number, and then provide the endpoint.
@@ -278,8 +278,8 @@ and edges (&lt;code&gt;getPartStudioEdges&lt;/code&gt;}. Note the ids:
 &lt;ul&gt;
 &lt;li&gt;All Onshape API calls must be properly authenticated.
 &lt;ul&gt;
-&lt;li&gt;See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys"&gt;API Keys&lt;/a&gt; page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart"&gt;Quick Start&lt;/a&gt; for an example.&lt;/li&gt;
-&lt;li&gt;All applications submitted to the Onshape App Store &lt;em&gt;must&lt;/em&gt; authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth"&gt;OAuth2&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys/"&gt;API Keys&lt;/a&gt; page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart/"&gt;Quick Start&lt;/a&gt; for an example.&lt;/li&gt;
+&lt;li&gt;All applications submitted to the Onshape App Store &lt;em&gt;must&lt;/em&gt; authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth/"&gt;OAuth2&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;For Standard accounts, replace &lt;code&gt;{baseUrl}&lt;/code&gt; with &lt;code&gt;cad&lt;/code&gt; in all endpoints. For Enterprise accounts, replace it with your company domain. Add &lt;code&gt;/api&lt;/code&gt; and the version number, and then provide the endpoint.
@@ -325,8 +325,8 @@ and edges (&lt;code&gt;getPartStudioEdges&lt;/code&gt;}. Note the ids:
 &lt;ul&gt;
 &lt;li&gt;All Onshape API calls must be properly authenticated.
 &lt;ul&gt;
-&lt;li&gt;See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys"&gt;API Keys&lt;/a&gt; page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart"&gt;Quick Start&lt;/a&gt; for an example.&lt;/li&gt;
-&lt;li&gt;All applications submitted to the Onshape App Store &lt;em&gt;must&lt;/em&gt; authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth"&gt;OAuth2&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys/"&gt;API Keys&lt;/a&gt; page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart/"&gt;Quick Start&lt;/a&gt; for an example.&lt;/li&gt;
+&lt;li&gt;All applications submitted to the Onshape App Store &lt;em&gt;must&lt;/em&gt; authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth/"&gt;OAuth2&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;For Standard accounts, replace &lt;code&gt;{baseUrl}&lt;/code&gt; with &lt;code&gt;cad&lt;/code&gt; in all endpoints. For Enterprise accounts, replace it with your company domain. Add &lt;code&gt;/api&lt;/code&gt; and the version number, and then provide the endpoint.
@@ -367,8 +367,8 @@ and edges (&lt;code&gt;getPartStudioEdges&lt;/code&gt;}. Note the ids:
 &lt;ul&gt;
 &lt;li&gt;All Onshape API calls must be properly authenticated.
 &lt;ul&gt;
-&lt;li&gt;See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys"&gt;API Keys&lt;/a&gt; page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart"&gt;Quick Start&lt;/a&gt; for an example.&lt;/li&gt;
-&lt;li&gt;All applications submitted to the Onshape App Store &lt;em&gt;must&lt;/em&gt; authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth"&gt;OAuth2&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys/"&gt;API Keys&lt;/a&gt; page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart/"&gt;Quick Start&lt;/a&gt; for an example.&lt;/li&gt;
+&lt;li&gt;All applications submitted to the Onshape App Store &lt;em&gt;must&lt;/em&gt; authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth/"&gt;OAuth2&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;For Standard accounts, replace &lt;code&gt;{baseUrl}&lt;/code&gt; with &lt;code&gt;cad&lt;/code&gt; in all endpoints. For Enterprise accounts, replace it with your company domain. Add &lt;code&gt;/api&lt;/code&gt; and the version number, and then provide the endpoint.
@@ -418,8 +418,8 @@ and edges (&lt;code&gt;getPartStudioEdges&lt;/code&gt;}. Note the ids:
 &lt;ul&gt;
 &lt;li&gt;All Onshape API calls must be properly authenticated.
 &lt;ul&gt;
-&lt;li&gt;See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys"&gt;API Keys&lt;/a&gt; page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart"&gt;Quick Start&lt;/a&gt; for an example.&lt;/li&gt;
-&lt;li&gt;All applications submitted to the Onshape App Store &lt;em&gt;must&lt;/em&gt; authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth"&gt;OAuth2&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys/"&gt;API Keys&lt;/a&gt; page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart/"&gt;Quick Start&lt;/a&gt; for an example.&lt;/li&gt;
+&lt;li&gt;All applications submitted to the Onshape App Store &lt;em&gt;must&lt;/em&gt; authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth/"&gt;OAuth2&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;For Standard accounts, replace &lt;code&gt;{baseUrl}&lt;/code&gt; with &lt;code&gt;cad&lt;/code&gt; in all endpoints. For Enterprise accounts, replace it with your company domain. Add &lt;code&gt;/api&lt;/code&gt; and the version number, and then provide the endpoint.
@@ -460,8 +460,8 @@ and edges (&lt;code&gt;getPartStudioEdges&lt;/code&gt;}. Note the ids:
 &lt;ul&gt;
 &lt;li&gt;All Onshape API calls must be properly authenticated.
 &lt;ul&gt;
-&lt;li&gt;See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys"&gt;API Keys&lt;/a&gt; page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart"&gt;Quick Start&lt;/a&gt; for an example.&lt;/li&gt;
-&lt;li&gt;All applications submitted to the Onshape App Store &lt;em&gt;must&lt;/em&gt; authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth"&gt;OAuth2&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys/"&gt;API Keys&lt;/a&gt; page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart/"&gt;Quick Start&lt;/a&gt; for an example.&lt;/li&gt;
+&lt;li&gt;All applications submitted to the Onshape App Store &lt;em&gt;must&lt;/em&gt; authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth/"&gt;OAuth2&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;For Standard accounts, replace &lt;code&gt;{baseUrl}&lt;/code&gt; with &lt;code&gt;cad&lt;/code&gt; in all endpoints. For Enterprise accounts, replace it with your company domain. Add &lt;code&gt;/api&lt;/code&gt; and the version number, and then provide the endpoint.
@@ -624,8 +624,8 @@ and edges (&lt;code&gt;getPartStudioEdges&lt;/code&gt;}. Note the ids:
 &lt;ul&gt;
 &lt;li&gt;All Onshape API calls must be properly authenticated.
 &lt;ul&gt;
-&lt;li&gt;See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys"&gt;API Keys&lt;/a&gt; page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart"&gt;Quick Start&lt;/a&gt; for an example.&lt;/li&gt;
-&lt;li&gt;All applications submitted to the Onshape App Store &lt;em&gt;must&lt;/em&gt; authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth"&gt;OAuth2&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys/"&gt;API Keys&lt;/a&gt; page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart/"&gt;Quick Start&lt;/a&gt; for an example.&lt;/li&gt;
+&lt;li&gt;All applications submitted to the Onshape App Store &lt;em&gt;must&lt;/em&gt; authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth/"&gt;OAuth2&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;For Standard accounts, replace &lt;code&gt;{baseUrl}&lt;/code&gt; with &lt;code&gt;cad&lt;/code&gt; in all endpoints. For Enterprise accounts, replace it with your company domain. Add &lt;code&gt;/api&lt;/code&gt; and the version number, and then provide the endpoint.
@@ -657,8 +657,8 @@ and edges (&lt;code&gt;getPartStudioEdges&lt;/code&gt;}. Note the ids:
  &lt;/tr&gt;
 &lt;/table&gt;
 &lt;h2 id="custom-workflows"&gt;Custom Workflows&lt;/h2&gt;
-&lt;p&gt;Enterprise administrators can create customized release and obsoletion workflows. See the following Onshape Help article on designing release management processes for your Enterprise: &lt;strong&gt;&lt;a href="https://cad.onshape.com/help/Content/relmgmt_custom.htm"&gt;Designing Release Management Processes&lt;/a&gt;&lt;/strong&gt;.&lt;/p&gt;</description></item><item><title>Extensions</title><link>https://onshape-public.github.io/docs/app-dev/extensions/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/app-dev/extensions/</guid><description>&lt;p&gt;This page provides information for some of the more common options for
-embedding a third-party application into the Onshape interface. Onshape provides many options for embedding commands in various menus, fly-out panels, and elements. In this example, you will embed a custom web page inside a document’s right side fly-out panel. This interface will receive information from Onshape and push information from the panel back to Onshape, providing a complete, bi-directional integration scenario.&lt;/p&gt;</description></item><item><title>Response Codes</title><link>https://onshape-public.github.io/docs/api-adv/errors/</link><pubDate>Wed, 03 Apr 2024 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/errors/</guid><description>&lt;p&gt;This page details some of the response codes that may be returned by Onshape API endpoints. For each response code, we&amp;rsquo;ve provided a brief description of the response and recommended next steps.&lt;/p&gt;
+&lt;p&gt;Enterprise administrators can create customized release and obsoletion workflows. See the following Onshape Help article on designing release management processes for your Enterprise: &lt;strong&gt;&lt;a href="https://cad.onshape.com/help/Content/relmgmt_custom.htm"&gt;Designing Release Management Processes&lt;/a&gt;&lt;/strong&gt;.&lt;/p&gt;</description></item><item><title>Extensions</title><link>https://onshape-public.github.io/docs/app-dev/extensions/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/app-dev/extensions/</guid><description>&lt;p&gt;Onshape provides options for embedding commands in various menus, fly-out panels, and elements via extensions.&lt;/p&gt;
+&lt;p&gt;We can classify extensions into two high-level types. The first type embeds a UI &lt;em&gt;from&lt;/em&gt; the application &lt;em&gt;into&lt;/em&gt; the Onshape UI. The embedded UI is an HTTPS page displayed in an iFrame in the Onshape UI. The UI is served from the application, and can choose to make API calls to Onshape for additional information. This is exactly like the traditional tab-based applications in Onshape, except that such extensions exist at different UI locations.&lt;/p&gt;</description></item><item><title>Response Codes</title><link>https://onshape-public.github.io/docs/api-adv/errors/</link><pubDate>Wed, 03 Apr 2024 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/errors/</guid><description>&lt;p&gt;This page details some of the response codes that may be returned by Onshape API endpoints. For each response code, we&amp;rsquo;ve provided a brief description of the response and recommended next steps.&lt;/p&gt;
 &lt;h2 id="success-2xx"&gt;Success (2xx)&lt;/h2&gt;
 &lt;p&gt;The client call was successful.&lt;/p&gt;
 &lt;h3 id="200-ok"&gt;200 OK&lt;/h3&gt;
@@ -666,30 +666,177 @@ embedding a third-party application into the Onshape interface. Onshape provides
 &lt;h3 id="204-no-content"&gt;204 No Content&lt;/h3&gt;
 &lt;p&gt;The client call was successful, and there&amp;rsquo;s nothing to return in the response body. The empty response body cannot be parsed.&lt;/p&gt;</description></item><item><title>Client Messaging</title><link>https://onshape-public.github.io/docs/app-dev/clientmessaging/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/app-dev/clientmessaging/</guid><description>&lt;p&gt;Application extensions and the Onshape JavaScript web client need to communicate directly, calling across the iframe containing the application extension using post message.
 &lt;img src="https://onshape-public.github.io/images/extension-right-panel-02.png" alt="image alt text"&gt;&lt;/p&gt;
+&lt;h2 id="client-message-structure"&gt;Client message structure&lt;/h2&gt;
+&lt;p&gt;The basic client message structure is:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-ts" data-lang="ts"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;clientMessage = {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; documentId: &lt;span style="color:#0aa"&gt;documentId&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; workspaceId: &lt;span style="color:#0aa"&gt;workspaceId&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; elementId: &lt;span style="color:#0aa"&gt;elementId&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; messageName: &lt;span style="color:#0aa"&gt;string&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;};
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Where &lt;code&gt;messageName&lt;/code&gt; corresponds to one of the supported client messages for the extension type. To view the supported client messages for each extension type, see:&lt;/p&gt;</description></item><item><title>Element Right Panel</title><link>https://onshape-public.github.io/docs/app-dev/element-right-panel/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/app-dev/element-right-panel/</guid><description>&lt;p&gt;The element right panel is the panel inside a document that currently houses the BOM, configurations, etc. Applications can use this extension location to add items in this panel.&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://onshape-public.github.io/images/extension-right-panel-02.png" alt="image alt text"&gt;&lt;/p&gt;
+&lt;h2 id="interaction-sequence"&gt;Interaction sequence&lt;/h2&gt;
+&lt;p&gt;The sequence diagram below illustrates the interaction between an Element right panel application extension and the Onshape client:&lt;/p&gt;
+&lt;pre class="mermaid"&gt;%%{
+ init: {
+ &amp;#34;theme&amp;#34;: &amp;#34;default&amp;#34;,
+ &amp;#34;sequence&amp;#34;: {
+ &amp;#34;mirrorActors&amp;#34;: false,
+ &amp;#34;showSequenceNumbers&amp;#34;: false,
+ &amp;#34;width&amp;#34;: 75,
+ &amp;#34;height&amp;#34;: 60,
+ &amp;#34;actorMargin&amp;#34;: 25,
+ &amp;#34;messageFontSize&amp;#34;: 13,
+ &amp;#34;messageFontFamily&amp;#34;: &amp;#34;monospace&amp;#34;,
+ &amp;#34;messageFontWeight&amp;#34;: 2
+ }
+ }
+}%%
+sequenceDiagram
+ actor user
+ participant OSC AS Onshape Client
+ participant AE AS Application Extension
+ user-&amp;gt;&amp;gt;&amp;#43;OSC: start element right panel extension
+ Note right of user: via configured button
+ OSC-&amp;gt;&amp;gt;&amp;#43;AE: invoke action url (with query params)
+ AE-&amp;gt;&amp;gt;OSC: postMessage(messageName: &amp;#39;applicationInit&amp;#39;)
+ loop selection interactions
+ user-&amp;gt;&amp;gt;OSC: select
+ OSC-&amp;gt;&amp;gt;AE: postMessage(messageName: &amp;#39;SELECTION&amp;#39;)
+ end
+ user-&amp;gt;&amp;gt;OSC: stop element right panel extension
+ Note right of user: via configured button
+ deactivate AE
+ OSC-XAE: destroy
+ deactivate OSC&lt;/pre&gt;
 &lt;hr&gt;
-&lt;h2 id="message-initiation"&gt;Message initiation&lt;/h2&gt;
-&lt;p&gt;Onshape client messaging can be split into those that are initiated from the &lt;em&gt;application extension&lt;/em&gt; and those that are initiated from the &lt;em&gt;Onshape client&lt;/em&gt;.&lt;/p&gt;
-&lt;h3 id="messages-from-the-extension"&gt;Messages from the extension&lt;/h3&gt;
-&lt;p&gt;These client messages can be initiated from the application extension:&lt;/p&gt;
+&lt;h2 id="supported-contexts"&gt;Supported contexts&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Click/close flyouts events&lt;/strong&gt;: Notify the Onshape client that the user has clicked in the application extension, which should cause Onshape flyouts (versions, history, uploads, etc.) and dropdown menus (profile dropdown menu, document menu) to close. Without this, flyouts and menus might remain open over the application extension.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Shortcut keyboard events&lt;/strong&gt;: Shortcut keys (such as &lt;code&gt;?&lt;/code&gt;, which opens the Onshape Help dialog), can be handled by the application extension by posting a message to the Onshape client to open the dialog.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;keepAlive&lt;/strong&gt;: Notify the Onshape client that the user is actively working in the application extension, which triggers the Onshape client to send a message to the server to keep the browser session alive. Without this, the Onshape browser session will timeout and ask the user to sign in again.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Standard Onshape dialogs&lt;/strong&gt;: Request from the application extension to the Onshape client to open one of the Onshape standard dialogs and send the user’s choices back to the application extension. For example, if the application extension needs the user to choose a part or assembly to be operated on, the application extension can post a message to the Onshape client requesting that dialog be opened and the selected part or assembly information sent back to the application extension.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;UI customization&lt;/strong&gt;&amp;quot;: Request from the application extension to the Onshape client to customize the Onshape UI (e.g., add commands to menus, add buttons to the toolbars, etc). When these commands or toolbar buttons are clicked, the Onshape client posts a message to the application extension with the available context.
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Note&lt;/strong&gt;: This is limited to cases where the application extension is made active by the user; application extensions are not automatically loaded when a document is opened. Most UI customizations should be done when you register the application with Onshape, as those change the Onshape client automatically without needing to load the application extension first.&lt;/li&gt;
+&lt;li&gt;Part Studio&lt;/li&gt;
+&lt;li&gt;Assembly&lt;/li&gt;
+&lt;li&gt;Document&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Content/material insertion&lt;/strong&gt;: Request from the application extension to insert content into the Onshape document. For example, insert a part into a new or existing Part Studio, apply a material to a part, add a material to a material library, etc.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="messages-from-onshape"&gt;Messages from Onshape&lt;/h3&gt;
-&lt;p&gt;The following messages can be initiated from the Onshape client:&lt;/p&gt;</description></item><item><title>Structured Storage</title><link>https://onshape-public.github.io/docs/app-dev/structuredstorage/</link><pubDate>Mon, 18 May 2020 20:40:16 -0400</pubDate><guid>https://onshape-public.github.io/docs/app-dev/structuredstorage/</guid><description>&lt;h2 id="sub-elements"&gt;Sub Elements&lt;/h2&gt;
-&lt;p&gt;Onshape provides application elements storage that is controlled by applications through the API. These elements allow a set of named sub-elements.&lt;/p&gt;
-&lt;p&gt;The application can make changes to sub-elements independently or in arbitrary groupings. Changes may be wholesale replacements, or may be deltas. When performing a delta update, the application may post a full version as well, which allows the api to return a smaller number of deltas for subsequent queries.&lt;/p&gt;</description></item><item><title>Webhooks</title><link>https://onshape-public.github.io/docs/app-dev/webhook/</link><pubDate>Mon, 18 May 2020 20:44:05 -0400</pubDate><guid>https://onshape-public.github.io/docs/app-dev/webhook/</guid><description>&lt;p&gt;This page describes the Webhook APIs Onshape provides for working with notifications.&lt;/p&gt;
+&lt;h2 id="supported-messages"&gt;Supported messages&lt;/h2&gt;
+&lt;p&gt;Each message must include:&lt;/p&gt;</description></item><item><title>Element Tab</title><link>https://onshape-public.github.io/docs/app-dev/element-tab/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/app-dev/element-tab/</guid><description>&lt;p&gt;Messages may be sent and received by element tab application extensions. This is the menu option for &lt;code&gt;+ menu -&amp;gt; Add application&lt;/code&gt; inside a document . After menu click, a new tab will be created with the action url associated with this extension.&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://onshape-public.github.io/images/extension-tab-01.png" alt="image alt text"&gt;&lt;/p&gt;
+&lt;h2 id="supported-messages"&gt;Supported messages&lt;/h2&gt;
+&lt;p&gt;The following messages can be &lt;em&gt;sent&lt;/em&gt; by Element tab application extensions:&lt;/p&gt;
+&lt;table&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;b&gt;Message name (case sensitive)&lt;/b&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;b&gt;Additional properties&lt;/b&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;b&gt;Notes&lt;/b&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;code&gt;applicationInit&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;notifyWhenSaveRequired&lt;/code&gt;: Whether Onshape should send a notification to save pending changes during certain operations. (default: false)&lt;/td&gt;
+ &lt;td&gt;Send once on application startup.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;code /&gt;closeFlyoutsAndMenus&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;Send when a mouse click or other event happens in the application extension. Closes Onshape flyouts and dropdown menus.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;code /&gt;closeSelectItemDialog&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;Closes the select item dialog.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;code /&gt;connectionLost&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;Displays the standard Onshape connection lost message in a message bubble, forcing the user to either reload the document or return to the documents page.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;code /&gt;errorReload&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;message&lt;/code&gt;: your message
+&lt;/td&gt;
+ &lt;td&gt;Similar to the connectionLost message, but enables an application to specify the first part of the message, which will be used instead of "Onshape is not connected." The user must reload the document or return to the documents page.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;code /&gt;finishedSaving&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;messageId&lt;/code&gt;: the id sent in the corresponding &lt;code&gt;saveChanges&lt;/code&gt; message
+&lt;/td&gt;
+ &lt;td&gt;Response to a &lt;code&gt;saveChanges&lt;/code&gt; message sent from Onshape. Should be sent after application has cleaned up any pending edits.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;code /&gt;keepAlive&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;Send periodically while while the user is actively working to avoid the session from timing out.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;code /&gt;saveAVersion&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;Send when the user types &lt;code&gt;Shift-S&lt;/code&gt; in the application extension, the keyboard shortcut for save a version.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;code /&gt;showKeyboardShortcutsHelp&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;Send when the user types &lt;code&gt;?&lt;/code&gt; (&lt;code&gt;Shift-?&lt;/code&gt; on most keyboards) in the application extension, the keyboard shortcut for the keyboard shortcuts help dialog.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;code /&gt;showMessageBubble&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;message&lt;/code&gt;: your message
+&lt;/td&gt;
+ &lt;td&gt;Send when you want to show a string in the message bubble at the top of the Onshape app.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;code /&gt;startLoadingSpinner&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;message&lt;/code&gt;: your message
+&lt;/td&gt;
+ &lt;td&gt;Send to start a large spinner in the middle of the browser window with your message underneath it.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;code /&gt;stopLoadingSpinner&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;Send to stop the large spinner.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;code /&gt;startWorkingSpinner&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;Send to start a small spinner in the middle bottom of the browser window.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;code /&gt;stopWorkingSpinner&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;Send to stop the small spinner.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;code /&gt;openSelectItemDialog&lt;/td&gt;
+ &lt;td&gt;&lt;ul&gt;&lt;li&gt;&lt;code&gt;dialogTitle&lt;/code&gt;: your dialog title (default="")&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;selectBlobs&lt;/code&gt;: true or false (default)&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;selectParts&lt;/code&gt;: true or false (default)&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;selectPartStudios&lt;/code&gt;: true or false (default)&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;selectAssemblies&lt;/code&gt;: true or false (default)&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;selectMultiple&lt;/code&gt;: true or false (default)&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;selectBlobMimeTypes&lt;/code&gt;: comma-delimited string of blob mime types to show in dialog (e.g. “application/dwt,application/dwg”); (default="")&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;showBrowseDocuments&lt;/code&gt;: Whether "Other documents" choice should be available (default=true)&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;showStandardContent&lt;/code&gt;: Whether "Standard content" choice should be available (default=false)&lt;/li&gt;&lt;/ul&gt;
+&lt;/td&gt;
+ &lt;td&gt;Send when your application wants to open a dialog in which the user will select one or multiple items - blobs, parts, part studios or assemblies.
+&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;code /&gt;requestCameraProperties&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;graphicsElementId&lt;/code&gt;: string, element ID of the part studio or assembly
+&lt;/td&gt;
+ &lt;td&gt;
+ Send to request camera properties of a specific part studio or assembly element. Note: The element should have been opened at least once in the current session. The &lt;code&gt;messageName&lt;/code&gt; of the response is &lt;code&gt;cameraProperties&lt;/code&gt;.
+ &lt;/td&gt;
+ &lt;/tr&gt;
+&lt;/table&gt;
+&lt;h2 id="received-messages"&gt;Received messages&lt;/h2&gt;
+&lt;p&gt;The following messages can be &lt;em&gt;received&lt;/em&gt; by Element tab application extensions:&lt;/p&gt;</description></item><item><title>Example: Hello World</title><link>https://onshape-public.github.io/docs/app-dev/helloworld/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/app-dev/helloworld/</guid><description>&lt;p&gt;In this example, we create an application extension in the element right panel to display a button to the user. When the button is clicked, a &amp;ldquo;Hello World!&amp;rdquo; message is displayed in the Onshape window.&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;&lt;img src="https://onshape-public.github.io/images/right-panel-app-04.png" alt="Click Me button visible in the Element Right Panel and Hello World message displayed" width=100% border=1&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;These steps are for creating a private application on a personal account. To create an internal application for a company, classroom, or enterprise, create the app in your &lt;a href="https://cad.onshape.com/help/Content/Plans/enterprise_settings_developer.htm"&gt;Enterprise Settings: Developer&lt;/a&gt; and assign it to users, aliases, or teams. To create a public application for the Onshape App Store, see &lt;a href="https://onshape-public.github.io/docs/auth/oauth/"&gt;OAuth&lt;/a&gt; and &lt;a href="https://onshape-public.github.io/docs/app-dev/"&gt;App Development&lt;/a&gt;.&lt;/p&gt;</description></item><item><title>Webhooks</title><link>https://onshape-public.github.io/docs/app-dev/webhook/</link><pubDate>Mon, 18 May 2020 20:44:05 -0400</pubDate><guid>https://onshape-public.github.io/docs/app-dev/webhook/</guid><description>&lt;p&gt;This page describes the Webhook APIs Onshape provides for working with notifications.&lt;/p&gt;
 &lt;p&gt;Notifications are delivered to an application as an HTTP &lt;code&gt;POST&lt;/code&gt; with a JSON body, which includes information about the identity of the registration request and information specific to the event and notification message.&lt;/p&gt;
-&lt;p&gt;Webhooks are an alternative approach to polling; instead of your application continuously asking Onshape for new information, webhooks automatically send a notification from Onshape any time an event you are subscribed to occurs.&lt;/p&gt;</description></item><item><title>Launch Checklist</title><link>https://onshape-public.github.io/docs/app-store/checklist/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/app-store/checklist/</guid><description>&lt;p&gt;This checklist combines the processes you should follow to ensure your app launches successfully. While all tasks must be completed to submit your app to the Onshape App Store, the task sequence provided here is a suggestion.&lt;/p&gt;
-&lt;p&gt;If you do not have access to Developer Licenses yet, please contact the &lt;a href="mailto:onshape-developer-relations@ptc.com"&gt;Developer Relations team&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Webhooks are an alternative approach to polling; instead of your application continuously asking Onshape for new information, webhooks automatically send a notification from Onshape any time an event you are subscribed to occurs.&lt;/p&gt;</description></item><item><title>Structured Storage</title><link>https://onshape-public.github.io/docs/app-dev/structuredstorage/</link><pubDate>Mon, 18 May 2020 20:40:16 -0400</pubDate><guid>https://onshape-public.github.io/docs/app-dev/structuredstorage/</guid><description>&lt;h2 id="sub-elements"&gt;Sub Elements&lt;/h2&gt;
+&lt;p&gt;Onshape provides application elements storage that is controlled by applications through the API. These elements allow a set of named sub-elements.&lt;/p&gt;
+&lt;p&gt;The application can make changes to sub-elements independently or in arbitrary groupings. Changes may be wholesale replacements, or may be deltas. When performing a delta update, the application may post a full version as well, which allows the api to return a smaller number of deltas for subsequent queries.&lt;/p&gt;</description></item><item><title>Launch Checklist</title><link>https://onshape-public.github.io/docs/app-store/checklist/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/app-store/checklist/</guid><description>&lt;p&gt;This checklist combines the processes you should follow to ensure your app launches successfully. While all tasks must be completed to submit your app to the Onshape App Store, the task sequence provided here is a suggestion.&lt;/p&gt;
+&lt;p&gt;If you do not have access to Developer Licenses yet, please &lt;a href="https://www.onshape.com/en/app-integrations/build-an-integration" target="_blank"&gt;fill out this form&lt;/a&gt; to request developer access.&lt;/p&gt;
 &lt;h3 id="understand-quality-expectations"&gt;Understand quality expectations&lt;/h3&gt;
 &lt;p&gt;These are to ensure that the Onshape App Store remains a trusted resource and that quality is maintained. Review the &lt;a href="https://onshape-public.github.io/docs/app-store/quality/" target="_blank"&gt;Quality Considerations&lt;/a&gt; page, and reach out to the &lt;a href="mailto:onshape-developer-relations@ptc.com"&gt;Developer Relations team&lt;/a&gt; with any questions.&lt;/p&gt;</description></item><item><title>Testing Guidelines</title><link>https://onshape-public.github.io/docs/app-store/testingguidelines/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/app-store/testingguidelines/</guid><description>&lt;p&gt;The purpose of this document is to help you get your application and App Store entry ready for QA testing.&lt;/p&gt;
 &lt;h2 id="application-release-workflow-arw"&gt;Application Release Workflow (ARW)&lt;/h2&gt;
@@ -702,21 +849,7 @@ embedding a third-party application into the Onshape interface. Onshape provides
 &lt;p&gt;To advance to the next stage, your application must pass testing, and your App Store entry must pass review.&lt;/p&gt;</description></item><item><title>Quality Considerations</title><link>https://onshape-public.github.io/docs/app-store/quality/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/app-store/quality/</guid><description>&lt;h2 id="core-app-quality"&gt;Core App Quality&lt;/h2&gt;
 &lt;p&gt;Onshape users expect high-quality apps. App quality directly influences the long-term success of your app in terms of installs, user rating and reviews, engagement, and user retention.&lt;/p&gt;
 &lt;p&gt;This page helps you assess the core aspects of quality in your app, through a compact set of quality criteria and associated tests. All Onshape apps should meet these criteria.&lt;/p&gt;
-&lt;p&gt;Before publishing your apps, test them against these criteria to ensure that they function well. Your testing should go well beyond what&amp;rsquo;s described here; the purpose of this page is to specify the essential quality characteristics all apps should display, so that you can cover them in your test plans.&lt;/p&gt;</description></item><item><title>Create an Extension</title><link>https://onshape-public.github.io/docs/tutorials/createextension/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/tutorials/createextension/</guid><description>&lt;p&gt;In this example, you will create a custom web page (as shown in the image below) that is displayed in the
-right-hand fly-out panel. This interface displays metadata pulled from
-a third-party system when a part in Onshape is selected. This interface can also update metadata in Onshape through the &lt;code&gt;Update&lt;/code&gt; functionality.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;These steps are for creating a private application on a personal account. To create an internal application for a company, classroom, or enterprise, see &lt;a href="https://cad.onshape.com/help/Content/Plans/enterprise_settings_developer.htm"&gt;Enterprise Settings: Developer&lt;/a&gt;. To create a public application for the Onshape App Store, see &lt;a href="https://onshape-public.github.io/docs/auth/oauth"&gt;OAuth&lt;/a&gt; and &lt;a href="https://onshape-public.github.io/docs/app-dev/"&gt;App Development&lt;/a&gt;.&lt;/p&gt;</description></item><item><title>glTF Viewer</title><link>https://onshape-public.github.io/docs/tutorials/gltf/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/tutorials/gltf/</guid><description>&lt;p&gt;The GLTF Viewer is a sample application that demonstrates:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;How to fetch a glTF representation of an Onshape model&lt;/li&gt;
-&lt;li&gt;How to create an app that runs as a tab inside an Onshape document&lt;/li&gt;
-&lt;li&gt;OAuth2 authentication&lt;/li&gt;
-&lt;li&gt;Use of REST APIs&lt;/li&gt;
-&lt;li&gt;Use of document context&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The application is built using Express and is deployed on Heroku.&lt;/p&gt;
-&lt;p&gt;Refer to the &lt;a href="https://github.com/onshape-public/app-gltf-viewer"&gt;gltf-viewer-app README&lt;/a&gt; for instructions on running this sample app.&lt;/p&gt;</description></item><item><title>Changelog</title><link>https://onshape-public.github.io/docs/changelog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/changelog/</guid><description>&lt;h4 id="rel-1213---released-2026-04-03"&gt;&lt;code&gt;rel-1.213&lt;/code&gt; - released 2026-04-03&lt;/h4&gt;
+&lt;p&gt;Before publishing your apps, test them against these criteria to ensure that they function well. Your testing should go well beyond what&amp;rsquo;s described here; the purpose of this page is to specify the essential quality characteristics all apps should display, so that you can cover them in your test plans.&lt;/p&gt;</description></item><item><title>Changelog</title><link>https://onshape-public.github.io/docs/changelog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/changelog/</guid><description>&lt;h4 id="rel-1213---released-2026-04-03"&gt;&lt;code&gt;rel-1.213&lt;/code&gt; - released 2026-04-03&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;New list company users endpoint &lt;code&gt;GET&lt;/code&gt; : &lt;code&gt;/companies/{cid}/users&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Updated &lt;code&gt;POST&lt;/code&gt; : &lt;code&gt;/drawings/d/{did}/w/{wid}/e/{eid}/modify&lt;/code&gt; to support creation and modification of ordinate dimensions &lt;a href="https://onshape-public.github.io/docs/api-adv/drawings/#create-ordinate-dimensions"&gt;https://onshape-public.github.io/docs/api-adv/drawings/#create-ordinate-dimensions&lt;/a&gt;&lt;/li&gt;

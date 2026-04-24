@@ -7,8 +7,8 @@
 &lt;ul&gt;
 &lt;li&gt;All Onshape API calls must be properly authenticated.
 &lt;ul&gt;
-&lt;li&gt;See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys"&gt;API Keys&lt;/a&gt; page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart"&gt;Quick Start&lt;/a&gt; for an example.&lt;/li&gt;
-&lt;li&gt;All applications submitted to the Onshape App Store &lt;em&gt;must&lt;/em&gt; authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth"&gt;OAuth2&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys/"&gt;API Keys&lt;/a&gt; page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart/"&gt;Quick Start&lt;/a&gt; for an example.&lt;/li&gt;
+&lt;li&gt;All applications submitted to the Onshape App Store &lt;em&gt;must&lt;/em&gt; authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth/"&gt;OAuth2&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;For Standard accounts, replace &lt;code&gt;{baseUrl}&lt;/code&gt; with &lt;code&gt;cad&lt;/code&gt; in all endpoints. For Enterprise accounts, replace it with your company domain. Add &lt;code&gt;/api&lt;/code&gt; and the version number, and then provide the endpoint.
@@ -196,8 +196,8 @@ and edges (&lt;code&gt;getPartStudioEdges&lt;/code&gt;}. Note the ids:
 &lt;ul&gt;
 &lt;li&gt;All Onshape API calls must be properly authenticated.
 &lt;ul&gt;
-&lt;li&gt;See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys"&gt;API Keys&lt;/a&gt; page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart"&gt;Quick Start&lt;/a&gt; for an example.&lt;/li&gt;
-&lt;li&gt;All applications submitted to the Onshape App Store &lt;em&gt;must&lt;/em&gt; authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth"&gt;OAuth2&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys/"&gt;API Keys&lt;/a&gt; page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart/"&gt;Quick Start&lt;/a&gt; for an example.&lt;/li&gt;
+&lt;li&gt;All applications submitted to the Onshape App Store &lt;em&gt;must&lt;/em&gt; authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth/"&gt;OAuth2&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;For Standard accounts, replace &lt;code&gt;{baseUrl}&lt;/code&gt; with &lt;code&gt;cad&lt;/code&gt; in all endpoints. For Enterprise accounts, replace it with your company domain. Add &lt;code&gt;/api&lt;/code&gt; and the version number, and then provide the endpoint.
@@ -238,8 +238,8 @@ and edges (&lt;code&gt;getPartStudioEdges&lt;/code&gt;}. Note the ids:
 &lt;ul&gt;
 &lt;li&gt;All Onshape API calls must be properly authenticated.
 &lt;ul&gt;
-&lt;li&gt;See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys"&gt;API Keys&lt;/a&gt; page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart"&gt;Quick Start&lt;/a&gt; for an example.&lt;/li&gt;
-&lt;li&gt;All applications submitted to the Onshape App Store &lt;em&gt;must&lt;/em&gt; authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth"&gt;OAuth2&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys/"&gt;API Keys&lt;/a&gt; page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart/"&gt;Quick Start&lt;/a&gt; for an example.&lt;/li&gt;
+&lt;li&gt;All applications submitted to the Onshape App Store &lt;em&gt;must&lt;/em&gt; authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth/"&gt;OAuth2&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;For Standard accounts, replace &lt;code&gt;{baseUrl}&lt;/code&gt; with &lt;code&gt;cad&lt;/code&gt; in all endpoints. For Enterprise accounts, replace it with your company domain. Add &lt;code&gt;/api&lt;/code&gt; and the version number, and then provide the endpoint.
@@ -285,8 +285,8 @@ and edges (&lt;code&gt;getPartStudioEdges&lt;/code&gt;}. Note the ids:
 &lt;ul&gt;
 &lt;li&gt;All Onshape API calls must be properly authenticated.
 &lt;ul&gt;
-&lt;li&gt;See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys"&gt;API Keys&lt;/a&gt; page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart"&gt;Quick Start&lt;/a&gt; for an example.&lt;/li&gt;
-&lt;li&gt;All applications submitted to the Onshape App Store &lt;em&gt;must&lt;/em&gt; authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth"&gt;OAuth2&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys/"&gt;API Keys&lt;/a&gt; page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart/"&gt;Quick Start&lt;/a&gt; for an example.&lt;/li&gt;
+&lt;li&gt;All applications submitted to the Onshape App Store &lt;em&gt;must&lt;/em&gt; authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth/"&gt;OAuth2&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;For Standard accounts, replace &lt;code&gt;{baseUrl}&lt;/code&gt; with &lt;code&gt;cad&lt;/code&gt; in all endpoints. For Enterprise accounts, replace it with your company domain. Add &lt;code&gt;/api&lt;/code&gt; and the version number, and then provide the endpoint.
@@ -327,8 +327,8 @@ and edges (&lt;code&gt;getPartStudioEdges&lt;/code&gt;}. Note the ids:
 &lt;ul&gt;
 &lt;li&gt;All Onshape API calls must be properly authenticated.
 &lt;ul&gt;
-&lt;li&gt;See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys"&gt;API Keys&lt;/a&gt; page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart"&gt;Quick Start&lt;/a&gt; for an example.&lt;/li&gt;
-&lt;li&gt;All applications submitted to the Onshape App Store &lt;em&gt;must&lt;/em&gt; authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth"&gt;OAuth2&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys/"&gt;API Keys&lt;/a&gt; page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart/"&gt;Quick Start&lt;/a&gt; for an example.&lt;/li&gt;
+&lt;li&gt;All applications submitted to the Onshape App Store &lt;em&gt;must&lt;/em&gt; authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth/"&gt;OAuth2&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;For Standard accounts, replace &lt;code&gt;{baseUrl}&lt;/code&gt; with &lt;code&gt;cad&lt;/code&gt; in all endpoints. For Enterprise accounts, replace it with your company domain. Add &lt;code&gt;/api&lt;/code&gt; and the version number, and then provide the endpoint.
@@ -378,8 +378,8 @@ and edges (&lt;code&gt;getPartStudioEdges&lt;/code&gt;}. Note the ids:
 &lt;ul&gt;
 &lt;li&gt;All Onshape API calls must be properly authenticated.
 &lt;ul&gt;
-&lt;li&gt;See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys"&gt;API Keys&lt;/a&gt; page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart"&gt;Quick Start&lt;/a&gt; for an example.&lt;/li&gt;
-&lt;li&gt;All applications submitted to the Onshape App Store &lt;em&gt;must&lt;/em&gt; authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth"&gt;OAuth2&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys/"&gt;API Keys&lt;/a&gt; page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart/"&gt;Quick Start&lt;/a&gt; for an example.&lt;/li&gt;
+&lt;li&gt;All applications submitted to the Onshape App Store &lt;em&gt;must&lt;/em&gt; authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth/"&gt;OAuth2&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;For Standard accounts, replace &lt;code&gt;{baseUrl}&lt;/code&gt; with &lt;code&gt;cad&lt;/code&gt; in all endpoints. For Enterprise accounts, replace it with your company domain. Add &lt;code&gt;/api&lt;/code&gt; and the version number, and then provide the endpoint.
@@ -420,8 +420,8 @@ and edges (&lt;code&gt;getPartStudioEdges&lt;/code&gt;}. Note the ids:
 &lt;ul&gt;
 &lt;li&gt;All Onshape API calls must be properly authenticated.
 &lt;ul&gt;
-&lt;li&gt;See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys"&gt;API Keys&lt;/a&gt; page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart"&gt;Quick Start&lt;/a&gt; for an example.&lt;/li&gt;
-&lt;li&gt;All applications submitted to the Onshape App Store &lt;em&gt;must&lt;/em&gt; authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth"&gt;OAuth2&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys/"&gt;API Keys&lt;/a&gt; page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart/"&gt;Quick Start&lt;/a&gt; for an example.&lt;/li&gt;
+&lt;li&gt;All applications submitted to the Onshape App Store &lt;em&gt;must&lt;/em&gt; authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth/"&gt;OAuth2&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;For Standard accounts, replace &lt;code&gt;{baseUrl}&lt;/code&gt; with &lt;code&gt;cad&lt;/code&gt; in all endpoints. For Enterprise accounts, replace it with your company domain. Add &lt;code&gt;/api&lt;/code&gt; and the version number, and then provide the endpoint.
@@ -584,8 +584,8 @@ and edges (&lt;code&gt;getPartStudioEdges&lt;/code&gt;}. Note the ids:
 &lt;ul&gt;
 &lt;li&gt;All Onshape API calls must be properly authenticated.
 &lt;ul&gt;
-&lt;li&gt;See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys"&gt;API Keys&lt;/a&gt; page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart"&gt;Quick Start&lt;/a&gt; for an example.&lt;/li&gt;
-&lt;li&gt;All applications submitted to the Onshape App Store &lt;em&gt;must&lt;/em&gt; authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth"&gt;OAuth2&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys/"&gt;API Keys&lt;/a&gt; page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart/"&gt;Quick Start&lt;/a&gt; for an example.&lt;/li&gt;
+&lt;li&gt;All applications submitted to the Onshape App Store &lt;em&gt;must&lt;/em&gt; authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth/"&gt;OAuth2&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;For Standard accounts, replace &lt;code&gt;{baseUrl}&lt;/code&gt; with &lt;code&gt;cad&lt;/code&gt; in all endpoints. For Enterprise accounts, replace it with your company domain. Add &lt;code&gt;/api&lt;/code&gt; and the version number, and then provide the endpoint.
