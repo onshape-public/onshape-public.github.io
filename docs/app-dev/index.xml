@@ -3,7 +3,7 @@
 &lt;img src="https://onshape-public.github.io/images/extension-right-panel-02.png" alt="image alt text"&gt;&lt;/p&gt;
 &lt;h2 id="client-message-structure"&gt;Client message structure&lt;/h2&gt;
 &lt;p&gt;The basic client message structure is:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-ts" data-lang="ts"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;clientMessage = {
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-ts" data-lang="ts"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;clientMessage = {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; documentId: &lt;span style="color:#0aa"&gt;documentId&lt;/span&gt;,
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; workspaceId: &lt;span style="color:#0aa"&gt;workspaceId&lt;/span&gt;,
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; elementId: &lt;span style="color:#0aa"&gt;elementId&lt;/span&gt;,
@@ -164,9 +164,15 @@ sequenceDiagram
 &lt;h2 id="received-messages"&gt;Received messages&lt;/h2&gt;
 &lt;p&gt;The following messages can be &lt;em&gt;received&lt;/em&gt; by Element tab application extensions:&lt;/p&gt;</description></item><item><title>Example: Hello World</title><link>https://onshape-public.github.io/docs/app-dev/helloworld/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/app-dev/helloworld/</guid><description>&lt;p&gt;In this example, we create an application extension in the element right panel to display a button to the user. When the button is clicked, a &amp;ldquo;Hello World!&amp;rdquo; message is displayed in the Onshape window.&lt;/p&gt;
 &lt;p&gt;&lt;br /&gt;&lt;img src="https://onshape-public.github.io/images/right-panel-app-04.png" alt="Click Me button visible in the Element Right Panel and Hello World message displayed" width=100% border=1&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;These steps are for creating a private application on a personal account. To create an internal application for a company, classroom, or enterprise, create the app in your &lt;a href="https://cad.onshape.com/help/Content/Plans/enterprise_settings_developer.htm"&gt;Enterprise Settings: Developer&lt;/a&gt; and assign it to users, aliases, or teams. To create a public application for the Onshape App Store, see &lt;a href="https://onshape-public.github.io/docs/auth/oauth/"&gt;OAuth&lt;/a&gt; and &lt;a href="https://onshape-public.github.io/docs/app-dev/"&gt;App Development&lt;/a&gt;.&lt;/p&gt;</description></item><item><title>Webhooks</title><link>https://onshape-public.github.io/docs/app-dev/webhook/</link><pubDate>Mon, 18 May 2020 20:44:05 -0400</pubDate><guid>https://onshape-public.github.io/docs/app-dev/webhook/</guid><description>&lt;p&gt;This page describes the Webhook APIs Onshape provides for working with notifications.&lt;/p&gt;
+&lt;h2 id="before-you-begin"&gt;Before you begin&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Sign in to your &lt;a href="https://cad.onshape.com"&gt;Onshape&lt;/a&gt; account.&lt;/li&gt;
+&lt;li&gt;Install &lt;a href="https://www.python.org/downloads/"&gt;python&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="copy-and-execute-the-sample-code"&gt;Copy and execute the sample code&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Copy the two files below and save them to your machine as &lt;code&gt;script.js&lt;/code&gt; and &lt;code&gt;index.html&lt;/code&gt;.&lt;/p&gt;</description></item><item><title>Webhooks</title><link>https://onshape-public.github.io/docs/app-dev/webhook/</link><pubDate>Mon, 18 May 2020 20:44:05 -0400</pubDate><guid>https://onshape-public.github.io/docs/app-dev/webhook/</guid><description>&lt;p&gt;This page describes the Webhook APIs Onshape provides for working with notifications.&lt;/p&gt;
 &lt;p&gt;Notifications are delivered to an application as an HTTP &lt;code&gt;POST&lt;/code&gt; with a JSON body, which includes information about the identity of the registration request and information specific to the event and notification message.&lt;/p&gt;
 &lt;p&gt;Webhooks are an alternative approach to polling; instead of your application continuously asking Onshape for new information, webhooks automatically send a notification from Onshape any time an event you are subscribed to occurs.&lt;/p&gt;</description></item><item><title>Structured Storage</title><link>https://onshape-public.github.io/docs/app-dev/structuredstorage/</link><pubDate>Mon, 18 May 2020 20:40:16 -0400</pubDate><guid>https://onshape-public.github.io/docs/app-dev/structuredstorage/</guid><description>&lt;h2 id="sub-elements"&gt;Sub Elements&lt;/h2&gt;
 &lt;p&gt;Onshape provides application elements storage that is controlled by applications through the API. These elements allow a set of named sub-elements.&lt;/p&gt;
