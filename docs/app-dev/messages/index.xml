@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Client Messaging on</title><link>https://onshape-public.github.io/docs/app-dev/messages/</link><description>Recent content in Client Messaging on</description><generator>Hugo</generator><language>en-us</language><atom:link href="https://onshape-public.github.io/docs/app-dev/messages/index.xml" rel="self" type="application/rss+xml"/><item><title>Element Right Panel</title><link>https://onshape-public.github.io/docs/app-dev/messages/element-right-panel/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/app-dev/messages/element-right-panel/</guid><description>&lt;p&gt;The element right panel is the panel inside a document that currently houses the BOM, configurations, etc. Applications can use this extension location to add items in this panel.&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://onshape-public.github.io/images/extension-right-panel-02.png" alt="image alt text"&gt;&lt;/p&gt;
+&lt;h2 id="interaction-sequence"&gt;Interaction sequence&lt;/h2&gt;
+&lt;p&gt;The sequence diagram below illustrates the interaction between an Element right panel application extension and the Onshape client:&lt;/p&gt;
+&lt;pre class="mermaid"&gt;%%{
+ init: {
+ &amp;#34;theme&amp;#34;: &amp;#34;default&amp;#34;,
+ &amp;#34;sequence&amp;#34;: {
+ &amp;#34;mirrorActors&amp;#34;: false,
+ &amp;#34;showSequenceNumbers&amp;#34;: false,
+ &amp;#34;width&amp;#34;: 75,
+ &amp;#34;height&amp;#34;: 60,
+ &amp;#34;actorMargin&amp;#34;: 25,
+ &amp;#34;messageFontSize&amp;#34;: 13,
+ &amp;#34;messageFontFamily&amp;#34;: &amp;#34;monospace&amp;#34;,
+ &amp;#34;messageFontWeight&amp;#34;: 2
+ }
+ }
+}%%
+sequenceDiagram
+ actor user
+ participant OSC AS Onshape Client
+ participant AE AS Application Extension
+ user-&amp;gt;&amp;gt;&amp;#43;OSC: start element right panel extension
+ Note right of user: via configured button
+ OSC-&amp;gt;&amp;gt;&amp;#43;AE: invoke action url (with query params)
+ AE-&amp;gt;&amp;gt;OSC: postMessage(messageName: &amp;#39;applicationInit&amp;#39;)
+ loop selection interactions
+ user-&amp;gt;&amp;gt;OSC: select
+ OSC-&amp;gt;&amp;gt;AE: postMessage(messageName: &amp;#39;SELECTION&amp;#39;)
+ end
+ user-&amp;gt;&amp;gt;OSC: stop element right panel extension
+ Note right of user: via configured button
+ deactivate AE
+ OSC-XAE: destroy
+ deactivate OSC&lt;/pre&gt;
+&lt;hr&gt;
+&lt;h2 id="supported-messages"&gt;Supported messages&lt;/h2&gt;
+&lt;p&gt;Each message must include:&lt;/p&gt;</description></item><item><title>Element Tab</title><link>https://onshape-public.github.io/docs/app-dev/messages/element-tab/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/app-dev/messages/element-tab/</guid><description>&lt;p&gt;Element tab extensions live in their own element (tab) within a document, without needing to be opened within a Part Studio or assembly. Users can add the extension to their Onshape documents by clicking the &lt;strong&gt;Insert new tab&lt;/strong&gt; button on the Onshape toolbar and selecting &lt;strong&gt;Applications&lt;/strong&gt;. The element tab extension appears on the list. When selected, the extension&amp;rsquo;s Action URL is opened in a new tab in the document. The new tab has its own &lt;code&gt;elementId&lt;/code&gt; in the Onshape URL.&lt;/p&gt;</description></item></channel></rss>

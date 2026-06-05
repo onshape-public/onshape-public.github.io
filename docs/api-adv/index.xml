@@ -1,44 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>API Guides on</title><link>https://onshape-public.github.io/docs/api-adv/</link><description>Recent content in API Guides on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Tue, 20 May 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://onshape-public.github.io/docs/api-adv/index.xml" rel="self" type="application/rss+xml"/><item><title>Assemblies</title><link>https://onshape-public.github.io/docs/api-adv/assemblies/</link><pubDate>Tue, 13 Aug 2024 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/assemblies/</guid><description>&lt;p&gt;This page describes the APIs Onshape provides for working with assemblies.&lt;/p&gt;
-&lt;table width=100%&gt;
- &lt;tr&gt;
- &lt;th&gt;&lt;details&gt;
- &lt;summary&gt;Prerequisites&lt;/summary&gt;
- &lt;blockquote&gt;
+&lt;div class="callout-note"&gt;
+&lt;b&gt;ℹ️ Onshape API Notes&lt;/b&gt;
 &lt;ul&gt;
-&lt;li&gt;All Onshape API calls must be properly authenticated.
-&lt;ul&gt;
-&lt;li&gt;See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys/"&gt;API Keys&lt;/a&gt; page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart/"&gt;Quick Start&lt;/a&gt; for an example.&lt;/li&gt;
-&lt;li&gt;All applications submitted to the Onshape App Store &lt;em&gt;must&lt;/em&gt; authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth/"&gt;OAuth2&lt;/a&gt;.&lt;/li&gt;
+ &lt;li&gt;All Onshape API calls must be properly &lt;a href="https://onshape-public.github.io/docs/auth/"&gt;authenticated&lt;/a&gt;.&lt;/li&gt;
+ &lt;li&gt;For Enterprise accounts, replace &lt;b&gt;cad&lt;/b&gt; in URLs with your company domain.&lt;/li&gt;
+ &lt;li&gt;Onshape IDs are written as: &lt;b&gt;{did}, {wvmid}, {eid}, {pid}, {otherId}&lt;/b&gt;. See &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request"&gt;Onshape API Intro&lt;/a&gt; for information on what these IDs mean and how to obtain them from your documents.&lt;/li&gt;
+ &lt;li&gt;Variables for replacement are written as: &lt;b&gt;{variable1}&lt;/b&gt; or &lt;b&gt;&amp;lt;variableTwo&amp;gt;&lt;/b&gt;. Never include the braces or angle brackets themselves with these variables.&lt;/li&gt;
+ &lt;li&gt;Visit the Learning Center's &lt;a href="https://learn.onshape.com/learn/course/intro-to-the-onshape-api/intro-to-the-onshape-api/what-is-an-api?page=1"&gt;Intro to the Onshape API&lt;/a&gt; course for additional instruction and videos.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;For Standard accounts, replace &lt;code&gt;{baseUrl}&lt;/code&gt; with &lt;code&gt;cad&lt;/code&gt; in all endpoints. For Enterprise accounts, replace it with your company domain. Add &lt;code&gt;/api&lt;/code&gt; and the version number, and then provide the endpoint.
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;https://{baseUrl}.onshape.com/api/v10/documents&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;https://cad.onshape.com/api/v10/documents&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;https://companySubDomain.onshape.com/api/v10/documents&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Onshape IDs are written as: &lt;code&gt;{did}, {wvmid}, {eid}, {pid}, {otherId}&lt;/code&gt;.
-&lt;ul&gt;
-&lt;li&gt;These represent document, workspace (or version or microversion), element, part, and other IDs, respectively.&lt;/li&gt;
-&lt;li&gt;See &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request"&gt;API Guide: API Intro&lt;/a&gt; for information on what these IDs mean and how to obtain them from your documents.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Variables are written as: &lt;code&gt;{variableId1}&lt;/code&gt; or &lt;code&gt;&amp;lt;variableIdTwo&amp;gt;&lt;/code&gt;.
-&lt;ul&gt;
-&lt;li&gt;These represent variables that must be replaced in the code before it is usable.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Never include the braces &lt;code&gt;{}&lt;/code&gt; or angle brackets &lt;code&gt;&amp;lt;&amp;gt;&lt;/code&gt; with your IDs/variables.&lt;/li&gt;
-&lt;li&gt;This page provides sample code in cURL and python.&lt;/li&gt;
-&lt;li&gt;For additional instruction and video content, visit the Learning Center&amp;rsquo;s &lt;a href="https://learn.onshape.com/learn/course/intro-to-the-onshape-api/intro-to-the-onshape-api/what-is-an-api?page=1"&gt;Intro to the Onshape API&lt;/a&gt; course.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-
- &lt;/details&gt;
- &lt;/th&gt;
- &lt;/tr&gt;
-&lt;/table&gt;
+&lt;/div&gt; 
 &lt;h2 id="endpoints"&gt;Endpoints&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://cad.onshape.com/glassworks/explorer/#/Assembly/createAssembly"&gt;createAssembly&lt;/a&gt;: Create a new assembly tab in a document.
@@ -188,88 +158,28 @@ and edges (&lt;code&gt;getPartStudioEdges&lt;/code&gt;}. Note the ids:
 &lt;/table&gt;
 &lt;p&gt;Onshape defines three kinds of plans:&lt;/p&gt;</description></item><item><title>Configurations</title><link>https://onshape-public.github.io/docs/api-adv/configs/</link><pubDate>Fri, 05 Apr 2024 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/configs/</guid><description>&lt;p&gt;This page describes the APIs Onshape provides for working with &lt;a href="https://cad.onshape.com/help/Content/configurations.htm"&gt;configurations&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;You can use configurations to create variations of entire Part Studios, assemblies, specific parts and more. You can configure feature and parameter values, part properties, custom part properties, face and part appearances, and sketch text. Each Part Studio can have only one configuration, but it can contain multiple configuration inputs. The configuration inputs you define for a Part Studio become options when inserting that Part Studio into an assembly or drawing. You can also create configurations for an assembly, regardless of any existing Part Studio configurations. Assembly configurations work the same way as Part Studio configurations, but are limited to configuring mates (&lt;em&gt;not&lt;/em&gt; mate connectors), instances, and patterns.&lt;/p&gt;</description></item><item><title>Documents</title><link>https://onshape-public.github.io/docs/api-adv/documents/</link><pubDate>Thu, 19 Dec 2024 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/documents/</guid><description>&lt;p&gt;This page describes the APIs Onshape provides for working with documents.&lt;/p&gt;
-&lt;table width=100%&gt;
- &lt;tr&gt;
- &lt;th&gt;&lt;details&gt;
- &lt;summary&gt;Prerequisites&lt;/summary&gt;
- &lt;blockquote&gt;
+&lt;div class="callout-note"&gt;
+&lt;b&gt;ℹ️ Onshape API Notes&lt;/b&gt;
 &lt;ul&gt;
-&lt;li&gt;All Onshape API calls must be properly authenticated.
-&lt;ul&gt;
-&lt;li&gt;See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys/"&gt;API Keys&lt;/a&gt; page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart/"&gt;Quick Start&lt;/a&gt; for an example.&lt;/li&gt;
-&lt;li&gt;All applications submitted to the Onshape App Store &lt;em&gt;must&lt;/em&gt; authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth/"&gt;OAuth2&lt;/a&gt;.&lt;/li&gt;
+ &lt;li&gt;All Onshape API calls must be properly &lt;a href="https://onshape-public.github.io/docs/auth/"&gt;authenticated&lt;/a&gt;.&lt;/li&gt;
+ &lt;li&gt;For Enterprise accounts, replace &lt;b&gt;cad&lt;/b&gt; in URLs with your company domain.&lt;/li&gt;
+ &lt;li&gt;Onshape IDs are written as: &lt;b&gt;{did}, {wvmid}, {eid}, {pid}, {otherId}&lt;/b&gt;. See &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request"&gt;Onshape API Intro&lt;/a&gt; for information on what these IDs mean and how to obtain them from your documents.&lt;/li&gt;
+ &lt;li&gt;Variables for replacement are written as: &lt;b&gt;{variable1}&lt;/b&gt; or &lt;b&gt;&amp;lt;variableTwo&amp;gt;&lt;/b&gt;. Never include the braces or angle brackets themselves with these variables.&lt;/li&gt;
+ &lt;li&gt;Visit the Learning Center's &lt;a href="https://learn.onshape.com/learn/course/intro-to-the-onshape-api/intro-to-the-onshape-api/what-is-an-api?page=1"&gt;Intro to the Onshape API&lt;/a&gt; course for additional instruction and videos.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;For Standard accounts, replace &lt;code&gt;{baseUrl}&lt;/code&gt; with &lt;code&gt;cad&lt;/code&gt; in all endpoints. For Enterprise accounts, replace it with your company domain. Add &lt;code&gt;/api&lt;/code&gt; and the version number, and then provide the endpoint.
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;https://{baseUrl}.onshape.com/api/v10/documents&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;https://cad.onshape.com/api/v10/documents&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;https://companySubDomain.onshape.com/api/v10/documents&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Onshape IDs are written as: &lt;code&gt;{did}, {wvmid}, {eid}, {pid}, {otherId}&lt;/code&gt;.
-&lt;ul&gt;
-&lt;li&gt;These represent document, workspace (or version or microversion), element, part, and other IDs, respectively.&lt;/li&gt;
-&lt;li&gt;See &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request"&gt;API Guide: API Intro&lt;/a&gt; for information on what these IDs mean and how to obtain them from your documents.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Variables are written as: &lt;code&gt;{variableId1}&lt;/code&gt; or &lt;code&gt;&amp;lt;variableIdTwo&amp;gt;&lt;/code&gt;.
-&lt;ul&gt;
-&lt;li&gt;These represent variables that must be replaced in the code before it is usable.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Never include the braces &lt;code&gt;{}&lt;/code&gt; or angle brackets &lt;code&gt;&amp;lt;&amp;gt;&lt;/code&gt; with your IDs/variables.&lt;/li&gt;
-&lt;li&gt;This page provides sample code in cURL and python.&lt;/li&gt;
-&lt;li&gt;For additional instruction and video content, visit the Learning Center&amp;rsquo;s &lt;a href="https://learn.onshape.com/learn/course/intro-to-the-onshape-api/intro-to-the-onshape-api/what-is-an-api?page=1"&gt;Intro to the Onshape API&lt;/a&gt; course.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-
- &lt;/details&gt;
- &lt;/th&gt;
- &lt;/tr&gt;
-&lt;/table&gt;
+&lt;/div&gt; 
 &lt;h2 id="examples"&gt;Examples&lt;/h2&gt;
 &lt;p&gt;&lt;a name="endpoints"&gt;&lt;/a&gt;&lt;/p&gt;</description></item><item><title>Drawings</title><link>https://onshape-public.github.io/docs/api-adv/drawings/</link><pubDate>Thu, 12 Oct 2023 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/drawings/</guid><description>&lt;p&gt;This page describes the APIs Onshape provides for working with Onshape drawings.&lt;/p&gt;
-&lt;table width=100%&gt;
- &lt;tr&gt;
- &lt;th&gt;&lt;details&gt;
- &lt;summary&gt;Prerequisites&lt;/summary&gt;
- &lt;blockquote&gt;
+&lt;div class="callout-note"&gt;
+&lt;b&gt;ℹ️ Onshape API Notes&lt;/b&gt;
 &lt;ul&gt;
-&lt;li&gt;All Onshape API calls must be properly authenticated.
-&lt;ul&gt;
-&lt;li&gt;See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys/"&gt;API Keys&lt;/a&gt; page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart/"&gt;Quick Start&lt;/a&gt; for an example.&lt;/li&gt;
-&lt;li&gt;All applications submitted to the Onshape App Store &lt;em&gt;must&lt;/em&gt; authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth/"&gt;OAuth2&lt;/a&gt;.&lt;/li&gt;
+ &lt;li&gt;All Onshape API calls must be properly &lt;a href="https://onshape-public.github.io/docs/auth/"&gt;authenticated&lt;/a&gt;.&lt;/li&gt;
+ &lt;li&gt;For Enterprise accounts, replace &lt;b&gt;cad&lt;/b&gt; in URLs with your company domain.&lt;/li&gt;
+ &lt;li&gt;Onshape IDs are written as: &lt;b&gt;{did}, {wvmid}, {eid}, {pid}, {otherId}&lt;/b&gt;. See &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request"&gt;Onshape API Intro&lt;/a&gt; for information on what these IDs mean and how to obtain them from your documents.&lt;/li&gt;
+ &lt;li&gt;Variables for replacement are written as: &lt;b&gt;{variable1}&lt;/b&gt; or &lt;b&gt;&amp;lt;variableTwo&amp;gt;&lt;/b&gt;. Never include the braces or angle brackets themselves with these variables.&lt;/li&gt;
+ &lt;li&gt;Visit the Learning Center's &lt;a href="https://learn.onshape.com/learn/course/intro-to-the-onshape-api/intro-to-the-onshape-api/what-is-an-api?page=1"&gt;Intro to the Onshape API&lt;/a&gt; course for additional instruction and videos.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;For Standard accounts, replace &lt;code&gt;{baseUrl}&lt;/code&gt; with &lt;code&gt;cad&lt;/code&gt; in all endpoints. For Enterprise accounts, replace it with your company domain. Add &lt;code&gt;/api&lt;/code&gt; and the version number, and then provide the endpoint.
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;https://{baseUrl}.onshape.com/api/v10/documents&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;https://cad.onshape.com/api/v10/documents&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;https://companySubDomain.onshape.com/api/v10/documents&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Onshape IDs are written as: &lt;code&gt;{did}, {wvmid}, {eid}, {pid}, {otherId}&lt;/code&gt;.
-&lt;ul&gt;
-&lt;li&gt;These represent document, workspace (or version or microversion), element, part, and other IDs, respectively.&lt;/li&gt;
-&lt;li&gt;See &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request"&gt;API Guide: API Intro&lt;/a&gt; for information on what these IDs mean and how to obtain them from your documents.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Variables are written as: &lt;code&gt;{variableId1}&lt;/code&gt; or &lt;code&gt;&amp;lt;variableIdTwo&amp;gt;&lt;/code&gt;.
-&lt;ul&gt;
-&lt;li&gt;These represent variables that must be replaced in the code before it is usable.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Never include the braces &lt;code&gt;{}&lt;/code&gt; or angle brackets &lt;code&gt;&amp;lt;&amp;gt;&lt;/code&gt; with your IDs/variables.&lt;/li&gt;
-&lt;li&gt;This page provides sample code in cURL and python.&lt;/li&gt;
-&lt;li&gt;For additional instruction and video content, visit the Learning Center&amp;rsquo;s &lt;a href="https://learn.onshape.com/learn/course/intro-to-the-onshape-api/intro-to-the-onshape-api/what-is-an-api?page=1"&gt;Intro to the Onshape API&lt;/a&gt; course.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-
- &lt;/details&gt;
- &lt;/th&gt;
- &lt;/tr&gt;
-&lt;/table&gt;
+&lt;/div&gt; 
 &lt;h2 id="sample-code"&gt;Sample Code&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://github.com/onshape-public/onshape-ts-drawing-client"&gt;Onshape TypeScript Drawing Client&lt;/a&gt;&lt;/li&gt;
@@ -277,181 +187,63 @@ and edges (&lt;code&gt;getPartStudioEdges&lt;/code&gt;}. Note the ids:
 &lt;/ul&gt;
 &lt;h2 id="endpoints"&gt;Endpoints&lt;/h2&gt;
 &lt;p&gt;To create drawings, Onshape allows you to send all drawing data points and information through the API as part of the request body JSON.&lt;/p&gt;</description></item><item><title>Features</title><link>https://onshape-public.github.io/docs/api-adv/featureaccess/</link><pubDate>Mon, 18 May 2020 20:37:28 -0400</pubDate><guid>https://onshape-public.github.io/docs/api-adv/featureaccess/</guid><description>&lt;p&gt;This page describes the APIs Onshape provides for creating and manipulating features and the Feature List in a Part Studio.&lt;/p&gt;
-&lt;table width=100%&gt;
- &lt;tr&gt;
- &lt;th&gt;&lt;details&gt;
- &lt;summary&gt;Prerequisites&lt;/summary&gt;
- &lt;blockquote&gt;
+&lt;div class="callout-note"&gt;
+&lt;b&gt;ℹ️ Onshape API Notes&lt;/b&gt;
 &lt;ul&gt;
-&lt;li&gt;All Onshape API calls must be properly authenticated.
-&lt;ul&gt;
-&lt;li&gt;See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys/"&gt;API Keys&lt;/a&gt; page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart/"&gt;Quick Start&lt;/a&gt; for an example.&lt;/li&gt;
-&lt;li&gt;All applications submitted to the Onshape App Store &lt;em&gt;must&lt;/em&gt; authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth/"&gt;OAuth2&lt;/a&gt;.&lt;/li&gt;
+ &lt;li&gt;All Onshape API calls must be properly &lt;a href="https://onshape-public.github.io/docs/auth/"&gt;authenticated&lt;/a&gt;.&lt;/li&gt;
+ &lt;li&gt;For Enterprise accounts, replace &lt;b&gt;cad&lt;/b&gt; in URLs with your company domain.&lt;/li&gt;
+ &lt;li&gt;Onshape IDs are written as: &lt;b&gt;{did}, {wvmid}, {eid}, {pid}, {otherId}&lt;/b&gt;. See &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request"&gt;Onshape API Intro&lt;/a&gt; for information on what these IDs mean and how to obtain them from your documents.&lt;/li&gt;
+ &lt;li&gt;Variables for replacement are written as: &lt;b&gt;{variable1}&lt;/b&gt; or &lt;b&gt;&amp;lt;variableTwo&amp;gt;&lt;/b&gt;. Never include the braces or angle brackets themselves with these variables.&lt;/li&gt;
+ &lt;li&gt;Visit the Learning Center's &lt;a href="https://learn.onshape.com/learn/course/intro-to-the-onshape-api/intro-to-the-onshape-api/what-is-an-api?page=1"&gt;Intro to the Onshape API&lt;/a&gt; course for additional instruction and videos.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;For Standard accounts, replace &lt;code&gt;{baseUrl}&lt;/code&gt; with &lt;code&gt;cad&lt;/code&gt; in all endpoints. For Enterprise accounts, replace it with your company domain. Add &lt;code&gt;/api&lt;/code&gt; and the version number, and then provide the endpoint.
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;https://{baseUrl}.onshape.com/api/v10/documents&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;https://cad.onshape.com/api/v10/documents&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;https://companySubDomain.onshape.com/api/v10/documents&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Onshape IDs are written as: &lt;code&gt;{did}, {wvmid}, {eid}, {pid}, {otherId}&lt;/code&gt;.
-&lt;ul&gt;
-&lt;li&gt;These represent document, workspace (or version or microversion), element, part, and other IDs, respectively.&lt;/li&gt;
-&lt;li&gt;See &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request"&gt;API Guide: API Intro&lt;/a&gt; for information on what these IDs mean and how to obtain them from your documents.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Variables are written as: &lt;code&gt;{variableId1}&lt;/code&gt; or &lt;code&gt;&amp;lt;variableIdTwo&amp;gt;&lt;/code&gt;.
-&lt;ul&gt;
-&lt;li&gt;These represent variables that must be replaced in the code before it is usable.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Never include the braces &lt;code&gt;{}&lt;/code&gt; or angle brackets &lt;code&gt;&amp;lt;&amp;gt;&lt;/code&gt; with your IDs/variables.&lt;/li&gt;
-&lt;li&gt;This page provides sample code in cURL and python.&lt;/li&gt;
-&lt;li&gt;For additional instruction and video content, visit the Learning Center&amp;rsquo;s &lt;a href="https://learn.onshape.com/learn/course/intro-to-the-onshape-api/intro-to-the-onshape-api/what-is-an-api?page=1"&gt;Intro to the Onshape API&lt;/a&gt; course.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-
- &lt;/details&gt;
- &lt;/th&gt;
- &lt;/tr&gt;
-&lt;/table&gt;
+&lt;/div&gt; 
 &lt;h2 id="featurescript-vs-rest-api"&gt;FeatureScript vs REST API&lt;/h2&gt;
 &lt;p&gt;When working with complex geometry, you might find working directly in FeatureScript easier than working with the Onshape REST API.&lt;/p&gt;</description></item><item><title>Evaluating FeatureScript</title><link>https://onshape-public.github.io/docs/api-adv/fs/</link><pubDate>Thu, 15 Aug 2024 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/fs/</guid><description>&lt;p&gt;This page describes some of the APIs Onshape provides for evaluating &lt;a href="https://cad.onshape.com/FsDoc/"&gt;FeatureScript&lt;/a&gt;.&lt;/p&gt;
-&lt;table width=100%&gt;
- &lt;tr&gt;
- &lt;th&gt;&lt;details&gt;
- &lt;summary&gt;Prerequisites&lt;/summary&gt;
- &lt;blockquote&gt;
+&lt;div class="callout-note"&gt;
+&lt;b&gt;ℹ️ Onshape API Notes&lt;/b&gt;
 &lt;ul&gt;
-&lt;li&gt;All Onshape API calls must be properly authenticated.
-&lt;ul&gt;
-&lt;li&gt;See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys/"&gt;API Keys&lt;/a&gt; page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart/"&gt;Quick Start&lt;/a&gt; for an example.&lt;/li&gt;
-&lt;li&gt;All applications submitted to the Onshape App Store &lt;em&gt;must&lt;/em&gt; authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth/"&gt;OAuth2&lt;/a&gt;.&lt;/li&gt;
+ &lt;li&gt;All Onshape API calls must be properly &lt;a href="https://onshape-public.github.io/docs/auth/"&gt;authenticated&lt;/a&gt;.&lt;/li&gt;
+ &lt;li&gt;For Enterprise accounts, replace &lt;b&gt;cad&lt;/b&gt; in URLs with your company domain.&lt;/li&gt;
+ &lt;li&gt;Onshape IDs are written as: &lt;b&gt;{did}, {wvmid}, {eid}, {pid}, {otherId}&lt;/b&gt;. See &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request"&gt;Onshape API Intro&lt;/a&gt; for information on what these IDs mean and how to obtain them from your documents.&lt;/li&gt;
+ &lt;li&gt;Variables for replacement are written as: &lt;b&gt;{variable1}&lt;/b&gt; or &lt;b&gt;&amp;lt;variableTwo&amp;gt;&lt;/b&gt;. Never include the braces or angle brackets themselves with these variables.&lt;/li&gt;
+ &lt;li&gt;Visit the Learning Center's &lt;a href="https://learn.onshape.com/learn/course/intro-to-the-onshape-api/intro-to-the-onshape-api/what-is-an-api?page=1"&gt;Intro to the Onshape API&lt;/a&gt; course for additional instruction and videos.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;For Standard accounts, replace &lt;code&gt;{baseUrl}&lt;/code&gt; with &lt;code&gt;cad&lt;/code&gt; in all endpoints. For Enterprise accounts, replace it with your company domain. Add &lt;code&gt;/api&lt;/code&gt; and the version number, and then provide the endpoint.
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;https://{baseUrl}.onshape.com/api/v10/documents&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;https://cad.onshape.com/api/v10/documents&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;https://companySubDomain.onshape.com/api/v10/documents&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Onshape IDs are written as: &lt;code&gt;{did}, {wvmid}, {eid}, {pid}, {otherId}&lt;/code&gt;.
-&lt;ul&gt;
-&lt;li&gt;These represent document, workspace (or version or microversion), element, part, and other IDs, respectively.&lt;/li&gt;
-&lt;li&gt;See &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request"&gt;API Guide: API Intro&lt;/a&gt; for information on what these IDs mean and how to obtain them from your documents.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Variables are written as: &lt;code&gt;{variableId1}&lt;/code&gt; or &lt;code&gt;&amp;lt;variableIdTwo&amp;gt;&lt;/code&gt;.
-&lt;ul&gt;
-&lt;li&gt;These represent variables that must be replaced in the code before it is usable.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Never include the braces &lt;code&gt;{}&lt;/code&gt; or angle brackets &lt;code&gt;&amp;lt;&amp;gt;&lt;/code&gt; with your IDs/variables.&lt;/li&gt;
-&lt;li&gt;This page provides sample code in cURL and python.&lt;/li&gt;
-&lt;li&gt;For additional instruction and video content, visit the Learning Center&amp;rsquo;s &lt;a href="https://learn.onshape.com/learn/course/intro-to-the-onshape-api/intro-to-the-onshape-api/what-is-an-api?page=1"&gt;Intro to the Onshape API&lt;/a&gt; course.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-
- &lt;/details&gt;
- &lt;/th&gt;
- &lt;/tr&gt;
-&lt;/table&gt;
+&lt;/div&gt; 
 &lt;h2 id="featurescript-vs-rest-api"&gt;FeatureScript vs REST API&lt;/h2&gt;
 &lt;p&gt;When working with complex geometry, you might find working directly in FeatureScript easier than working with the Onshape REST API. &lt;a href="https://cad.onshape.com/FsDoc/"&gt;Click here to see the FeatureScript documentation.&lt;/a&gt;&lt;/p&gt;</description></item><item><title>Import &amp; Export</title><link>https://onshape-public.github.io/docs/api-adv/translation/</link><pubDate>Wed, 27 Sep 2023 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/translation/</guid><description>&lt;p&gt;This page describes the APIs Onshape provides for importing files to Onshape and exporting files from Onshape into different formats. We refer to the process of importing and exporting files from one format to another as &lt;em&gt;translating&lt;/em&gt; the files.&lt;/p&gt;
-&lt;p&gt;Onshape provides several APIs to support this format translation. These fall into three categories:&lt;/p&gt;
+&lt;div class="callout-note"&gt;
+&lt;b&gt;ℹ️ Onshape API Notes&lt;/b&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#asynchronous-exports"&gt;Asynchronous exports&lt;/a&gt; - Export Onshape elements to one of many supported formats.&lt;/li&gt;
-&lt;li&gt;&lt;a href="#synchronous-exports"&gt;Synchronous exports&lt;/a&gt; - Faster export to specific formats with limited settings options.&lt;/li&gt;
-&lt;li&gt;&lt;a href="#imports"&gt;Import to Onshape&lt;/a&gt; - Import a translatable file by uploading it to an Onshape blob element.&lt;/li&gt;
+ &lt;li&gt;All Onshape API calls must be properly &lt;a href="https://onshape-public.github.io/docs/auth/"&gt;authenticated&lt;/a&gt;.&lt;/li&gt;
+ &lt;li&gt;For Enterprise accounts, replace &lt;b&gt;cad&lt;/b&gt; in URLs with your company domain.&lt;/li&gt;
+ &lt;li&gt;Onshape IDs are written as: &lt;b&gt;{did}, {wvmid}, {eid}, {pid}, {otherId}&lt;/b&gt;. See &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request"&gt;Onshape API Intro&lt;/a&gt; for information on what these IDs mean and how to obtain them from your documents.&lt;/li&gt;
+ &lt;li&gt;Variables for replacement are written as: &lt;b&gt;{variable1}&lt;/b&gt; or &lt;b&gt;&amp;lt;variableTwo&amp;gt;&lt;/b&gt;. Never include the braces or angle brackets themselves with these variables.&lt;/li&gt;
+ &lt;li&gt;Visit the Learning Center's &lt;a href="https://learn.onshape.com/learn/course/intro-to-the-onshape-api/intro-to-the-onshape-api/what-is-an-api?page=1"&gt;Intro to the Onshape API&lt;/a&gt; course for additional instruction and videos.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;br /&gt;
-&lt;blockquote&gt;
-&lt;p&gt;⚠️ &lt;strong&gt;Warning&lt;/strong&gt;&lt;/p&gt;</description></item><item><title>Metadata</title><link>https://onshape-public.github.io/docs/api-adv/metadata/</link><pubDate>Wed, 20 Dec 2023 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/metadata/</guid><description>&lt;p&gt;This page describes the APIs Onshape provides for working with metadata.&lt;/p&gt;
-&lt;table width=100%&gt;
- &lt;tr&gt;
- &lt;th&gt;&lt;details&gt;
- &lt;summary&gt;Prerequisites&lt;/summary&gt;
- &lt;blockquote&gt;
+&lt;/div&gt; 
+&lt;p&gt;Onshape provides several APIs to support this format translation. These fall into three categories:&lt;/p&gt;</description></item><item><title>Metadata</title><link>https://onshape-public.github.io/docs/api-adv/metadata/</link><pubDate>Wed, 20 Dec 2023 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/metadata/</guid><description>&lt;p&gt;This page describes the APIs Onshape provides for working with metadata.&lt;/p&gt;
+&lt;div class="callout-note"&gt;
+&lt;b&gt;ℹ️ Onshape API Notes&lt;/b&gt;
 &lt;ul&gt;
-&lt;li&gt;All Onshape API calls must be properly authenticated.
-&lt;ul&gt;
-&lt;li&gt;See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys/"&gt;API Keys&lt;/a&gt; page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart/"&gt;Quick Start&lt;/a&gt; for an example.&lt;/li&gt;
-&lt;li&gt;All applications submitted to the Onshape App Store &lt;em&gt;must&lt;/em&gt; authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth/"&gt;OAuth2&lt;/a&gt;.&lt;/li&gt;
+ &lt;li&gt;All Onshape API calls must be properly &lt;a href="https://onshape-public.github.io/docs/auth/"&gt;authenticated&lt;/a&gt;.&lt;/li&gt;
+ &lt;li&gt;For Enterprise accounts, replace &lt;b&gt;cad&lt;/b&gt; in URLs with your company domain.&lt;/li&gt;
+ &lt;li&gt;Onshape IDs are written as: &lt;b&gt;{did}, {wvmid}, {eid}, {pid}, {otherId}&lt;/b&gt;. See &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request"&gt;Onshape API Intro&lt;/a&gt; for information on what these IDs mean and how to obtain them from your documents.&lt;/li&gt;
+ &lt;li&gt;Variables for replacement are written as: &lt;b&gt;{variable1}&lt;/b&gt; or &lt;b&gt;&amp;lt;variableTwo&amp;gt;&lt;/b&gt;. Never include the braces or angle brackets themselves with these variables.&lt;/li&gt;
+ &lt;li&gt;Visit the Learning Center's &lt;a href="https://learn.onshape.com/learn/course/intro-to-the-onshape-api/intro-to-the-onshape-api/what-is-an-api?page=1"&gt;Intro to the Onshape API&lt;/a&gt; course for additional instruction and videos.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;For Standard accounts, replace &lt;code&gt;{baseUrl}&lt;/code&gt; with &lt;code&gt;cad&lt;/code&gt; in all endpoints. For Enterprise accounts, replace it with your company domain. Add &lt;code&gt;/api&lt;/code&gt; and the version number, and then provide the endpoint.
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;https://{baseUrl}.onshape.com/api/v10/documents&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;https://cad.onshape.com/api/v10/documents&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;https://companySubDomain.onshape.com/api/v10/documents&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Onshape IDs are written as: &lt;code&gt;{did}, {wvmid}, {eid}, {pid}, {otherId}&lt;/code&gt;.
-&lt;ul&gt;
-&lt;li&gt;These represent document, workspace (or version or microversion), element, part, and other IDs, respectively.&lt;/li&gt;
-&lt;li&gt;See &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request"&gt;API Guide: API Intro&lt;/a&gt; for information on what these IDs mean and how to obtain them from your documents.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Variables are written as: &lt;code&gt;{variableId1}&lt;/code&gt; or &lt;code&gt;&amp;lt;variableIdTwo&amp;gt;&lt;/code&gt;.
-&lt;ul&gt;
-&lt;li&gt;These represent variables that must be replaced in the code before it is usable.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Never include the braces &lt;code&gt;{}&lt;/code&gt; or angle brackets &lt;code&gt;&amp;lt;&amp;gt;&lt;/code&gt; with your IDs/variables.&lt;/li&gt;
-&lt;li&gt;This page provides sample code in cURL and python.&lt;/li&gt;
-&lt;li&gt;For additional instruction and video content, visit the Learning Center&amp;rsquo;s &lt;a href="https://learn.onshape.com/learn/course/intro-to-the-onshape-api/intro-to-the-onshape-api/what-is-an-api?page=1"&gt;Intro to the Onshape API&lt;/a&gt; course.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-
- &lt;/details&gt;
- &lt;/th&gt;
- &lt;/tr&gt;
-&lt;/table&gt;
+&lt;/div&gt; 
 &lt;h2 id="updating-metadata"&gt;Updating Metadata&lt;/h2&gt;
 &lt;p&gt;&lt;a name="update-metadata"&gt;&lt;/a&gt;&lt;/p&gt;</description></item><item><title>Part Studios</title><link>https://onshape-public.github.io/docs/api-adv/partstudios/</link><pubDate>Tue, 13 Aug 2024 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/partstudios/</guid><description>&lt;p&gt;This page describes the APIs Onshape provides for working with Part Studios.&lt;/p&gt;
-&lt;table width=100%&gt;
- &lt;tr&gt;
- &lt;th&gt;&lt;details&gt;
- &lt;summary&gt;Prerequisites&lt;/summary&gt;
- &lt;blockquote&gt;
+&lt;div class="callout-note"&gt;
+&lt;b&gt;ℹ️ Onshape API Notes&lt;/b&gt;
 &lt;ul&gt;
-&lt;li&gt;All Onshape API calls must be properly authenticated.
-&lt;ul&gt;
-&lt;li&gt;See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys/"&gt;API Keys&lt;/a&gt; page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart/"&gt;Quick Start&lt;/a&gt; for an example.&lt;/li&gt;
-&lt;li&gt;All applications submitted to the Onshape App Store &lt;em&gt;must&lt;/em&gt; authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth/"&gt;OAuth2&lt;/a&gt;.&lt;/li&gt;
+ &lt;li&gt;All Onshape API calls must be properly &lt;a href="https://onshape-public.github.io/docs/auth/"&gt;authenticated&lt;/a&gt;.&lt;/li&gt;
+ &lt;li&gt;For Enterprise accounts, replace &lt;b&gt;cad&lt;/b&gt; in URLs with your company domain.&lt;/li&gt;
+ &lt;li&gt;Onshape IDs are written as: &lt;b&gt;{did}, {wvmid}, {eid}, {pid}, {otherId}&lt;/b&gt;. See &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request"&gt;Onshape API Intro&lt;/a&gt; for information on what these IDs mean and how to obtain them from your documents.&lt;/li&gt;
+ &lt;li&gt;Variables for replacement are written as: &lt;b&gt;{variable1}&lt;/b&gt; or &lt;b&gt;&amp;lt;variableTwo&amp;gt;&lt;/b&gt;. Never include the braces or angle brackets themselves with these variables.&lt;/li&gt;
+ &lt;li&gt;Visit the Learning Center's &lt;a href="https://learn.onshape.com/learn/course/intro-to-the-onshape-api/intro-to-the-onshape-api/what-is-an-api?page=1"&gt;Intro to the Onshape API&lt;/a&gt; course for additional instruction and videos.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;For Standard accounts, replace &lt;code&gt;{baseUrl}&lt;/code&gt; with &lt;code&gt;cad&lt;/code&gt; in all endpoints. For Enterprise accounts, replace it with your company domain. Add &lt;code&gt;/api&lt;/code&gt; and the version number, and then provide the endpoint.
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;https://{baseUrl}.onshape.com/api/v10/documents&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;https://cad.onshape.com/api/v10/documents&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;https://companySubDomain.onshape.com/api/v10/documents&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Onshape IDs are written as: &lt;code&gt;{did}, {wvmid}, {eid}, {pid}, {otherId}&lt;/code&gt;.
-&lt;ul&gt;
-&lt;li&gt;These represent document, workspace (or version or microversion), element, part, and other IDs, respectively.&lt;/li&gt;
-&lt;li&gt;See &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request"&gt;API Guide: API Intro&lt;/a&gt; for information on what these IDs mean and how to obtain them from your documents.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Variables are written as: &lt;code&gt;{variableId1}&lt;/code&gt; or &lt;code&gt;&amp;lt;variableIdTwo&amp;gt;&lt;/code&gt;.
-&lt;ul&gt;
-&lt;li&gt;These represent variables that must be replaced in the code before it is usable.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Never include the braces &lt;code&gt;{}&lt;/code&gt; or angle brackets &lt;code&gt;&amp;lt;&amp;gt;&lt;/code&gt; with your IDs/variables.&lt;/li&gt;
-&lt;li&gt;This page provides sample code in cURL and python.&lt;/li&gt;
-&lt;li&gt;For additional instruction and video content, visit the Learning Center&amp;rsquo;s &lt;a href="https://learn.onshape.com/learn/course/intro-to-the-onshape-api/intro-to-the-onshape-api/what-is-an-api?page=1"&gt;Intro to the Onshape API&lt;/a&gt; course.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-
- &lt;/details&gt;
- &lt;/th&gt;
- &lt;/tr&gt;
-&lt;/table&gt;
+&lt;/div&gt; 
 &lt;h2 id="endpoints"&gt;Endpoints&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/createPartStudio"&gt;createPartStudio&lt;/a&gt;: Create a new Part Studio tab in a document.
@@ -576,46 +368,16 @@ and edges (&lt;code&gt;getPartStudioEdges&lt;/code&gt;}. Note the ids:
 &lt;/ol&gt;
 &lt;h3 id="get-the-list-of-features-in-a-part-studio"&gt;Get the list of features in a Part Studio&lt;/h3&gt;
 &lt;p&gt;One of the best ways to familiarize yourself with the Onshape Feature APIs is to view the API details for existing features in a Part Studio. In this example, we&amp;rsquo;ll add three features to a Part Studio, and then call the &lt;a href="https://cad.onshape.com/glassworks/explorer/#/PartStudio/getPartStudioFeatures"&gt;getPartStudioFeatures&lt;/a&gt; API on the Part Studio. We&amp;rsquo;ll then be able to view the structure of the way features are represented in the API.&lt;/p&gt;</description></item><item><title>Release Management</title><link>https://onshape-public.github.io/docs/api-adv/relmgmt/</link><pubDate>Tue, 20 May 2025 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/relmgmt/</guid><description>&lt;p&gt;This page describes the APIs Onshape provides for viewing revisions and for creating, submitting, approving, and publishing releases.&lt;/p&gt;
-&lt;table width=100%&gt;
- &lt;tr&gt;
- &lt;th&gt;&lt;details&gt;
- &lt;summary&gt;Prerequisites&lt;/summary&gt;
- &lt;blockquote&gt;
+&lt;div class="callout-note"&gt;
+&lt;b&gt;ℹ️ Onshape API Notes&lt;/b&gt;
 &lt;ul&gt;
-&lt;li&gt;All Onshape API calls must be properly authenticated.
-&lt;ul&gt;
-&lt;li&gt;See the &lt;a href="https://onshape-public.github.io/docs/auth/apikeys/"&gt;API Keys&lt;/a&gt; page for instructions and the &lt;a href="https://onshape-public.github.io/docs/api-intro/quickstart/"&gt;Quick Start&lt;/a&gt; for an example.&lt;/li&gt;
-&lt;li&gt;All applications submitted to the Onshape App Store &lt;em&gt;must&lt;/em&gt; authenticate with &lt;a href="https://onshape-public.github.io/docs/auth/oauth/"&gt;OAuth2&lt;/a&gt;.&lt;/li&gt;
+ &lt;li&gt;All Onshape API calls must be properly &lt;a href="https://onshape-public.github.io/docs/auth/"&gt;authenticated&lt;/a&gt;.&lt;/li&gt;
+ &lt;li&gt;For Enterprise accounts, replace &lt;b&gt;cad&lt;/b&gt; in URLs with your company domain.&lt;/li&gt;
+ &lt;li&gt;Onshape IDs are written as: &lt;b&gt;{did}, {wvmid}, {eid}, {pid}, {otherId}&lt;/b&gt;. See &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request"&gt;Onshape API Intro&lt;/a&gt; for information on what these IDs mean and how to obtain them from your documents.&lt;/li&gt;
+ &lt;li&gt;Variables for replacement are written as: &lt;b&gt;{variable1}&lt;/b&gt; or &lt;b&gt;&amp;lt;variableTwo&amp;gt;&lt;/b&gt;. Never include the braces or angle brackets themselves with these variables.&lt;/li&gt;
+ &lt;li&gt;Visit the Learning Center's &lt;a href="https://learn.onshape.com/learn/course/intro-to-the-onshape-api/intro-to-the-onshape-api/what-is-an-api?page=1"&gt;Intro to the Onshape API&lt;/a&gt; course for additional instruction and videos.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;For Standard accounts, replace &lt;code&gt;{baseUrl}&lt;/code&gt; with &lt;code&gt;cad&lt;/code&gt; in all endpoints. For Enterprise accounts, replace it with your company domain. Add &lt;code&gt;/api&lt;/code&gt; and the version number, and then provide the endpoint.
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;https://{baseUrl}.onshape.com/api/v10/documents&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;https://cad.onshape.com/api/v10/documents&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;https://companySubDomain.onshape.com/api/v10/documents&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Onshape IDs are written as: &lt;code&gt;{did}, {wvmid}, {eid}, {pid}, {otherId}&lt;/code&gt;.
-&lt;ul&gt;
-&lt;li&gt;These represent document, workspace (or version or microversion), element, part, and other IDs, respectively.&lt;/li&gt;
-&lt;li&gt;See &lt;a href="https://onshape-public.github.io/docs/api-intro/#onshape-api-request"&gt;API Guide: API Intro&lt;/a&gt; for information on what these IDs mean and how to obtain them from your documents.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Variables are written as: &lt;code&gt;{variableId1}&lt;/code&gt; or &lt;code&gt;&amp;lt;variableIdTwo&amp;gt;&lt;/code&gt;.
-&lt;ul&gt;
-&lt;li&gt;These represent variables that must be replaced in the code before it is usable.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Never include the braces &lt;code&gt;{}&lt;/code&gt; or angle brackets &lt;code&gt;&amp;lt;&amp;gt;&lt;/code&gt; with your IDs/variables.&lt;/li&gt;
-&lt;li&gt;This page provides sample code in cURL and python.&lt;/li&gt;
-&lt;li&gt;For additional instruction and video content, visit the Learning Center&amp;rsquo;s &lt;a href="https://learn.onshape.com/learn/course/intro-to-the-onshape-api/intro-to-the-onshape-api/what-is-an-api?page=1"&gt;Intro to the Onshape API&lt;/a&gt; course.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-
- &lt;/details&gt;
- &lt;/th&gt;
- &lt;/tr&gt;
-&lt;/table&gt;
+&lt;/div&gt; 
 &lt;h2 id="custom-workflows"&gt;Custom Workflows&lt;/h2&gt;
 &lt;p&gt;Enterprise administrators can create customized release and obsoletion workflows. See the following Onshape Help article on designing release management processes for your Enterprise: &lt;strong&gt;&lt;a href="https://cad.onshape.com/help/Content/relmgmt_custom.htm"&gt;Designing Release Management Processes&lt;/a&gt;&lt;/strong&gt;.&lt;/p&gt;</description></item><item><title>Response Codes</title><link>https://onshape-public.github.io/docs/api-adv/errors/</link><pubDate>Wed, 03 Apr 2024 00:00:00 +0000</pubDate><guid>https://onshape-public.github.io/docs/api-adv/errors/</guid><description>&lt;p&gt;This page details some of the response codes that may be returned by Onshape API endpoints. For each response code, we&amp;rsquo;ve provided a brief description of the response and recommended next steps.&lt;/p&gt;
 &lt;h2 id="success-2xx"&gt;Success (2xx)&lt;/h2&gt;
